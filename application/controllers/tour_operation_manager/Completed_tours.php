@@ -26,11 +26,12 @@ class Completed_tours extends CI_Controller{
         // $arr_data = $this->master_model->getRecords('assign_staff');
         // print_r($arr_data); die;
 
-        $fields = "packages.*,package_type.package_type,package_type.id as pid";
+        $fields = "packages.*,package_type.package_type,package_type.id as pid,package_date.journey_date";
         $this->db->where('packages.is_deleted','no');
         $this->db->where('packages.is_active','yes');
 		$this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
         $this->db->join("package_type", 'packages.package_type=package_type.id','left');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
         $arr_data = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 

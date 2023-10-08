@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <!-- <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
+              <!-- <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
               
             </ol>
           </div>
@@ -23,7 +23,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-              <?php $this->load->view('tour_operation_manager/layout/tour_operation_manager_alert'); ?>
+              <?php $this->load->view('account/layout/account_alert'); ?>
             <div class="card">
              
               <!-- /.card-header -->
@@ -33,12 +33,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                  <th>SN</th>
-                    <th>Package Type</th>
-					          <th>Tour Number</th>
-                    <th>Tour Title</th>
-                    <th>Tour Date</th>
-                    <!-- <th>Action</th> -->
+                    <th>SN</th>
+                    <th>Tour Manager Name</th>
+                    <!-- <th>Is Active?</th> -->
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -51,30 +49,21 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <?php if($info['package_type']!="Special Limited Offer"){
-                      ?>
-                    <td><?php echo $info['package_type'] ?></td>
-                    <?php }else{
-                      ?>
-                      <td>Special Limited Offer</td>
-                    <?php } ?>
-					          <td><?php echo $info['tour_number'] ?></td>
-                    <td><?php echo $info['tour_title'] ?></td>
-                    <td><?php echo $info['journey_date']; ?></td>
-                   
-                    <!-- <td>
+                    <td><?php echo $info['supervision_name'] ?></td>
+                    <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-default">Action</button>
                         <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-
-                          <a href="<?php //echo $module_url_path;?>/expenses/<?php //echo $info['id']; ?>" ><button class="dropdown-item">Show Expenses</button></a>
-
+                       
+                          <a href="<?php echo $module_url_path;?>/assign_tours_to_tour_manager/<?php $aid=base64_encode($info['tour_manager_name']); 
+					                  echo rtrim($aid, '='); ?>" class="itinerary_css"><button class="dropdown-item">Assign Tours</button></a>
+							            
                         </div>
                       </div>
-                    </td> -->
+                    </td>
                   </tr>
                   
                   <?php $i++; } ?>

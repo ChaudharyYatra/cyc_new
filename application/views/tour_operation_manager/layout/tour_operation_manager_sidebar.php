@@ -71,6 +71,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>supervision/tour_expences/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Tour Expences
+              </p>
+            </a>
+          </li>
+
           <!-- <li class="nav-item">
                 <a href="<?php //echo base_url(); ?>stationary/stationary_order_reject/reject" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
