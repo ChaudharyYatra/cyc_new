@@ -29,6 +29,15 @@ class Seat_checker extends CI_Controller {
 
     public function index($iid="")
     {
+
+        $record = array();
+        $fields = "booking_enquiry.*,packages.id,packages.tour_title,packages.tour_number";
+        $this->db->order_by('booking_enquiry.id','desc');
+        $this->db->where('booking_enquiry.is_deleted','no');
+        $this->db->where('booking_enquiry.id',$iid);
+        $this->db->join("packages", 'packages.id=booking_enquiry.package_id','left');
+        $tour_no_title = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
+
         // echo $iid;
        $agent_sess_name = $this->session->userdata('agent_name');
        $id = $this->session->userdata('agent_sess_id');
@@ -149,6 +158,7 @@ class Seat_checker extends CI_Controller {
 
         $this->arr_view_data['new_pack_id'] = $pack_id;
         $this->arr_view_data['new_pack_date_id'] = $pack_date_id;
+        $this->arr_view_data['tour_no_title'] = $tour_no_title;
         $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
         $this->arr_view_data['listing_page'] = 'yes';
         $this->arr_view_data['final_booked_data'] = $final_booked_data;

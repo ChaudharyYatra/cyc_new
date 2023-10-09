@@ -31,6 +31,28 @@
     <section class="content">
       <div class="container-fluid">
         <?php $this->load->view('agent/layout/agent_alert'); ?>
+        <div class="card card-primary">
+              <div class="card-header">
+                <?php foreach($tour_no_title as $tour_no_title_value) 
+                   {  ?>
+                <table id="example2" class="" style="width:100%">
+                  <tr>
+                    <th>Customer Name -</th>
+                    <td><?php echo $tour_no_title_value['first_name']; ?> <?php echo $tour_no_title_value['last_name']; ?> </td>
+
+                    <th>Total Travellers Count -</th>
+                    <td><?php echo $tour_no_title_value['seat_count']; ?></td>
+                  </tr>
+                  <tr>
+                    
+
+                    <th>Mobile No -</th>
+                    <td><?php echo $tour_no_title_value['mobile_number']; ?></td>
+                  </tr>
+                </table>
+                <?php } ?>
+              </div>
+
       <div class="wrapper">
         <div class="container">
             <div class="row">
@@ -170,7 +192,8 @@
                 </div>
               </div>
              
-    </div>
+      </div>
+      </div>
 
 
 
