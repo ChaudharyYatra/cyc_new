@@ -17,6 +17,7 @@ class All_general_enquiry_followup extends CI_Controller {
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/all_general_enquiry_followup";
         $this->module_url_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/booking_basic_info";
         $this->module_url_path_booking_enq    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
+        $this->module_url_path_all_general_enquiry   =  base_url().$this->config->item('agent_panel_slug')."/all_general_enquiry";
         $this->module_title       = "Domestic Booking Enquiry Followup";
         $this->module_title_followup = "All General Enquiry Followup";
         $this->module_url_slug    = "all_general_enquiry_followup";
@@ -60,6 +61,7 @@ class All_general_enquiry_followup extends CI_Controller {
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
          $this->arr_view_data['module_url_booking_basic_info'] = $this->module_url_booking_basic_info;
+         $this->arr_view_data['module_url_path_all_general_enquiry'] = $this->module_url_path_all_general_enquiry;
          $this->arr_view_data['module_url_path_booking_enq'] = $this->module_url_path_booking_enq;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
