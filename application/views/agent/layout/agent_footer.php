@@ -5724,6 +5724,7 @@ $("#final_booking_submit").click(function() {
                     // alert('Doneeeee');
                     // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
                     alert('Verify OTP Sucessfully');
+                    $("#final_booking_submit").prop('disabled', true);
 
                 } else {
                     alert('You Entered Wrong OTP. Please check it and submit right OTP');
@@ -7288,6 +7289,7 @@ $(document).ready(function() {
                         var booking_ref_no = $('#booking_ref_no').val(responce);
 
                     }
+                    window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+enquiry_id;
                 }
             });
         }
@@ -7518,21 +7520,68 @@ $(document).ready(function() {
     });
 });
 </script>
-<!-- <script>
-    $('#booking_confirm_submit').click(function(){
-        // Ajax request
-        var btn = $(this);
-        btn.prop('disabled', true);
-            $("#srs_final_submit").prop('disabled', false);
-    });
-</script> -->
-
 <script>
     $('#booking_confirm_submit').click(function(){
         // Toggle visibility
         $("#srs_final_submit").css('display', 'block');
         $(this).prop('disabled', true);
     });
+</script>
+
+<script>
+$("#booking_confirm_submit").click(function() {
+
+    var verify_otp = $("#booking_otp").val(); 
+    var mobile_no = $('#booking_tm_mobile_no').val();
+    // var booking_ref_no = $('#booking_ref_no').val(); 
+    // alert(booking_ref_no);
+    var enquiry_id = $('#enquiry_id').val(); 
+    
+    
+    var journey_date  = $("#journey_date").val();
+    
+    var traveller_id  = $("#traveller_id").val();
+    var enquiry_id    = $("#enquiry_id").val();
+    var hotel_name_id    = $("#hotel_name_id").val();
+    var package_date_id    = $("#package_date_id").val();
+    var package_id    = $("#package_id").val();
+    // alert(package_id);
+
+    if (verify_otp != '') {
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url() ?>agent/booking_preview/booking_confirm_verify_otp',
+            data: {
+                verify_otp: verify_otp,
+                mobile_no: mobile_no,
+                // booking_ref_no: booking_ref_no,
+                enquiry_id: enquiry_id,
+                journey_date: journey_date,
+                traveller_id: traveller_id,
+                enquiry_id: enquiry_id,
+                hotel_name_id: hotel_name_id,
+                package_date_id: package_date_id,
+                package_id: package_id
+            },
+            //  dataType: 'json',
+            //  cache: false,
+            success: function(response) {
+                // alert(response);
+                if (response == 'true') {
+                    // alert('Doneeeee');
+                    // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
+                    alert('Verify OTP Sucessfully');
+
+                } else {
+                    alert('You Entered Wrong OTP. Please check it and submit right OTP');
+
+                }
+            },
+
+        });
+    }
+    
+});
 </script>
 
 <!-- ===========Booking confirm Otp ==================================== -->

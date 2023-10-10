@@ -1802,7 +1802,7 @@
                                 <div class="form-group">
                                 <label>Upload SRS Image / PDF</label><br>
                                 <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php if(!empty($booking_payment_details['enquiry_id'])){echo $booking_payment_details['enquiry_id'];}?>">
-                                <input type="file" name="image_name" id="image_nam" required="required">
+                                <input type="file" name="image_name" id="image_nam">
                                 <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
                                 <br>
                                 <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
