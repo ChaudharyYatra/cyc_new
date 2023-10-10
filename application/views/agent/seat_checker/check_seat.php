@@ -2,7 +2,8 @@
     .card-bg{
         background-color: #F6F6F6;
     }
-    .btn_follow{padding: 2px 8px;};
+    .btn_follow{padding: 2px 8px;}
+    
 </style>
 <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/admin/bus_seat_design/css/jquery.seat-charts.css">
@@ -35,38 +36,50 @@
               <div class="card-header">
                 <?php foreach($tour_no_title as $tour_no_title_value) 
                    {  ?>
-                <table id="example2" class="" style="width:100%">
-                  <tr>
-                    <th>Customer Name -</th>
-                    <td><?php echo $tour_no_title_value['first_name']; ?> <?php echo $tour_no_title_value['last_name']; ?> </td>
 
-                    <th>Total Travellers Count -</th>
-                    <td><?php echo $tour_no_title_value['seat_count']; ?></td>
-                  </tr>
-                  <tr>
-                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-3">
+                            Customer Name -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['first_name']; ?> <?php echo $tour_no_title_value['last_name']; ?>
+                          </div>
+                          <div class="col-md-3">
+                            Total Travellers Count -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['seat_count']; ?>
+                          </div>
 
-                    <th>Mobile No -</th>
-                    <td><?php echo $tour_no_title_value['mobile_number']; ?></td>
-                  </tr>
-                </table>
+                          <div class="col-md-3">
+                            Mobile No -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['mobile_number']; ?>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
                 <?php } ?>
               </div>
 
       <div class="wrapper">
         <div class="container">
             <div class="row">
+
+              <div class="col-md-12">
               
-            <form method="post" enctype="multipart/form-data" id="bus_seat_selection">
-            <input type="hidden" class="form-control" name="is_main_page" id="is_main_page" value="no">
-            <input type="hidden" class="form-control" name="btn_disabled" id="btn_disabled" value="<?php echo $p;?>">
-            <input type="hidden" class="form-control" name="enquiry_seat_count" id="enquiry_seat_count" value="<?php echo $agent_booking_enquiry_data['seat_count'];?>">
-            <input type="hidden" class="form-control" name="new_pack_id" id="new_pack_id" value="<?php echo $new_pack_id;?>">
-            <input type="hidden" class="form-control" name="new_pack_date_id" id="new_pack_date_id" value="<?php echo $new_pack_date_id;?>">
-            <input type="hidden" id="bdata" value='<?php print_r(
-                          $bus_info
-                      ); ?>'>
-                   
+                <form method="post" enctype="multipart/form-data" id="bus_seat_selection">
+                <input type="hidden" class="form-control" name="is_main_page" id="is_main_page" value="no">
+                <input type="hidden" class="form-control" name="btn_disabled" id="btn_disabled" value="<?php echo $p;?>">
+                <input type="hidden" class="form-control" name="enquiry_seat_count" id="enquiry_seat_count" value="<?php echo $agent_booking_enquiry_data['seat_count'];?>">
+                <input type="hidden" class="form-control" name="new_pack_id" id="new_pack_id" value="<?php print_r($new_pack_id);?>">
+                <input type="hidden" class="form-control" name="new_pack_date_id" id="new_pack_date_id" value="<?php echo $new_pack_date_id;?>">
+                <input type="hidden" id="bdata" value='<?php print_r($bus_info); ?>'>
+                    
 
                       <input type="hidden" id="booked_data" value='<?php print_r($final_booked_data); ?>'>
                       <script>
@@ -77,10 +90,12 @@
                     <script>
                       var temp_booked_data=<?php echo json_encode($temp_booking_data);?>;
                     </script> 
-                    
+              </div> 
 
                 <div class="card-body card-bg">
                   <div class="row">
+                    <div class="col-md-12">
+                    <div class="row">
 
                       <?php
                       //   foreach($agent_booking_enquiry_data as $agent_booking_enquiry_data_info) 
@@ -90,9 +105,15 @@
                       // ?>
                       <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_booking_enquiry_data['id']; ?>">
                       <!-- <?php //} ?> -->
+                      <div class="col-md-1">
+                        <div class="form-group">
+                         
+                        </div>
+                      </div>
+
                       <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Select Tour</label>
+                        <div class="form-group">
+                          <label>Select Tour</label>
                           <select class="select_css" name="pack_id" id="pack_id">
                             <option value="">Select Tour</option>
                               <?php foreach($packages_data_booking as $packages_data_booking){ ?>  
@@ -112,16 +133,32 @@
                         </div>
                       </div>
 
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-success mt-4" name="submit" value="Search" id="search" style="margin-top: 24% !important;">Search </button> 
+                          <!-- <a href="<?php //echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
+                          <a href="<?php //echo $module_booking_enquiry; ?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a> -->
+                          <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item">Booking</button></a>   -->
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                         
+                        </div>
+                      </div>
+
                       <div class="col-md-4">
                         <div class="form-group">
-                          <button type="submit" class="btn btn-success mt-4" name="submit" value="Search" id="search">Search </button> 
-                          <a href="<?php echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
                           <a href="<?php echo $module_booking_enquiry; ?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a>
-                          <a href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item">Booking</button></a>  
+                          <a href="<?php echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
+                          <button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item"><a style="color: #fff;text-decoration: none;" href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>">Booking</a></button>
                         </div>
                       </div>
 
                     </div>
+                    </div>
+                  </div>
                 </div>
               </form>
               <!-- <div class="grid-50">
@@ -190,7 +227,9 @@
                       </div>
                   </div>
                 </div>
-              </div>
+
+            </div>
+            
              
       </div>
       </div>

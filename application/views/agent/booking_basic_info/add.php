@@ -34,6 +34,7 @@
               <div class="card-header">
                 <?php foreach($tour_no_title as $tour_no_title_value) 
                    {  ?>
+                   
                 <table id="example2" class="" style="width:100%">
                   <tr>
                     <th style="width:15%">Tour Details -</th>

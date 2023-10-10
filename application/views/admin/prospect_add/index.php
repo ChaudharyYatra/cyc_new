@@ -52,7 +52,6 @@
                     <td><a class="btn-link pull-right text-center" download="" href="<?php echo base_url(); ?>uploads/prospect_pdf/<?php echo $info['prospect_pdf']; ?>">Download</a></td>
                     <td><a class="btn-link pull-right text-center" download="" href="<?php echo base_url(); ?>uploads/rate_chart_pdf/<?php echo $info['rate_chart_pdf']; ?>">Download</a></td>
                     <td>
-                    <td>
                         <?php 
                         if ($info['is_active'] == 'yes') {
                         ?>
@@ -68,7 +67,6 @@
                             <button class="btn btn-danger btn-sm">NO</button>
                         </a>
                         <?php } ?>
-                    </td>
                     </td>
                     <td>
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
