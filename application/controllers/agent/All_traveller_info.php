@@ -27,17 +27,17 @@ class All_traveller_info extends CI_Controller {
 
         public function index()
         {
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $id=$this->session->userdata('agent_sess_id');
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
 
-        $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
-        $this->arr_view_data['listing_page']    = 'yes';
-        //  $this->arr_view_data['arr_data']        = $arr_data;
-        $this->arr_view_data['page_title']      = $this->module_title." List";
-        $this->arr_view_data['module_title']    = $this->module_title;
-        $this->arr_view_data['module_url_path'] = $this->module_url_path;
-        $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
-        $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+            $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
+            $this->arr_view_data['listing_page']    = 'yes';
+            //  $this->arr_view_data['arr_data']        = $arr_data;
+            $this->arr_view_data['page_title']      = $this->module_title." List";
+            $this->arr_view_data['module_title']    = $this->module_title;
+            $this->arr_view_data['module_url_path'] = $this->module_url_path;
+            $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
+            $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
         
         }
 
@@ -567,8 +567,10 @@ class All_traveller_info extends CI_Controller {
 
                         if(!empty($all_traveller_info_tble)){
                             $arr_where  = array("id" => $travaller_info_id[$i]);
+                            // print_r($arr_where); die;
                             // echo "hii"; die;
                          $inserted_id = $this->master_model->updateRecord('all_traveller_info',$arr_insert,$arr_where);
+                         
                         }else{
                             // echo "elseee"; die;
                             // $inserted_id = $this->master_model->insertRecord('all_traveller_info',$arr_insert,true);
@@ -582,7 +584,8 @@ class All_traveller_info extends CI_Controller {
                     
              
                  if($inserted_id > 0)
-                 {
+                 { 
+                    // echo('hoooooooo'); die;
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_booking_basic_info.'/add/'.$iid);
                  }

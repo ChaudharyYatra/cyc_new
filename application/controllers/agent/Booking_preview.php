@@ -637,32 +637,32 @@ class Booking_preview extends CI_Controller {
             $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
 
 
-            $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+        //     $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
-            $alphabet = '1234567890';
-            $otp = str_shuffle($alphabet);
-            $traveler_otp = substr($otp, 0, '6'); 
+        //     $alphabet = '1234567890';
+        //     $otp = str_shuffle($alphabet);
+        //     $traveler_otp = substr($otp, 0, '6'); 
 
-            $from_email='test@choudharyyatra.co.in';
+        //     $from_email='test@choudharyyatra.co.in';
             
-            $authKey = "1207168241267288907";
+        //     $authKey = "1207168241267288907";
             
-        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        $senderId  = "CYCPLN";
+        // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+        // $senderId  = "CYCPLN";
         
-        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+        // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
         
-         $apiurl = str_replace(" ", '%20', $apiurl); 
+        //  $apiurl = str_replace(" ", '%20', $apiurl); 
             
             
-            $ch = curl_init($apiurl);
-                    $get_url = $apiurl;
-                    curl_setopt($ch, CURLOPT_POST,0);
-                    curl_setopt($ch, CURLOPT_URL, $get_url);
-                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                    curl_setopt($ch, CURLOPT_HEADER,0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            $return_val = curl_exec($ch); 
+        //     $ch = curl_init($apiurl);
+        //             $get_url = $apiurl;
+        //             curl_setopt($ch, CURLOPT_POST,0);
+        //             curl_setopt($ch, CURLOPT_URL, $get_url);
+        //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+        //             curl_setopt($ch, CURLOPT_HEADER,0);
+        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        //     $return_val = curl_exec($ch); 
                
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
@@ -875,55 +875,6 @@ class Booking_preview extends CI_Controller {
        }else {
            echo false;
        }
-        // =================================================================
-        //      $extra_services = $this->input->post('extra_services');
-
-            //      if($this->input->post('select_services')!=''){
-            //         $select_services = implode(",",$this->input->post('select_services'));
-            //     }else{
-            //         $select_services = '';
-            //     }
-
-            //     $selected_services=explode(',',$select_services);
-
-            //     // print_r($selected_services); 
-            //     // $ccc=count($selected_services);
-                
-            //     for($i=0;$i<count($selected_services);$i++){
-                    
-            //      $arr_insert2 = array(
-            //         'select_services' => $selected_services[$i],
-            //         'extra_services' => $extra_services,
-            //         // 'booking_reference_no'  =>  $booking_reference_no,
-            //         // 'package_date_id' => $package_date_id,
-            //         'enquiry_id' => $enquiry_id,
-            //         // 'package_id' => $package_id,
-            //         // 'traveller_id' => $traveller_id
-            //     );
-            //     // print_r($arr_insert2); die;
-            //     $this->db->where('is_deleted','no');
-            //     $this->db->where('extra_services_details.enquiry_id',$enquiry_id);
-            //     $extra_services_details = $this->master_model->getRecord('extra_services_details');
-            //     // print_r($extra_services_details); die;
-
-            //     if(!empty($extra_services_details)){
-            //         $arr_where     = array("id" => $extra_sevices_id);
-            //         $inserted_id = $this->master_model->updateRecord('extra_services_details',$arr_insert2,$arr_where);
-            //     } else{
-            //     $inserted_id = $this->master_model->insertRecord('extra_services_details',$arr_insert2,true);
-            //     }
-            // }
-            //      if($inserted_id!=''){
-            //         // echo true;
-            //         $this->session->set_flashdata('success_message',"Booking Preview data save sucessfully.");
-            //         redirect($this->module_url_path_back.'/add_bus/'.$iid);
-
-            //     }else {
-            //         // echo false;
-            //         $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-            //     }
-            //     redirect($this->module_url_path.'/index');
-            //     // module_url_path_back
 
                 
     }

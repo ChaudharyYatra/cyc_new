@@ -7045,7 +7045,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 <script>
 $(document).ready(function() {
-    $("#submit_back_preview").click(function() {
+    $("#back-button_booking_preview").click(function() {
 
         // var confirmed = confirm('Are You Sure You Want To Save This Record?');
         // alert('hiiiiiiiiiii');
@@ -7287,6 +7287,7 @@ $(document).ready(function() {
                     if (responce != false && responce !='') {
                         // alert(responce);
                         var booking_ref_no = $('#booking_ref_no').val(responce);
+                        window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+enquiry_id;
 
                     }
                     window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+enquiry_id;
