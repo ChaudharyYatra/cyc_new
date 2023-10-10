@@ -1397,7 +1397,6 @@ class Booking_preview extends CI_Controller {
                 $arr_update = array(
                     'srs_image_name'    => $filename
                 );
-                
                     $arr_where     = array("enquiry_id" => $enquiry_id);
                     $inserted_id= $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
                     if($inserted_id > 0)
