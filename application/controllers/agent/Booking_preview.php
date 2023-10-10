@@ -1337,13 +1337,14 @@ class Booking_preview extends CI_Controller {
        }else {
            echo false;
        }
-
     }
 
     public function edit()
     {
             if($this->input->post('submit'))
             {
+                if($_FILES['image_name']['name']!=''){
+
                 $file_name     = $_FILES['image_name']['name'];
                 $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','pdf','PDF');
 
@@ -1386,6 +1387,10 @@ class Booking_preview extends CI_Controller {
                 {
                     $filename = $this->input->post('image_name',TRUE);
                 }
+            } 
+            else{
+                $filename  = '';
+            }
             // ===============
             $enquiry_id  = $this->input->post('enquiry_id'); 
 
@@ -1416,6 +1421,87 @@ class Booking_preview extends CI_Controller {
         $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+    }
+
+
+    public function booking_confirm_verify_otp()
+    { 
+        // echo 'hiiiii IN Controller'; die;
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+             $verify_otp = $this->input->post('verify_otp');
+             $mobile_no = $this->input->post('mobile_no'); 
+             $enquiry_id = $this->input->post('enquiry_id'); 
+            // echo $booking_ref_no = $this->input->post('booking_ref_no');  die;
+
+            $record = array();
+            $fields = "booking_payment_details.*";
+            $this->db->where('is_deleted','no');
+            $this->db->where('booking_confirm_traveler_otp',$verify_otp);
+            $this->db->where('booking_tm_mobile_no',$mobile_no);
+            $this->db->where('enquiry_id',$enquiry_id);
+            $booking_payment_details_info = $this->master_model->getRecord('booking_payment_details');
+
+            // print_r($booking_payment_details_info); die;
+
+            if($booking_payment_details_info !=''){
+
+                
+                $journey_date  = $this->input->post('journey_date');
+
+                $traveller_id  = $this->input->post('traveller_id');
+                $enquiry_id    = $this->input->post('enquiry_id'); 
+                $hotel_name_id    = $this->input->post('hotel_name_id'); 
+                $package_date_id    = $this->input->post('package_date_id'); 
+                $package_id    = $this->input->post('package_id'); 
+                $today = date('y-m-d');
+                
+                $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+
+                $arr_insert = array(
+                    'enquiry_id'   =>   $enquiry_id,
+                    'hotel_name_id'   =>   $hotel_name_id,
+                    'package_date_id'   =>   $package_date_id,
+                    'package_id'   =>   $package_id,
+                    'booking_date'   =>   $today,
+                    'traveller_id'   =>   $traveller_id,
+                    'booking_reference_no'  =>  $booking_reference_no,
+                    'agent_id'   =>   $id,
+                    'booking_status'   =>  'confirm'
+                );
+              
+                $arr_where     = array("enquiry_id" => $enquiry_id);
+                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+
+                $arr_update = array(
+                    'booking_done'   =>   'yes'
+                );
+                $arr_where     = array("id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+
+                $arr_update = array(
+                    'booking_done'   =>   'yes'
+                );
+                $arr_where     = array("domestic_enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_basic_info',$arr_update,$arr_where);
+
+                $arr_update1 = array(
+                    'is_book'    =>  'yes',
+                    'booking_reference_no'=>$booking_reference_no, 
+
+                );
+                $arr_where1     = array("enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('bus_seat_book',$arr_update1,$arr_where1);
+               
+
+                echo 'true';
+            }else {
+                echo 'false';
+            }
+                
+// die;
+        
     }
     
 }
