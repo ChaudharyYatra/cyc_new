@@ -475,7 +475,7 @@ $(document).ready(function() {
                                         ); ?>">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control row_set" name="age[]" id="age" oninput="this.value = this.value.replace(/[^0-9]/g, '');">>
+                                        <input type="text" class="form-control row_set" name="age[]" id="age" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </td>
                                     <td>
                                         <select class="select_css row_set" name="relation[]" id="relation">
@@ -2575,7 +2575,7 @@ $(document).ready(function() {
                                         ); ?>">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control row_set" name="age[]" id="age" oninput="this.value = this.value.replace(/[^0-9]/g, '');">>
+                                        <input type="text" class="form-control row_set" name="age[]" id="age" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                     </td>
                                     <td>
                                         <select class="select_css row_set" name="relation[]" id="relation">
