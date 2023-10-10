@@ -4053,9 +4053,32 @@ function all_total_count(newvar_1) {
 
     var total_adult_bus = $("#seperate_seat").val();
     var total_90_bus = $("#child_seperate_seat").val();
-    var total_adult_60 = $("#two_child_share_one_seat").val();
-    var total_adult_40 = $("#child_no_seat_needed").val();
-    var total_adult_0 = $("#child_noo_seat_needed").val();
+
+    var total_adult_60 =0;
+    if (total_adult_60 > 0) {
+        total_adult_60 = $("#two_child_share_one_seat").val();
+    } else {
+        total_adult_60 = 0;
+    }
+    // var total_adult_60 = $("#two_child_share_one_seat").val();
+    
+    var total_adult_40 =0;
+    if (total_adult_40 > 0) {
+        var total_adult_40 = $("#child_no_seat_needed").val();
+    } else {
+        total_adult_40 = 0;
+    }
+
+    // var total_adult_40 = $("#child_no_seat_needed").val();
+
+    var total_adult_0 =0;
+    if (total_adult_0 > 0) {
+        var total_adult_0 = $("#child_noo_seat_needed").val();
+    } else {
+        total_adult_0 = 0;
+    }
+
+    // var total_adult_0 = $("#child_noo_seat_needed").val();
     // ----------------------------------
 
     if (total_agewise_cal_adult > 0) {
