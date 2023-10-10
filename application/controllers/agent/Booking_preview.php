@@ -271,26 +271,26 @@ class Booking_preview extends CI_Controller {
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
 
-        //     $from_email='test@choudharyyatra.co.in';
+            $from_email='test@choudharyyatra.co.in';
             
-        //     $authKey = "1207168241267288907";
+            $authKey = "1207168241267288907";
             
-        // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        // $senderId  = "CYCPLN";
+        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+        $senderId  = "CYCPLN";
         
-        // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
         
-        //  $apiurl = str_replace(" ", '%20', $apiurl); 
+         $apiurl = str_replace(" ", '%20', $apiurl); 
             
             
-        //     $ch = curl_init($apiurl);
-        //             $get_url = $apiurl;
-        //             curl_setopt($ch, CURLOPT_POST,0);
-        //             curl_setopt($ch, CURLOPT_URL, $get_url);
-        //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-        //             curl_setopt($ch, CURLOPT_HEADER,0);
-        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        //     $return_val = curl_exec($ch); 
+            $ch = curl_init($apiurl);
+                    $get_url = $apiurl;
+                    curl_setopt($ch, CURLOPT_POST,0);
+                    curl_setopt($ch, CURLOPT_URL, $get_url);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                    curl_setopt($ch, CURLOPT_HEADER,0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            $return_val = curl_exec($ch); 
                
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
@@ -643,26 +643,26 @@ class Booking_preview extends CI_Controller {
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
 
-        //     $from_email='test@choudharyyatra.co.in';
+            $from_email='test@choudharyyatra.co.in';
             
-        //     $authKey = "1207168241267288907";
+            $authKey = "1207168241267288907";
             
-        // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        // $senderId  = "CYCPLN";
+        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+        $senderId  = "CYCPLN";
         
-        // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
         
-        //  $apiurl = str_replace(" ", '%20', $apiurl); 
+         $apiurl = str_replace(" ", '%20', $apiurl); 
             
             
-        //     $ch = curl_init($apiurl);
-        //             $get_url = $apiurl;
-        //             curl_setopt($ch, CURLOPT_POST,0);
-        //             curl_setopt($ch, CURLOPT_URL, $get_url);
-        //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-        //             curl_setopt($ch, CURLOPT_HEADER,0);
-        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        //     $return_val = curl_exec($ch); 
+            $ch = curl_init($apiurl);
+                    $get_url = $apiurl;
+                    curl_setopt($ch, CURLOPT_POST,0);
+                    curl_setopt($ch, CURLOPT_URL, $get_url);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                    curl_setopt($ch, CURLOPT_HEADER,0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            $return_val = curl_exec($ch); 
                
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
@@ -943,26 +943,26 @@ class Booking_preview extends CI_Controller {
                 $otp = str_shuffle($alphabet);
                 $traveler_otp = substr($otp, 0, '6'); 
 
-            //     $from_email='test@choudharyyatra.co.in';
+                $from_email='test@choudharyyatra.co.in';
                 
-            //     $authKey = "1207168241267288907";
+                $authKey = "1207168241267288907";
                 
-            // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-            // $senderId  = "CYCPLN";
+            $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+            $senderId  = "CYCPLN";
             
-            // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+            $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
             
-            // $apiurl = str_replace(" ", '%20', $apiurl); 
+            $apiurl = str_replace(" ", '%20', $apiurl); 
                 
                 
-            //     $ch = curl_init($apiurl);
-            //             $get_url = $apiurl;
-            //             curl_setopt($ch, CURLOPT_POST,0);
-            //             curl_setopt($ch, CURLOPT_URL, $get_url);
-            //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-            //             curl_setopt($ch, CURLOPT_HEADER,0);
-            //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            //     $return_val = curl_exec($ch); 
+                $ch = curl_init($apiurl);
+                        $get_url = $apiurl;
+                        curl_setopt($ch, CURLOPT_POST,0);
+                        curl_setopt($ch, CURLOPT_URL, $get_url);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                        curl_setopt($ch, CURLOPT_HEADER,0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                $return_val = curl_exec($ch); 
                 
                     $arr_update = array(
                         'booking_tm_mobile_no'   =>   $booking_tm_mobile_no,
@@ -1236,29 +1236,28 @@ class Booking_preview extends CI_Controller {
                 $otp = str_shuffle($alphabet);
                 $traveler_otp = substr($otp, 0, '6'); 
 
-            //     $from_email='test@choudharyyatra.co.in';
+                $from_email='test@choudharyyatra.co.in';
                 
-            //     $authKey = "1207168241267288907";
+                $authKey = "1207168241267288907";
                 
-            // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-            // $senderId  = "CYCPLN";
+            $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+            $senderId  = "CYCPLN";
             
-            // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+            $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
             
-            // $apiurl = str_replace(" ", '%20', $apiurl); 
+            $apiurl = str_replace(" ", '%20', $apiurl); 
                 
                 
-            //     $ch = curl_init($apiurl);
-            //             $get_url = $apiurl;
-            //             curl_setopt($ch, CURLOPT_POST,0);
-            //             curl_setopt($ch, CURLOPT_URL, $get_url);
-            //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-            //             curl_setopt($ch, CURLOPT_HEADER,0);
-            //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            //     $return_val = curl_exec($ch); 
+                $ch = curl_init($apiurl);
+                        $get_url = $apiurl;
+                        curl_setopt($ch, CURLOPT_POST,0);
+                        curl_setopt($ch, CURLOPT_URL, $get_url);
+                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                        curl_setopt($ch, CURLOPT_HEADER,0);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                $return_val = curl_exec($ch); 
                 
                 
-                    
 
                     $arr_update = array(
                         'booking_tm_mobile_no'   =>   $booking_tm_mobile_no,
@@ -1303,26 +1302,26 @@ class Booking_preview extends CI_Controller {
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
 
-        //     $from_email='test@choudharyyatra.co.in';
+            $from_email='test@choudharyyatra.co.in';
             
-        //     $authKey = "1207168241267288907";
+            $authKey = "1207168241267288907";
             
-        // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        // $senderId  = "CYCPLN";
+        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+        $senderId  = "CYCPLN";
         
-        // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
         
-        //  $apiurl = str_replace(" ", '%20', $apiurl); 
+         $apiurl = str_replace(" ", '%20', $apiurl); 
             
             
-        //     $ch = curl_init($apiurl);
-        //             $get_url = $apiurl;
-        //             curl_setopt($ch, CURLOPT_POST,0);
-        //             curl_setopt($ch, CURLOPT_URL, $get_url);
-        //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-        //             curl_setopt($ch, CURLOPT_HEADER,0);
-        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-        //     $return_val = curl_exec($ch); 
+            $ch = curl_init($apiurl);
+                    $get_url = $apiurl;
+                    curl_setopt($ch, CURLOPT_POST,0);
+                    curl_setopt($ch, CURLOPT_URL, $get_url);
+                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                    curl_setopt($ch, CURLOPT_HEADER,0);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            $return_val = curl_exec($ch); 
                
                 $arr_insert = array(
                     'booking_tm_mobile_no'   =>   $mobile_no,
@@ -1340,9 +1339,6 @@ class Booking_preview extends CI_Controller {
        }
 
     }
-
-
-
 
     public function edit()
     {
