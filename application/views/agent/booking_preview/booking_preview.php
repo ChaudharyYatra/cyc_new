@@ -21,6 +21,10 @@
         font-weight:400;
         color:red;
     }
+    #booking_least_count{
+        font-weight:400;
+        color:red;
+    }
 
     #qr_code_image img{
         width:40%;
@@ -29,6 +33,9 @@
     #qr_mode_code_image img{
         width:100%;
         height:100%;
+    }
+    .enq_id{
+        color:white;
     }
 </style>
 <!-- Content Wrapper. Contains page content -->
@@ -1704,11 +1711,19 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-
-                        </div>
+                        <div class="col-md-12">
+                    <div class="row">
                         <div class="col-md-6">
-                            <div class="row">
+                            <h5>Payment Confirmation OTP</h5>
+                            <table id="example2" class="table table-bordered table-hover table-striped">
+                                <tr>
+                                    <th><input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
+                                    <p id="least_count"></p>
+                                    </th>
+                                    <th><button type="button" class="btn btn-success" name="submit" id="final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
+                                </tr>
+                            </table>
+                            <div class="row justify-content-center">
                                 <div class="col-md-3">
                                     <center><th><button type="button" class="btn btn-primary mb-3" name="submit_otp" id="submit_otp"  disabled>Send OTP</button></th></center>
                                 </div>
@@ -1716,45 +1731,96 @@
                                     <center><th><button type="button" class="btn btn-primary mb-3" name="re_send_otp" id="re_send_otp" disabled>Resend OTP</button></th></center>
                                 </div>
                             </div>
-                            <!-- <h5>OTP Details :</h5> -->
-                            <!-- <center><th><button type="button" class="btn btn-primary mb-4" name="submit_otp" id="submit_otp" value="submit_otp" >Send OTP</button></th></center> -->
-                            
+                        </div>
+                        <div class="col-md-6">
+                            <h5> Booking Confirmation OTP</h5>
                             <table id="example2" class="table table-bordered table-hover table-striped">
                                 <tr>
-                                    <th><input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
-                                    <p id="least_count"></p>
+                                    <th><input type="text" class="form-control" name="booking_otp" id="booking_otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
+                                    <p id="booking_least_count"></p>
                                 </th>
                                     
-                                    <th><button type="button" class="btn btn-success" name="submit" id="final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
+                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled>Verify OTP</button></th>
+                                    <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a> -->
                                 </tr>
                             </table>
+                            <div class="row justify-content-center">
+                                <div class="col-md-3">
+                                    <center><th><button type="button" class="btn btn-primary mb-3" name="booking_submit_otp" id="booking_submit_otp"  disabled>Send OTP</button></th></center>
+                                </div>
+                                <div class="col-md-4">
+                                    <center><th><button type="button" class="btn btn-primary mb-3" name="booking_re_send_otp" id="booking_re_send_otp" disabled>Resend OTP</button></th></center>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        
                         <div class="col-md-3">
 
                         </div>
                     </div>
                 </div>
-                
-
+                <div class="card-footer">
+                <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button_booking_preview">Back</button>
+                <a href="<?php echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                </div>
               <!-- /.card-header -->
               <!-- form start -->
                 
-            </div>
+            
             <!-- /.card -->
 
                                             
 
-                <div class="card-footer">
+                <!-- <div class="card-footer"> -->
                     <!-- <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button> -->
                     
                     <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')"><button type="submit" class="btn btn-warning" name="submit_back_preview" value="submit_back_preview" id="submit_back_preview">Back</button></a> -->
-                    <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button_booking_preview">Back</button>
-                    <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')" href="<?php echo $module_url_path_back; ?>/add_bus/<?php echo $enquiry_id; ?>"><button type="button" class="btn btn-warning" name="submit_back_preview" value="submit_back_preview" id="submit_back_preview">Back</button></a> -->
+                    <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')" href="<?php //echo $module_url_path_back; ?>/add_bus/<?php //echo $enquiry_id; ?>"><button type="button" class="btn btn-warning" name="submit_back_preview" value="submit_back_preview" id="submit_back_preview">Back</button></a> -->
                     <!-- <a href="<?php //echo $module_url_path_back; ?>/add_bus/<?php //echo $enquiry_id; ?>/1"><button type="button" class="btn btn-warning" name="back_btn">Back</button></a> -->
-                    <a href="<?php echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
-                </div>
+                <!-- </div> -->
             </div>
             </form>
+
+
+            <!-- <div class="card card-primary"> -->
+            <form method="post" action="<?php echo base_url(); ?>agent/booking_preview/edit" enctype="multipart/form-data" style="background-color: #fff;">
+                <div class="row float-right" id="srs_final_submit" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                <label>Upload SRS Image / PDF</label><br>
+                                <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php if(!empty($booking_payment_details['enquiry_id'])){echo $booking_payment_details['enquiry_id'];}?>">
+                                <input type="file" name="image_name" id="image_nam" required="required">
+                                <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
+                                <br>
+                                <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Final Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+            
           <!--/.col (left) -->
           <!-- right column -->
           
@@ -1767,7 +1833,7 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
   
 <script>
     function show1(){

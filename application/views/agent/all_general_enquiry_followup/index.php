@@ -15,7 +15,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path_booking_enq; ?>/index"><button class="btn btn-primary">List</button></a>
+              <a href="<?php echo $module_url_path_all_general_enquiry; ?>/general_enquiry"><button class="btn btn-primary">List</button></a>
             </ol>
           </div>
         </div>

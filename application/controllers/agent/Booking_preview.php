@@ -127,6 +127,9 @@ class Booking_preview extends CI_Controller {
         $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
         // print_r($booking_payment_details); die;
 
+        $enquiry = isset($booking_payment_details['enquiry_id']);
+        // print_r($enquiry); die;
+
         $this->db->where('is_deleted','no');
         $this->db->where('return_customer_booking_payment_details.enquiry_id',$iid);
         $return_customer_booking_payment_details = $this->master_model->getRecord('return_customer_booking_payment_details');
@@ -143,6 +146,7 @@ class Booking_preview extends CI_Controller {
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['enquiry']        = $enquiry;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
@@ -930,7 +934,6 @@ class Booking_preview extends CI_Controller {
             // echo 'hiiiii IN Controller'; die;
             $agent_sess_name = $this->session->userdata('agent_name');
             $id=$this->session->userdata('agent_sess_id');
-
                 
                 $booking_tm_mobile_no = $this->input->post('booking_tm_mobile_no');
 
@@ -940,35 +943,32 @@ class Booking_preview extends CI_Controller {
                 $otp = str_shuffle($alphabet);
                 $traveler_otp = substr($otp, 0, '6'); 
 
-                $from_email='test@choudharyyatra.co.in';
+            //     $from_email='test@choudharyyatra.co.in';
                 
-                $authKey = "1207168241267288907";
+            //     $authKey = "1207168241267288907";
                 
-            $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-            $senderId  = "CYCPLN";
+            // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+            // $senderId  = "CYCPLN";
             
-            $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+            // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
             
-            $apiurl = str_replace(" ", '%20', $apiurl); 
+            // $apiurl = str_replace(" ", '%20', $apiurl); 
                 
                 
-                $ch = curl_init($apiurl);
-                        $get_url = $apiurl;
-                        curl_setopt($ch, CURLOPT_POST,0);
-                        curl_setopt($ch, CURLOPT_URL, $get_url);
-                        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                        curl_setopt($ch, CURLOPT_HEADER,0);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-                $return_val = curl_exec($ch); 
+            //     $ch = curl_init($apiurl);
+            //             $get_url = $apiurl;
+            //             curl_setopt($ch, CURLOPT_POST,0);
+            //             curl_setopt($ch, CURLOPT_URL, $get_url);
+            //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+            //             curl_setopt($ch, CURLOPT_HEADER,0);
+            //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            //     $return_val = curl_exec($ch); 
                 
-                
-                    
-
                     $arr_update = array(
                         'booking_tm_mobile_no'   =>   $booking_tm_mobile_no,
                         'traveler_otp'   =>   $traveler_otp
                     );
-// print_r($arr_update); die;
+                    // print_r($arr_update); die;
 
                     $arr_where     = array("enquiry_id" => $enquiry_id);
                     $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
@@ -980,9 +980,6 @@ class Booking_preview extends CI_Controller {
                     }else {
                         echo false;
                     }
-                    
-
-            
         }
 
     public function verify_otp()
@@ -1223,5 +1220,206 @@ class Booking_preview extends CI_Controller {
                 echo json_encode($data); 
     
             }
+
+
+            public function booking_resend_otp()
+        { 
+            // echo 'hiiiii IN Controller'; die;
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+                
+                $booking_tm_mobile_no = $this->input->post('booking_tm_mobile_no');
+
+                $enquiry_id = $this->input->post('enquiry_id');
+
+                $alphabet = '1234567890';
+                $otp = str_shuffle($alphabet);
+                $traveler_otp = substr($otp, 0, '6'); 
+
+            //     $from_email='test@choudharyyatra.co.in';
+                
+            //     $authKey = "1207168241267288907";
+                
+            // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+            // $senderId  = "CYCPLN";
+            
+            // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+            
+            // $apiurl = str_replace(" ", '%20', $apiurl); 
+                
+                
+            //     $ch = curl_init($apiurl);
+            //             $get_url = $apiurl;
+            //             curl_setopt($ch, CURLOPT_POST,0);
+            //             curl_setopt($ch, CURLOPT_URL, $get_url);
+            //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+            //             curl_setopt($ch, CURLOPT_HEADER,0);
+            //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+            //     $return_val = curl_exec($ch); 
+                
+                
+                    
+
+                    $arr_update = array(
+                        'booking_tm_mobile_no'   =>   $booking_tm_mobile_no,
+                        'booking_confirm_traveler_otp'   =>   $traveler_otp
+                    );
+                    // print_r($arr_update); die;
+
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
+                    
+                    //  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                    if($enquiry_id!=''){
+                        echo true;
+
+                    }else {
+                        echo false;
+                    }
+        }
+
+
+        
+    public function booking_confirm_otp()
+    { 
+        // echo 'hiiiii IN Controller'; die;
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+            $booking_amt = $this->input->post('booking_amt');
+            $final_amt = $this->input->post('final_amt');
+            $mobile_no = $this->input->post('mobile_no');
+            $pending_amt = $this->input->post('pending_amt');
+
+            $enquiry_id = $this->input->post('enquiry_id');
+            $traveller_id = $this->input->post('traveller_id');
+            $package_id = $this->input->post('package_id');
+            $journey_date = $this->input->post('journey_date');
+            $package_date_id = $this->input->post('package_date_id');
+
+            $booking_payment_details_id = $this->input->post('booking_payment_details_id');
+
+            $alphabet = '1234567890';
+            $otp = str_shuffle($alphabet);
+            $traveler_otp = substr($otp, 0, '6'); 
+
+        //     $from_email='test@choudharyyatra.co.in';
+            
+        //     $authKey = "1207168241267288907";
+            
+        // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+        // $senderId  = "CYCPLN";
+        
+        // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+        
+        //  $apiurl = str_replace(" ", '%20', $apiurl); 
+            
+            
+        //     $ch = curl_init($apiurl);
+        //             $get_url = $apiurl;
+        //             curl_setopt($ch, CURLOPT_POST,0);
+        //             curl_setopt($ch, CURLOPT_URL, $get_url);
+        //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+        //             curl_setopt($ch, CURLOPT_HEADER,0);
+        //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        //     $return_val = curl_exec($ch); 
+               
+                $arr_insert = array(
+                    'booking_tm_mobile_no'   =>   $mobile_no,
+                    'booking_confirm_traveler_otp'   =>   $traveler_otp
+                );
+                // print_r($arr_insert); die;
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+
+        if($inserted_id!=''){   
+           echo true;
+
+       }else {
+           echo false;
+       }
+
+    }
+
+
+
+
+    public function edit()
+    {
+            if($this->input->post('submit'))
+            {
+                $file_name     = $_FILES['image_name']['name'];
+                $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','pdf','PDF');
+
+                if($file_name!="")
+                {               
+                    $ext = explode('.',$_FILES['image_name']['name']); 
+                    $config['file_name']   = $this->input->post('txtEmp_id').'.'.$ext[1];
+
+                    if(!in_array($ext[1],$arr_extension))
+                    {
+                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                        redirect($this->module_url_path.'/add');  
+                    }
+                }
+                $file_name_to_dispaly =  $this->config->item('project_name').''.round(microtime(true)).str_replace(' ','_',$file_name);
+                // print_r($file_name_to_dispaly); die;
+                $config['upload_path']   = './uploads/srs_image/';
+                $config['allowed_types'] = 'png|jpg|jpeg|JPG|PNG|JPEG|pdf|PDF'; 
+                $config['max_size']      = '10000';
+                $config['file_name']     =  $file_name_to_dispaly;
+                $config['overwrite']     =  TRUE;
+
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config); // Important
+
+                if(!$this->upload->do_upload('image_name'))
+                {  
+                    $data['error'] = $this->upload->display_errors();
+                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                    redirect($this->module_url_path);  
+                }
+
+                if($file_name!="")
+                {
+                    $file_name = $this->upload->data();
+                    $filename = $file_name_to_dispaly;
+                }
+
+                else
+                {
+                    $filename = $this->input->post('image_name',TRUE);
+                }
+            // ===============
+            $enquiry_id  = $this->input->post('enquiry_id'); 
+
+                $arr_update = array(
+                    'srs_image_name'    => $filename
+                );
+                
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id= $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
+                    if($inserted_id > 0)
+                    {
+                        $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
+                        redirect($this->module_url_path_payment_receipt.'/index/'.$enquiry_id);
+                    }
+                    else
+                    {
+                        $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+                    }
+                    redirect($this->module_url_path.'/index');
+
+          
+        }
+        
+        // $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+        $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+    }
     
 }
