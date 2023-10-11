@@ -1740,7 +1740,7 @@
                                     <p id="booking_least_count"></p>
                                 </th>
                                     
-                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled>Verify OTP</button></th>
+                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled data-bs-toggle="modal" data-bs-target="#exampleModal_send">Verify OTP</button></th>
                                     <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a> -->
                                 </tr>
                             </table>
@@ -1791,36 +1791,6 @@
                 <!-- </div> -->
             </div>
             </form>
-
-
-            <!-- <div class="card card-primary"> -->
-            <form method="post" action="<?php echo base_url(); ?>agent/booking_preview/edit" enctype="multipart/form-data" style="background-color: #fff;">
-                <div class="row float-right" id="srs_final_submit" style="display: none;">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                <label>Upload SRS Image / PDF</label><br>
-                                <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
-                                { ?>
-                                <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
-                                <?php } ?>
-                                <input type="file" name="image_name" id="image_nam">
-                                <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
-                                <br>
-                                <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" name="submit" value="submit">Final Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
 
             
@@ -1838,6 +1808,58 @@
     <!-- /.content -->
 </div>
   
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal_send" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <form method="post" action="<?php echo $module_url_path;?>/edit" enctype="multipart/form-data">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SRS form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 mb-2">
+                    <div class="form-group">
+                    <label>Upload SRS Image / PDF</label><br>
+                    <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
+                    { ?>
+                    <input type="text" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
+                    <?php } ?>
+                    <input type="file" name="image_name" id="image_nam">
+                    <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
+                    <br>
+                    <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="col-form-label">Comment:</label>
+                  <textarea class="form-control" name="srs_remark" id="srs_remark"></textarea>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit" name="submit" value="send">Send</button>
+            </div> -->
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit_doc" name="submit_doc" value="send">Send</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+</div>
+
 <script>
     function show1(){
     document.getElementById('extra_services_div1').style.display = 'none';

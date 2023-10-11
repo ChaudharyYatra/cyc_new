@@ -1341,61 +1341,65 @@ class Booking_preview extends CI_Controller {
 
     public function edit()
     {
-            if($this->input->post('submit'))
+            if($this->input->post('submit_doc'))
             {
                 if($_FILES['image_name']['name']!=''){
 
                 $file_name     = $_FILES['image_name']['name'];
-                $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','pdf','PDF');
+                
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','pdf','PDF');
 
-                if($file_name!="")
-                {               
+                $file_name = $_FILES['image_name'];
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','pdf','PDF');
+
+                if($file_name['name']!="")
+                {
                     $ext = explode('.',$_FILES['image_name']['name']); 
-                    $config['file_name']   = $this->input->post('txtEmp_id').'.'.$ext[1];
+                    $config['file_name'] = rand(1000,90000);
 
                     if(!in_array($ext[1],$arr_extension))
                     {
                         $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                        redirect($this->module_url_path.'/add');  
                     }
-                }
-                $file_name_to_dispaly =  $this->config->item('project_name').''.round(microtime(true)).str_replace(' ','_',$file_name);
-                // print_r($file_name_to_dispaly); die;
-                $config['upload_path']   = './uploads/srs_image/';
-                $config['allowed_types'] = 'png|jpg|jpeg|JPG|PNG|JPEG|pdf|PDF'; 
-                $config['max_size']      = '10000';
-                $config['file_name']     =  $file_name_to_dispaly;
-                $config['overwrite']     =  TRUE;
+                }   
 
+              $file_name_courier_receipt =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+            
+                $config['upload_path']   = './uploads/srs_image/';
+                $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|pdf|PDF';  
+                $config['max_size']      = '10000';
+                $config['file_name']     = $file_name_courier_receipt;
+                $config['overwrite']     = TRUE;
                 $this->load->library('upload',$config);
                 $this->upload->initialize($config); // Important
-
+                
                 if(!$this->upload->do_upload('image_name'))
                 {  
                     $data['error'] = $this->upload->display_errors();
                     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    redirect($this->module_url_path);  
                 }
-
-                if($file_name!="")
-                {
+                if($file_name['name']!="")
+                {   
                     $file_name = $this->upload->data();
-                    $filename = $file_name_to_dispaly;
+                    $new_img_filename = $file_name_courier_receipt;
                 }
-
                 else
                 {
-                    $filename = $this->input->post('image_name',TRUE);
+                    $new_img_filename = $this->input->post('image_name',TRUE);     
                 }
+
             } 
             else{
-                $filename  = '';
+                $new_img_filename  = '';
             }
             // ===============
             $enquiry_id  = $this->input->post('enquiry_id'); 
+            $srs_remark  = $this->input->post('srs_remark'); 
 
                 $arr_update = array(
-                    'srs_image_name'    => $filename
+                    'srs_image_name'    => $new_img_filename,
+                    'srs_remark'    => $srs_remark
+
                 );
                     $arr_where     = array("enquiry_id" => $enquiry_id);
                     $inserted_id= $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
@@ -1498,9 +1502,7 @@ class Booking_preview extends CI_Controller {
             }else {
                 echo 'false';
             }
-                
 // die;
         
     }
-    
 }
