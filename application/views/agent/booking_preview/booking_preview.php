@@ -1740,7 +1740,8 @@
                                     <p id="booking_least_count"></p>
                                 </th>
                                     
-                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled data-bs-toggle="modal" data-bs-target="#exampleModal_send">Verify OTP</button></th>
+                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled>Verify OTP</button></th>
+                                    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal_send" -->
                                     <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a> -->
                                 </tr>
                             </table>

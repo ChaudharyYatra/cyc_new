@@ -5725,6 +5725,7 @@ $("#final_booking_submit").click(function() {
                     // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
                     alert('Verify OTP Sucessfully');
                     $("#final_booking_submit").prop('disabled', true);
+                    $("#booking_submit_otp").prop('disabled', false);
 
                 } else {
                     alert('You Entered Wrong OTP. Please check it and submit right OTP');
@@ -7464,11 +7465,11 @@ $(document).ready(function() {
         }, fewSeconds*20000);
     });
 </script>
-<script>
+<!-- <script>
     $('#otp').on('keyup',function(){
             $("#booking_submit_otp").prop('disabled', false);
     });
-</script>
+</script> -->
 <script>
     $(document).ready(function(){ 
     const target = document.getElementById('booking_confirm_submit');
@@ -7521,13 +7522,13 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
+<!-- <script>
     $('#booking_confirm_submit').click(function(){
         // Toggle visibility
         $("#srs_final_submit").css('display', 'block');
         $(this).prop('disabled', true);
     });
-</script>
+</script> -->
 
 <script>
 $("#booking_confirm_submit").click(function() {
@@ -7572,7 +7573,7 @@ $("#booking_confirm_submit").click(function() {
                     // alert('Doneeeee');
                     // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
                     alert('Verify OTP Sucessfully');
-
+                    $('#exampleModal_send').modal('show');
                 } else {
                     alert('You Entered Wrong OTP. Please check it and submit right OTP');
 
