@@ -9276,4 +9276,45 @@ $(document).ready(function () {
 
 });
 </script>
+
+<script>
+$(document).ready(function () {
+
+  $('#edit_prospect').validate({ // initialize the plugin
+    errorPlacement: function ($error, $element) {
+      $error.appendTo($element.closest("div"));
+    },
+    rules: {
+      old_img_name: {
+        required: true,
+        accept: "application/pdf", // Make sure it's a PDF file
+        filesize: 1024 * 1024,     // Max size is 1MB (in bytes)
+      },
+      old_img_name2: {
+        required: true,
+        accept: "application/pdf", // Make sure it's a PDF file
+        filesize: 1024 * 1024,     // Max size is 1MB (in bytes)
+      }
+    },
+
+    messages: {
+      old_img_name: {
+        required: "Please upload prospect pdf",
+        accept: "Only PDF files are allowed",
+        filesize: "File size must be less than 1MB",
+      },
+      old_img_name2: {
+        required: "Please upload rate chart pdf",
+        accept: "Only PDF files are allowed",
+        filesize: "File size must be less than 1MB",
+      },
+    }
+  });
+  // Add a custom validation method for file size
+  $.validator.addMethod("filesize", function (value, element, param) {
+      return this.optional(element) || (element.files[0].size <= param);
+    }, "File size must be less than {0} bytes");
+
+});
+</script>
 <!-- jquery validation on add prospect and rate chart for fornt website -->

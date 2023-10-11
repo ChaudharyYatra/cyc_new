@@ -30,6 +30,40 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+      <?php $this->load->view('agent/layout/agent_alert'); ?>
+        <div class="card card-primary">
+              <div class="card-header">
+                <?php foreach($tour_no_title as $tour_no_title_value) 
+                   {  ?>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-3">
+                            Customer Name -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['first_name']; ?> <?php echo $tour_no_title_value['last_name']; ?>
+                          </div>
+                          <div class="col-md-3">
+                            Total Travellers Count -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['seat_count']; ?>
+                          </div>
+
+                          <div class="col-md-3">
+                            Mobile No -
+                          </div>
+                          <div class="col-md-3">
+                            <?php echo $tour_no_title_value['mobile_number']; ?>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                <?php } ?>
+              </div>
 
       <div class="wrapper">
         <div class="container">
