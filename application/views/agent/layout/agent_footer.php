@@ -7492,7 +7492,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     $("#booking_re_send_otp").click(function() {
-        alert('hiiiiiiiiiii');
+        // alert('hiiiiiiiiiii');
         var booking_tm_mobile_no = $('#booking_tm_mobile_no').val();  
         var enquiry_id = $('#enquiry_id').val();
         
@@ -7500,7 +7500,7 @@ $(document).ready(function() {
         // alert(enquiry_id);
 
         if (booking_tm_mobile_no != '') {
-            alert('IN hiiiii');
+            // alert('IN hiiiii');
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/booking_preview/booking_resend_otp",
                 type: "post",
