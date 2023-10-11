@@ -366,8 +366,9 @@ class All_traveller_info extends CI_Controller {
         }
 
         if($this->input->post('submit_back'))
+
         {
-            
+
                 $domestic_enquiry_id  = $this->input->post('domestic_enquiry_id');
                 $package_id  = $this->input->post('package_id');
                 $seat_count  = $this->input->post('seat_count');
@@ -376,104 +377,79 @@ class All_traveller_info extends CI_Controller {
                 $mrandmrs  = $this->input->post('mrandmrs');
                 $first_name  = $this->input->post('first_name');
                 $middle_name  = $this->input->post('middle_name');
-                $last_name  = $this->input->post('last_name'); 
-                $dob  = $this->input->post('dob'); 
+                $last_name  = $this->input->post('last_name');
+                $dob  = $this->input->post('dob');
                 $relation  = $this->input->post('relation');
                 $flat_no  = $this->input->post('flat_no');
                 $building_house_nm  = $this->input->post('building_house_nm');
                 $street_name  = $this->input->post('street_name');
-                $landmark  = $this->input->post('landmark'); 
-                $area  = $this->input->post('area'); 
-                $all_traveller_state  = $this->input->post('all_traveller_state'); 
+                $landmark  = $this->input->post('landmark');
+                $area  = $this->input->post('area');
+                $all_traveller_state  = $this->input->post('all_traveller_state');
                 $all_traveller_district  = $this->input->post('all_traveller_district');
                 $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
                 $all_traveller_city  = $this->input->post('all_traveller_city');
-                $pincode  = $this->input->post('pincode'); 
+                $pincode  = $this->input->post('pincode');
                 $std_code  = $this->input->post('std_code');
                 $mobile_no  = $this->input->post('mobile_no');
-                $phone_no  = $this->input->post('phone_no'); 
+                $phone_no  = $this->input->post('phone_no');
                 $email_id  = $this->input->post('email_id');
                 $document_file_traveller_img = $this->input->post('document_file_traveller_img[]');
-                $travaller_info_id = $this->input->post('travaller_info_id'); 
-                $all_traveller_count = $this->input->post('all_traveller_count'); 
+                $travaller_info_id = $this->input->post('travaller_info_id');
+                $all_traveller_count = $this->input->post('all_traveller_count');
                 $d_hidden = $this->input->post('d_hidden');
-                $anniversary_date  = $this->input->post('anniversary_date'); 
+                $anniversary_date  = $this->input->post('anniversary_date');
                 $age  = $this->input->post('age');
                 $mobile_number  = $this->input->post('mobile_number');
                 $document_file_aadhar_img = $this->input->post('document_file_aadhar_img');
-                
-                // if(!empty($all_traveller_info))
-                // {
-                //     // $arr_update = array('is_deleted' => 'yes');
-                //     $arr_where = array("domestic_enquiry_id" => $iid);
-                         
-                //     $inserted_id =  $this->master_model->updateRecord('all_traveller_info',$arr_update,$arr_where);
-                // }
-                
+
                 $c=count($first_name);
 
-                // $this->db->where('is_deleted','no');
-                // $this->db->order_by('id','desc');
-                // $this->db->limit('1');
-                // $all_traveller_info_tble = $this->master_model->getRecord('all_traveller_info');
-                // $all_traveller_info_tble_id = $all_traveller_info_tble['id'];
-
-                // print_r($_REQUEST);
-
                    for($i=0; $i<$c; $i++){
-
-                    // $traveller_id = $all_traveller_info_tble_id+$i;
-
                     $img_encoded= '';
                     $fname_traveller_img='';
-                            
+
                         if($document_file_traveller_img[$i]!='')
-                        {   
-                            
+                        {  
                             if(isset($document_file_traveller_img[$i]) && !empty($document_file_traveller_img[$i]))
                             {
-                                
                                 $img_encoded = $document_file_traveller_img[$i];
                                 $image_parts_traveller_img = explode(";base64,", $document_file_traveller_img[$i]);
                             } else {
                                 $image_parts_traveller_img = explode(";base64,", $document_file_traveller_img[$i]);
                             }      
                             $image_base64_traveller_img = base64_decode($image_parts_traveller_img[1]);
-                            
                             $image_type_aux_travellerimg = explode("image/", $image_parts_traveller_img[0]);
 
                             if(count($image_type_aux_travellerimg)>1) {
                                 $image_type_traveller_img = $image_type_aux_travellerimg[1];
                                 $file_name_traveller_img = "traveller_img_".time().date("Ymd").$i;
-                                
                             } else {
                                 $image_type_aux_travellerimg = explode("data:application/", $image_parts_traveller_img[0]);
                                 $image_type_traveller_img = $image_type_aux_travellerimg[1];
                                 $file_name_traveller_img = "traveller_img_".time().date("Ymd").$i;
-                                
                             }
+
                             $fname_traveller_img=$file_name_traveller_img.".".$image_type_traveller_img;
                             $file_traveller_img = 'uploads/traveller/'.$file_name_traveller_img.".".$image_type_traveller_img;
                             file_put_contents($file_traveller_img, $image_base64_traveller_img);
                         }
-                      
 
-                        // print_r($_REQUEST);
-                      
-                        // ---------------------------
+                     
+
                         $aadhar_img_encoded= '';
                         $fname_aadhar_img='';
                         if($document_file_aadhar_img[$i]!='')
-                        {   
+                        {  
                             if(isset($document_file_aadhar_img[$i]) && !empty($document_file_aadhar_img[$i]))
                             {
                                 $aadhar_img_encoded = $document_file_aadhar_img[$i];
                                 $image_parts_aadhar_img = explode(";base64,", $document_file_aadhar_img[$i]);
                             } else {
-                                $image_parts_aadhar_img = explode(";base64,", $document_file_aadhar_img[$i]); 
+                                $image_parts_aadhar_img = explode(";base64,", $document_file_aadhar_img[$i]);
                             }      
                             $image_base64_aadhar_img = base64_decode($image_parts_aadhar_img[1]);
-                            
+
                             $image_type_aux_aadharimg = explode("image/", $image_parts_aadhar_img[0]);
                             if(count($image_type_aux_aadharimg)>1) {
                                 $image_type_aadhar_img = $image_type_aux_aadharimg[1];
@@ -483,11 +459,11 @@ class All_traveller_info extends CI_Controller {
                                 $image_type_aadhar_img = $image_type_aux_aadharimg[1];
                                 $file_name_aadhar_img = "aadhar_img_".time().date("Ymd").$i;
                             }
+
                             $fname_aadhar_img=$file_name_aadhar_img.".".$image_type_aadhar_img;
                             $file_aadhar_img = 'uploads/traveller_aadhar/'.$file_name_aadhar_img.".".$image_type_aadhar_img;
                             file_put_contents($file_aadhar_img, $image_base64_aadhar_img);
                         }
-
 
                         if(!empty($all_traveller_info_tble)){
 
@@ -498,24 +474,20 @@ class All_traveller_info extends CI_Controller {
                             }else{
                                 $credentials_yes_no='no';
                             }
-
                         } else{
 
                             $credentials_yes_no = 'no';
 
                             if($for_credentials[0]==$traveller_id[$i]){
-                                
                                 $credentials_yes_no='yes';
                             }else{
                                 $credentials_yes_no='no';
                             }
-
                         }
 
-                        
                         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+=-<>?/,.';
                         $password = str_shuffle($alphabet);
-                        $traveler_password = substr($password, 0, '8'); 
+                        $traveler_password = substr($password, 0, '8');
                         // echo $traveler_password; die;
 
                         if($credentials_yes_no=="yes"){
@@ -527,8 +499,7 @@ class All_traveller_info extends CI_Controller {
                         $today = date('y-m-d');
 
                         $traveller_uniqe_no = $domestic_enquiry_id.'_'.$package_id;
-                        
-                        // echo $credentials_yes_no; die;
+
                         $arr_insert = array(
                         'domestic_enquiry_id' =>   $domestic_enquiry_id,
                         'package_id' =>   $package_id,
@@ -536,12 +507,12 @@ class All_traveller_info extends CI_Controller {
                         'for_credentials' =>   $credentials_yes_no,
                         'mr/mrs' =>   $mrandmrs[$i],
                         'first_name'   =>   $first_name[$i],
-                        'middle_name'   =>   $middle_name[$i],   
+                        'middle_name'   =>   $middle_name[$i],  
                         'last_name'    =>$last_name[$i],
-                        'dob'=>$dob[$i], 
+                        'dob'=>$dob[$i],
                         'age'=>$age[$i],
                         'anniversary_date'=>$anniversary_date[$i],
-                        'mobile_number'=>$mobile_number[$i], 
+                        'mobile_number'=>$mobile_number[$i],
                         'all_traveller_relation'=>$relation[$i],
                         'image_name'=>$fname_traveller_img,
                         'aadhar_image_name' =>$fname_aadhar_img,
@@ -549,42 +520,37 @@ class All_traveller_info extends CI_Controller {
                         'aadhar_img_encoded'=>$aadhar_img_encoded,
                         'flat_no' =>   $flat_no,
                         'building_house_nm'   =>   $building_house_nm,
-                        'street_name'   =>   $street_name,   
+                        'street_name'   =>   $street_name,  
                         'landmark'    =>$landmark,
                         'area'    =>$area,
                         'state_name'=>$all_traveller_state,
                         'district_name' =>   $all_traveller_district,
                         'taluka_name'   =>   $all_traveller_taluka,
-                        'city_name'   =>   $all_traveller_city,   
+                        'city_name'   =>   $all_traveller_city,  
                         'pincode'    =>$pincode,
                         'std_code'=>$std_code,
-                        'mobile_no'   =>   $mobile_no,   
+                        'mobile_no'   =>   $mobile_no,  
                         'phone_no'    =>$phone_no,
                         'email_id'=>$email_id ,
                         'password' => $traveler_password_yes
-                        ); 
-                        //   die;
 
-                        if(!empty($all_traveller_info_tble)){
-                            $arr_where  = array("id" => $travaller_info_id[$i]);
-                            // print_r($arr_where); die;
-                            // echo "hii"; die;
-                         $inserted_id = $this->master_model->updateRecord('all_traveller_info',$arr_insert,$arr_where);
-                         
-                        }else{
-                            // echo "elseee"; die;
-                            // $inserted_id = $this->master_model->insertRecord('all_traveller_info',$arr_insert,true);
-                            $inserted_id = $this->master_model->insertRecord('all_traveller_info',$arr_insert,true);
-    
+                        );
+
+                        if($first_name[$i]!='')
+                        {
+                            if(!empty($all_traveller_info_tble))
+                            {
+                                $arr_where  = array("id" => $travaller_info_id[$i]);
+                                $inserted_id = $this->master_model->updateRecord('all_traveller_info',$arr_insert,$arr_where);
+                            }else{
+                                $inserted_id = $this->master_model->insertRecord('all_traveller_info',$arr_insert,true);
+                            }
                         }
-                         //sleep(2);
-                        //  $insert_id = $this->db->insert_id();
                     }
-                    // $arr_insert = null;
-                    
-             
+
+
                  if($inserted_id > 0)
-                 { 
+                 {
                     // echo('hoooooooo'); die;
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_booking_basic_info.'/add/'.$iid);
@@ -594,8 +560,11 @@ class All_traveller_info extends CI_Controller {
                      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
                  }
                 //  redirect($this->module_seat_type_room_type.'/add/'.$iid);
+
                  redirect($this->module_url_path.'/index');
-                // }   
+
+                // }  
+
         }
 
         $this->db->where('is_deleted','no');
