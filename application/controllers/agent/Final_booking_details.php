@@ -61,14 +61,16 @@ class Final_booking_details extends CI_Controller {
         $iid = $this->session->userdata('agent_sess_id');
 
          $record = array();
-         $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name";
+         $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name,
+         booking_payment_details.enquiry_id as enq,booking_payment_details.srs_image_name";
          $this->db->where('final_booking.is_deleted','no');
-         $this->db->where('package_date_id',$id);
+         $this->db->where('final_booking.package_date_id',$id);
          $this->db->join("packages", 'final_booking.package_id=packages.id','left');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
          $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
+         $this->db->join("booking_payment_details", 'final_booking.enquiry_id=booking_payment_details.enquiry_id','right');
          $arr_data = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
-        
+        // print_r($arr_data); die;
 
          $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
@@ -138,6 +140,95 @@ class Final_booking_details extends CI_Controller {
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."details";
+        $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+    }
+
+
+    public function edit()
+    {
+            if($this->input->post('submit_doc'))
+            {
+                if($_FILES['image_name']['name']!=''){
+
+                $file_name     = $_FILES['image_name']['name'];
+                
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','pdf','PDF');
+
+                $file_name = $_FILES['image_name'];
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','pdf','PDF');
+
+                if($file_name['name']!="")
+                {
+                    $ext = explode('.',$_FILES['image_name']['name']); 
+                    $config['file_name'] = rand(1000,90000);
+
+                    if(!in_array($ext[1],$arr_extension))
+                    {
+                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                    }
+                }   
+
+              $file_name_courier_receipt =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+            
+                $config['upload_path']   = './uploads/srs_image/';
+                $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|pdf|PDF';  
+                $config['max_size']      = '10000';
+                $config['file_name']     = $file_name_courier_receipt;
+                $config['overwrite']     = TRUE;
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config); // Important
+                
+                if(!$this->upload->do_upload('image_name'))
+                {  
+                    $data['error'] = $this->upload->display_errors();
+                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                }
+                if($file_name['name']!="")
+                {   
+                    $file_name = $this->upload->data();
+                    $new_img_filename = $file_name_courier_receipt;
+                }
+                else
+                {
+                    $new_img_filename = $this->input->post('image_name',TRUE);     
+                }
+
+            } 
+            else{
+                $new_img_filename  = '';
+            }
+            // ===============
+            $enquiry_id  = $this->input->post('enquiry_id'); 
+            $package_date_id  = $this->input->post('package_date_id'); 
+            $srs_remark  = $this->input->post('srs_remark'); 
+
+                $arr_update = array(
+                    'srs_image_name'    => $new_img_filename,
+                    'srs_remark'    => $srs_remark
+
+                );
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id= $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
+                    if($inserted_id > 0)
+                    {
+                        $this->session->set_flashdata('success_message',"SRS Updated Successfully.");
+                        redirect($this->module_url_path.'/sub_index/'.$package_date_id);
+                    }
+                    else
+                    {
+                        $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+                    }
+                    redirect($this->module_url_path.'/index');
+
+          
+        }
+        
+        // $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }
 

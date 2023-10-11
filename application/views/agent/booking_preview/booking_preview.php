@@ -1827,7 +1827,7 @@
                     <label>Upload SRS Image / PDF</label><br>
                     <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
                     { ?>
-                    <input type="text" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
+                    <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
                     <?php } ?>
                     <input type="file" name="image_name" id="image_nam">
                     <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
