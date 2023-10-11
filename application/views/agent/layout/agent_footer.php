@@ -7585,4 +7585,8 @@ $("#booking_confirm_submit").click(function() {
 });
 </script>
 
+<!-- srs ajax throw insert -->
+
+<!-- srs ajax throw insert -->
+
 <!-- ===========Booking confirm Otp ==================================== -->

@@ -531,7 +531,7 @@ class All_traveller_info extends CI_Controller {
                         'std_code'=>$std_code,
                         'mobile_no'   =>   $mobile_no,  
                         'phone_no'    =>$phone_no,
-                        'email_id'=>$email_id ,
+                        'email_id'=>$email_id,
                         'password' => $traveler_password_yes
 
                         );
