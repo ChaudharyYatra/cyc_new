@@ -310,17 +310,17 @@ class Prospect_add extends CI_Controller{
 
                 $old_img_name2 = $this->input->post('old_img_name2');
                 
-                    if(!empty($_FILES['image_name']) && $_FILES['image_name']['name'] !='')
+                    if(!empty($_FILES['rate_chart_pdf']) && $_FILES['rate_chart_pdf']['name'] !='')
                     {
-                    $file_name2     = $_FILES['image_name']['name'];
+                    $file_name2     = $_FILES['rate_chart_pdf']['name'];
                     $arr_extension = array('pdf');
 
-                    $file_name2 = $_FILES['image_name'];
+                    $file_name2 = $_FILES['rate_chart_pdf'];
                     $arr_extension = array('pdf');
 
                     if($file_name2['name']!="")
                     {
-                        $ext = explode('.',$_FILES['image_name']['name']); 
+                        $ext = explode('.',$_FILES['rate_chart_pdf']['name']); 
                         $config['file_name'] = rand(1000,90000);
 
                         if(!in_array($ext[1],$arr_extension))
@@ -340,7 +340,7 @@ class Prospect_add extends CI_Controller{
                     $this->load->library('upload',$config);
                     $this->upload->initialize($config); // Important
                     
-                    if(!$this->upload->do_upload('image_name'))
+                    if(!$this->upload->do_upload('rate_chart_pdf'))
                     {  
                         $data['error'] = $this->upload->display_errors();
                         $this->session->set_flashdata('error_message',$this->upload->display_errors());

@@ -1442,8 +1442,15 @@ class Seat_type_room_type extends CI_Controller {
      {  
 
          $agent_sess_name = $this->session->userdata('agent_name');
-
          $id=$this->session->userdata('agent_sess_id');
+
+        $record = array();
+        $fields = "booking_enquiry.*,packages.id,packages.tour_title,packages.tour_number";
+        $this->db->order_by('booking_enquiry.id','desc');
+        $this->db->where('booking_enquiry.is_deleted','no');
+        $this->db->where('booking_enquiry.id',$iid);
+        $this->db->join("packages", 'packages.id=booking_enquiry.package_id','left');
+        $tour_no_title = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
 
         //  echo $iid;
 
@@ -1538,6 +1545,7 @@ class Seat_type_room_type extends CI_Controller {
         }
 
          $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['tour_no_title'] = $tour_no_title;
          $this->arr_view_data['bus_info'] = $bus_info;
          $this->arr_view_data['traveller_booking_info'] = $traveller_booking_info;
          $this->arr_view_data['temp_booking_data'] = $temp_booking_data;

@@ -280,7 +280,8 @@ table.scrolldown tbody{
                         $this->db->where('packages.is_deleted','no');
                         $this->db->where('packages.is_active','yes');
                         $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-                        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+                        // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+                        $this->db->order_by('journey_date', 'ASC');
                         // $this->db->group_by('package_id');
                         $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
                         

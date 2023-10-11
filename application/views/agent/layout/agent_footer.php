@@ -4132,6 +4132,31 @@ $(document).ready(function() {
 });
 </script>
 
+<!-- this condition for add bus - seat type room type selection -->
+<script>
+$(document).ready(function() {
+    var temp_booked_data = [];
+    
+    var seat_count = $("#total_seat_count").val();
+    // alert(seat_count);
+
+    var temp_array =<?php echo json_encode($temp_booking_data);?>;
+
+    var selected_seat = temp_array.length;
+
+    // alert(temp_array);
+
+    if (seat_count == selected_seat){
+        $("#booknow_submit").prop('disabled', false)
+
+    } else {
+        $("#booknow_submit").prop('disabled', true)
+        
+    }
+
+});
+</script>
+<!-- end this condition for add bus - seat type room type selection -->
 
 <!-- validation for custom booking enquiry -->
 <script>
