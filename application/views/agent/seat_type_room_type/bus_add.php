@@ -141,7 +141,7 @@
               <div class="card-footer">
                 <!-- <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button> -->
                 <button type="button" class="btn btn-success booknow_submit" name="booknow_submit" value="Book Now" id="booknow_submit">Submit & Proceed</button> 
-                <a href="<?php echo $module_url_path; ?>/add/<?php echo $enquiry_id; ?>/1"><button type="button" class="btn btn-warning" name="back_btn">Back</button></a>
+                <a href="<?php echo $module_url_path; ?>/add/<?php echo $enquiry_id; ?>/1"><button type="button" class="btn btn-warning submit_back" name="back_btn" id="submit_back">Back</button></a>
                 <a href="<?php echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
               </div>
     </div>
