@@ -1093,5 +1093,51 @@ class All_traveller_info extends CI_Controller {
 
     }
 
+    public function row_delete(){
+
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        $rowID = $this->input->post('rowID');
+        $seat_count = $this->input->post('seat_count');
+        $domestic_enquiry_id = $this->input->post('domestic_enquiry_id');
+
+        if($rowID !=''){
+
+                
+            $rowID = $this->input->post('rowID');
+
+            $seat_count = $this->input->post('seat_count');
+            $domestic_enquiry_id = $this->input->post('domestic_enquiry_id');
+           
+            $update_seat_count = $seat_count - 1;
+
+            $arr_update = array(
+                'is_deleted'   =>   'yes',
+                'seat_count'   => $update_seat_count
+            );
+            $arr_where     = array("id" => $rowID);
+            $this->master_model->updateRecord('all_traveller_info',$arr_update,$arr_where);
+
+            $arr_update = array(
+                'seat_count'   => $update_seat_count
+            );
+            $arr_where     = array("domestic_enquiry_id" => $domestic_enquiry_id);
+            $this->master_model->updateRecord('booking_basic_info',$arr_update,$arr_where);
+
+            $arr_update = array(
+                'seat_count'   => $update_seat_count
+            );
+            $arr_where     = array("id" => $domestic_enquiry_id);
+            $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+           
+
+            echo 'true';
+        }else {
+            echo 'false';
+        }
+
+    }
+
 
 }

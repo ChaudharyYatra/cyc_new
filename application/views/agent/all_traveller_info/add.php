@@ -23,6 +23,9 @@
         width:70px;
 
     }
+    .chaudhary_yatra_logo{
+        width:100% !important;
+    }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -181,6 +184,7 @@
                                 
                                 </td>
                                 <td>
+                                <input type="hidden" class="form-control" name="row_id[]" id="row_id" value="<?php echo $all_traveller_info_value['id']; ?>">
                                     <select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs">
                                         <option value="">select Mr / Mrs</option>
                                         <?php
@@ -268,7 +272,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary resetBtn" id="resetBtn" name="Clear" value="Reset">Reset</button>
+                                    <button type="button" class="btn btn-danger resetBtn" id="resetBtn" name="Clear" value="Reset">Delete</button>
                                 </td>
                                 
                             </tr>
@@ -415,7 +419,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary resetBtn" id="resetBtn" name="Clear" value="Reset">Reset</button>
+                                    <button type="button" class="btn btn-danger resetBtn" id="resetBtn" name="Clear" value="Reset">Delete</button>
                                 </td>
                                 
                             </tr>
