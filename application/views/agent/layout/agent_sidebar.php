@@ -11,7 +11,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo base_url(); ?>agent/dashboard" class="brand-link">
 
-      <img src="<?php echo base_url(); ?>uploads/do_not_delete/logo.png" alt="Chaudhary Yatra" style="width:100%;"></img>
+      <img class="chaudhary_yatra_logo" src="<?php echo base_url(); ?>uploads/do_not_delete/logo.png" alt="Chaudhary Yatra" style="width:100%;"></img>
     </a>
 
     <!-- Sidebar -->

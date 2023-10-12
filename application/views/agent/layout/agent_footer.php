@@ -518,7 +518,7 @@ $(document).ready(function() {
                                             </div>
                                     </td>
                                     <td>
-                                        <button type="button" id="resetBtn" class="btn btn-primary resetBtn" name="Clear" value="Reset">Reset</button>
+                                        <button type="button" id="resetBtn" class="btn btn-danger resetBtn" name="Clear" value="Reset">Delete</button>
                                     </td>
 
                                 </tr>`);
@@ -2529,6 +2529,9 @@ $(document).ready(function() {
                         width:25% !important;
                         height:25% !important;
                     }
+                    .chaudhary_yatra_logo{
+                        width:100% !important;
+                    }
                     table{
                     table-layout: fixed;
                     display: block;
@@ -2629,7 +2632,7 @@ $(document).ready(function() {
                                             </div>
                                     </td>
                                     <td>
-                                        <button type="button" id="resetBtn" class="btn btn-primary resetBtn" name="Clear" value="Reset">Reset</button>
+                                        <button type="button" id="resetBtn" class="btn btn-danger resetBtn" name="Clear" value="Reset">Delete</button>
                                     </td>
 
                                 </tr>`);
@@ -2642,7 +2645,7 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
+<!-- <script>
 $('.resetBtn').click(function() {
     // alert('hiiii'); 
 
@@ -2666,7 +2669,45 @@ $('.resetBtn').click(function() {
     currentRow.find("td:eq(11) .img_size_cast").empty();
     // alert(col1);
 
+     // Remove the row
+     currentRow.remove();
 
+});
+</script> -->
+
+<script>
+$('.resetBtn').click(function() {
+    var currentRow = $(this).closest("tr");
+    var rowID = currentRow.find('input[name="row_id[]"]').val();
+
+    if (rowID != '') {
+        // Display a confirmation dialog
+        if (confirm('Are you sure you want to delete this record? If this record is deleted, it will not get back and the seat count will also be reduced.')) {
+            var seat_count = $('#seat_count_add').val();
+            var domestic_enquiry_id = $('#domestic_enquiry_id').val();
+
+            $.ajax({
+                type: 'POST', 
+                url: '<?=base_url()?>agent/all_traveller_info/row_delete', 
+                data: {
+                    rowID: rowID,
+                    seat_count: seat_count,
+                    domestic_enquiry_id: domestic_enquiry_id
+                },
+                success: function(response) {
+                    if (response == 'true') {
+                        currentRow.remove();
+                        location.reload();
+                    } else {
+                        alert('Something Went Wrong. Failed to delete the row. Please try again.');
+                    }
+                },
+                error: function() {
+                    alert('Failed to delete the row. Please try again.');
+                }
+            });
+        }
+    }
 });
 </script>
 
@@ -4068,6 +4109,24 @@ function all_total_count(newvar_1) {
         total_agewise_cal_90 = $("#total_agewise_cal_90").val();
     } else {
         total_agewise_cal_90 = 0;
+    }
+
+    if (total_agewise_cal_60 > 0) {
+        total_agewise_cal_60 = $("#total_agewise_cal_60").val();
+    } else {
+        total_agewise_cal_60 = 0;
+    }
+
+    if (total_agewise_cal_40 > 0) {
+        total_agewise_cal_40 = $("#total_agewise_cal_40").val();
+    } else {
+        total_agewise_cal_40 = 0;
+    }
+
+    if (total_agewise_cal_0 > 0) {
+        total_agewise_cal_0 = $("#total_agewise_cal_0").val();
+    } else {
+        total_agewise_cal_0 = 0;
     }
 
     // total_adult_90 = parseInt(total_agewise_cal_adult) + parseInt(total_agewise_cal_90);
