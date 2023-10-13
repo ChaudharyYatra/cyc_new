@@ -166,8 +166,7 @@ input:disabled+label {
                                                 $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
                                                 $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
                                                 $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
-                                                $fourth_seats=explode(',',$seat_preference_data['fourth_cls_seats']);
-                                                $array_combine = array_merge($second_seats,$third_seats,$fourth_seats);
+                                                $array_combine = array_merge($second_seats,$third_seats);
 
                                                 $seat_count=$vehicle_details_data['seat_capacity'];
                                                 for($a=1; $a<=$seat_count; $a++){
@@ -219,8 +218,7 @@ input:disabled+label {
                                                 $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
                                                 $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
                                                 $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
-                                                $fourth_seats=explode(',',$seat_preference_data['fourth_cls_seats']);
-                                                $array_combine = array_merge($fist_seats,$third_seats,$fourth_seats);
+                                                $array_combine = array_merge($fist_seats,$third_seats);
 
                                                 $seat_count=$vehicle_details_data['seat_capacity'];
                                                 for($a=1; $a<=$seat_count; $a++){
@@ -273,8 +271,7 @@ input:disabled+label {
                                                 $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
                                                 $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
                                                 $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
-                                                $fourth_seats=explode(',',$seat_preference_data['fourth_cls_seats']);
-                                                $array_combine = array_merge($second_seats,$fist_seats,$fourth_seats);
+                                                $array_combine = array_merge($second_seats,$fist_seats);
 
                                                 $seat_count=$vehicle_details_data['seat_capacity'];
                                                 for($a=1; $a<=$seat_count; $a++){
@@ -297,60 +294,6 @@ input:disabled+label {
                                             <label>Add On Price</label>
                                             <input type="text" class="form-control" name="third_class_price"
                                                 id="third_class_price" placeholder="Enter Price" value="<?php if($seat_preference_data['third_class_price'] !='') { echo $seat_preference_data['third_class_price'];} ?>"
-                                                oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');"
-                                                required="required">
-                                            <span class="error"><?php echo form_error('price'); ?></span>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-
-                                <div class="row" id="main_row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Seat Type</label>
-
-
-                                            <input type="text" class="form-control" name="fourth_class" id="fourth_class"
-                                                placeholder="Third Class" Value="Fourth Class" required="required"
-                                                readonly="readonly">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <!-- <label>Seat Numbers</label> -->
-                                            <div class="book-tbl">
-                                                <ul class="new_seat_design_ul">
-
-                                                <?php 
-                                                $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
-                                                $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
-                                                $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
-                                                $fourth_seats=explode(',',$seat_preference_data['fourth_cls_seats']);
-                                                $array_combine = array_merge($second_seats,$fist_seats,$third_seats);
-
-                                                $seat_count=$vehicle_details_data['seat_capacity'];
-                                                for($a=1; $a<=$seat_count; $a++){
-                                                ?>
-                                                    <li>
-                                                        <input class="fourth_class" id="fourth_class_i<?php echo $a;?>" type="checkbox" value="<?php echo $a;?>"
-                                                        <?php if(in_array($a,$fourth_seats)){ echo "checked";}elseif(in_array($a,$array_combine)){ echo "disabled";} ?> name="fourth_cls_seats[]"/>
-                                                        <label class="label" for="fourth_class_i<?php echo $a;?>"  style="width: 40px"><?php echo $a;?></label>
-                                                    </li>
-                                                <?php } ?>  
-                                                </ul>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Add On Price</label>
-                                            <input type="text" class="form-control" name="fourth_class_price"
-                                                id="fourth_class_price" placeholder="Enter Price" value="<?php if($seat_preference_data['fourth_class_price'] !='') { echo $seat_preference_data['fourth_class_price'];} ?>"
                                                 oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');"
                                                 required="required">
                                             <span class="error"><?php echo form_error('price'); ?></span>
@@ -533,55 +476,6 @@ input:disabled+label {
                                             <label>Add On Price</label>
                                             <input type="text" class="form-control" name="third_class_price"
                                                 id="third_class_price" placeholder="Enter Price" value=""
-                                                oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');"
-                                                required="required">
-                                            <span class="error"><?php echo form_error('price'); ?></span>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-
-                                <div class="row" id="main_row">
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Seat Type</label>
-
-
-                                            <input type="text" class="form-control" name="fourth_class" id="fourth_class"
-                                                placeholder="Third Class" Value="fourth_class" required="required"
-                                                readonly="readonly">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
-                                            <!-- <label>Seat Numbers</label> -->
-                                            <div class="book-tbl">
-                                                <ul class="new_seat_design_ul">
-
-                                                <?php 
-
-                                                $seat_count=$vehicle_details_data['seat_capacity'];
-                                                for($a=1; $a<=$seat_count; $a++){
-                                                ?>
-                                                    <li>
-                                                        <input class="fourth_class" id="fourth_class_i<?php echo $a;?>" type="checkbox" value="<?php echo $a;?>"
-                                                        name="fourth_cls_seats[]"/>
-                                                        <label class="label" for="fourth_class_i<?php echo $a;?>"  style="width: 40px"><?php echo $a;?></label>
-                                                    </li>
-                                                <?php } ?>  
-                                                </ul>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Add On Price</label>
-                                            <input type="text" class="form-control" name="fourth_class_price"
-                                                id="fourth_class_price" placeholder="Enter Price" value=""
                                                 oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');"
                                                 required="required">
                                             <span class="error"><?php echo form_error('price'); ?></span>
