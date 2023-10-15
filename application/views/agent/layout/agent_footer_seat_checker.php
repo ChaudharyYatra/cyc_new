@@ -5277,6 +5277,8 @@ $(document).ready(function(){
     $("#booking_start").click(function() {  
         var enquiry_seat_count = $("#enquiry_seat_count").val();
 
+        alert(enquiry_seat_count);
+        alert($('#selected-seats li').length);
         if (enquiry_seat_count != $('#selected-seats li').length) {
             var is_confirmed=confirm("The Enquired seats and selected seats are not same are you sure to continue");
             if(is_confirmed)

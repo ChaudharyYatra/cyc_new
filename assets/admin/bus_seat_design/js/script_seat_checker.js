@@ -746,8 +746,8 @@ for(var p=0; p<total_seat_count; p++) {
 
                     //             selection_array.splice($.inArray(last_row_first_idid, selection_array), 1);
                     //         } else {
-                    //             $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li>'
-                    //             + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+                    //             $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p>'
+                    //             + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></p>')
                     //                 .attr('id', 'cart-item-' + this.settings.id)
                     //                 .attr('class', 'cart-item-cls-' + this.settings.id)
                     //                 .data('seatId', this.settings.id)
@@ -1099,8 +1099,8 @@ for(var p=0; p<total_seat_count; p++) {
                                 // हा कोड सिलेक्ट केलेल्या विंडो सीटच्या पुढचं सीट हे उपलब्ध आहे का हे चेक करण्या साठी वापरला आहे ================================================================================
                                 if($.inArray('available', clicked_next_cls_array) != '-1')
                                 { 
-                                    $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                    + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                    $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                    + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1148,8 +1148,8 @@ for(var p=0; p<total_seat_count; p++) {
                                         //हा कोड चेक करतो कि सिलेक्ट केलेलं विंडो सीटच्या मगच सीट हे उपलब्ध आज आणि ते मगच सीट हे विंडो सीट नाही 
                                     if($.inArray('available', clicked_prev_cls_array) != '-1' && prev_seat_type.indexOf(check_str)==-1)
                                     {  
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1175,8 +1175,8 @@ for(var p=0; p<total_seat_count; p++) {
                                     else if(clicked_prev_cls.indexOf(check_str)!=-1 &&  clicked_next_cls.indexOf(check_str)==-1
                                             && $.inArray('available', clicked_next_cls_array) != '-1')
                                     {                
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1189,8 +1189,8 @@ for(var p=0; p<total_seat_count; p++) {
                                     else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
                                             && clicked_cls.indexOf(check_str)!=-1 && $.inArray('available', clicked_prev_cls_array) != '-1')
                                     {                
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1202,8 +1202,8 @@ for(var p=0; p<total_seat_count; p++) {
                                     }else if(clicked_prev_cls.indexOf(check_str)!=-1 &&  clicked_next_cls.indexOf(check_str)==-1
                                     && clicked_cls.indexOf(check_str)!=-1 && $.inArray('available', clicked_next_cls_array) != '-1')
                                     {                
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1230,8 +1230,8 @@ for(var p=0; p<total_seat_count; p++) {
                                     if(clicked_prev_cls.indexOf(check_str)!=-1 &&  clicked_next_cls.indexOf(check_str)==-1
                                             && $.inArray('available', clicked_next_cls_array) != '-1')
                                     {    
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1255,8 +1255,8 @@ for(var p=0; p<total_seat_count; p++) {
                                     }else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
                                             && $.inArray('available', clicked_prev_cls_array) != '-1')
                                     {    
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1341,8 +1341,8 @@ for(var p=0; p<total_seat_count; p++) {
                                             && $.inArray('available', clicked_next_cls_array) != '-1' && $.inArray(last_seat_id, selection_array) == '-1')
                                     { 
                                         // alert('available if 1');
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><span class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></span>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
@@ -1408,8 +1408,8 @@ for(var p=0; p<total_seat_count; p++) {
                                                 && $.inArray('available', clicked_prev_cls_array) != '-1')
                                     { 
                                         alert('available if 3');
-                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><p class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></p>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
                                         .data('seatId', this.settings.id)
