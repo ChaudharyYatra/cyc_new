@@ -786,7 +786,8 @@
 
                 <li class="nav-item">
                     <a href="<?php echo base_url(); ?>admin/prospect_rate_download_mob/index" class="nav-link">
-                        <i class="nav-icon fas fa fa-user"></i>
+                        <!-- <i class="nav-icon fas fa fa-user"></i> -->
+                        <i class="nav-icon fa fa-download" aria-hidden="true"></i>
                         <p>
                             Document download list
                         </p>

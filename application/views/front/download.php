@@ -20,11 +20,11 @@
                              <?php foreach($website_basic_structure as $key => $website_basic_structure_value) { ?>
                                 <div class="row">
                                     <div class="col-lg-6 text-center">
-                                        <img class="mb_for_img_cont" src=<?php echo base_url(); ?>uploads\do_not_delete\pdf.PNG height="35%" width="30%" alt></img>
+                                        <img class="mb_for_img_cont" src=<?php echo base_url(); ?>uploads\do_not_delete\pdf.PNG height="60%" width="30%" alt></img>
                                             <h3 class="mb-1 text-center">Prospect</h3>
                                     </div>
                                     <div class="col-lg-6 text-center">
-                                        <img class="mb_for_img_cont" src=<?php echo base_url(); ?>uploads\do_not_delete\pdf.PNG height="35%" width="30%" alt></img>
+                                        <img class="mb_for_img_cont" src=<?php echo base_url(); ?>uploads\do_not_delete\pdf.PNG height="60%" width="30%" alt></img>
                                             <h3 class="mb-1 text-center">Rate Chart</h3>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                         <div class="col-lg-2">
                                         </div>
                                         <div class="col-lg-8">
-                                            <div class="form-group mt-4">
+                                            <div class="form-group">
                                                 <select class="select_css region_css" name="region_office_location" id="region_office_location">
                                                     <option value="">Select Region Office Location</option>
                                                     <?php foreach($agent_data_office_address as $agent_data_office_address_value){ ?>   
