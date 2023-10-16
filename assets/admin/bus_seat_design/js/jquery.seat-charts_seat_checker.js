@@ -88,6 +88,7 @@
 			},
 			//seat will be basically a seat object which we'll when generating the map
 			seat = (function(seatCharts, seatChartsSettings) {
+				console.log(seatChartsSettings);
 
 				return function (setup) {
 					var fn = this;
@@ -144,16 +145,235 @@
 							//anything goes here?
 						}, setup);
 
+				
 
-						  $('<li>' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>$' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+						  
+
+						
+// console.log('ttttttttttttttttttttttttttttttttttt',fn.settings);
+						var for_windows_cls=fn.settings.data.classes;
+						var check_str='window';
+						var selected_seat_id=fn.settings.label;
+						// console.log('selected_seat_id',fn.settings);
+						if(for_windows_cls!='window-economy-class' && for_windows_cls!='window-fourth-class'){
+
+							if(for_windows_cls=='window-first-class' || for_windows_cls=='window-second-class'){
+
+								var clicked_prev=selected_seat_id-1;
+								var prev_id_str=clicked_prev.toString();
+								var clicked_next=parseInt(selected_seat_id)+1;
+								var next_id_str=clicked_next.toString();
+
+								
+								
+								if(fn.settings.label==1){
+
+									if($.inArray(next_id_str, temp_booking_data_id) != '-1'){
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+									}else if($.inArray(next_id_str, temp_booking_data_id) == '-1'){
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'">'
+										+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.attr_win);
+
+									}
+									
+									// if($.inArray(prev_id_str, temp_booking_data_id) != '-1' && $.inArray(next_id_str, temp_booking_data_id) != '-1'){
+									// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'">'
+									// 	+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
+									// 	.attr('id', 'cart-item-' + fn.settings.id)
+									// 	.data('seatId', fn.settings.id)
+									// 	.appendTo($cart);
+									// 	pqr.push(fn.settings.data.price)
+									// 	$counter.text(temp_booked_seats_data.length);
+									// 	console.log(fn.settings.data.price);
+									// 	ttttt += parseInt(fn.settings.data.price);
+									// 	ttttt += parseInt(fn.settings.data.attr_win);
+									// }	
+									}else if(fn.settings.label!=1){
+
+								// console.log('fn.settings.label',fn.settings.label);
+										var current_prev_cls = $("[data_id=" + clicked_prev + "]").attr('class');
+										var current_next_cls = $("[data_id=" + clicked_next + "]").attr('class');
+								
+								if(typeof current_prev_cls === "undefined")
+								{
+									var current_prev_cls='abc';
+								}
+
+									if(for_windows_cls.indexOf(check_str)!=-1 && current_prev_cls.indexOf(check_str)!=-1 && $.inArray(next_id_str, temp_booking_data_id) == '-1')
+									{
+										// alert('nonwindow 1');
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'">'
+										+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.attr_win);
+									}else if(for_windows_cls.indexOf(check_str)!=-1 && current_prev_cls.indexOf(check_str)!=-1 
+									&& $.inArray(next_id_str, temp_booking_data_id) != '-1')
+									{
+										// alert('nonwindow 2');
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+									}else if(for_windows_cls.indexOf(check_str)!=-1 && current_prev_cls == "abc"
+									&& $.inArray(prev_id_str, temp_booking_data_id) != '-1')
+									{
+										// alert('nonwindow 3');
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+									} if(for_windows_cls.indexOf(check_str)!=-1 && current_prev_cls == "abc"
+									&& $.inArray(prev_id_str, temp_booking_data_id) == '-1')
+									{
+										// alert('nonwindow 4');
+										$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'">'
+										+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.attr('id', 'cart-item-' + fn.settings.id)
+										.data('seatId', fn.settings.id)
+										.appendTo($cart);
+										pqr.push(fn.settings.data.price)
+										$counter.text(temp_booked_seats_data.length);
+										console.log(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.price);
+										ttttt += parseInt(fn.settings.data.attr_win);
+									}
+								}
+								// if($.inArray(prev_id_str, temp_booking_data_id) != '-1' || $.inArray(next_id_str, temp_booking_data_id) != '-1'){
+								// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+								// 	.attr('id', 'cart-item-' + fn.settings.id)
+								// 	.data('seatId', fn.settings.id)
+								// 	.appendTo($cart);
+								// 	pqr.push(fn.settings.data.price)
+								// 	$counter.text(temp_booked_seats_data.length);
+								// 	console.log(fn.settings.data.price);
+								// 	ttttt += parseInt(fn.settings.data.price);
+								// }else{
+								// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'">'
+								// 	+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
+								// 	.attr('id', 'cart-item-' + fn.settings.id)
+								// 	.data('seatId', fn.settings.id)
+								// 	.appendTo($cart);
+								// 	pqr.push(fn.settings.data.price)
+								// 	$counter.text(temp_booked_seats_data.length);
+								// 	console.log(fn.settings.data.price);
+								// 	ttttt += parseInt(fn.settings.data.price);
+								// 	ttttt += parseInt(fn.settings.data.attr_win);
+								// }	
+							}else{
+							$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+						.attr('id', 'cart-item-' + fn.settings.id)
+						.data('seatId', fn.settings.id)
+						.appendTo($cart);
+							pqr.push(fn.settings.data.price)
+							$counter.text(temp_booked_seats_data.length);
+							console.log(fn.settings.data.price);
+							ttttt += parseInt(fn.settings.data.price);
+							}
+						}else if(for_windows_cls=='window-economy-class' || for_windows_cls=='window-fourth-class'){
+							console.log(fn.settings.data);
+							$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -'+ fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li>'
+							+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
 						.attr('id', 'cart-item-' + fn.settings.id)
 						.data('seatId', fn.settings.id)
 						.appendTo($cart);
 
-						pqr.push(fn.settings.data.price)
-						$counter.text(temp_booked_seats_data.length);
-						console.log(fn.settings.data.price);
-						ttttt += fn.settings.data.price;
+							var win_price=seatChartsSettings.seats[setup.character].attr_win;
+							pqr.push(fn.settings.data.price)
+							$counter.text(temp_booked_seats_data.length);
+
+							ttttt -= parseInt(fn.settings.data.price);
+							ttttt += parseInt(win_price);
+						}if(for_windows_cls=='economy-class' || for_windows_cls=='fourth-class'){
+
+							$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -'+ fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+						.attr('id', 'cart-item-' + fn.settings.id)
+						.data('seatId', fn.settings.id)
+						.appendTo($cart);
+
+							var win_price=seatChartsSettings.seats[setup.character].attr_win;
+							pqr.push(fn.settings.data.price)
+							$counter.text(temp_booked_seats_data.length);
+
+							// var last_seat_remove_price= parseInt(ttttt)-fn.settings.data.price;
+							// var with_wind_price = parseInt(last_seat_remove_price)+parseInt(win_price);
+							//  console.log('with_wind_price',with_wind_price);
+							ttttt -= fn.settings.data.price;
+						}
+
+						// var for_windows_cls=fn.settings.data.classes;
+						// if(for_windows_cls=='window-economy-class' || for_windows_cls=='window-fourth-class'){
+						// 	// var windows_price = seatChartsSettings.seats[setup.character].attr_win;
+
+						// 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
+						// pqr.push(fn.settings.data.price)
+						// $counter.text(temp_booked_seats_data.length);
+
+						//  var last_seat_remove_price= parseInt(ttttt)-fn.settings.data.price;
+						//  var with_wind_price = parseInt(last_seat_remove_price)+parseInt(win_price);
+						// //  console.log('with_wind_price',with_wind_price);
+						//  ttttt += parseInt(with_wind_price);
+						// }else if(for_windows_cls=='economy-class' || for_windows_cls=='fourth-class'){
+						// // 	seatChartsSettings.seats[setup.character].attr_win;
+						// // pqr.push(fn.settings.data.price)
+						// // $counter.text(temp_booked_seats_data.length);
+						// // ttttt += fn.settings.data.price;
+						// seatChartsSettings.seats[setup.character].attr_win;
+						// pqr.push(fn.settings.data.price)
+						// $counter.text(temp_booked_seats_data.length);
+
+						// var last_seat_remove_price= ttttt-fn.settings.data.price;
+						// //  var with_wind_price = last_seat_remove_price+win_price;
+						// console.log('last_seat_remove_price',last_seat_remove_price);
+						//  ttttt += parseInt(last_seat_remove_price);
+						// }else{
+						// 	pqr.push(fn.settings.data.price)
+						// $counter.text(temp_booked_seats_data.length);
+						// console.log(fn.settings.data.price);
+						// console.log('fn.settings.data.price',fn.settings.data.price);
+						// ttttt += parseInt(fn.settings.data.price);
+						// }
+						// // else if(for_windows_cls=='window-economy-class' || for_windows_cls=='window-fourth-class' && ttttt==0){
+						// // 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
+						// // 	pqr.push(fn.settings.data.price)
+						// // 	$counter.text(temp_booked_seats_data.length);
+	
+						// // 	 var last_seat_remove_price= ttttt-fn.settings.data.price;
+						// // 	 var with_wind_price = last_seat_remove_price+win_price;
+						// // 	 ttttt += with_wind_price
+						// // }
+
+						
+						
 						$total.text(ttttt);
 						fn.settings.$node = $('<div></div>');
 						var title='';
@@ -176,7 +396,7 @@
 						// console.log(fn.settings);
 
 
-						//   $('<li>' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>$' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+						//   $('<li>' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
 						// .attr('id', 'cart-item-' + fn.settings.id)
 						// .data('seatId', fn.settings.id)
 						// .appendTo($cart);

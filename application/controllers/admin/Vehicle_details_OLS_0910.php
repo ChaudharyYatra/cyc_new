@@ -110,12 +110,20 @@ public function add_seat_preference($id) {
     $this->db->where('vehicle_seat_preference.is_deleted','no');
     $this->db->where('vehicle_seat_preference.vehicle_id',$vehicle_id);
     $this->db->join("vehicle_details", 'vehicle_details.id=vehicle_seat_preference.vehicle_id','left');
+    // $seat_preference_data = $this->master_model->getRecord('vehicle_seat_preference');
     $seat_preference_data = $this->master_model->getRecord("vehicle_seat_preference", "", $fields);
 
     $selected_seats=array();
 
     if ($this->input->post("submit")) {
+        // $this->form_validation->set_rules("first_cls_seats", "Seat", "required");
+        // $this->form_validation->set_rules("seat_number[]", "Seat Number", "required");
+        // $this->form_validation->set_rules("price", "Price", "required");
 
+       
+
+        // if ($this->form_validation->run() == true) {
+            
             $first_cls_seats_check = $this->input->post("first_cls_seats[]");
            if(!empty($first_cls_seats_check)){
             $first_cls_seats = implode(',',$first_cls_seats_check);
@@ -143,15 +151,6 @@ public function add_seat_preference($id) {
             $third_class_price='';
            }
 
-           $fourth_cls_seats_check = $this->input->post("fourth_cls_seats[]");
-           if(!empty($fourth_cls_seats_check)){
-            $fourth_cls_seats = implode(',',$fourth_cls_seats_check);
-            $fourth_class_price = $this->input->post("fourth_class_price");
-           }else{
-            $fourth_cls_seats='';
-            $fourth_class_price='';
-           }
-
          
             $vehicle_id = $this->input->post("vehicle_id");
             $seat_capacity = $this->input->post("seat_capacity");
@@ -166,28 +165,40 @@ public function add_seat_preference($id) {
                 "third_cls_seats" => $third_cls_seats,
                   "third_class_price" => $third_class_price,
                   'window_class_price'=>$window_class_price,
-                  "fourth_cls_seats" => $fourth_cls_seats,
-                  'fourth_class_price'=>$fourth_class_price,
                   'vehicle_id'=>$vehicle_id,
                   'total_seat_count'=>$seat_capacity,
                   ];
 
                   if(empty($seat_preference_data)){
-                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference", $arr_insert, true,);
+
+                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference", $arr_insert, true);
+                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference", $arr_insert, true);
+
+                
+                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference", $arr_insert, true);
                   }else{
                     $arr_where     = array("id" => $vpreference_id);
                     $inserted_id =$this->master_model->updateRecord('vehicle_seat_preference',$arr_insert,$arr_where);
                   }
                   
             if ($inserted_id > 0) {
-                $this->session->set_flashdata("success_message", ucfirst($this->module_title) . " Added Successfully.",);
+
+                $this->session->set_flashdata("success_message", ucfirst($this->module_title) . " Added Successfully.");
+
+                $this->session->set_flashdata("success_message", ucfirst($this->module_title) . " Added Successfully.");
+
                 redirect($this->module_url_path . "/add_seat_preference/".$id);
             } else {
-                $this->session->set_flashdata("error_message", "Something Went Wrong While Adding The " . ucfirst($this->module_title) . ".",);
+
+                $this->session->set_flashdata("error_message", "Something Went Wrong While Adding The " . ucfirst($this->module_title) . ".");
+
+                $this->session->set_flashdata("error_message", "Something Went Wrong While Adding The " . ucfirst($this->module_title) . ".");
+
             }
             redirect($this->module_url_path . "/add_seat_preference/".$id);
         // }
     }
+    // $this->arr_view_data["vehicle_ssession_owner_name"] = $vehicle_ssession_owner_name;
     $this->arr_view_data["action"] = "add";
     $this->arr_view_data["page_title"] = " Add " . $this->module_title;
     $this->arr_view_data["page_title"] = " Add " . $this->module_title;
@@ -296,3 +307,7 @@ public function details($id)
    
    
 }
+
+
+
+

@@ -144,7 +144,7 @@ class Seat_checker extends CI_Controller {
        $cart_temp_booking_data=array();
        $temp_hold_data=array();
        $temp_hold_another_enquiry=array();
-
+       $temp_booking_data_id=array();
 
         $fields = "packages.*,bus_open.package_id,packages.id as package_id";
         $this->db->where('packages.is_deleted','no');
@@ -173,6 +173,7 @@ class Seat_checker extends CI_Controller {
             
             if($this->form_validation->run() == TRUE)
             {
+                
                 $pack_id    = $this->input->post('pack_id'); 
                 $pack_date_id    = $this->input->post('pack_date_id'); 
 
@@ -197,6 +198,17 @@ class Seat_checker extends CI_Controller {
                     array_push($temp_booking_data, $temp_booked_data['seat_orignal_id']);
                 }
                 // print_r($temp_booked_seats_data); die;
+
+                $fields = "bus_seat_book.seat_id";
+                $this->db->where('bus_seat_book.package_id',$pack_id);
+                $this->db->where('bus_seat_book.enquiry_id',$iid);
+                $this->db->where('bus_seat_book.agent_id',$id);
+                $this->db->where('bus_seat_book.is_book','no');
+                $this->db->where('bus_seat_book.tour_dates',$pack_date_id);
+                $temp_booked_seats_data_id = $this->master_model->getRecords('bus_seat_book','',$fields);
+                foreach($temp_booked_seats_data_id as $temp_booked_data_id){
+                    array_push($temp_booking_data_id, $temp_booked_data_id['seat_id']);
+                }
 
                 $fields = "bus_seat_book.*";
                 $this->db->where('bus_seat_book.package_id',$pack_id);
@@ -233,8 +245,8 @@ class Seat_checker extends CI_Controller {
 
                 // print_r($temp_hold_another_enquiry); die;
 
-            $fields = "bus_open.*,vehicle_details.*,vehicle_seat_preference.total_seat_count,first_cls_seats,second_cls_seats,third_cls_seats,first_class_price,second_class_price,
-                       third_class_price,window_class_price,vehicle_seat_preference.vehicle_id";
+            $fields = "bus_open.*,vehicle_details.*,vehicle_seat_preference.total_seat_count,first_cls_seats,second_cls_seats,third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
+                       third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference.vehicle_id";
             $this->db->join("vehicle_details", 'vehicle_details.id=bus_open.vehicle_rto_registration','left');
             $this->db->join("vehicle_seat_preference", 'vehicle_seat_preference.vehicle_id=bus_open.vehicle_rto_registration','left');
             $this->db->where('package_id',$pack_id);
@@ -311,7 +323,8 @@ class Seat_checker extends CI_Controller {
         // $this->arr_view_data['temp_hold_data'] = $temp_hold_data;
 
         //=========================================================================================
-         
+        $this->arr_view_data['temp_booking_data_id'] = $temp_booking_data_id;
+
         $this->arr_view_data['agent_all_travaller_info'] = $agent_all_travaller_info;
         $this->arr_view_data['traveller_booking_info'] = $traveller_booking_info ;
         

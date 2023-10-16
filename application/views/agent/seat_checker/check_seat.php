@@ -95,68 +95,68 @@
                 <div class="card-body card-bg">
                   <div class="row">
                     <div class="col-md-12">
-                    <div class="row">
+                      <div class="row">
 
-                      <?php
-                      //   foreach($agent_booking_enquiry_data as $agent_booking_enquiry_data_info) 
-                      //   { 
-                      //     // print_r($agent_booking_enquiry_data); die;
-                      //     $enq_id=$agent_booking_enquiry_data_info['id'];
-                      // ?>
-                      <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_booking_enquiry_data['id']; ?>">
-                      <!-- <?php //} ?> -->
-                      <div class="col-md-1">
-                        <div class="form-group">
-                         
+                        <?php
+                        //   foreach($agent_booking_enquiry_data as $agent_booking_enquiry_data_info) 
+                        //   { 
+                        //     // print_r($agent_booking_enquiry_data); die;
+                        //     $enq_id=$agent_booking_enquiry_data_info['id'];
+                        // ?>
+                        <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_booking_enquiry_data['id']; ?>">
+                        <!-- <?php //} ?> -->
+                        <div class="col-md-1">
+                          <div class="form-group">
+                          
+                          </div>
                         </div>
-                      </div>
 
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label>Select Tour</label>
-                          <select class="select_css" name="pack_id" id="pack_id">
-                            <option value="">Select Tour</option>
-                              <?php foreach($packages_data_booking as $packages_data_booking){ ?>  
-                                <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
-                                  echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
-                              <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label>Select Date</label>
-                            <select class="select_css" name="pack_date_id" id="pack_date_id">
-                              <option value="">Select Date</option>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Select Tour</label>
+                            <select class="select_css" name="pack_id" id="pack_id">
+                              <option value="">Select Tour</option>
+                                <?php foreach($packages_data_booking as $packages_data_booking){ ?>  
+                                  <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
+                                    echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
+                                <?php } ?>
                             </select>
+                          </div>
                         </div>
-                      </div>
 
-                      <div class="col-md-2">
-                        <div class="form-group">
-                          <button type="submit" class="btn btn-success mt-4" name="submit" value="Search" id="search" style="margin-top: 24% !important;">Search </button> 
-                          <!-- <a href="<?php //echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
-                          <a href="<?php //echo $module_booking_enquiry; ?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a> -->
-                          <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item">Booking</button></a>   -->
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Select Date</label>
+                              <select class="select_css" name="pack_date_id" id="pack_date_id">
+                                <option value="">Select Date</option>
+                              </select>
+                          </div>
                         </div>
-                      </div>
 
-                      <div class="col-md-3">
-                        <div class="form-group">
-                         
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-success mt-4" name="submit" value="Search" id="search" style="margin-top: 24% !important;">Search </button> 
+                            <!-- <a href="<?php //echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
+                            <a href="<?php //echo $module_booking_enquiry; ?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a> -->
+                            <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item">Booking</button></a>   -->
+                          </div>
                         </div>
-                      </div>
 
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <a href="<?php echo $module_booking_enquiry; ?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a>
-                          <a href="<?php echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
-                          <button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item"><a style="color: #fff;text-decoration: none;" href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>">Booking</a></button>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                          
+                          </div>
                         </div>
-                      </div>
 
-                    </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <a href="<?php echo $module_booking_enquiry; ?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a>
+                            <a href="<?php echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
+                            <button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item"><a style="color: #fff;text-decoration: none;" href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>">Booking</a></button>
+                          </div>
+                        </div>
+
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -211,6 +211,11 @@
                     <script>
                       var temp_hold_data=<?php echo json_encode($temp_hold_data);?>;
                     </script> 
+
+                    <input type="hidden" id="temp_hold_data" value='<?php print_r($temp_booking_data_id); ?>'>
+                    <script>
+                      var temp_booking_data_id=<?php echo json_encode($temp_booking_data_id);?>;
+                    </script>
                           <h2>Booking Details</h2>
 
                           <h3> Selected Seats (<span id="counter">0</span>):</h3>
