@@ -1750,6 +1750,7 @@ function validateFeedbackForms()
 function downloadForms() {
 
     var mobileNumber = document.getElementById('mobile_number').value;
+    var region_office_location = document.getElementById('region_office_location').value;
 
     // Validate the mobile number
     var mobileRegex = /^[6-9]\d{9}$/;
@@ -1765,7 +1766,9 @@ function downloadForms() {
     $.ajax({
         type: 'POST',
         url: '<?php echo base_url('download/insertMobileNumber'); ?>',
-        data: { mobile_number: mobileNumber },
+        data: { mobile_number: mobileNumber,
+          region_office_location:region_office_location
+        },
         success: function(response) {
           // alert(response)
             if (response= true) {
@@ -1794,6 +1797,7 @@ function downloadForms() {
 function downloadrateForms() {
 
     var mobileNumber = document.getElementById('rate_mobile_number').value;
+    var region_office_location = document.getElementById('region_office_location').value;
 
     // Validate the mobile number
     var mobileRegex = /^[6-9]\d{9}$/;
@@ -1809,7 +1813,9 @@ function downloadrateForms() {
     $.ajax({
         type: 'POST',
         url: '<?php echo base_url('download/insertrateMobileNumber'); ?>',
-        data: { mobile_number: mobileNumber },
+        data: { mobile_number: mobileNumber,
+          region_office_location:region_office_location
+        },
         success: function(response) {
           // alert(response)
             if (response= true) {

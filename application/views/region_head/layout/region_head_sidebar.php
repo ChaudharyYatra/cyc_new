@@ -44,6 +44,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>region_head/prospect_rate_download_mob/index" class="nav-link">
+              <i class="nav-icon fas fa fa-user-secret"></i>
+              <p>
+                Document Download List
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">

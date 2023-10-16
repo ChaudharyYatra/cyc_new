@@ -51,6 +51,7 @@ class Login extends CI_Controller{
                         $this->session->set_userdata('region_head_sess_id',$region_head_data['id']);
                         $this->session->set_userdata('region_head_name',$region_head_data['agent_name']);
                         $this->session->set_userdata('region_head_region',$region_head_data['agent_region']);
+                        $this->session->set_userdata('agent_region_id',$region_head_data['agent_center']);
                     }
                     
                     redirect($this->module_url_path_dashboard.'/index');

@@ -43,6 +43,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Enquiry Given By(Agent name)</th>
                     <th>Tour No.</th>
                     <th>Customer Name</th>
                     <th>Package</th>
@@ -67,6 +68,7 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
+                    <td><?php echo $info['agent_name']; ?></td>
                     <td><?php echo $info['tno']; ?></td>
                     <td><?php echo $info['first_name']; ?> <?php echo $info['last_name']; ?></td>
                     <td><?php echo $info['tour_title']; ?></td>

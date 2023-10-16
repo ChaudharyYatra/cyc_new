@@ -87,11 +87,19 @@ class Download extends CI_Controller {
             $this->db->order_by('id','ASC');
             $media_source = $this->master_model->getRecords('media_source');
 
+            $record = array();
+            $fields = "agent.*";
+            $this->db->where('agent.is_active','yes');
+            $this->db->where('agent.is_deleted','no');
+            $agent_data_office_address = $this->master_model->getRecords('agent','',$fields);
+            // print_r($agent_data_office_address); die;
+
         $data = array('middle_content' => 'download',
                 'arr_data' => $arr_data,
                 'packages_data' => $packages_data,
                 'Aagent_data' => $Aagent_data,
                 'agent_data' => $agent_data,
+                'agent_data_office_address' => $agent_data_office_address,
                 'media_source' => $media_source,
                 'department_data' => $department_data,
                 'website_basic_structure' => $website_basic_structure,
@@ -104,10 +112,12 @@ class Download extends CI_Controller {
 
      public function insertMobileNumber() {
         $mobileNumber = $this->input->post('mobile_number');
+        $region_office_location = $this->input->post('region_office_location');
         
         // Insert $mobileNumber into your database
         $arr_insert = array(
             'mobile_number' => $mobileNumber,
+            'region_office_location' => $region_office_location,
             'pdf_name' => 'prospect'
         );
         $inserted_id = $this->master_model->insertRecord('prospect_downloaded',$arr_insert,true);
@@ -146,10 +156,11 @@ class Download extends CI_Controller {
 
     public function insertrateMobileNumber() {
         $mobileNumber = $this->input->post('mobile_number');
-        
+        $region_office_location = $this->input->post('region_office_location');
         // Insert $mobileNumber into your database
         $arr_insert = array(
             'mobile_number' => $mobileNumber,
+            'region_office_location' => $region_office_location,
             'pdf_name' => 'rate_chart'
         );
         $inserted_id = $this->master_model->insertRecord('prospect_downloaded',$arr_insert,true);
