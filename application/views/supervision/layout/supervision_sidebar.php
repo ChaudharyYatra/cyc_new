@@ -254,15 +254,36 @@
                 </a>
           </li>
     
-
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>account/tour_expences/index" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Tour Expences
-              </p>
-            </a>
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                      Master
+                      <i class="right fas fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>account/Company_information/index" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Company Name</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>account/voucher_types/index" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Voucher Types</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="<?php echo base_url(); ?>account/ledgers/index" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ledgers</p>
+                  </a>
+                </li>
+              </ul>
           </li>
+                
 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -318,11 +339,17 @@
                   <p>Request Fund From My side</p>
                 </a>
                </li>
-               
             </ul>
           </li>
 
-
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>account/tour_expences/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Tour Expences
+              </p>
+            </a>
+          </li>
 
           
           <li class="nav-item">
@@ -377,7 +404,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>tour_manager/tour_expenses/index" class="nav-link">
+            <a href="<?php //echo base_url(); ?>tour_manager/tour_expenses/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
                Tour Expenses
@@ -395,21 +422,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>tour_manager/asign_tour_to_manager/index" class="nav-link">
+                <a href="<?php //echo base_url(); ?>tour_manager/asign_tour_to_manager/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>My Asigned Tour</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>tour_manager/request_replace_bus/index" class="nav-link">
+                <a href="<?php //echo base_url(); ?>tour_manager/request_replace_bus/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Request Replace Bus</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>tour_manager/birthday_and_anniversary/index" class="nav-link">
+                <a href="<?php //echo base_url(); ?>tour_manager/birthday_and_anniversary/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Birthday & Anniversary Module</p>
                 </a>
@@ -417,13 +444,13 @@
 
 
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>tour_manager/tour_photos/index" class="nav-link">
+                <a href="<?php //echo base_url(); ?>tour_manager/tour_photos/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tour Photos</p>
                 </a>
               </li>
 
-              <!-- <li class="nav-item">
+              <li class="nav-item">
                 <a href="<?php //echo base_url(); ?>tour_manager/attendance/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daily Attendance</p>
@@ -533,38 +560,39 @@
                 </a>
             </li>
 
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>expences_checker/tour_expenses/index" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-               Tour Expenses
-              </p>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>expences_checker/tour_expenses/index" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                Tour Expenses
+                </p>
+              </a>
+            </li>
           
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>expences_checker/profile/index" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-               Profile
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>expences_checker/change_password/change_password" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-              Change Password
-              </p>
-            </a>
-          </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>expences_checker/profile/index" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                Profile
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>expences_checker/change_password/change_password" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>
+                Change Password
+                </p>
+              </a>
+            </li>
                
-           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>supervision/login/logout" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Logout</p>
-            </a>
-           </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url(); ?>supervision/login/logout" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Logout</p>
+              </a>
+            </li>
         </ul>
 
         <?php }?>

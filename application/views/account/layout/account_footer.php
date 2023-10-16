@@ -436,3 +436,152 @@ $('#enter_code').validate({ // initialize the plugin
 });
 
 </script>
+
+<!-- company information add,edit validation  -->
+<script>
+$(document).ready(function () {
+$('#add_comp_info').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        company_name: {
+            required: true,
+        },
+        mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+        email_address: {
+            required: true,
+            email:true
+        },
+        comp_address: {
+            required: true
+        }
+        
+    },
+
+    messages :{
+        company_name : {
+            required : "Please enter first name",
+        },
+        mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email_address : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        comp_address : {
+            required : "Please enter company address",
+        }
+        
+    
+    }
+});
+
+});
+
+</script>
+<script>
+$(document).ready(function () {
+$('#edit_comp_info').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        company_name: {
+            required: true,
+        },
+        mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+        email_address: {
+            required: true,
+            email:true
+        },
+        comp_address: {
+            required: true
+        }
+        
+    },
+
+    messages :{
+        company_name : {
+            required : "Please enter first name",
+        },
+        mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email_address : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        comp_address : {
+            required : "Please enter company address",
+        }
+        
+    
+    }
+});
+
+});
+
+</script>
+<!-- company information add,edit validation  -->
+
+<!-- voucher type information add , edit validation -->
+<script>
+$(document).ready(function () {
+$('#add_voucher_type').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+      voucher_types: {
+            required: true,
+        }
+    },
+
+    messages :{
+      voucher_types : {
+            required : "Please Enter Voucher Type",
+        }
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+$('#edit_voucher_type').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+      voucher_types: {
+            required: true,
+        }
+    },
+
+    messages :{
+      voucher_types : {
+            required : "Please Enter Voucher Type",
+        }
+    }
+});
+
+});
+
+</script>
+<!-- voucher type information add , edit validation -->
