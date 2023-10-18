@@ -1563,7 +1563,7 @@ $(document).ready(function() {
 
     $('#all_traveller_info').validate({ // initialize the plugin
         errorPlacement: function($error, $element) {
-            $error.appendTo($element.closest("td,div"))
+            $error.appendTo($element.closest("div,td"))
         },
         rules: {
             "mrandmrs[]": {
@@ -7670,8 +7670,5 @@ $("#booking_confirm_submit").click(function() {
 });
 </script>
 
-<!-- srs ajax throw insert -->
-
-<!-- srs ajax throw insert -->
 
 <!-- ===========Booking confirm Otp ==================================== -->

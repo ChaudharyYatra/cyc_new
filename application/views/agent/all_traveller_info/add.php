@@ -586,7 +586,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
-                        <button type="submit" class="btn btn-success" name="booknow_submit" value="Book Now">Submit & Proceed</button>
+                        <button type="submit" class="btn btn-success" name="booknow_submit" value="Book Now" id="append_val">Submit & Proceed</button>
                         <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button_all_traveller">Back</button>
 
                         <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')">

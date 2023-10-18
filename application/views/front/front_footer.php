@@ -1752,6 +1752,14 @@ function downloadForms() {
     var mobileNumber = document.getElementById('mobile_number').value;
     var region_office_location = document.getElementById('region_office_location').value;
 
+    if (region_office_location == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please Select Region Office Location.',
+        });
+        return false; // Prevent the form from submitting
+    }
     // Validate the mobile number
     var mobileRegex = /^[6-9]\d{9}$/;
     if (!mobileRegex.test(mobileNumber)) {
@@ -1800,6 +1808,15 @@ function downloadrateForms() {
     var region_office_location = document.getElementById('region_office_location').value;
 
     // Validate the mobile number
+
+    if (region_office_location == '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please Select Region Office Location.',
+        });
+        return false; // Prevent the form from submitting
+    }
     var mobileRegex = /^[6-9]\d{9}$/;
     if (!mobileRegex.test(mobileNumber)) {
         Swal.fire({
@@ -1809,6 +1826,9 @@ function downloadrateForms() {
         });
         return false; // Prevent the form from submitting
     }
+
+    // var mobileRegex = /^[6-9]\d{9}$/;
+    
 
     $.ajax({
         type: 'POST',
