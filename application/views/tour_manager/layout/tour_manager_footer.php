@@ -1278,13 +1278,14 @@ $('#add_changepassword').validate({ // initialize the plugin
         },
         new_password: {
             required: true,
-            minlength: 6,
-			notEqualTo:"#old_pass"
+            // minlength: 6,
+			notEqualTo:"#old_pass",
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#new_password", 
-            minlength: 6
+            // minlength: 6
         }
     },
 
@@ -1294,13 +1295,19 @@ $('#add_changepassword').validate({ // initialize the plugin
         },
         new_password : {
             required : "Please enter new password",
-            minlength : "Please enter 6 digit or character length",
+            // minlength : "Please enter 6 digit or character length",
 			notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass : {
             required : "Please enter confirm password",
-            equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 6 digit or character length"
+            equalTo : "New password and Confirm Password can't match"
+            // minlength : "Please enter 6 digit or character length"
         }
     
     }
@@ -4538,7 +4545,7 @@ $('#suugestion_edit').validate({ // initialize the plugin
 $(document).ready(function () {
 $('#add_tour_expenses').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div td"));
+    $error.appendTo($element.closest("div"));
   },
     rules: {
         tour_number: {
@@ -4550,7 +4557,13 @@ $('#add_tour_expenses').validate({ // initialize the plugin
         expense_place: {
             required: true,
         },
+        tour_expenses_type: {
+            required: true,
+        },
         bill_number: {
+            required: true,
+        },
+        bill_date: {
             required: true,
         },
         total_pax: {
@@ -4598,8 +4611,14 @@ $('#add_tour_expenses').validate({ // initialize the plugin
         expense_place : {
             required : "Please Enter Expense place",
         },
+        tour_expenses_type : {
+            required : "Please Select Expense type",
+        },
         bill_number : {
             required : "Please Enter Bill Number",
+        },
+        bill_date : {
+            required : "Please Select Bill Date",
         },
         total_pax : {
             required : "Please Select Total Pax",

@@ -37,7 +37,7 @@
           <div class="row">
             <div class="col-md-12 pb-3">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number1" id="mobile_number1" maxlength="10">
+                  <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number1" id="mobile_number1" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                   <div class="input-group-append">
                   </div>
                 </div>
@@ -50,7 +50,7 @@
                   <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password"></span>
+                      <span toggle="#password-field" class="fas fa-fw fa-eye-slash field_icon toggle-password"></span>
                     </div>
                   </div>
               </div> 
@@ -106,36 +106,6 @@
   
   var submiform='';
 
-  
-//  var email_login = $('#email_login').val();
-//   if (email_login == '' || email_login ==null) 
-//   {
-//     $('#emaillogin_error').text('Please enter email address.');
-//     $('#emaillogin_error').show();
-//     submiform=false;
-//   }
-//   else
-//   {
-//       var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-//         if(!regex.test(email_login)) 
-//         {
-//            $('#emaillogin_error').text('Please enter valid email address.');
-//             $('#emaillogin_error').show();
-//             submiform=false;
-//         }
-//         else if(email_login)
-//         {
-//           var email_split = email_login.split('@');
-//           var count = (email_split[1].match(/\./g) || []).length;
-//           if(count > 2)
-//           {
-//               $('#emaillogin_error').text('Please enter valid email address.');
-//               $('#emaillogin_error').show();
-//               submiform=false;
-//           }
-//         }
-//   }
-
 var mobile_number1 = $('#mobile_number1').val();
   if(mobile_number1 == '' || mobile_number1 ==null) 
   {
@@ -151,6 +121,22 @@ var mobile_number1 = $('#mobile_number1').val();
     $('#passlogin_error').show();
     submiform=false;
   }
+
+  // var Password = $('#password').val();
+  // if (Password == '' || Password == null) {
+  //   $('#passlogin_error').text('Please enter password.');
+  //   $('#passlogin_error').show();
+  //   submiform = false;
+  // } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/.test(Password)) {
+  //   $('#passlogin_error').text('Password must contain: ' +
+  //     'At least one upper case letter, ' +
+  //     'At least one lower case letter, ' +
+  //     'At least one number, ' +
+  //     'At least one special character, ' +
+  //     'and be between 6-15 characters.');
+  //   $('#passlogin_error').show();
+  //   submiform = false;
+  // }
 
   if(submiform==='')
   {

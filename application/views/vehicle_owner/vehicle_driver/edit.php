@@ -244,7 +244,6 @@
                       <div class="col-md-6">
                             <label>Confirm Password</label>
                               <div class="form-group input-group">
-                                
                                 <input type="password" class="form-control" name="confirm_pass" id="confirm_pass" placeholder="Enter Confirm Password" value="<?php echo $info['password']; ?>" required>
                                 <div class="input-group-append">
                                   <div class="input-group-text">

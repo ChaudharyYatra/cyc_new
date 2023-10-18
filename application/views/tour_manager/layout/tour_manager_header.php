@@ -260,7 +260,7 @@ margin-top: -9px;
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
         <div class="ringing-bell">
-          <i class='fa fa-bell faa-ring animated fa-2x' style="color:red;"></i>
+          <i class='fa fa-bell faa-ring animated fa-2x' style="color:red;" title="click on bell"></i>
         </div>
         <span class="badge badge-warning navbar-badge" id="total_count"></span>
           <!-- <span class="badge badge-warning navbar-badge" id="notification_count">15</span> -->
@@ -287,7 +287,7 @@ margin-top: -9px;
 
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>supervision/login/logout" role="button">
-            <i class='fas fa-sign-out-alt' style='font-size:30px'></i>
+            <i class='fas fa-sign-out-alt' style='font-size:30px' title="logout"></i>
             </a>
           </li>
       </li>

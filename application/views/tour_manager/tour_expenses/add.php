@@ -37,6 +37,13 @@
     .add_more_css{
         margin-top:30px;
     }
+
+    .remove_color .form-control{
+        color: black !important;
+    }
+    .remove_color .select_css{
+        color: black !important;
+    }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -90,16 +97,16 @@
                         <?php } ?>
 
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group remove_color">
                                 <label>Expenses Date</label>
-                                <input type="date" class="form-control" name="expense_date" id="expense_date" placeholder="Enter Expense Date" max="<?php echo date("Y-m-d"); ?>" required>
+                                <input type="date" class="form-control" name="expense_date" id="expense_date" placeholder="Enter Expense Date" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Place</label>
-                                <input type="text" class="form-control" name="expense_place" id="expense_place" placeholder="Enter Place" required>
+                                <input type="text" class="form-control" name="expense_place" id="expense_place" placeholder="Enter Place" required oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                         </div>
 
@@ -107,7 +114,7 @@
                             <div class="form-group">
                             <label>Expenses Type</label> <br>
                                 <input type="radio" id="single_expenses_type" name="tour_expenses_type" value="1" onclick="main();"/>&nbsp;&nbsp;&nbsp;Single&nbsp;&nbsp;&nbsp;
-                                <input type="radio" id="multiple_expenses_type" name="tour_expenses_type" value="0" onclick="sub();"/>&nbsp;&nbsp;&nbsp;Multiple
+                                <input type="radio" id="multiple_expenses_type" name="tour_expenses_type" value="0" onclick="sub();"/>&nbsp;&nbsp;&nbsp;Multiple<br>
                             </div>
                         </div> 
 
@@ -119,14 +126,14 @@
                         </div>        
 
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group remove_color">
                                 <label>Bill Date</label>
                                 <input type="date" class="form-control" name="bill_date" id="bill_date" placeholder="Enter Bill Date" max="<?php echo date("Y-m-d"); ?>" required>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group remove_color">
                                 <label>Pax type (Expense for)</label>
                                 <select class="select_css" name="pax_type" id="pax_type" required>
                                     <option value="">Select Pax Type</option>
@@ -184,8 +191,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Upload Photo/PDF</label><br>
-                                <input type="file" name="image_name" id="image_name">
-                                <br><span class="text-danger">Please select only PDF,JPG,PNG,JPEG,PDF format files.</span>
+                                <input type="file" name="image_name" id="image_name" accept="image/png, image/jpg, image/jpeg, image/pdf">
+                                <br><span class="text-danger">Please select only PDF,JPG,PNG,JPEG format files.</span>
                             </div>
                         </div>
 
@@ -240,9 +247,9 @@
                                                 </select>
                                                 
                                             </td>
-                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" ></td>
-                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" ></td>
-                                            <td><input readonly type="text" class="form-control per_unit_rate" name="per_unit_rate[]" id="per_unit_rate" placeholder="Enter per unit rate" ></td>
+                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input readonly type="text" class="form-control per_unit_rate" name="per_unit_rate[]" id="per_unit_rate" placeholder="Enter per unit rate"></td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" name="submit" value="expenses_add_more" id="expenses_add_more">Add More</button>
                                             </td>
@@ -256,7 +263,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             <label>Upload Photo/PDF</label>
-                            <input type="file" name="image_name_2" id="image_name_2">
+                            <input type="file" name="image_name_2" id="image_name_2" accept="image/png, image/jpg, image/jpeg, image/pdf">
                             <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
                             </div>
                         </div>

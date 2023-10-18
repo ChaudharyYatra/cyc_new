@@ -382,8 +382,8 @@
                                                     <?php } ?>
                                                 </select>
                                                 
-                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['quantity']; ?>" required></td>
-                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" value="<?php echo $add_more_tour_expenses_all_value['rate']; ?>" required></td>
+                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['quantity']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" value="<?php echo $add_more_tour_expenses_all_value['rate']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
                                             <td><input readonly type="text" class="form-control per_unit_rate" name="per_unit_rate[]" id="per_unit_rate" placeholder="Enter per unit rate" value="<?php echo $add_more_tour_expenses_all_value['per_unit_rate']; ?>" required></td>
                                             <td>
                                             <input type="hidden" class="form-control" name="add_more_tour_expenses_id[]" id="add_more_tour_expenses_id" value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" placeholder="Enter per unit rate" required>

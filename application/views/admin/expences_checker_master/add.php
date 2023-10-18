@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data" id="add_agent">
+              <form method="post" enctype="multipart/form-data" id="add_Expences_checker">
                 <div class="card-body">
                  <div class="row">
                       <div class="col-md-6">

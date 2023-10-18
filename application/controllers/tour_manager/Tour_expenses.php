@@ -565,6 +565,16 @@ class Tour_expenses extends CI_Controller {
                     $arr_where     = array("id" => $tour_expenses_id);
                     $inserted_id = $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
 
+                    if($inserted_id > 0)
+                 {
+                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Record Updated Successfully.");
+                     redirect($this->module_url_path.'/all_expenses/'.$pid.'/'.$pd_id);
+                 }
+                 else
+                 {
+                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                 }
+
 
                     if($tour_expenses_type == '0'){
                         $count = count($expense_type_row);
@@ -621,13 +631,13 @@ class Tour_expenses extends CI_Controller {
                     'tour_expenses_id' => $current_tour_expenses_id
                     
                     ); 
-                    $inserted_id = $this->master_model->insertRecord('add_more_tour_expenses',$arr_insert,true);
+                    $inserted_id_2 = $this->master_model->insertRecord('add_more_tour_expenses',$arr_insert,true);
                     }
                 }
                     // ===================================================================
 
                         
-                 if($inserted_id > 0)
+                 if($inserted_id_2 > 0)
                  {
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_url_path.'/all_expenses/'.$pid.'/'.$pd_id);

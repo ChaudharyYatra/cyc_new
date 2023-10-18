@@ -48,7 +48,7 @@
             <a href="<?php echo base_url(); ?>supervision/supervision_request/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Requests For Code
+                Requests for code
               </p>
             </a>
           </li>
@@ -57,7 +57,7 @@
             <a href="<?php echo base_url(); ?>supervision/supervision_request_completed/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Code Allocation Completed
+                Code alocation completed
               </p>
             </a>
           </li>
@@ -74,7 +74,7 @@
             <a href="<?php echo base_url(); ?>supervision/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>
@@ -100,7 +100,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/assign_staff/main_index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Assign Staff
+                Assign staff
               </p>
             </a>
           </li>
@@ -109,7 +109,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/assign_expences_checker/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Assign Expences Checker
+                Assign expences checker
               </p>
             </a>
           </li>
@@ -127,7 +127,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_operation_manager/completed_tours/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Completed Tours</p>
+                  <p>Completed tours</p>
                 </a>
                </li>
                
@@ -138,7 +138,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Hotel Advance Payment
+                Hotel advance payment
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -148,7 +148,7 @@
               <a href="<?php echo base_url(); ?>tour_operation_manager/hotel_advance_payment/index" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>
-                Hotel Advance Payment Req to Accountent
+                Hotel advance payment req to accountent
                 </p>
               </a>
             </li>
@@ -157,7 +157,7 @@
               <a href="<?php echo base_url(); ?>tour_operation_manager/hotel_advance_payment/advance_pay_detail" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>
-                Hotel Advance Payment Request Completed
+                Hotel advance payment request completed
                 </p>
               </a>
             </li>
@@ -169,7 +169,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Request More Fund
+                Request more fund
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -178,14 +178,14 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_operation_manager/more_fund_request/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Request Fund From Tour Manager</p>
+                  <p>Request fund from tour manager</p>
                 </a>
                </li>
 
                <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_operation_manager/account_pay_amt/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Requested Amount Pay From Account</p>
+                  <p>Requested amount pay from account</p>
                 </a>
                </li>
                
@@ -196,7 +196,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/tour_expences/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Tour Expences
+                Tour expences
               </p>
             </a>
           </li>
@@ -205,7 +205,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/final_booking_details/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Final Booking
+                Final booking
               </p>
             </a>
           </li>
@@ -214,7 +214,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/replace_tm_request_bus/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                TM Request Replace Bus
+                TM request replace bus
               </p>
             </a>
           </li>
@@ -231,7 +231,7 @@
             <a href="<?php echo base_url(); ?>tour_operation_manager/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>
@@ -266,13 +266,13 @@
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>account/Company_information/index" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Company Name</p>
+                      <p>Company name</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="<?php echo base_url(); ?>account/voucher_types/index" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Voucher Types</p>
+                      <p>Voucher types</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -289,7 +289,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Hotel Advance Payment
+                Hotel advance payment
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -299,7 +299,7 @@
                 <a href="<?php echo base_url(); ?>account/hotel_advance_payment_req/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
-                  Hotel Advance Payment Request
+                  Hotel advance payment request
                   </p>
                 </a>
               </li>
@@ -308,7 +308,7 @@
                 <a href="<?php echo base_url(); ?>account/hotel_advance_payment_req/advance_pay_detail" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
-                  Hotel Advance Payment Request Completed
+                  Hotel advance payment request completed
                   </p>
                 </a>
               </li>
@@ -320,7 +320,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Request More Fund
+                Request more fund
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -329,14 +329,14 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>account/more_fund_request_acc/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Request Fund From Tour Manager</p>
+                  <p>Request fund from tour manager</p>
                 </a>
                </li>
 
                <li class="nav-item">
                 <a href="<?php echo base_url(); ?>account/account_pay_amt_details/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Request Fund From My side</p>
+                  <p>Request fund from my side</p>
                 </a>
                </li>
             </ul>
@@ -346,7 +346,7 @@
             <a href="<?php echo base_url(); ?>account/tour_expences/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Tour Expences
+                Tour expences
               </p>
             </a>
           </li>
@@ -364,7 +364,7 @@
             <a href="<?php echo base_url(); ?>account/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>
@@ -389,7 +389,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/suggestion_module/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-               Suggestion Module
+               Suggestion module
               </p>
             </a>
           </li>
@@ -479,7 +479,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>
@@ -505,7 +505,7 @@
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                My Tour Operation
+                My tour operation
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -514,7 +514,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>kitchen_staff_cook/asign_tour_to_manager/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>My Asigned Tour</p>
+                  <p>My asigned tour</p>
                 </a>
               </li>
             </ul>
@@ -523,7 +523,7 @@
            <li class="nav-item">
             <a href="<?php echo base_url(); ?>kitchen_staff_cook/kitchen_staff_cook_photos/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Kitchen Menu Photos</p>
+              <p>Kitchen menu photos</p>
             </a>
           </li>
           
@@ -539,7 +539,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>
@@ -564,7 +564,7 @@
               <a href="<?php echo base_url(); ?>expences_checker/tour_expenses/index" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
-                Tour Expenses
+                Tour expenses
                 </p>
               </a>
             </li>
@@ -582,7 +582,7 @@
               <a href="<?php echo base_url(); ?>expences_checker/change_password/change_password" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>
-                Change Password
+                Change password
                 </p>
               </a>
             </li>

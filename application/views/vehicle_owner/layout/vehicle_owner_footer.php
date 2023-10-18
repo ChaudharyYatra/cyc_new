@@ -1273,13 +1273,12 @@ $('#add_changepassword').validate({ // initialize the plugin
         },
         new_password: {
             required: true,
-            minlength: 6,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/,
 			notEqualTo:"#old_pass"
         },
         confirm_pass: {
             required: true,
             equalTo: "#new_password", 
-            minlength: 6
         }
     },
 
@@ -1289,13 +1288,17 @@ $('#add_changepassword').validate({ // initialize the plugin
         },
         new_password : {
             required : "Please enter new password",
-            minlength : "Please enter 6 digit or character length",
 			notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 6 digit or character length"
         }
     
     }
@@ -5260,11 +5263,11 @@ $('#add_vehicle_driver').validate({ // initialize the plugin
         },
         password: {
             required: true,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#password", 
-            minlength: 6,
         }
     },
 
@@ -5303,7 +5306,13 @@ $('#add_vehicle_driver').validate({ // initialize the plugin
                 required: "Please Enter Address",   
         },
         password: {       
-                required: "Please Enter Password",   
+                required: "Please Enter Password",
+                pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."   
         },
         confirm_pass:{       
                 required: "Please Enter Confirm Password",   
@@ -5350,11 +5359,11 @@ $('#edit_vehicle_driver').validate({ // initialize the plugin
         },
         password: {
             required: true,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#password", 
-            minlength: 6,
         }
     },
 
@@ -5379,6 +5388,12 @@ $('#edit_vehicle_driver').validate({ // initialize the plugin
         },
         password: {       
                 required: "Please Enter Password",   
+                pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass:{       
                 required: "Please Enter Confirm Password",   

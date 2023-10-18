@@ -31,13 +31,13 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data">
+              <form method="post" enctype="multipart/form-data" id="tour_operation_change_password">
                 <div class="card-body">
                  <div class="row">
                       <div class="col-md-6">
                             <label>Old Password</label>
                               <div class="form-group input-group">
-                                <input type="password" name="old_pass" id="old_pass" class="form-control" placeholder="Old Password" required>
+                                <input type="password" name="old_pass" id="old_pass" class="form-control" placeholder="Old Password">
                                 <div class="input-group-append">
                                   <div class="input-group-text">
                                   <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password1"></span>

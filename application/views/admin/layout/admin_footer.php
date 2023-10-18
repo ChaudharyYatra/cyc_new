@@ -3702,7 +3702,21 @@ $('#add_agent').validate({ // initialize the plugin
         email: {
             required: true,
             email:true
-
+        },
+        agent_state: {
+            required: true
+        },
+        agent_district: {
+            required: true
+        },
+        agent_taluka: {
+            required: true
+        },
+        agent_city: {
+            required: true
+        },
+        image_name: {
+            required: true
         },
         registration_date: {
             required: true,
@@ -3710,12 +3724,13 @@ $('#add_agent').validate({ // initialize the plugin
         },
         password: {
             required: true,
-            minlength: 6
+            // minlength: 6
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#password", 
-            minlength: 6
+            // minlength: 6
 
         }  
     },
@@ -3763,17 +3778,38 @@ $('#add_agent').validate({ // initialize the plugin
             required : "Please enter email address",
             email: "Please enter a valid email address"
         },
+        agent_state : {
+            required : "Please select state"
+        },
+        agent_district : {
+            required : "Please select district"
+        },
+        agent_taluka : {
+            required : "Please select taluka"
+        },
+        agent_city : {
+            required : "Please select city"
+        },
+        image_name : {
+            required : "Please upload image"
+        },
         registration_date : {
             required : "Please enter registration date",
         },
         password : {
             required : "Please enter password",
-            minlength : "Please enter 6 digit or character length",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+            // minlength : "Please enter 6 digit or character length",
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 6 digit or character length"
+            // minlength : "Please enter 6 digit or character length"
         }
     }
 });
@@ -3815,12 +3851,13 @@ $('#add_supervision').validate({ // initialize the plugin
         },
         password: {
             required: true,
-            minlength: 5
+            // minlength: 5,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
-            minlength: 5
+            equalTo: "#password"
+            // minlength: 5
 
         }  
     },
@@ -3851,12 +3888,18 @@ $('#add_supervision').validate({ // initialize the plugin
         },
         password : {
             required : "Please enter password",
-            minlength : "Please enter 5 digit or character length",
+            // minlength : "Please enter 5 digit or character length",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 5 digit or character length"
+            // minlength : "Please enter 5 digit or character length"
         }
     }
 });
@@ -3917,7 +3960,18 @@ $('#edit_agent').validate({ // initialize the plugin
         email: {
             required: true,
             email:true
-
+        },
+        agent_state: {
+            required: true
+        },
+        agent_district: {
+            required: true
+        },
+        agent_taluka: {
+            required: true
+        },
+        agent_city: {
+            required: true
         },
         registration_date: {
             required: true,
@@ -3925,7 +3979,8 @@ $('#edit_agent').validate({ // initialize the plugin
         },
         password: {
             required: true,
-            minlength: 6
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+            // minlength: 6
         },
         confirm_pass: {
             required: true,
@@ -3978,17 +4033,35 @@ $('#edit_agent').validate({ // initialize the plugin
             required : "Please enter email address",
             email: "Please enter a valid email address"
         },
+        agent_state : {
+            required : "Please select state"
+        },
+        agent_district : {
+            required : "Please select district"
+        },
+        agent_taluka : {
+            required : "Please select taluka"
+        },
+        agent_city : {
+            required : "Please select city"
+        },
         registration_date : {
             required : "Please enter registration date",
         },
         password : {
             required : "Please enter password",
-            minlength : "Please enter 6 digit or character length",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+            // minlength : "Please enter 6 digit or character length",
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 6 digit or character length"
+            // minlength : "Please enter 6 digit or character length"
         }
     }
 });
@@ -4026,16 +4099,14 @@ $('#edit_supervision').validate({ // initialize the plugin
         email: {
             required: true,
             email:true
-
         },
         password: {
             required: true,
-            minlength: 5
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#password", 
-            minlength: 5
 
         }  
     },
@@ -4065,12 +4136,16 @@ $('#edit_supervision').validate({ // initialize the plugin
         },
         password : {
             required : "Please enter password",
-            minlength : "Please enter 5 digit or character length",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 5 digit or character length"
         }
     }
 });
@@ -9358,6 +9433,161 @@ $(second_selecter_id).prop('disabled', false);
 $(third_selecter_id).prop('disabled', false);
 
 }
+
+});
+
+</script>
+
+<!-- expences checker master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_Expences_checker').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        expences_checker_name: {
+            required: true,
+        },
+        mobile_number1: {
+            required: true,
+            maxlength:10,
+            minlength:10,
+            
+        },
+        mobile_number2: {
+            maxlength:10,
+            minlength:10
+        },
+        email: {
+            required: true,
+            email:true
+        },
+        password: {
+            required: true,
+            // minlength: 6
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+        },
+        confirm_pass: {
+            required: true,
+            equalTo: "#password", 
+            // minlength: 6
+
+        }  
+    },
+
+    messages :{
+        expences_checker_name : {
+            required : "Please enter expence checker name",
+        },
+        mobile_number1 : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        mobile_number2 : {
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        password : {
+            required : "Please enter password",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+            // minlength : "Please enter 6 digit or character length",
+        },
+        confirm_pass : {
+            required : "Please enter confirm password",
+            equalTo : "New password and Confirm Password can't match",
+            // minlength : "Please enter 6 digit or character length"
+        }
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_Expences_checker').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        expences_checker_name: {
+            required: true,
+        },
+        mobile_number1: {
+            required: true,
+            maxlength:10,
+            minlength:10,
+            
+        },
+        mobile_number2: {
+            maxlength:10,
+            minlength:10
+        },
+        email: {
+            required: true,
+            email:true
+        },
+        password: {
+            required: true,
+            // minlength: 6
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+        },
+        confirm_pass: {
+            required: true,
+            equalTo: "#password", 
+            // minlength: 6
+
+        }  
+    },
+
+    messages :{
+        expences_checker_name : {
+            required : "Please enter expence checker name",
+        },
+        mobile_number1 : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        mobile_number2 : {
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        password : {
+            required : "Please enter password",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+            // minlength : "Please enter 6 digit or character length",
+        },
+        confirm_pass : {
+            required : "Please enter confirm password",
+            equalTo : "New password and Confirm Password can't match",
+            // minlength : "Please enter 6 digit or character length"
+        }
+    }
+});
 
 });
 

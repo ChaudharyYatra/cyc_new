@@ -561,3 +561,55 @@ $(document).on('click', '.btn_remove', function(){
  });
 </script>
 <!-- ---------change bus seat capacity ajax --------------------------------------------->
+
+<script>
+$(document).ready(function () {
+
+$('#tour_operation_change_password').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+     old_pass: {
+            required: true,
+        },
+        new_password: {
+            required: true,
+            // minlength: 6,
+			notEqualTo:"#old_pass",
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+        },
+        confirm_pass: {
+            required: true,
+            equalTo: "#new_password", 
+            // minlength: 6
+        }
+    },
+
+    messages :{
+     old_pass : {
+            required : "Please enter old password",
+        },
+        new_password : {
+            required : "Please enter new password",
+            // minlength : "Please enter 6 digit or character length",
+			notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+        },
+        confirm_pass : {
+            required : "Please enter confirm password",
+            equalTo : "New password and Confirm Password can't match"
+            // minlength : "Please enter 6 digit or character length"
+        }
+    
+    }
+});
+
+});
+
+</script>

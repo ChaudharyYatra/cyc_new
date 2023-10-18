@@ -1,3 +1,11 @@
+<style>
+  .color_remove .form-control{
+    color:gray !important;
+  }
+  .color_remove .select_css{
+    color:gray !important;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -47,7 +55,7 @@
                               </div>
                       </div>
                       <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group color_remove">
                             <label>Region Name</label>
                             <select class="form-control" style="width: 100%;" name="department" id="department" required="required">
                                 <option value="">Select Region</option>
@@ -131,7 +139,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>select State</label>
                                 <select class="select_css" name="agent_state" id="agent_state" required>
 
@@ -144,7 +152,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>Select District</label>
                                 <select class="select_css" name="agent_district" id="agent_district" required>
 
@@ -154,7 +162,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>Select Taluka</label>
                                 <select class="select_css" name="agent_taluka" id="agent_taluka" required>
 
@@ -165,7 +173,7 @@
                         </div>
 
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                             <label>City/Village Name</label>
                             <input type="text" class="form-control" name="agent_city" id="agent_city" placeholder="Enter City Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required>
                           </div>
@@ -213,7 +221,7 @@
                         </div>
 
                       <div class="col-md-6">
-                              <div class="form-group">
+                              <div class="form-group color_remove">
                                 <label>Registration Date</label>
                                 <input type="date" class="form-control" name="registration_date" id="registration_date" placeholder="Select Date" >
                               </div>

@@ -42,7 +42,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/suggestion_module/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-               Suggestion Module
+               Suggestion module
               </p>
             </a>
           </li>
@@ -60,7 +60,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/tour_expenses/index" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-               Tour Expenses
+               Tour expenses
               </p>
             </a>
           </li>
@@ -78,7 +78,7 @@
             <a href="" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                My Tour Operation
+                My tour operation
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -87,21 +87,21 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_manager/asign_tour_to_manager/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>My Asigned Tour</p>
+                  <p>My asigned tour</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_manager/request_replace_bus/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Request Replace Bus</p>
+                  <p>Request replace bus</p>
                 </a>
               </li>
               
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_manager/birthday_and_anniversary/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Birthday & Anniversary Module</p>
+                  <p>Birthday & anniversary module</p>
                 </a>
               </li>
 
@@ -115,7 +115,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>tour_manager/tour_photos/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Tour Photos</p>
+                  <p>Tour photos</p>
                 </a>
               </li>
 
@@ -147,7 +147,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/tm_account_details/add" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-               Account Details
+               Account details
               </p>
             </a>
           </li>
@@ -164,7 +164,7 @@
             <a href="<?php echo base_url(); ?>tour_manager/change_password/change_password" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-              Change Password
+              Change password
               </p>
             </a>
           </li>

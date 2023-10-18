@@ -35,7 +35,7 @@
                    foreach($arr_data as $info) 
                    { 
                      ?>
-              <form method="post" enctype="multipart/form-data" id="edit_agent">
+              <form method="post" enctype="multipart/form-data" id="edit_Expences_checker">
                 <div class="card-body">
                  <div class="row">
                       <div class="col-md-6">
