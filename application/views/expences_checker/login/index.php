@@ -37,7 +37,7 @@
           <div class="row">
             <div class="col-md-12 pb-3">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number1" id="mobile_number" maxlength="10">
+                  <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number1" id="mobile_number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                   <div class="input-group-append">
                   </div>
                 </div>
@@ -50,7 +50,7 @@
                   <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password"></span>
+                      <span toggle="#password-field" class="fas fa-fw fa-eye-slash field_icon toggle-password" title="password"></span>
                     </div>
                   </div>
               </div> 
@@ -139,7 +139,7 @@ setTimeout(function(){ $('.alert-dismissible').hide(); }, 3000);
 <script>
 $("body").on('click', '.toggle-password', function() {
   $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $("#pass_login");
+  var input = $("#password");
   if (input.attr("type") === "password") {
     input.attr("type", "text");
   } else {

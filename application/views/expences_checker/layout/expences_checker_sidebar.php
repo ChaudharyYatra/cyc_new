@@ -22,7 +22,7 @@
         </div>
         <div class="info">
           <center><a href="#" class="d-block name_css"><?php echo $expences_checker_master_sess_name = $this->session->userdata('expences_checker_name'); ?></a></center>
-          <center><h6 class="desig_css">[ Expences Checker ]</h6></center>
+          <center><h6 class="desig_css">[ Expenses Checker ]</h6></center>
         </div>
       </div>
 

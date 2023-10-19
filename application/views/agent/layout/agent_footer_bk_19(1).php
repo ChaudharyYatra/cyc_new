@@ -433,6 +433,7 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
+    alert("hiiiiiii");
     var count = $('#seat_count_add').val();
 
     var d_count = $('#d_hidden').val();
@@ -440,6 +441,7 @@ $(document).ready(function() {
     for (var i = 0; i < d_count; i++) {
         var img_count = parseInt(i) + 1 + parseInt(count);
         var inc = i+2;
+        alert(inc);
 
         // alert(img_count);
         var structure = $(`<tr>
@@ -532,7 +534,7 @@ $(document).ready(function() {
 });
 </script>
 <!-- Auto calculate AGE as we select DOB -->
-<!-- <script>
+<script>
 $(function() {
     var calculateAge = function(time) {
         var months = Math.round(time / (24 * 60 * 60 * 1000 * 30));
@@ -556,26 +558,6 @@ $(function() {
         //alert(presentDate);
 
         // $('input[name="age[]"]').val(calculateAge(age));
-    });
-});
-</script> -->
-
-<script>
-$(function() {
-    var calculateAge = function(time) {
-        var months = Math.round(time / (24 * 60 * 60 * 1000 * 30));
-        var years = parseInt(months / 12);
-        months = months % 12;
-        return years;
-    };
-
-    $('input[name^="dob["]').change(function() {
-        var birthDate = new Date($(this).val()).getTime();
-        var presentDate = new Date().getTime();
-        var age = presentDate - birthDate;
-        var currentRow = $(this).closest("tr");
-        var index = $(this).attr('name').match(/\[(.*?)\]/)[1];
-        var col3 = currentRow.find('input[name="age[' + index + ']"]').val(calculateAge(age));
     });
 });
 </script>
@@ -1581,12 +1563,39 @@ $(document).ready(function() {
 <!-- jquery validation on add all traveller info-->
 <script>
 $(document).ready(function() {
+    alert("in");
     $('#all_traveller_info').validate({ 
         // initialize the plugin
-        errorPlacement: function($error, $element) {
-            $error.appendTo($element.closest("td,span,div"))
-        },
+        // errorPlacement: function($error, $element) {
+        //     $error.appendTo($element.closest("td,span"))
+        // },
+       
         rules: {
+            "mrandmrs[]": {
+                required: true,
+            },
+            "first_name[]": {
+                required: true,
+                noSpace: true,
+            },
+            "middle_name[]": {
+                required: true,
+                noSpace: true,
+            },
+            "last_name[]": {
+                required: true,
+                noSpace: true,
+            },
+            "age[]": {
+                required: true,
+                noSpace: true,
+            },
+            "relation[]": {
+                required: true,
+            },
+            "document_file_traveller_img[]": {
+                required: true,
+            },
             area: {
                 required: true,
             },
@@ -1611,6 +1620,27 @@ $(document).ready(function() {
         },
 
         messages: {
+            "mrandmrs[]": {
+                required: "Please select Mr / Mrs",
+            },
+            "first_name[]": {
+                required: "Please enter first name",
+            },
+            "middle_name[]": {
+                required: "Please enter middle name",
+            },
+            "last_name[]": {
+                required: "Please enter last name",
+            },
+            "age[]": {
+                required: "Please enter age",
+            },
+            "relation[]": {
+                required: "Please select relation",
+            },
+            "document_file_traveller_img[]": {
+                required: "Please upload photo",
+            },
             area: {
                 required: "Please enter area",
             },
@@ -1634,71 +1664,7 @@ $(document).ready(function() {
             }
         }
     });
-    $('[id^="mrandmrs"]').each(function() {
-        // alert("cccccc");
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Select mr&mrs",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-    $('[id^="first_name"]').each(function() {
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Enter first name",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-    $('[id^="middle_name"]').each(function() {
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Enter middle name",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-    $('[id^="last_name"]').each(function() {
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Enter last name",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-    $('[id^="age"]').each(function() {
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Enter age",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-    $('[id^="relation"]').each(function() {
-        $(this).rules('add', {
-            required: true,
-            // minlength: 2,
-            messages: {
-                required: "Enter relation",
-                // minlength: "Enter at least {0} characters",
-            }
-        })
-    });
-
 });
-
-
 </script>
 <!-- jquery validation on add all traveller info -->
 

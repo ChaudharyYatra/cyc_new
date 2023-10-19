@@ -253,7 +253,7 @@ margin-top: -9px;
 
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url(); ?>region_head/login/logout" role="button">
-            <i class='fas fa-sign-out-alt' style='font-size:30px'></i>
+            <i class='fas fa-sign-out-alt' style='font-size:30px' title="logout"></i>
             </a>
           </li>
       </li>

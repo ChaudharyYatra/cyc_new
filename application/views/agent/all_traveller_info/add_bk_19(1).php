@@ -26,12 +26,6 @@
     .chaudhary_yatra_logo{
         width:100% !important;
     }
-    .for_row_set .select_css{
-        color: black !important;
-    }
-    .red_remove .select_css{
-        color: black !important;
-    }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -191,7 +185,7 @@
                                 </td>
                                 <td>
                                 <input type="hidden" class="form-control" name="row_id[]" id="row_id" value="<?php echo $all_traveller_info_value['id']; ?>">
-                                    <select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs">
+                                    <select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs<?php echo $img_count ?>">
                                         <option value="">select Mr / Mrs</option>
                                         <?php
                                         foreach($courtesy_titles_data as $courtesy_titles_data_info){ 
@@ -297,11 +291,12 @@
                             <input type="hidden" name="traveller_id[]" value="<?php echo $traveller_id; ?>" required>
 
                                 <td>
-                                <input type="radio" id="yes" name="for_credentials[]" class="relation-radio" value="<?php echo $traveller_id; ?>" required>
+                                <input type="radio" id="yes" name="for_credentials[]" value="<?php echo $traveller_id; ?>" required>
+                          
                                 </td>
                                     
                                 <td>
-                                    <select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs[<?php echo $i ?>]" required>
+                                    <select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs<?php echo $i ?>">
                                         <option value="">select Mr / Mrs</option>
                                         <?php
                                         foreach($courtesy_titles_data as $courtesy_titles_data_info){ 
@@ -376,13 +371,13 @@
 
                                 </td>
                                 <td>
-                                    <input type="date" class="form-control row_set" name="dob[]" id="dob<?php echo $i ?>" max="<?php echo date("Y-m-d");?>">
+                                    <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date("Y-m-d");?>">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control row_set" name="age[]" id="age<?php echo $i ?>" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['age'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    <input type="text" class="form-control row_set" name="age[]" id="age" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['age'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                 </td>
                                 <td>
-                                    <select class="select_css row_set" name="relation[]" id="relation<?php echo $i ?>">
+                                    <select class="select_css row_set" name="relation[]" id="relation">
                                         <option value="">Select</option>
                                         <?php
                                         foreach($relation_data as $relation_data_info){ 
@@ -396,13 +391,13 @@
                                 </td>
                                 <td>
                                 <?php if(!empty($all_traveller_info)){ ?>
-                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number<?php echo $i ?>" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['mobile_number'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
+                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['mobile_number'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
                                     <?php } else if($i==1){ 
                                 foreach($traveller_booking_info as $traveller_booking_info_value){ 
                                     ?>
-                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number<?php echo $i ?>" value="<?php echo $traveller_booking_info_value['mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
+                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number" value="<?php echo $traveller_booking_info_value['mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
                                 <?php } } else{ ?> 
-                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number<?php echo $i ?>" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
+                                    <input type="text" class="form-control row_set" name="mobile_number[]" id="mobile_number" value="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
                                     <?php  } ?>
                                 </td>
                                 
@@ -429,8 +424,8 @@
                                 </td>
                                 
                             </tr>
+                            
                             <?php
-
                             } 
                         }
                         ?>
@@ -476,7 +471,7 @@
                         </div>
 
                         <div class="col-md-4">
-                            <div class="form-group red_remove">
+                            <div class="form-group">
                                 <label>Select State</label>
                                 <select class="select_css" name="all_traveller_state" id="all_traveller_state">
                                     <?php 
@@ -499,7 +494,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group red_remove">
+                            <div class="form-group">
                                 <label>Select District</label>
                                 <select class="select_css" name="all_traveller_district" id="all_traveller_district">
                                     <?php 
@@ -520,7 +515,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group red_remove">
+                            <div class="form-group">
                                 <label>Select Taluka</label>
                                 <select class="select_css" name="all_traveller_taluka" id="all_traveller_taluka">
                                     <?php 

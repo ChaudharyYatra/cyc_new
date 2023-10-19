@@ -93,7 +93,7 @@
                     <a href="<?php echo $module_url_path;?>/tourwise_expences_details/<?php $aid=base64_encode($info['package_id']); 
 					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['package_date_id']); 
 					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['tour_manager_id']); 
-					            echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a>
+					            echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black"; title="View"></i></a>
                     
                     </td>
 

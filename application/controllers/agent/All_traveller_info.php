@@ -129,7 +129,7 @@ class All_traveller_info extends CI_Controller {
               
             //  $this->form_validation->set_rules('domestic_enquiry_id', 'domestic_enquiry_id', 'required');
             //  $this->form_validation->set_rules('seat_count', 'seat count', 'required');
-            //  $this->form_validation->set_rules('mrandmrs', 'mr and mrs', 'required');
+            //  $this->form_validation->set_rules('mrandmrs[]', 'mr and mrs', 'required');
             //  $this->form_validation->set_rules('first_name', 'first name', 'required');
             //  $this->form_validation->set_rules('middle_name', 'middle name', 'required');
             //  $this->form_validation->set_rules('last_name', 'last name', 'required');
