@@ -25,6 +25,8 @@ class All_traveller_info extends CI_Controller {
         $this->arr_view_data = [];
 	 }
 
+     
+
         public function index()
         {
             $agent_sess_name = $this->session->userdata('agent_name');
