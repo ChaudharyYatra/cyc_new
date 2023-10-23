@@ -20,9 +20,16 @@ class Prospect_rate_download_mob extends CI_Controller{
 
 	public function index()
 	{  
+        // $this->db->order_by('id','desc');
+        // $this->db->where('is_deleted','no');
+        // $arr_data = $this->master_model->getRecords('prospect_downloaded');
+
+        $fields = "prospect_downloaded.*,agent.booking_center,agent.id as booking_center_id";
         $this->db->order_by('id','desc');
-        $this->db->where('is_deleted','no');
-        $arr_data = $this->master_model->getRecords('prospect_downloaded');
+        $this->db->where('prospect_downloaded.is_deleted','no');
+        $this->db->where('prospect_downloaded.is_active','yes');
+        $this->db->join("agent", 'agent.id=prospect_downloaded.region_office_location','left');
+        $arr_data = $this->master_model->getRecords('prospect_downloaded',array('prospect_downloaded.is_deleted'=>'no'),$fields);
 
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;

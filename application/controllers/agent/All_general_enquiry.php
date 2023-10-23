@@ -21,7 +21,7 @@ class All_general_enquiry extends CI_Controller{
         $this->module_url_slug    = "all_general_enquiry";
         $this->module_view_folder = "all_general_enquiry/";    
         $this->load->library('upload');
-        $this->load->model('member');
+        // $this->load->model('member');
 	}
 
 	public function index()
