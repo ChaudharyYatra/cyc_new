@@ -4632,20 +4632,24 @@ $('#add_state').validate({ // initialize the plugin
         country_id: {
             required: true,
         },
-        state_name: {
+        state_id: {
             required: true,
         },
-        
+        city_name: {
+            required: true,
+        }
     },
 
     messages :{
         country_id : {
             required : "Please Select country",
         },
-        state_name : {
+        state_id : {
             required : "Please enter state name",
         },
-    
+        city_name : {
+            required : "Please enter city name",
+        }
     }
 });
 
@@ -4666,9 +4670,12 @@ $('#edit_state').validate({ // initialize the plugin
         country_id: {
             required: true,
         },
-        state_name: {
+        state_id: {
             required: true,
         },
+        city_name: {
+            required: true,
+        }
         
     },
 
@@ -4676,9 +4683,12 @@ $('#edit_state').validate({ // initialize the plugin
         country_id : {
             required : "Please Select country",
         },
-        state_name : {
+        state_id : {
             required : "Please enter state name",
         },
+        city_name : {
+            required : "Please enter city name",
+        }
     
     }
 });
@@ -6147,37 +6157,37 @@ $('.accordian-body').on('show.bs.collapse', function () {
     $('#add_more_instraction').click(function() {
        // alert('hhhh');
             i++;
-    var structure = $('<div class="row" style="width:100% !important" id="new_row'+i+'">'+
-                        '<div class="col-md-6">'+
-                            '<div class="form-group">'+
-                                '<label>Enter Instraction Point</label>'+
-                                '<div class="form-group">'+
-                                    '<textarea type="text" class="form-control" name="instraction[]" id="instraction" placeholder="Enter Instraction" required="required"></textarea>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
+    var structure = $(`<div class="row" style="width:100% !important" id="new_row`+i+`">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Enter Instraction Point</label>
+                                <div class="form-group">
+                                    <textarea type="text" class="form-control" name="instraction[]" id="instraction`+i+`" placeholder="Enter Instraction" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
 
-                        `<div class="col-md-2">`+
-                            `<div class="form-group">`+
-                                `<label>Select Priority</label><br>`+
-                                `<select class="form-control" name="priority[]" id="priority">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Select Priority</label><br>
+                                <select class="form-control" name="priority[]" id="priority`+i+`">
                                 <option value="">Select</option>
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
                                 <option value="low">Low</option>
-                                </select>`+
-                            `</div>`+
-                        `</div>`+
+                                </select>
+                            </div>
+                        </div>
                         
 
 
-                        '<div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">'+
-                            '<div class="form-group">'+
-                            '<label></label>'+
-                                '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>'+
-                            '</div>'+
-                        '</div>'+   
-                    '</div>');
+                        <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                            <div class="form-group">
+                            <label></label>
+                                <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                            </div>
+                        </div>  
+                    </div>`);
 $('#main_row').append(structure); 
 
 });
@@ -6199,37 +6209,37 @@ $(document).on('click', '.btn_remove', function(){
     $('#add_more_instraction_for_cust').click(function() {
        // alert('hhhh');
             i++;
-    var structure = $('<div class="row" style="width:100% !important" id="new_row'+i+'">'+
-                        '<div class="col-md-6">'+
-                            '<div class="form-group">'+
-                                '<label>Enter Instraction Point</label>'+
-                                '<div class="form-group">'+
-                                    '<textarea type="text" class="form-control" name="instraction[]" id="instraction" placeholder="Enter Instraction" required="required"></textarea>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
+    var structure = $(`<div class="row" style="width:100% !important" id="new_row`+i+`">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Enter Instraction Point</label>
+                                <div class="form-group">
+                                    <textarea type="text" class="form-control" name="instraction[]" id="instraction`+i+`" placeholder="Enter Instraction" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
 
-                        `<div class="col-md-2">`+
-                            `<div class="form-group">`+
-                                `<label>Select Priority</label><br>`+
-                                `<select class="form-control" name="priority[]" id="priority">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Select Priority</label><br>
+                                <select class="form-control" name="priority[]" id="priority`+i+`">
                                 <option value="">Select</option>
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
                                 <option value="low">Low</option>
-                                </select>`+
-                            `</div>`+
-                        `</div>`+
+                                </select>
+                            </div>
+                        </div>
                         
 
 
-                        '<div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">'+
-                            '<div class="form-group">'+
-                            '<label></label>'+
-                                '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>'+
-                            '</div>'+
-                        '</div>'+   
-                    '</div>');
+                        <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                            <div class="form-group">
+                            <label></label>
+                                <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                            </div>
+                        </div> 
+                    </div>`);
 $('#main_row_cust').append(structure); 
 
 });
@@ -6379,36 +6389,36 @@ $('#edit_expense_type').validate({ // initialize the plugin
     $('#add_more_category').click(function() {
        // alert('hhhh');
             i++;
-    var structure = $('<div class="row" style="width:100% !important" id="new_row'+i+'">'+
-    `<div class="col-md-5">`+
-                    `<div class="form-group">`+
-                        `<label>Expense Type</label>`+
-                        `<select class="select_css" name="expense_type[]" id="expense_type" required="required">
+    var structure = $(`<div class="row" style="width:100% !important" id="new_row`+i+`">
+                <div class="col-md-5">
+                    <div class="form-group">
+                       <label>Expense Type</label>
+                        <select class="select_css" name="expense_type[]" id="expense_type`+i+`" required="required">
                         <option value="">Select Expense Type</option>
                         <?php foreach($arr_data as $info){ ?> 
                             <option value="<?php echo $info['id'];?>"><?php echo $info['expense_type_name'];?></option>
                         <?php } ?>
-                        </select>`+
-                    `</div>`+
-                `</div>`+
+                        </select>
+                    </div>
+                </div>
 
-                `<div class="col-md-5">`+
-                  `<div class="form-group">`+
-                    `<label>Expense Category</label>`+
-                    `<input type="text" class="form-control" name="expense_category[]" id="expense_category" placeholder="Enter Expense Category">`+
-                    `<input type="hidden" readonly class="form-control" name="expense_type_id[]" id="expense_type_id" placeholder="Enter tour number" value="<?php echo $info['id'] ?>" required="required">`+
-                    `</div>`+
-                `</div>`+
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label>Expense Category</label>
+                    <input type="text" class="form-control" name="expense_category[]" id="expense_category`+i+`" placeholder="Enter Expense Category">
+                    <input type="hidden" readonly class="form-control" name="expense_type_id[]" id="expense_type_id" placeholder="Enter tour number" value="<?php echo $info['id'] ?>" required="required">
+                    </div>
+                </div>
                         
 
 
-                        '<div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">'+
-                            '<div class="form-group">'+
-                            '<label></label>'+
-                                '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>'+
-                            '</div>'+
-                        '</div>'+   
-                    '</div>');
+                        <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                            <div class="form-group">
+                            <label></label>
+                                <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>
+                            </div>
+                        </div>
+                    </div>`);
 $('#main_row').append(structure); 
 
 });
@@ -8437,7 +8447,7 @@ var structure = $(`<div class="row" id="new_row`+i+`">
                         <div class="col-md-4">
                         <div class="form-group">
                             <label>Required Time will it take to see this place</label>
-                            <input type="text" class="form-control" name="state_tax[]" id="state_tax`+i+`" placeholder="Enter time" required="required">
+                            <input type="text" class="form-control" name="req_time[]" id="req_time`+i+`" placeholder="Enter time" required="required">
                         </div>
                         </div>
 
@@ -8520,6 +8530,22 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
     $error.appendTo($element.closest("div"));
   },
     rules: {
+        "select_district": {
+            required: true,
+        },
+        "approximate_hall_rate": {
+            required: true,
+        },
+        "separate_room_rate": {
+            required: true,
+        },
+        "dharmshala_rate": {
+            required: true,
+        },
+        "state_tax": {
+            required: true,
+        },
+
         "Place_name[]": {
             required: true,
         },
@@ -8528,10 +8554,45 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         },
         "allow_vehicle_types[]": {
             required: true,
+        },
+
+        "opening_time[]": {
+            required: true,
+        },
+        "closing_time[]": {
+            required: true,
+        },
+        "req_time[]": {
+            required: true,
+        },
+        "ticket_yes_no[]": {
+            required: true,
+        },
+        "ticket_cost[]": {
+            required: true,
+        },
+        "railway_station_name[]": {
+            required: true,
         }
     },
 
     messages :{
+        "select_district": {
+            required : "Please select district",
+        },
+        "approximate_hall_rate": {
+            required : "Please enter approximate hall rate",
+        },
+        "separate_room_rate": {
+            required : "Please enter separate soom rate",
+        },
+        "dharmshala_rate": {
+            required : "Please dharmshala rate",
+        },
+        "state_tax": {
+            required : "Please enter state tax",
+        },
+
         "Place_name[]": {
             required : "Please enter name",
         },
@@ -8540,6 +8601,25 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         },
         "allow_vehicle_types[]": {
             required : "Please select vehicle types",
+        },
+
+        "opening_time[]": {
+            required : "Please select opening time",
+        },
+        "closing_time[]": {
+            required : "Please select closing time",
+        },
+        "req_time[]": {
+            required : "Please enter required time",
+        },
+        "ticket_yes_no[]": {
+            required : "Please select entry ticket cost",
+        },
+        "ticket_cost[]": {
+            required : "Please enter ticket cost",
+        },
+        "railway_station_name[]": {
+            required : "Please enter nearest railway station name",
         },
     }
 });
@@ -9592,3 +9672,361 @@ $('#edit_Expences_checker').validate({ // initialize the plugin
 });
 
 </script>
+
+<!-- country master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_country').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        "country_name": {
+            required: true,
+        }
+    },
+
+    messages :{
+        "country_name" : {
+            required : "Please enter country",
+        }
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_country').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        "country_name": {
+            required: true,
+        }
+    },
+
+    messages :{
+        "country_name" : {
+            required : "Please enter country",
+        }
+    }
+});
+
+});
+
+</script>
+
+<!-- country master validation -->
+
+<!-- district master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_district').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district: {
+            required: true,
+        }
+    },
+
+    messages :{
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please select state name",
+        },
+        district : {
+            required : "Please enter district name",
+        }
+    }
+});
+
+});
+
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_district').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district: {
+            required: true,
+        }
+    },
+
+    messages :{
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please select state name",
+        },
+        district : {
+            required : "Please enter district name",
+        }
+    }
+});
+
+});
+
+</script>
+<!-- district master validation -->
+
+<!-- Taluka master validation  -->
+<script>
+$(document).ready(function () {
+
+$('#add_taluka').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district_id: {
+            required: true,
+        },
+        taluka: {
+            required: true,
+        }
+    },
+
+    messages :{
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please select state name",
+        },
+        district_id : {
+            required : "Please enter district name",
+        },
+        taluka : {
+            required : "Please enter taluka name",
+        }
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_taluka').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district_id: {
+            required: true,
+        },
+        taluka: {
+            required: true,
+        }
+    },
+
+    messages :{
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please select state name",
+        },
+        district_id : {
+            required : "Please enter district name",
+        },
+        taluka : {
+            required : "Please enter taluka name",
+        }
+    }
+});
+
+});
+
+</script>
+
+<!-- Taluka master validation  -->
+
+<!-- instraction for tour manager validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_instruction_TM').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        image_name: {
+            required: true,
+        },
+        "instraction[]": {
+            required: true,
+        },
+        "priority[]": {
+            required: true,
+        }
+    },
+
+    messages :{
+        image_name : {
+            required : "Please upload image",
+        },
+        "instraction[]" : {
+            required : "Please enter instraction",
+        },
+        "priority[]" : {
+            required : "Please select priority",
+        }
+    }
+});
+
+});
+
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_instruction_TM').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        old_img_name: {
+            required: true,
+        },
+        "instraction[]": {
+            required: true,
+        },
+        "priority[]": {
+            required: true,
+        }
+    },
+
+    messages :{
+        old_img_name : {
+            required : "Please upload image",
+        },
+        "instraction[]" : {
+            required : "Please enter instraction",
+        },
+        "priority[]" : {
+            required : "Please select priority",
+        }
+    }
+});
+
+});
+
+</script>
+<!-- instraction for tour manager validation -->
+
+<!-- instraction for customer -->
+<script>
+$(document).ready(function () {
+
+$('#add_for_cust').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        image_name: {
+            required: true,
+        },
+        "instraction[]": {
+            required: true,
+        },
+        "priority[]": {
+            required: true,
+        }
+    },
+
+    messages :{
+        image_name : {
+            required : "Please upload image",
+        },
+        "instraction[]" : {
+            required : "Please enter instraction",
+        },
+        "priority[]" : {
+            required : "Please select priority",
+        }
+    }
+});
+
+});
+
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_for_cust').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        old_img_name: {
+            required: true,
+        },
+        "instraction[]": {
+            required: true,
+        },
+        "priority[]": {
+            required: true,
+        }
+    },
+
+    messages :{
+        old_img_name : {
+            required : "Please upload image",
+        },
+        "instraction[]" : {
+            required : "Please enter instraction",
+        },
+        "priority[]" : {
+            required : "Please select priority",
+        }
+    }
+});
+
+});
+
+</script>
+
+<!-- instraction for customer -->

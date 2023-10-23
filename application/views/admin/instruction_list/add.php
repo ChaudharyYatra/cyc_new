@@ -32,7 +32,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               <!-- in form id="add_instraction"  jquery validation can't work required only work-->
-              <form method="post" enctype="multipart/form-data" id="">
+              <form method="post" enctype="multipart/form-data" id="add_instruction_TM">
                 <div class="card-body">
                   <div class="row">
 
@@ -59,7 +59,7 @@
                       <div class="form-group">
                         <label>Attachment</label><br>
                         <input type="file" name="image_name" id="image_name" required="required">
-                        <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
+                        <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span><br>
                       </div>
                     </div>
 
@@ -97,7 +97,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit" id="instrct_add_submit">Submit</button>
 					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger">Cancel</button></a>
                 </div>
               </form>

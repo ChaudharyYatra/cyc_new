@@ -32,7 +32,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               
-              <form method="post" enctype="multipart/form-data" id="add_package">
+              <form method="post" enctype="multipart/form-data" id="add_for_cust">
                 <div class="card-body">
                   <div class="row">
 
@@ -59,13 +59,13 @@
                       <div class="form-group">
                         <label>Attachment</label><br>
                         <input type="file" name="image_name" id="image_name" required="required">
-                        <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
+                        <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span><br>
                       </div>
                     </div>
 
                   </div>  
                   
-                  <div class="row" id="main_row">
+                  <div class="row" id="main_row_cust">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Enter Instruction Point</label><br>
@@ -88,7 +88,7 @@
                     <div class="col-md-4 mt-4">
                       <div class="form-group">
                           <label></label>
-                          <button type="button" class="btn btn-primary" name="submit" value="add_more" name="add_more_instraction" id="add_more_instraction">Add More Instruction Points</button>
+                          <button type="button" class="btn btn-primary" name="submit" value="add_more" name="add_more_instraction" id="add_more_instraction_for_cust">Add More Instruction Points</button>
                       </div>
                     </div>
 
@@ -97,7 +97,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit" id="add_cust_submit">Submit</button>
 					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger">Cancel</button></a>
                 </div>
               </form>

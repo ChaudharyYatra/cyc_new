@@ -227,6 +227,7 @@ class Instruction_list extends CI_Controller{
             $arr_data2 = $this->master_model->getRecord('tm_instraction_attachment');
 
                     
+            
 
         // $this->db->order_by('id','desc');
         // $this->db->where('is_deleted','no');
@@ -239,7 +240,6 @@ class Instruction_list extends CI_Controller{
         
         if($this->input->post('submit'))
         {
-
             $this->form_validation->set_rules('tour_number', 'tour number', 'required');
             $this->form_validation->set_rules('instraction[]', 'instraction', 'required');
             $this->form_validation->set_rules('priority[]', 'priority', 'required');
@@ -346,14 +346,12 @@ class Instruction_list extends CI_Controller{
         
             if($this->input->post('submit'))
             {
-                $this->form_validation->set_rules('tour_number', 'tour number', 'required');
-                $this->form_validation->set_rules('instraction[]', 'instraction', 'required');
-                $this->form_validation->set_rules('priority[]', 'priority', 'required');
+                // $this->form_validation->set_rules('tour_number', 'tour number', 'required');
+                // $this->form_validation->set_rules('instraction[]', 'instraction', 'required');
+                // $this->form_validation->set_rules('priority[]', 'priority', 'required');
 
-                if($this->form_validation->run() == TRUE)
-                {
-
-                //  print_r($_REQUEST);
+                // if($this->form_validation->run() == TRUE)
+                // {
 
                  $old_img_name = $this->input->post('old_img_name');
                 
@@ -424,10 +422,11 @@ class Instruction_list extends CI_Controller{
                     'image_name	'   =>   $filename
                 );
 
-            
+                
                 $arr_where     = array("id" => $tm_intr_attachment_id);
                 $this->master_model->updateRecord('tm_instraction_attachment',$arr_update,$arr_where);
                 
+                if($priority !=''){
                 $count = count($priority);
                 for($i=0;$i<$count;$i++)
                 {
@@ -442,6 +441,7 @@ class Instruction_list extends CI_Controller{
                     $arr_where     = array("id" => $tm_intr_id[$i]);
                     $this->master_model->updateRecord('tm_instraction',$arr_update,$arr_where);
                 }
+            }
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
@@ -452,7 +452,7 @@ class Instruction_list extends CI_Controller{
                     }
                     redirect($this->module_url_path.'/index');
                 
-            }
+            // }
           }
         }
         

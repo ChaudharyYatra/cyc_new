@@ -38,7 +38,7 @@
               <!-- /.card-header -->
               <!-- form start -->
 
-              <form method="post" enctype="multipart/form-data" id="edit_package">
+              <form method="post" enctype="multipart/form-data" id="edit_instruction_TM">
                 <div class="card-body">
                   <div class="row">
                         <input type="hidden" readonly class="form-control" name="tour_no" id="tour_no" placeholder="Enter tour number" value="<?php echo $arr_data_main['tour_no'] ?>" required="required">

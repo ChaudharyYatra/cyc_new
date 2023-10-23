@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data" id="add_state">
+              <form method="post" enctype="multipart/form-data" id="add_taluka">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">

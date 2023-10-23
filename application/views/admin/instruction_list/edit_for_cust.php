@@ -38,7 +38,7 @@
               <!-- /.card-header -->
               <!-- form start -->
 
-              <form method="post" enctype="multipart/form-data" id="edit_package">
+              <form method="post" enctype="multipart/form-data" id="edit_for_cust">
                 <div class="card-body">
                   <div class="row">
 
@@ -86,8 +86,8 @@
 
                   </div>  
                   
-                  <div class="row" id="main_row">
-
+                  <div class="row" id="main_row_cust">
+                          
                     <?php
                     foreach($arr_data as $info) 
                     { 

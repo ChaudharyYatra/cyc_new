@@ -54,14 +54,14 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Approximate Hall Rate</label>
-                        <input type="text" class="form-control" name="approximate_hall_rate" id="approximate_hall_rate" placeholder="Enter enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        <input type="text" class="form-control" name="approximate_hall_rate" id="approximate_hall_rate" placeholder="Enter enter approximate hall rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Separate Room Rate</label>
-                        <input type="text" class="form-control" name="separate_room_rate" id="separate_room_rate" placeholder="Enter enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        <input type="text" class="form-control" name="separate_room_rate" id="separate_room_rate" placeholder="Enter enter separate soom rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
                     </div>
 

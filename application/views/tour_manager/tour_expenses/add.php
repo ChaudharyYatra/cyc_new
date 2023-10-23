@@ -212,9 +212,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i=1;?>
                                         <tr>
                                             <td>
-                                                <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row" >
+                                                <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row<?php echo $i;?>" >
                                                     <option value="">Select </option>
                                                     <?php foreach($expense_type_data as $expense_type_info){ ?> 
                                                         <option value="<?php echo $expense_type_info['id'];?>"><?php echo $expense_type_info['expense_type_name'];?></option>
@@ -222,16 +223,16 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css sub_expenses_head" name="expense_category_row[]" id="expense_category_row">
+                                                <select class="select_css sub_expenses_head" name="expense_category_row[]" id="expense_category_row<?php echo $i;?>">
                                                         <option value="">Select </option>
                                                         
                                                 </select>
                                                 <br>
-                                                <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name" placeholder="Enter name" >
+                                                <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name<?php echo $i;?>" placeholder="Enter name" >
                                             </td>
                                             
                                             <td>
-                                                <select class="select_css" name="product_name[]" id="product_name" >
+                                                <select class="select_css" name="product_name[]" id="product_name<?php echo $i;?>" >
                                                     <option value="">Select </option>
                                                     <?php foreach($expense_category as $expense_category_info){ ?> 
                                                         <option value="<?php echo $expense_category_info['id'];?>"><?php echo $expense_category_info['expense_category'];?></option>
@@ -239,7 +240,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="measuring_unit[]" id="measuring_unit" >
+                                                <select class="select_css" name="measuring_unit[]" id="measuring_unit<?php echo $i;?>" >
                                                     <option value="">Select </option>
                                                     <?php foreach($measuring_unit as $measuring_unit_info){ ?> 
                                                         <option value="<?php echo $measuring_unit_info['id'];?>"><?php echo $measuring_unit_info['unit_type'];?></option>
@@ -247,13 +248,14 @@
                                                 </select>
                                                 
                                             </td>
-                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
-                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity<?php echo $i;?>" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate<?php echo $i;?>" placeholder="Enter rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
                                             <td><input readonly type="text" class="form-control per_unit_rate" name="per_unit_rate[]" id="per_unit_rate" placeholder="Enter per unit rate"></td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" name="submit" value="expenses_add_more" id="expenses_add_more">Add More</button>
+                                                <button type="button" class="btn btn-primary" attr_add_id="1" name="submit" value="expenses_add_more" id="expenses_add_more">Add More</button>
                                             </td>
                                         </tr>
+                                        <?php $i++; ?>
                                     </tbody>
                                 </table>
                             </div>
