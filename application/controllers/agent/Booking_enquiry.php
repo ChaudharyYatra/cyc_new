@@ -732,6 +732,43 @@ class Booking_enquiry extends CI_Controller {
        }
     }
 
+    public function not_intrested($iid)
+    {
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        // print_r($iid); die;
+
+            $arr_update = array(
+            'not_interested'          => 'no',
+            'followup_status'          => 'yes'
+                
+            );
+            
+            $arr_where     = array("id" => $iid);
+            $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+            if($id > 0)
+            {
+                $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
+            }
+            else
+            {
+                $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+            }
+            redirect($this->module_url_path.'/index/'.$iid);
+                   
+
+            
+            $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+            $this->arr_view_data['arr_data']        = $arr_data;
+            $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+            $this->arr_view_data['module_title']    = $this->module_title;
+            $this->arr_view_data['module_url_path'] = $this->module_url_path;
+            $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+            $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+        
+    }
+
 
 
 }

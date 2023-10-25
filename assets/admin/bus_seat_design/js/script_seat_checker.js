@@ -1035,9 +1035,23 @@ for(var p=0; p<total_seat_count; p++) {
                             // var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) - this.data().price;
                             // $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
 
-                            var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
-                                    $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
+                            // var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                            //         $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
 
+                            if (($.inArray('available', middle_next_seat_array) != '-1')) {
+                                var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                                console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
+
+                                $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
+                            }else{
+                                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+
+                                    // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
+
+                                    $total.text(recalculateTotal(sc,click_id,selection_array) + this.data().price);
+
+                            }
+                           
                             //remove the item from our cart
                             $('#cart-item-' + this.settings.id).remove();
                             var p = this.settings.id;

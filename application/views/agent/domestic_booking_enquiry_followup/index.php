@@ -2,6 +2,9 @@
   .table-color{
     background:#00899f80;
   }
+  a{
+    text-decoration: none !important;
+  }
   
 </style>
 <!-- Content Wrapper. Contains page content -->
@@ -98,12 +101,12 @@
                     ?></td>
                     <td><?php if($i < 5)
                             {
-						echo $info['follow_up_time'];
-							}else
-					 {
-						 echo "No Record";
-					 }
-						?></td>
+                      echo $info['follow_up_time'];
+                        }else
+                    {
+                      echo "No Record";
+                    }
+                      ?></td>
                     <td><?php echo $info['create_followup_reason'] ?></td>
                     <td><?php echo $info['follow_up_comment'] ?></td>
                     <td>
@@ -122,6 +125,12 @@
                         ?>
                         
 						            <button class="btn btn-danger btn-sm btn_follow_form<?php echo $i;?>"  data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $i;?>" attr-test="no" attr-count="<?php echo $i;?>">Next Followup</button>
+
+                        <a href="<?php echo base_url(); ?>agent/booking_enquiry/not_intrested/<?php echo $enq_id; ?>"
+                          onclick="return confirm('Are you sure you want to mark this as Not Interested?');">
+                          <button type="button" class="btn btn-primary btn-sm take_followup_btn mt-1" class="dropdown-item">Not Interested</button>
+                        </a>
+
                         <?php } ?>
                         <?php } else { ?>
                         <button class="btn btn-success btn-sm btn_follow_form disabled" attr-test="no">Followup Done</button>
@@ -138,6 +147,7 @@
                         <a href="<?php echo base_url(); ?>agent/seat_checker/index/<?php echo $info['booking_enquiry_id']; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>  
                      
                         <?php } ?>
+
                     </td>
                     <!-- <td>
                     <a href="<?php //echo $module_url_path;?>/edit/<?php //echo $info['booking_enquiry_id']; ?>" data-bs-toggle="modal" data-bs-target="#exampleModal<?php //echo $i; ?>" data-bs-whatever="Form"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;

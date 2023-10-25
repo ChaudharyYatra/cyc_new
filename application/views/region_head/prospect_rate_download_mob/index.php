@@ -31,6 +31,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Region Name</th>
                     <th>Mobile Number</th>
                     <th>Downloaded PDF</th>
                     <th>Date</th>
@@ -45,6 +46,7 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
+                    <td><?php echo $info['booking_center']; ?></td>
                     <td><?php echo $info['mobile_number']; ?></td>
                     <td>
                       <?php 

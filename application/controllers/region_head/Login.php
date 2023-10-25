@@ -71,6 +71,8 @@ class Login extends CI_Controller{
         $this->session->unset_userdata('region_head_sess_id');
         $this->session->unset_userdata('region_head_mobile');
         $this->session->unset_userdata('region_head_name');
+        $this->session->unset_userdata('region_head_region');
+        $this->session->unset_userdata('agent_region_id');
         $this->session->sess_destroy();
         redirect($this->module_url_path.'/index');  
     }
