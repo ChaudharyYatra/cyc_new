@@ -22,26 +22,24 @@ class Prospect_rate_download_mob extends CI_Controller{
 	{  
         $region_head_sess_name = $this->session->userdata('region_head_name');
         $id = $this->session->userdata('region_head_sess_id');
-
         $region_id = $this->session->userdata('region_head_region');
         $agent_region_id = $this->session->userdata('agent_region_id');
 
-        $fields = "prospect_downloaded.*,agent.booking_center,agent.id as booking_center_id";
-        $this->db->order_by('id','desc');
+        $fields = "prospect_downloaded.*,agent.agent_name";
+        $this->db->order_by('prospect_downloaded.id','desc');
         $this->db->where('prospect_downloaded.is_deleted','no');
-        $this->db->where('prospect_downloaded.is_active','yes');
-        $this->db->where('region_office_location',$agent_region_id);
-        $this->db->join("agent", 'agent.id=prospect_downloaded.region_office_location','left');
-        $arr_data = $this->master_model->getRecords('prospect_downloaded',array('prospect_downloaded.is_deleted'=>'no'),$fields);
+        $this->db->where('prospect_downloaded.region_office_location',$region_id);
+        $this->db->join("agent", 'prospect_downloaded.assign_agent_id=agent.id','left');
+        $arr_data = $this->master_model->getRecords('prospect_downloaded',array('prospect_downloaded.is_deleted'=>'no','prospect_downloaded.is_active'=>'yes'),$fields);
+        // print_r($arr_data); die;
 
-        // $this->db->order_by('id','desc');
-        // $this->db->where('is_deleted','no');
-        // $this->db->where('region_office_location',$agent_region_id);
-        // $arr_data = $this->master_model->getRecords('prospect_downloaded');
-
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('department',$region_id);
+        $agent_data = $this->master_model->getRecords('agent');
+        // print_r($agent_data); die;
 
         $this->arr_view_data['region_head_sess_name']        = $region_head_sess_name;
-        $this->arr_view_data['agent_region_id']        = $agent_region_id;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['agent_data']        = $agent_data;
