@@ -226,12 +226,15 @@
             </ul>
           </li>
 
-          <!-- <li class="nav-item">
-                <a href="<?php //echo base_url(); ?>agent/seat_checker/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Seat Checker</p>
-                </a>
-          </li> -->
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>agent/prospect_rate_download_mob/index" class="nav-link">
+                <!-- <i class="nav-icon fas fa fa-user"></i> -->
+                <i class="nav-icon fa fa-download" aria-hidden="true"></i>
+                <p>
+                    Document download list
+                </p>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>agent/final_booking_details/index" class="nav-link">

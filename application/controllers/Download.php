@@ -88,18 +88,18 @@ class Download extends CI_Controller {
             $media_source = $this->master_model->getRecords('media_source');
 
             $record = array();
-            $fields = "agent.*";
-            $this->db->where('agent.is_active','yes');
-            $this->db->where('agent.is_deleted','no');
-            $agent_data_office_address = $this->master_model->getRecords('agent','',$fields);
-            // print_r($agent_data_office_address); die;
+            $fields = "department.*";
+            $this->db->where('department.is_active','yes');
+            $this->db->where('department.is_deleted','no');
+            $department_data = $this->master_model->getRecords('department','',$fields);
+            // print_r($department_data); die;
 
         $data = array('middle_content' => 'download',
                 'arr_data' => $arr_data,
                 'packages_data' => $packages_data,
                 'Aagent_data' => $Aagent_data,
                 'agent_data' => $agent_data,
-                'agent_data_office_address' => $agent_data_office_address,
+                'department_data' => $department_data,
                 'media_source' => $media_source,
                 'department_data' => $department_data,
                 'website_basic_structure' => $website_basic_structure,

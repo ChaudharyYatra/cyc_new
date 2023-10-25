@@ -36,8 +36,8 @@
                                             <div class="form-group">
                                                 <select class="select_css region_css" name="region_office_location" id="region_office_location">
                                                     <option value="">Select Region Office Location</option>
-                                                    <?php foreach($agent_data_office_address as $agent_data_office_address_value){ ?>   
-                                                            <option value="<?php echo $agent_data_office_address_value['id'];?>"><?php echo $agent_data_office_address_value['booking_center'];?></option>
+                                                    <?php foreach($department_data as $department_data_value){ ?>   
+                                                            <option value="<?php echo $department_data_value['id'];?>"><?php echo $department_data_value['department'];?></option>
                                                             <?php } ?>
                                                 </select>
                                             </div>
