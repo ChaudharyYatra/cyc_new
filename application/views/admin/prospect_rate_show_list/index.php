@@ -1,14 +1,16 @@
 <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-8">
+          <div class="col-sm-6">
             <h1><?php echo $module_title; ?></h1>
           </div>
           <div class="col-sm-6">
-            
+            <ol class="breadcrumb float-sm-right">
+              <a href="<?php echo $module_url_path_region; ?>/index"><button class="btn btn-primary">Back</button></a>
+            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -31,8 +33,10 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Region Name</th>
-                    <th>Rate and Prospect download</th>
+                    <th>Mobile Number</th>
+                    <th>Downloaded PDF</th>
+                    <th>Date</th>
+                    <th>Assigned Agent Name</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -41,13 +45,27 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
-                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['department']; ?></td>
+                    <td><?php echo $info['mobile_number']; ?></td>
                     <td>
-                    <a href="<?php echo $module_url_path_show_list;?>/index/<?php echo $info['dept_id']; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Show List</button></a>
+                      <?php 
+                      if($info['pdf_name']=='prospect'){
+                        ?>
+                        Prospect
+                      <?php } else { ?>
+                        Rate Chart
+                      <?php } ?>
+                    </td>
+                    <td><?php echo date('d-m-Y', strtotime($info['created_at'])); ?></td>
+
+                    <td>
+                    <?php if($info['agent_name']!=''){?>
+                    <?php echo $info['agent_name']; ?>
+                    <?php } else { ?>
+                        Not Assigned Agent
+                    <?php } ?>
                     </td>
                     
                   </tr>

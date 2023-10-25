@@ -31,8 +31,10 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Region Name</th>
-                    <th>Rate and Prospect download</th>
+                    <!-- <th>Region Name</th> -->
+                    <th>Mobile Number</th>
+                    <th>Downloaded PDF</th>
+                    <th>Date</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -41,14 +43,21 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
-                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['department']; ?></td>
+                    <!-- <td><?php //echo $info['booking_center']; ?></td> -->
+                    <td><?php echo $info['mobile_number']; ?></td>
                     <td>
-                    <a href="<?php echo $module_url_path_show_list;?>/index/<?php echo $info['dept_id']; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Show List</button></a>
+                      <?php 
+                      if($info['pdf_name']=='prospect'){
+                        ?>
+                        Prospect
+                      <?php } else { ?>
+                        Rate Chart
+                      <?php } ?>
                     </td>
+                    <td><?php echo date('d-m-Y', strtotime($info['created_at'])); ?></td>
                     
                   </tr>
                   <?php $i++; } ?>
