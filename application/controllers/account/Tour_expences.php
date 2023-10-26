@@ -11,8 +11,8 @@ class Tour_expences extends CI_Controller{
                 redirect(base_url().'supervision/login'); 
         }
         $this->module_url_path    =  base_url().$this->config->item('account_panel_slug')."account/tour_expences";
-        $this->module_title       = "Tour Expences  ";
-        $this->module_title_expences = "Tour Expences";
+        $this->module_title       = "Tour Expenses  ";
+        $this->module_title_expences = "Tour Expenses";
         $this->module_url_slug    = "tour_expences";
         $this->module_view_folder = "tour_expences/";    
         $this->load->library('upload');

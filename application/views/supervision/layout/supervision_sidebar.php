@@ -346,7 +346,7 @@
             <a href="<?php echo base_url(); ?>account/tour_expences/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
-                Tour expences
+                Tour expenses
               </p>
             </a>
           </li>
