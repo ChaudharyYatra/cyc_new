@@ -50,7 +50,7 @@
                   <input type="password" class="form-control" placeholder="Password" name="password" id="password">
                   <div class="input-group-append">
                     <div class="input-group-text">
-                      <span toggle="#password-field" class="fas fa-fw fa-eye-slash field_icon toggle-password" title="password"></span>
+                      <span toggle="#password-field" title="show password" class="fas fa-fw fa-eye-slash field_icon toggle-password"></span>
                     </div>
                   </div>
               </div> 
@@ -142,8 +142,10 @@ $("body").on('click', '.toggle-password', function() {
   var input = $("#password");
   if (input.attr("type") === "password") {
     input.attr("type", "text");
+    $(this).attr("title", "Hide Password");
   } else {
     input.attr("type", "password");
+    $(this).attr("title", "Show Password");
   }
 
 });
