@@ -17,7 +17,7 @@ class Website_visitor_data extends CI_Controller{
         $this->module_url_slug    = "website_visitor_data";
         $this->module_view_folder = "website_visitor_data/";    
         $this->load->library('upload');
-        $this->load->model('member');
+        // $this->load->model('member');
 	}
 
     public function index()

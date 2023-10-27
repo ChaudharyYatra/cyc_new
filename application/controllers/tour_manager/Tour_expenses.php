@@ -395,6 +395,7 @@ class Tour_expenses extends CI_Controller {
             }
             if($this->input->post('submit'))
             {
+                // print_r($_REQUEST); die;
                 $old_img_name = $this->input->post('old_img_name');
                 
                     if(!empty($_FILES['image_name']) && $_FILES['image_name']['name'] !='')
@@ -538,6 +539,7 @@ class Tour_expenses extends CI_Controller {
                 // print_r($add_more_tour_expenses_id); die;
 
                 $expense_type_row  = $this->input->post('expense_type_row');
+                // print_r($expense_type_row); die;
                 $expense_category_row  = $this->input->post('expense_category_row');
                 $other_name  = $this->input->post('other_name');
                 $bill_date  = $this->input->post('bill_date');
@@ -562,19 +564,9 @@ class Tour_expenses extends CI_Controller {
                 // 'package_date_id' =>   $tour_number
 
                  );
+                 
                     $arr_where     = array("id" => $tour_expenses_id);
                     $inserted_id = $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
-
-                    if($inserted_id > 0)
-                 {
-                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Record Updated Successfully.");
-                     redirect($this->module_url_path.'/all_expenses/'.$pid.'/'.$pd_id);
-                 }
-                 else
-                 {
-                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                 }
-
 
                     if($tour_expenses_type == '0'){
                         $count = count($expense_type_row);
@@ -598,9 +590,7 @@ class Tour_expenses extends CI_Controller {
                         
                     }
 
-                    // ==================================================================
                     $add_product_name  = $this->input->post('add_product_name');
-                    // print_r($add_product_name); die;
                     $add_measuring_unit  = $this->input->post('add_measuring_unit');
                     $add_quantity  = $this->input->post('add_quantity');
                     $add_rate  = $this->input->post('add_rate');
@@ -631,15 +621,13 @@ class Tour_expenses extends CI_Controller {
                     'tour_expenses_id' => $current_tour_expenses_id
                     
                     ); 
-                    $inserted_id_2 = $this->master_model->insertRecord('add_more_tour_expenses',$arr_insert,true);
+                    $inserted_id = $this->master_model->insertRecord('add_more_tour_expenses',$arr_insert,true);
                     }
                 }
-                    // ===================================================================
 
-                        
-                 if($inserted_id_2 > 0)
+                    if($inserted_id > 0)
                  {
-                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Record Updated Successfully.");
                      redirect($this->module_url_path.'/all_expenses/'.$pid.'/'.$pd_id);
                  }
                  else
@@ -648,7 +636,6 @@ class Tour_expenses extends CI_Controller {
                  }
                  redirect($this->module_url_path.'/index');
                 }   
-        //    }
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -700,12 +687,15 @@ class Tour_expenses extends CI_Controller {
         $this->db->where('add_more_tour_expenses.tour_expenses_id',$tour_expenses_id);
         $this->db->join("expense_category", 'add_more_tour_expenses.product_name=expense_category.id','left');
         $add_more_tour_expenses_all = $this->master_model->getRecords('add_more_tour_expenses',array('add_more_tour_expenses.is_deleted'=>'no'),$fields);
-        // print_r($add_more_tour_expenses_all); die;
+
+        $edit_data=count($add_more_tour_expenses_all);
+        // print_r($edit_data); die;
 
 
-        $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
          $this->arr_view_data['packages_data'] = $packages_data;
          $this->arr_view_data['add_more_tour_expenses_all'] = $add_more_tour_expenses_all;
+         $this->arr_view_data['edit_data'] = $edit_data;
          $this->arr_view_data['expense_category'] = $expense_category;
          $this->arr_view_data['package_date'] = $package_date;
          $this->arr_view_data['tour_expenses_all'] = $tour_expenses_all;
@@ -713,7 +703,7 @@ class Tour_expenses extends CI_Controller {
          $this->arr_view_data['expense_category_data'] = $expense_category_data;
          $this->arr_view_data['measuring_unit'] = $measuring_unit;
          $this->arr_view_data['package_id']        = $package_id;
-        $this->arr_view_data['package_date_id']        = $package_date_id;
+         $this->arr_view_data['package_date_id']        = $package_date_id;
          $this->arr_view_data['page_title']      = " Edit ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['add_more_module_url_path']    = $this->add_more_module_url_path;

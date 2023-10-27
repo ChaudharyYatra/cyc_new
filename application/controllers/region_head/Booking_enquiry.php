@@ -21,7 +21,7 @@ class Booking_enquiry extends CI_Controller{
         $this->module_url_slug    = "booking_enquiry";
         $this->module_view_folder = "booking_enquiry/";    
         $this->load->library('upload');
-        $this->load->model('member');
+        // $this->load->model('member');
 	}
 
 	public function index()

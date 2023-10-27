@@ -210,21 +210,21 @@ $('#add_assign_staff').validate({ // initialize the plugin
         tour_number: {
             required: true,
         },
-        staff_name: {
+        "role_name[]": {
             required: true,
         },
-        mobile_number: {
+        "name[]": {
             required: true,
-        },
-        email: {
-            required: true,
-        },
-        gender: {
-            required: true,
-        },
-        image_name: {
-            required: true,
-        },
+        }
+        // email: {
+        //     required: true,
+        // },
+        // gender: {
+        //     required: true,
+        // },
+        // image_name: {
+        //     required: true,
+        // },
         
     },
 
@@ -235,21 +235,21 @@ $('#add_assign_staff').validate({ // initialize the plugin
         tour_number : {
             required : "Please select tour name",
         },
-        staff_name : {
-            required : "Please enter staff name",
+        "role_name[]" : {
+            required : "Please select role name",
         },
-        mobile_number : {
-            required : "Please enter mobile number",
-        },
-        email : {
-            required : "Please enter email",
-        },
-        gender : {
-            required : "Please select gender",
-        },
-        image_name : {
-            required : "Please upload image",
-        },
+        "name[]" : {
+            required : "Please select name",
+        }
+        // email : {
+        //     required : "Please enter email",
+        // },
+        // gender : {
+        //     required : "Please select gender",
+        // },
+        // image_name : {
+        //     required : "Please upload image",
+        // },
     
     }
 });
@@ -272,21 +272,12 @@ $('#edit_assign_staff').validate({ // initialize the plugin
         tour_number: {
             required: true,
         },
-        staff_name: {
+        "role_name[]": {
             required: true,
         },
-        mobile_number: {
+        "name[]": {
             required: true,
-        },
-        email: {
-            required: true,
-        },
-        gender: {
-            required: true,
-        },
-        image_name: {
-            required: true,
-        },
+        }
         
     },
 
@@ -297,21 +288,12 @@ $('#edit_assign_staff').validate({ // initialize the plugin
         tour_number : {
             required : "Please select tour name",
         },
-        staff_name : {
-            required : "Please enter staff name",
+        "role_name[]" : {
+            required : "Please select role name",
         },
-        mobile_number : {
-            required : "Please enter mobile number",
-        },
-        email : {
-            required : "Please enter email",
-        },
-        gender : {
-            required : "Please select gender",
-        },
-        image_name : {
-            required : "Please upload image",
-        },
+        "name[]" : {
+            required : "Please select name",
+        }
     
     }
 });
@@ -372,12 +354,12 @@ if(select_type=='role'){
 var i=1;
 $('#add_more_staff').click(function() {
    // alert('hhhh');
-        i++;
+        
 var structure = $(` <div class="row" id="new_row`+i+`">
                         <div class="col-md-5">
                         <div class="form-group">
                             <label>Select role </label>
-                            <select class="select_css role_name" attr_name="role" name="role_name[]" id="role_name" required="required">
+                            <select class="select_css role_name" attr_name="role" name="role_name[]" id="role_name`+i+`" required="required">
                             <option value="">select role</option>
                             <?php
                                 foreach($role_type as $role_type_info){ 
@@ -392,14 +374,14 @@ var structure = $(` <div class="row" id="new_row`+i+`">
                         <div class="col-md-6">
                         <div class="form-group">
                             <label>Name </label>
-                            <select class="select_css row_set1 name" attr_name="staff_name" name="name[]" id="name" required="required">
+                            <select class="select_css row_set1 name" attr_name="staff_name" name="name[]" id="name`+i+`" required="required">
                             <option value="">select name</option>
                             
                             </select>
                         </div>
                         </div>
 
-                        <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                        <div class="col-md-1 mt-4 d-flex justify-content-center align-self-center">
                             <div class="form-group">
                             <label></label>
                                 <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
@@ -412,7 +394,7 @@ var structure = $(` <div class="row" id="new_row`+i+`">
                     </div>
               `);
 $('#main_row').append(structure); 
-
+i++;
 });
 
 

@@ -312,7 +312,7 @@
                                 <label></label>
                                 <?php if($tour_expenses_all_info['tour_expenses_type'] == '0'){?>
 
-                                <button type="button" class="btn btn-primary add_more_css" name="submit" value="expenses_edit_more" id="expenses_edit_more">Add More Product</button>
+                                <button type="button" class="btn btn-primary add_more_css" attr_add_id="0" name="submit" value="expenses_edit_more" id="expenses_edit_more">Add More Product</button>
                                 <?php } ?>
                             </div>
                         </div> 
@@ -339,11 +339,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($add_more_tour_expenses_all as $add_more_tour_expenses_all_value){ ?> 
+                                    
+                                    <?php $i=1;
+                                    foreach($add_more_tour_expenses_all as $add_more_tour_expenses_all_value){ 
+                                         ?>
                                         <tr>
                                         <input type="hidden" class="form-control quantity" name="add_more_expenses_id[]" id="add_more_expenses_id" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" required>
                                             <td>
-                                                <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row" >
+                                                <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row<?php echo $i;?>">
                                                     <option value="">Select </option>
                                                     <?php foreach($expense_type_data as $expense_type_info){ ?> 
                                                         <option value="<?php echo $expense_type_info['id']; ?>" <?php if($expense_type_info['id']==$add_more_tour_expenses_all_value['expense_type']) { echo "selected"; } ?>><?php echo $expense_type_info['expense_type_name']; ?></option>
@@ -351,7 +354,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css sub_expenses_head" name="expense_category_row[]" id="expense_category_row">
+                                                <select class="select_css sub_expenses_head" name="expense_category_row[]" id="expense_category_row<?php echo $i;?>">
                                                         <option value="">Select </option>
                                                         <option value="Other_row" <?php if(isset($add_more_tour_expenses_all_value['other_name'])){if("Other_row" == $add_more_tour_expenses_all_value['expense_category_id']) {echo 'selected';}}?>>Other</option>
                                                         <?php foreach($expense_category_data as $expense_category_info){ ?> 
@@ -360,14 +363,14 @@
                                                 </select>
                                                 <br>
                                                 <?php if($add_more_tour_expenses_all_value['expense_category_id'] == 'Other_row'){?>
-                                                <input style="margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name" value="<?php echo $add_more_tour_expenses_all_value['other_name'];?>" placeholder="Enter name" >
+                                                <input style="margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name<?php echo $i;?>" value="<?php echo $add_more_tour_expenses_all_value['other_name'];?>" placeholder="Enter name" >
                                                 <?php } else {?>
 
                                                 <?php } ?>
-                                                <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name" placeholder="Enter name" >
+                                                <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name<?php echo $i;?>" placeholder="Enter name" >
                                             </td>
                                             <td>
-                                                <select class="select_css" name="product_name[]" id="product_name" required>
+                                                <select class="select_css" name="product_name[]" id="product_name<?php echo $i;?>" required>
                                                     <option value="">Select Product Name</option>
                                                     <?php foreach($expense_category as $expense_category_info){ ?> 
                                                         <option value="<?php echo $expense_category_info['id']; ?>" <?php if($expense_category_info['id']==$add_more_tour_expenses_all_value['product_name']) { echo "selected"; } ?>><?php echo $expense_category_info['expense_category']; ?></option>
@@ -375,22 +378,22 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="measuring_unit[]" id="measuring_unit" >
+                                                <select class="select_css" name="measuring_unit[]" id="measuring_unit<?php echo $i;?>">
                                                     <option value="">Select </option>
                                                     <?php foreach($measuring_unit as $measuring_unit_info){ ?> 
                                                         <option value="<?php echo $measuring_unit_info['id'];?>" <?php if($measuring_unit_info['id']==$add_more_tour_expenses_all_value['measuring_unit']) { echo "selected"; } ?>><?php echo $measuring_unit_info['unit_type'];?></option>
                                                     <?php } ?>
                                                 </select>
                                                 
-                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['quantity']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
-                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate" placeholder="Enter rate" value="<?php echo $add_more_tour_expenses_all_value['rate']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control quantity" name="quantity[]" id="quantity<?php echo $i;?>" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['quantity']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                            <td><input type="text" class="form-control rate" name="rate[]" id="rate<?php echo $i;?>" placeholder="Enter rate" value="<?php echo $add_more_tour_expenses_all_value['rate']; ?>" required oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
                                             <td><input readonly type="text" class="form-control per_unit_rate" name="per_unit_rate[]" id="per_unit_rate" placeholder="Enter per unit rate" value="<?php echo $add_more_tour_expenses_all_value['per_unit_rate']; ?>" required></td>
                                             <td>
                                             <input type="hidden" class="form-control" name="add_more_tour_expenses_id[]" id="add_more_tour_expenses_id" value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" placeholder="Enter per unit rate" required>
                                             <a onclick="return confirm('Are You Sure You Want To Delete This Record? ')" href="<?php echo $module_url_path;?>/add_more_delete/<?php echo $add_more_tour_expenses_all_value['id']; ?>" title="delete"><button value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" class="btn btn-primary delete_instruction">Delete</button></a>
                                             </td>
                                         </tr>
-                                        <?php } ?>
+                                        <?php $i++;} ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -4723,7 +4723,7 @@ $('[name^="expense_type_row"]').each(function() {
 $(document).ready(function () {
 $('#edit_tour_expenses').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div td"));
+    $error.appendTo($element.closest("div,td"));
   },
   rules: {
         tour_number: {
@@ -4803,6 +4803,19 @@ $('[name^="expense_type_row"]').each(function() {
             }
         })
     });
+
+    $('[name^="expense_type_row"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select expense head",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
     
     $('[name^="expense_category_row"]').each(function() {
         // alert("cccccc");
@@ -4862,6 +4875,14 @@ $('[name^="expense_type_row"]').each(function() {
             }
         })
     });
+
+
+    // $('.dynamic-row').find('[name^="add_expense_type_row"]').rules('add', {
+    //     required: true,
+    //     messages: {
+    //         required: "Select expense head",
+    //     }
+    // });
 
 });
 
@@ -5481,11 +5502,21 @@ $('#edit_tour_photo').validate({ // initialize the plugin
         }
 
         // Add more rows when the "Add More" button is clicked
+        var i=1;
         $("#expenses_edit_more").click(function() {
+
+            // var expence = $(this).attr('attr_add_id');
+            
+            // var i= parseInt(expence)+parseInt(1);
+            // // alert(i);
+            // var expence = $(this).attr('attr_add_id',i);
+
+           
+            // alert(i);
             var newRow = `
                 <tr>
                     <td>
-                        <select class="select_css expense_type" name="add_expense_type_row[]" id="expense_type_row">
+                        <select class="select_css expense_type" name="add_expense_type_row[]" id="add_expense_type_row`+i+`">
                             <option value="">Select </option>
                             <?php foreach($expense_type_data as $expense_type_info){ ?> 
                                 <option value="<?php echo $expense_type_info['id'];?>"><?php echo $expense_type_info['expense_type_name'];?></option>
@@ -5493,15 +5524,15 @@ $('#edit_tour_photo').validate({ // initialize the plugin
                         </select>
                     </td>
                     <td>
-                        <select class="select_css sub_expenses_head" name="add_expense_category_row[]" id="expense_category_row">
+                        <select class="select_css sub_expenses_head" name="add_expense_category_row[]" id="add_expense_category_row`+i+`">
                                 <option value="">Select </option>
                                 
                         </select>
                         <br>
-                        <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="add_other_name[]" id="other_name" placeholder="Enter name" >
+                        <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="add_other_name[]" id="other_name`+i+`" placeholder="Enter name" >
                     </td>
                     <td>
-                        <select class="select_css" name="add_product_name[]" id="add_product_name" required>
+                        <select class="select_css" name="add_product_name[]" id="add_product_name`+i+`" required>
                             <option value="">Select Product Name</option>
                             <?php foreach($expense_category as $expense_category_info){ ?>
                                 '<option value="<?php echo $expense_category_info['id'];?>"><?php echo $expense_category_info['expense_category'];?></option>'+
@@ -5509,23 +5540,77 @@ $('#edit_tour_photo').validate({ // initialize the plugin
                         </select>
                     </td>
                     <td>
-                        <select class="select_css" name="add_measuring_unit[]" id="add_measuring_unit" >
+                        <select class="select_css" name="add_measuring_unit[]" id="add_measuring_unit`+i+`" >
                             <option value="">Select </option>
                             <?php foreach($measuring_unit as $measuring_unit_info){ ?> 
                                 <option value="<?php echo $measuring_unit_info['id'];?>"><?php echo $measuring_unit_info['unit_type'];?></option>
                             <?php } ?>
                         </select>
                     </td>
-                    <td><input type="text" class="form-control quantity" name="add_quantity[]" placeholder="Enter quantity" required></td>
-                    <td><input type="text" class="form-control rate" name="add_rate[]" placeholder="Enter rate" required></td>
-                    <td><input readonly type="text" class="form-control per_unit_rate" name="add_per_unit_rate[]" placeholder="Enter per unit rate" required></td>
+                    <td><input type="text" class="form-control quantity" name="add_quantity[]" id="add_quantity`+i+`" placeholder="Enter quantity" required></td>
+                    <td><input type="text" class="form-control rate" name="add_rate[]" id="add_rate`+i+`" placeholder="Enter rate" required></td>
+                    <td><input readonly type="text" class="form-control per_unit_rate" name="add_per_unit_rate[]" placeholder="Enter per unit rate"></td>
                     <td>
                         <button type="button" class="btn btn-danger remove-row">Remove</button>
                     </td>
                 </tr>
             `;
             $("#table tbody").append(newRow);
+            i++;
+            initializeValidationForNewRow(i - 1);
         });
+
+
+        function initializeValidationForNewRow(rowIndex) {
+    // Define rules and messages for the newly added row
+    $('#add_expense_type_row' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Select expense head"
+        }
+    });
+
+    $('#add_expense_category_row' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Select sub expense head"
+        }
+    });
+
+    $('#add_product_name' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Select product name"
+        }
+    });
+
+    $('#add_measuring_unit' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Select unit"
+        }
+    });
+
+    $('#add_quantity' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Enter quantity"
+        }
+    });
+
+    $('#add_rate' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Enter rate"
+        }
+    });
+}
+
+// Call the initializeValidationForNewRow function for any existing rows
+$(".dynamic-row").each(function (index) {
+    initializeValidationForNewRow(index + 1);
+});
+
 
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {

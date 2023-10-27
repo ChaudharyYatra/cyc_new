@@ -6,7 +6,7 @@ class Tour_expences extends CI_Controller{
 	{
 		parent::__construct();
 	    $this->arr_view_data = [];
-        if($this->session->userdata('supervision_sess_id')=="") 
+        if($this->session->userdata('supervision_sess_id')=="")  
         { 
                 redirect(base_url().'supervision/login'); 
         }
