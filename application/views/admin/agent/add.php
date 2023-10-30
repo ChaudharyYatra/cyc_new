@@ -3,7 +3,7 @@
     color:gray !important;
   }
   .color_remove .select_css{
-    color:gray !important;
+    color:#000 !important;
   }
 </style>
 <!-- Content Wrapper. Contains page content -->

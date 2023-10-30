@@ -39,6 +39,7 @@ class Tour_creation_iternary extends CI_Controller{
     
     public function add($id)
     {
+        
         if ($id=='') 
         {
             $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -53,6 +54,7 @@ class Tour_creation_iternary extends CI_Controller{
         
             if($this->input->post('submit'))
             {
+                // print_r('hiiiiiii'); die;
                 // print_r($_REQUEST);
                 // DIE;
                 $total_days = $this->input->post('total_days');
@@ -385,19 +387,18 @@ class Tour_creation_iternary extends CI_Controller{
 
     public function insert_daywise_iternary(){
         
-                $total_days = $this->input->post('total_days');
+                $tour_number = $this->input->post('tour_number');
                 $day_number = $this->input->post('day_number');
-                $image_name = $this->input->post('image_name');
-
                 $district = $this->input->post('district');
-                $place_name = $this->input->post('place_name');
-                $time = $this->input->post('time');
-                $visit_time = $this->input->post('visit_time');
-                $details = $this->input->post('details');
-
+                $select_place_values = $this->input->post('select_place_values');
+                $time_values = $this->input->post('time_values');
+                $visit_time_values = $this->input->post('visit_time_values');
+                $details_values = $this->input->post('details_values');
+                $image_name = $this->input->post('image_name');
                 $iternary_desc = $this->input->post('iternary_desc');
 
-                    $count = count($iternary_desc);
+
+                    $count = count($details_values);
                     
                 for($i=0;$i<$count;$i++)
                 {
@@ -420,23 +421,22 @@ class Tour_creation_iternary extends CI_Controller{
                     }
 
                     // -------------------upload image 1-------------------------------------------------------
-                
+
                     $arr_insert = array(
-                        // 'total_days'   =>   $_POST["total_days"],
+                        'package_id'   =>   $_POST["tour_number"],
                         'day_number'   =>   $_POST["day_number"][$i],
-                        'image_name'   =>   $fileData['file_name'],
+                        // 'image_name'   =>   $fileData['file_name'],
 
                         'district'   =>   $_POST["district"][$i],
-                        'place_name'   =>   $_POST["place_name"][$i],
-                        'time'   =>   $_POST["time"][$i],
-                        'visit_time'   =>   $_POST["visit_time"][$i],
-                        'details'   =>   $_POST["details"][$i],
-
-                        'iternary_desc'   =>   $_POST["iternary_desc"][$i],
-                        'package_id' => $id,
+                        'place_name'   =>   $_POST["select_place_values"][$i],
+                        'time'   =>   $_POST["time_values"][$i],
+                        'visit_time'   =>   $_POST["visit_time_values"][$i],
+                        'details'   =>   $_POST["details_values"][$i],
+                        'iternary_desc'   =>   $_POST["iternary_desc"][$i]
                     );
+                    print_r($arr_insert); die;
         
-                    
+                    $inserted_id = $this->master_model->insertRecord('tour_creation_iternary',$arr_insert,true);
                 }
         
             // You can return a success message if needed

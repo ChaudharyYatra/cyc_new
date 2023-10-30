@@ -79,6 +79,7 @@ class All_general_enquiry extends CI_Controller{
            $this->db->where('agent.department',$region_head_id);
            $this->db->where('booking_enquiry.followup_status','no');
            $this->db->where('booking_enquiry.booking_process','no');
+           $this->db->where('booking_enquiry.not_interested','yes');
            $this->db->where('booking_enquiry.created_at <', $twentyFourHoursAgo);
            $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
            $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
