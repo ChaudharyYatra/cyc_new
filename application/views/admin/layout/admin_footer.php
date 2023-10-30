@@ -676,7 +676,7 @@ $("#image_name_guide").change(function (e) {
                         '<div class="col-md-5">'+
                              '<div class="form-group">'+
                             '<label>Itinerary For Day '+day+' <span class="text-danger">*</span></label>'+
-                            '<textarea class="form-control iternary_desc" name="iternary_desc[]" id="" placeholder="Enter Itinerary Description" required="required"></textarea>'+
+                            '<textarea class="form-control iternary_desc" name="iternary_desc[]" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>'+
                     '</div></div>');
             var newInput = input.clone();
             
@@ -8862,11 +8862,17 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
+                                                    <label>Tour Number <span class="text-danger">*</label>
+                                                    <input type="number" readonly class="form-control" name="tour_number[]" id="tour_number" placeholder="Tour Number" required value="<?php echo $id; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <label>Day Number <span class="text-danger">*</label>
                                                     <input type="number" readonly class="form-control" name="day_number[]" id="day_number" placeholder="Enter Day Number" required value="${day}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 mb-4">
                                                 <label>Select District <span class="text-danger">*</label>
                                                 <select class="select_css district" name="district[]" attr_district="district" required="required" attr_day="${day}">
                                                     <option value="">Select district</option>
@@ -8919,7 +8925,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Itinerary For Day ${day} <span class="text-danger">*</span></label>
-                                                    <textarea class="form-control iternary_desc" name="iternary_desc[]" id="" placeholder="Enter Itinerary Description" required="required"></textarea>
+                                                    <textarea class="form-control iternary_desc" name="iternary_desc[]" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>
                                                 </div>
                                             </div>
 
@@ -9065,7 +9071,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Itinerary For Day ${day} <span class="text-danger">*</span></label>
-                                                    <textarea class="form-control iternary_desc" name="iternary_desc[]" id="" placeholder="Enter Itinerary Description" required="required"></textarea>
+                                                    <textarea class="form-control iternary_desc" name="iternary_desc[]" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>
                                                 </div>
                                             </div>
 
@@ -9228,56 +9234,89 @@ $('#edit_measuring_type').validate({ // initialize the plugin
       $(document).ready(function(){
         // alert('hii');
     $(document).on('click','.daywise_submit', function () {
-        alert('hoooo');
+        // alert('hoooo');
         // console.log('formData',formData);
 
         var total_days = $('#total_days').val();
-        var day_number = $('#day_number').val();
-        // alert(total_days);
-        var district = $(".district option:selected").val();
+
+        var tour_number = $('#tour_number').val();
+        // alert(tour_number);
+        var day_number = $('input[name="day_number[]"]').map(function() {
+        return $(this).val();
+        }).get();
+        console.log('day_number',day_number);
+        // var day_number = $('#day_number').val();
+        // alert(day_number);
+        // var district = $(".district option:selected").val();
         // alert(district);
+        var district = $('select[name="district[]"]').map(function() {
+        return $(this).val();
+        }).get();
+        console.log('district',district);
+        // alert(district);
+
         // var select_place = $('input[name="place_name[]"]').val();
         var select_place_values = $('select[name="place_name[]"]').map(function() {
         return $(this).val();
         }).get();
         console.log('select_place_values',select_place_values);
-
+        // alert(select_place_values);
         var time_values = $('input[name="time[]"]').map(function() {
         return $(this).val();
         }).get();
         console.log('time_values',time_values);
-
+        // alert(time_values);
         var visit_time_values = $('input[name="visit_time[]"]').map(function() {
         return $(this).val();
         }).get();
         console.log('visit_time_values',visit_time_values);
+        // alert(visit_time_values);
+        var details_values = $('input[name="details[]"]').map(function() {
+        return $(this).val();
+        }).get();
+        console.log('details_values',details_values);
+        // alert(details_values);
 
-exit();
-        // var image_name = $('input[name="document_file_traveller_img[]"]').map(function () {
-        //     return this.value; // $(this).val()
-        // }).get();
+        var iternary_desc = $('textarea[name="iternary_desc[]"]').map(function() {
+        return $(this).val();
+        }).get();
+        console.log('iternary_desc',iternary_desc);
+        // alert(visit_time_values);
+        // var iternary_desc = $('#iternary_desc').val();
+        // alert(iternary_desc);
+
+
+// exit();
+        var image_name = $('input[name="image_name[]"]').map(function () {
+            return this.value; // $(this).val()
+        }).get();
 
         //   alert(image_name);
-        var image_name = $('.document_file_traveller_img').map(function () {
-                return this.value;
-            }).get();
+        // var image_name = $('#image_name').map(function () {
+        //         return this.value;
+        //     }).get();
 
             // alert(image_name);
 
         $.ajax({
             method: 'post',
-                          url:'<?=base_url()?>admin/tour_creation_itinerary/insert_daywise_iternary',
-                          data: {tour_number: tour_number,
-                            tour_name: tour_name,
-                            tour_days: tour_days,
-                            image_name   :image_name
+                          url:'<?=base_url()?>admin/tour_creation_iternary/insert_daywise_iternary',
+                          data: { tour_number: tour_number,
+                            day_number: day_number,
+                            district: district,
+                            select_place_values: select_place_values,
+                            time_values: time_values,
+                            visit_time_values: visit_time_values,
+                            details_values: details_values,
+                            iternary_desc: iternary_desc,
+                            // image_names: image_name
                         },
                           dataType: 'json',
                           cache: false,
                           success: function(response) {
                             // alert(response);
-                              if (response=true) {
-                                //   alert('success');
+                              if (response.message === 'Data inserted successfully') {
+                                  alert('success');
                                 // window.location.href = "<?//=base_url()?>admin/day_wise_tour_itinerary/add";
                               } else {
                                   alert('error');
