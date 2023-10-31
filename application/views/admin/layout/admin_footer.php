@@ -9316,7 +9316,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                           success: function(response) {
                             // alert(response);
                               if (response.message === 'Data inserted successfully') {
-                                  alert('success');
+                                //   alert('success');
                                 // window.location.href = "<?//=base_url()?>admin/day_wise_tour_itinerary/add";
                               } else {
                                   alert('error');

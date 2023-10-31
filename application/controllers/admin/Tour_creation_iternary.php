@@ -394,7 +394,7 @@ class Tour_creation_iternary extends CI_Controller{
                 $time_values = $this->input->post('time_values');
                 $visit_time_values = $this->input->post('visit_time_values');
                 $details_values = $this->input->post('details_values');
-                $image_name = $this->input->post('image_name');
+                // $image_name = $this->input->post('image_name');
                 $iternary_desc = $this->input->post('iternary_desc');
 
 
@@ -402,23 +402,23 @@ class Tour_creation_iternary extends CI_Controller{
                     
                 for($i=0;$i<$count;$i++)
                 {
-                    $_FILES['file']['name']     = $_FILES['image_name']['name'][$i]; 
-                    $_FILES['file']['type']     = $_FILES['image_name']['type'][$i]; 
-                    $_FILES['file']['tmp_name'] = $_FILES['image_name']['tmp_name'][$i]; 
-                    $_FILES['file']['error']     = $_FILES['image_name']['error'][$i]; 
-                    $_FILES['file']['size']     = $_FILES['image_name']['size'][$i]; 
+                    // $_FILES['file']['name']     = $_FILES['image_name']['name'][$i]; 
+                    // $_FILES['file']['type']     = $_FILES['image_name']['type'][$i]; 
+                    // $_FILES['file']['tmp_name'] = $_FILES['image_name']['tmp_name'][$i]; 
+                    // $_FILES['file']['error']     = $_FILES['image_name']['error'][$i]; 
+                    // $_FILES['file']['size']     = $_FILES['image_name']['size'][$i]; 
                      
-                    $uploadPath = './uploads/tour_cration_iternary/'; 
-                    $config['upload_path'] = $uploadPath; 
-                    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+                    // $uploadPath = './uploads/tour_cration_iternary/'; 
+                    // $config['upload_path'] = $uploadPath; 
+                    // $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
 
-                    $this->load->library('upload', $config); 
-                    $this->upload->initialize($config); 
+                    // $this->load->library('upload', $config); 
+                    // $this->upload->initialize($config); 
 
-                    if($this->upload->do_upload('file')){ 
-                        // Uploaded file data 
-                        $fileData = $this->upload->data(); 
-                    }
+                    // if($this->upload->do_upload('file')){ 
+                    //     // Uploaded file data 
+                    //     $fileData = $this->upload->data(); 
+                    // }
 
                     // -------------------upload image 1-------------------------------------------------------
 
@@ -428,13 +428,15 @@ class Tour_creation_iternary extends CI_Controller{
                         // 'image_name'   =>   $fileData['file_name'],
 
                         'district'   =>   $_POST["district"][$i],
+                        
                         'place_name'   =>   $_POST["select_place_values"][$i],
                         'time'   =>   $_POST["time_values"][$i],
                         'visit_time'   =>   $_POST["visit_time_values"][$i],
                         'details'   =>   $_POST["details_values"][$i],
+
                         'iternary_desc'   =>   $_POST["iternary_desc"][$i]
                     );
-                    print_r($arr_insert); die;
+                    // print_r($arr_insert); die;
         
                     $inserted_id = $this->master_model->insertRecord('tour_creation_iternary',$arr_insert,true);
                 }
