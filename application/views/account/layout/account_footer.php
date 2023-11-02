@@ -585,3 +585,1017 @@ $('#edit_voucher_type').validate({ // initialize the plugin
 
 </script>
 <!-- voucher type information add , edit validation -->
+
+<!-- Accounting in that group master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_group').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        group_name: {
+            required: true,
+        },
+        parent_group: {
+            required: true,
+        },
+        group_code: {
+            required: true,
+        }
+    },
+
+    messages :{
+        group_name : {
+            required : "Please enter group name",
+        },
+        parent_group : {
+            required : "Please enter parent group",
+        },
+        group_code : {
+            required : "Please enter group code",
+        }
+    }
+});
+});
+
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_group').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+  rules: {
+        group_name: {
+            required: true,
+        },
+        parent_group: {
+            required: true,
+        },
+        group_code: {
+            required: true,
+        }
+    },
+
+    messages :{
+        group_name : {
+            required : "Please enter group name",
+        },
+        parent_group : {
+            required : "Please enter parent group",
+        },
+        group_code : {
+            required : "Please enter group code",
+        }
+    }
+});
+});
+
+</script>
+<!-- Accounting in that group master validation -->
+
+<!-- Accounting in that subgroup master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_subgroup').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+      group_name_id: {
+            required: true,
+        },
+        subgroup_name: {
+            required: true,
+        },
+        subparent_group: {
+            required: true,
+        },
+        subgroup_code: {
+            required: true,
+        }
+    },
+
+    messages :{
+      group_name_id : {
+            required : "Please select group name",
+        },
+        subgroup_name : {
+            required : "Please enter subgroup name",
+        },
+        subparent_group : {
+            required : "Please enter parent group",
+        },
+        subgroup_code : {
+            required : "Please enter subgroup code",
+        }
+    }
+});
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_subgroup').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        group_name_id: {
+            required: true,
+        },
+        subgroup_name: {
+            required: true,
+        },
+        subparent_group: {
+            required: true,
+        },
+        subgroup_code: {
+            required: true,
+        }
+    },
+
+    messages :{
+        group_name_id : {
+            required : "Please select group name",
+        },
+        subgroup_name : {
+            required : "Please enter subgroup name",
+        },
+        subparent_group : {
+            required : "Please enter parent group",
+        },
+        subgroup_code : {
+            required : "Please enter subgroup code",
+        }
+    }
+});
+});
+
+</script>
+<!-- Accounting in that subgroup master validation -->
+
+<!-- Accounting in that ledger accounts master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_ledger_account').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ledger_name: {
+            required: true,
+        },
+        ledger_desc: {
+            required: true,
+        },
+        ledger_group: {
+            required: true,
+        },
+        ledger_address: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        ledger_Currency: {
+            required: true,
+        },
+        ledger_bank_details: {
+            required: true,
+        }
+    },
+
+    messages :{
+      ledger_name : {
+            required : "Please enter ledger name",
+        },
+        ledger_desc : {
+            required : "Please enter ledger description",
+        },
+        ledger_group : {
+            required : "Please enter ledger group",
+        },
+        ledger_address : {
+            required : "Please enter ledger address",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        ledger_Currency : {
+            required : "Please enter ledger currency",
+        },
+        ledger_bank_details : {
+            required : "Please enter bank details",
+        }
+    }
+});
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_ledger_account').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ledger_name: {
+            required: true,
+        },
+        ledger_desc: {
+            required: true,
+        },
+        ledger_group: {
+            required: true,
+        },
+        ledger_address: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        ledger_Currency: {
+            required: true,
+        },
+        ledger_bank_details: {
+            required: true,
+        }
+    },
+
+    messages :{
+      ledger_name : {
+            required : "Please enter ledger name",
+        },
+        ledger_desc : {
+            required : "Please enter ledger description",
+        },
+        ledger_group : {
+            required : "Please enter ledger group",
+        },
+        ledger_address : {
+            required : "Please enter ledger address",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        ledger_Currency : {
+            required : "Please enter ledger currency",
+        },
+        ledger_bank_details : {
+            required : "Please enter bank details",
+        }
+    }
+});
+});
+
+</script>
+<!-- Accounting in that ledger accounts master validation -->
+
+<!-- Accounting in that opening balanaces master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_opening_balance').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+      ledger_account: {
+            required: true,
+        },
+        opening_date: {
+            required: true,
+        },
+        opening_balances: {
+            required: true,
+        },
+        opening_balance_note: {
+            required: true,
+        }
+    },
+
+    messages :{
+      ledger_account : {
+            required : "Please enter ledger account",
+        },
+        opening_date : {
+            required : "Please select opening date",
+        },
+        opening_balances : {
+            required : "Please enter opening balance",
+        },
+        opening_balance_note : {
+            required : "Please enter comment",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_opening_balance').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+      ledger_account: {
+            required: true,
+        },
+        opening_date: {
+            required: true,
+        },
+        opening_balances: {
+            required: true,
+        },
+        opening_balance_note: {
+            required: true,
+        }
+    },
+
+    messages :{
+      ledger_account : {
+            required : "Please enter ledger account",
+        },
+        opening_date : {
+            required : "Please select opening date",
+        },
+        opening_balances : {
+            required : "Please enter opening balance",
+        },
+        opening_balance_note : {
+            required : "Please enter comment",
+        }
+    }
+});
+});
+</script>
+<!-- Accounting in that opening balanaces master validation -->
+
+<!-- Accounting in that Depreciation masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_depreciation_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        asset_name: {
+            required: true,
+        },
+        depreciation_rate: {
+            required: true,
+        },
+        depreciation_start_date: {
+            required: true,
+        },
+        depreciation_end_date: {
+            required: true,
+        }
+    },
+
+    messages :{
+        asset_name : {
+            required : "Please enter asset name",
+        },
+        depreciation_rate : {
+            required : "Please select depreciation rate",
+        },
+        depreciation_start_date : {
+            required : "Please select depreciation start date",
+        },
+        depreciation_end_date : {
+            required : "Please select depreciation end date",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_depreciation_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        asset_name: {
+            required: true,
+        },
+        depreciation_rate: {
+            required: true,
+        },
+        depreciation_start_date: {
+            required: true,
+        },
+        depreciation_end_date: {
+            required: true,
+        }
+    },
+
+    messages :{
+        asset_name : {
+            required : "Please enter asset name",
+        },
+        depreciation_rate : {
+            required : "Please select depreciation rate",
+        },
+        depreciation_start_date : {
+            required : "Please select depreciation start date",
+        },
+        depreciation_end_date : {
+            required : "Please select depreciation end date",
+        }
+    }
+});
+});
+</script>
+<!-- Accounting in that Depreciation masters validation -->
+
+<!-- Accounting in that Fixed Assets validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_fixed_assets').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        asset_name: {
+            required: true,
+        },
+        asset_category: {
+            required: true,
+        },
+        asset_identification_no: {
+            required: true,
+        },
+        purchase_date: {
+            required: true,
+        },
+        purchase_cost: {
+            required: true,
+        }
+    },
+
+    messages :{
+        asset_name : {
+            required : "Please enter asset name",
+        },
+        asset_category : {
+            required : "Please enter asset category",
+        },
+        asset_identification_no : {
+            required : "Please enter asset identification no",
+        },
+        purchase_date : {
+            required : "Please select purchase date",
+        },
+        purchase_cost : {
+            required : "Please enter purchase cost",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_fixed_assets').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        asset_name: {
+            required: true,
+        },
+        asset_category: {
+            required: true,
+        },
+        asset_identification_no: {
+            required: true,
+        },
+        purchase_date: {
+            required: true,
+        },
+        purchase_cost: {
+            required: true,
+        }
+    },
+
+    messages :{
+        asset_name : {
+            required : "Please enter asset name",
+        },
+        asset_category : {
+            required : "Please enter asset category",
+        },
+        asset_identification_no : {
+            required : "Please enter asset identification no",
+        },
+        purchase_date : {
+            required : "Please select purchase date",
+        },
+        purchase_cost : {
+            required : "Please enter purchase cost",
+        }
+    }
+});
+});
+</script>
+<!-- Accounting in that Fixed Assets validation -->
+
+<!-- Accounting in that Bank Reconciliation validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_bank_reconciliation').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        reconcilation_date: {
+            required: true,
+        },
+        bank_account: {
+            required: true,
+        },
+        statement_date: {
+            required: true,
+        },
+        bank_statement_bal: {
+            required: true,
+        },
+        book_balance: {
+            required: true,
+        }
+    },
+
+    messages :{
+        reconcilation_date : {
+            required : "Please select reconcilation date",
+        },
+        bank_account : {
+            required : "Please enter bank account",
+        },
+        statement_date : {
+            required : "Please select statement date",
+        },
+        bank_statement_bal : {
+            required : "Please bank statement balance",
+        },
+        book_balance : {
+            required : "Please enter book balance",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_bank_reconciliation').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        reconcilation_date: {
+            required: true,
+        },
+        bank_account: {
+            required: true,
+        },
+        statement_date: {
+            required: true,
+        },
+        bank_statement_bal: {
+            required: true,
+        },
+        book_balance: {
+            required: true,
+        }
+    },
+
+    messages :{
+        reconcilation_date : {
+            required : "Please select reconcilation date",
+        },
+        bank_account : {
+            required : "Please enter bank account",
+        },
+        statement_date : {
+            required : "Please select statement date",
+        },
+        bank_statement_bal : {
+            required : "Please bank statement balance",
+        },
+        book_balance : {
+            required : "Please enter book balance",
+        }
+    }
+});
+});
+</script>
+<!-- Accounting in that Bank Reconciliation validation -->
+
+<!-- Accounting in that Audit Trail validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_audit_trail').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        audit_date_time: {
+            required: true,
+        },
+        audit_user: {
+            required: true,
+        },
+        trail_id: {
+            required: true,
+        },
+        audit_comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        audit_date_time : {
+            required : "Please select date and time",
+        },
+        audit_user : {
+            required : "Please enter user",
+        },
+        trail_id : {
+            required : "Please enter trail id",
+        },
+        audit_comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_audit_trail').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        audit_date_time: {
+            required: true,
+        },
+        audit_user: {
+            required: true,
+        },
+        trail_id: {
+            required: true,
+        },
+        audit_comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        audit_date_time : {
+            required : "Please select date and time",
+        },
+        audit_user : {
+            required : "Please enter user",
+        },
+        trail_id : {
+            required : "Please enter trail id",
+        },
+        audit_comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Accounting in that Audit Trail validation -->
+
+<!-- Inventory Masters in that items validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_items').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        item_name: {
+            required: true,
+        },
+        item_code: {
+            required: true,
+        },
+        description: {
+            required: true,
+        },
+        category: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        item_name : {
+            required : "Please enter item name",
+        },
+        item_code : {
+            required : "Please enter item code",
+        },
+        description : {
+            required : "Please enter description",
+        },
+        category : {
+            required : "Please enter category",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_items').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        item_name: {
+            required: true,
+        },
+        item_code: {
+            required: true,
+        },
+        description: {
+            required: true,
+        },
+        category: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        item_name : {
+            required : "Please enter item name",
+        },
+        item_code : {
+            required : "Please enter item code",
+        },
+        description : {
+            required : "Please enter description",
+        },
+        category : {
+            required : "Please enter category",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<!-- Inventory Masters in that items validation -->
+
+<!-- Inventory Masters in that stock categories validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_stock_categories').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        category_name: {
+            required: true,
+        },
+        category_code: {
+            required: true,
+        },
+        description: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        category_name : {
+            required : "Please enter category name",
+        },
+        category_code : {
+            required : "Please enter category code",
+        },
+        description : {
+            required : "Please enter description",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_stock_categories').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        category_name: {
+            required: true,
+        },
+        category_code: {
+            required: true,
+        },
+        description: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        category_name : {
+            required : "Please enter category name",
+        },
+        category_code : {
+            required : "Please enter category code",
+        },
+        description : {
+            required : "Please enter description",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that stock categories validation -->
+
+<!-- Inventory Masters in that Batch Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_batch_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        batch_no: {
+            required: true,
+        },
+        product_name: {
+            required: true,
+        },
+        manufacturing_date: {
+            required: true,
+        },
+        expiry_date: {
+            required: true,
+        },
+        quantity: {
+            required: true,
+        },
+        location: {
+            required: true,
+        },
+        supplier: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        batch_no : {
+            required : "Please enter batch no",
+        },
+        product_name : {
+            required : "Please enter product name",
+        },
+        manufacturing_date : {
+            required : "Please enter manufacturing sdate",
+        },
+        expiry_date : {
+            required : "Please enter expiry date",
+        },
+        quantity : {
+            required : "Please enter quantity",
+        },
+        location : {
+            required : "Please enter location",
+        },
+        supplier : {
+            required : "Please enter supplier",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_batch_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        batch_no: {
+            required: true,
+        },
+        product_name: {
+            required: true,
+        },
+        manufacturing_date: {
+            required: true,
+        },
+        expiry_date: {
+            required: true,
+        },
+        quantity: {
+            required: true,
+        },
+        location: {
+            required: true,
+        },
+        supplier: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        batch_no : {
+            required : "Please enter batch no",
+        },
+        product_name : {
+            required : "Please enter product name",
+        },
+        manufacturing_date : {
+            required : "Please enter manufacturing sdate",
+        },
+        expiry_date : {
+            required : "Please enter expiry date",
+        },
+        quantity : {
+            required : "Please enter quantity",
+        },
+        location : {
+            required : "Please enter location",
+        },
+        supplier : {
+            required : "Please enter supplier",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Batch Masters validation -->
+

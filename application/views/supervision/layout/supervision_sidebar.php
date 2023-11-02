@@ -253,37 +253,170 @@
                   <p>Dashboard</p>
                 </a>
           </li>
-    
+
           <li class="nav-item">
-              <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                      Master
-                      <i class="right fas fa-angle-left"></i>
-                  </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>account/Company_information/index" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Company name</p>
-                  </a>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Master
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                  Accounting masters
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/Company_information/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Company name</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/voucher_types/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Voucher types</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/ledgers/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Ledgers</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/group/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Groups</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/subgroup/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Subgroups</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/ledger_accounts/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Ledger Accounts</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/opening_balances/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Opening Balances</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/depreciation_masters/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Depreciation Masters</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/fixed_assets/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Fixed Assets</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/bank_reconciliation/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Bank Reconciliation</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/audit_trail/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Audit Trail</p>
+                              </a>
+                            </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                  Inventory Masters
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/items/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Items</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/stock_categories/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Stock Categories</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/batch_masters/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Batch masters</p>
+                              </a>
+                            </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                  Payroll Masters
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+                                
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                  Statutory Masters
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Other Masters
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+
+
+                            </ul>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>account/voucher_types/index" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Voucher types</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo base_url(); ?>account/ledgers/index" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Ledgers</p>
-                  </a>
-                </li>
-              </ul>
-          </li>
-                
 
           <li class="nav-item">
             <a href="#" class="nav-link">
