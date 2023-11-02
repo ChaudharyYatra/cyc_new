@@ -1713,6 +1713,8 @@
                     <div class="row">
                         <div class="col-md-12">
                     <div class="row">
+                        <div class="col-md-3">
+                        </div>
                         <div class="col-md-6">
                             <h5>Payment Confirmation OTP</h5>
                             <table id="example2" class="table table-bordered table-hover table-striped">
@@ -1732,27 +1734,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <h5> Booking Confirmation OTP</h5>
-                            <table id="example2" class="table table-bordered table-hover table-striped">
-                                <tr>
-                                    <th><input type="text" class="form-control" name="booking_otp" id="booking_otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
-                                    <p id="booking_least_count"></p>
-                                </th>
-                                    
-                                    <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled>Verify OTP</button></th>
-                                    <!-- data-bs-toggle="modal" data-bs-target="#exampleModal_send" -->
-                                    <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a> -->
-                                </tr>
-                            </table>
-                            <div class="row justify-content-center">
-                                <div class="col-md-3">
-                                    <center><th><button type="button" class="btn btn-primary mb-3" name="booking_submit_otp" id="booking_submit_otp"  disabled>Send OTP</button></th></center>
-                                </div>
-                                <div class="col-md-4">
-                                    <center><th><button type="button" class="btn btn-primary mb-3" name="booking_re_send_otp" id="booking_re_send_otp" disabled>Resend OTP</button></th></center>
-                                </div>
-                            </div>
+                        <div class="col-md-3">
                         </div>
                     </div>
 

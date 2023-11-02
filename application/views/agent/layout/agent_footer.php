@@ -5847,10 +5847,11 @@ $("#final_booking_submit").click(function() {
                 // alert(response);
                 if (response == 'true') {
                     // alert('Doneeeee');
-                    // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
+                    
                     alert('Verify OTP Sucessfully');
                     $("#final_booking_submit").prop('disabled', true);
                     $("#booking_submit_otp").prop('disabled', false);
+                    window.location.href = "<?= base_url() ?>agent/srs_form/index/"+enquiry_id;
 
                 } else {
                     alert('You Entered Wrong OTP. Please check it and submit right OTP');
@@ -7521,52 +7522,52 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
 
 <!-- ===========Booking confirm Otp ==================================== -->
 <script>
-$(document).ready(function() {
-    $("#booking_submit_otp").click(function() {
-        // alert('hiiiiiiiiiii');
-        var mobile_no = $('#booking_tm_mobile_no').val();  
-        var final_amt = $('#final_amt').val();
+    $(document).ready(function() {
+        $("#booking_submit_otp").click(function() {
+            var mobile_no = $('#mobile_no').val();
+            var srs_remark = $('#srs_remark').val();
+            var final_amt = $('#final_amt').val();
+            var booking_amt = $('#booking_amt').val();
+            var pending_amt = $('#pending_amt').val();
+            var enquiry_id = $('#enquiry_id').val();
+            var package_id = $('#package_id').val();
+            var journey_date = $('#journey_date').val();
+            var package_date_id = $('#package_date_id').val();
+            var traveller_id = $('#traveller_id').val();
+            var booking_payment_details_id = $('#booking_payment_details_id').val();
 
-        var booking_amt = $('#booking_amt').val(); 
-        var pending_amt = $('#pending_amt').val();
+            var formData = new FormData();
+            formData.append('enquiry_id', enquiry_id);
+            formData.append('srs_remark', srs_remark);
+            formData.append('booking_payment_details_id', booking_payment_details_id);
+            formData.append('package_id', package_id);
+            formData.append('journey_date', journey_date);
+            formData.append('package_date_id', package_date_id);
+            formData.append('traveller_id', traveller_id);
+            formData.append('booking_amt', booking_amt);
+            formData.append('final_amt', final_amt);
+            formData.append('mobile_no', mobile_no);
+            formData.append('pending_amt', pending_amt);
 
-        // alert(mobile_no);
-        var enquiry_id = $('#enquiry_id').val();
-        var package_id = $('#package_id').val();
-        var journey_date = $('#journey_date').val();
-        var package_date_id = $('#package_date_id').val();
-        var traveller_id = $('#traveller_id').val();
+            var imageFile = $('#image_nam')[0].files[0];
+            if (imageFile) {
+                formData.append('image_name', imageFile);
+            }
 
-        var booking_payment_details_id = $('#booking_payment_details_id').val();
- 
-        if (mobile_no != '') {
-            // alert('IN hiiiii');
             $.ajax({
-                url: "<?php echo base_url(); ?>agent/booking_preview/booking_confirm_otp",
+                url: "<?php echo base_url(); ?>agent/srs_form/booking_confirm_otp",
                 type: "post",
-                data: {
-                    enquiry_id: enquiry_id,
-                    booking_payment_details_id: booking_payment_details_id,
-                    package_id: package_id,
-                    journey_date: journey_date,
-                    package_date_id: package_date_id,
-                    traveller_id: traveller_id,
-                    booking_amt: booking_amt,
-                    final_amt: final_amt,
-                    mobile_no: mobile_no,
-                    pending_amt: pending_amt
-                },
-                // dataType: 'json',
-                success: function(responce) {
-                    if (responce != false && responce !='') {
-                        // alert(responce);
-                        var booking_ref_no = $('#booking_ref_no').val(responce);
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Prevent jQuery from setting the content type
+                success: function(response) {
+                    if (response !== false && response !== '') {
+                        var booking_ref_no = $('#booking_ref_no').val(response);
                     }
                 }
             });
-        }
+        });
     });
-});
 </script>
 <script>
     var fewSeconds = 5;
@@ -7618,7 +7619,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $("#booking_re_send_otp").click(function() {
         // alert('hiiiiiiiiiii');
-        var booking_tm_mobile_no = $('#booking_tm_mobile_no').val();  
+        var booking_tm_mobile_no = $('#mobile_no').val();  
         var enquiry_id = $('#enquiry_id').val();
         
         // alert(booking_tm_mobile_no);
@@ -7627,7 +7628,7 @@ $(document).ready(function() {
         if (booking_tm_mobile_no != '') {
             // alert('IN hiiiii');
             $.ajax({
-                url: "<?php echo base_url(); ?>agent/booking_preview/booking_resend_otp",
+                url: "<?php echo base_url(); ?>agent/srs_form/booking_resend_otp",
                 type: "post",
                 data: {
                     enquiry_id: enquiry_id,
@@ -7659,15 +7660,18 @@ $(document).ready(function() {
 $("#booking_confirm_submit").click(function() {
 
     var verify_otp = $("#booking_otp").val(); 
-    var mobile_no = $('#booking_tm_mobile_no').val();
+    // alert(verify_otp);
+    var mobile_no = $('#mobile_no').val();
     // var booking_ref_no = $('#booking_ref_no').val(); 
-    // alert(booking_ref_no);
+    // alert(mobile_no);
     var enquiry_id = $('#enquiry_id').val(); 
+    // alert(enquiry_id);
     
     
     var journey_date  = $("#journey_date").val();
     
     var traveller_id  = $("#traveller_id").val();
+    // alert(traveller_id);
     var enquiry_id    = $("#enquiry_id").val();
     var hotel_name_id    = $("#hotel_name_id").val();
     var package_date_id    = $("#package_date_id").val();
@@ -7677,7 +7681,7 @@ $("#booking_confirm_submit").click(function() {
     if (verify_otp != '') {
         $.ajax({
             type: "POST",
-            url: '<?= base_url() ?>agent/booking_preview/booking_confirm_verify_otp',
+            url: '<?= base_url() ?>agent/srs_form/booking_confirm_verify_otp',
             data: {
                 verify_otp: verify_otp,
                 mobile_no: mobile_no,
@@ -7696,9 +7700,9 @@ $("#booking_confirm_submit").click(function() {
                 // alert(response);
                 if (response == 'true') {
                     // alert('Doneeeee');
-                    // window.location.href = "<?//= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
                     alert('Verify OTP Sucessfully');
-                    $('#exampleModal_send').modal('show');
+                    window.location.href = "<?= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
+                    // $('#exampleModal_send').modal('show');
                 } else {
                     alert('You Entered Wrong OTP. Please check it and submit right OTP');
 
