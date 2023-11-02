@@ -97,7 +97,7 @@
                                 <h5 class="">SRS Form</h5>
                                     <div class="cash_payment_div mb-4">
                                         <div class="form-group">
-                                        <input type="text" class="form-control" name="mobile_no" id="mobile_no" value="<?php echo $mob_no_booking_payment['booking_tm_mobile_no']?>">
+                                        <input type="hidden" class="form-control" name="mobile_no" id="mobile_no" value="<?php echo $mob_no_booking_payment['booking_tm_mobile_no']?>">
                                             <label>Upload SRS Image / PDF</label><br>
                                             <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
                                             { ?>
