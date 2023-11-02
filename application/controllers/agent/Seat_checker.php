@@ -165,7 +165,7 @@ class Seat_checker extends CI_Controller {
         // $bus_info=array();
         // $p='yes';
         
-        
+        $bus_type= '';
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('pack_id', 'Package', 'required');
@@ -248,6 +248,7 @@ class Seat_checker extends CI_Controller {
             $fields = "bus_open.*,vehicle_details.*,vehicle_seat_preference.total_seat_count,first_cls_seats,second_cls_seats,third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
                        third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference.vehicle_id";
             $this->db->join("vehicle_details", 'vehicle_details.id=bus_open.vehicle_rto_registration','left');
+            $this->db->join("bus_type", 'bus_type.id=vehicle_details.vehicle_bus_type','left');
             $this->db->join("vehicle_seat_preference", 'vehicle_seat_preference.vehicle_id=bus_open.vehicle_rto_registration','left');
             $this->db->where('package_id',$pack_id);
             $this->db->where('package_date_id',$pack_date_id );
@@ -256,8 +257,10 @@ class Seat_checker extends CI_Controller {
             if($bus_info==''){
                 $this->session->set_flashdata('error_message',"Bus is not open, Please cantact to admin.");
                 $p='yes';
+                $bus_type= '';
             }else{
                 $p='no';
+                $bus_type= $bus_info['bus_type'];
             }
 
             }
@@ -323,7 +326,9 @@ class Seat_checker extends CI_Controller {
         // $this->arr_view_data['temp_hold_data'] = $temp_hold_data;
 
         //=========================================================================================
+        $this->arr_view_data['bus_type'] = $bus_type;
         $this->arr_view_data['temp_booking_data_id'] = $temp_booking_data_id;
+
 
         $this->arr_view_data['agent_all_travaller_info'] = $agent_all_travaller_info;
         $this->arr_view_data['traveller_booking_info'] = $traveller_booking_info ;
