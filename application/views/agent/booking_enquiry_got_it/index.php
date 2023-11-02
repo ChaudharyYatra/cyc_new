@@ -23,7 +23,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
+              <!-- <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
               
             </ol>
           </div>
@@ -96,7 +96,7 @@
                       <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>   -->
                       <a href="<?php echo base_url(); ?>agent/seat_checker/index/<?php echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>          
                       
-                      <a href="<?php echo base_url(); ?>agent/booking_enquiry/not_intrested/<?php echo $enq_id; ?>"
+                      <a href="<?php echo base_url(); ?>agent/booking_enquiry_got_it/not_intrested/<?php echo $enq_id; ?>"
                         onclick="return confirm('Are you sure you want to mark this as Not Interested?');">
                         <button type="button" class="btn btn-primary btn-sm take_followup_btn mt-1" class="dropdown-item">Not Interested</button>
                       </a>  

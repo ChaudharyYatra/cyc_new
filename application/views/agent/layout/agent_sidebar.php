@@ -98,6 +98,13 @@
                </li>
 
                <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/booking_enquiry_got_it/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pending Enquiry</p>
+                </a>
+               </li>
+
+               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>agent/followup_already_taken/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Followup Already Taken By Agent</p>

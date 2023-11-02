@@ -5,7 +5,7 @@
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Booking_enquiry extends CI_Controller {
+class Booking_enquiry_got_it extends CI_Controller {
 	 
 	function __construct() {
 
@@ -14,15 +14,15 @@ class Booking_enquiry extends CI_Controller {
         { 
                 redirect(base_url().'agent/login'); 
         }
-        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
+        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry_got_it";
         $this->module_url_path_domestic_followup    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_enquiry_followup";
 		$this->module_url_path_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/booking_basic_info";
 		$this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
 		$this->module_url_path_seat_checker   =  base_url().$this->config->item('agent_panel_slug')."/seat_checker";
-        $this->module_title       = "Booking Enquiry";
-        $this->module_title_followup       = "Domestic Booking Enquiry Followup";
-        $this->module_url_slug    = "booking_enquiry";
-        $this->module_view_folder = "booking_enquiry/";
+        $this->module_title       = "Pending Booking Enquiry";
+        $this->module_title_followup = "Domestic Booking Enquiry Followup";
+        $this->module_url_slug    = "booking_enquiry_got_it";
+        $this->module_view_folder = "booking_enquiry_got_it/";
         $this->arr_view_data = []; 
 	 }
 
@@ -42,11 +42,11 @@ class Booking_enquiry extends CI_Controller {
         $this->db->where('booking_enquiry.followup_status','no');
         $this->db->where('booking_enquiry.booking_status','no');
 
-        $this->db->where('booking_enquiry.i_got_it','no');
-        // $this->db->where('booking_enquiry.not_interested','yes');
+        $this->db->where('booking_enquiry.i_got_it','yes');
+        $this->db->where('booking_enquiry.not_interested','yes');
 
         $this->db->where('booking_enquiry.agent_id',$id);
-        $this->db->where('booking_enquiry.created_at >', $twentyFourHoursAgo);
+        // $this->db->where('booking_enquiry.created_at >', $twentyFourHoursAgo);
         $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
         $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
         $this->db->order_by("booking_enquiry.id", "desc");

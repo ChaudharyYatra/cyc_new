@@ -2,14 +2,6 @@
   .a_text{
     text-decoration: none;
   }
-  .take_followup_btn{
-    padding: 3%;
-  }
-  .i_got_it{
-    text-decoration: none;
-    color: #fff !important;
-  }
-  
 </style>
 
 <!-- Content Wrapper. Contains page content -->
@@ -48,15 +40,15 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Current Status</th>
-                    <th>Enquiry From</th>
+                    <th>Tour No.</th>
                     <th>Customer Name</th>
-                    <th>Package Details</th>
+                    <th>Package</th>
                     <th>Email</th>
                     <th>Contact Number</th>
+                    <th>Gender</th>
                     <th>Enquiry Date</th>
-                    <th>Followup Form</th>
-                    <th>I Got It</th>
+                    <th>Followup form</th>
+                    <th>Followup List</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -67,61 +59,56 @@
                    foreach($arr_data as $info) 
                    { 
                     $enq_id=$info['id'];
-                    $query=$this->db->query("select * from domestic_followup where booking_enquiry_id=$enq_id");
+                    $query=$this->db->query("select * from domestic_followup where booking_enquiry_id=$enq_id and is_followup_status='yes'");
                     $followupdata=$query->result_array();
                     // print_r($followupdata); die;
                     $count= count($followupdata);
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['agent_name']; ?></td>
-                    <td><?php echo $info['enquiry_from']; ?></td>
+                    <td><?php echo $info['tour_number']; ?></td>
                     <td><?php echo $info['first_name']; ?> <?php echo $info['last_name']; ?></td>
-                    <td><?php echo $info['tno']; ?> - <?php echo $info['tour_title']; ?></td>
+                    <td><?php echo $info['tour_title']; ?></td>
                     <td><?php echo $info['email']; ?></td>
                     <td><?php echo $info['mobile_number']; ?></td>
-                    <td><?php echo date("d-m-Y",strtotime($info['created_at'])); ?></td>
+                    <td><?php echo ucfirst($info['gender']); ?></td>
+                    <td><?php echo date("Y-m-d",strtotime($info['created_at'])); ?></td>
 
                     <td>
                       <?php
-                          if($count > 0)
+                          if($count >= 3)
                           {
                       ?>
-                      <h6>Follow Already Taken</h6>
+                       <h5 style="color:red;">Not Interested</h5>
+                       <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?php //echo $i;?>">Status</button> -->
                       <?php        
                           }else{
                       ?>
-                      <!--<a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><img src=<?php //echo base_url(); ?>uploads\do_not_delete\follow.png height="30%" width="30%" alt></img></a>-->
-                      <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a>
-                      <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>   -->
-                      <a href="<?php echo base_url(); ?>agent/seat_checker/index/<?php echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>          
+                     <!-- <h5 style="color:red;">No Followup</h5> -->
+                    
+                      <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php echo $enq_id;?>"><i class="fa fa-file" aria-hidden="true"></i></a>
                       
-                      <a href="<?php echo base_url(); ?>agent/booking_enquiry/not_intrested/<?php echo $enq_id; ?>"
-                        onclick="return confirm('Are you sure you want to mark this as Not Interested?');">
-                        <button type="button" class="btn btn-primary btn-sm take_followup_btn mt-1" class="dropdown-item">Not Interested</button>
-                      </a>  
                     </td>
                      <?php } ?>
-                     
                     <td>
-                      <?php 
-                      if($info['i_got_it']=='yes')
-                        {
-                      ?>
-                      <button class="btn btn-success btn-sm" disabled><a class="i_got_it" href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-                        echo rtrim($aid, '=').'/'.$info['i_got_it']; ?>">YES</a></button>
-                      <?php } else { ?>
-                      <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-                        echo rtrim($aid, '=').'/'.$info['i_got_it']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
-                      <?php } ?>
+                    <a href="<?php echo $module_url_path_domestic_followup;?>/index/<?php echo $info['id']; ?>"><i class="fa fa-file" aria-hidden="true"></i></a>
                     </td>
                     
-                    <td>
-                      <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" ><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                      <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
-                    </td>
 
-              
+                    <td>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                          <a class="a_text" href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" > <button class="dropdown-item">Edit</button></a>
+                          <a class="a_text" onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"> <button class="dropdown-item">Delete</button></a>
+                          <button class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#booking">Booking</button>
+                          
+                        </div> 
+                       </div>
+                    </td>
 
                   </tr>
 
@@ -129,55 +116,49 @@
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Next followup form</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         <form method="post" action="<?php echo $module_url_path;?>/domestic_followup">
                           <div class="col-md-12">
                             <div class="row">
-                              <div class="col-md-6 mb-2">
-                                <label class="col-form-label">Next followup Date:</label> 
-                                <input type="date" class="form-control" name="next_followup_date" id="next_followup_date" min="<?php echo date("Y-m-d"); ?>" value="<?php if(isset($domestic_followup_info['next_followup_date'])){ echo $domestic_followup_info['next_followup_date'];}?>" required>
+                              <div class="col-md-6">
+                                <label class="col-form-label">Follow Up Date:</label>
+                                <input type="date" class="form-control" name="follow_up_date" id="follow_up_date" value="<?php if(isset($domestic_followup_info['follow_up_date'])){ echo $domestic_followup_info['follow_up_date'];}?>">
                                 <input type="hidden" name="enquiry_id" id="enquiry_id" value="<?php if(isset($info['id'])){ echo $info['id'];}?>">
                               </div>
-                              <div class="col-md-6 mb-2">
-                                <label class="col-form-label">Next Follow Up Time:</label>
-                                <input type="time" class="form-control" name="follow_up_time" id="follow_up_time" required>
+                              <div class="col-md-6">
+                                <label class="col-form-label">Follow Up Time:</label>
+                                <input type="time" class="form-control" name="follow_up_time" id="follow_up_time">
                               </div>
-                              <div class="col-md-12 mb-2">
-                                <label>Select Reason</label>
-                                  <div class="input-group">
-                                      <select class="form-control niceSelect" name="followup_reason" id="followup_reason" onfocus='this.size=4;' onblur='this.size=1;' 
-                                          onchange='this.size=1; this.blur();' required="required">
-                                          <option value="">Select reason</option>
-
-                                          <?php foreach($followup_reason_data as $followup_reason){ ?> 
-                                          <option value="<?php echo $followup_reason['id'];?>"><?php echo $followup_reason['create_followup_reason'];?></option> 
-                                          <?php } ?>
-                                      </select>
-                                  </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-3">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="col-form-label">Next followup Date:</label>
+                                <input type="date" class="form-control" name="next_followup_date" id="next_followup_date" value="<?php if(isset($domestic_followup_info['next_followup_date'])){ echo $domestic_followup_info['next_followup_date'];}?>">
+                              </div>
+                              <div class="col-md-3">
                               </div>
                             </div>
                             <div class="row">
                               <div class="col-md-12">
-                                <label class="col-form-label">Follow Remark:</label>
-                                <textarea class="form-control" name="follow_up_comment" id="follow_up_comment" required></textarea>
+                                <label class="col-form-label">Follow Up Comment:</label>
+                                <textarea class="form-control" name="follow_up_comment" id="follow_up_comment"></textarea>
                               </div>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                            <!-- <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> -->
-                            <a onclick="return confirm('Are You Sure You Want To submit This Follow Up Record?')" href="<?php echo $module_url_path;?>/booking_enquiry/<?php echo $info['id']; ?>"><button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button></a>
+                            <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
                           </div>
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
-
-
                   
                   <?php $i++; } ?>
                   
