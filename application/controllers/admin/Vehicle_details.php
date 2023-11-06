@@ -100,6 +100,8 @@ public function add_seat_preference($id) {
     $owenwr_id = $this->session->userdata("vehicle_owner_sess_id");
     $vehicle_id = base64_decode($id);
 
+   
+
     $this->db->where('is_active','yes');
     $this->db->where('is_deleted','no');
     $this->db->where('vehicle_details.id',$vehicle_id);
@@ -115,6 +117,7 @@ public function add_seat_preference($id) {
     $selected_seats=array();
 
     if ($this->input->post("submit")) {
+        
 
             $first_cls_seats_check = $this->input->post("first_cls_seats[]");
            if(!empty($first_cls_seats_check)){
@@ -152,6 +155,13 @@ public function add_seat_preference($id) {
             $fourth_class_price='';
            }
 
+           $admin_hold_seats_check = $this->input->post("admin_hold_seats[]");
+           if(!empty($admin_hold_seats_check)){
+            $admin_hold_seats = implode(',',$admin_hold_seats_check);
+           }else{
+            $admin_hold_seats='';
+           }
+
          
             $vehicle_id = $this->input->post("vehicle_id");
             $seat_capacity = $this->input->post("seat_capacity");
@@ -168,6 +178,7 @@ public function add_seat_preference($id) {
                   'window_class_price'=>$window_class_price,
                   "fourth_cls_seats" => $fourth_cls_seats,
                   'fourth_class_price'=>$fourth_class_price,
+                  'admin_hold_seats'=>$admin_hold_seats,
                   'vehicle_id'=>$vehicle_id,
                   'total_seat_count'=>$seat_capacity,
                   ];

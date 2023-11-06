@@ -168,7 +168,6 @@ $(function() {
 $(document).ready(function() {
     // var email = $('#agent_sess_id').val();  
     var agent_id = '1';
-    //alert(email);
     if (agent_id != '') {
         $.ajax({
             url: "<?php echo base_url(); ?>agent/dashboard/check_notification_count",
@@ -195,7 +194,6 @@ $(document).ready(function() {
     $("#notification_count").click(function() {
         // var email = $('#agent_sess_id').val();  
         var agent_id = '0';
-        //alert(email);
         if (agent_id != '') {
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/dashboard/enquiry_view",
@@ -205,8 +203,6 @@ $(document).ready(function() {
                 },
                 success: function(responce) {
                     if (responce = true) {
-                        // alert(responce);
-                        // redirect($this->module_url_path.'agent/booking_enquiry/index');
                         window.location.href =
                             "<?= base_url() ?>agent/booking_enquiry/index";
                     }
@@ -222,7 +218,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     // var email = $('#agent_sess_id').val();  
     var agent_id = '1';
-    //alert(email);
     if (agent_id != '') {
         $.ajax({
             url: "<?php echo base_url(); ?>agent/dashboard/check_international_count",
@@ -251,7 +246,6 @@ $(document).ready(function() {
     $("#international_count").click(function() {
         // var email = $('#agent_sess_id').val();  
         var agent_id = '1';
-        //alert(email);
         if (agent_id != '') {
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/dashboard/international_view",
@@ -324,7 +318,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     // var email = $('#agent_sess_id').val();  
     var agent_id = '1';
-    //alert(email);
     if (agent_id != '') {
         $.ajax({
             url: "<?php echo base_url(); ?>agent/dashboard/todays_domestic_notification_count",
@@ -353,7 +346,6 @@ $(document).ready(function() {
     $("#todays_domestic_count").click(function() {
         // var email = $('#agent_sess_id').val();  
         var agent_id = '0';
-        //alert(email);
         if (agent_id != '') {
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/dashboard/todays_enquiry_view",
@@ -381,7 +373,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     // var email = $('#agent_sess_id').val();  
     var agent_id = '1';
-    //alert(email);
     if (agent_id != '') {
         $.ajax({
             url: "<?php echo base_url(); ?>agent/dashboard/todays_international_notification_count",
@@ -413,7 +404,6 @@ $(document).ready(function() {
     $("#todays_international_count").click(function() {
         // var email = $('#agent_sess_id').val();  
         var agent_id = '0';
-        //alert(email);
         if (agent_id != '') {
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/dashboard/todays_international_view",
@@ -442,12 +432,7 @@ $(document).ready(function() {
     var count = $('#seat_count_add').val();
 
     var d_count = $('#d_hidden').val();
-    // alert(d_count); 
-
-    //alert('kkkkkk');
-    //$('#add_more').click(function() {
-    //alert(count);
-    //i++;
+  
     for (var i = 0; i < d_count; i++) {
         var img_count = parseInt(i) + 1 + parseInt(count);
 
@@ -5222,14 +5207,11 @@ $('#submit_otp').keyup(function(){
     var booking_tm_mobile_no = $("#booking_tm_mobile_no").val();
     var booking_amt = $("#booking_amt").val();
     var booking_amt = $("#select_transaction").val();
-    // alert(total_travaller_count);
 
     if (booking_tm_mobile_no != '') {
         $("#submit_otp").prop('disabled', true)
-        // alert('Matching!');
     } else {
         $("#submit_otp").prop('disabled', false)
-        // alert('Not Matching!');
     }
 });
 </script>
@@ -5282,8 +5264,7 @@ $(document).ready(function(){
     $("#booking_start").click(function() {  
         var enquiry_seat_count = $("#enquiry_seat_count").val();
 
-        alert(enquiry_seat_count);
-        alert($('#selected-seats li').length);
+       
         if (enquiry_seat_count != $('#selected-seats li').length) {
             var is_confirmed=confirm("The Enquired seats and selected seats are not same are you sure to continue");
             if(is_confirmed)
@@ -5361,9 +5342,8 @@ $(document).ready(function(){
         var seat_price =  $(this).attr('seat_price');
         var btn_class =  $(this).attr('class').split(' ');
      
-           if(seat_orignal_id != '' && $.inArray('hold', btn_class) == '-1')  
+           if(seat_orignal_id != '' && $.inArray('hold', btn_class) == '-1' && $.inArray('admin_hold', btn_class) == '-1')  
            {  
-
 
                 $.ajax({  
 
@@ -5392,7 +5372,6 @@ $(document).ready(function(){
           });
       });  
  </script>
-
 
 
 
@@ -5441,6 +5420,45 @@ $(document).ready(function(){
  setInterval(fetch_new_hold,2000);
 
 });
+
+</script>
+
+
+
+<script>
+
+// $(document).ready(function(){
+// // function fetch_new_hold_2(){
+   
+//         // var admin_hold_array = js_array;
+//         var admin_hold_string_footer = js_array.admin_hold_seats;
+//     var admin_hold_array_footer = admin_hold_string_footer.split(',');
+
+//                     for(var i=0; i<admin_hold_array_footer.length;i++)
+//             {
+//         //   console.log(admin_hold_array_footer);
+                
+                
+//                 var seat_data_id=admin_hold_array_footer[i];
+//                 var abc=seat_data_id;
+//                 // $(abc).css("color", "red");
+//                 // $(abc).removeClass("available");
+//                 // $(abc).addClass("hold");
+//                 $('div[data_id='+seat_data_id+']').css("color", "white");
+//                 $('div[data_id='+seat_data_id+']').removeClass("available");
+//                 $('div[data_id='+seat_data_id+']').addClass("admin_hold");
+//             }
+
+
+// // }
+// });
+
+
+// $(document).ready(function(){
+
+//  setInterval(fetch_new_hold,2000);
+
+// });
 
 </script>
 

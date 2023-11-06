@@ -64,6 +64,11 @@ div.seatCharts-seat.hold {
 	cursor: not-allowed;
 }
 
+div.seatCharts-seat.admin_hold {
+	background: rgb(223, 12, 188);
+	cursor: not-allowed;
+}
+
 ul.seatCharts-legendList {
 	list-style: none;
 }

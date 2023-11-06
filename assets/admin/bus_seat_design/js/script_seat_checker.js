@@ -6,7 +6,8 @@
     if(js_array.length != 0){
     var array_data = js_array;
    
-
+	// var admin_hold_seat_array= vehicle_seat_data.admin_hold_seats;
+    
     if(typeof booked_data != 'undefined'){
     var booked_seats_data=booked_data;
     }else{
@@ -39,6 +40,8 @@
     var new_fourth_string = array_data.fourth_cls_seats;
     var new_fourth_array = new_fourth_string.split(',');
 
+    var admin_hold_string = array_data.admin_hold_seats;
+    var admin_hold_array = admin_hold_string.split(',');
 
 
 
@@ -389,6 +392,13 @@ for(var p=0; p<total_seat_count; p++) {
                         category: 'Hold Class',
                         attr_win: '',
 
+                    },
+                    z: {
+                        price: '0',
+                        classes: 'admin_hold', //your custom CSS class
+                        category: 'Admin Hold Class',
+                        attr_win: '',
+
                     }
                 },
                 naming: {
@@ -409,6 +419,7 @@ for(var p=0; p<total_seat_count; p++) {
                         ['u', 'unavailable', 'Already Booked'],
                         ['a', 'selected', 'Selected'],
                         ['h', 'hold', 'Hold Seats'],
+                        ['z', 'admin_hold', 'Admin Hold Seats'],
                         ['b', 'available', 'Window Seats'],
                     ]
                 },
@@ -440,7 +451,7 @@ for(var p=0; p<total_seat_count; p++) {
                         {
                             if ($.inArray(middle_btn_id, selection_array) != '-1') 
                             {
-                                console.log('middle_if1');
+                                // console.log('middle_if1');
                                 
                                 var last_row_first_cls = $("[data_id=" + last_row_first_id + "]").attr('class');
                                 var last_row_first_cls_array = last_row_first_cls.split(" ");
@@ -505,9 +516,9 @@ for(var p=0; p<total_seat_count; p++) {
 
                             } else if ($.inArray(last_seat_id, selection_array) != '-1' && ($.inArray('available', middle_next_seat_array) != '-1')) 
                             {
-                            console.log('middle_if2');
+                            // console.log('middle_if2');
                                 var amt_for_addition = recalculateTotal(sc,click_id,selection_array); 
-                                console.log('last_seat_id',last_seat_id);
+                                // console.log('last_seat_id',last_seat_id);
                                 $('#cart-item-' + this.settings.id).remove();
                                 sc.status(last_row_first_idid, 'available');
                                 // $("[attr_win_remove=win_" + last_seat_id + "]").remove();
@@ -548,7 +559,7 @@ for(var p=0; p<total_seat_count; p++) {
 
                                 selection_array.splice($.inArray(last_row_first_idid, selection_array), 1);
                             } else {
-                                console.log('middle_if3');
+                                // console.log('middle_if3');
                                 
 
 
@@ -611,14 +622,14 @@ for(var p=0; p<total_seat_count; p++) {
                     {
 
                         if (this.status() == 'available') {
-                            console.log('fffffffffffff');
+                            // console.log('fffffffffffff');
 
                             if ($.inArray(middle_btn_id, selection_array) != '-1') {
                                 var last_seat_string = $("[data_id=" + total_seat_count + "]").attr('class');
                                 var last_seat_array = last_seat_string.split(" ");
 
                                 if ($.inArray('available', last_seat_array) != '-1') {
-                                    console.log('cccccccccccccc');
+                                    // console.log('cccccccccccccc');
 
                                     var amt_for_addition = recalculateTotal(sc,click_id,selection_array); 
 
@@ -674,7 +685,7 @@ for(var p=0; p<total_seat_count; p++) {
 
                                     return 'selected';
                                 } else if ($.inArray('selected', last_seat_array) != '-1'){
-                                console.log('dddddddddddddd');
+                                // console.log('dddddddddddddd');
 
                                 var amt_for_addition = recalculateTotal(sc,click_id,selection_array);
                                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
@@ -694,7 +705,7 @@ for(var p=0; p<total_seat_count; p++) {
                                     return 'selected';
                                 }
                             } else {
-                                console.log('vvvvvvvvvvvvvvvvvv');
+                                // console.log('vvvvvvvvvvvvvvvvvv');
                                 $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
                                     .attr('id', 'cart-item-' + this.settings.id)
                                     .attr('class', 'cart-item-cls-' + this.settings.id)
@@ -754,7 +765,7 @@ for(var p=0; p<total_seat_count; p++) {
                             
                             if ($.inArray(last_seat_id, selection_array) != '-1' && ($.inArray('available', middle_next_seat_array) != '-1')) 
                             {
-                                console.log('sssssssssssssssssssssssss');
+                                // console.log('ssssssssssssss/sssssssssss');
                                 var amt_for_addition = recalculateTotal(sc,click_id,selection_array);
 
                                 var last_seat_string = $("[data_id=" + total_seat_count + "]").attr('class');
@@ -821,7 +832,7 @@ for(var p=0; p<total_seat_count; p++) {
                                 var middle_seat_pre_array = middle_seat_pre_string.split(" ");
                               
                                 if (($.inArray('available', middle_seat_pre_array) != '-1')) {
-                                    console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                                    // console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
                                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
                                     + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
                                         .attr('id', 'cart-item-' + this.settings.id)
@@ -837,7 +848,7 @@ for(var p=0; p<total_seat_count; p++) {
                                     var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) - this.data().price;
                                     $total.text(parseInt(array_data.window_class_price)+parseInt(seat_cost_with_window));
                                 }else{
-                                    console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                                    // console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
 
                                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
                                         .attr('id', 'cart-item-' + this.settings.id)
@@ -872,11 +883,11 @@ for(var p=0; p<total_seat_count; p++) {
                             var middle_seat_pre_array = middle_seat_pre_string.split(" ");
 
                             if (($.inArray('available', middle_seat_pre_array) != '-1')) {
-                                console.log('lllllllllllllllllllllllllllllll');
+                                // console.log('lllllllllllllllllllllllllllllll');
                                 var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
                                 $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
                             }else{
-                                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                                 
                                     // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
                                     $total.text(recalculateTotal(sc,click_id,selection_array) + this.data().price); 
@@ -902,7 +913,7 @@ for(var p=0; p<total_seat_count; p++) {
                         //###########################################################################################################################################################################################################################################################################
                     } 
                     else if (click_id == total_seat_count) {
-                            console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                            // console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
                         if (this.status() == 'available') {
                             var last_row_first_main_id = $("[data_id=" + last_row_first_id + "]").attr('id');
                             var middle_pre_id = $("[data_id=" + middle_seat_pre + "]").attr('id');
@@ -985,7 +996,7 @@ for(var p=0; p<total_seat_count; p++) {
 
                                 if(($.inArray('available', middle_next_seat_array) != '-1'))
                                 {
-                                    console.log('last seat click 1');
+                                    // console.log('last seat click 1');
                                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
                                     + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
                                         .attr('id', 'cart-item-' + this.settings.id)
@@ -1001,7 +1012,7 @@ for(var p=0; p<total_seat_count; p++) {
                                 }
                                 else
                                 {
-                                    console.log('last seat click 2');
+                                    // console.log('last seat click 2');
                                     $('<li>' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
                                         .attr('id', 'cart-item-' + this.settings.id)
                                         .attr('class', 'cart-item-cls-' + this.settings.id)
@@ -1040,11 +1051,11 @@ for(var p=0; p<total_seat_count; p++) {
 
                             if (($.inArray('available', middle_next_seat_array) != '-1')) {
                                 var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
-                                console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
+                                // console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
 
                                 $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
                             }else{
-                                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 
                                     // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
 
@@ -1074,7 +1085,7 @@ for(var p=0; p<total_seat_count; p++) {
                     } 
                     else if (click_id == middle_id) {
                         if (this.status() == 'available') {
-                            console.log('--------------------------------------',selection_array);
+                            // console.log('--------------------------------------',selection_array);
                             
                             var middle_next_id = $("[data_id=" + middle_next_seat + "]").attr('id');
                             var middle_pre_id = $("[data_id=" + middle_seat_pre + "]").attr('id');
@@ -1260,6 +1271,7 @@ for(var p=0; p<total_seat_count; p++) {
                         var check_str_economy='economy-class';
                         var check_str_window_fourth='window-fourth-class';
                         var check_str_fourth='fourth-class';
+                        var check_admin_hold="admin_hold";
                        
                         // हा कोड सीट सिलेक्ट करताना विंडो सीट आहे का हे चेक क्रय साठी वापरला आहे =================================================================================================
                         if(seat_type.indexOf(check_str)!=-1)
@@ -2403,7 +2415,7 @@ for(var p=0; p<total_seat_count; p++) {
 
                                     var middle_next_seat_string = $("[data_id=" + middle_next_seat + "]").attr('class');
                                     var middle_next_seat_array = middle_next_seat_string.split(" ");
-                                   console.log('current_prev_cls_array',current_prev_cls_array);
+                                //    console.log('current_prev_cls_array',current_prev_cls_array);
                                     if(current_prev_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)==-1 
                                             && current_cls.indexOf(check_str)!=-1 && $.inArray('available', current_next_cls_array) != '-1'
                                             && $.inArray(last_seat_id, selection_array) == '-1' && click_id != last_row_first_id)

@@ -108,6 +108,11 @@ div.seatCharts-seat.hold {
     background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
 }
 
+div.seatCharts-seat.admin_hold {
+    background: rgb(223, 12, 188)!important;
+    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+}
+
 div.seatCharts-seat.focused {
     background: rgb(219, 215, 215);
     background: radial-gradient(circle, rgba(219, 215, 215, 1) 0%, rgba(205, 205, 205, 1) 25%, rgba(195, 192, 192, 1) 50%, rgba(204, 204, 204, 1) 75%, rgba(207, 207, 207, 1) 100%);

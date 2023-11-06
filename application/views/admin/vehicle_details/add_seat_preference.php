@@ -391,6 +391,73 @@ input:disabled+label {
                                     </div>
                                     <hr>
                                 </div>
+
+
+
+
+
+
+
+
+
+                                <div class="row" id="main_row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Hold Seats</label>
+
+
+                                            <input type="text" class="form-control" name="hold_class" id="hold_class"
+                                                placeholder="Hold Class" Value="Hold Seats" required="required"
+                                                readonly="readonly">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <!-- <label>Seat Numbers</label> -->
+                                            <div class="book-tbl">
+                                                <ul class="new_seat_design_ul">
+
+                                                <?php 
+                                                // print_r($seat_preference_data);
+                                                // die;
+                                                // $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
+                                                // $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
+                                                // $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
+                                                $admin_hold_seats=explode(',',$seat_preference_data['admin_hold_seats']);
+                                                // $array_combine = array_merge($second_seats,$fist_seats,$third_seats);
+
+                                                $seat_count=$vehicle_details_data['seat_capacity'];
+                                                for($a=1; $a<=$seat_count; $a++){
+                                                ?>
+                                                    <li>
+                                                        <input class="hold_class" id="hold_class_i<?php echo $a;?>" type="checkbox" value="<?php echo $a;?>" 
+                                                        <?php if(in_array($a,$admin_hold_seats)){ echo "checked";} ?> name="admin_hold_seats[]"/>
+                                                        <label class="label" for="hold_class_i<?php echo $a;?>"  style="width: 40px"><?php echo $a;?></label>
+                                                    </li>
+                                                <?php } ?>  
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        
+                                    </div>
+                                    <hr>
+                                </div>
+
+
+
+
+
+
+
+
+
+
                             </div>
                             <!-- /.card-body -->
                             <?php }else{ ?>
@@ -622,6 +689,67 @@ input:disabled+label {
                                     </div>
                                     <hr>
                                 </div>
+
+
+
+
+
+
+
+
+                                <div class="row" id="main_row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Seat Type</label>
+
+                                            <input type="text" class="form-control" name="second_class"
+                                                id="second_class" placeholder="First Class" Value="Second Class"
+                                                required="required" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <!-- <label>Seat Numbers</label> -->
+                                            <div class="book-tbl">
+                                                <ul class="new_seat_design_ul">
+                                                
+                                                <?php 
+
+                                                $seat_count=$vehicle_details_data['seat_capacity'];
+                                                for($a=1; $a<=$seat_count; $a++){
+                                                ?>
+                                                    <li>
+                                                        <input class="second_class" id="second_class_i<?php echo $a;?>" now_selected="" type="checkbox" value="<?php echo $a;?>"
+                                                        name="second_cls_seats[]"/>
+                                                        <label class="label" for="second_class_i<?php echo $a;?>"  style="width: 40px"><?php echo $a;?></label>
+                                                    </li>
+                                                <?php } ?>    
+                                                    
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Add On Price</label>
+                                            <input type="text" class="form-control" name="second_class_price"
+                                            value=""
+                                                id="second_class_price" placeholder="Enter Price" required="required">
+                                            <span class="error"><?php echo form_error('price'); ?></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+
+
+
+
+
+
+
                             </div>
                             <?php } ?>
                             <div class="card-footer">

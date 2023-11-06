@@ -5,6 +5,14 @@
  * Copyright 2013, 2014 Mateusz Markowski
  * Released under the MIT license
  */
+if(js_array.length != 0){
+    var vehicle_seat_data = js_array;
+	// var admin_hold_seat_array= vehicle_seat_data.admin_hold_seats;
+
+	var admin_hold_string = js_array.admin_hold_seats;
+    var admin_hold_seat_array = admin_hold_string.split(',');
+}
+// console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',admin_hold_seat_array);
 
 (function($) {
 		
@@ -63,6 +71,7 @@
 					
 				},
 				focus  : function() {
+					// console.log(this.status());
 					if (this.status() == 'available') {
 						return 'focused';
 					} else if (this.status() == 'unavailable') {
@@ -102,7 +111,7 @@
 					}, setup);
 				
 					var objectLength = Object.keys(fn).length;
-// console.log('objectLength',did);
+					// console.log('objectLength',did);
 
 					// current_prev_cls
 
@@ -110,120 +119,35 @@
 					fn.settings.$node = $('<div></div>');
 					var title='';
 
+					fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
 
 
-					// fn.nextSeatInfo = function () {
-					// 	var row = fn.settings.id.split('_')[0];
-						
-					// 	var column = parseInt(fn.settings.id.split('_')[1]);
-					// 	var nextColumn = column + 1;
-					// 	var nextColumnStr = nextColumn.toString();
-					// 	var nextSeatId = row + '_' + nextColumnStr;
-					// 	var nextSeatClass = seatChartsSettings.seats[fn.settings.character + nextColumnStr];
-					// 	console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-					// 	console.log('seatChartsSettings.seats[fn.settings.character + nextColumnStr]',seatChartsSettings.seats[nextSeatId]);
-					// 	console.log('seatChartsSettings.seatsseatChartsSettings.seatsseatChartsSettings.seats',seatChartsSettings.seats);
-					// 	console.log('fn.settings.characterfn.settings.characterfn.settings.character',fn.settings.character);
-					// 	console.log('nextColumnStrnextColumnStrnextColumnStrnextColumnStrnextColumnStr',nextColumnStr);
-					// 	console.log('rowrowrowrowrowrow',row);
-					// 	console.log('columncolumncolumn',column);
-					// 	console.log('nextColumnStrnextColumnStrnextColumnStr',nextColumnStr);
-					// 	console.log('nextSeatIdnextSeatIdnextSeatId',nextSeatId);
-					// 	// console.log('nextSeatClassnextSeatClassnextSeatClass',nextSeatClass);
-					// 	if (nextSeatClass) {
-					// 		return { id: nextSeatId, class: nextSeatClass };
-					// 	}
-					// 	return null; // No next seat in the same row
-					// };
-					
-					// fn.hasNextSeat = function () {
-				// 		var row = fn.settings.id.split('_')[0];
-				// 		var column = parseInt(fn.settings.id.split('_')[1]);
-						
-				// 		var nextColumn = column + 1;
-				// 		var nextColumnStr = nextColumn.toString();
-				// 		var nextSeatId = row + '_' + nextColumnStr;
 
-				// // console.log('seatChartsSettingsseatChartsSettingsseatChartsSettings',seatChartsSettings.seats[setup.character]);
-				// // console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',seatChartsSettings);
-				// // console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',seatChartsSettings.map);
-
-				// var concatenatedString = seatChartsSettings.map.join(',');
-				// var stringWithoutUnderscores = concatenatedString.replace(/_/g, '');
-				// var arrayFromText = stringWithoutUnderscores.split(',');
-				// // var numbersArray = concatenatedString.split(',');
-
-				// // Initialize an empty array to store individual characters
-				// var individualCharacters = [];
-
-				// arrayFromText.forEach(function (str) {
-				// 	var characters = str.split('');
-				// 	individualCharacters = individualCharacters.concat(characters);
-				//   });
-
-
-				// // var divElement = $('#' + nextSeatId);
-
-				// // var div = jQuery('#' + nextSeatId);
-				// // var id = div.attr('id');
-				// // // var className = $('#sidebar div:eq(14)').attr('class');
-				// // var className = $('#' +nextSeatId + 'div:eq(4_2)').attr('class');
-
-				// var current_id=fn.settings.id;
-				// var prev_id = column - parseInt(1);
-				// var next_id = column + parseInt(1);
-				// console.log(')))))))))))))))))))))))))))))))))))))))))))',individualCharacters[0]);
-				// console.log('((((((((((((((((((((((((((((((((((((((((((((((( Current',column);
-				// console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Prev',prev_id);
-				// console.log('################################################## Next',next_id);
-
-				// if(column=='1')
-				// {
-				// 	const valueAtIndex2 = individualCharacters[next_id];
-				// 	console.log('1111111111111111111111111111111111111111111111111',individualCharacters);
-				// 	console.log('1111111111111111111111111111111111111111111111111',individualCharacters[next_id]);
-
-				// }else{
-				// 	console.log('222222222222222222222222222222222222222222');
-				// }
-
-				// // if (divElement.length > 0) {
-				// // 	// Access specific attributes of the div element
-				// // 	var attribute1Value = divElement.attr('data_id'); // Replace 'attribute1' with the actual attribute name
-				// // 	var attribute2Value = divElement.attr('seat_type'); // Replace 'attribute2' with the actual attribute name
-				  
-				// // 	// Log the attribute values
-				// // 	console.log('Attribute 1 Value:', attribute1Value);
-				// // 	console.log('Attribute 2 Value:', attribute2Value);
-				// //   } else {
-				// // 	console.log('Div element with ID ' + divId + ' not found.');
-				// //   }
-
-
-				// 		console.log('seatChartsSettings.seats[fn.settings.nextSeatId',nextSeatId);
-				// 		console.log('seatChartsSettings.seats[fn.settings.character + nextColumnStr]',seatChartsSettings.seats[fn.settings.character].classes);
-				// 		if (seatChartsSettings.seats[fn.settings.character + nextColumnStr]) {
-				// 			// The next seat exists, you can access its class directly
-				// 			var nextSeatClass = seatChartsSettings.seats[fn.settings.character + nextColumnStr].classes;
-				// 			return { id: nextSeatId, class: nextSeatClass };
-				// 		}
-				// 		return null; // No next seat in the same row
-				// 	// };
-	
-				// 	var seat = fn; // Your seat object
-					// var nextSeatInfo = seat.hasNextSeat();
-					
-					// if (nextSeatInfo) {
-					// 	var nextSeatId = nextSeatInfo.id;
-					// 	var nextSeatClass = nextSeatInfo.class;
-					// 	console.log("Next Seat ID: " + nextSeatId);
-					// 	console.log("Next Seat Class: " + nextSeatClass);
-					// } else {
-					// 	console.log("No next seat in the same row.");
-					// }
-
-					if($.inArray(fn.settings.id, booked_seats_data) != '-1')
+					var setting_label=fn.settings.label
+					var setting_label_string=setting_label.toString();
+					console.log('fffffffffffffffffffffffffffffffffffffff',$.inArray('17', admin_hold_seat_array));
+					if($.inArray(fn.settings.id, booked_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
 					{
+					console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',fn.settings.id);
+
 						// fn.settings.status(fn.settings.id,'unvailable');
 						// fn.settings.status('2_15','unvailable');
 						fn.settings = $.extend({
@@ -243,7 +167,32 @@
 						}, setup);
 						fn.settings.$node = $('<div></div>');
 						var title='';
-					}else if($.inArray(fn.settings.id, temp_booked_seats_data) != '-1'  && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1'){
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+					}
+					else if($.inArray(fn.settings.id, temp_booked_seats_data) != '-1'  && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1'
+										&& $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
+					{
+					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc',fn.settings.id);
+
 						fn.settings = $.extend({
 							status : '', //available, unavailable, selected
 							style  : '',
@@ -658,132 +607,13 @@
 									ttttt += parseInt(-fn.settings.data.price);
 								}
 							}
-						// }
-						// else if(for_windows_cls=='window-economy-class' || for_windows_cls!='window-fourth-class'){
-						// 	// console.log(fn.settings.data);
-
-						// 	if($.inArray(next_id_str, temp_booking_data_id) == '-1')
-						// 	{
-
-						// 	}
-
-
-						// 	if($.inArray('available', current_next_cls_array) != '-1' 
-						// 	&& current_prev_cls.indexOf(check_str)!=-1 && current_next_cls_array.indexOf(check_str)==-1)
-
-
-
-
-						// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -'+ fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
-						// 	+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
-						// 	.attr('id', 'cart-item-' + fn.settings.id)
-						// 	.data('seatId', fn.settings.id)
-						// 	.appendTo($cart);
-
-						// 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
-						// 	pqr.push(fn.settings.data.price)
-						// 	$counter.text(temp_booked_seats_data.length);
-
-						// 	ttttt -= parseInt(fn.settings.data.price);
-						// 	ttttt += parseInt(win_price);
-						// }
-						// if(for_windows_cls=='economy-class' || for_windows_cls=='fourth-class'){
-
-						// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -'+ fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-						// .attr('id', 'cart-item-' + fn.settings.id)
-						// .data('seatId', fn.settings.id)
-						// .appendTo($cart);
-
-						// 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
-						// 	pqr.push(fn.settings.data.price)
-						// 	$counter.text(temp_booked_seats_data.length);
-
-						// 	// var last_seat_remove_price= parseInt(ttttt)-fn.settings.data.price;
-						// 	// var with_wind_price = parseInt(last_seat_remove_price)+parseInt(win_price);
-						// 	//  console.log('with_wind_price',with_wind_price);
-						// 	ttttt -= fn.settings.data.price;
-						// }
-
-						// var for_windows_cls=fn.settings.data.classes;
-						// if(for_windows_cls=='window-economy-class' || for_windows_cls=='window-fourth-class'){
-						// 	// var windows_price = seatChartsSettings.seats[setup.character].attr_win;
-
-						// 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
-						// pqr.push(fn.settings.data.price)
-						// $counter.text(temp_booked_seats_data.length);
-
-						//  var last_seat_remove_price= parseInt(ttttt)-fn.settings.data.price;
-						//  var with_wind_price = parseInt(last_seat_remove_price)+parseInt(win_price);
-						// //  console.log('with_wind_price',with_wind_price);
-						//  ttttt += parseInt(with_wind_price);
-						// }else if(for_windows_cls=='economy-class' || for_windows_cls=='fourth-class'){
-						// // 	seatChartsSettings.seats[setup.character].attr_win;
-						// // pqr.push(fn.settings.data.price)
-						// // $counter.text(temp_booked_seats_data.length);
-						// // ttttt += fn.settings.data.price;
-						// seatChartsSettings.seats[setup.character].attr_win;
-						// pqr.push(fn.settings.data.price)
-						// $counter.text(temp_booked_seats_data.length);
-
-						// var last_seat_remove_price= ttttt-fn.settings.data.price;
-						// //  var with_wind_price = last_seat_remove_price+win_price;
-						// console.log('last_seat_remove_price',last_seat_remove_price);
-						//  ttttt += parseInt(last_seat_remove_price);
-						// }else{
-						// 	pqr.push(fn.settings.data.price)
-						// $counter.text(temp_booked_seats_data.length);
-						// console.log(fn.settings.data.price);
-						// console.log('fn.settings.data.price',fn.settings.data.price);
-						// ttttt += parseInt(fn.settings.data.price);
-						// }
-						// // else if(for_windows_cls=='window-economy-class' || for_windows_cls=='window-fourth-class' && ttttt==0){
-						// // 	var win_price=seatChartsSettings.seats[setup.character].attr_win;
-						// // 	pqr.push(fn.settings.data.price)
-						// // 	$counter.text(temp_booked_seats_data.length);
-	
-						// // 	 var last_seat_remove_price= ttttt-fn.settings.data.price;
-						// // 	 var with_wind_price = last_seat_remove_price+win_price;
-						// // 	 ttttt += with_wind_price
-						// // }
-
 						
 						
 						$total.text(ttttt);
 						fn.settings.$node = $('<div></div>');
 						var title='';
-				}else if($.inArray(fn.settings.id, temp_hold_seats_data) != '-1'){
-						fn.settings = $.extend({
-							status : '', //available, unavailable, selected
-							style  : '',
-							//make sure there's an empty hash if user doesn't pass anything
-							data   : seatChartsSettings.seats[setup.character] || {}
-							//anything goes here?
-						}, setup);
 
-						fn.settings = $.extend({
-							status : 'hold', //available, unavailable, selected
-							style  : 'hold',
-							//make sure there's an empty hash if user doesn't pass anything
-							data   : seatChartsSettings.seats[setup.character] || {}
-							//anything goes here?
-						}, setup);
-						// console.log(fn.settings);
-
-
-						//   $('<li>' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-						// .attr('id', 'cart-item-' + fn.settings.id)
-						// .data('seatId', fn.settings.id)
-						// .appendTo($cart);
-
-						// pqr.push(fn.settings.data.price)
-						// $counter.text(temp_booked_seats_data.length);
-						// ttttt += fn.settings.data.price;
-						// $total.text(ttttt);
-						fn.settings.$node = $('<div></div>');
-						var title='This seat is on hold for some time';
-					}
-					
-					fn.settings.$node
+						fn.settings.$node
 						.attr({
 							id             : fn.settings.id,
 							role           : 'checkbox',
@@ -802,6 +632,97 @@
 							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
 								[] : seatChartsSettings.seats[fn.settings.character].classes
 							).join(' '));
+				}
+				else if($.inArray(fn.settings.id, temp_hold_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
+				{
+					console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',fn.settings.id);
+
+						fn.settings = $.extend({
+							status : '', //available, unavailable, selected
+							style  : '',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings = $.extend({
+							status : 'hold', //available, unavailable, selected
+							style  : 'hold',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings.$node = $('<div></div>');
+						var title='This seat is on hold for some time';
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+
+					}
+					else if($.inArray(setting_label_string, admin_hold_seat_array) != '-1' && $.inArray(fn.settings.id, booked_seats_data) == '-1'
+					        && $.inArray(fn.settings.id, temp_booked_seats_data) == '-1' && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1')
+					{
+						console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',fn.settings.id);
+
+						fn.settings = $.extend({
+							status : '', //available, unavailable, selected
+							style  : '',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings = $.extend({
+							status : 'unavailable', //available, unavailable, selected
+							style  : 'unavailable',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings.$node = $('<div></div>');
+						var title='This seat is on hold for some time';
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'admin_hold'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+					}
+					
+					
 
 
 					
