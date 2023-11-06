@@ -118,11 +118,7 @@ div.seatCharts-seat.hold {
 }
 
 div.seatCharts-seat.admin_hold {
-<<<<<<< HEAD
     background: rgb(147 91 241) !important;
-=======
-    background: rgb(147 91 241)!important;
->>>>>>> vivek_0910
     background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
 }
 
