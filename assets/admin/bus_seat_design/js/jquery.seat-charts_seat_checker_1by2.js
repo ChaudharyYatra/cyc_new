@@ -5,6 +5,12 @@
  * Copyright 2013, 2014 Mateusz Markowski
  * Released under the MIT license
  */
+if(js_array.length != 0){
+    var vehicle_seat_data = js_array;
+
+	var admin_hold_string = js_array.admin_hold_seats;
+    var admin_hold_seat_array = admin_hold_string.split(',');
+}
 
 (function($) {
 		
@@ -106,8 +112,31 @@
 					fn.settings.$node = $('<div></div>');
 					var title='';
 
+					fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
 
-					if($.inArray(fn.settings.id, booked_seats_data) != '-1')
+
+					var setting_label=fn.settings.label
+					var setting_label_string=setting_label.toString();		
+
+					if($.inArray(fn.settings.id, booked_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
 					{
 						
 						fn.settings = $.extend({
@@ -127,7 +156,30 @@
 						}, setup);
 						fn.settings.$node = $('<div></div>');
 						var title='';
-					}else if($.inArray(fn.settings.id, temp_booked_seats_data) != '-1'  && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1'){
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+					}
+					else if($.inArray(fn.settings.id, temp_booked_seats_data) != '-1'  && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1'
+										&& $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
+					{
 						fn.settings = $.extend({
 							status : '', //available, unavailable, selected
 							style  : '',
@@ -161,15 +213,8 @@
 						// if(for_windows_cls!='window-economy-class' && for_windows_cls!='window-fourth-class'){
 
 							if(for_windows_cls.indexOf(check_str)!=-1){
-
-						
-								// var clicked_prev=selected_seat_id-1;
-								// var prev_id_str=clicked_prev.toString();
-								// var clicked_next=parseInt(selected_seat_id)+1;
-								// var next_id_str=clicked_next.toString();
-
-								
-							if(fn.settings.label==1){
+	
+								if(fn.settings.label==1){
 									
 									var row = fn.settings.id.split('_')[0];
 									var column = parseInt(fn.settings.id.split('_')[1]);
@@ -201,20 +246,7 @@
 										.appendTo($cart);
 										pqr.push(fn.settings.data.price)
 										$counter.text(temp_booked_seats_data.length);
-										ttttt += parseInt(fn.settings.data.price);
-									// }
-									// else if($.inArray(next_id_str, temp_booking_data_id) == '-1'){
-									// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ fn.settings.id +'" attr_win_remove="win_'+ fn.settings.id +'">'
-									// 	+ fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. '+ fn.settings.data.attr_win + '</b></li>')
-									// 	.attr('id', 'cart-item-' + fn.settings.id)
-									// 	.data('seatId', fn.settings.id)
-									// 	.appendTo($cart);
-									// 	pqr.push(fn.settings.data.price)
-									// 	$counter.text(temp_booked_seats_data.length);
-									// 	ttttt += parseInt(fn.settings.data.price);
-									// 	ttttt += parseInt(fn.settings.data.attr_win);
-
-									// }	
+										ttttt += parseInt(fn.settings.data.price);	
 							}else if(fn.settings.label!=1)
 							{
 										var row = fn.settings.id.split('_')[0];
@@ -322,19 +354,6 @@
 										$counter.text(temp_booked_seats_data.length);
 										ttttt += parseInt(fn.settings.data.price);
 									}
-									// else if(prev_cls.indexOf(check_str)!=-1 && next_cls.indexOf(check_str)==-1
-									// 		&& $.inArray(next_id_str, temp_booking_data_id) != -1)
-									// {
-									// 	console.log('window4');
-									// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-									// 	.attr('id', 'cart-item-' + fn.settings.id)
-									// 	.data('seatId', fn.settings.id)
-									// 	.appendTo($cart);
-									// 	pqr.push(fn.settings.data.price)
-									// 	$counter.text(temp_booked_seats_data.length);
-									// 	// console.log(fn.settings.data.price);
-									// 	ttttt += parseInt(fn.settings.data.price);
-									// }
 
 								}
 
@@ -378,18 +397,6 @@
 										$counter.text(temp_booked_seats_data.length);
 										ttttt += parseInt(-fn.settings.data.price);
 									}
-                                    // else if(prev_cls.indexOf(check_str)!=-1 && next_cls.indexOf(check_str)==-1
-									// && $.inArray(next_id_str, temp_booking_data_id) != -1)
-									// {
-									// 	console.log('economy window 2');
-									// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-									// 	.attr('id', 'cart-item-' + fn.settings.id)
-									// 	.data('seatId', fn.settings.id)
-									// 	.appendTo($cart);
-									// 	pqr.push(fn.settings.data.price)
-									// 	$counter.text(temp_booked_seats_data.length);
-									// 	ttttt += parseInt(-fn.settings.data.price);
-									// }
                                     else if(prev_cls.indexOf(check_str)==-1 && next_cls.indexOf(check_str)!=-1
 									&& $.inArray(prev_id_str, temp_booking_data_id) == -1)
 									{
@@ -453,18 +460,6 @@
 										$counter.text(temp_booked_seats_data.length);
 										ttttt += parseInt(-fn.settings.data.price);
 									}
-                                    // else if(prev_cls.indexOf(check_str)!=-1 && next_cls.indexOf(check_str)==-1
-									// && $.inArray(next_id_str, temp_booking_data_id) != -1)
-									// {
-									// 	console.log('fourth window 2');
-									// 	$('<li class="cart-item-cls-'+ fn.settings.id +'">' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs. -' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-									// 	.attr('id', 'cart-item-' + fn.settings.id)
-									// 	.data('seatId', fn.settings.id)
-									// 	.appendTo($cart);
-									// 	pqr.push(fn.settings.data.price)
-									// 	$counter.text(temp_booked_seats_data.length);
-									// 	ttttt += parseInt(-fn.settings.data.price);
-									// }
                                     else if(prev_cls.indexOf(check_str)==-1 && total_seats == fn.settings.label
 									&& $.inArray(prev_id_str, temp_booking_data_id) == -1)
 									{
@@ -625,39 +620,8 @@
 						$total.text(ttttt);
 						fn.settings.$node = $('<div></div>');
 						var title='';
-				}else if($.inArray(fn.settings.id, temp_hold_seats_data) != '-1'){
-						fn.settings = $.extend({
-							status : '', //available, unavailable, selected
-							style  : '',
-							//make sure there's an empty hash if user doesn't pass anything
-							data   : seatChartsSettings.seats[setup.character] || {}
-							//anything goes here?
-						}, setup);
 
-						fn.settings = $.extend({
-							status : 'hold', //available, unavailable, selected
-							style  : 'hold',
-							//make sure there's an empty hash if user doesn't pass anything
-							data   : seatChartsSettings.seats[setup.character] || {}
-							//anything goes here?
-						}, setup);
-						// console.log(fn.settings);
-
-
-						//   $('<li>' + fn.settings.data.classes + ' Seat # ' + fn.settings.label + ': <b>Rs.' + fn.settings.data.price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-						// .attr('id', 'cart-item-' + fn.settings.id)
-						// .data('seatId', fn.settings.id)
-						// .appendTo($cart);
-
-						// pqr.push(fn.settings.data.price)
-						// $counter.text(temp_booked_seats_data.length);
-						// ttttt += fn.settings.data.price;
-						// $total.text(ttttt);
-						fn.settings.$node = $('<div></div>');
-						var title='This seat is on hold for some time';
-					}
-					
-					fn.settings.$node
+						fn.settings.$node
 						.attr({
 							id             : fn.settings.id,
 							role           : 'checkbox',
@@ -676,6 +640,92 @@
 							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
 								[] : seatChartsSettings.seats[fn.settings.character].classes
 							).join(' '));
+				}else if($.inArray(fn.settings.id, temp_hold_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
+				{
+						fn.settings = $.extend({
+							status : '', //available, unavailable, selected
+							style  : '',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings = $.extend({
+							status : 'hold', //available, unavailable, selected
+							style  : 'hold',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings.$node = $('<div></div>');
+						var title='This seat is on hold for some time';
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'available'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+					}
+					else if($.inArray(setting_label_string, admin_hold_seat_array) != '-1' && $.inArray(fn.settings.id, booked_seats_data) == '-1'
+					        && $.inArray(fn.settings.id, temp_booked_seats_data) == '-1' && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1')
+					{
+
+						fn.settings = $.extend({
+							status : '', //available, unavailable, selected
+							style  : '',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings = $.extend({
+							status : 'unavailable', //available, unavailable, selected
+							style  : 'unavailable',
+							//make sure there's an empty hash if user doesn't pass anything
+							data   : seatChartsSettings.seats[setup.character] || {}
+							//anything goes here?
+						}, setup);
+
+						fn.settings.$node = $('<div></div>');
+						var title='This seat is on hold for some time';
+
+						fn.settings.$node
+						.attr({
+							id             : fn.settings.id,
+							role           : 'checkbox',
+							'aria-checked' : false,
+							focusable      : true,
+							tabIndex       : -1, //manual focus
+							data_id		   : did,
+							title          : title,
+							seat_type      :fn.settings.data.classes,
+							seat_price     :fn.settings.data.price,
+						})
+						.text(fn.settings.label)
+						.addClass(['seatCharts-seat', 'seatCharts-cell', 'admin_hold'].concat(
+							//let's merge custom user defined classes with standard JSC ones
+							fn.settings.classes, 
+							typeof seatChartsSettings.seats[fn.settings.character] == "undefined" ? 
+								[] : seatChartsSettings.seats[fn.settings.character].classes
+							).join(' '));
+					}
+					
+					
 
 
 					

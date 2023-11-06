@@ -39,6 +39,9 @@
     var new_fourth_string = array_data.fourth_cls_seats;
     var new_fourth_array = new_fourth_string.split(',');
 
+    var admin_hold_string = array_data.admin_hold_seats;
+    var admin_hold_array = admin_hold_string.split(',');
+
 
 
 
@@ -308,6 +311,13 @@ for (var i = 0; i < resultArray.length; i++) {
                         category: 'Hold Class',
                         attr_win: '',
 
+                    },
+                    z: {
+                        price: '0',
+                        classes: 'admin_hold', //your custom CSS class
+                        category: 'Admin Hold Class',
+                        attr_win: '',
+
                     }
                 },
                 naming: {
@@ -328,6 +338,7 @@ for (var i = 0; i < resultArray.length; i++) {
                         ['u', 'unavailable', 'Already Booked'],
                         ['a', 'selected', 'Selected'],
                         ['h', 'hold', 'Hold Seats'],
+                        ['z', 'admin_hold', 'Admin Hold Seats'],
                         ['b', 'available', 'Window Seats'],
                     ]
                 },
@@ -1182,6 +1193,8 @@ for (var i = 0; i < resultArray.length; i++) {
                         var check_str_economy='economy-class';
                         var check_str_window_fourth='window-fourth-class';
                         var check_str_fourth='fourth-class';
+                        var check_admin_hold="admin_hold";
+
                        
                         // हा कोड सीट सिलेक्ट करताना विंडो सीट आहे का हे चेक क्रय साठी वापरला आहे =================================================================================================
                         if(seat_type.indexOf(check_str)!=-1)
@@ -1247,6 +1260,20 @@ for (var i = 0; i < resultArray.length; i++) {
                                         var win_additional_cost= parseInt(this.data().price)+parseInt(this.data().attr_win);
                                         $total.text(recalculateTotal(sc,click_id,selection_array) + win_additional_cost);
                                     }
+                                    if($.inArray('admin_hold', clicked_prev_cls_array) != '-1' && prev_seat_type.indexOf(check_str)==-1
+                                                    && clicked_next_cls.indexOf(check_str)!=-1)
+                                    {  
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        .attr('id', 'cart-item-' + this.settings.id)
+                                        .attr('class', 'cart-item-cls-' + this.settings.id)
+                                        .data('seatId', this.settings.id)
+                                        .appendTo($cart);
+                                        $counter.text(sc.find('selected').length + 1);
+                                
+                                        var win_additional_cost= parseInt(this.data().price)+parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) + win_additional_cost);
+                                    }
                                         //हा कोड चेक करतो कि सिलेक्ट केलेलं विंडो सीटच्या मगच सीट हे उपलब्ध नाही आणि ते मगच सीट हे विंडो सीट नाही 
                                     else if($.inArray('selected', clicked_prev_cls_array) != '-1' && prev_seat_type.indexOf(check_str)==-1
                                                 && clicked_next_cls.indexOf(check_str)!=-1)
@@ -1288,18 +1315,6 @@ for (var i = 0; i < resultArray.length; i++) {
                                 
                                         $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(this.data().price));
                                     }
-                                    // else if(clicked_prev_cls.indexOf(check_str)!=-1 &&  clicked_next_cls.indexOf(check_str)==-1
-                                    //         && $.inArray('selected', clicked_next_cls_array) != '-1')
-                                    // {    
-                                    //     $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-                                    //     .attr('id', 'cart-item-' + this.settings.id)
-                                    //     .attr('class', 'cart-item-cls-' + this.settings.id)
-                                    //     .data('seatId', this.settings.id)
-                                    //     .appendTo($cart);
-                                    //     $counter.text(sc.find('selected').length + 1);
-                                
-                                    //     $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(this.data().price));
-                                    // }
                                     else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
                                             && $.inArray('available', clicked_prev_cls_array) != '-1')
                                     {    
@@ -1313,7 +1328,22 @@ for (var i = 0; i < resultArray.length; i++) {
                                 
                                         var economy_cls_reduced_amt= parseInt(-this.data().price)+parseInt(this.data().attr_win);
                                         $total.text(recalculateTotal(sc,click_id,selection_array) + economy_cls_reduced_amt);
-                                     }else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
+                                     }
+                                     else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
+                                            && $.inArray('admin_hold', clicked_prev_cls_array) != '-1')
+                                    {    
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        .attr('id', 'cart-item-' + this.settings.id)
+                                        .attr('class', 'cart-item-cls-' + this.settings.id)
+                                        .data('seatId', this.settings.id)
+                                        .appendTo($cart);
+                                        $counter.text(sc.find('selected').length + 1);
+                                
+                                        var economy_cls_reduced_amt= parseInt(-this.data().price)+parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) + economy_cls_reduced_amt);
+                                     }
+                                     else if(clicked_prev_cls.indexOf(check_str)==-1 &&  clicked_next_cls.indexOf(check_str)!=-1
                                      && $.inArray('selected', clicked_prev_cls_array) != '-1')
                                     {    
                                         $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
@@ -1354,6 +1384,20 @@ for (var i = 0; i < resultArray.length; i++) {
                                     } 
                                     else if(clicked_prev_cls.indexOf(check_str)==-1 && click_id==total_seat_count
                                              && $.inArray('available', clicked_prev_cls_array) != '-1')
+                                    { 
+                                        $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
+                                        + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
+                                        .attr('id', 'cart-item-' + this.settings.id)
+                                        .attr('class', 'cart-item-cls-' + this.settings.id)
+                                        .data('seatId', this.settings.id)
+                                        .appendTo($cart);
+                                        $counter.text(sc.find('selected').length + 1);
+                                
+                                        var economy_cls_reduced_amt= parseInt(-this.data().price)+parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) + economy_cls_reduced_amt);
+                                    }
+                                    else if(clicked_prev_cls.indexOf(check_str)==-1 && click_id==total_seat_count
+                                             && $.inArray('admin_hold', clicked_prev_cls_array) != '-1')
                                     { 
                                         $('<li class="cart-item-cls-'+ this.settings.id +'">' + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. -' + this.data().price + '</b> <a href="#" class="cancel-cart-item">[cancel]</a></li><li class="cart-item-cls-'+ this.settings.id +'" attr_win_remove="win_'+ this.settings.id +'">'
                                         + this.data().category + ' Seat # ' + this.settings.label + ': <b>Rs. ' + this.data().attr_win + '</b></li>')
@@ -1511,9 +1555,18 @@ for (var i = 0; i < resultArray.length; i++) {
                                 }
                                 if(selected_cls.indexOf(check_str_window_economy)==-1 && selected_cls.indexOf(check_str_window_fourth)==-1)
                                 {    
-                                    alert('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                                     //हा कोड चेक करतो कि क्लिक केलेल्या  विंडो सीटच्या मगच सीट हे उपलब्ध आहे आणि ते मागच सीट हे विंडो सीट नाही 
                                     if($.inArray('available', current_prev_cls_array) != '-1' && current_prev_cls.indexOf(check_str)==-1
+                                                    && current_next_cls.indexOf(check_str)!=-1)
+                                    {
+                                        alert('selected1');
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        selection_array.splice($.inArray(click_id, selection_array), 1);
+
+                                        var win_price_for_remove = parseInt(this.data().price) +  parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(win_price_for_remove));
+                                    }
+                                    else if($.inArray('admin_hold', current_prev_cls_array) != '-1' && current_prev_cls.indexOf(check_str)==-1
                                                     && current_next_cls.indexOf(check_str)!=-1)
                                     {
                                         alert('selected1');
@@ -1555,6 +1608,16 @@ for (var i = 0; i < resultArray.length; i++) {
                                         $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(economy_cls_for_remove_amt));
                                     }
                                     else if(current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1 
+                                    && current_cls.indexOf(check_str)!=-1 && $.inArray('admin_hold', current_prev_cls_array) != '-1')
+                                    {
+                                        $('#cart-item-' + this.settings.id).remove();
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        selection_array.splice($.inArray(click_id, selection_array), 1);
+
+                                        var economy_cls_for_remove_amt = parseInt(-this.data().price) +  parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(economy_cls_for_remove_amt));
+                                    }
+                                    else if(current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1 
                                     && current_cls.indexOf(check_str)!=-1 && $.inArray('selected', current_prev_cls_array) != '-1')
                                     {
                                         $('#cart-item-' + this.settings.id).remove();
@@ -1577,19 +1640,19 @@ for (var i = 0; i < resultArray.length; i++) {
 
                                         $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(-this.data().price));
                                     }
-                                    // else if(current_prev_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)==-1 
-                                    //         && current_cls.indexOf(check_str)!=-1 && $.inArray('selected', current_next_cls_array) != '-1'
-                                    //         && $.inArray(last_seat_id, selection_array) == '-1')
-                                    // {
-                                    //     // alert('already_selected11');
-                                    //     $('#cart-item-' + this.settings.id).remove();
-                                    //     selection_array.splice($.inArray(click_id, selection_array), 1);
-
-                                    //     // var fourth_cls_for_remove_amt = parseInt(-this.data().price) +  parseInt(this.data().attr_win);
-                                    //     $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(-this.data().price));
-                                    // }
                                     else if(clicked_prev_cls.indexOf(check_str)==-1 &&  click_id==total_seat_count
                                                 && $.inArray('available', clicked_prev_cls_array) != '-1')
+                                    { 
+                                        // alert('already_selected2');
+                                        $('#cart-item-' + this.settings.id).remove();
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        selection_array.splice($.inArray(click_id, selection_array), 1);
+
+                                        var economy_cls_for_remove_amt = parseInt(-this.data().price) +  parseInt(this.data().attr_win);
+                                        $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(economy_cls_for_remove_amt));
+                                    }
+                                    else if(clicked_prev_cls.indexOf(check_str)==-1 &&  click_id==total_seat_count
+                                                && $.inArray('admin_hold', clicked_prev_cls_array) != '-1')
                                     { 
                                         // alert('already_selected2');
                                         $('#cart-item-' + this.settings.id).remove();
@@ -1608,20 +1671,6 @@ for (var i = 0; i < resultArray.length; i++) {
 
                                         $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(-this.data().price));
                                     }
-                                    
-                                    
-                                    
-                                    // else if(current_prev_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)==-1 
-                                    // && current_cls.indexOf(check_str)!=-1 && $.inArray('available', current_next_cls_array) != '-1')
-                                    // {
-                                    //     // alert('already_selected3');
-                                    //     $('#cart-item-' + this.settings.id).remove();
-                                    //     $("[attr_win_remove=win_" + this.settings.id + "]").remove();
-                                    //     selection_array.splice($.inArray(click_id, selection_array), 1);
-
-                                    //     var fourth_cls_for_remove_amt = parseInt(-this.data().price) +  parseInt(this.data().attr_win);
-                                    //     $total.text(recalculateTotal(sc,click_id,selection_array) - parseInt(fourth_cls_for_remove_amt));
-                                    // }
                                 }    
                             }
                         }
@@ -1739,7 +1788,18 @@ for (var i = 0; i < resultArray.length; i++) {
                                         total += parseInt(this.data().price);
                                         total += parseInt(this.data().attr_win);
 
-                                    }else if(click_id == prev_seat_number_id
+                                    }
+                                    if(click_id == current_seat_number_id && click_id!=prev_seat_number_id && $.inArray('admin_hold', current_prev_cls_array) != '-1' 
+                                    && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1)
+                                    {   
+                                        alert('n1');
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        selection_array.splice($.inArray(click_id, selection_array), 1);
+                                        total += parseInt(this.data().price);
+                                        total += parseInt(this.data().attr_win);
+
+                                    }
+                                    else if(click_id == prev_seat_number_id
                                                 && ($.inArray('focused', current_prev_cls_array) != '-1' || $.inArray('available', current_prev_cls_array) != '-1')
                                             && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1)
                                     {   
@@ -1806,6 +1866,14 @@ for (var i = 0; i < resultArray.length; i++) {
                                     }
                                     else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id
                                         && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1
+                                        && $.inArray('admin_hold', current_prev_cls_array) != '-1')
+                                    {   
+                                        alert('n111');
+                                        total += parseInt(this.data().price);    
+                                        total += parseInt(this.data().attr_win);
+                                    }
+                                    else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id
+                                        && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1
                                         && $.inArray('selected', current_prev_cls_array) != '-1')
                                     {   
                                         alert('n1111');
@@ -1839,16 +1907,14 @@ for (var i = 0; i < resultArray.length; i++) {
                                         // total += parseInt(this.data().attr_win);   
 
                                     }
-                                    // else if(click_id != prev_seat_number_id && click_id == next_seat_number_id && click_id != current_seat_number_id
-                                    //     && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1
-                                    //     && current_cls.indexOf(check_str)!=-1 && $.inArray('selected', current_prev_cls_array) != '-1')
-                                    // {   
-                                    //     alert('a555');
-                                    //     total += parseInt(-this.data().price);    
-                                    //     // total += parseInt(this.data().attr_win);   
-
-                                    // }
                                     else if(click_id == current_seat_number_id && $.inArray('available', current_prev_cls_array) != '-1' 
+                                                && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1)
+                                    {   
+                                        alert('a7');
+                                        total += parseInt(-this.data().price);    
+                                        total += parseInt(this.data().attr_win);
+                                    }
+                                    else if(click_id == current_seat_number_id && $.inArray('admin_hold', current_prev_cls_array) != '-1' 
                                                 && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1)
                                     {   
                                         alert('a7');
@@ -1892,14 +1958,6 @@ for (var i = 0; i < resultArray.length; i++) {
                                         // total += parseInt(this.data().attr_win);
 
                                     }
-                                    // else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id &&
-                                    //     $.inArray('selected', current_next_cls_array) != '-1' && current_prev_cls.indexOf(check_str)!=-1
-                                    //     && current_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)==-1)
-                                    // {   
-                                    //     alert('a12');
-                                    //     total += parseInt(-this.data().price); 
-
-                                    // }
                                     else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id &&
                                         $.inArray('available', current_prev_cls_array) != '-1' && current_prev_cls.indexOf(check_str)==-1
                                         && current_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)!=-1)
@@ -1909,7 +1967,18 @@ for (var i = 0; i < resultArray.length; i++) {
                                         total += parseInt(-this.data().price); 
                                         total += parseInt(this.data().attr_win);
 
-                                    }else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id &&
+                                    }
+                                    else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id &&
+                                        $.inArray('admin_hold', current_prev_cls_array) != '-1' && current_prev_cls.indexOf(check_str)==-1
+                                        && current_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)!=-1)
+                                    {   
+                                        alert('a13');
+
+                                        total += parseInt(-this.data().price); 
+                                        total += parseInt(this.data().attr_win);
+
+                                    }
+                                    else if(click_id != prev_seat_number_id && click_id != next_seat_number_id && click_id != current_seat_number_id &&
                                         $.inArray('selected', current_prev_cls_array) != '-1' && current_prev_cls.indexOf(check_str)==-1
                                         && current_cls.indexOf(check_str)!=-1 && current_next_cls.indexOf(check_str)!=-1)
                                     {   
@@ -1956,6 +2025,14 @@ for (var i = 0; i < resultArray.length; i++) {
                                         total += parseInt(this.data().attr_win);
                                     }
                                     else if(current_prev_cls.indexOf(check_str)==-1 &&  click_id==total_seat_count 
+                                    && $.inArray('admin_hold', current_prev_cls_array) != '-1')
+                                    {
+                                        alert('22');
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        total += parseInt(-this.data().price); 
+                                        total += parseInt(this.data().attr_win);
+                                    }
+                                    else if(current_prev_cls.indexOf(check_str)==-1 &&  click_id==total_seat_count 
                                                 && $.inArray('selected', current_prev_cls_array) != '-1')
                                     {
                                         alert('2');
@@ -1994,7 +2071,17 @@ for (var i = 0; i < resultArray.length; i++) {
                                         selection_array.splice($.inArray(click_id, selection_array), 1);
                                         total += parseInt(-this.data().price);    
                                         total += parseInt(this.data().attr_win);
-                                    }else if(click_id == current_seat_number_id && $.inArray('selected', current_prev_cls_array) != '-1' 
+                                    }
+                                    else if(click_id == current_seat_number_id && $.inArray('admin_hold', current_prev_cls_array) != '-1' 
+                                    && current_prev_cls.indexOf(check_str)==-1)
+                                    {   
+                                        alert('5');
+                                        $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                        selection_array.splice($.inArray(click_id, selection_array), 1);
+                                        total += parseInt(-this.data().price);    
+                                        total += parseInt(this.data().attr_win);
+                                    }
+                                    else if(click_id == current_seat_number_id && $.inArray('selected', current_prev_cls_array) != '-1' 
                                                 && current_prev_cls.indexOf(check_str)==-1)
                                     {   
                                         alert('55');

@@ -7,12 +7,10 @@
  */
 if(js_array.length != 0){
     var vehicle_seat_data = js_array;
-	// var admin_hold_seat_array= vehicle_seat_data.admin_hold_seats;
 
 	var admin_hold_string = js_array.admin_hold_seats;
     var admin_hold_seat_array = admin_hold_string.split(',');
 }
-// console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',admin_hold_seat_array);
 
 (function($) {
 		
@@ -143,11 +141,8 @@ if(js_array.length != 0){
 
 					var setting_label=fn.settings.label
 					var setting_label_string=setting_label.toString();
-					console.log('fffffffffffffffffffffffffffffffffffffff',$.inArray('17', admin_hold_seat_array));
 					if($.inArray(fn.settings.id, booked_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
 					{
-					console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',fn.settings.id);
-
 						// fn.settings.status(fn.settings.id,'unvailable');
 						// fn.settings.status('2_15','unvailable');
 						fn.settings = $.extend({
@@ -191,7 +186,6 @@ if(js_array.length != 0){
 					else if($.inArray(fn.settings.id, temp_booked_seats_data) != '-1'  && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1'
 										&& $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
 					{
-					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc',fn.settings.id);
 
 						fn.settings = $.extend({
 							status : '', //available, unavailable, selected
@@ -635,8 +629,6 @@ if(js_array.length != 0){
 				}
 				else if($.inArray(fn.settings.id, temp_hold_seats_data) != '-1' && $.inArray(setting_label_string, admin_hold_seat_array) == '-1')
 				{
-					console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',fn.settings.id);
-
 						fn.settings = $.extend({
 							status : '', //available, unavailable, selected
 							style  : '',
@@ -676,7 +668,7 @@ if(js_array.length != 0){
 								[] : seatChartsSettings.seats[fn.settings.character].classes
 							).join(' '));
 
-					}
+				}
 					else if($.inArray(setting_label_string, admin_hold_seat_array) != '-1' && $.inArray(fn.settings.id, booked_seats_data) == '-1'
 					        && $.inArray(fn.settings.id, temp_booked_seats_data) == '-1' && $.inArray(fn.settings.id, temp_hold_seats_data) == '-1')
 					{
