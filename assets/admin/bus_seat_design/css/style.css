@@ -88,14 +88,14 @@ div.seatCharts-seat.available {
 }
 
 div.seatCharts-seat.available.first-class {
-    background: rgb(178, 64, 212);
-    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+    background: rgb(255, 198, 243)!important;
+    /* background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%); */
 }
 
 
 div.seatCharts-seat.available.second-class {
-    background: rgb(12, 223, 82)!important;
-    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+    background: rgb(221 221 221)!important;
+    /* background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%); */
 }
 
 div.seatCharts-seat.available.economy-class {

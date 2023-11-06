@@ -49,7 +49,6 @@
 
 
 
-    // var total_seat_count = parseInt(first_cls_cnt) + parseInt(second_cls_cnt) + parseInt(economy_cls_cnt);
     var total_seat_count = parseInt(first_cls_cnt) + parseInt(second_cls_cnt) + parseInt(economy_cls_cnt) + parseInt(fourth_cls_cnt);
 
     var first_cls_amt = parseInt(array_data.first_class_price);
@@ -110,23 +109,6 @@ for (var q = 1; q <= total_seat_count; q++) {
     }
 }
 
-
-    // var final=[];
-    // for(var p=0;p<total_seat_count;p++) {
-    //     add_p=parseInt(p)+parseInt(1);
-    //     var p_string = add_p.toString();
-
-    //   if($.inArray(p_string, new_first_array)!= '-1') {
-    //     final.push(abc[p]);
-    //   }
-    //    else if($.inArray(p_string, new_second_array)!= '-1') {
-    //       final.push(xyz[p]);
-    //   }
-    //    else if($.inArray(p_string, new_third_array)!= '-1') {
-    //     final.push(pqr[p]);
-    // }
-    // }
-
     var final=[];
 for(var p=0; p<total_seat_count; p++) {
     add_p = parseInt(p) + parseInt(1);
@@ -163,6 +145,7 @@ for(var p=0; p<total_seat_count; p++) {
             if ((i + 1) % 2 === 0 && (i + 1) % 4 != 0) {
                 myString += "_";
             }
+            
             var ooo = final_filtered_a.length - 1;
             if ((i + 1) % 4 === 0) {
                 myString = myString.substring(0, myString.length - 1);
@@ -259,46 +242,12 @@ for(var p=0; p<total_seat_count; p++) {
                 {
                     myString_fourth += "d"; 
                 }      
-                // var remain = final_filtered_a.length - i;
-                // if ((i + 1) % 2 === 0 && (i + 1) % 4 != 0 && remain > 5) {
-                //     myString_economy += "_";
-                // }
-                // var ooo = final_filtered_a.length - 1;
-                // if ((i + 1) % 4 === 0 && remain > 2) {
-                //     myString_economy = myString_economy.substring(0, myString_economy.length - 1);
-                //     myString_economy += "c,";
-                // } else if ((i + 1) % 4 === 1 && i != 0) {
-                //     myString_economy = myString_economy.substring(0, myString_economy.length - 1);
-                //     myString_economy += "c";
-                // } else if (i == 0) {
-                //     myString_economy = myString_economy.substring(0, myString_economy.length - 1);
-                //     myString_economy += "c";
-                // }
             } else {
                 myString_fourth += "";
             }
         }
     }
 
-// var myString_fourth = "d";
-// for (var i = 0; i < final_filtered_a.length; i++) {
-//     if(final_filtered_a[i]=='v' || final_filtered_a[i]=='u')
-//     {
-//         if ((i + 1) % 2 === 0 && (i + 1) % 4 != 0 && remain > 5) {
-//                     myString_fourth += "_";
-//                 }
-//         var i_string = i.toString();
-//         if ($.inArray(i_string, new_fourth_array) != '-1') {
-//             myString_fourth += final_filtered_a[i];
-//         }else if ((i + 1) % 4 === 1 && i != 0) {
-//                     myString_fourth = myString_fourth.substring(0, myString_fourth.length - 1);
-//                     myString_fourth += "d";
-//             //     } 
-//         //  else {
-//         //     myString_fourth += "";
-//         }
-//     }
-// }
 
     // =============================================================================================================================================================
 
@@ -872,8 +821,9 @@ for(var p=0; p<total_seat_count; p++) {
                             var middle_seat_pre_array = middle_seat_pre_string.split(" ");
 
                             if (($.inArray('available', middle_seat_pre_array) != '-1')) {
-                                console.log('lllllllllllllllllllllllllllllll');
                                 var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                                console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
+
                                 $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
                             }else{
                                 console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
@@ -1036,22 +986,24 @@ for(var p=0; p<total_seat_count; p++) {
                             // $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
 
                             // var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                            // console.log('ssssssssssssssssssssssssssssssssssssssssssssssssssss',seat_cost_with_window);
                             //         $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
 
-                            if (($.inArray('available', middle_next_seat_array) != '-1')) {
-                                var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
-                                console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
 
-                                $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
-                            }else{
-                                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 
-                                    // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
 
-                                    $total.text(recalculateTotal(sc,click_id,selection_array) + this.data().price);
+                                    if (($.inArray('available', middle_next_seat_array) != '-1')) {
+                                        var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                                        console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
+        
+                                        $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
+                                    }else{
+                                        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                                        
+                                            // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
+                                            $total.text(recalculateTotal(sc,click_id,selection_array) + this.data().price); 
+                                    }
 
-                            }
-                           
                             //remove the item from our cart
                             $('#cart-item-' + this.settings.id).remove();
                             var p = this.settings.id;
