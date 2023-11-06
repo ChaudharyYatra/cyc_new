@@ -5471,6 +5471,7 @@ $(document).ready(function(){
   <?php   }else{ ?>
         var temp_array=[];
    <?php  } ?>
+// alert(temp_array);
 
   var temp_booke_data = $('#temp_booked_data').val();
   var is_main_page = $('#is_main_page').val();
