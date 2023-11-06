@@ -63,7 +63,7 @@ a {
 }
 
 div.seatCharts-cell {
-    color: #1a1c1e;
+    color: #1a1c1e !important;
     height: 4em;
     width: 14.666666%;
     line-height: .5em;
@@ -83,26 +83,35 @@ div.seatCharts-row {
 }
 
 div.seatCharts-seat.available {
-    background: rgb(16, 125, 202);
+    /* background: rgb(16, 125, 202); */
     /* background: radial-gradient(circle, rgba(156, 195, 222, 1) 0%, rgba(110, 185, 238, 1) 25%, rgba(64, 144, 212, 1) 50%, rgba(46, 135, 196, 1) 75%, rgba(40, 121, 177, 1) 100%); */
 }
 
-div.seatCharts-seat.available.first-class {
-    background: rgb(178, 64, 212);
-    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+div.seatCharts-seat.available.first-class, div.seatCharts-seat.available.window-first-class {
+    background: rgb(255, 198, 243)!important;
+    /* background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%); */
 }
 
 
-div.seatCharts-seat.available.second-class {
-    background: rgb(12, 223, 82)!important;
-    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+div.seatCharts-seat.available.second-class, div.seatCharts-seat.available.window-second-class {
+    background: rgb(221 221 221)!important;
+    /* background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%); */
 }
 
-div.seatCharts-seat.available.economy-class {
-    background: rgb(12, 223, 195)!important;
-    background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);
+div.seatCharts-seat.available.economy-class, div.seatCharts-seat.available.window-economy-class {
+    background: rgb(249 252 140 /74%)!important;
+    /* background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%); */
 }
 
+/* new vivek */
+div.seatCharts-seat.available.window-fourth-class, div.seatCharts-seat.available.fourth-class{
+    background: rgb(179, 219, 222)!important;
+}
+
+div.seatCharts-seat.available.window-fourth-class.hold, div.seatCharts-seat.available.fourth-class.hold{
+    background: rgb(223, 174, 12) !important;
+}
+/*  */
 div.seatCharts-seat.hold {
     background: rgb(223, 174, 12)!important;
     background: radial-gradient(circle, rgba(178, 64, 212, 1) 0%, rgba(137, 26, 158, 1) 25%, rgba(118, 12, 149, 1) 50%, rgba(126, 17, 149, 1) 75%, rgba(94, 2, 121, 1) 100%);

@@ -48,7 +48,7 @@ class Payment_receipt extends CI_Controller {
         $arr_data = $this->master_model->getRecord('all_traveller_info',array('all_traveller_info.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
         $traveller_id = $arr_data['id'];
-        
+        // print_r($traveller_id); die;
 
         $record = array();
         $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,

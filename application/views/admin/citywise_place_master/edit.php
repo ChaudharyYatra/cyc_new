@@ -39,7 +39,6 @@
                 <div class="card-body">
                   
                   <div class="row"> 
-
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Select District</label>
