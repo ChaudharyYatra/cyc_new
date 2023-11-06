@@ -150,7 +150,7 @@
 
                         <div class="col-md-4">
                           <div class="form-group">
-                            <a href="<?php echo $module_booking_enquiry; ?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a>
+                            <a href="<?php echo $module_booking_enquiry; ?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" id="booking_back" >Back</button></a>
                             <a href="<?php echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
                             <button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item"><a style="color: #fff;text-decoration: none;" href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $agent_booking_enquiry_data['id']; ?>">Booking</a></button>
                           </div>

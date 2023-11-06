@@ -5288,6 +5288,32 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+$(document).ready(function(){
+
+    $("#booking_back").click(function() {  
+        
+        var enquiry_seat_count = $("#enquiry_seat_count").val();
+        var selected_seat = $('#selected-seats li').length;
+        // alert(selected_seat);
+
+       
+        if (selected_seat != '') {
+            var is_confirmed=confirm("Do you want to hold your selected seats ? if 'Yes' then click on 'Ok' and if you do not want to hold your selected seats then click on 'Cancel' and unselect selected seats and go back.");
+            if(is_confirmed)
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
+    });
+
+});
+</script>
+
 <script type='text/javascript'>
 
   $(document).ready(function(){
