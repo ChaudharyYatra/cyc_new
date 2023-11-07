@@ -685,7 +685,6 @@ for(var p=0; p<total_seat_count; p++) {
                             
                             if ($.inArray(last_seat_id, selection_array) != '-1' && ($.inArray('available', middle_next_seat_array) != '-1')) 
                             {
-                                // console.log('ssssssssssssss/sssssssssss');
                                 var amt_for_addition = recalculateTotal(sc,click_id,selection_array);
 
                                 var last_seat_string = $("[data_id=" + total_seat_count + "]").attr('class');
@@ -807,7 +806,14 @@ for(var p=0; p<total_seat_count; p++) {
                                 console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
 
                                 $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
-                            }else{
+                            }
+                            if (($.inArray('admin_hold', middle_seat_pre_array) != '-1')) {
+                                var seat_cost_with_window= recalculateTotal(sc,click_id,selection_array) + this.data().price;
+                                console.log('lllllllllllllllllllllllllllllll',seat_cost_with_window);
+
+                                $total.text(parseInt(array_data.window_class_price)-parseInt(seat_cost_with_window));
+                            }
+                            else{
                                 // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                                 
                                     // $seat_cost_with_window= recalculateTotal(sc) - this.data().price;
