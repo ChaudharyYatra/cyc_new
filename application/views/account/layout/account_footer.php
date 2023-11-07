@@ -1599,3 +1599,1782 @@ $('#edit_batch_masters').validate({ // initialize the plugin
 </script>
 <!-- Inventory Masters in that Batch Masters validation -->
 
+<!-- Inventory Masters in that Warranty Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_warranty_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        warranty_title: {
+            required: true,
+        },
+        warranty_description: {
+            required: true,
+        },
+        warranty_type: {
+            required: true,
+        },
+        warranty_duration: {
+            required: true,
+        },
+        warranty_start_date: {
+            required: true,
+        },
+        warranty_end_date: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        warranty_title : {
+            required : "Please enter warranty title",
+        },
+        warranty_description : {
+            required : "Please enter warranty description",
+        },
+        warranty_type : {
+            required : "Please enter warranty type",
+        },
+        warranty_duration : {
+            required : "Please enter warranty duration",
+        },
+        warranty_start_date : {
+            required : "Please select warranty start date",
+        },
+        warranty_end_date : {
+            required : "Please select warranty end date",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_warranty_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        warranty_title: {
+            required: true,
+        },
+        warranty_description: {
+            required: true,
+        },
+        warranty_type: {
+            required: true,
+        },
+        warranty_duration: {
+            required: true,
+        },
+        warranty_start_date: {
+            required: true,
+        },
+        warranty_end_date: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        warranty_title : {
+            required : "Please enter warranty title",
+        },
+        warranty_description : {
+            required : "Please enter warranty description",
+        },
+        warranty_type : {
+            required : "Please enter warranty type",
+        },
+        warranty_duration : {
+            required : "Please enter warranty duration",
+        },
+        warranty_start_date : {
+            required : "Please select warranty start date",
+        },
+        warranty_end_date : {
+            required : "Please select warranty end date",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Warranty Masters validation -->
+
+<!-- Inventory Masters in that Serial Number Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_serial_number').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        product_name: {
+            required: true,
+        },
+        product_description: {
+            required: true,
+        },
+        manufacturer: {
+            required: true,
+        },
+        manufacturing_date: {
+            required: true,
+        },
+        purchase_date: {
+            required: true,
+        },
+        purchase_order_no: {
+            required: true,
+        },
+        serial_number: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        product_name : {
+            required : "Please enter product name",
+        },
+        product_description : {
+            required : "Please enter product description",
+        },
+        manufacturer : {
+            required : "Please enter manufacturer",
+        },
+        manufacturing_date : {
+            required : "Please enter manufacturing date",
+        },
+        purchase_date : {
+            required : "Please select purchase date",
+        },
+        purchase_order_no : {
+            required : "Please purchase order no",
+        },
+        serial_number : {
+            required : "Please enter serial number",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_serial_number').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        product_name: {
+            required: true,
+        },
+        product_description: {
+            required: true,
+        },
+        manufacturer: {
+            required: true,
+        },
+        manufacturing_date: {
+            required: true,
+        },
+        purchase_date: {
+            required: true,
+        },
+        purchase_order_no: {
+            required: true,
+        },
+        serial_number: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        product_name : {
+            required : "Please enter product name",
+        },
+        product_description : {
+            required : "Please enter product description",
+        },
+        manufacturer : {
+            required : "Please enter manufacturer",
+        },
+        manufacturing_date : {
+            required : "Please enter manufacturing date",
+        },
+        purchase_date : {
+            required : "Please select purchase date",
+        },
+        purchase_order_no : {
+            required : "Please purchase order no",
+        },
+        serial_number : {
+            required : "Please enter serial number",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Serial Number Masters validation -->
+
+<!-- Inventory Masters in that Godowns Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_godowns').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        godowns_name: {
+            required: true,
+        },
+        godowns_address: {
+            required: true,
+        },
+        contact_info: {
+            required: true,
+        },
+        capacity: {
+            required: true,
+        },
+        location: {
+            required: true,
+        },
+        manager_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        godowns_name : {
+            required : "Please enter godowns name",
+        },
+        godowns_address : {
+            required : "Please enter godowns address",
+        },
+        contact_info : {
+            required : "Please enter contact info",
+        },
+        capacity : {
+            required : "Please enter capacity",
+        },
+        location : {
+            required : "Please location",
+        },
+        manager_name : {
+            required : "Please enter manager name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_godowns').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        godowns_name: {
+            required: true,
+        },
+        godowns_address: {
+            required: true,
+        },
+        contact_info: {
+            required: true,
+        },
+        capacity: {
+            required: true,
+        },
+        location: {
+            required: true,
+        },
+        manager_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        godowns_name : {
+            required : "Please enter godowns name",
+        },
+        godowns_address : {
+            required : "Please enter godowns address",
+        },
+        contact_info : {
+            required : "Please enter contact info",
+        },
+        capacity : {
+            required : "Please enter capacity",
+        },
+        location : {
+            required : "Please location",
+        },
+        manager_name : {
+            required : "Please enter manager name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Godowns Masters validation -->
+
+<!-- Inventory Masters in that MRP Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_mrp_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        mrp_system_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        mrp_system_name : {
+            required : "Please enter MRP system name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_mrp_masters').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        mrp_system_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        mrp_system_name : {
+            required : "Please enter MRP system name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that MRP Masters validation -->
+
+<!-- Inventory Masters in that employees Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_employees_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        full_name: {
+            required: true,
+        },
+        gender: {
+            required: true,
+        },
+        employee_dob: {
+            required: true,
+        },
+        employee_address: {
+            required: true,
+        },
+        employee_position: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please enter employee id",
+        },
+        full_name : {
+            required : "Please enter full name",
+        },
+        gender : {
+            required : "Please enter gender",
+        },
+        employee_dob : {
+            required : "Please select employee dob",
+        },
+        employee_address : {
+            required : "Please employee address",
+        },
+        employee_position : {
+            required : "Please enter employee position",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_employees_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        full_name: {
+            required: true,
+        },
+        gender: {
+            required: true,
+        },
+        employee_dob: {
+            required: true,
+        },
+        employee_address: {
+            required: true,
+        },
+        employee_position: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please enter employee id",
+        },
+        full_name : {
+            required : "Please enter full name",
+        },
+        gender : {
+            required : "Please enter gender",
+        },
+        employee_dob : {
+            required : "Please select employee dob",
+        },
+        employee_address : {
+            required : "Please employee address",
+        },
+        employee_position : {
+            required : "Please enter employee position",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that employees Masters validation -->
+
+<!-- Inventory Masters in that Destination Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_destination').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        destination_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        destination_name : {
+            required : "Please enter destination name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_destination').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        destination_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        destination_name : {
+            required : "Please enter destination name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Destination Masters validation -->
+
+<!-- Inventory Masters in that Departments Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_departments').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        destination_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        destination_name : {
+            required : "Please enter destination name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_departments').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        destination_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        destination_name : {
+            required : "Please enter destination name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Departments Masters validation -->
+
+<!-- Inventory Masters in that Grades Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_grades').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        grade_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        grade_name : {
+            required : "Please enter grade name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_grades').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        grade_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        grade_name : {
+            required : "Please enter grade name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Grades Masters validation -->
+
+<!-- Inventory Masters in that payroll_setup Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_payroll_setup').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        payroll_period: {
+            required: true,
+        },
+        salary_structure: {
+            required: true,
+        },
+        leave_attendence_policies: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        payroll_period : {
+            required : "Please enter payroll period",
+        },
+        salary_structure : {
+            required : "Please enter salary structure",
+        },
+        leave_attendence_policies : {
+            required : "Please enter leave attendence policies",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_payroll_setup').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        payroll_period: {
+            required: true,
+        },
+        salary_structure: {
+            required: true,
+        },
+        leave_attendence_policies: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        payroll_period : {
+            required : "Please enter payroll period",
+        },
+        salary_structure : {
+            required : "Please enter salary structure",
+        },
+        leave_attendence_policies : {
+            required : "Please enter leave attendence policies",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that payroll_setup Masters validation -->
+
+<!-- Inventory Masters in that payment schedule Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_payment_schedule').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        employee_name: {
+            required: true,
+        },
+        employee_department: {
+            required: true,
+        },
+        payment_frequency: {
+            required: true,
+        },
+        payment_start_date: {
+            required: true,
+        },
+        payment_end_date: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please enter employee id",
+        },
+        employee_name : {
+            required : "Please enter employee name",
+        },
+        employee_department : {
+            required : "Please enter employee department",
+        },
+        payment_frequency : {
+            required : "Please enter payment frequency",
+        },
+        payment_start_date : {
+            required : "Please enter payment start date",
+        },
+        payment_end_date : {
+            required : "Please enter payment end date",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_payment_schedule').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        employee_name: {
+            required: true,
+        },
+        employee_department: {
+            required: true,
+        },
+        payment_frequency: {
+            required: true,
+        },
+        payment_start_date: {
+            required: true,
+        },
+        payment_end_date: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please enter employee id",
+        },
+        employee_name : {
+            required : "Please enter employee name",
+        },
+        employee_department : {
+            required : "Please enter employee department",
+        },
+        payment_frequency : {
+            required : "Please enter payment frequency",
+        },
+        payment_start_date : {
+            required : "Please enter payment start date",
+        },
+        payment_end_date : {
+            required : "Please enter payment end date",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that payment schedule Masters validation -->
+
+<!-- Inventory Masters in that Leave Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_leave').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_name: {
+            required: true,
+        },
+        leave_type: {
+            required: true,
+        },
+        leave_start_date: {
+            required: true,
+        },
+        leave_end_date: {
+            required: true,
+        },
+        leave_balanace: {
+            required: true,
+        },
+        leave_reason: {
+            required: true,
+        },
+        leave_approval_status: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_name : {
+            required : "Please enter employee name",
+        },
+        leave_type : {
+            required : "Please enter leave type",
+        },
+        leave_start_date : {
+            required : "Please select leave start date",
+        },
+        leave_end_date : {
+            required : "Please select leave end date",
+        },
+        leave_balanace : {
+            required : "Please enter leave balanace",
+        },
+        leave_reason : {
+            required : "Please enter leave reason",
+        },
+        leave_approval_status : {
+            required : "Please enter leave approval status",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_leave').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_name: {
+            required: true,
+        },
+        leave_type: {
+            required: true,
+        },
+        leave_start_date: {
+            required: true,
+        },
+        leave_end_date: {
+            required: true,
+        },
+        leave_balanace: {
+            required: true,
+        },
+        leave_reason: {
+            required: true,
+        },
+        leave_approval_status: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_name : {
+            required : "Please enter employee name",
+        },
+        leave_type : {
+            required : "Please enter leave type",
+        },
+        leave_start_date : {
+            required : "Please select leave start date",
+        },
+        leave_end_date : {
+            required : "Please select leave end date",
+        },
+        leave_balanace : {
+            required : "Please enter leave balanace",
+        },
+        leave_reason : {
+            required : "Please enter leave reason",
+        },
+        leave_approval_status : {
+            required : "Please enter leave approval status",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Leave Masters validation -->
+
+<!-- Inventory Masters in that Advances Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_advances_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        employee_name: {
+            required: true,
+        },
+        date_of_advance: {
+            required: true,
+        },
+        amount: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please select employee id",
+        },
+        employee_name : {
+            required : "Please select employee name",
+        },
+        date_of_advance : {
+            required : "Please select date of advance",
+        },
+        amount : {
+            required : "Please enter amount",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_advances_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        employee_id: {
+            required: true,
+        },
+        employee_name: {
+            required: true,
+        },
+        date_of_advance: {
+            required: true,
+        },
+        amount: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        employee_id : {
+            required : "Please select employee id",
+        },
+        employee_name : {
+            required : "Please select employee name",
+        },
+        date_of_advance : {
+            required : "Please select date of advance",
+        },
+        amount : {
+            required : "Please enter amount",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<!-- Inventory Masters in that Advances Masters validation -->
+
+<!-- Inventory Masters in that taxes Masters validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_taxes_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        tax_name: {
+            required: true,
+        },
+        tax_code: {
+            required: true,
+        },
+        tax_type: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        tax_name : {
+            required : "Please enter tax name",
+        },
+        tax_code : {
+            required : "Please enter tax_code",
+        },
+        tax_type : {
+            required : "Please enter tax type",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_taxes_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        tax_name: {
+            required: true,
+        },
+        tax_code: {
+            required: true,
+        },
+        tax_type: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        tax_name : {
+            required : "Please enter tax name",
+        },
+        tax_code : {
+            required : "Please enter tax_code",
+        },
+        tax_type : {
+            required : "Please enter tax type",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that taxes Masters validation -->
+
+<!-- Inventory Masters in that Currencies Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_currencies_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        currency_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        currency_name : {
+            required : "Please enter currency name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_currencies_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        currency_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        currency_name : {
+            required : "Please enter currency name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Currencies Master validation -->
+
+<!-- Inventory Masters in that Statutory Reports Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_statutory_reports_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        report_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        report_name : {
+            required : "Please enter report name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_statutory_reports_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        report_name: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        report_name : {
+            required : "Please enter report name",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Statutory Reports Master validation -->
+
+<!-- Inventory Masters in that Bank Accounts Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_bank_accounts_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        bank_name: {
+            required: true,
+        },
+        account_name: {
+            required: true,
+        },
+        account_number: {
+            required: true,
+        },
+        account_type: {
+            required: true,
+        },
+        branch_name: {
+            required: true,
+        },
+        branch_address: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        account_balance: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        bank_name : {
+            required : "Please enter bank name",
+        },
+        account_name : {
+            required : "Please enter account name",
+        },
+        account_number : {
+            required : "Please enter account number",
+        },
+        account_type : {
+            required : "Please enter account type",
+        },
+        branch_name : {
+            required : "Please enter branch name",
+        },
+        branch_address : {
+            required : "Please enter branch address",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        account_balance : {
+            required : "Please enter account balance",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_bank_accounts_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        bank_name: {
+            required: true,
+        },
+        account_name: {
+            required: true,
+        },
+        account_number: {
+            required: true,
+        },
+        account_type: {
+            required: true,
+        },
+        branch_name: {
+            required: true,
+        },
+        branch_address: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        account_balance: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        bank_name : {
+            required : "Please enter bank name",
+        },
+        account_name : {
+            required : "Please enter account name",
+        },
+        account_number : {
+            required : "Please enter account number",
+        },
+        account_type : {
+            required : "Please enter account type",
+        },
+        branch_name : {
+            required : "Please enter branch name",
+        },
+        branch_address : {
+            required : "Please enter branch address",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        account_balance : {
+            required : "Please enter account balance",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Bank Accounts Master validation -->
+
+<!-- Inventory Masters in that Customer Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_customer_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        customer_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        }
+    },
+
+    messages :{
+        customer_name : {
+            required : "Please enter customer name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_customer_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        customer_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        }
+    },
+
+    messages :{
+        customer_name : {
+            required : "Please enter customer name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Customer Master validation -->
+
+<!-- Inventory Masters in that Suppliers Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_supplier_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        supplier_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        address: {
+            required: true,
+        },
+        contact_person: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        supplier_name : {
+            required : "Please enter supplier name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        address : {
+            required : "Please enter address",
+        },
+        contact_person : {
+            required : "Please enter contact person",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_supplier_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        supplier_name: {
+            required: true,
+        },
+        contact_information: {
+            required: true,
+        },
+        address: {
+            required: true,
+        },
+        contact_person: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        supplier_name : {
+            required : "Please enter supplier name",
+        },
+        contact_information : {
+            required : "Please enter contact information",
+        },
+        address : {
+            required : "Please enter address",
+        },
+        contact_person : {
+            required : "Please enter contact person",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Suppliers Master validation -->
+
+<!-- Inventory Masters in that Budgets Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_budgets_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        budget_name: {
+            required: true,
+        },
+        budget_type: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        budget_name : {
+            required : "Please enter budget name",
+        },
+        budget_type : {
+            required : "Please enter budget type",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+
+$('#edit_budgets_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        budget_name: {
+            required: true,
+        },
+        budget_type: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        budget_name : {
+            required : "Please enter budget name",
+        },
+        budget_type : {
+            required : "Please enter budget type",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that Budgets Master validation -->
+
+
+<!-- Inventory Masters in that price lists Master validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_price_lists_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        price_list_name: {
+            required: true,
+        },
+        tax_included: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        price_list_name : {
+            required : "Please enter price list name",
+        },
+        tax_included : {
+            required : "Please enter tax included",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_price_lists_master').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        price_list_name: {
+            required: true,
+        },
+        tax_included: {
+            required: true,
+        },
+        comments: {
+            required: true,
+        }
+    },
+
+    messages :{
+        price_list_name : {
+            required : "Please enter price list name",
+        },
+        tax_included : {
+            required : "Please enter tax included",
+        },
+        comments : {
+            required : "Please enter comments",
+        }
+    }
+});
+});
+</script>
+<!-- Inventory Masters in that price lists Master validation -->
+
+
+
+
+
+
+
+
+
+
+

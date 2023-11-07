@@ -371,6 +371,30 @@
                                   <p>Batch masters</p>
                               </a>
                             </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/warranty_masters/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Warranty Masters</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/serial_number/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Serial Number</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/godowns/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Godowns</p>
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/mrp_masters/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>MRP Masters</p>
+                              </a>
+                            </li>
                             </ul>
                         </li>
 
@@ -383,8 +407,54 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
-                                
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/employees_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Employees Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/destination_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Destination Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/departments_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Departments Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/grades_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Grades Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/payroll_setup_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Payroll Setup Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/payment_schedule/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Payment Schedule</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/leave_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Leave Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/advances_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Advances Master</p>
+                                </a>
+                              </li>
                             </ul>
                         </li>
 
@@ -397,8 +467,24 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
-
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/taxes_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Taxes Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/currencies_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Currencies Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/statutory_reports_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Statutory Reports</p>
+                                </a>
+                              </li>
                             </ul>
                         </li>
 
@@ -411,8 +497,36 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
-
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/bank_accounts/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Bank Accounts</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/customer_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Customers Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/suppliers_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Suppliers Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/budgets_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Budgets Master</p>
+                                </a>
+                              </li>
+                              <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>account/price_lists_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Price Lists Master</p>
+                                </a>
+                              </li>
                             </ul>
                         </li>
                     </ul>
