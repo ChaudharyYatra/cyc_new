@@ -33,7 +33,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Destination Name</th>
+                    <th>Designation Name</th>
                     <th>Notes/Comments</th>
                     <th>Is Active?</th>
                     <th>Action</th>

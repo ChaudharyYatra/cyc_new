@@ -38,7 +38,7 @@
               <div class="card-body">
                 <table id="" class="table table-bordered table-hover">
                   <tr>
-                  <th>Destination Name</th>
+                  <th>Designation Name</th>
                   <td><?php echo $info['destination_name'] ?></td>
 
                   <th>Notes/Comments</th>

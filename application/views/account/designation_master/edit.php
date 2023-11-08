@@ -46,7 +46,7 @@
                     <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Destination Name</label>
+                            <label>Designation Name</label>
                             <input type="text" class="form-control" name="destination_name" id="destination_name" value="<?php echo $info['destination_name']; ?>" placeholder="Enter destination name"  required="required">
                         </div>
                     </div>

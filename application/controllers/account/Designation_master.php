@@ -12,7 +12,7 @@ class Designation_master extends CI_Controller{
         }
 	
         $this->module_url_path    =  base_url().$this->config->item('account_panel_slug')."account/designation_master";
-        $this->module_title       = "Destination Master Information";
+        $this->module_title       = "Designation Master Information";
         $this->module_url_slug    = "designation_master";
         $this->module_view_folder = "designation_master/";     
         $this->load->library('upload');
