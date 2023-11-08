@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Destination_master extends CI_Controller{
+class Designation_master extends CI_Controller{
 
 	public function __construct()
 	{
@@ -11,10 +11,10 @@ class Destination_master extends CI_Controller{
             redirect(base_url().'supervision/login'); 
         }
 	
-        $this->module_url_path    =  base_url().$this->config->item('account_panel_slug')."account/destination_master";
+        $this->module_url_path    =  base_url().$this->config->item('account_panel_slug')."account/designation_master";
         $this->module_title       = "Destination Master Information";
-        $this->module_url_slug    = "destination_master";
-        $this->module_view_folder = "destination_master/";     
+        $this->module_url_slug    = "designation_master";
+        $this->module_view_folder = "designation_master/";     
         $this->load->library('upload');
 	}
 
@@ -23,10 +23,10 @@ class Destination_master extends CI_Controller{
         $supervision_sess_name = $this->session->userdata('supervision_name');
         $id = $this->session->userdata('supervision_sess_id');
 
-        $fields = "destination_master.*";
+        $fields = "designation_master.*";
         $this->db->order_by('id','desc');
-        $this->db->where('destination_master.is_deleted','no');
-        $arr_data = $this->master_model->getRecords('destination_master',array('destination_master.is_deleted'=>'no'),$fields);
+        $this->db->where('designation_master.is_deleted','no');
+        $arr_data = $this->master_model->getRecords('designation_master',array('designation_master.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
@@ -59,7 +59,7 @@ class Destination_master extends CI_Controller{
                     'comments'  => $comments
                 ); 
                                 
-                $inserted_id = $this->master_model->insertRecord('destination_master',$arr_insert,true);
+                $inserted_id = $this->master_model->insertRecord('designation_master',$arr_insert,true);
                                
                 if($inserted_id > 0)
                 {
@@ -96,7 +96,7 @@ class Destination_master extends CI_Controller{
         if($id!='' && ($type == "yes" || $type == "no") )
         {   
             $this->db->where('id',$id);
-            $arr_data = $this->master_model->getRecords('destination_master');
+            $arr_data = $this->master_model->getRecords('designation_master');
             if(empty($arr_data))
             {
                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -114,7 +114,7 @@ class Destination_master extends CI_Controller{
                 $arr_update['is_active'] = "yes";
             }
             
-            if($this->master_model->updateRecord('destination_master',$arr_update,array('id' => $id)))
+            if($this->master_model->updateRecord('designation_master',$arr_update,array('id' => $id)))
             {
                 $this->session->set_flashdata('success_message',$this->module_title.' Updated Successfully.');
             }
@@ -147,7 +147,7 @@ class Destination_master extends CI_Controller{
         else
         {   
             $this->db->where('id',$id);
-            $arr_data = $this->master_model->getRecords('destination_master');
+            $arr_data = $this->master_model->getRecords('designation_master');
             if($this->input->post('submit'))
             {
                 $this->form_validation->set_rules('destination_name', 'destination_name', 'required');    
@@ -164,7 +164,7 @@ class Destination_master extends CI_Controller{
                     );
                 
                     $arr_where     = array("id" => $id);
-                    $this->master_model->updateRecord('destination_master',$arr_update,$arr_where);
+                    $this->master_model->updateRecord('designation_master',$arr_update,$arr_where);
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
@@ -181,7 +181,7 @@ class Destination_master extends CI_Controller{
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $this->db->where('id',$id);
-        $qr_code_master_data = $this->master_model->getRecords('destination_master');
+        $qr_code_master_data = $this->master_model->getRecords('designation_master');
         
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
         $this->arr_view_data['qr_code_master_data']   = $qr_code_master_data;
@@ -203,7 +203,7 @@ class Destination_master extends CI_Controller{
         if($id!='')
         {   
             $this->db->where('id',$id);
-            $arr_data = $this->master_model->getRecords('destination_master');
+            $arr_data = $this->master_model->getRecords('designation_master');
 
             if(empty($arr_data))
             {
@@ -213,7 +213,7 @@ class Destination_master extends CI_Controller{
             $arr_update = array('is_deleted' => 'yes');
             $arr_where = array("id" => $id);
                  
-            if($this->master_model->updateRecord('destination_master',$arr_update,$arr_where))
+            if($this->master_model->updateRecord('designation_master',$arr_update,$arr_where))
             {
                 $this->session->set_flashdata('success_message',$this->module_title.' Deleted Successfully.');
             }
@@ -242,9 +242,9 @@ class Destination_master extends CI_Controller{
             redirect($this->module_url_path.'/index');
         }   
         
-        $fields = "destination_master.*";
-        $this->db->where('destination_master.id',$id);
-        $arr_data = $this->master_model->getRecords('destination_master',array('destination_master.is_deleted'=>'no'),$fields);
+        $fields = "designation_master.*";
+        $this->db->where('designation_master.id',$id);
+        $arr_data = $this->master_model->getRecords('designation_master',array('designation_master.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
         $this->arr_view_data['arr_data']        = $arr_data;
