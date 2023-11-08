@@ -504,7 +504,7 @@
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a href="<?php echo base_url(); ?>account/customer_master/index" class="nav-link">
+                                <a href="<?php echo base_url(); ?>account/customers_master/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Customers Master</p>
                                 </a>
@@ -532,6 +532,8 @@
                     </ul>
                 </li>
 
+
+                
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>

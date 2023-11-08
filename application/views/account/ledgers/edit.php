@@ -41,7 +41,7 @@
                    { 
                     // print_r($info); die;
                      ?>
-              <form method="post" enctype="multipart/form-data" id="edit_voucher_type">
+              <form method="post" enctype="multipart/form-data" id="edit_ledger">
                 <div class="card-body">
                  <div class="row">
                     <div class="col-md-6">

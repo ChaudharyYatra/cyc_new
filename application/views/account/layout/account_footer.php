@@ -586,6 +586,53 @@ $('#edit_voucher_type').validate({ // initialize the plugin
 </script>
 <!-- voucher type information add , edit validation -->
 
+<!-- Ledgers information add , edit validation -->
+<script>
+$(document).ready(function () {
+$('#add_ledger').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ledger_name: {
+            required: true,
+        }
+    },
+
+    messages :{
+        ledger_name : {
+            required : "Please Enter ledger name",
+        }
+    }
+});
+
+});
+
+</script>
+<script>
+$(document).ready(function () {
+$('#edit_ledger').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ledger_name: {
+            required: true,
+        }
+    },
+
+    messages :{
+        ledger_name : {
+            required : "Please Enter ledger name",
+        }
+    }
+});
+
+});
+
+</script>
+<!-- Ledgers information add , edit validation -->
+
 <!-- Accounting in that group master validation -->
 <script>
 $(document).ready(function () {
@@ -3335,7 +3382,6 @@ $('#add_price_lists_master').validate({ // initialize the plugin
 
 <script>
 $(document).ready(function () {
-
 $('#edit_price_lists_master').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
     $error.appendTo($element.closest("div"));

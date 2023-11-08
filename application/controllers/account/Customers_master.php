@@ -12,7 +12,7 @@ class Customers_master extends CI_Controller{
         }
 	
         $this->module_url_path    =  base_url().$this->config->item('account_panel_slug')."account/customers_master";
-        $this->module_title       = "Bank Accounts Master Information";
+        $this->module_title       = "Customers Master Information";
         $this->module_url_slug    = "customers_master";
         $this->module_view_folder = "customers_master/";     
         $this->load->library('upload');
