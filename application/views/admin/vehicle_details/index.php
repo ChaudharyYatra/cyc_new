@@ -15,7 +15,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <!-- <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
-              
             </ol>
           </div>
         </div>
@@ -30,11 +29,10 @@
           <div class="col-12">
               <?php $this->load->view('admin/layout/admin_alert'); ?>
             <div class="card">
-             
               <!-- /.card-header -->
               <div class="card-body">
                   <?php  if(count($arr_data) > 0 ) 
-              { ?>
+                  { ?>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -89,7 +87,7 @@
                         else if($info['is_active']=='yes' && $info['is_active']!=''){
                           ?> 
                         <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							          echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-primary">Disapproved</button> </a>
+							          echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-primary" disabled>Disapproved</button> </a>
                         <?php } 
                         else if($info['is_active']=''){
                           ?>
