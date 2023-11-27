@@ -37,7 +37,7 @@
                     <th>Package Name</th>
                     <th>Package Date</th>
                     <th>Booking Date</th>
-                    <th>Hotel Name</th>
+                    <!-- <th>Hotel Name</th> -->
                     <th>Booking Reference No</th>
                     <th>Booking Status</th>
                     <th>Action</th>
@@ -55,14 +55,10 @@
                     <td><?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['booking_date'] ?></td>
-                    <td><?php echo $info['hotel_name'] ?></td>
+                    <!-- <td><?php //echo $info['hotel_name'] ?></td> -->
                     <td><?php echo $info['booking_reference_no'] ?></td>
+                    <td><?php echo $info['booking_status'] ?></td>
                     
-                    <?php if($info['srs_image_name']!=''){?>
-                      <td><?php echo $info['booking_status'] ?></td>
-                    <?php }else{ ?>
-                      <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_submit" value="booking_submit" data-bs-toggle="modal" data-bs-target="#exampleModal_send<?php echo $info['enquiry_id']; ?>">Upload SRS</button></th>
-                    <?php } ?>
 
                     <td>
                     <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>

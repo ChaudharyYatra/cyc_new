@@ -62,13 +62,27 @@
                             <label>Bus Type</label><br>
                             <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
                               <option value="">Select Bus Type</option>
-                              <option value="1*2" <?php if(isset($info['vehicle_bus_type'])){if("1*2" == $info['vehicle_bus_type']) {echo 'selected';}}?>>1*2</option>
-                              <option value="1*3" <?php if(isset($info['vehicle_bus_type'])){if("1*3" == $info['vehicle_bus_type']) {echo 'selected';}}?>>1*3</option>
-                              <option value="2*2" <?php if(isset($info['vehicle_bus_type'])){if("2*2" == $info['vehicle_bus_type']) {echo 'selected';}}?>>2*2</option>
-                              <option value="2*3" <?php if(isset($info['vehicle_bus_type'])){if("2*3" == $info['vehicle_bus_type']) {echo 'selected';}}?>>2*3</option>
-                            </select>
+                                <?php
+                                    foreach($bus_type as $bus_type_info) 
+                                    { 
+                                  ?>
+                                  <option value="<?php echo $bus_type_info['id'];?>" <?php if(isset($info['vehicle_bus_type'])){if($bus_type_info['id'] == $info['vehicle_bus_type']) {echo 'selected';}}?>><?php echo $bus_type_info['bus_type'];?></option>
+                                <?php } ?>
+                              </select>
                           </div>
                         </div>
+                        <!-- <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Bus Type</label><br>
+                            <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
+                              <option value="">Select Bus Type</option>
+                              <option value="1*2" <?php //if(isset($info['vehicle_bus_type'])){if("1*2" == $info['vehicle_bus_type']) {echo 'selected';}}?>>1*2</option>
+                              <option value="1*3" <?php //if(isset($info['vehicle_bus_type'])){if("1*3" == $info['vehicle_bus_type']) {echo 'selected';}}?>>1*3</option>
+                              <option value="2*2" <?php //if(isset($info['vehicle_bus_type'])){if("2*2" == $info['vehicle_bus_type']) {echo 'selected';}}?>>2*2</option>
+                              <option value="2*3" <?php //if(isset($info['vehicle_bus_type'])){if("2*3" == $info['vehicle_bus_type']) {echo 'selected';}}?>>2*3</option>
+                            </select>
+                          </div>
+                        </div> -->
                         <div class="col-md-6">
                             <div class="form-group">
                             <label>Vehicle RTO Registration No</label>

@@ -32,9 +32,6 @@
     .red_remove .select_css{
         color: black !important;
     }
-    /* .footer-top{
-        margin-bottom: 70px !important;
-    } */
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -105,13 +102,13 @@
               <!-- /.card-header -->
               <!-- form start -->
                 
-                <div class="card-body footer-top">
+                <div class="card-body">
                     <form method="post" enctype="multipart/form-data" id="all_traveller_info">
                     <?php
                     foreach($booking_basic_info_data as $booking_basic_info_data_value) 
                     { 
                     ?>
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12 text-center" hidden>
                         <div class="row">
                             <div class="col-md-4">
                             </div>
@@ -137,7 +134,7 @@
                           
                         <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $package_id['tour_no']; ?>">
                         
-                    <table class="table table-bordered" style="width:100%" id="traveller_table_add">
+                    <table class="table table-bordered" style="width:100%" id="traveller_table_add" hidden>
                         
                         <colgroup>
                             <col span="1" style="width: 10%;">
@@ -210,7 +207,7 @@
                                     <input type="text" style="text-transform: capitalize;" class="form-control row_set first_name" name="first_name[]" id="first_name<?php echo $img_count; ?>" attr_for_search="<?php echo $img_count; ?>" autocomplete="off"
                                     value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['first_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" list="nameList">
 
-                                    <div id="user_name">    
+                                    <div id="user_name">
                                         <ul id="search-results<?php echo $img_count;?>">
                                             
                                         </ul>
@@ -442,10 +439,162 @@
                     </table>
                     
 
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Flat No. / Bunglow No.</label>
+                            <!-- <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder=""> -->
+                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['flat_no'];} ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Building / House Name</label>
+                            <!-- <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder=""> -->
+                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['building_house_nm'];} ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Street Name</label>
+                            <!-- <input type="text" class="form-control" name="street_name" id="street_name" placeholder=""> -->
+                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['street_name'];} ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Landmark</label>
+                            <!-- <input type="text" class="form-control" name="landmark" id="landmark" placeholder=""> -->
+                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['landmark'];} ?>">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                            <label>Area</label>
+                            <input type="text" class="form-control" name="area" id="area" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['area'];} ?>" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group red_remove">
+                                <label>Select State</label>
+                                <select class="select_css" name="all_traveller_state" id="all_traveller_state">
+                                    <?php 
+                                    if(!empty($all_traveller_info)){
+                                    ?>
+                                        <option value="">Select State</option>
+                                        <?php foreach($state_data as $state_data_value){ ?> 
+                                            <option value="<?php echo $state_data_value['id'];?>" <?php if($state_data_value['id']==$all_traveller_info_value['state_name']){echo "selected";} ?>><?php echo $state_data_value['state_name'];?></option>
+                                        <?php } ?>
+                                    <?php }
+                                    else{
+                                        ?>
+                                        <option value="">Select State</option>
+                                        <?php foreach($state_data as $state_data_value){ ?> 
+                                            <option value="<?php echo $state_data_value['id'];?>"><?php echo $state_data_value['state_name'];?></option>
+                                        <?php } ?>
+                                    <?php 
+                                    }?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group red_remove">
+                                <label>Select District</label>
+                                <select class="select_css" name="all_traveller_district" id="all_traveller_district">
+                                    <?php 
+                                    if(!empty($all_traveller_info)){
+                                    ?>
+                                        <option value="">Select District</option>
+                                        <?php foreach($district_data as $district_data_value){ ?> 
+                                        <option value="<?php echo $district_data_value['id'];?>" <?php if($district_data_value['id']==$all_traveller_info_value['district_name']){echo "selected";} ?>><?php echo $district_data_value['district'];?></option>
+                                        <?php } ?>
+
+                                    <?php }
+                                    else{
+                                        ?>
+                                    <option value="">Select District</option>
+                                    <?php 
+                                    }?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group red_remove">
+                                <label>Select Taluka</label>
+                                <select class="select_css" name="all_traveller_taluka" id="all_traveller_taluka">
+                                    <?php 
+                                    if(!empty($all_traveller_info)){
+                                    ?>
+                                    <option value="">Select Taluka</option>
+                                    <?php foreach($taluka_data as $taluka_data_value){ ?> 
+                                        <option value="<?php echo $taluka_data_value['id'];?>" <?php if($taluka_data_value['id']==$all_traveller_info_value['taluka_name']){echo "selected";} ?>><?php echo $taluka_data_value['taluka'];?></option>
+                                    <?php } ?>
+
+                                    <?php }
+                                    else{
+                                        ?>
+
+                                    <option value="">Select Taluka</option>
+                                   
+                                    <?php 
+                                    }?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                            <label>City Name</label>
+                            <!-- <input type="text" class="form-control" name="all_traveller_city" id="all_traveller_city" placeholder="" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                            <input type="text" class="form-control" name="all_traveller_city" id="all_traveller_city" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['city_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                            <label>Pincode</label>
+                            <!-- <input type="text" class="form-control" name="pincode" id="pincode" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                            <input type="text" class="form-control" name="pincode" id="pincode" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['pincode'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Alternate Mobile Number</label>
+                            <!-- <input type="text" class="form-control" name="mobile_no" id="mobile_no" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                            <input type="text" class="form-control" name="mobile_no" id="mobile_no" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>STD code </label>
+                            <!-- <input type="text" class="form-control" name="std_code" id="std_code" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                            <input type="text" class="form-control" name="std_code" id="std_code" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['std_code'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Landline Number</label>
+                            <!-- <input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -->
+                            <input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['phone_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                            <label>Email ID</label>
+                            <!-- <input type="text" class="form-control" name="email_id" id="email_id" placeholder=""> -->
+                            <input type="text" class="form-control" name="email_id" id="email_id" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['email_id'];} ?>">
+                        </div>
+                        </div>
+                    </div>
+
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
                         <button type="submit" class="btn btn-success" name="booknow_submit" value="Book Now" id="append_val">Submit & Proceed</button>
-                        <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button_all_traveller">Back</button>
+                        <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="traveller_address_info">Back</button>
 
                         <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')">
                         <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button">Back</button></a> -->
