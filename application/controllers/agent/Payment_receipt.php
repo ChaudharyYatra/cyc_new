@@ -37,7 +37,7 @@ class Payment_receipt extends CI_Controller {
         // $this->load->library('pdf');
         // $html = $this->load->view('payment_receipt', '', true);
         // $this->pdf->createPDF($html, 'mypdf', false);
-
+            // echo $iid; die;
         
         $record = array();
         $fields = "all_traveller_info.*,relation.relation";
@@ -64,7 +64,10 @@ class Payment_receipt extends CI_Controller {
         $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
         // print_r($payment_receipt); die;
 
-        $payment_rupee = $payment_receipt['booking_amt'];
+        $payment_rupee = isset($payment_receipt['booking_amt']);
+        // $payment_rupee = $payment_receipt['booking_amt']=== null ? 0 : count($payment_receipt['booking_amt']);
+
+        // $len = $cOTLdata['char_data'] === null ? 0 : count($cOTLdata['char_data']);
         $pay= $this->getIndianCurrency($payment_rupee);
         
         

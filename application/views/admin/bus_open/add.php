@@ -59,6 +59,20 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Bus Type</label><br>
+                            <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
+                              <option value="">Select Bus Type</option>
+                              <?php
+                                    foreach($bus_type as $bus_type_info) 
+                                    { 
+                                  ?>
+                              <option value="<?php echo $bus_type_info['id']; ?>"><?php echo $bus_type_info['bus_type']; ?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>Bus Type</label><br>
                                 <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
@@ -69,7 +83,7 @@
                                     <option value="2*3">2*3</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
                             <div class="form-group">
                             <label>Vehicle RTO Registration No</label>

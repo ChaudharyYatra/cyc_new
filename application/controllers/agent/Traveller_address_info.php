@@ -5,7 +5,7 @@
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class All_traveller_info extends CI_Controller {
+class Traveller_address_info extends CI_Controller {
 	 
 	function __construct() {
 
@@ -14,15 +14,15 @@ class All_traveller_info extends CI_Controller {
         { 
                 redirect(base_url().'agent/login'); 
         }
-        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/all_traveller_info";
+        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/traveller_address_info";
         $this->module_seat_type_room_type    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->domestic_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_booking_enquiry    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
         $this->module_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/booking_basic_info";
-        $this->module_url_traveller_address_info    =  base_url().$this->config->item('agent_panel_slug')."/traveller_address_info";
-        $this->module_title       = "All Traveller Info";
-        $this->module_url_slug    = "all_traveller_info";
-        $this->module_view_folder = "all_traveller_info/";
+        $this->module_all_traveller_info    =  base_url().$this->config->item('agent_panel_slug')."/all_traveller_info";
+        $this->module_title       = "Traveller Address Info";
+        $this->module_url_slug    = "traveller_address_info";
+        $this->module_view_folder = "traveller_address_info/";
         $this->arr_view_data = [];
 	 }
 
@@ -46,6 +46,8 @@ class All_traveller_info extends CI_Controller {
 
         public function add($iid="")
         {   
+            
+            
             $agent_sess_name = $this->session->userdata('agent_name');
             $id=$this->session->userdata('agent_sess_id');
          
@@ -162,20 +164,20 @@ class All_traveller_info extends CI_Controller {
                     $last_name  = $this->input->post('last_name'); 
                     $dob  = $this->input->post('dob'); 
                     $relation  = $this->input->post('relation');
-                    // $flat_no  = $this->input->post('flat_no');
-                    // $building_house_nm  = $this->input->post('building_house_nm');
-                    // $street_name  = $this->input->post('street_name');
-                    // $landmark  = $this->input->post('landmark'); 
-                    // $area  = $this->input->post('area'); 
-                    // $all_traveller_state  = $this->input->post('all_traveller_state'); 
-                    // $all_traveller_district  = $this->input->post('all_traveller_district');
-                    // $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
-                    // $all_traveller_city  = $this->input->post('all_traveller_city');
-                    // $pincode  = $this->input->post('pincode'); 
-                    // $std_code  = $this->input->post('std_code');
-                    // $mobile_no  = $this->input->post('mobile_no');
-                    // $phone_no  = $this->input->post('phone_no'); 
-                    // $email_id  = $this->input->post('email_id');
+                    $flat_no  = $this->input->post('flat_no');
+                    $building_house_nm  = $this->input->post('building_house_nm');
+                    $street_name  = $this->input->post('street_name');
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area'); 
+                    $all_traveller_state  = $this->input->post('all_traveller_state'); 
+                    $all_traveller_district  = $this->input->post('all_traveller_district');
+                    $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
+                    $all_traveller_city  = $this->input->post('all_traveller_city');
+                    $pincode  = $this->input->post('pincode'); 
+                    $std_code  = $this->input->post('std_code');
+                    $mobile_no  = $this->input->post('mobile_no');
+                    $phone_no  = $this->input->post('phone_no'); 
+                    $email_id  = $this->input->post('email_id');
                     $document_file_traveller_img = $this->input->post('document_file_traveller_img[]');
                     $travaller_info_id = $this->input->post('travaller_info_id'); 
                     $all_traveller_count = $this->input->post('all_traveller_count'); 
@@ -312,20 +314,20 @@ class All_traveller_info extends CI_Controller {
                             'aadhar_image_name' =>$fname_aadhar_img,
                             'img_encoded'=>$img_encoded,
                             'aadhar_img_encoded'=>$aadhar_img_encoded,
-                            // 'flat_no' =>   $flat_no,
-                            // 'building_house_nm'   =>   $building_house_nm,
-                            // 'street_name'   =>   $street_name,   
-                            // 'landmark'    =>$landmark,
-                            // 'area'    =>$area,
-                            // 'state_name'=>$all_traveller_state,
-                            // 'district_name' =>   $all_traveller_district,
-                            // 'taluka_name'   =>   $all_traveller_taluka,
-                            // 'city_name'   =>   $all_traveller_city,   
-                            // 'pincode'    =>$pincode,
-                            // 'std_code'=>$std_code,
-                            // 'mobile_no'   =>   $mobile_no,   
-                            // 'phone_no'    =>$phone_no,
-                            // 'email_id'=>$email_id ,
+                            'flat_no' =>   $flat_no,
+                            'building_house_nm'   =>   $building_house_nm,
+                            'street_name'   =>   $street_name,   
+                            'landmark'    =>$landmark,
+                            'area'    =>$area,
+                            'state_name'=>$all_traveller_state,
+                            'district_name' =>   $all_traveller_district,
+                            'taluka_name'   =>   $all_traveller_taluka,
+                            'city_name'   =>   $all_traveller_city,   
+                            'pincode'    =>$pincode,
+                            'std_code'=>$std_code,
+                            'mobile_no'   =>   $mobile_no,   
+                            'phone_no'    =>$phone_no,
+                            'email_id'=>$email_id ,
                             'password' => $traveler_password_yes
                             ); 
                              
@@ -366,6 +368,7 @@ class All_traveller_info extends CI_Controller {
             }
 
 
+
         if($this->input->post('booknow_submit'))
         {
               
@@ -404,20 +407,20 @@ class All_traveller_info extends CI_Controller {
                 $last_name  = $this->input->post('last_name'); 
                 $dob  = $this->input->post('dob'); 
                 $relation  = $this->input->post('relation');
-                // $flat_no  = $this->input->post('flat_no');
-                // $building_house_nm  = $this->input->post('building_house_nm');
-                // $street_name  = $this->input->post('street_name');
-                // $landmark  = $this->input->post('landmark'); 
-                // $area  = $this->input->post('area'); 
-                // $all_traveller_state  = $this->input->post('all_traveller_state'); 
-                // $all_traveller_district  = $this->input->post('all_traveller_district');
-                // $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
-                // $all_traveller_city  = $this->input->post('all_traveller_city');
-                // $pincode  = $this->input->post('pincode'); 
-                // $std_code  = $this->input->post('std_code');
-                // $mobile_no  = $this->input->post('mobile_no');
-                // $phone_no  = $this->input->post('phone_no'); 
-                // $email_id  = $this->input->post('email_id');
+                $flat_no  = $this->input->post('flat_no');
+                $building_house_nm  = $this->input->post('building_house_nm');
+                $street_name  = $this->input->post('street_name');
+                $landmark  = $this->input->post('landmark'); 
+                $area  = $this->input->post('area'); 
+                $all_traveller_state  = $this->input->post('all_traveller_state'); 
+                $all_traveller_district  = $this->input->post('all_traveller_district');
+                $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
+                $all_traveller_city  = $this->input->post('all_traveller_city');
+                $pincode  = $this->input->post('pincode'); 
+                $std_code  = $this->input->post('std_code');
+                $mobile_no  = $this->input->post('mobile_no');
+                $phone_no  = $this->input->post('phone_no'); 
+                $email_id  = $this->input->post('email_id');
                 $document_file_traveller_img = $this->input->post('document_file_traveller_img[]');
                 $travaller_info_id = $this->input->post('travaller_info_id'); 
                 $all_traveller_count = $this->input->post('all_traveller_count'); 
@@ -554,20 +557,20 @@ class All_traveller_info extends CI_Controller {
                         'aadhar_image_name' =>$fname_aadhar_img,
                         'img_encoded'=>$img_encoded,
                         'aadhar_img_encoded'=>$aadhar_img_encoded,
-                        // 'flat_no' =>   $flat_no,
-                        // 'building_house_nm'   =>   $building_house_nm,
-                        // 'street_name'   =>   $street_name,   
-                        // 'landmark'    =>$landmark,
-                        // 'area'    =>$area,
-                        // 'state_name'=>$all_traveller_state,
-                        // 'district_name' =>   $all_traveller_district,
-                        // 'taluka_name'   =>   $all_traveller_taluka,
-                        // 'city_name'   =>   $all_traveller_city,   
-                        // 'pincode'    =>$pincode,
-                        // 'std_code'=>$std_code,
-                        // 'mobile_no'   =>   $mobile_no,   
-                        // 'phone_no'    =>$phone_no,
-                        // 'email_id'=>$email_id ,
+                        'flat_no' =>   $flat_no,
+                        'building_house_nm'   =>   $building_house_nm,
+                        'street_name'   =>   $street_name,   
+                        'landmark'    =>$landmark,
+                        'area'    =>$area,
+                        'state_name'=>$all_traveller_state,
+                        'district_name' =>   $all_traveller_district,
+                        'taluka_name'   =>   $all_traveller_taluka,
+                        'city_name'   =>   $all_traveller_city,   
+                        'pincode'    =>$pincode,
+                        'std_code'=>$std_code,
+                        'mobile_no'   =>   $mobile_no,   
+                        'phone_no'    =>$phone_no,
+                        'email_id'=>$email_id ,
                         'password' => $traveler_password_yes
                         ); 
                          
@@ -596,7 +599,7 @@ class All_traveller_info extends CI_Controller {
                  if($inserted_id > 0)
                  {
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
-                     redirect($this->module_url_traveller_address_info.'/add/'.$iid);
+                     redirect($this->module_seat_type_room_type.'/add/'.$iid);
                  }
                  else
                  {
@@ -610,7 +613,7 @@ class All_traveller_info extends CI_Controller {
         if($this->input->post('submit_back'))
 
         {
-                // print_r($_REQUEST); die;
+
                 $domestic_enquiry_id  = $this->input->post('domestic_enquiry_id');
                 $package_id  = $this->input->post('package_id');
                 $seat_count  = $this->input->post('seat_count');
@@ -622,20 +625,20 @@ class All_traveller_info extends CI_Controller {
                 $last_name  = $this->input->post('last_name');
                 $dob  = $this->input->post('dob');
                 $relation  = $this->input->post('relation');
-                // $flat_no  = $this->input->post('flat_no');
-                // $building_house_nm  = $this->input->post('building_house_nm');
-                // $street_name  = $this->input->post('street_name');
-                // $landmark  = $this->input->post('landmark');
-                // $area  = $this->input->post('area');
-                // $all_traveller_state  = $this->input->post('all_traveller_state');
-                // $all_traveller_district  = $this->input->post('all_traveller_district');
-                // $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
-                // $all_traveller_city  = $this->input->post('all_traveller_city');
-                // $pincode  = $this->input->post('pincode');
-                // $std_code  = $this->input->post('std_code');
-                // $mobile_no  = $this->input->post('mobile_no');
-                // $phone_no  = $this->input->post('phone_no');
-                // $email_id  = $this->input->post('email_id');
+                $flat_no  = $this->input->post('flat_no');
+                $building_house_nm  = $this->input->post('building_house_nm');
+                $street_name  = $this->input->post('street_name');
+                $landmark  = $this->input->post('landmark');
+                $area  = $this->input->post('area');
+                $all_traveller_state  = $this->input->post('all_traveller_state');
+                $all_traveller_district  = $this->input->post('all_traveller_district');
+                $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
+                $all_traveller_city  = $this->input->post('all_traveller_city');
+                $pincode  = $this->input->post('pincode');
+                $std_code  = $this->input->post('std_code');
+                $mobile_no  = $this->input->post('mobile_no');
+                $phone_no  = $this->input->post('phone_no');
+                $email_id  = $this->input->post('email_id');
                 $document_file_traveller_img = $this->input->post('document_file_traveller_img[]');
                 $travaller_info_id = $this->input->post('travaller_info_id');
                 $all_traveller_count = $this->input->post('all_traveller_count');
@@ -760,20 +763,20 @@ class All_traveller_info extends CI_Controller {
                         'aadhar_image_name' =>$fname_aadhar_img,
                         'img_encoded'=>$img_encoded,
                         'aadhar_img_encoded'=>$aadhar_img_encoded,
-                        // 'flat_no' =>   $flat_no,
-                        // 'building_house_nm'   =>   $building_house_nm,
-                        // 'street_name'   =>   $street_name,  
-                        // 'landmark'    =>$landmark,
-                        // 'area'    =>$area,
-                        // 'state_name'=>$all_traveller_state,
-                        // 'district_name' =>   $all_traveller_district,
-                        // 'taluka_name'   =>   $all_traveller_taluka,
-                        // 'city_name'   =>   $all_traveller_city,  
-                        // 'pincode'    =>$pincode,
-                        // 'std_code'=>$std_code,
-                        // 'mobile_no'   =>   $mobile_no,  
-                        // 'phone_no'    =>$phone_no,
-                        // 'email_id'=>$email_id,
+                        'flat_no' =>   $flat_no,
+                        'building_house_nm'   =>   $building_house_nm,
+                        'street_name'   =>   $street_name,  
+                        'landmark'    =>$landmark,
+                        'area'    =>$area,
+                        'state_name'=>$all_traveller_state,
+                        'district_name' =>   $all_traveller_district,
+                        'taluka_name'   =>   $all_traveller_taluka,
+                        'city_name'   =>   $all_traveller_city,  
+                        'pincode'    =>$pincode,
+                        'std_code'=>$std_code,
+                        'mobile_no'   =>   $mobile_no,  
+                        'phone_no'    =>$phone_no,
+                        'email_id'=>$email_id,
                         'password' => $traveler_password_yes
 
                         );
@@ -795,8 +798,7 @@ class All_traveller_info extends CI_Controller {
                  {
                     // echo('hoooooooo'); die;
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
-                    //  redirect($this->module_booking_basic_info.'/add/'.$iid);
-                    redirect($this->module_booking_basic_info.'/add/'.$iid);
+                     redirect($this->module_all_traveller_info.'/add/'.$iid);
                  }
                  else
                  {
@@ -837,8 +839,8 @@ class All_traveller_info extends CI_Controller {
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['module_all_traveller_info'] = $this->module_all_traveller_info;
          $this->arr_view_data['domestic_booking_process'] = $this->domestic_booking_process;
-         $this->arr_view_data['module_url_traveller_address_info'] = $this->module_url_traveller_address_info;
          $this->arr_view_data['module_booking_basic_info'] = $this->module_booking_basic_info;
          $this->arr_view_data['module_booking_enquiry'] = $this->module_booking_enquiry;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
@@ -1006,19 +1008,19 @@ class All_traveller_info extends CI_Controller {
                 $last_name  = $this->input->post('last_name'); 
                 $dob  = $this->input->post('dob'); 
                 $relation  = $this->input->post('relation');
-                // $flat_no  = $this->input->post('flat_no');
-                // $building_house_nm  = $this->input->post('building_house_nm');
-                // $street_name  = $this->input->post('street_name');
-                // $landmark  = $this->input->post('landmark'); 
-                // $all_traveller_state  = $this->input->post('all_traveller_state'); 
-                // $all_traveller_district  = $this->input->post('all_traveller_district');
-                // $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
-                // $all_traveller_city  = $this->input->post('all_traveller_city');
-                // $pincode  = $this->input->post('pincode'); 
-                // $std_code  = $this->input->post('std_code');
-                // $mobile_no  = $this->input->post('mobile_no');
-                // $phone_no  = $this->input->post('phone_no'); 
-                // $email_id  = $this->input->post('email_id');  
+                $flat_no  = $this->input->post('flat_no');
+                $building_house_nm  = $this->input->post('building_house_nm');
+                $street_name  = $this->input->post('street_name');
+                $landmark  = $this->input->post('landmark'); 
+                $all_traveller_state  = $this->input->post('all_traveller_state'); 
+                $all_traveller_district  = $this->input->post('all_traveller_district');
+                $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
+                $all_traveller_city  = $this->input->post('all_traveller_city');
+                $pincode  = $this->input->post('pincode'); 
+                $std_code  = $this->input->post('std_code');
+                $mobile_no  = $this->input->post('mobile_no');
+                $phone_no  = $this->input->post('phone_no'); 
+                $email_id  = $this->input->post('email_id');  
 
                 
                  
@@ -1037,20 +1039,20 @@ class All_traveller_info extends CI_Controller {
                     'middle_name'   =>   $middle_name[$i],   
                     'last_name'    =>$last_name[$i],
                     'dob'=>$dob[$i],
-                    'all_traveller_relation'=>$relation[$i]
-                    // 'flat_no' =>   $flat_no,
-                    // 'building_house_nm'   =>   $building_house_nm,
-                    // 'street_name'   =>   $street_name,   
-                    // 'landmark'    =>$landmark,
-                    // 'state_name'=>$all_traveller_state,
-                    // 'district_name' =>   $all_traveller_district,
-                    // 'taluka_name'   =>   $all_traveller_taluka,
-                    // 'city_name'   =>   $all_traveller_city,   
-                    // 'pincode'    =>$pincode,
-                    // 'std_code'=>$std_code,
-                    // 'mobile_no'   =>   $mobile_no,   
-                    // 'phone_no'    =>$phone_no,
-                    // 'email_id'=>$email_id 
+                    'all_traveller_relation'=>$relation[$i],
+                    'flat_no' =>   $flat_no,
+                    'building_house_nm'   =>   $building_house_nm,
+                    'street_name'   =>   $street_name,   
+                    'landmark'    =>$landmark,
+                    'state_name'=>$all_traveller_state,
+                    'district_name' =>   $all_traveller_district,
+                    'taluka_name'   =>   $all_traveller_taluka,
+                    'city_name'   =>   $all_traveller_city,   
+                    'pincode'    =>$pincode,
+                    'std_code'=>$std_code,
+                    'mobile_no'   =>   $mobile_no,   
+                    'phone_no'    =>$phone_no,
+                    'email_id'=>$email_id 
                          
                  );
                  $inserted_id = $this->master_model->insertRecord('all_traveller_info',$arr_insert,true);
@@ -1110,19 +1112,19 @@ class All_traveller_info extends CI_Controller {
                 $last_name  = $this->input->post('last_name'); 
                 $dob  = $this->input->post('dob'); 
                 $relation  = $this->input->post('relation');
-                // $flat_no  = $this->input->post('flat_no');
-                // $building_house_nm  = $this->input->post('building_house_nm');
-                // $street_name  = $this->input->post('street_name');
-                // $landmark  = $this->input->post('landmark'); 
-                // $all_traveller_state  = $this->input->post('all_traveller_state'); 
-                // $all_traveller_district  = $this->input->post('all_traveller_district');
-                // $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
-                // $all_traveller_city  = $this->input->post('all_traveller_city');
-                // $pincode  = $this->input->post('pincode'); 
-                // $std_code  = $this->input->post('std_code');
-                // $mobile_no  = $this->input->post('mobile_no');
-                // $phone_no  = $this->input->post('phone_no'); 
-                // $email_id  = $this->input->post('email_id');  
+                $flat_no  = $this->input->post('flat_no');
+                $building_house_nm  = $this->input->post('building_house_nm');
+                $street_name  = $this->input->post('street_name');
+                $landmark  = $this->input->post('landmark'); 
+                $all_traveller_state  = $this->input->post('all_traveller_state'); 
+                $all_traveller_district  = $this->input->post('all_traveller_district');
+                $all_traveller_taluka  = $this->input->post('all_traveller_taluka');
+                $all_traveller_city  = $this->input->post('all_traveller_city');
+                $pincode  = $this->input->post('pincode'); 
+                $std_code  = $this->input->post('std_code');
+                $mobile_no  = $this->input->post('mobile_no');
+                $phone_no  = $this->input->post('phone_no'); 
+                $email_id  = $this->input->post('email_id');  
                 $document_file_traveller_img = $this->input->post('document_file_traveller_img');
                 //   print_r($document_file_traveller_img);
                 //   die;
@@ -1210,20 +1212,20 @@ class All_traveller_info extends CI_Controller {
                     'last_name'    =>$last_name[$i],
                     'dob'=>$dob[$i],
                     'all_traveller_relation'=>$relation[$i],
-                    // 'flat_no' =>   $flat_no,
-                    // 'building_house_nm'   =>   $building_house_nm,
-                    // 'street_name'   =>   $street_name,   
-                    // 'landmark'    =>$landmark,
-                    // 'area'    =>$area,
-                    // 'state_name'=>$all_traveller_state,
-                    // 'district_name' =>   $all_traveller_district,
-                    // 'taluka_name'   =>   $all_traveller_taluka,
-                    // 'city_name'   =>   $all_traveller_city,   
-                    // 'pincode'    =>$pincode,
-                    // 'std_code'=>$std_code,
-                    // 'mobile_no'   =>   $mobile_no,   
-                    // 'phone_no'    =>$phone_no,
-                    // 'email_id'=>$email_id,
+                    'flat_no' =>   $flat_no,
+                    'building_house_nm'   =>   $building_house_nm,
+                    'street_name'   =>   $street_name,   
+                    'landmark'    =>$landmark,
+                    'area'    =>$area,
+                    'state_name'=>$all_traveller_state,
+                    'district_name' =>   $all_traveller_district,
+                    'taluka_name'   =>   $all_traveller_taluka,
+                    'city_name'   =>   $all_traveller_city,   
+                    'pincode'    =>$pincode,
+                    'std_code'=>$std_code,
+                    'mobile_no'   =>   $mobile_no,   
+                    'phone_no'    =>$phone_no,
+                    'email_id'=>$email_id,
                     'image_name'=>$fname_traveller_img 
                  );
                  $tid = $traveller_info_id[$i];

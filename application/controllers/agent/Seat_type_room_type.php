@@ -17,6 +17,7 @@ class Seat_type_room_type extends CI_Controller {
         $this->module_all_traveller_info   =  base_url().$this->config->item('agent_panel_slug')."/all_traveller_info";
         $this->module_url_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_booking_enquiry    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
+        $this->module_traveller_address_info    =  base_url().$this->config->item('agent_panel_slug')."/traveller_address_info";
         $this->module_title       = "Seat Type and Room Type Selection";
         $this->module_url_slug    = "Seat Type and Room Type Selection";
         $this->module_view_folder = "seat_type_room_type/";
@@ -837,7 +838,7 @@ class Seat_type_room_type extends CI_Controller {
                  if($inserted_id > 0)
                  {
                      $this->session->set_flashdata('success_message',"seat selection and room selection.");
-                     redirect($this->module_all_traveller_info.'/add/'.$iid);
+                     redirect($this->module_traveller_address_info.'/add/'.$iid);
                  }
  
                  else
@@ -862,6 +863,7 @@ class Seat_type_room_type extends CI_Controller {
          $this->arr_view_data['packages_data_booking']        = $packages_data_booking;
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
+         $this->arr_view_data['module_traveller_address_info'] = $this->module_traveller_address_info;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
          $this->arr_view_data['module_url_booking_process'] = $this->module_url_booking_process;
          $this->arr_view_data['module_all_traveller_info'] = $this->module_all_traveller_info;

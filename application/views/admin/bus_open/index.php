@@ -52,7 +52,7 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['tour_number'] ?> - <?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
-                    <td><?php echo $info['vehicle_bus_type'] ?></td>
+                    <td><?php echo $info['bus_type'] ?></td>
                     <td><?php echo $info['registration_number'] ?> - <?php echo $info['vehicle_owner_name'] ?></td>
                     <td>
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
