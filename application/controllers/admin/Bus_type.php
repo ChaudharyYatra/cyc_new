@@ -194,34 +194,25 @@ class Bus_type extends CI_Controller{
             $arr_data = $this->master_model->getRecords('bus_type');
             if($this->input->post('submit'))
             {
-                $this->form_validation->set_rules('total_seats', 'Total Seat', 'required');
-                $this->form_validation->set_rules('description', 'Bus Seat Count', 'required');
-                $this->form_validation->set_rules('ac_non_ac', 'AC Non-AC', 'required');
-                $this->form_validation->set_rules('seats', 'Seat Type', 'required');
+                $this->form_validation->set_rules('bus_type', 'Bus Type', 'required');
                 
                 if($this->form_validation->run() == TRUE)
                 {
-                    $total_seats = $this->input->post('total_seats'); 
-                    $description = $this->input->post('description'); 
-                    $ac_non_ac = $this->input->post('ac_non_ac'); 
-                    $seats = $this->input->post('seats'); 
+                    $bus_type = $this->input->post('bus_type'); 
                    
-                    $this->db->where('total_seats',$total_seats);
+                    $this->db->where('bus_type',$bus_type);
                     $this->db->where('is_deleted','no');
                     $this->db->where('is_active','yes');
                     $department_exist_data = $this->master_model->getRecords('bus_type');
-                    if(count($bus_type_exist_data) > 0)
+                    if(count($department_exist_data) > 0)
                     {
-                        $this->session->set_flashdata('error_message',"Bus".$total_seats." Already Exist.");
+                        $this->session->set_flashdata('error_message',"Bus ".$bus_type." Already Exist.");
                         redirect($this->module_url_path.'/add');
                     }
                     
                     
                     $arr_update = array(
-                        'total_seats'   =>   $total_seats,
-                    'description'   =>   $description,
-                    'ac_non_ac'   =>   $ac_non_ac,
-                    'seats'   =>   $seats,
+                        'bus_type'   =>   $bus_type
                     );
                     $arr_where     = array("id" => $id);
                    $this->master_model->updateRecord('bus_type',$arr_update,$arr_where);

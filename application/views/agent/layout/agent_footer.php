@@ -560,7 +560,7 @@ $(function() {
 });
 </script> -->
 
-<script>
+<!-- <script>
 $(function() {
     var calculateAge = function(time) {
         var months = Math.round(time / (24 * 60 * 60 * 1000 * 30));
@@ -578,6 +578,36 @@ $(function() {
         var col3 = currentRow.find('input[name="age[' + index + ']"]').val(calculateAge(age));
     });
 });
+</script> -->
+<script>
+  $(function() {
+    var calculateAge = function(time) {
+      var birthDate = new Date(time);
+      var presentDate = new Date();
+      
+      var years = presentDate.getFullYear() - birthDate.getFullYear();
+      var months = presentDate.getMonth() - birthDate.getMonth();
+
+      if (presentDate.getDate() < birthDate.getDate()) {
+        months--;
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      return years;
+    };
+
+    $('input[name^="dob["]').change(function() {
+      var birthDate = new Date($(this).val()).getTime();
+      var age = calculateAge(birthDate);
+      var currentRow = $(this).closest("tr");
+      var index = $(this).attr('name').match(/\[(.*?)\]/)[1];
+      var col3 = currentRow.find('input[name="age[' + index + ']"]').val(age);
+    });
+  });
 </script>
 
 <!-- ================================================================================================ -->
@@ -2885,13 +2915,13 @@ function child_no_seat_count() {
 <!-- Total Traveller Count -->
 <script>
 $(document).ready(function() {
+    
     $("#booknow_submit").prop('disabled', true);
     var f_count = '';
     var e_count = '';
     var g_count = '';
     var m_count = '';
     var l_count = '';
-
 
     $(".seattype_count").on('keyup', function() {
         var f_count = $("#seperate_seat").val();
@@ -3040,6 +3070,7 @@ $(document).ready(function() {
     // alert(inputString_one);
 });
 </script>
+
 <!-- End Total Traveller Count -->
 
 <!-- Total Seats Needed Count -->
@@ -3123,6 +3154,7 @@ $(document).ready(function() {
             var room_seat_c = 0;
             var adult_val = 0;
             var adult_val_90 = 0;
+            
             $(".hotel_rate1").each(function(index) {
 
                 var did = $(this).val();
@@ -4199,9 +4231,6 @@ function all_total_count(newvar_1) {
         alert('Traveller count and staying traveller count must be same');
         $('#traveller_count_error').empty().text('Traveller count and staying traveller count must be same');
     }
-
-
-
 
 
 }
@@ -7042,6 +7071,273 @@ document.getElementById("back-button").addEventListener("click", function() {
     }
 });
 </script>
+<!-- <script>
+document.getElementById("back-button").addEventListener("click", function() {
+    var iid = $("#domestic_enquiry_id").val();
+
+    Swal.fire({
+        title: "Are You Sure You Want to Save This Record?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // User clicked "Yes," do nothing or submit the form here
+        } else {
+            window.location.href = "<?//=base_url()?>agent/seat_checker/index/" + iid;
+        }
+    });
+});
+</script> -->
+
+<!-- <script>
+    $(document).ready(function() {
+        $('#back-button').on('click', function(e) {
+            e.preventDefault();
+            var iid = $("#domestic_enquiry_id").val();
+
+            Swal.fire({
+                title: "Are You Sure You Want to Save This Record?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                cancelButtonText: "No",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // User clicked "Yes," do nothing or submit the form here
+
+                    $('#booking_basic_info').validate({ // initialize the plugin
+                        errorPlacement: function($error, $element) {
+                            $error.appendTo($element.closest("div"));
+                        },
+                        rules: {
+                            booking_office: {
+                                required: true,
+                            },
+                            boarding_office_location: {
+                                required: true,
+                            },
+                            mrandmrs: {
+                                required: true,
+                            },
+                            surname: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            first_name: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            middle_name: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            tour_no: {
+                                required: true,
+                            },
+                            tour_date: {
+                                required: true,
+                            },
+                            hotel_type: {
+                                required: true,
+                            },
+                            seat_count: {
+                                required: true,
+                            },
+                            mobile_number: {
+                                required: true,
+                                maxlength: 10,
+                                minlength: 10
+                            },
+                            media_source_name: {
+                                required: true,
+                            },
+                            gender: {
+                                required: true,
+                            }
+
+                        },
+
+                        messages: {
+                            booking_office: {
+                                required: "Please enter booking office",
+                            },
+                            boarding_office_location: {
+                                required: "Please select boarding office location",
+                            },
+                            mrandmrs: {
+                                required: "Please select Mr / Mrs",
+                            },
+                            surname: {
+                                required: "Please enter surname",
+                            },
+                            first_name: {
+                                required: "Please enter first name",
+                            },
+                            middle_name: {
+                                required: "Please enter middle name",
+                            },
+                            tour_no: {
+                                required: "Please select tour no",
+                            },
+                            tour_date: {
+                                required: "Please select tour date",
+                            },
+                            hotel_type: {
+                                required: "Please enter hotel type",
+                            },
+                            seat_count: {
+                                required: "Please enter seat count",
+                            },
+                            mobile_number: {
+                                required: "Please enter mobile number",
+                                maxlength: "Please enter maximum 10 digit number",
+                                minlength: "Please enter minimum 10 digit number"
+                            },
+                            media_source_name: {
+                                required: "Please select media source name",
+                            },
+                            gender: {
+                                required: "Please select gender",
+                            }
+                        }
+                    });
+                 
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    alert('elseeeeeeeeee');
+                    window.location.href = "<?//=base_url()?>agent/seat_checker/index/" + iid;
+                    // Alternatively, you can use window.history.back();
+                }
+            });
+        });
+    });
+</script> -->
+
+<!-- <script>
+        $(document).ready(function() {
+            $('#back-button').on('click', function(e) {
+                e.preventDefault();
+                var iid = $("#domestic_enquiry_id").val();
+ 
+                Swal.fire({
+                    title: "Are You Sure You Want to Save This Record?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#booking_basic_info').validate({
+                            errorPlacement: function($error, $element) {
+                            $error.appendTo($element.closest("div"));
+                            },
+                            rules: {
+                                booking_office: {
+                                required: true,
+                            },
+                            boarding_office_location: {
+                                required: true,
+                            },
+                            mrandmrs: {
+                                required: true,
+                            },
+                            surname: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            first_name: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            middle_name: {
+                                required: true,
+                                noSpace: true,
+                            },
+                            tour_no: {
+                                required: true,
+                            },
+                            tour_date: {
+                                required: true,
+                            },
+                            hotel_type: {
+                                required: true,
+                            },
+                            seat_count: {
+                                required: true,
+                            },
+                            mobile_number: {
+                                required: true,
+                                maxlength: 10,
+                                minlength: 10
+                            },
+                            media_source_name: {
+                                required: true,
+                            },
+                            gender: {
+                                required: true,
+                            }
+                            },
+                            messages: {
+                                booking_office: {
+                                required: "Please enter booking office",
+                            },
+                            boarding_office_location: {
+                                required: "Please select boarding office location",
+                            },
+                            mrandmrs: {
+                                required: "Please select Mr / Mrs",
+                            },
+                            surname: {
+                                required: "Please enter surname",
+                            },
+                            first_name: {
+                                required: "Please enter first name",
+                            },
+                            middle_name: {
+                                required: "Please enter middle name",
+                            },
+                            tour_no: {
+                                required: "Please select tour no",
+                            },
+                            tour_date: {
+                                required: "Please select tour date",
+                            },
+                            hotel_type: {
+                                required: "Please enter hotel type",
+                            },
+                            seat_count: {
+                                required: "Please enter seat count",
+                            },
+                            mobile_number: {
+                                required: "Please enter mobile number",
+                                maxlength: "Please enter maximum 10 digit number",
+                                minlength: "Please enter minimum 10 digit number"
+                            },
+                            media_source_name: {
+                                required: "Please select media source name",
+                            },
+                            gender: {
+                                required: "Please select gender",
+                            }
+                            },
+                        });
+ 
+                        // Trigger validation
+                        if ($('#booking_basic_info').valid()) {
+                            // Form is valid, you can continue with your actions
+                            console.log('Form is valid!');
+                            
+                        }
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        alert('Cancelled');
+                        window.location.href = "<?//=base_url()?>agent/seat_checker/index/" + iid;
+                    }
+                });
+            });
+        });
+</script> -->
 
 <script>
 document.getElementById("back-button_all_traveller").addEventListener("click", function() {
@@ -7338,3 +7634,42 @@ $("#booking_confirm_submit").click(function() {
 
 
 <!-- ===========Booking confirm Otp ==================================== -->
+
+<!-- Booking Enquiry Multiple tour select time alert script -->
+<!-- Your JavaScript code -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function() {
+        var previousSelections = []; // Variable to store previous selections
+        var sweetAlertShown = false; // Flag to track if SweetAlert has been shown
+
+        $('#tour_number').on('change', function() {
+            var selectedOptions = $(this).val();
+
+            if (selectedOptions && selectedOptions.length > 1 && !sweetAlertShown) {
+                Swal.fire({
+                    title: "Do you want to select multiple tours?",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Update the previous selections if the user chooses to select multiple tours
+                        previousSelections = selectedOptions.slice();
+                        sweetAlertShown = true; // Set to true to prevent further SweetAlerts
+                        $('#tour_number').prop('multiple', true); // Allow multiple selections
+                    } else {
+                        // If the user chooses not to select multiple tours, keep the previous selections
+                        $(this).val(previousSelections);
+                        $('#tour_number').trigger('change.select2'); // Refresh Select2
+                        $('#tour_number').prop('multiple', false); // Restrict to single selection
+                    }
+                });
+            } else {
+                // Update previous selections if only one option is selected
+                previousSelections = selectedOptions ? selectedOptions.slice() : [];
+            }
+        });
+    });
+</script>
+<!-- End Booking Enquiry Multiple tour select time alert script -->

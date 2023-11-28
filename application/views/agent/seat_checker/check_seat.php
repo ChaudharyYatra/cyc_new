@@ -114,13 +114,24 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label>Select Tour</label>
+                            
                             <select class="select_css" name="pack_id" id="pack_id">
                               <option value="">Select Tour</option>
                                 <?php foreach($packages_data_booking as $packages_data_booking){ ?>  
-                                  <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
+
+                                  <?php if(count($tour_no_title) == 1){ ?>
+                                    <?php foreach($tour_no_title as $tour_no_title_info){ ?>
+                                    <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$tour_no_title_info['package_id']){
                                     echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
+                                    <?php } ?>
+                                  <?php } else{?>
+                                    <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
+                                    echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
+                                  <?php } ?>
+
                                 <?php } ?>
                             </select>
+
                           </div>
                         </div>
 
