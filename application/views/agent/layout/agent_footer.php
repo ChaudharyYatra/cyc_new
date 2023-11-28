@@ -6175,7 +6175,7 @@ function fetch_new_hold(){
 
       $(abc).css("color", "white");
 
-      $(abc).removeClass("selected");
+      $(abc).removeClass("available");
 
       $(abc).addClass("hold");
 

@@ -97,12 +97,6 @@
                     <div class="col-md-12">
                       <div class="row">
 
-                        <?php
-                        //   foreach($agent_booking_enquiry_data as $agent_booking_enquiry_data_info) 
-                        //   { 
-                        //     // print_r($agent_booking_enquiry_data); die;
-                        //     $enq_id=$agent_booking_enquiry_data_info['id'];
-                        // ?>
                         <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_booking_enquiry_data['id']; ?>">
                         <!-- <?php //} ?> -->
                         <div class="col-md-1">
@@ -136,9 +130,6 @@
                         <div class="col-md-2">
                           <div class="form-group">
                             <button type="submit" class="btn btn-success mt-4" name="submit" value="Search" id="search" style="margin-top: 24% !important;">Search </button> 
-                            <!-- <a href="<?php //echo $module_booking_enquiry; ?>/index"><button type="button" class="btn btn-danger mt-4" >Cancel</button></a>
-                            <a href="<?php //echo $module_booking_enquiry; ?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" class="btn btn-warning mt-4" >Back</button></a> -->
-                            <!-- <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $agent_booking_enquiry_data['id']; ?>"><button type="button" id="booking_start" class="btn btn-primary btn-md mt-4" class="dropdown-item">Booking</button></a>   -->
                           </div>
                         </div>
 

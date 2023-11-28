@@ -37,7 +37,7 @@
                     <th>Tour Details</th>
                     <th>Tour Date</th>
                     <th>Bus Type</th>
-                    <!-- <th>Vehicle RTO Registration No</th> -->
+                    <th>Vehicle RTO Registration No</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -53,7 +53,7 @@
                     <td><?php echo $info['tour_number'] ?> - <?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['bus_type'] ?></td>
-                    <!-- <td><?php //echo $info['registration_number'] ?> - <?php //echo $info['vehicle_owner_name'] ?></td> -->
+                    <td><?php echo $info['registration_number'] ?> - <?php echo $info['vehicle_owner_name'] ?></td>
                     <td>
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
 					                echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;

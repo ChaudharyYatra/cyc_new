@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Vehicle_details extends CI_Controller{
+class Vehicle_details_admin extends CI_Controller{
 
 	public function __construct()
 	{
@@ -10,13 +10,13 @@ class Vehicle_details extends CI_Controller{
         { 
                 redirect(base_url().'admin/login'); 
         }
-        $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/vehicle_details";
+        $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/vehicle_details_admin";
         $this->module_url_path_dates    =  base_url().$this->config->item('admin_panel_slug')."/package_dates";
 		$this->module_url_path_iternary    =  base_url().$this->config->item('admin_panel_slug')."/package_iternary";
 		$this->module_url_path_review    =  base_url().$this->config->item('admin_panel_slug')."/domestic_package_review";
         $this->module_title       = "Vehicle Details";
-        $this->module_url_slug    = "vehicle_details";
-        $this->module_view_folder = "vehicle_details/";    
+        $this->module_url_slug    = "vehicle_details_admin";
+        $this->module_view_folder = "vehicle_details_admin/";    
         $this->load->library('upload');
 	}
 
@@ -25,16 +25,15 @@ class Vehicle_details extends CI_Controller{
         $vehicle_ssession_owner_name = $this->session->userdata('vehicle_ssession_owner_name');
         $id = $this->session->userdata('vehicle_owner_sess_id');
 
-        $fields = "vehicle_details.*,vehicle_type.vehicle_type_name,vehicle_fuel.vehicle_fuel_name,vehicle_brand.vehicle_brand_name,
+        $fields = "vehicle_details_dummy.*,vehicle_type.vehicle_type_name,vehicle_fuel.vehicle_fuel_name,vehicle_brand.vehicle_brand_name,
         bus_type.bus_type";
-        $this->db->where('vehicle_details.is_deleted','no');
-        $this->db->where('vehicle_details.added_by','owner');
-        $this->db->join("vehicle_type", 'vehicle_details.vehicle_type=vehicle_type.id','left');
-        $this->db->join("vehicle_fuel", 'vehicle_details.fuel_type=vehicle_fuel.id','left');
-        $this->db->join("vehicle_brand", 'vehicle_details.vehicle_brand=vehicle_brand.id','left');
-        $this->db->join("bus_type", 'vehicle_details.vehicle_bus_type=bus_type.id','left');
-        $arr_data = $this->master_model->getRecords('vehicle_details',array('vehicle_details.is_deleted'=>'no'),$fields);
-        // print_r($arr_data); die;
+        $this->db->where('vehicle_details_dummy.is_deleted','no');
+        $this->db->where('vehicle_details_dummy.added_by','admin');
+        $this->db->join("vehicle_type", 'vehicle_details_dummy.vehicle_type=vehicle_type.id','left');
+        $this->db->join("vehicle_fuel", 'vehicle_details_dummy.fuel_type=vehicle_fuel.id','left');
+        $this->db->join("vehicle_brand", 'vehicle_details_dummy.vehicle_brand=vehicle_brand.id','left');
+        $this->db->join("bus_type", 'vehicle_details_dummy.vehicle_bus_type=bus_type.id','left');
+        $arr_data = $this->master_model->getRecords('vehicle_details_dummy',array('vehicle_details_dummy.is_deleted'=>'no'),$fields);
 
         $this->arr_view_data['vehicle_ssession_owner_name']= $vehicle_ssession_owner_name;
         $this->arr_view_data['listing_page']    = 'yes';
@@ -47,7 +46,6 @@ class Vehicle_details extends CI_Controller{
 		$this->arr_view_data['module_url_path_review'] = $this->module_url_path_review;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
-       
 	}
 	
 
@@ -55,11 +53,13 @@ class Vehicle_details extends CI_Controller{
 //   Active/Inactive
 public function active_inactive($id,$type)
 {
-  $id=base64_decode($id);
+//   $id=base64_decode($id);
     if($id!='' && ($type == "yes" || $type == "no") )
     {   
         $this->db->where('id',$id);
         $arr_data = $this->master_model->getRecords('vehicle_details');
+        // print_r($arr_data);
+        // die;
         if(empty($arr_data))
         {
            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -105,21 +105,19 @@ public function add_seat_preference($id) {
 
     $this->db->where('is_active','yes');
     $this->db->where('is_deleted','no');
-    $this->db->where('vehicle_details.id',$vehicle_id);
-    $vehicle_details_data = $this->master_model->getRecord('vehicle_details');
-
-    $fields = "vehicle_seat_preference.*,vehicle_details.id as vehicle_id,vehicle_seat_preference.id as vpreference_id";
-    $this->db->where('vehicle_seat_preference.is_active','yes');
-    $this->db->where('vehicle_seat_preference.is_deleted','no');
-    $this->db->where('vehicle_seat_preference.vehicle_id',$vehicle_id);
-    $this->db->join("vehicle_details", 'vehicle_details.id=vehicle_seat_preference.vehicle_id','left');
-    $seat_preference_data = $this->master_model->getRecord("vehicle_seat_preference", "", $fields);
+    $this->db->where('vehicle_details_dummy.id',$vehicle_id);
+    $vehicle_details_data = $this->master_model->getRecord('vehicle_details_dummy');
+    $fields = "vehicle_seat_preference_dummy.*,vehicle_details_dummy.id as vehicle_id,vehicle_seat_preference_dummy.id as vpreference_id";
+    $this->db->where('vehicle_seat_preference_dummy.is_active','yes');
+    $this->db->where('vehicle_seat_preference_dummy.is_deleted','no');
+    $this->db->where('vehicle_seat_preference_dummy.vehicle_id',$vehicle_id);
+    $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=vehicle_seat_preference_dummy.vehicle_id','left');
+    $seat_preference_data = $this->master_model->getRecord("vehicle_seat_preference_dummy", "", $fields);
 
     $selected_seats=array();
 
     if ($this->input->post("submit")) {
         
-
             $first_cls_seats_check = $this->input->post("first_cls_seats[]");
            if(!empty($first_cls_seats_check)){
             $first_cls_seats = implode(',',$first_cls_seats_check);
@@ -185,10 +183,10 @@ public function add_seat_preference($id) {
                   ];
 
                   if(empty($seat_preference_data)){
-                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference", $arr_insert, true,);
+                $inserted_id = $this->master_model->insertRecord("vehicle_seat_preference_dummy", $arr_insert, true,);
                   }else{
                     $arr_where     = array("id" => $vpreference_id);
-                    $inserted_id =$this->master_model->updateRecord('vehicle_seat_preference',$arr_insert,$arr_where);
+                    $inserted_id =$this->master_model->updateRecord('vehicle_seat_preference_dummy',$arr_insert,$arr_where);
                   }
                   
             if ($inserted_id > 0) {
@@ -263,46 +261,91 @@ public function details($id)
     $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
 }
 
-
  // Edit - Get data for edit
     
  public function add()
- {
-    $vehicle_ssession_owner_name = $this->session->userdata('vehicle_ssession_owner_name');
-    $iid = $this->session->userdata('vehicle_owner_sess_id');
+ {   
+     $vehicle_ssession_owner_name = $this->session->userdata('vehicle_ssession_owner_name');
+     $id = $this->session->userdata('vehicle_owner_sess_id');
 
-         if($this->input->post('submit'))
+     if($this->input->post('submit'))
+     {
+         $this->form_validation->set_rules('vehicle_bus_type', 'vehicle_bus_type', 'required');
+         $this->form_validation->set_rules('vehicle_type', 'vehicle_type', 'required');
+         $this->form_validation->set_rules('seat_capacity', 'seat_capacity', 'required');
+         
+         if($this->form_validation->run() == TRUE)
          {
-            // print_r($_REQUEST); die;
-             $this->form_validation->set_rules('document_checker_name', 'document_checker_name', 'required');
+            
+
+             $vehicle_bus_type  = $this->input->post('vehicle_bus_type'); 
+             $vehicle_type  = $this->input->post('vehicle_type'); 
+             $seat_capacity = trim($this->input->post('seat_capacity'));
+             $air_conditionar = trim($this->input->post('air_conditionar'));
              
-             if($this->form_validation->run() == TRUE)
+             $arr_insert = array(
+                 'vehicle_bus_type'   =>   $vehicle_bus_type,
+                 'vehicle_type'   =>   $vehicle_type,
+                 'seat_capacity'          => $seat_capacity,
+                 'air_conditionar'          => $air_conditionar,
+                 'status'                  => 'pending',
+                 'added_by' => 'admin'
+             );
+             
+             $inserted_id = $this->master_model->insertRecord('vehicle_details_dummy',$arr_insert,true);
+                            
+             if($inserted_id > 0)
              {
-                $document_checker_name = trim($this->input->post('document_checker_name'));
-                $vehicle_id = trim($this->input->post('vehicle_id'));
-                
-                $arr_update = array(
-                     'document_checker_name' => $document_checker_name,
-                 );
-                 $arr_where     = array("id" => $vehicle_id);
-                $inserted = $this->master_model->updateRecord('vehicle_details',$arr_update,$arr_where);
-                 if($inserted > 0)
-                 {
-                     $this->session->set_flashdata('success_message',"Document Checker Name Added Successfully.");
-                 }
-                 else
-                 {
-                     $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
-                 }
+                 $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully. <br> Now visit choudhary yatra office with your original document and one xerox copy.");
                  redirect($this->module_url_path.'/index');
-             }   
-         }
-      
-     $this->arr_view_data['arr_data']        = $arr_data;
-     $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+             }
+
+             else
+             {
+                 $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+             }
+             redirect($this->module_url_path.'/index');
+         
+     }
+    
+     }
+
+     $this->db->order_by('id','ASC');
+     $this->db->where('is_deleted','no');
+     $this->db->where('is_active','yes');
+     $bus_type = $this->master_model->getRecords('bus_type');
+
+     $this->db->order_by('id','ASC');
+     $this->db->where('is_deleted','no');
+     $this->db->where('is_active','yes');
+     $vehicle_type = $this->master_model->getRecords('vehicle_type');
+
+     $this->db->order_by('id','ASC');
+     $this->db->where('is_deleted','no');
+     $vehicle_fuel = $this->master_model->getRecords('vehicle_fuel');
+     // print_r($package_type); die;
+
+     $this->db->order_by('id','ASC');
+     $this->db->where('is_deleted','no');
+     $vehicle_brand = $this->master_model->getRecords('vehicle_brand');
+
+     $this->db->order_by('id','desc');
+     $this->db->where('is_deleted','no');
+     $this->db->where('is_active','yes');
+     $zone_info = $this->master_model->getRecords('zone_master');
+
+     
+     $this->arr_view_data['vehicle_ssession_owner_name'] = $vehicle_ssession_owner_name;
+     $this->arr_view_data['action']          = 'add';
+     $this->arr_view_data['vehicle_type'] = $vehicle_type;
+     $this->arr_view_data['vehicle_fuel'] = $vehicle_fuel;
+     $this->arr_view_data['bus_type'] = $bus_type;
+     $this->arr_view_data['vehicle_brand'] = $vehicle_brand;
+     $this->arr_view_data['zone_info'] = $zone_info;
+     $this->arr_view_data['page_title']      = " Add ".$this->module_title;
      $this->arr_view_data['module_title']    = $this->module_title;
      $this->arr_view_data['module_url_path'] = $this->module_url_path;
-     $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+     $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
      $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
  }
    
