@@ -40,6 +40,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/vehicle_details_admin/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Dummy Vehicle Details</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/assign_vehicle/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Assign Tour Vehicle</p>
+                    </a>
+                </li>                
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>

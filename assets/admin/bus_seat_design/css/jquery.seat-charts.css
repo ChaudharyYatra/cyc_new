@@ -61,7 +61,7 @@ div.seatCharts-seat.unavailable {
 
 div.seatCharts-seat.hold {
 	background-color: orange;
-	cursor: not-allowed;
+	cursor: not-allowed !important;
 }
 
 div.seatCharts-seat.admin_hold {

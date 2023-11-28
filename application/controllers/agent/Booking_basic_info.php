@@ -832,6 +832,7 @@ class Booking_basic_info extends CI_Controller {
         // print_r($boarding_office_location); die;
                         $this->db->where('is_deleted','no');
                         $this->db->where('is_active','yes');
+                        $this->db->where('bus_open_status','yes');
                         $this->db->where('journey_date >=',$today);
                         $this->db->where('package_id',$boarding_office_location);
                         $data = $this->master_model->getRecords('package_date');

@@ -10094,3 +10094,31 @@ $('#edit_for_cust').validate({ // initialize the plugin
 </script>
 
 <!-- instraction for customer -->
+
+<script type='text/javascript'>
+    // baseURL variable
+    var baseURL= "<?php echo base_url();?>";
+    
+    $(document).ready(function(){
+        // district change
+        $(document).on("change","#vehicle_bus_type",function(){
+            var vehicle_bus_type_id = $(this).val();
+        $.ajax({
+            url:'<?=base_url()?>admin/assign_vehicle/get_rtonumber',
+            method: 'post',
+            data: {vehicle_bus_type_id: vehicle_bus_type_id},
+            dataType: 'json',
+            success: function(response){
+            
+            // var closestTable = $(this).closest("table");
+
+                $('#vehicle_rto_registration').find('option').remove();
+                $('#vehicle_rto_registration').append('<option value="">Select RTO Registration No</option>');
+            $.each(response,function(index,data){   
+                $('#vehicle_rto_registration').append('<option value="'+data['id']+'">'+data['registration_number']+'</option>');
+            });
+            }
+        });
+        });
+    });
+</script>

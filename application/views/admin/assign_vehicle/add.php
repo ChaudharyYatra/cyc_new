@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data"  id="add_corefeature">
+              <form method="post" enctype="multipart/form-data"  id="">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -57,29 +57,25 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Bus Type</label><br>
-                            <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
-                              <option value="">Select Bus Type</option>
-                              <?php
-                                    foreach($bus_type as $bus_type_info) 
-                                    { 
-                                  ?>
-                              <option value="<?php echo $bus_type_info['id']; ?>"><?php echo $bus_type_info['bus_type']; ?></option>
-                              <?php } ?>
-                            </select>
-                          </div>
-                        </div>
-                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label>Bus Type</label><br>
                                   <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
                                       <option value="">Select Bus Type</option>
                                       <?php foreach($record_bus_type as $bus_type_data){ ?>
-                                        <option value="<?php echo $bus_type_data['vehicle_id'];?>"><?php echo $bus_type_data['bus_type']. ' ==> '. $bus_type_data['seat_capacity'];?> Seater</option>
+                                        <option value="<?php echo $bus_type_data['id'];?>"><?php echo $bus_type_data['bus_type'];?></option>
                                         <?php } ?>
                                   </select> 
 
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            <label>Vehicle RTO Registration No</label>
+                            <select class="select_css" name="vehicle_rto_registration" id="vehicle_rto_registration" required="required">
+                                <option value="">Select RTO Registration No</option>
+                                
+                                </select>
                             </div>
                         </div>
                         

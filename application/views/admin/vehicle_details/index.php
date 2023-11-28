@@ -67,11 +67,21 @@
                     <td><?php echo $info['vehicle_brand_name'] ?></td>
                     <td><?php echo $info['seat_capacity'] ?></td>
                     <td><?php echo $info['vehicle_model'] ?></td>
-                    <td><?php echo $info['status'] ?></td>
                     <td>
+                    <?php 
+                    if($info['added_by']!='admin' || $info['added_by']=='owner')
+                    { echo $info['status'];  
+                      
+                      } else{  echo 'Not Applicable'; 
+                        
+                    } ?>
+                  
+                  </td>
+                    <td>
+
                         <?php 
-                        // if($info['status']=='approved' || $info['status']=='rejected')
-                        // {
+                        if($info['added_by']!='admin' || $info['added_by']=='owner')
+                        {
                         if($info['is_active']=='no' && $info['is_active']!='')
                           {
                         ?>
@@ -98,25 +108,30 @@
                           <?php } 
                         //}else if($info['status']=='pending'){
                         ?>
-                        <!-- <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //$aid=base64_encode($info['id']); 
-							//echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-down"></i></a> / 
-                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //$aid=base64_encode($info['id']); 
-							//echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-up"></i> </a>
-                        <?php //} ?> -->
-
+                        
                         <br>
                         <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
                       " ><button type="button" class="btn btn-primary mt-1">Documents</button></a> 
+                        <?php }else if($info['added_by']!='owner' || $info['added_by']=='admin')
+                        {
+                          echo "Not Applicable";
+                        }
+                          ?>
                     </td>
 
                     <td>
-                      <?php if($info['status']=='approved'){?>
-                      <a href="<?php echo $module_url_path;?>/add_seat_preference/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
-                      " ><button type="button" class="btn btn-primary">View</button></a>  
-                      <?php } else{ ?>
-                        <a href="<?php echo $module_url_path;?>/add_seat_preference/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
-                      " ><button type="button" class="btn btn-primary" disabled>View</button></a>
-                      <?php } ?>
+                      
+                    <?php if ($info['status'] == 'approved') { ?>
+                        <a href="<?php echo $module_url_path; ?>/add_seat_preference/<?php $aid = base64_encode($info['id']); echo rtrim($aid, '='); ?>">
+                            <button type="button" class="btn btn-primary">View</button>
+                        </a>
+                    <?php } else if ($info['added_by'] == 'admin') { ?>
+                        <p>Not Applicable</p>
+                    <?php } else { ?>
+                        <a href="<?php echo $module_url_path; ?>/add_seat_preference/<?php $aid = base64_encode($info['id']); echo rtrim($aid, '='); ?>">
+                            <button type="button" class="btn btn-primary" disabled>View</button>
+                        </a>
+                    <?php } ?>
                     </td>
                   </tr>
                   

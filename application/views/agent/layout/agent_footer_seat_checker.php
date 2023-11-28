@@ -5263,9 +5263,11 @@ $(document).ready(function(){
 
     $("#booking_start").click(function() {  
         var enquiry_seat_count = $("#enquiry_seat_count").val();
+        var selected_seat_counter = $("#counter").text();
+        // alert(selected_seat_counter);
 
        
-        if (enquiry_seat_count != $('#selected-seats li').length) {
+        if (enquiry_seat_count != selected_seat_counter) {
             var is_confirmed=confirm("The Enquired seats and selected seats are not same are you sure to continue");
             if(is_confirmed)
             {
@@ -5409,6 +5411,18 @@ function fetch_new_hold(){
         var enq_id =  $("#domestic_enquiry_id").val();
         var package_id =  $("#new_pack_id").val();
         var tour_dates =  $("#new_pack_date_id").val();
+        // var hold_seat =  $(".hold").attr('id');
+        // console.log('hold_seathold_seathold_seathold_seat',hold_seat);
+        var hold_seat = $('.hold');
+        var attributeValues = [];
+
+        hold_seat.each(function() {
+      var attributeValue = $(this).attr('id');
+      attributeValues.push(attributeValue);
+    });
+
+        // console.log('hold_seathold_seathold_seathold_seat',attributeValues);
+
         var temp_array_hold = [];
             $.ajax({
             url: '<?php echo base_url(); ?>agent/seat_checker/fetch_new_hold',
@@ -5426,14 +5440,36 @@ function fetch_new_hold(){
                     var temp_array_hold=[];
                 }
 
-                    for(var i=0; i<temp_array_hold.length;i++)
+                var uniqueTo_attributeValues=[];
+                var uniqueTo_temp_array_hold=[];
+                // Find elements unique to array1
+                var uniqueTo_attributeValues = attributeValues.filter(function(item) {
+                return temp_array_hold.indexOf(item) === -1;
+                });
+
+
+                for(var i=0; i<temp_array_hold.length;i++)
             {
                 var seat_data_id=temp_array_hold[i];
                 var abc="#"+seat_data_id;
                 $(abc).css("color", "white");
-                $(abc).removeClass("selected");
+                $(abc).off('click');
+                $(abc).removeClass("available");
                 $(abc).addClass("hold");
             }
+
+            
+            for(var i=0; i<uniqueTo_attributeValues.length;i++)
+            {
+                var seat_data_id=uniqueTo_attributeValues[i];
+                var abc="#"+seat_data_id;
+                $(abc).css("color", "white");
+                $(abc).removeClass("hold");
+                $(abc).addClass("available");
+            }
+
+
+
             }
             });
 
@@ -5443,7 +5479,7 @@ function fetch_new_hold(){
 
 $(document).ready(function(){
 
- setInterval(fetch_new_hold,2000);
+ setInterval(fetch_new_hold,1000);
 
 });
 
