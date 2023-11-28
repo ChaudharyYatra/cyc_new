@@ -9147,6 +9147,31 @@ $('#edit_measuring_type').validate({ // initialize the plugin
     });
 </script>
 
+<script>
+     $(document).on("change","select",function(){
+         var selectedOption=$(this).val();
+           var select_name=$(this).attr('name');
+           var select_id=$(this).attr('id');
+
+          $('.district').find('option[value="' + selectedOption + '"]').prop('disabled', true);
+
+          $('#'+select_id).find('option[value="' + selectedOption + '"]').prop('disabled', false);
+
+          $(".district").each(function () {
+               var from_series_id=$(this).val();
+               if(from_series_id!="")
+               {
+                   
+          $('.place_name').attr("disabled", false);
+               }else{
+          $('.place_name').attr("disabled", true);
+                   
+               }
+          });
+
+     });
+</script>
+
 <script type='text/javascript'>
     // baseURL variable
     var baseURL= "<?php echo base_url();?>";

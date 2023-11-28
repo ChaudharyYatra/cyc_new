@@ -97,8 +97,7 @@
 					                  <div class="col-md-6">
                               <div class="form-group">
                                 <label>Media source</label>
-                                  <select class="form-control niceSelect" name="media_source_name" id="media_source_name" onfocus='this.size=3;' onblur='this.size=1;' 
-                                        onchange='this.size=1; this.blur();'>
+                                  <select class="select_css" name="media_source_name" id="media_source_name" >
                                       <option value="">Select media source</option>
                                       <?php
                                         foreach($media_source_data as $media_source_info){ 
@@ -110,18 +109,15 @@
                             </div>
 
                             <div class="col-md-6">
-                              <div class="form-group">
-                                <label>Tour Number-Name</label>
-                                <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number" required="required">
-                                    <option value="">Select Tour</option>
-                                    <?php
-                                      foreach($packages_data as $packages_data_value) 
-                                      { 
-                                    ?>
-                                      <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
-                                  <?php } ?>
-                                  </select>
-                              </div>
+                                <div class="form-group">
+                                    <label>Tour Number-Name</label>
+                                    <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number" required="required">
+                                        <option value="">Select Tour</option>
+                                        <?php foreach($packages_data as $packages_data_value) { ?>
+                                            <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
 					 
                             <div class="col-md-6" id="other_tour_name_div" style='display:none;'>
@@ -144,8 +140,9 @@
               </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
+                <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
-                  <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button> 
+                   
                   <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
@@ -214,8 +211,7 @@
 					                  <div class="col-md-6">
                               <div class="form-group">
                                 <label>Media source</label>
-                                  <select class="form-control niceSelect" name="media_source_name" id="media_source_name" onfocus='this.size=3;' onblur='this.size=1;' 
-                                        onchange='this.size=1; this.blur();'>
+                                  <select class="select_css" name="media_source_name" id="media_source_name">
                                       <option value="">Select media source</option>
                                       <?php
                                         foreach($media_source_data as $media_source_info){ 
@@ -265,8 +261,9 @@
               </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
                   <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button> 
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
+                  
                   <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>

@@ -41,7 +41,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                           <label>Bus Type</label>
-                          <input type="text" class="form-control" name="bus_type" id="bus_type" placeholder="Enter bus type" value="<?php echo $info['vehicle_brand_name']; ?>">
+                          <input type="text" class="form-control" name="bus_type" id="bus_type" placeholder="Enter bus type" value="<?php echo $info['bus_type']; ?>">
                       </div>
                     </div>
                   </div>

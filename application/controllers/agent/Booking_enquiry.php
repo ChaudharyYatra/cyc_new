@@ -655,7 +655,7 @@ class Booking_enquiry extends CI_Controller {
                 $this->form_validation->set_rules('gender', 'gender', 'required');
                 // $this->form_validation->set_rules('packages', 'packages', 'required');
                 // $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
-				$this->form_validation->set_rules('wp_mobile_number', 'whatsapp mobile number', 'required');
+				// $this->form_validation->set_rules('wp_mobile_number', 'whatsapp mobile number', 'required');
                 if($this->input->post('tour_number')=='Other'){
                 $this->form_validation->set_rules('other_tour_name', 'enter destination name', 'required');
 				$this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');

@@ -46,7 +46,7 @@ class Seat_checker extends CI_Controller {
        $this->db->where('booking_enquiry.id',$iid);
        $this->db->join("packages", 'packages.id=booking_enquiry.package_id','left');
        $tour_no_title = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
-
+    //    print_r($tour_no_title); die;
 
         $fields = "packages.*,bus_open.package_id,packages.id as package_id";
         $this->db->where('packages.is_deleted','no');
@@ -55,6 +55,7 @@ class Seat_checker extends CI_Controller {
         $this->db->group_by('bus_open.package_id');
         $this->db->join("bus_open", 'packages.id=bus_open.package_id','right');
         $packages_data_booking = $this->master_model->getRecords('packages');
+        // print_r($packages_data_booking); die;
 
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
