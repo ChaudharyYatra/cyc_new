@@ -37,7 +37,7 @@ table.scrolldown tbody{
 
     <!-- top Destination starts -->
     <section class="trending pt-6 pb-0 bg-lgrey">
-        <div class="container scrolling">
+        <div class="container">
             <div class="list-results d-flex align-items-center justify-content-between">
                 <div class="list-results-sort">
                     <!--<p class="m-0">Showing 1-5 of <?php //echo $count; ?> results</p>-->

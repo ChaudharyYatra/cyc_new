@@ -38,13 +38,15 @@ class Upcoming_tour extends CI_Controller {
 
         $today= date('Y-m-d');
 
-        $fields = "confirm_booking.*,packages.tour_title,package_date.journey_date";
+        $fields = "confirm_booking.*,packages.tour_title,package_date.journey_date,agent.booking_center";
         $this->db->where('confirm_booking.is_deleted','no');
         $this->db->where('confirm_booking.is_active','yes');
         $this->db->where('package_date.journey_date >',$today); //comparision grater than or less
         $this->db->where('confirm_booking.traveler_id',$id); //check session id & traverl id match
         $this->db->join("packages", 'confirm_booking.package_id=packages.id','left');
         $this->db->join("package_date", 'confirm_booking.package_date_id=package_date.id','left');
+        $this->db->join("booking_basic_info", 'confirm_booking.enquiry_id=booking_basic_info.domestic_enquiry_id','left');
+        $this->db->join("agent", 'booking_basic_info.boarding_office_location=agent.id','left');
         $arr_data = $this->master_model->getRecords('confirm_booking',array('confirm_booking.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
                 
