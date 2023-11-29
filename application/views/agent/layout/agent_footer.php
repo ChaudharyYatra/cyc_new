@@ -5491,6 +5491,7 @@ $(document).ready(function() {
         var package_date_id = $('#package_date_id').val();
         var traveller_id = $('#traveller_id').val();
         var booking_payment_details_id = $('#booking_payment_details_id').val();
+        // var booking_on = $('#booking_on').val();
         
          
             // alert('IN hiiiii');
@@ -5504,6 +5505,7 @@ $(document).ready(function() {
                     journey_date: journey_date,
                     package_date_id: package_date_id,
                     traveller_id: traveller_id
+                    // booking_on: booking_on
                 },
                 // dataType: 'json',
                 success: function(responce) {
@@ -7259,7 +7261,7 @@ $(document).ready(function() {
 </script> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-$("#booking_confirm_submit").click(function() {
+    $("#booking_confirm_submit").click(function() {
 
     var verify_otp = $("#booking_otp").val(); 
     // alert(verify_otp);
@@ -7282,11 +7284,32 @@ $("#booking_confirm_submit").click(function() {
 
     var crediential_mobile_no = $('#crediential_mobile_no').val();
     var extra_services = $('input[name="extra_services"]:checked').val();
-            // alert(extra_services);
+    
+    var select_services = [''];
+    // alert(select_services);
+    if(extra_services == 'yes'){    
     var select_services = $('#select_services').val();
-    // console.log(select_services);
+    }
+    //  alert(select_services);
+    if (!extra_services) {
+        // If extra_services is empty, show SweetAlert
+        Swal.fire({
+            title: 'Error',
+            text: 'Please select extra services',
+            icon: 'error',
+        });
+        return;
+    }
 
-
+    if (extra_services === 'yes' && select_services.length === 0) {
+    Swal.fire({
+      title: 'Please Select Services',
+      text: 'You must select at least one service.',
+      icon: 'error',
+    });
+    return;
+    }
+    
     if (verify_otp != '') {
         $.ajax({
             type: "POST",

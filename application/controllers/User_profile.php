@@ -24,7 +24,7 @@ class User_profile extends CI_Controller {
 
         if($this->input->post('submit'))
         {  
-            
+            // print_r($_REQUEST); die;
                 $this->form_validation->set_rules('mobile', 'Mobile', 'required');
                 $this->form_validation->set_rules('password', 'Password', 'required');
 
@@ -46,17 +46,18 @@ class User_profile extends CI_Controller {
                     }
                      else
                     {
-                         foreach($arr_data as $cust_data)
-                         {
+                        //  foreach($arr_data as $cust_data)
+                        //  {
+                            // print_r($arr_data); die;
 
-                             $this->session->set_userdata('cust_email',$cust_data['email']);
-                             $this->session->set_userdata('cust_mobile_no',$cust_data['mobile_no']);
-                             $this->session->set_userdata('cust_sess_id',$cust_data['id']);
-                             $this->session->set_userdata('cust_fname',$cust_data['first_name']);
-                             $this->session->set_userdata('cust_mname',$cust_data['middle_name']);
-                             $this->session->set_userdata('cust_lname',$cust_data['last_name']);
+                             $this->session->set_userdata('cust_email',$arr_data['email_id']);
+                             $this->session->set_userdata('cust_mobile_no',$arr_data['mobile_number']);
+                             $this->session->set_userdata('cust_sess_id',$arr_data['id']);
+                             $this->session->set_userdata('cust_fname',$arr_data['first_name']);
+                             $this->session->set_userdata('cust_mname',$arr_data['middle_name']);
+                             $this->session->set_userdata('cust_lname',$arr_data['last_name']);
                              
-                         }
+                        //  }
      
                         //  redirect($this->module_url_path.'/index');
                         redirect(base_url().'tour_instruction/index');  

@@ -18,7 +18,7 @@
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Upcoming Tour</li>
+                        <li class="breadcrumb-item active" aria-current="page"><?php echo $page_title;?></li>
                     </ul>
                 </nav>
             </div>
@@ -82,39 +82,41 @@
                             </div> -->
 
                             <div class="col-lg-12 col-md-12">
-                                <h4>Upcoming Tour</h4>
+                                <h4><?php echo $page_title;?></h4>
 
-                                <?php  if(count($arr_data) > 0 ) 
+                                <?php  if(count($traveller_info) > 0 ) 
                                 { ?>
 
                                 <table class="table table-bordered author_bg">
                                     <thead>
                                         <tr>
                                             <th>SN</th>
-                                            <th>Tour Name</th>
-                                            <th>Tour Date</th>
-                                            <th>Boarding Location</th>
-                                            <th>Action</th>
+                                            <th>Traveller Name</th>
+                                            <th>Mobile Number</th>
+                                            <th>Tourist Image</th>
+                                            <th>Aadhar Card Image</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php  
                                             $i=1; 
-                                            foreach($arr_data as $info) 
+                                            foreach($traveller_info as $info) 
                                             { 
                                             // print_r($info); die;
                                         ?>
                                         
                                         <tr>
                                             <td><?php echo $i; ?></td>
-                                            <td><?php echo $info['tour_title'] ?></td>
-                                            <td><?php echo date("d-m-Y",strtotime($info['journey_date'])) ?></td>
-                                            <td><?php echo $info['booking_center'] ?></td>
-                                            <td><a href="<?php echo base_url(); ?>traveller_details/index/<?php echo $info['package_id']; 
-                                                 ?>/<?php echo $info['package_date_id']; 
-                                                 ?>/<?php echo $info['enquiry_id']; 
-                                                 ?>" class="nir-btn view_btn"><b>Details</b></a></td>
+                                            <td><?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
+                                            <td><?php echo $info['mobile_number'] ?></td>
+                                            <td><img src="<?php echo base_url(); ?>uploads/traveller/<?php echo $info['image_name']; ?>" width="100px;" height="70px;" alt="traveller Image"><br>
+                                                <a class="btn-link text-center" download="" href="<?php echo base_url(); ?>uploads/traveller/<?php echo $info['image_name']; ?>">Download</a>
+                                            </td>
+                                            <td><img src="<?php echo base_url(); ?>uploads/traveller_aadhar/<?php echo $info['aadhar_image_name']; ?>" width="100px;" height="70px;" alt="Aadhar Image"><br>
+                                                <a class="btn-link text-center" download="" href="<?php echo base_url(); ?>uploads/traveller_aadhar/<?php echo $info['aadhar_image_name']; ?>">Download</a>
+                                            </td>
+                                            
                                         </tr>
 
                                         <?php $i++; } ?>

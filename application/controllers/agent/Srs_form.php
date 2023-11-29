@@ -1187,7 +1187,7 @@ class Srs_form extends CI_Controller {
 
             if($booking_payment_details_info !=''){
 
-                
+                // print_r('hiiiiiiiiiiii'); die;
                 $journey_date  = $this->input->post('journey_date');
 
                 $traveller_id  = $this->input->post('traveller_id');
@@ -1210,9 +1210,9 @@ class Srs_form extends CI_Controller {
                     'agent_id'   =>   $id,
                     'booking_status'   =>  'confirm'
                 );
-              
-                $arr_where     = array("enquiry_id" => $enquiry_id);
-                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                // print_r($arr_insert); die;
+                // $arr_where     = array("enquiry_id" => $enquiry_id);
+                $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert, true);
 
                 $arr_update = array(
                     'booking_done'   =>   'yes'

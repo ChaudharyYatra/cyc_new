@@ -141,7 +141,8 @@ class Booking_preview extends CI_Controller {
         // $this->db->where('booking_payment_details.QR_holder_name',$iid);
         $this->db->join("qr_code_master", 'booking_payment_details.QR_holder_name=qr_code_master.id','left');
         $qr_image_details = $this->master_model->getRecord('booking_payment_details');
-        // print_r($qr_image_details); die;    
+        // print_r($qr_image_details); die; 
+           
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
@@ -183,7 +184,8 @@ class Booking_preview extends CI_Controller {
             $journey_date = $this->input->post('journey_date');
             $package_date_id = $this->input->post('package_date_id');
             $booking_payment_details_id = $this->input->post('booking_payment_details_id');
-            
+            // $booking_on = $this->input->post('booking_on');
+
             $arr_insert = array(
                 'enquiry_id' => $enquiry_id,
                 'package_id' => $package_id,
@@ -193,6 +195,30 @@ class Booking_preview extends CI_Controller {
             );
             
             $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+
+            
+
+            $arr_insert = array(
+                'enquiry_id' => $enquiry_id,
+                'package_id' => $package_id,
+                'traveler_id' => $traveller_id,
+                'package_date_id' => $package_date_id,
+                // 'package_booked_on'   =>  $booking_on,
+                'tour_status'   =>  'confirm'
+            );
+            $this->db->where('is_deleted','no');
+            $this->db->where('confirm_booking.traveler_id',$traveller_id);
+            $confirm_booking_details = $this->master_model->getRecord('confirm_booking');
+            // print_r($confirm_booking_details); die;
+
+            if(!empty($confirm_booking_details)){
+                $arr_where     = array("traveler_id" => $traveller_id);
+                $inserted_id = $this->master_model->updateRecord('confirm_booking',$arr_insert,$arr_where);
+            }else{
+             $inserted_id = $this->master_model->insertRecord('confirm_booking',$arr_insert,true);
+             $insertid = $this->db->insert_id();
+            }
+
 
                 $arr_insert = array(
                     'enquiry_id' => $enquiry_id,

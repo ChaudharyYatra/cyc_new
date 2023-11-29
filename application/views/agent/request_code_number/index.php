@@ -77,7 +77,10 @@
 
                     <td>
                       <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" ><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                      <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                      <!-- <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php //echo $module_url_path;?>/delete/<?php //echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a> -->
+                      <a href="#" onclick="confirmDelete('<?php echo $module_url_path; ?>/delete/<?php echo $info['id']; ?>')" title="Delete">
+                        <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
+                      </a>
                     </td>
                     
                     
@@ -109,5 +112,24 @@
     </section>
     <!-- /.content -->
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+  function confirmDelete(deleteUrl) {
+    // Use SweetAlert for confirmation
+    Swal.fire({
+      title: 'Are You Sure You Want To Delete This Record?',
+      // text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If confirmed, redirect to the delete URL
+        window.location.href = deleteUrl;
+      }
+    });
+  }
+</script>
 
