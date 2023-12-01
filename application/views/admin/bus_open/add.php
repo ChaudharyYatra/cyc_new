@@ -1,3 +1,103 @@
+<style>
+.book-tbl {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    margin-top: 5%;
+    padding-bottom: 20px;
+}
+
+.new_seat_design_ul {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.new_seat_design_ul li {
+    display: block;
+    float: left;
+    margin: 0 5px;
+}
+
+.label {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    color: #fff;
+    background: #FBCF61;
+    text-align: center;
+    line-height: 22px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.25s ease 0s;
+    -webkit-transition: all 0.25s
+}
+
+.label:hover {
+    background: #00B4F1;
+}
+
+.label:active {
+    transition: 0;
+    -webkit-transition: 0;
+    -webkit-filter: brightness(.8);
+}
+
+input {
+    display: none;
+}
+
+input:checked+label {
+    background: #FF7541;
+    color: #fff;
+}
+
+input:checked+label {
+    animation: boom .5s;
+    -webkit-animation: boom .5s;
+}
+
+@keyframes boom {
+    25% {
+        transform: scale(1.25);
+    }
+}
+
+@-webkit-keyframes boom {
+    25% {
+        -webkit-transform: scale(1.25);
+    }
+}
+
+input:disabled+label {
+    color: #fff;
+    background: #f00;
+}
+
+.book-txt {
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    color: #888;
+}
+
+.book-txt h2 {
+    color: #FF7541;
+}
+
+.note {
+    padding: 25px 0;
+    font-size: 14px;
+}
+
+.note a {
+    color: #FF7541;
+    text-decoration: none;
+}
+
+.note a:hover {
+    text-decoration: underline;
+}
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -59,31 +159,29 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Bus Type</label><br>
-                            <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
+                            <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type_bus_open">
                               <option value="">Select Bus Type</option>
-                              <?php
-                                    foreach($bus_type as $bus_type_info) 
-                                    { 
-                                  ?>
-                              <option value="<?php echo $bus_type_info['id']; ?>"><?php echo $bus_type_info['bus_type']; ?></option>
-                              <?php } ?>
+                              <?php 
+                                      foreach($record_bus_type as $bus_type_data)
+                                      { 
+                                        ?>
+                                        <option value="<?php echo $bus_type_data['bus_id'];?>/<?php echo $bus_type_data['vehicle_id'];?>"><?php echo $bus_type_data['bus_type']. ' ==> '. $bus_type_data['seat_capacity'];?> Seater</option>
+                                        <?php } ?>
                             </select>
                           </div>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Bus Type</label><br>
-                                  <select class="select_css" name="vehicle_bus_type" id="vehicle_bus_type">
-                                      <option value="">Select Bus Type</option>
-                                      <?php foreach($record_bus_type as $bus_type_data){ ?>
-                                        <option value="<?php echo $bus_type_data['vehicle_id'];?>"><?php echo $bus_type_data['bus_type']. ' ==> '. $bus_type_data['seat_capacity'];?> Seater</option>
-                                        <?php } ?>
-                                  </select> 
 
-                            </div>
+                        <div class="col-md-8">
+                          <div class="form-group">
+                              <!-- <label>Seat Numbers</label> -->
+                              <div class="book-tbl">
+                                  <ul class="new_seat_design_ul" id="append_pref_data">
+
+                                  </ul>
+                              </div>
+                          </div>
                         </div>
-                        
-                    </div>
+                      
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>

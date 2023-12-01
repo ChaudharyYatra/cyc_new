@@ -34,6 +34,8 @@ var js_array =<?php echo json_encode($bus_info);?>;
 </script>
 
 
+
+
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

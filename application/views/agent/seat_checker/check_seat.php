@@ -218,6 +218,13 @@
                     <script>
                       var temp_booking_data_id=<?php echo json_encode($temp_booking_data_id);?>;
                     </script>
+
+                    <input type="hidden" id="admin_hold_data" value='<?php print_r($admin_hold_data); ?>'>
+                    <script>
+                      var admin_hold_data=<?php echo json_encode($admin_hold_data);?>;
+                    </script>
+
+                    
                           <h2>Booking Details</h2>
 
                           <h3> Selected Seats (<span id="counter">0</span>):</h3>
