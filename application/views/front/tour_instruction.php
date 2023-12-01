@@ -1,9 +1,45 @@
-<!-- BreadCrumb Starts -->  
 
+<style>
+    .view_btn{
+        padding-left:10px;
+        padding-right:10px;
+        padding-top:10px;
+        padding-bottom:10px;
+        margin-bottom:-7px;
+    }
+    .table_css_img{
+        padding:15px !important;
+    }
+
+    .td_css_img{
+        text-align:center;
+    }
+    .header_css{
+        background-color: bisque;
+    }
+</style>
+<!-- BreadCrumb Starts -->  
+<section class="breadcrumb-main pb-20 pt-14" style="background-image: url(<?php echo base_url(); ?>uploads/do_not_delete/Packages.png);">
+    <div class="section-shape section-shape1 top-inherit bottom-0" style="background-image: url(images/shape8.png);"></div>
+    <div class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+                <h1 class="mb-3"><?php echo $page_title;?></h1>
+                <nav aria-label="breadcrumb" class="d-block">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tour Instruction</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="dot-overlay"></div>
+</section>
 <!-- BreadCrumb Ends --> 
 
-    <!-- blog starts package_list-->
-    <section class="blog bg_img_customer">
+    <!-- blog starts -->
+    <section class="blog package_list">
         <div class="container">
             <div class="row flex-row-reverse">
                 <div class="col-lg-8 ps-lg-4">
@@ -56,43 +92,48 @@
                             </div> -->
 
                             <div class="col-lg-12 col-md-12">
-                                <?php foreach($arr_data2 as $info) { ?>
-                                <h4><?php echo $info['tour_title']; ?> Tour Instruction</h4>
-                                <?php } ?>
+                                <h4>Tour Instruction</h4>
 
-                                <?php  if(count($arr_data) > 0 ) 
+                                <?php  if(count($arr_data_tour) > 0 ) 
                                 { ?>
 
-                                    <?php  
-                                        $i=1; 
-                                        foreach($arr_data as $info) 
-                                        { 
-                                        // print_r($info); die;
-                                    ?>
+                                <table class="table table-bordered author_bg table_css">
+                                    <thead>
+                                        <tr class="header_css">
+                                            <th>SN</th>
+                                            <th>Tour Name</th>
+                                            <th>Tour Date</th>
+                                            <th>Boarding Location</th>
+                                            <th>Instruction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    <div class="author-news mb-1 box-shadow p-3 rounded overflow-hidden border-all instruction_bg">
-                                            <div class="row">
-                                                <div class="col-md-1 remove_ml">
-                                                    <p><?php echo $i; ?> .</p>
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <p><?php echo $info['instraction']; ?></p>
-                                                </div>
-                                            </div>
+                                        <?php  
+                                            $i=1; 
+                                            foreach($arr_data_tour as $info) 
+                                            { 
+                                            // print_r($info); die;
+                                        ?>
                                         
-                                   
-                                    </div>
+                                        <tr>
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $info['tour_title'] ?></td>
+                                            <td><?php echo date("d-m-Y",strtotime($info['journey_date'])) ?></td>
+                                            <td><?php echo $info['booking_center'] ?></td>
+                                            <td class="text-center"><a href="<?php echo base_url(); ?>tour_instruction_details/index/<?php echo $info['package_id']; 
+                                                 ?>/<?php echo $info['package_date_id']; 
+                                                 ?>/<?php echo $info['enquiry_id']; 
+                                                 ?>" class="nir-btn view_btn"><b>View</b></a></td>
+                                        </tr>
 
-                                    <?php $i++; } ?>
+                                        <?php $i++; } ?>
+                  
+                                    </tbody>
+                                    
+                                </table>
                                 
                                 <?php } ?>
-                                
-                                        
-                                        
-                                        
-                                    
-
-                                
                             </div>
                             
                         </div>
@@ -127,7 +168,7 @@
                             <div class="author-news mb-4 box-shadow p-5 text-center rounded overflow-hidden border-all author_bg">
                                 <div class="author-news-content">
                                     <div class="author-thumb mb-1">
-                                        <img src="../uploads/do_not_delete/profile.jpg" alt="author">
+                                        <img src="<?php echo base_url(); ?>uploads/do_not_delete/profile.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
                                         <h3 class="title mb-1"><a href="#"><?php echo $cust_sess_name ?> <?php echo $cust_sess_lname ?></a></h3>
@@ -150,7 +191,8 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
-                                    <li class="active"><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
+                                    <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
                                     <li><a href="#">Cancelled Tour</a></li>

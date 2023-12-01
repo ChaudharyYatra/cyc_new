@@ -1,7 +1,7 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tour_instruction extends CI_Controller {
+class Tour_instruction_details extends CI_Controller {
 	 
 	function __construct() {
 
@@ -53,6 +53,27 @@ class Tour_instruction extends CI_Controller {
         $arr_data = $this->master_model->getRecords('confirm_booking',array('confirm_booking.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 
+        // foreach ($arr_data as &$data) {
+        //     // Calculate remaining time for the tour
+        //     $journeyDateTime = new DateTime($data['journey_date']);
+        //     // print_r($journeyDateTime); die;
+        //     $currentDateTime = new DateTime();
+        
+        //     $interval = $journeyDateTime->diff($currentDateTime);
+        
+        //     $data['remaining_days'] = $interval->format('%a');
+        //     // print_r($data['remaining_days']);
+        //     $data['remaining_hours'] = $interval->format('%h');
+        //     // print_r($data['remaining_hours']); die;
+
+        //     $data['remaining_minutes'] = $interval->format('%i');
+        //     // print_r($data['remaining_minutes']); die;
+
+        //     $data['remaining_seconds'] = $interval->format('%s');
+        //     // print_r($data['remaining_seconds']); die;
+
+        // }
+
 
         $fields = "confirm_booking.*,packages.tour_title,package_date.journey_date,agent.booking_center,cust_instraction.*,cust_instraction_attachment.image_name";
         $this->db->where('confirm_booking.is_deleted','no');
@@ -88,7 +109,7 @@ class Tour_instruction extends CI_Controller {
         $arr_data2 = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);    
 
          
-        $data = array('middle_content' => 'tour_instruction',
+        $data = array('middle_content' => 'tour_instruction_details',
                         'website_basic_structure'       => $website_basic_structure,
                         'social_media_link'       => $social_media_link,
                         'arr_data'               => $arr_data,
@@ -96,10 +117,10 @@ class Tour_instruction extends CI_Controller {
                         'arr_data2'               => $arr_data2,
                         'cust_sess_name'        => $cust_sess_name,
                         'cust_sess_lname'        => $cust_sess_lname,
-                        'page_title'    => 'Tour Instruction');
+                        'page_title'    => 'Tour Instruction Details');
 
-        $this->arr_view_data['page_title']     =  "Tour Instruction";
-        $this->arr_view_data['middle_content'] =  "tour_instruction";
+        $this->arr_view_data['page_title']     =  "Tour Instruction Details";
+        $this->arr_view_data['middle_content'] =  "tour_instruction_details";
         $this->load->view('front/common_view',$data);
      }
 

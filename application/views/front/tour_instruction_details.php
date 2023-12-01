@@ -7,9 +7,15 @@
         padding-bottom:10px;
         margin-bottom:-7px;
     }
+    .table_css_img{
+        padding:15px !important;
+    }
 
-    .table_css{
-        border-radius: 10px;
+    .td_css_img{
+        text-align:center;
+    }
+    .header_css{
+        background-color: bisque;
     }
 </style>
 <!-- BreadCrumb Starts -->  
@@ -22,7 +28,7 @@
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Upcoming Tour</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tour Instruction</li>
                     </ul>
                 </nav>
             </div>
@@ -86,26 +92,26 @@
                             </div> -->
 
                             <div class="col-lg-12 col-md-12">
-                                <h4>Upcoming Tour</h4>
+                                <h4>Tour Instruction</h4>
 
-                                <?php  if(count($arr_data) > 0 ) 
+                                <?php  if(count($arr_data_tour) > 0 ) 
                                 { ?>
 
                                 <table class="table table-bordered author_bg table_css">
                                     <thead>
-                                        <tr>
+                                        <tr class="header_css">
                                             <th>SN</th>
                                             <th>Tour Name</th>
                                             <th>Tour Date</th>
                                             <th>Boarding Location</th>
-                                            <th>Action</th>
+                                            <!-- <th>Instruction</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php  
                                             $i=1; 
-                                            foreach($arr_data as $info) 
+                                            foreach($arr_data_tour as $info) 
                                             { 
                                             // print_r($info); die;
                                         ?>
@@ -115,10 +121,10 @@
                                             <td><?php echo $info['tour_title'] ?></td>
                                             <td><?php echo date("d-m-Y",strtotime($info['journey_date'])) ?></td>
                                             <td><?php echo $info['booking_center'] ?></td>
-                                            <td><a href="<?php echo base_url(); ?>traveller_details/index/<?php echo $info['package_id']; 
-                                                 ?>/<?php echo $info['package_date_id']; 
-                                                 ?>/<?php echo $info['enquiry_id']; 
-                                                 ?>" class="nir-btn view_btn"><b>Details</b></a></td>
+                                            <!-- <td class="text-center"><a href="<?php //echo base_url(); ?>traveller_details/index/<?php //echo $info['package_id']; 
+                                                 ?>/<?php //echo $info['package_date_id']; 
+                                                 ?>/<?php //echo $info['enquiry_id']; 
+                                                 ?>" class="nir-btn view_btn"><b>View</b></a></td> -->
                                         </tr>
 
                                         <?php $i++; } ?>
@@ -128,12 +134,62 @@
                                 </table>
                                 
                                 <?php } ?>
-                                
-                                        
-                                        
-                                        
-                                    
+                            </div>
 
+
+                            <div class="card-body">
+                                <?php  
+                                    foreach($arr_data_tour as $info) 
+                                        { 
+                                            // print_r($info); die;
+                                        ?>
+                                    <table id="" class="table table-bordered author_bg">
+                                    <tr class="">
+                                    <th class="col-md-2 table_css_img td_css_img">Tour Number - Name</th>
+                                    <td class="col-md-2 table_css_img td_css_img"><?php echo $info['tour_number']; ?></td>
+
+                                    <th class="col-md-2 table_css_img td_css_img">Upload Attachment</th>
+                                    <td class="col-md-2 table_css_img td_css_img">
+                                        <?php if(!empty($info['image_name'])){ ?>
+                                        <img src="<?php echo base_url(); ?>uploads/cust_instraction/<?php echo $info['image_name']; ?>" width="50%"><br>
+                                        <a class="btn-link text-center" download="" target="_blank" href="<?php echo base_url(); ?>uploads/cust_instraction/<?php echo $info['image_name']; ?>">Download</a>
+                                        <?php } ?>
+                                    </td>
+                                    
+                                    </tr>
+                                </table>
+                                <?php } ?>
+                            </div>
+            
+                            <div class="card-body">
+                
+                                <table id="" class="table table-bordered author_bg">
+                                <thead>
+                                <tr class="header_css">
+                                    <th>Id</th>
+                                    <th>Instraction</th>
+                                    <th>Priority</th>
+                                    <!-- <th>Action</th> -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $i=1; 
+                                    foreach($arr_data as $info) 
+                                    { 
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo $info['instraction']; ?></td>
+                                        <td><?php echo $info['priority']; ?></td>
+                                        <!-- <td>
+                                        
+                                        </td> -->
+                                    </tr>
+                                    <?php $i++; } ?>
+                                </tbody>
+                                
+                                </table>
                                 
                             </div>
                             
@@ -169,7 +225,7 @@
                             <div class="author-news mb-4 box-shadow p-5 text-center rounded overflow-hidden border-all author_bg">
                                 <div class="author-news-content">
                                     <div class="author-thumb mb-1">
-                                        <img src="../uploads/do_not_delete/profile.jpg" alt="author">
+                                        <img src="<?php echo base_url(); ?>uploads/do_not_delete/profile.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
                                         <h3 class="title mb-1"><a href="#"><?php echo $cust_sess_name ?> <?php echo $cust_sess_lname ?></a></h3>
