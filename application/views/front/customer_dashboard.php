@@ -7,9 +7,19 @@
         padding-bottom:10px;
         margin-bottom:-7px;
     }
+    .table_css_img{
+        padding:15px !important;
+    }
 
-    .table_css{
+    .td_css_img{
+        text-align:center;
+    }
+    .header_css{
+        background-color: bisque;
+    }
+    .card-css{
         border-radius: 10px;
+        background-color: bisque; 
     }
 </style>
 <!-- BreadCrumb Starts -->  
@@ -19,10 +29,10 @@
         <div class="container">
             <div class="breadcrumb-content text-center">
                 <h1 class="mb-3"><?php echo $page_title;?></h1>
-                <nav aria-label="breadcrumb" class="d-block">
+                <nav aria-label="breadcrumb" class="d-block">   
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Upcoming Tour</li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                     </ul>
                 </nav>
             </div>
@@ -85,70 +95,32 @@
                                 </div>
                             </div> -->
 
-                            <div class="col-lg-12 col-md-12">
-                                <h4>Upcoming Tour</h4>
+                                <h4>Dashboard</h4>
 
-                                <?php  if(count($arr_data) > 0 ) 
-                                { ?>
+                                <div class="row">
+                                <div class="col-12 col-xl-12 col-md-12 stretch-card">
+                                    <div class="row flex-grow-1">
+                                    <div class="col-md-4 grid-margin stretch-card">
+                                    <?php 
+                                        if($tour_count >0 ){
 
-                                <table class="table table-bordered author_bg table_css">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Tour Name</th>
-                                            <th>Tour Date</th>
-                                            <th>Boarding Location</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php  
-                                            $i=1; 
-                                            foreach($arr_data as $info) 
-                                            { 
-                                            // print_r($info); die;
-                                        ?>
-                                        
-                                        <tr>
-                                            <td><?php echo $i; ?></td>
-                                            <td><?php echo $info['tour_title'] ?></td>
-                                            <td><?php echo date("d-m-Y",strtotime($info['journey_date'])) ?></td>
-                                            <td><?php echo $info['booking_center'] ?></td>
-                                            <td><a href="<?php echo base_url(); ?>traveller_details/index/<?php echo $info['package_id']; 
-                                                 ?>/<?php echo $info['package_date_id']; 
-                                                 ?>/<?php echo $info['enquiry_id']; 
-                                                 ?>" class="nir-btn view_btn"><b>Details</b></a></td>
-                                        </tr>
-
-                                        <?php $i++; } ?>
-                  
-                                    </tbody>
-                                    
-                                </table>
-                                
-                                <?php } ?>
-                                
-                                        
-                                        
-                                        
-                                    
-
-                                
-                            </div>
-                            
+                                    ?> 
+                                    <div class="card card-css">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-center align-items-baseline">
+                                            <h6 class="card-title mb-0">Confirm Booking Tour</h6>
+                                            </div>
+                                            <div class="mt-2 d-flex justify-content-center">
+                                            <h4><?php echo $tour_count; ?></h4>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                    </div>
+                                </div>
+                                </div> <!-- row -->
                         </div>
-
-                        <!-- <div class="pagination-main text-center">
-                            <ul class="pagination">
-                                <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div> -->
                     </div>
                 </div>
 
@@ -169,7 +141,7 @@
                             <div class="author-news mb-4 box-shadow p-5 text-center rounded overflow-hidden border-all author_bg">
                                 <div class="author-news-content">
                                     <div class="author-thumb mb-1">
-                                        <img src="../uploads/do_not_delete/profile.jpg" alt="author">
+                                        <img src="<?php echo base_url(); ?>uploads/do_not_delete/profile.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
                                         <h3 class="title mb-1"><a href="#"><?php echo $cust_sess_name ?> <?php echo $cust_sess_lname ?></a></h3>
@@ -195,7 +167,7 @@
                                     <li><a href="<?php echo base_url(); ?>customer_dashboards/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
-                                    <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
+                                    <li class=""><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
                                     <li><a href="#">Cancelled Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
                                 </ul>
