@@ -40,8 +40,7 @@
 
     var admin_hold_string = array_data.admin_hold_seats;
     var admin_hold_array = admin_hold_string.split(',');
-
-
+    console.log('admin_hold_arrayadmin_hold_arrayadmin_hold_array',admin_hold_array);
 
     var first_cls_cnt = new_first_array.length;
     var second_cls_cnt = new_second_array.length;
@@ -2098,6 +2097,15 @@ for(var p=0; p<total_seat_count; p++) {
                                         total += parseInt(this.data().attr_win);
 
                                     }
+                                    else if(click_id == prev_seat_number_id
+                                        && ($.inArray('focused', current_prev_cls_array) != '-1' || $.inArray('available', current_prev_cls_array) != '-1')
+                                    && current_prev_cls.indexOf(check_str)==-1 && $.inArray('admin_hold', current_next_cls_array) != '-1')
+                            {   
+                                alert('n2222222222222222222');
+                                $("[attr_win_remove=win_" + this.settings.id + "]").remove();
+                                selection_array.splice($.inArray(click_id, selection_array), 1);
+                                total += parseInt(this.data().price);
+                            }
                                     else if(click_id == prev_seat_number_id
                                                 && ($.inArray('focused', current_prev_cls_array) != '-1' || $.inArray('available', current_prev_cls_array) != '-1')
                                             && current_prev_cls.indexOf(check_str)==-1)

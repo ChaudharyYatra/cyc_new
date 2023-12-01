@@ -10122,3 +10122,102 @@ $('#edit_for_cust').validate({ // initialize the plugin
         });
     });
 </script>
+
+<script type='text/javascript'>
+    // baseURL variable
+    var baseURL = "<?php echo base_url(); ?>";
+    $(document).ready(function () {
+   
+        $(document).on("change", "#vehicle_bus_type_bus_open", function () {
+
+            var vehicle_bus_type_string = $(this).val();
+            var vehicle_bus_type_data = vehicle_bus_type_string.split("/");
+            var vehicle_bus_type_id =vehicle_bus_type_data[0];
+            // alert(vehicle_bus_type_data[0]);
+
+            $.ajax({
+                url:'<?=base_url()?>admin/bus_open/getseat_preference',
+                method: 'post',
+                data: { vehicle_bus_type_id: vehicle_bus_type_id },
+                dataType: 'json',
+                success: function (response) {
+                    var seatCount = response['total_seat_count'];
+                    var new_district_day ='';
+
+                                                for (var a = 1; a <= seatCount; a++) {
+                     new_district_day += `<li>
+                                                <input class="hold_class" id="hold_class_i${a}" type="checkbox" value="${a}" 
+                                                    name="admin_hold_seats[]"/>
+                                                <label class="label" for="hold_class_i${a}"  style="width: 40px">${a}</label>
+                                            </li>`;
+
+                                                }
+                                                console.log(new_district_day);
+
+                    // var new_district_day = `</ul>
+                    //                         </div>
+                    //                     </div>
+                    //                 </div> `;
+                    $(`#append_pref_data`).empty();
+                // Append the new row to the table
+                $(`#append_pref_data`).append(new_district_day);   
+
+
+                }
+            });
+        });
+    });
+</script>
+
+<script type='text/javascript'>  
+    // baseURL variable
+    var baseURL = "<?php echo base_url(); ?>";
+    $(document).ready(function () {
+   
+        // Function to fetch seat preferences
+        function fetchSeatPreferences() {
+            var vehicle_bus_type_string = $("#vehicle_bus_type_bus_open").val();
+            var vehicle_bus_type_data = vehicle_bus_type_string.split("/");
+            var vehicle_bus_type_id = vehicle_bus_type_data[0];
+
+            var adminholdseat = $("#admin_hold_seats").val();
+            // Convert the comma-separated string to an array
+            var adminHoldSeatArray = adminholdseat.split(",");
+
+            $.ajax({
+                url: '<?=base_url()?>admin/bus_open/getseat_preference',
+                method: 'post',
+                data: { vehicle_bus_type_id: vehicle_bus_type_id },
+                dataType: 'json',
+                success: function (response) {
+                    var seatCount = response['total_seat_count'];
+                    var new_district_day = '';
+
+                    for (var a = 1; a <= seatCount; a++) {
+                        // Check if the value of a exists in adminHoldSeatArray
+                        var isChecked = adminHoldSeatArray.includes(a.toString()) ? 'checked' : '';
+                        
+                        new_district_day += `<li>
+                                                <input class="hold_class" id="hold_class_i${a}" type="checkbox" value="${a}" 
+                                                    name="admin_hold_seats[]" ${isChecked}/>
+                                                <label class="label" for="hold_class_i${a}"  style="width: 40px">${a}</label>
+                                            </li>`;
+                    }
+
+                    console.log(new_district_day);
+
+                    $(`#append_pref_data`).empty();
+                    $(`#append_pref_data`).append(new_district_day);
+                }
+            });
+        }
+
+        // Bind change event to the select box
+        $("#vehicle_bus_type_bus_open").on("change", fetchSeatPreferences);
+
+        // Trigger change event on page load if a value is pre-selected
+        if ($("#vehicle_bus_type_bus_open").val()) {
+            fetchSeatPreferences();
+        }
+    });
+</script>

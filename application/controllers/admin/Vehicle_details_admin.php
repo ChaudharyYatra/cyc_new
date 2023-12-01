@@ -107,6 +107,7 @@ public function add_seat_preference($id) {
     $this->db->where('is_deleted','no');
     $this->db->where('vehicle_details_dummy.id',$vehicle_id);
     $vehicle_details_data = $this->master_model->getRecord('vehicle_details_dummy');
+    
     $fields = "vehicle_seat_preference_dummy.*,vehicle_details_dummy.id as vehicle_id,vehicle_seat_preference_dummy.id as vpreference_id";
     $this->db->where('vehicle_seat_preference_dummy.is_active','yes');
     $this->db->where('vehicle_seat_preference_dummy.is_deleted','no');

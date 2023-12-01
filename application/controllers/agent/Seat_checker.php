@@ -29,7 +29,6 @@ class Seat_checker extends CI_Controller {
 
     public function index($iid="")
     {
-        // echo $iid;
        $agent_sess_name = $this->session->userdata('agent_name');
        $id = $this->session->userdata('agent_sess_id');
        $pack_id='';
@@ -46,7 +45,6 @@ class Seat_checker extends CI_Controller {
        $this->db->where('booking_enquiry.id',$iid);
        $this->db->join("packages", 'packages.id=booking_enquiry.package_id','left');
        $tour_no_title = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
-    //    print_r($tour_no_title); die;
 
         $fields = "packages.*,bus_open.package_id,packages.id as package_id";
         $this->db->where('packages.is_deleted','no');
@@ -55,13 +53,11 @@ class Seat_checker extends CI_Controller {
         $this->db->group_by('bus_open.package_id');
         $this->db->join("bus_open", 'packages.id=bus_open.package_id','right');
         $packages_data_booking = $this->master_model->getRecords('packages');
-        // print_r($packages_data_booking); die;
 
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $this->db->where('booking_enquiry.id',$iid);
         $agent_booking_enquiry_data = $this->master_model->getRecord('booking_enquiry');
-        // print_r($agent_booking_enquiry_data); die;
 
         $final_booked_data=array();
         $temp_booking_data=array();
@@ -144,15 +140,16 @@ class Seat_checker extends CI_Controller {
                 foreach($temp_hold_self_another_enquiry as $temp_hold_self_another){
                     array_push($temp_hold_another_enquiry, $temp_hold_self_another['seat_orignal_id']);
                 }
+                
 
                 // print_r($temp_hold_another_enquiry); die;
 
             $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
                        third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
-                       third_class_price,fourth_class_price,window_class_price,admin_hold_seats,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
-            $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.vehicle_bus_type','left');
+                       third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
+            $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.dummy_vehicle_id','left');
             $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
-            $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.vehicle_bus_type','left');
+            $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.dummy_vehicle_id','left');
             $this->db->where('package_id',$pack_id);
             $this->db->where('package_date_id',$pack_date_id );
             $bus_info = $this->master_model->getRecord('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
