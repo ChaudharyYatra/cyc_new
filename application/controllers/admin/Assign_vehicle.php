@@ -249,8 +249,16 @@ class Assign_vehicle extends CI_Controller{
                         'vehicle_rto_registration'   =>   $vehicle_rto_registration
                     );
                     $arr_where     = array('package_id'   =>   $tour_number,
-                                           'package_date_id'   =>   $tour_date);
+                                            'vehicle_bus_type'   =>   $vehicle_bus_type,
+                                           'package_date_id'   =>   $tour_date,);
                    $this->master_model->updateRecord('bus_open',$arr_update,$arr_where);
+    
+                    $arr_update2 = array(
+                        'bus_open_status'   =>  'yes'
+                    );
+                    $arr_where2     = array("id" => $vehicle_rto_registration);
+                    $id=$this->master_model->updateRecord('vehicle_details',$arr_update2,$arr_where2);
+
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");

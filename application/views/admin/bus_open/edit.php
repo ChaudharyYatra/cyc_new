@@ -133,7 +133,7 @@ input:disabled+label {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data"  id="add_corefeature">
+              <form method="post" enctype="multipart/form-data"  id="edit_bus_open">
                 <div class="card-body">
                     <div class="row">
                     <?php foreach($arr_data as $info){ ?> 

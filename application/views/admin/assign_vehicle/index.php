@@ -38,7 +38,7 @@
                     <th>Tour Date</th>
                     <th>Bus Type</th>
                     <th>Vehicle RTO Registration No</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                   </tr>
                   </thead>
                   <tbody>
@@ -54,16 +54,16 @@
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['bus_type'] ?></td>
                     <td><?php echo $info['registration_number'] ?> - <?php echo $info['vehicle_owner_name'] ?></td>
-                    <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
-					                echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
-					                echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                    <!-- <td>
+                          <a href="<?php //echo $module_url_path;?>/edit/<?php //$aid=base64_encode($info['id']); 
+					                //echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php //echo $module_url_path;?>/delete/<?php //$aid=base64_encode($info['id']); 
+					                //echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
 
-                          <a href="<?php echo $module_url_path;?>/add_seat_preference/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
+                          <a href="<?php //echo $module_url_path;?>/add_seat_preference/<?php //$aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
                           " ><button type="button" class="btn btn-primary">View</button></a>
                           
-                    </td>
+                    </td> -->
                   </tr>
                   <?php $i++; } ?>
                   </tbody>

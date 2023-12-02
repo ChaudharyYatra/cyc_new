@@ -132,7 +132,7 @@ input:disabled+label {
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data"  id="add_corefeature">
+              <form method="post" enctype="multipart/form-data"  id="add_bus_open">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">

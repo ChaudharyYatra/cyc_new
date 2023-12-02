@@ -10221,3 +10221,138 @@ $('#edit_for_cust').validate({ // initialize the plugin
         }
     });
 </script>
+
+<!-- Assign Vehicle To Tour Validation -->
+<script>
+$(document).ready(function () {
+
+$('#assign_vehicle').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+    
+  },
+    rules: {
+        tour_number: {
+            required: true,
+        },
+        tour_date: {
+            required: true,
+        },
+        vehicle_bus_type: {
+            required: true,
+        },
+        vehicle_rto_registration: {
+            required: true,
+        },
+    },
+
+    messages :{
+        tour_number : {
+            required : "Please select tour",
+        },
+        tour_date : {
+            required : "Please select tour date",
+        },
+        vehicle_bus_type : {
+            required : "Please select bus type",
+        },
+        vehicle_rto_registration : {
+            required : "Please select vehicle rto registration",
+        }
+    },
+
+    highlight: function(element, errorClass) {
+
+    }
+});
+
+});
+
+</script>
+
+<!-- Assign Vehicle To Tour Validation -->
+
+<!-- Bus Open Validation -->
+<script>
+$(document).ready(function () {
+
+$('#add_bus_open').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+    
+  },
+    rules: {
+        tour_number: {
+            required: true,
+        },
+        tour_date: {
+            required: true,
+        },
+        vehicle_bus_type: {
+            required: true,
+        },
+    },
+
+    messages :{
+        tour_number : {
+            required : "Please select tour",
+        },
+        tour_date : {
+            required : "Please select tour date",
+        },
+        vehicle_bus_type : {
+            required : "Please select bus type",
+        },
+    },
+
+    highlight: function(element, errorClass) {
+
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function () {
+
+$('#edit_bus_open').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+    
+  },
+    rules: {
+        tour_number: {
+            required: true,
+        },
+        tour_date: {
+            required: true,
+        },
+        vehicle_bus_type: {
+            required: true,
+        },
+    },
+
+    messages :{
+        tour_number : {
+            required : "Please select tour",
+        },
+        tour_date : {
+            required : "Please select tour date",
+        },
+        vehicle_bus_type : {
+            required : "Please select bus type",
+        },
+    },
+
+    highlight: function(element, errorClass) {
+
+    }
+});
+
+});
+
+</script>
+
+<!-- bus Open Validation -->
