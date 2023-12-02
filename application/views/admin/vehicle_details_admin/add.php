@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data" id="add_vehicle_details">
+              <form method="post" enctype="multipart/form-data" id="vehicle_details_admin">
                 <div class="card-body">
                  <div class="row">
                       <div class="col-md-6">

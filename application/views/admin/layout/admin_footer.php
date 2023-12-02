@@ -10356,3 +10356,50 @@ $('#edit_bus_open').validate({ // initialize the plugin
 </script>
 
 <!-- bus Open Validation -->
+
+<script>
+$(document).ready(function () {
+
+$('#vehicle_details_admin').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+    
+  },
+    rules: {
+        vehicle_bus_type: {
+            required: true,
+        },
+        vehicle_type: {
+            required: true,
+        },
+        seat_capacity: {
+            required: true,
+        },
+        air_conditionar: {
+            required: true,
+        },
+    },
+
+    messages :{
+        vehicle_bus_type : {
+            required : "Please select bus type",
+        },
+        vehicle_type : {
+            required : "Please select vehicle type",
+        },
+        seat_capacity : {
+            required : "Please select seat capacity",
+        },
+        air_conditionar : {
+            required : "Please select air conditionar",
+        },
+    },
+
+    highlight: function(element, errorClass) {
+
+    }
+});
+
+});
+
+</script>
