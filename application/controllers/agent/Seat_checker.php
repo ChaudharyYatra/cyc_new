@@ -142,7 +142,6 @@ class Seat_checker extends CI_Controller {
                 }
                 
 
-                // print_r($temp_hold_another_enquiry); die;
 
             $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
                        third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
