@@ -164,6 +164,7 @@ class Seat_checker extends CI_Controller {
 
             // echo $bus_type;
             // die;
+            
             }
             else{
                 $this->session->set_flashdata('error_message',"Please Select Tour Name & Tour Date.");
