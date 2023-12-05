@@ -215,7 +215,9 @@ class Bus_open extends CI_Controller{
     
     public function edit($id)
     {
+        
 		$id=base64_decode($id);
+        // print_r($id); die;
         if ($id=='') 
         {
             $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -236,36 +238,36 @@ class Bus_open extends CI_Controller{
                 if($this->form_validation->run() == TRUE)
                 {
                     $tour_number = $this->input->post('tour_number');
-                $tour_date = $this->input->post('tour_date');
-                $vehicle_bus_type_data = $this->input->post('vehicle_bus_type');
-
-                $vehicle_bus_type_data_array = explode("/", $vehicle_bus_type_data);
-                // $admin_hold_seats = $this->input->post('admin_hold_seats');
-
-                $admin_hold_seats_check = $this->input->post("admin_hold_seats[]");
-               if(!empty($admin_hold_seats_check)){
-                $admin_hold_seats = implode(',',$admin_hold_seats_check);
-               }else{
-                $admin_hold_seats='';
-               }
+                    $tour_date = $this->input->post('tour_date');
+                    $vehicle_bus_type_data = $this->input->post('vehicle_bus_type');
+    
+                    $vehicle_bus_type_data_array = explode("/", $vehicle_bus_type_data);
+                    // $admin_hold_seats = $this->input->post('admin_hold_seats');
+    
+                    $admin_hold_seats_check = $this->input->post("admin_hold_seats[]");
+                   if(!empty($admin_hold_seats_check)){
+                    $admin_hold_seats = implode(',',$admin_hold_seats_check);
+                   }else{
+                    $admin_hold_seats='';
+                   }
                    
                     $arr_update = array(
                         'package_id'   =>   $tour_number,
                         'package_date_id'   =>   $tour_date,
                         'vehicle_bus_type'   =>   $vehicle_bus_type_data_array[0],
                         'admin_hold_seats'   =>   $admin_hold_seats,
-                        'dummy_vehicle_id'   => $vehicle_bus_type_data_array[1],
+                        // 'dummy_vehicle_id'   => $vehicle_bus_type_data_array[1],
                         'bus_open_status'   =>   'yes'
                     );
                     $arr_where     = array("id" => $id);
                    $this->master_model->updateRecord('bus_open',$arr_update,$arr_where);
 
-                   $arr_update2 = array(
+                   $arr_update = array(
                     'bus_open_status'   =>  'yes'
                     );
-                    $arr_where2     = array("id" => $tour_date,
+                    $arr_where     = array("id" => $tour_date,
                                             "package_id" => $tour_number);
-                    $this->master_model->updateRecord('package_date',$arr_update2,$arr_where2);
+                    $this->master_model->updateRecord('package_date',$arr_update,$arr_where);
 
                     if($id > 0)
                     {
