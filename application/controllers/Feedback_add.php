@@ -131,7 +131,7 @@ class Feedback_add extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $this->db->where('traveller_id',$id);
+        $this->db->where('traveler_id',$id);
         $arr_data = $this->master_model->getRecords('customer_feedback');
         // print_r($arr_data); die;
 
@@ -144,7 +144,7 @@ class Feedback_add extends CI_Controller {
         $fields = "final_booking.*,packages.tour_title,package_date.journey_date";
         $this->db->where('final_booking.is_deleted','no');
         $this->db->where('final_booking.is_active','yes');
-        $this->db->where('final_booking.traveller_id',$iid); //check session id & traverl id match
+        $this->db->where('final_booking.traveller_id',$id); //check session id & traverl id match
         $this->db->join("packages", 'final_booking.package_id=packages.id','left');
         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
         $arr_data_tour_details = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);

@@ -816,6 +816,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/customer_cancel_tour/index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                    Customer Request Cancel Tour
+                    </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="<?php echo base_url(); ?>admin/sub_expenses_head/index" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>

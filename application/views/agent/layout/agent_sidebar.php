@@ -253,6 +253,15 @@
           </li>
 
           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>agent/customer_cancel_tour/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+               Customer Request Cancel Tour
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="<?php echo base_url(); ?>agent/request_code_number/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>

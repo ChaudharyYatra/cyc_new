@@ -15,7 +15,7 @@ class Customer_dashboard extends CI_Controller {
         }
 
         $this->traveler_front_id =  $this->session->userdata('traveler_front_id');
-	 }
+	}
 
 	 
      public function index()

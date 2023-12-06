@@ -7,15 +7,9 @@
         padding-bottom:10px;
         margin-bottom:-7px;
     }
-    .table_css_img{
-        padding:15px !important;
-    }
 
-    .td_css_img{
-        text-align:center;
-    }
-    .header_css{
-        background-color: bisque;
+    .table_css{
+        border-radius: 10px;
     }
 </style>
 <!-- BreadCrumb Starts -->  
@@ -92,19 +86,18 @@
                             </div> -->
 
                             <div class="col-lg-12 col-md-12">
-                                <h4>Upcoming Tour</h4>
+                                <h4>Tour</h4>
 
                                 <?php  if(count($arr_data) > 0 ) 
                                 { ?>
 
-                                <table id="example" class="table table-bordered author_bg table_css">
+                                <table class="table table-bordered author_bg table_css">
                                     <thead>
-                                        <tr class="header_css">
+                                        <tr>
                                             <th>SN</th>
                                             <th>Tour Name</th>
                                             <th>Tour Date</th>
-                                            <th>Boarding Location</th>  
-                                            <th>Tour status</th>
+                                            <th>Boarding Location</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -115,7 +108,6 @@
                                             foreach($arr_data as $info) 
                                             { 
                                             // print_r($info); die;
-                                            $today= date('Y-m-d');
                                         ?>
                                         
                                         <tr>
@@ -123,21 +115,10 @@
                                             <td><?php echo $info['tour_title'] ?></td>
                                             <td><?php echo date("d-m-Y",strtotime($info['journey_date'])) ?></td>
                                             <td><?php echo $info['booking_center'] ?></td>
-                                            
-                                            <td>
-                                            <?php if($info['journey_date']> $today){?>
-                                                Upcoming Tour
-                                            <?php }else if($info['journey_date']< $today || $info['journey_date']= $today){ ?>
-                                                Running Tour
-                                            <?php } ?>
-                                            </td>
-                                            
-
-                                            <td><a href="<?php echo base_url(); ?>traveller_details/index/<?php echo $info['package_id']; 
-                                                 ?>/<?php echo $info['package_date_id']; 
+                                            <td><a href="<?php echo base_url(); ?>tour_cancel/index/<?php echo $info['package_id']; 
+                                                 ?>/<?php echo $info['package_date_id'];
                                                  ?>/<?php echo $info['enquiry_id']; 
-                                                 ?>" class="nir-btn view_btn"><b>Details</b></a>
-                                            </td>
+                                                 ?>" class="nir-btn view_btn"><b>Cancel tour</b></a></td>
                                         </tr>
 
                                         <?php $i++; } ?>
@@ -147,12 +128,6 @@
                                 </table>
                                 
                                 <?php } ?>
-                                
-                                        
-                                        
-                                        
-                                    
-
                                 
                             </div>
                             
@@ -211,7 +186,7 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
-                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_dashboards/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>

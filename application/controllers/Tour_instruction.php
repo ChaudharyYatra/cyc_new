@@ -59,11 +59,13 @@ class Tour_instruction extends CI_Controller {
         $this->db->where('confirm_booking.is_active','yes');
         // $this->db->where('package_date.journey_date >',$today); //comparision grater than or less
         $this->db->where('confirm_booking.traveler_id',$id); //check session id & traverl id match
+        $this->db->where('assign_staff.tour_status','no');
         $this->db->join("packages", 'confirm_booking.package_id=packages.id','left');
         $this->db->join("package_date", 'confirm_booking.package_date_id=package_date.id','left');
         $this->db->join("booking_basic_info", 'confirm_booking.enquiry_id=booking_basic_info.domestic_enquiry_id','left');
         $this->db->join("agent", 'booking_basic_info.boarding_office_location=agent.id','left');
         $this->db->join("cust_instraction", 'confirm_booking.package_id=cust_instraction.tour_no','left');
+        $this->db->join("assign_staff", 'confirm_booking.package_id=assign_staff.package_id and confirm_booking.package_date_id=assign_staff.package_date_id','left');
         $this->db->group_by('tour_no');
         $this->db->join("cust_instraction_attachment", 'confirm_booking.package_id=cust_instraction_attachment.tour_no','left');
         $arr_data_tour = $this->master_model->getRecords('confirm_booking',array('confirm_booking.is_deleted'=>'no'),$fields);

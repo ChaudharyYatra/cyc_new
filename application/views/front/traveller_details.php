@@ -7,6 +7,16 @@
         padding-bottom:10px;
         margin-bottom:-7px;
     }
+    .table_css_img{
+        padding:15px !important;
+    }
+
+    .td_css_img{
+        text-align:center;
+    }
+    .header_css{
+        background-color: bisque;
+    }
 </style>
 <!-- BreadCrumb Starts -->  
 <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(<?php echo base_url(); ?>uploads/do_not_delete/Packages.png);">
@@ -89,7 +99,7 @@
 
                                 <table class="table table-bordered author_bg">
                                     <thead>
-                                        <tr>
+                                        <tr class="header_css">
                                             <th>SN</th>
                                             <th>Traveller Name</th>
                                             <th>Mobile Number</th>
@@ -193,7 +203,7 @@
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li class="active"><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
-                                    <li><a href="#">Cancelled Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
                                 </ul>
                                 

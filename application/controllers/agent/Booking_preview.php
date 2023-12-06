@@ -178,6 +178,7 @@ class Booking_preview extends CI_Controller {
         // echo 'hiiiii IN Controller'; die;
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
+        // print_r($id); die;
 
             $enquiry_id = $this->input->post('enquiry_id');
             $traveller_id = $this->input->post('traveller_id');
@@ -192,6 +193,7 @@ class Booking_preview extends CI_Controller {
                 'package_id' => $package_id,
                 'traveller_id' => $traveller_id,
                 'package_date_id' => $package_date_id,
+                'agent_id'   =>  $id,
                 'booking_status'   =>  'confirm'
             );
             
@@ -204,7 +206,7 @@ class Booking_preview extends CI_Controller {
                 'package_id' => $package_id,
                 'traveler_id' => $traveller_id,
                 'package_date_id' => $package_date_id,
-                // 'package_booked_on'   =>  $booking_on,
+                'take_enquiry_by_agent_id'   =>  $id,
                 'tour_status'   =>  'confirm'
             );
             $this->db->where('is_deleted','no');
