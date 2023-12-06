@@ -109,7 +109,7 @@
                           <div class="col-md-4">
                             <div class="form-group">
                               <label>Mobile number</label>
-                              <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
+                              <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10"
                               value="<?php echo $agent_booking_enquiry_data_info['mobile_number']; ?>">
                             </div>
                           </div>

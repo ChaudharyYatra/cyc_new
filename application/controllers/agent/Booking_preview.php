@@ -42,10 +42,11 @@ class Booking_preview extends CI_Controller {
         $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
 
         $record = array();
-        $fields = "all_traveller_info.*,relation.relation";
+        $fields = "all_traveller_info.*,relation.relation,courtesy_titles.courtesy_titles_name";
         $this->db->where('all_traveller_info.is_deleted','no');
         $this->db->where('all_traveller_info.domestic_enquiry_id',$iid);
         $this->db->join("relation", 'relation.id=all_traveller_info.all_traveller_relation','left');
+        $this->db->join("courtesy_titles", 'courtesy_titles.id=all_traveller_info.mr/mrs','left');
         $arr_data = $this->master_model->getRecords('all_traveller_info',array('all_traveller_info.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 

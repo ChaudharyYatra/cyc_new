@@ -7591,6 +7591,23 @@ document.getElementById("back-button_all_traveller").addEventListener("click", f
 </script>
 
 <script>
+document.getElementById("traveller_address_info").addEventListener("click", function() {
+    var iid = $("#domestic_enquiry_id").val();
+    
+    if (confirm('Are You Sure You Want Save This Record?')) {
+        // User clicked "OK," do nothing or submit the form here
+        
+    } else {
+        // $("#all_traveller_info").validate().resetForm();  error
+        // jQuery('#all_traveller_info').unbind('submit').submit();
+
+        window.location.href = "<?=base_url()?>agent/all_traveller_info/add/"+iid;
+        // window.history.back();
+    }
+});
+</script>
+
+<script>
 document.getElementById("back-button_seat_type").addEventListener("click", function() {
     var iid = $("#domestic_enquiry_id").val();
     

@@ -146,7 +146,7 @@
                         <input type="hidden" class="form-control" name="traveller_id" id="traveller_id" value="<?php echo $info['id']; ?>">
                         <?php } ?>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $info['mr/mrs'] ?>. <?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
+                        <td><?php echo $info['courtesy_titles_name'] ?>. <?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
                         <td>
                              <?php if($info['dob']=='0000-00-00') { ?>
                                 NA
