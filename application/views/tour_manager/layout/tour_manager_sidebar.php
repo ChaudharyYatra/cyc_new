@@ -139,10 +139,18 @@
                   <p>Requested amount pay from account</p>
                 </a>
               </li>
-
             </ul>
           </li>
           
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>tour_manager/running_tour/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                  Running Tour
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>tour_manager/tm_account_details/add" class="nav-link">
               <i class="far fa-circle nav-icon"></i>

@@ -90,9 +90,14 @@
                                     </div>
                                 </div>
                             </div> -->
-
+                            
                             <div class="col-lg-12 col-md-12">
                                 <h4>Tour Instruction</h4>
+                                <?php 
+                                foreach($arr_data_tour as $info) 
+                                { 
+                                $today= date('Y-m-d');
+                                if($info['journey_date']< $today || $info['journey_date']== $today){ ?>
 
                                 <?php  if(count($arr_data_tour) > 0 ) 
                                 { ?>
@@ -134,10 +139,12 @@
                                 </table>
                                 
                                 <?php } ?>
+                                <?php } } ?>
                             </div>
                             
+                            
                         </div>
-
+                        
                         <!-- <div class="pagination-main text-center">
                             <ul class="pagination">
                                 <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
@@ -195,8 +202,9 @@
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
-                                    <li><a href="#">Cancelled Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_change_password/change_password">Change Password</a></li>
                                 </ul>
                                 
                             </div>

@@ -10,7 +10,6 @@
     .table_css_img{
         padding:15px !important;
     }
-
     .td_css_img{
         text-align:center;
     }
@@ -20,6 +19,9 @@
     .card-css{
         border-radius: 10px;
         background-color: bisque; 
+    }
+    .card_body_css{
+        padding-bottom: 0px;
     }
 </style>
 <!-- BreadCrumb Starts -->  
@@ -49,76 +51,51 @@
                 <div class="col-lg-8 ps-lg-4">
                     <div class="listing-inner">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <!-- <div class="list-results d-flex align-items-center justify-content-between">
-                                    <div class="list-results-sort">
-                                        <p class="m-0">Showing 1-5 of 80 results</p>
-                                    </div>
-                                    <div class="click-menu d-flex align-items-center justify-content-between">
-                                        <div class="change-list me-2 rounded overflow-hidden"><a href="post-list-1.html"><i class="fa fa-bars bg-grey"></i></a></div>
-                                        <div class="change-grid f-active me-2 rounded overflow-hidden"><a href="post-grid-1.html"><i class="fa fa-th"></i></a></div>
-                                        <div class="sortby d-flex align-items-center justify-content-between ml-2">
-                                            <select class="niceSelect">
-                                                <option value="1" >Sort By</option>
-                                                <option value="2">Average rating</option>
-                                                <option value="3">Price: low to high</option>
-                                                <option value="4">Price: high to low</option>
-                                            </select> 
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
-
-                            <!-- <div class="col-lg-6">
-                                <div class="trend-item box-shadow bg-white mb-4 rounded overflow-hidden">
-                                    <div class="trend-image">
-                                        <img class="img_br_no" src="../uploads/packages/p1.jpg" alt="image">
-                                    </div>
-                                    <div class="trend-content-main p-4 pb-2">
-                                        <div class="trend-content">
-                                            <h5 class="theme mb-1">Technology</h5>
-                                            <h4><a href="detail-1.html">How a developer duo at Deutsche Bank keep remote alive.</a></h4>
-                                            <p class="mb-3">
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            </p>
-                                            <div class="entry-meta d-flex align-items-center justify-content-between">
-                                                <div class="entry-author mb-2">
-                                                    <img src="images/reviewer/2.jpg" alt="" class="rounded-circle me-1">
-                                                    <span>Sollmond Nell</span>
-                                                </div>
-                                                <div class="entry-button d-flex align-items-center mb-2">
-                                                    <a href="#" class="nir-btn">Read More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                                <h4>Dashboard</h4>
-
+                                <h4>Dashboard</h4>  
                                 <div class="row">
-                                <div class="col-12 col-xl-12 col-md-12 stretch-card">
-                                    <div class="row flex-grow-1">
-                                    <div class="col-md-4 grid-margin stretch-card">
-                                    <?php 
-                                        if($tour_count >0 ){
-
-                                    ?> 
-                                    <div class="card card-css">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-center align-items-baseline">
-                                            <h6 class="card-title mb-0">Confirm Booking Tour</h6>
+                                    <div class="col-12 col-xl-12 col-md-12 stretch-card">
+                                        <div class="row flex-grow-1">
+                                            <div class="col-md-4 grid-margin stretch-card">
+                                                <?php 
+                                                    if($tour_count >0 ){
+                                                ?> 
+                                                <div class="card card-css">
+                                                    <div class="card-body card_body_css">
+                                                        <div class="d-flex justify-content-center align-items-baseline">
+                                                        <h6 class="card-title mb-0">Confirm Booking Tour</h6>
+                                                        </div>
+                                                        <div class="mt-2 d-flex justify-content-center">
+                                                        <h4><?php echo $tour_count; ?></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php } ?>
                                             </div>
-                                            <div class="mt-2 d-flex justify-content-center">
-                                            <h4><?php echo $tour_count; ?></h4>
+                                            <div class="col-md-8 grid-margin stretch-card">
+                                                
+                                            </div>
+                                            <div class="col-md-8 grid-margin stretch-card mt-2">
+                                                <?php
+                                                foreach($arr_data_tour as $info) 
+                                                    {
+                                                    ?>
+                                                <div class="card card-css">
+                                                    <div class="card-body card_body_css">
+                                                        <div class="d-flex justify-content-center align-items-baseline">
+                                                            <h6 class="card-title mb-0">Upcoming Tour Name / Duration:-</h6>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center align-items-baseline mt-1">
+                                                            <h6 class="card-title"><?php echo $info['tour_title']; ?></h6>
+                                                        </div>
+                                                        <div class="mt-0 d-flex justify-content-center">
+                                                            <b><p id="remainingTime">Remaining Duration:</p></b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
-                                    <?php } ?>
-                                    </div>
-                                </div>
                                 </div> <!-- row -->
                         </div>
                     </div>
@@ -164,14 +141,13 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
-                                    <li><a href="<?php echo base_url(); ?>customer_dashboards/index">Dashboard</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
-                                    <li class=""><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
-                                    <li><a href="#">Cancelled Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
                                 </ul>
-                                
                             </div>
 
                             <!-- <div class="popular-post sidebar-item mb-4">
@@ -322,6 +298,28 @@
     <!-- blog Ends -->  
 
 
+    <script>
+    // Fetch the journey date from PHP variable
+    var journeyDate = new Date("<?php echo $info['journey_date']; ?>").getTime();
+
+    // Update every second
+    setInterval(function() {
+        // Get current date and time
+        var now = new Date().getTime();
+
+        // Calculate the time remaining in milliseconds
+        var timeRemaining = journeyDate - now;
+
+        // Calculate days, hours, minutes, and seconds
+        var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+        // Update the HTML elements with the calculated values
+        document.getElementById("remainingTime").innerHTML = "Remaining Date/Time: " + days + "Day " + hours + "Hour " + minutes + "Mins " + seconds + "Sec";
+    }, 1000); // Update every second
+</script>
 
 </body>
 </html>

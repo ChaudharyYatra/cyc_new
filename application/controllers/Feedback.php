@@ -38,7 +38,7 @@ class Feedback extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $this->db->where('traveller_id',$id);
+        $this->db->where('traveler_id',$id);
         $arr_data = $this->master_model->getRecords('customer_feedback');
         // print_r($arr_data); die;
 
