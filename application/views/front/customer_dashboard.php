@@ -23,6 +23,9 @@
     .card_body_css{
         padding-bottom: 0px;
     }
+    #remainingTime{
+        color: #dc3545 !important;
+    }
 </style>
 <!-- BreadCrumb Starts -->  
 <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(<?php echo base_url(); ?>uploads/do_not_delete/Packages.png);">
@@ -141,12 +144,13 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
-                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
+                                    <li class="active"><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_change_password/change_password">Change Password</a></li>
                                 </ul>
                             </div>
 

@@ -19,7 +19,7 @@ class Srs_form extends CI_Controller {
         $this->module_url_path_back    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
-        $this->module_title       = "SRS Form";
+        $this->module_title       = "Booking Confirmation Form";
         $this->module_view_folder = "srs_form/";
         $this->arr_view_data = [];
 	 }

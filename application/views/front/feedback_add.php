@@ -178,7 +178,7 @@
                             <div class="author-news mb-4 box-shadow p-5 text-center rounded overflow-hidden border-all author_bg">
                                 <div class="author-news-content">
                                     <div class="author-thumb mb-1">
-                                        <img src="../uploads/do_not_delete/profile.jpg" alt="author">
+                                        <img src="<?php echo base_url(); ?>uploads/do_not_delete/profile.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
                                         <h3 class="title mb-1"><a href="#"><?php echo $cust_sess_name ?> <?php echo $cust_sess_lname ?></a></h3>
@@ -201,11 +201,13 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
+                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
-                                    <li><a href="#">Cancelled Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li class="active"><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_change_password/change_password">Change Password</a></li>
                                 </ul>
                                 
                             </div>

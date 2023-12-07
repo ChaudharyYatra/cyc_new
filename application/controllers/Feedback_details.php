@@ -41,14 +41,14 @@ class Feedback_details extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $this->db->where('traveller_id',$id);
+        $this->db->where('traveler_id',$id);
         $arr_data = $this->master_model->getRecords('customer_feedback');
         // print_r($arr_data); die;
 
         $fields = "customer_feedback.*,packages.tour_title,package_date.journey_date,role_type.role_name";
         $this->db->where('customer_feedback.is_deleted','no');
         $this->db->where('customer_feedback.is_active','yes');
-        $this->db->where('customer_feedback.traveller_id',$iid); //check session id & traverl id match
+        $this->db->where('customer_feedback.traveler_id',$iid); //check session id & traverl id match
         $this->db->where('customer_feedback.package_id',$id);
         $this->db->where('customer_feedback.package_date_id',$did);
         $this->db->join("packages", 'customer_feedback.package_id=packages.id','left');

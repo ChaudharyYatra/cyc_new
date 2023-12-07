@@ -32,6 +32,12 @@
   <script src="https://cdn.tutorialjinni.com/pdfobject/2.2.7/pdfobject.js"></script>
   <script src="https://cdn.tutorialjinni.com/pdfobject/2.2.7/pdfobject.min.js"></script>
 </head>
+<style>
+    .header_menu .navbar.navbar-default .nav.navbar-nav li.submenu .dropdown-menu li a:hover {
+  background: #029e9d;
+  color: #fff !important;
+}
+</style>
 <body>
 
     <!-- Preloader -->
@@ -144,7 +150,6 @@
                                     <li class="submenu dropdown">
                                         <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $cust_data; ?> <i class="icon-arrow-down" aria-hidden="true"></i></a> 
                                         <ul class="dropdown-menu customer_dropdown">
-                                            <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                             <li><a href="<?php echo base_url(); ?>user_profile/logout">Logout</a></li>
                                         </ul> 
                                     </li>

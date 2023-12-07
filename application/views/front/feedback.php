@@ -18,7 +18,7 @@
                 <nav aria-label="breadcrumb" class="d-block">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Previous Tour</li>
+                        <li class="breadcrumb-item active" aria-current="page">Feedback</li>
                     </ul>
                 </nav>
             </div>
@@ -230,11 +230,13 @@
                             <div class="sidebar-item mb-4">
                                 <h4 class="">All Categories</h4>
                                 <ul class="sidebar-category">
+                                    <li><a href="<?php echo base_url(); ?>customer_dashboard/index">Dashboard</a></li>
                                     <li><a href="<?php echo base_url(); ?>tour_instruction/index">Tour Instruction</a></li>
                                     <li><a href="<?php echo base_url(); ?>previous_tour/index">Previous Tour</a></li>
                                     <li><a href="<?php echo base_url(); ?>upcoming_tour/index">Upcoming Tour</a></li>
-                                    <li><a href="#">Cancelled Tour</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_cancelled_tour/index">Cancelled Tour</a></li>
                                     <li class="active"><a href="<?php echo base_url(); ?>feedback/index">Feedback</a></li>
+                                    <li><a href="<?php echo base_url(); ?>customer_change_password/change_password">Change Password</a></li>
                                 </ul>
                                 
                             </div>

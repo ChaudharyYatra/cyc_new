@@ -177,7 +177,7 @@
                             <div class="author-news mb-4 box-shadow p-5 text-center rounded overflow-hidden border-all author_bg">
                                 <div class="author-news-content">
                                     <div class="author-thumb mb-1">
-                                        <img src="../uploads/do_not_delete/profile.jpg" alt="author">
+                                        <img src="<?php echo base_url(); ?>uploads/do_not_delete/profile.jpg" alt="author">
                                     </div>
                                     <div class="author-content">
                                         <h3 class="title mb-1"><a href="#"><?php echo $cust_sess_name ?> <?php echo $cust_sess_lname ?></a></h3>
