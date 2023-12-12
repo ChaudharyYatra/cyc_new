@@ -254,35 +254,35 @@ $(function () {
 
 
 <script>
-  function validateregForms() 
+  function validateregForms()
 {
   $("#firstname_error").hide();
   $("#lastname_error").hide();
   $("#emailid_error").hide();
-  $("#phoneno_error").hide(); 
+  $("#phoneno_error").hide();
   $("#password_error").hide();
-  
+
   var submiform='';
-  
+
   var firstname = $('#firstname').val();
-  if (firstname == '' || firstname ==null) 
+  if (firstname == '' || firstname ==null)
   {
     $('#firstname_error').text('Please enter first name.');
     $('#firstname_error').show();
     submiform=false;
   }
-  
-  
+
+
   var lastname = $('#lastname').val();
-  if (lastname == '' || lastname ==null) 
+  if (lastname == '' || lastname ==null)
   {
     $('#lastname_error').text('Please enter last name.');
     $('#lastname_error').show();
     submiform=false;
   }
-  
+
   var emailid = $('#emailid').val();
-  if (emailid == '' || emailid ==null) 
+  if (emailid == '' || emailid ==null)
   {
     $('#emailid_error').text('Please enter email address.');
     $('#emailid_error').show();
@@ -291,7 +291,7 @@ $(function () {
   else
   {
       var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(emailid)) 
+        if(!regex.test(emailid))
         {
            $('#emailid_error').text('Please enter valid email address.');
             $('#emailid_error').show();
@@ -313,9 +313,9 @@ $(function () {
         //     isEmailExist();
         // }
   }
-  
+
   var password = $('#password').val();
-  if(password == '' || password ==null) 
+  if(password == '' || password ==null)
   {
     $('#password_error').text('Please enter password.');
     $('#password_error').show();
@@ -325,10 +325,10 @@ $(function () {
               $('#password_error').text('Password should be minimum 8 characters long.');
               $('#password_error').show();
               submiform=false;
-             } 
- 
+             }
+
   var phoneno = $('#phoneno').val();
-  if (phoneno == '' || phoneno ==null) 
+  if (phoneno == '' || phoneno ==null)
   {
     $('#phoneno_error').text('Please enter mobile number.');
     $('#phoneno_error').show();
@@ -343,29 +343,29 @@ $(function () {
                   $('#phoneno_error').text('Please enter 10 digits mobile number');
               $('#phoneno_error').show();
               submiform=false;
-             } 
+             }
             }
-            
+
          if(filter.test(mobNum)) {
             if(mobNum.length > 10){
                   $('#phoneno_error').text('Please enter 10 digits mobile number');
               $('#phoneno_error').show();
               submiform=false;
-             } 
+             }
             }
   }
 
-  
+
   if(submiform==='')
   {
       return true;
   }
   else
   {
-     return false; 
+     return false;
   }
-  
-  
+
+
 }
 </script>
 
@@ -397,8 +397,8 @@ var structure = $('<div class="row" style="width:100% !important" id="new_row'+i
                     '</div>'+
                 '</div>'+
 
-                
-                  
+
+
                 //    '<div class="col-md-2">'+
                 //          '<div class="form-group">'+
                 //             '<label>Single Seat Cost</label>'+
@@ -422,16 +422,16 @@ var structure = $('<div class="row" style="width:100% !important" id="new_row'+i
                     '<label></label>'+
                         '<button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>'+
                     '</div>'+
-                '</div>'+   
+                '</div>'+
           '</div>');
-$('#main_row').append(structure); 
+$('#main_row').append(structure);
 
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-       var button_id = $(this).attr("id");   
-       $('#new_row'+button_id+'').remove();  
+$(document).on('click', '.btn_remove', function(){
+       var button_id = $(this).attr("id");
+       $('#new_row'+button_id+'').remove();
   });
 
 </script>
@@ -462,7 +462,7 @@ $("#image_name").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 1850 || width > 1900 ) 
+         if(width < 1850 || width > 1900 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -478,7 +478,7 @@ $("#image_name").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -493,10 +493,10 @@ $("#image_name").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -526,7 +526,7 @@ $("#image_name_reviews").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 280 || width > 320 ) 
+         if(width < 280 || width > 320 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -542,7 +542,7 @@ $("#image_name_reviews").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -557,10 +557,10 @@ $("#image_name_reviews").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -590,7 +590,7 @@ $("#image_name_guide").change(function (e) {
 	     if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 300 || width > 340 ) 
+         if(width < 300 || width > 340 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -606,7 +606,7 @@ $("#image_name_guide").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -623,21 +623,21 @@ $("#image_name_guide").change(function (e) {
         }
 	};
     }
-	
-	
-	
-	
+
+
+
+
         img.src = _URL.createObjectURL(file);
     }
 });
 });
 </script>
 
-<script>  
+<script>
 
- $(document).ready(function(){ 
+ $(document).ready(function(){
   // var i = '0';
-   
+
     var newFields = $('');
 
     $("#total_days").keyup(function(e){
@@ -648,13 +648,13 @@ $("#image_name_guide").change(function (e) {
         if (n+1) {
             if (n > newFields.length) {
                 addFields(n);
-                
+
             } else {
                 removeFields(n);
             }
         }
     });
-    
+
     function addFields(n) {
         for (i = newFields.length; i < n; i++) {
             var day=i+1;
@@ -676,27 +676,27 @@ $("#image_name_guide").change(function (e) {
                         '<div class="col-md-5">'+
                              '<div class="form-group">'+
                             '<label>Itinerary For Day '+day+' <span class="text-danger">*</span></label>'+
-                            '<textarea class="form-control iternary_desc" name="iternary_desc[]" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>'+
+                            '<textarea class="form-control iternary_desc" name="iternary_desc" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>'+
                     '</div></div>');
             var newInput = input.clone();
-            
+
             newFields = newFields.add(newInput);
             newInput.appendTo('#main_row');
         }
     }
-    
+
     function removeFields(n) {
         var removeField = newFields.slice(n).remove();
         newFields = newFields.not(removeField);
     }
-    
+
         //  for (i = 0; i <= n; i++) {
         //     var newInput = input.clone();
-            
+
         //     newFields = newFields.add(newInput);
         //     newInput.appendTo('#newFields');
         // }
-        
+
     });
 
 // });
@@ -727,7 +727,7 @@ $("#image_name_basic").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 200 || width > 240 ) 
+         if(width < 200 || width > 240 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -743,7 +743,7 @@ $("#image_name_basic").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -758,10 +758,10 @@ $("#image_name_basic").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -791,7 +791,7 @@ $("#image_name_social").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 780 || width > 820 ) 
+         if(width < 780 || width > 820 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -807,7 +807,7 @@ $("#image_name_social").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -822,10 +822,10 @@ $("#image_name_social").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -855,7 +855,7 @@ $("#image_name_gallery").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 680 || width > 720 ) 
+         if(width < 680 || width > 720 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -871,7 +871,7 @@ $("#image_name_gallery").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -886,10 +886,10 @@ $("#image_name_gallery").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -919,7 +919,7 @@ $("#image_name_package").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 780 || width > 820 ) 
+         if(width < 780 || width > 820 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -935,7 +935,7 @@ $("#image_name_package").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -950,10 +950,10 @@ $("#image_name_package").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -983,7 +983,7 @@ $("#image_name_international").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 780 || width > 820 ) 
+         if(width < 780 || width > 820 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -999,7 +999,7 @@ $("#image_name_international").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -1014,10 +1014,10 @@ $("#image_name_international").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -1039,7 +1039,7 @@ $("#image_name_privacy").change(function (e) {
     }else{
         $('#submit_slider').prop('disabled', false);
         $('#pdf_format').hide();
-    } 
+    }
     }
 });
 });
@@ -1060,7 +1060,7 @@ $("#image_name_terms").change(function (e) {
     }else{
         $('#submit_slider').prop('disabled', false);
         $('#pdf_format').hide();
-    } 
+    }
     }
 });
 });
@@ -1081,7 +1081,7 @@ $("#pdf_name_package").change(function (e) {
     }else{
         $('#submit_slider').prop('disabled', false);
         $('#pdf_format').hide();
-    } 
+    }
     }
 });
 });
@@ -1102,130 +1102,128 @@ $("#image_name_cancel").change(function (e) {
     }else{
         $('#submit_slider').prop('disabled', false);
         $('#pdf_format').hide();
-    } 
+    }
     }
 });
 });
 </script>
 
 
-<script>  
- $(document).ready(function(){  
-      $('#agent_email').change(function(event){  
-           var email = $('#agent_email').val();  
+<script>
+ $(document).ready(function(){
+      $('#agent_email').change(function(event){
+           var email = $('#agent_email').val();
            //alert(email);
-           if(email != '')  
-           {  
-                $.ajax({  
-                     url:"<?php echo base_url(); ?>admin/agent/check_email_add_avalibility",  
-                     method:"POST",  
-                     data:{email:email},  
-                     success:function(data){  
-                         //console.log(data);
+           if(email != '')
+           {
+                $.ajax({
+                     url:"<?php echo base_url(); ?>admin/agent/check_email_add_avalibility",
+                     method:"POST",
+                     data:{email:email},
+                     success:function(data){
                          if(data == true)
                          {
                             $('#email_result').html('<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Email address already exist..! Please use another email address.</label>');
                             $('#btn_agent').prop('disabled', true)
-                             
+
                          }else
                          {
                              $('#email_result').html('');
                              $('#btn_agent').prop('disabled', false)
-                         } 
-                     }  
-                });  
-           }  
-      });  
- });  
+                         }
+                     }
+                });
+           }
+      });
+ });
  </script>
 
 
-<script>  
- $(document).ready(function(){  
-      $('#email_edit').change(function(event){  
-           var email = $('#email_edit').val(); 
+<script>
+ $(document).ready(function(){
+      $('#email_edit').change(function(event){
+           var email = $('#email_edit').val();
            var id = $('#agent_id').val();
-           if(email != '')  
-           {  
-                $.ajax({  
-                     url:"<?php echo base_url(); ?>admin/agent/check_email_edit_avalibility",  
-                     method:"POST",  
-                     data:{email:email, agent_id:id},  
-                     success:function(data){                         
+           if(email != '')
+           {
+                $.ajax({
+                     url:"<?php echo base_url(); ?>admin/agent/check_email_edit_avalibility",
+                     method:"POST",
+                     data:{email:email, agent_id:id},
+                     success:function(data){
                          if(data == true)
                          {
                             $('#email_result').html('<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Email address already exist..! Please use another email address.</label>');
                             $('#btn_agent').prop('disabled', true)
-                             
+
                          }else
                          {
                              $('#email_result').html('');
                              $('#btn_agent').prop('disabled', false)
-                         } 
-                     }  
-                });  
-           }  
-      });  
- });  
+                         }
+                     }
+                });
+           }
+      });
+ });
  </script>
- 
- <script>  
- $(document).ready(function(){  
-      $('#package_title').keyup(function(event){  
-           var package_title = $('#package_title').val();  
+
+ <script>
+ $(document).ready(function(){
+      $('#package_title').keyup(function(event){
+           var package_title = $('#package_title').val();
            //alert(email);
-           if(package_title != '')  
-           {  
-                $.ajax({  
-                     url:"<?php echo base_url(); ?>admin/package_mapping/check_package_title_avalibility",  
-                     method:"POST",  
-                     data:{package_title:package_title},  
-                     success:function(data){  
-                         //console.log(data);
+           if(package_title != '')
+           {
+                $.ajax({
+                     url:"<?php echo base_url(); ?>admin/package_mapping/check_package_title_avalibility",
+                     method:"POST",
+                     data:{package_title:package_title},
+                     success:function(data){
                          if(data == true)
                          {
                             $('#pack_title_result').html('<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Package Title already exist..! Please use another Package title.</label>');
                             $('#btn_pack_mapping').prop('disabled', true)
-                             
+
                          }else
                          {
                              $('#pack_title_result').html('');
                              $('#btn_pack_mapping').prop('disabled', false)
-                         } 
-                     }  
-                });  
-           }  
-      });  
- });  
+                         }
+                     }
+                });
+           }
+      });
+ });
  </script>
- 
- <script>  
- $(document).ready(function(){  
-      $('#package_title').keyup(function(event){  
-           var package_title = $('#package_title').val(); 
+
+ <script>
+ $(document).ready(function(){
+      $('#package_title').keyup(function(event){
+           var package_title = $('#package_title').val();
            var package_id = $('#package_id').val();
-           if(package_title != '')  
-           {  
-                $.ajax({  
-                     url:"<?php echo base_url(); ?>admin/package_mapping/check_package_title_avalibility_edit",  
-                     method:"POST",  
-                     data:{package_title:package_title, package_id:package_id},  
-                     success:function(data){                         
+           if(package_title != '')
+           {
+                $.ajax({
+                     url:"<?php echo base_url(); ?>admin/package_mapping/check_package_title_avalibility_edit",
+                     method:"POST",
+                     data:{package_title:package_title, package_id:package_id},
+                     success:function(data){
                          if(data == true)
                          {
                             $('#pack_title_result').html('<label class="text-danger"><span class="glyphicon glyphicon-remove"></span> Package Title already exist..! Please use another Package title</label>');
                             $('#btn_pack_mapping').prop('disabled', true)
-                             
+
                          }else
                          {
                              $('#pack_title_result').html('');
                              $('#btn_pack_mapping').prop('disabled', false)
-                         } 
-                     }  
-                });  
-           }  
-      });  
- });  
+                         }
+                     }
+                });
+           }
+      });
+ });
  </script>
 
 
@@ -1252,7 +1250,7 @@ $("#image_name_award").change(function (e) {
          if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 680 || width > 720 ) 
+         if(width < 680 || width > 720 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -1268,7 +1266,7 @@ $("#image_name_award").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#submit_slider').prop('disabled', true)
@@ -1283,10 +1281,10 @@ $("#image_name_award").change(function (e) {
             $('#img_size').show();
             $('#submit_slider').prop('disabled', true)
         }
-        
-        
+
+
         };
-    }    
+    }
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -1753,7 +1751,7 @@ $('#add_aboutus').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
     $error.appendTo($element.closest("div"));
   },
-  
+
     rules: {
         years_experiences: {
             required: true,
@@ -2075,7 +2073,7 @@ $('#add_clientreview').validate({ // initialize the plugin
         image_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -2091,7 +2089,7 @@ $('#add_clientreview').validate({ // initialize the plugin
         image_name : {
             required : "Please upload image",
         },
-        
+
     }
 });
 
@@ -2121,7 +2119,7 @@ $('#edit_clientreview').validate({ // initialize the plugin
         old_img_name: {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -2716,14 +2714,14 @@ $('#add_mediasource').validate({ // initialize the plugin
         media_source_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         media_source_name : {
             required : "Please enter media source name",
         },
-    
+
     }
 });
 
@@ -2743,14 +2741,14 @@ $('#edit_mediasource').validate({ // initialize the plugin
         media_source_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         media_source_name : {
             required : "Please enter media source name",
         },
-    
+
     }
 });
 
@@ -2782,24 +2780,24 @@ $('#add_stationary').validate({ // initialize the plugin
         from_series: {
             required : function(element) {
                 var action = $("#Yes").val();
-                if(action == "Yes") { 
+                if(action == "Yes") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         to_series: {
             required : function(element) {
                 var action = $("#Yes").val();
-                if(action == "Yes") { 
+                if(action == "Yes") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
-        
+
     },
 
     messages :{
@@ -2821,7 +2819,7 @@ $('#add_stationary').validate({ // initialize the plugin
         to_series : {
             required : "Please select to series",
         },
-    
+
     }
 });
 
@@ -2854,24 +2852,24 @@ $('#edit_stationary').validate({ // initialize the plugin
         from_series: {
             required : function(element) {
                 var action = $("#Yes").val();
-                if(action == "Yes") { 
+                if(action == "Yes") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         to_series: {
             required : function(element) {
                 var action = $("#Yes").val();
-                if(action == "Yes") { 
+                if(action == "Yes") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
-        
+
     },
 
     messages :{
@@ -2893,7 +2891,7 @@ $('#edit_stationary').validate({ // initialize the plugin
         to_series : {
             required : "Please select to series",
         },
-    
+
     }
 });
 
@@ -2958,34 +2956,34 @@ $('#add_package').validate({ // initialize the plugin
         from_date: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "Special Limited Offer") { 
+                if(action == "Special Limited Offer") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         to_date: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "Special Limited Offer") { 
+                if(action == "Special Limited Offer") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         cost: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "3" || action == "4" || action == "Special Limited Offer") { 
+                if(action == "3" || action == "4" || action == "Special Limited Offer") {
                     return false;
                 } else {
                     return true;
                 }
-            }    
+            }
         },
-        
+
     },
 
     messages :{
@@ -3042,7 +3040,7 @@ $('#add_package').validate({ // initialize the plugin
         to_date : {
             required : "Please select to date",
         }
-    
+
     }
 });
 
@@ -3107,34 +3105,34 @@ $('#edit_package').validate({ // initialize the plugin
         from_date: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "Special Limited Offer") { 
+                if(action == "Special Limited Offer") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         to_date: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "Special Limited Offer") { 
+                if(action == "Special Limited Offer") {
                     return true;
                 } else {
                     return false;
                 }
-            }    
+            }
         },
         cost: {
             required : function(element) {
                 var action = $("#package_type").val();
-                if(action == "3" || action == "4" || action == "Special Limited Offer") { 
+                if(action == "3" || action == "4" || action == "Special Limited Offer") {
                     return false;
                 } else {
                     return true;
                 }
-            }    
+            }
         },
-        
+
     },
 
     messages :{
@@ -3185,7 +3183,7 @@ $('#edit_package').validate({ // initialize the plugin
         old_new_name : {
             required : "Please upload image",
         }
-    
+
     }
 });
 
@@ -3249,7 +3247,7 @@ $('#add_internationalpackage').validate({ // initialize the plugin
         international_package_full_image: {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -3300,7 +3298,7 @@ $('#add_internationalpackage').validate({ // initialize the plugin
         international_package_full_image : {
             required : "Please upload image",
         }
-    
+
     }
 });
 
@@ -3365,7 +3363,7 @@ $('#edit_internationalpackage').validate({ // initialize the plugin
         old_new_name: {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -3416,7 +3414,7 @@ $('#edit_internationalpackage').validate({ // initialize the plugin
         old_new_name : {
             required : "Please upload image",
         }
-    
+
     }
 });
 
@@ -3456,7 +3454,7 @@ $('#add_mainpackage').validate({ // initialize the plugin
         },
         image_name: {
             required: true,
-        } 
+        }
     },
 
     messages :{
@@ -3524,7 +3522,7 @@ $('#edit_mainpackage').validate({ // initialize the plugin
         },
         old_img_name: {
             required: true,
-        } 
+        }
     },
 
     messages :{
@@ -3578,10 +3576,10 @@ $('#add_changepassword').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#new_password", 
+            equalTo: "#new_password",
             minlength: 6
         }
-        
+
     },
 
     messages :{
@@ -3597,7 +3595,7 @@ $('#add_changepassword').validate({ // initialize the plugin
             equalTo : "New password and Confirm Password can't match",
             minlength : "Please enter 6 digit or character length"
         }
-    
+
     }
 });
 
@@ -3627,7 +3625,7 @@ $('#edit_profile').validate({ // initialize the plugin
             maxlength:10,
             minlength:10
         }
-        
+
     },
 
     messages :{
@@ -3643,7 +3641,7 @@ $('#edit_profile').validate({ // initialize the plugin
             maxlength: "Please enter maximum 10 digit number",
             minlength: "Please enter minimum 10 digit number"
         }
-    
+
     }
 });
 
@@ -3679,7 +3677,7 @@ $('#add_agent').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -3729,10 +3727,10 @@ $('#add_agent').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             // minlength: 6
 
-        }  
+        }
     },
 
     messages :{
@@ -3838,7 +3836,7 @@ $('#add_supervision').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -3859,7 +3857,7 @@ $('#add_supervision').validate({ // initialize the plugin
             equalTo: "#password"
             // minlength: 5
 
-        }  
+        }
     },
 
     messages :{
@@ -3937,7 +3935,7 @@ $('#edit_agent').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -3984,10 +3982,10 @@ $('#edit_agent').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 6
 
-        }  
+        }
     },
 
     messages :{
@@ -4090,7 +4088,7 @@ $('#edit_supervision').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -4106,9 +4104,9 @@ $('#edit_supervision').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
 
-        }  
+        }
     },
 
     messages :{
@@ -4171,7 +4169,7 @@ $('#add_courier').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         email: {
             required: true,
@@ -4217,7 +4215,7 @@ $('#edit_courier').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         email: {
             required: true,
@@ -4258,7 +4256,7 @@ $('#add_import').validate({ // initialize the plugin
     rules: {
         file: {
             required: true,
-        }, 
+        },
     },
 
     messages :{
@@ -4276,8 +4274,8 @@ $('#add_import').validate({ // initialize the plugin
 <!-- Approve profile edit using ajax -->
 
 <script>
-  $("#submit").click(function() { 
-   
+  $("#submit").click(function() {
+
      var temp_tbl_id =  $("#submit").val();
 // alert(temp_tbl_id);
 
@@ -4291,22 +4289,21 @@ $('#add_import').validate({ // initialize the plugin
                          //  dataType: 'json',
                          //  cache: false,
                           success: function(response) {
-                              console.log(response);
                                if (response= true) {
                                 window.location.href = "<?=base_url()?>admin/profile_edit_req/index";
-                                  
+
                               } else {
                                   alert('error');
 
                               }
                           },
-                          
+
                       });
      }
      // else{
      //      $('.sendButton').attr("disabled", true);
      // }
-}); 
+});
 
 </script>
 
@@ -4333,7 +4330,7 @@ $("#image_name_mapping").change(function (e) {
 	     if(size < 2000000)
          {
          $('#img_size').hide();
-         if(width < 324 || width > 328 ) 
+         if(width < 324 || width > 328 )
          {
              $('#img_width').show();
               $('#img_size').hide();
@@ -4349,7 +4346,7 @@ $("#image_name_mapping").change(function (e) {
             $('#img_height').hide();
              $('#img_size').hide();
          }
-         
+
          if (!isValid) {
             $('#img_id').show();
             $('#btn_pack_mapping').prop('disabled', true)
@@ -4366,10 +4363,10 @@ $("#image_name_mapping").change(function (e) {
         }
 	};
     }
-	
-	
-	
-	
+
+
+
+
         img.src = _URL.createObjectURL(file);
     }
 });
@@ -4394,7 +4391,7 @@ function getAddress()
 	    getMap(y_coor,x_coor);
 	    break;
       };
-      
+
     }, reason => {
     });
 }
@@ -4403,25 +4400,24 @@ function getAddress()
 <!-- Region Head Master  -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#agent_region').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/Region_head/getAgent', 
+        url:'<?=base_url()?>admin/Region_head/getAgent',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#agent_center').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#agent_center').append('<option value="'+data['id']+'">'+data['booking_center']+'</option>');
           });
         }
@@ -4432,21 +4428,20 @@ function getAddress()
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#agent_center').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/Region_head/getAgentno', 
+        url:'<?=base_url()?>admin/Region_head/getAgentno',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#mobile_number').val(response['mobile_number1']);
         }
@@ -4457,21 +4452,20 @@ function getAddress()
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#agent_center').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/Region_head/getAgentno', 
+        url:'<?=base_url()?>admin/Region_head/getAgentno',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#agent_name').val(response['agent_name']);
         }
@@ -4499,7 +4493,7 @@ $('#add_region_head').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
 		agent_name: {
             required: true,
@@ -4510,11 +4504,11 @@ $('#add_region_head').validate({ // initialize the plugin
         },
         confirm_password: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 6
 
-        }  
-        
+        }
+
     },
 
     messages :{
@@ -4541,7 +4535,7 @@ $('#add_region_head').validate({ // initialize the plugin
             equalTo : "Password and Confirm Password can't match",
             minlength : "Please enter 6 digit or character length"
         }
-    
+
     }
 });
 
@@ -4569,7 +4563,7 @@ $('#edit_region_head').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         agent_name: {
             required: true,
@@ -4580,11 +4574,11 @@ $('#edit_region_head').validate({ // initialize the plugin
         },
         confirm_password: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 6
 
         }
-        
+
     },
 
     messages :{
@@ -4611,7 +4605,7 @@ $('#edit_region_head').validate({ // initialize the plugin
             equalTo : "Password and Confirm Password can't match",
             minlength : "Please enter 6 digit or character length"
         }
-    
+
     }
 });
 
@@ -4676,7 +4670,7 @@ $('#edit_state').validate({ // initialize the plugin
         city_name: {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -4689,7 +4683,7 @@ $('#edit_state').validate({ // initialize the plugin
         city_name : {
             required : "Please enter city name",
         }
-    
+
     }
 });
 
@@ -4720,7 +4714,7 @@ $('#add_places_master').validate({ // initialize the plugin
         place_description: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -4736,7 +4730,7 @@ $('#add_places_master').validate({ // initialize the plugin
         place_description : {
             required : "Please enter place description",
         },
-    
+
     }
 });
 
@@ -4765,7 +4759,7 @@ $('#edit_places_master').validate({ // initialize the plugin
         place_description: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -4781,7 +4775,7 @@ $('#edit_places_master').validate({ // initialize the plugin
         place_description : {
             required : "Please enter place description",
         },
-    
+
     }
 });
 
@@ -4793,26 +4787,25 @@ $('#edit_places_master').validate({ // initialize the plugin
 <!-- place_wise_stay_costing state on places  -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#state_name').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/place_wise_stay_costing/getplace', 
+        url:'<?=base_url()?>admin/place_wise_stay_costing/getplace',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#place_name').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#place_name').append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
           });
         }
@@ -4846,7 +4839,7 @@ $('#add_place_wise_stay_costing').validate({ // initialize the plugin
         lodge_expences: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -4864,8 +4857,8 @@ $('#add_place_wise_stay_costing').validate({ // initialize the plugin
         },
         lodge_expences : {
             required : "Please enter Lodge Expences",
-        }, 
-    
+        },
+
     }
 });
 
@@ -4897,7 +4890,7 @@ $('#edit_place_wise_stay_costing').validate({ // initialize the plugin
         lodge_expences: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -4915,8 +4908,8 @@ $('#edit_place_wise_stay_costing').validate({ // initialize the plugin
         },
         lodge_expences : {
             required : "Please enter Lodge Expences",
-        }, 
-    
+        },
+
     }
 });
 
@@ -4945,7 +4938,7 @@ $('#add_boarding_expenses_master').validate({ // initialize the plugin
         rates1: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -4958,7 +4951,7 @@ $('#add_boarding_expenses_master').validate({ // initialize the plugin
         rates1 : {
             required : "Enter rate",
         },
-    
+
     }
 });
 
@@ -4991,7 +4984,7 @@ $('#add_year_wise_cost_creation').validate({ // initialize the plugin
         to_days: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -5010,7 +5003,7 @@ $('#add_year_wise_cost_creation').validate({ // initialize the plugin
         to_days : {
             required : "Enter to days",
         },
-    
+
     }
 });
 
@@ -5034,7 +5027,7 @@ $('#add_office_maintainance').validate({ // initialize the plugin
         from_date: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -5067,7 +5060,7 @@ $('#add_bus_kilometer_rates').validate({ // initialize the plugin
         rate_1: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -5115,7 +5108,7 @@ $('#add_tour_details_data').validate({ // initialize the plugin
         terms_conditions: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -5154,21 +5147,20 @@ $('#add_tour_details_data').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/Day_wise_cost_creation/getTourname', 
+        url:'<?=base_url()?>admin/Day_wise_cost_creation/getTourname',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_name').val(response['tour_title']);
         }
@@ -5181,7 +5173,7 @@ $('#add_tour_details_data').validate({ // initialize the plugin
  function getTourDays(tour_days) {
 // alert(tour_days);
     var structure = '';
-    $('#tour_calculation').empty(); 
+    $('#tour_calculation').empty();
     $('#tour_calculation').append(` <table class="table table-bordered" style="width:100%" id="tour_calculation">
                             <thead>
                                 <tr style="background:#a19f9f; color:white;">
@@ -5194,13 +5186,13 @@ $('#add_tour_details_data').validate({ // initialize the plugin
                                     <th style="width:10%;">Parking Charges</th>
                                 </tr>
                             </thead>
-                            <tbody>`); 
+                            <tbody>`);
     for (let index = 0; index < tour_days; index++) {
         var i=index+1;
-        
+
         // alert(index);
         structure +=`<tr>
-                                    
+
                         <td>
                             <input type="text" readonly class="form-control" name="day[]" id="day" value="`+i+`" required="required">
                         </td>
@@ -5208,10 +5200,10 @@ $('#add_tour_details_data').validate({ // initialize the plugin
                         <select class="select_css" name="halting[]" id="halting" required="required">
                             <option value="">Select halting place</option>
                             <?php
-                            foreach($halting_place_data as $halting_place_info){ 
-                            ?>
+foreach ($halting_place_data as $halting_place_info) {
+    ?>
                             <option value="<?php echo $halting_place_info['id']; ?>"><?php echo $halting_place_info['halting_place_name']; ?></option>
-                            <?php } ?>
+                            <?php }?>
                         </select>
                         </td>
                         <td>
@@ -5229,16 +5221,16 @@ $('#add_tour_details_data').validate({ // initialize the plugin
                         <td>
                             <input type="text" class="form-control" name="parking_chareges[]" id="parking_chareges" required="required">
                         </td>
-                        
-                        
+
+
                     </tr> `;
-        
-         
-        //     //alert(i);                       
+
+
+        //     //alert(i);
 
     }
 
-    $('#tour_calculation tbody').append(structure); 
+    $('#tour_calculation tbody').append(structure);
     $('#tour_calculation').append(`</tbody>
                     </table>
                     <div class="row">
@@ -5258,21 +5250,20 @@ $('#add_tour_details_data').validate({ // initialize the plugin
 
 
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/Day_wise_cost_creation/getTourdays', 
+        url:'<?=base_url()?>admin/Day_wise_cost_creation/getTourdays',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_days').val(response['tour_number_of_days']);
             getTourDays(response['tour_number_of_days']);
@@ -5291,7 +5282,7 @@ $('#add_tour_details_data').validate({ // initialize the plugin
 <script>
 $(document).ready(function () {
 
-$('#add_day_wise_cost_creation').validate({ 
+$('#add_day_wise_cost_creation').validate({
     errorPlacement: function($error, $element) {
     $error.appendTo($element.closest("div,td"));
   },
@@ -5305,8 +5296,8 @@ $('#add_day_wise_cost_creation').validate({
         tour_days: {
             required: true,
         },
-        
-        
+
+
     },
 
     messages :{
@@ -5319,8 +5310,8 @@ $('#add_day_wise_cost_creation').validate({
         tour_days : {
             required : "Please select tour days",
         },
-        
-    
+
+
     }
 });
 
@@ -5336,21 +5327,20 @@ $('#add_day_wise_cost_creation').validate({
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/tour_details_data/getTourname', 
+        url:'<?=base_url()?>admin/tour_details_data/getTourname',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_name').val(response['tour_title']);
         }
@@ -5361,21 +5351,20 @@ $('#add_day_wise_cost_creation').validate({
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/tour_details_data/getTourdays', 
+        url:'<?=base_url()?>admin/tour_details_data/getTourdays',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_days').val(response['tour_number_of_days']);
         }
@@ -5389,21 +5378,20 @@ $('#add_day_wise_cost_creation').validate({
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/day_wise_tour_itinerary/getTourname', 
+        url:'<?=base_url()?>admin/day_wise_tour_itinerary/getTourname',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_name').val(response['tour_title']);
         }
@@ -5417,7 +5405,7 @@ $('#add_day_wise_cost_creation').validate({
 // alert(tour_days);
     var structure = '';
     var structure1 = '';
-    $('#tour_itinerary').empty(); 
+    $('#tour_itinerary').empty();
     $('#tour_itinerary').append(` <table class="table table-bordered" style="width:100%" id="tour_itinerary">
                             <thead>
                                 <tr style="background:#a19f9f; color:white;">
@@ -5428,13 +5416,13 @@ $('#add_day_wise_cost_creation').validate({
                                     <th style="width:10%;">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>`); 
+                            <tbody>`);
     for (let index = 0; index < tour_days; index++) {
       var i=index+1;
-        
+
         // alert(index);
         structure +=`<tr>
-                                    
+
                         <td>
                             <input type="text" readonly class="form-control" name="day[]" id="day" value="`+i+`" required="required" >
                         </td>
@@ -5450,8 +5438,8 @@ $('#add_day_wise_cost_creation').validate({
                         <td>
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight`+index+`" aria-controls="offcanvasRight">Add more details</button>
                         </td>
-                       
-                        
+
+
                     </tr> `;
 
     }
@@ -5479,12 +5467,12 @@ $('#add_day_wise_cost_creation').validate({
               </div>
               <div class="col-md-6 mt-2">
                 <label>Place sample photo (Optional)</label>
-                
+
                 <input type="file" name="image_name[]" id="image_name`+img_count+`" onchange="encodeImgtoBase64traveller_img(this)" attr_id="`+img_count+`">
-                
+
               </div>
               <div class="col-md-6 mt-2">
-                 <input type="hidden" class="document_file_traveller_img" id="document_file_traveller_img`+img_count+`" name="document_file_traveller_img[]" value=""> 
+                 <input type="hidden" class="document_file_traveller_img" id="document_file_traveller_img`+img_count+`" name="document_file_traveller_img[]" value="">
                  <div id="imagePreview_traveller_img`+img_count+`" class="iti_img mt-2 img_size_cast">
                  <img src="<?php echo base_url(); ?>uploads/day_wise_itinerary/" width="25%" /></div>
               </div>
@@ -5499,11 +5487,10 @@ $('#add_day_wise_cost_creation').validate({
                 <select class="form-control" name="flight_airport[]" id="flight_airport" required="required">
                   <option value="">Select flight name</option>
                   <?php
-                    foreach($airport_data as $airport_info) 
-                    { 
-                  ?>
+foreach ($airport_data as $airport_info) {
+    ?>
                     <option value="<?php echo $airport_info['id']; ?>"><?php echo $airport_info['airport_name']; ?></option>
-                  <?php } ?>
+                  <?php }?>
                 </select>
               </div>
 
@@ -5517,11 +5504,10 @@ $('#add_day_wise_cost_creation').validate({
                 <select class="form-control" name="train_train[]" id="train_train" required="required">
                   <option value="">Select train name</option>
                   <?php
-                    foreach($train_data as $train_info) 
-                    { 
-                  ?>
+foreach ($train_data as $train_info) {
+    ?>
                     <option value="<?php echo $train_info['id']; ?>"><?php echo $train_info['railway_name']; ?></option>
-                  <?php } ?>
+                  <?php }?>
                 </select>
               </div>
 
@@ -5536,42 +5522,40 @@ $('#add_day_wise_cost_creation').validate({
     }
 
     $('#off_can').append(structure1);
-    $('#tour_itinerary tbody').append(structure); 
+    $('#tour_itinerary tbody').append(structure);
     $('#tour_itinerary').append(`</tbody>
                     </table>
                       <br>`);
-                      
+
     $(".summernote").summernote();
 
     // $('#'+dayid).summernote();
-             
+
 
 }
 
 
 
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
 //   $(document).ready(function(){
 //     $('#submit_str').on('click', function (e) {
-//         var form_data = new FormData(this); 
-//         console.log(JSON.stringify(form_data));
+//         var form_data = new FormData(this);
 //         //alert(JSON.stringify(formdata));
 //     });
 
- 
+
     $('#tour_number').on('change', function () {
       var did = $(this).val();
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/day_wise_tour_itinerary/getTourdays_it', 
+        url:'<?=base_url()?>admin/day_wise_tour_itinerary/getTourdays_it',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
            // var p = response['mobile_number1'];
             $('#tour_days').val(response['tour_number_of_days']);
             getTourDays_it(response['tour_number_of_days']);
@@ -5585,7 +5569,7 @@ $('#add_day_wise_cost_creation').validate({
  <script>
       $(document).ready(function(){
     $('#submit_str').on('click', function () {
-        
+
         var tour_number = $('#tour_number').val();
         var tour_name = $('#tour_name').val();
         var tour_days = $('#tour_days').val();
@@ -5662,10 +5646,10 @@ $('#add_day_wise_cost_creation').validate({
 
                               }
                           },
-                          
+
                       });
 
-    });    
+    });
 
 });
 
@@ -5673,9 +5657,9 @@ $('#add_day_wise_cost_creation').validate({
  </script>
 
 <script>
-//passbook_img doc    
+//passbook_img doc
 var count = $('#seat_count_add').val();
-//for(var i=1; i<count; i++){    
+//for(var i=1; i<count; i++){
     function encodeImgtoBase64traveller_img(element) {
         var img_id =$(element).attr('attr_id');
         var document_file_traveller_img='document_file_traveller_img'+img_id;
@@ -5689,27 +5673,25 @@ var count = $('#seat_count_add').val();
             var fileInputtraveller_img = document.getElementById(image_name);
             var filePathtraveller_img = fileInputtraveller_img.value;
             var allowedExtensionstraveller_img = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
-               if (!allowedExtensionstraveller_img.exec(filePathtraveller_img)) 
+               if (!allowedExtensionstraveller_img.exec(filePathtraveller_img))
                {
                     fileChecktraveller_img = fileInputtraveller_img.files[0];
                     if(fileChecktraveller_img)
                     {
-                        console.log('eeeeeeeeerrrrrrrrrrrrr');
                         fileInputtraveller_img.value = '';
-                        return false; 
+                        return false;
                     }
-                } 
-                    else 
-                    { 
+                }
+                    else
+                    {
                         var file = fileInputtraveller_img.files[0];
                         if (file.size > 2000005)
-                        { 
-                            console.log('sssiiizzeeeee');
+                        {
                             fileInputtraveller_img.value = '';
                             $('#imagePreview_traveller_img').empty();
                             return false;
-                        } 
-                        //Image preview                   
+                        }
+                        //Image preview
                         if (fileInputtraveller_img.files && fileInputtraveller_img.files[0]) {
                             var reader = new FileReader();
                             reader.onload = function(e) {
@@ -5738,7 +5720,7 @@ var count = $('#seat_count_add').val();
 <script>
 $(document).ready(function () {
 
-$('#add_itinerary').validate({ 
+$('#add_itinerary').validate({
     errorPlacement: function($error, $element) {
     $error.appendTo($element.closest("div"));
   },
@@ -5752,8 +5734,8 @@ $('#add_itinerary').validate({
         tour_days: {
             required: true,
         },
-        
-        
+
+
     },
 
     messages :{
@@ -5766,8 +5748,8 @@ $('#add_itinerary').validate({
         tour_days : {
             required : "Please select tour days",
         },
-        
-    
+
+
     }
 });
 
@@ -5783,26 +5765,25 @@ $('#add_itinerary').validate({
 <!-- airport master  -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#country_name').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/airport_master/getstate', 
+        url:'<?=base_url()?>admin/airport_master/getstate',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#state_name').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#state_name').append('<option value="'+data['id']+'">'+data['state_name']+'</option>');
           });
         }
@@ -5813,26 +5794,25 @@ $('#add_itinerary').validate({
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#state_name').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/airport_master/getplace', 
+        url:'<?=base_url()?>admin/airport_master/getplace',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#place_name').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#place_name').append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
           });
         }
@@ -5845,26 +5825,25 @@ $('#add_itinerary').validate({
  <!-- railway master  -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#country_name').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/railway_master/getstate', 
+        url:'<?=base_url()?>admin/railway_master/getstate',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#state_name').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#state_name').append('<option value="'+data['id']+'">'+data['state_name']+'</option>');
           });
         }
@@ -5875,26 +5854,25 @@ $('#add_itinerary').validate({
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#state_name').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/railway_master/getplace', 
+        url:'<?=base_url()?>admin/railway_master/getplace',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#place_name').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#place_name').append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
           });
         }
@@ -5919,7 +5897,7 @@ $('#add_itinerary').validate({ // initialize the plugin
         tour_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -5929,7 +5907,7 @@ $('#add_itinerary').validate({ // initialize the plugin
         tour_name : {
             required : "Please enter tour name",
         },
-    
+
     }
 });
 
@@ -6058,11 +6036,11 @@ $('#edit_zone_master').validate({ // initialize the plugin
 </script>
 <!-- End for stationary  series if yes show 2 textbox financial year from & to -->
 
-<script>  
+<script>
 
- $(document).ready(function(){ 
+ $(document).ready(function(){
   // var i = '0';
-   
+
     //var newFields = $('');
 
     $("#pages_per_book").keyup(function(e){
@@ -6086,12 +6064,12 @@ $('#edit_zone_master').validate({ // initialize the plugin
         }
     });
  });
- </script>   
- 
+ </script>
+
  <script>
       $(document).ready(function(){
     // $('#submit_str').on('click', function () {
-        $('#from_series').keyup(function(){ 
+        $('#from_series').keyup(function(){
         var from_series = $('#from_series').val();
         var stationary_id = $('#stationary_id').val();
 
@@ -6104,7 +6082,6 @@ $('#edit_zone_master').validate({ // initialize the plugin
                           dataType: 'json',
                           cache: false,
                           success: function(response) {
-                            console.log(response);
                               if (response=="123") {
                                 // alert('You have already used this series');
                                 $('#submit_slider').prop('disabled', true);
@@ -6113,10 +6090,10 @@ $('#edit_zone_master').validate({ // initialize the plugin
                                 // alert('okkk');
                             }
                           },
-                          
+
                       });
 
-    });    
+    });
 
 });
 
@@ -6151,7 +6128,7 @@ $('.accordian-body').on('show.bs.collapse', function () {
 <!-- ADD More instraction vivek -->
 
 <script>
-    
+
 
         var i=1;
     $('#add_more_instraction').click(function() {
@@ -6178,7 +6155,7 @@ $('.accordian-body').on('show.bs.collapse', function () {
                                 </select>
                             </div>
                         </div>
-                        
+
 
 
                         <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
@@ -6186,16 +6163,16 @@ $('.accordian-body').on('show.bs.collapse', function () {
                             <label></label>
                                 <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
                             </div>
-                        </div>  
+                        </div>
                     </div>`);
-$('#main_row').append(structure); 
+$('#main_row').append(structure);
 
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
+$(document).on('click', '.btn_remove', function(){
+           var button_id = $(this).attr("id");
+           $('#new_row'+button_id+'').remove();
       });
 
 </script>
@@ -6203,7 +6180,7 @@ $(document).on('click', '.btn_remove', function(){
 <!-- ===      === -->
 
 <script>
-    
+
 
     var i=1;
     $('#add_more_instraction_for_cust').click(function() {
@@ -6230,7 +6207,7 @@ $(document).on('click', '.btn_remove', function(){
                                 </select>
                             </div>
                         </div>
-                        
+
 
 
                         <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
@@ -6238,16 +6215,16 @@ $(document).on('click', '.btn_remove', function(){
                             <label></label>
                                 <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
                             </div>
-                        </div> 
+                        </div>
                     </div>`);
-$('#main_row_cust').append(structure); 
+$('#main_row_cust').append(structure);
 
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
+$(document).on('click', '.btn_remove', function(){
+           var button_id = $(this).attr("id");
+           $('#new_row'+button_id+'').remove();
       });
 
 </script>
@@ -6255,8 +6232,8 @@ $(document).on('click', '.btn_remove', function(){
 <!--  -->
 
 <script>
-  $(".delete_instruction").click(function() { 
-   
+  $(".delete_instruction").click(function() {
+
      var delete_instruction_id =  $(this).attr('value');
 // alert(delete_instruction_id);
 
@@ -6270,7 +6247,6 @@ $(document).on('click', '.btn_remove', function(){
                          //  dataType: 'json',
                          //  cache: false,
                           success: function(response) {
-                              console.log(response);
                                if (response= true) {
                                 // window.location.href = "<//?=base_url()?>admin/instruction_list/index";
                                   alert('Delete Sucessfully');
@@ -6279,19 +6255,19 @@ $(document).on('click', '.btn_remove', function(){
 
                               }
                           },
-                          
+
                       });
      }
      // else{
      //      $('.sendButton').attr("disabled", true);
      // }
-}); 
+});
 
 </script>
 
 <script>
-  $(".delete_instruction_cust").click(function() { 
-   
+  $(".delete_instruction_cust").click(function() {
+
      var delete_instruction_cust_id =  $(this).attr('value');
 // alert(delete_instruction_cust_id);
 
@@ -6305,7 +6281,6 @@ $(document).on('click', '.btn_remove', function(){
                          //  dataType: 'json',
                          //  cache: false,
                           success: function(response) {
-                              console.log(response);
                                if (response= true) {
                                 // window.location.href = "<//?=base_url()?>admin/instruction_list/edit/";
                                   alert('Delete Sucessfully');
@@ -6314,13 +6289,13 @@ $(document).on('click', '.btn_remove', function(){
 
                               }
                           },
-                          
+
                       });
      }
      // else{
      //      $('.sendButton').attr("disabled", true);
      // }
-}); 
+});
 
 </script>
 
@@ -6338,14 +6313,14 @@ $('#add_expense_type').validate({ // initialize the plugin
         expense_type: {
             required: true,
         },
-        
+
     },
 
     messages :{
         expense_type : {
             required : "Please enter Expense Type",
         },
-    
+
     }
 });
 
@@ -6365,14 +6340,14 @@ $('#edit_expense_type').validate({ // initialize the plugin
         expense_type: {
             required: true,
         },
-        
+
     },
 
     messages :{
         expense_type : {
             required : "Please enter Expense Type",
         },
-    
+
     }
 });
 
@@ -6383,7 +6358,7 @@ $('#edit_expense_type').validate({ // initialize the plugin
 
 <!-- add more for expense category add -->
 <script>
-    
+
 
         var i=1;
     $('#add_more_category').click(function() {
@@ -6395,9 +6370,9 @@ $('#edit_expense_type').validate({ // initialize the plugin
                        <label>Expense Type</label>
                         <select class="select_css" name="expense_type[]" id="expense_type`+i+`" required="required">
                         <option value="">Select Expense Type</option>
-                        <?php foreach($arr_data as $info){ ?> 
-                            <option value="<?php echo $info['id'];?>"><?php echo $info['expense_type_name'];?></option>
-                        <?php } ?>
+                        <?php foreach ($arr_data as $info) {?>
+                            <option value="<?php echo $info['id']; ?>"><?php echo $info['expense_type_name']; ?></option>
+                        <?php }?>
                         </select>
                     </div>
                 </div>
@@ -6409,7 +6384,7 @@ $('#edit_expense_type').validate({ // initialize the plugin
                     <input type="hidden" readonly class="form-control" name="expense_type_id[]" id="expense_type_id" placeholder="Enter tour number" value="<?php echo $info['id'] ?>" required="required">
                     </div>
                 </div>
-                        
+
 
 
                         <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
@@ -6419,14 +6394,14 @@ $('#edit_expense_type').validate({ // initialize the plugin
                             </div>
                         </div>
                     </div>`);
-$('#main_row').append(structure); 
+$('#main_row').append(structure);
 
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
+$(document).on('click', '.btn_remove', function(){
+           var button_id = $(this).attr("id");
+           $('#new_row'+button_id+'').remove();
       });
 
 </script>
@@ -6447,7 +6422,7 @@ $('#add_expense_category').validate({ // initialize the plugin
         "expense_category[]": {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -6457,7 +6432,7 @@ $('#add_expense_category').validate({ // initialize the plugin
         "expense_category[]" : {
             required : "Please enter Expense Category",
         }
-    
+
     }
 });
 
@@ -6481,7 +6456,7 @@ $('#edit_expense_category').validate({ // initialize the plugin
         "expense_category[]": {
             required: true,
         }
-        
+
     },
 
     messages :{
@@ -6491,7 +6466,7 @@ $('#edit_expense_category').validate({ // initialize the plugin
         "expense_category[]" : {
             required : "Please enter Expense Category",
         }
-    
+
     }
 });
 
@@ -6520,7 +6495,7 @@ $('#add_instraction').validate({ // initialize the plugin
         "priority[]": {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -6536,8 +6511,8 @@ $('#add_instraction').validate({ // initialize the plugin
         "priority[]" : {
             required : "Please Select Priority",
         },
-        
-    
+
+
     }
 });
 
@@ -6559,7 +6534,7 @@ $('#add_role').validate({ // initialize the plugin
         for_booking_yes_no: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -6569,7 +6544,7 @@ $('#add_role').validate({ // initialize the plugin
         for_booking_yes_no : {
             required : "Please select yes or no",
         },
-    
+
     }
 });
 
@@ -6591,7 +6566,7 @@ $('#edit_role').validate({ // initialize the plugin
         for_booking_yes_no: {
             required: true,
         },
-        
+
     },
 
     messages :{
@@ -6601,7 +6576,7 @@ $('#edit_role').validate({ // initialize the plugin
         for_booking_yes_no : {
             required : "Please select yes or no",
         },
-    
+
     }
 });
 
@@ -6626,7 +6601,7 @@ $('#add_hotel').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -6652,10 +6627,10 @@ $('#add_hotel').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 5
 
-        }  
+        }
     },
 
     messages :{
@@ -6705,14 +6680,14 @@ $('#add_hotel').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#country_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/city_master/get_state',
@@ -6720,14 +6695,13 @@ $('#add_hotel').validate({ // initialize the plugin
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#state_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#state_id').append('<option value="'+data['id']+'">'+data['state_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -6737,14 +6711,14 @@ $('#add_hotel').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#country_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/district/get_state',
@@ -6752,14 +6726,13 @@ $('#add_hotel').validate({ // initialize the plugin
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#state_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#state_id').append('<option value="'+data['id']+'">'+data['state_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -6768,14 +6741,14 @@ $('#add_hotel').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#country_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/taluka/get_state',
@@ -6783,14 +6756,13 @@ $('#add_hotel').validate({ // initialize the plugin
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#state_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#state_id').append('<option value="'+data['id']+'">'+data['state_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -6799,14 +6771,14 @@ $('#add_hotel').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#state_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/taluka/get_district',
@@ -6814,14 +6786,13 @@ $('#add_hotel').validate({ // initialize the plugin
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#district_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#district_id').append('<option value="'+data['id']+'">'+data['district']+'</option>');
           });
-         
+
         }
      });
    });
@@ -6834,14 +6805,14 @@ $('#add_hotel').validate({ // initialize the plugin
 <!-- tour expenses tour no wise date display dependency start -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#tour_number').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/tour_expenses/get_date',
@@ -6849,14 +6820,13 @@ $('#add_hotel').validate({ // initialize the plugin
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#tour_date').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
           });
-         
+
         }
      });
    });
@@ -6865,11 +6835,11 @@ $('#add_hotel').validate({ // initialize the plugin
 <!------ tour expenses tour no wise date display dependency start ---->
 
 <!-- tour expenses ajax  -->
-<script>  
+<script>
  $(document).ready(function(){
-  $("#expenses_submit").click(function() {  
+  $("#expenses_submit").click(function() {
 //   alert('hiiiiiiiiiiii');
-    // var agent_id = '1'; 
+    // var agent_id = '1';
 
         //   var attr_cancel_val =$(this).attr('attr_cancle_btn');
         var super_id = $('#tour_number').val();
@@ -6878,25 +6848,23 @@ $('#add_hotel').validate({ // initialize the plugin
         //    alert(super_id);
         //    alert(date_super_id);
 
-           
-           if(super_id != '' && date_super_id != '')  
-           {  
+
+           if(super_id != '' && date_super_id != '')
+           {
             // alert('hiiiiiiiiiiii');
-                $.ajax({  
-                     url:"<?php echo base_url(); ?>admin/tour_expenses/tour_expenses_data",  
-                     method:"POST",  
-                     data:{super_id:super_id , date_super_id:date_super_id},  
+                $.ajax({
+                     url:"<?php echo base_url(); ?>admin/tour_expenses/tour_expenses_data",
+                     method:"POST",
+                     data:{super_id:super_id , date_super_id:date_super_id},
                      dataType: 'json',
-                     success:function(response){ 
+                     success:function(response){
                         // alert('hiiiiiiiii');
-                        //   console.log(response); 
-                     
+
                         //   $('#tour_date').find('option').not(':first').remove();
                         var expenses_id = 0;
                         var img_count=parseInt(i)+1;
-                        $.each(response,function(index,data){  
+                        $.each(response,function(index,data){
                             expenses_id++;
-                            console.log(data);
                             // $('#tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
                             $('#tid').append(`<tr><td>`+ expenses_id +`</td>
                             <td>`+ data['expense_type_name'] +`</td>
@@ -6922,17 +6890,17 @@ $('#add_hotel').validate({ // initialize the plugin
                                         <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php echo base_url(); ?>uploads/tour_expenses/`+data['image_name_2']+`">Download</a>
                                     </div>
                             </td>
-                                        
+
                             <td>`+ data['tour_expenses_remark'] +`</td>
                                     </tr>`);
                         });
-                        
-                     } 
 
-                });  
-           } 
-          }); 
-      });  
+                     }
+
+                });
+           }
+          });
+      });
  </script>
 <!-- tour expenses ajax  -->
 
@@ -6942,16 +6910,16 @@ $('#add_hotel').validate({ // initialize the plugin
     $(document).ready(function(){
         // $('#traveller_table .remove_row').remove();
         var count = $('#inter_seat_count_add').val();
-    
+
     //alert('kkkkkk');
     //$('#add_more').click(function() {
     //alert(count);
             //i++;
             for(var i=1; i<count; i++){
                 var img_count=parseInt(i)+1;
-            
+
                 // alert(i);
-        var structure = 
+        var structure =
                     (`<tr>
                                     <td><select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs">
                                         <option value="">select Mr / Mrs</option>
@@ -6960,26 +6928,25 @@ $('#add_hotel').validate({ // initialize the plugin
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control row_set" name="last_name[]" id="last_name">
-                                    </td>
-                                    <td>
                                         <input type="text" class="form-control row_set" name="first_name[]" id="first_name">
                                     </td>
                                     <td>
                                         <input type="text" class="form-contro row_set" name="middle_name[]" id="middle_name">
                                     </td>
-                                    
                                     <td>
-                                        <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date("Y-m-d");?>">
+                                        <input type="text" class="form-control row_set" name="last_name[]" id="last_name">
+                                    </td>
+                                    <td>
+                                        <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date("Y-m-d"); ?>">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control row_set" name="age[]" id="age" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                     </td>
                                     <td>
-                                        <input type="date" class="form-control row_set" name="anniversary_date[]" id="anniversary_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['anniversary_date'];} ?>">
+                                        <input type="date" class="form-control row_set" name="anniversary_date[]" id="anniversary_date" max="<?php echo date("Y-m-d"); ?>" value="<?php if (!empty($all_traveller_info_value)) {echo $all_traveller_info_value['anniversary_date'];}?>">
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control row_set" maxlength="10" minlength="10" name="mobile_number[]" id="mobile_number" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['mobile_number'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input type="text" class="form-control row_set" maxlength="10" minlength="10" name="mobile_number[]" id="mobile_number" value="<?php if (!empty($all_traveller_info_value)) {echo $all_traveller_info_value['mobile_number'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control row_set" name="last_name[]" id="last_name">
@@ -6988,10 +6955,10 @@ $('#add_hotel').validate({ // initialize the plugin
                                     <select class="select_css row_set" name="relation[]" id="relation">
                                         <option value="">Select</option>
                                         <?php
-                                        foreach($relation_data as $relation_data_info){ 
-                                        ?>
+foreach ($relation_data as $relation_data_info) {
+    ?>
                                         <option value="<?php echo $relation_data_info['id']; ?>"><?php echo $relation_data_info['relation']; ?></option>
-                                        <?php } ?>
+                                        <?php }?>
                                     </select>
                                     </td>
                                     <td>
@@ -7005,7 +6972,7 @@ $('#add_hotel').validate({ // initialize the plugin
                                     </td>
                                     <td>
                                         <input type="file" name="aadhar_image_name[]" id="aadhar_image_name`+img_count+`" onchange="encodeImgtoBase64aadhar_img(this)" attr_id="`+img_count+`">
-    
+
                                         <input type="hidden" id="document_file_aadhar_img`+img_count+`" name="document_file_aadhar_img[]"
                                             value="">
                                             <div id="imagePreview_aadhar_img`+img_count+`" class="mt-2 img_size_cast">
@@ -7017,41 +6984,40 @@ $('#add_hotel').validate({ // initialize the plugin
                                     </td>
 
                                 </tr>`);
-        
-         
-            //alert(i);                       
-            $('#inter_traveller_table_add').append(structure); 
+
+
+            //alert(i);
+            $('#inter_traveller_table_add').append(structure);
         }
-       
+
     });
 
 </script>
- 
+
 
 <!--  -->
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     $('#state').on('change', function () {
       var did = $(this).val();
     //   alert('ppppppppppppppppppppppppppp');
-     
+
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>admin/hotel/getcity', 
+        url:'<?=base_url()?>admin/hotel/getcity',
         method: 'post',
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#city').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){             
+
+          $.each(response,function(index,data){
              $('#city').append('<option value="'+data['id']+'">'+data['district']+'</option>');
           });
         }
@@ -7101,14 +7067,14 @@ $('#add_vehicle_owner').validate({ // initialize the plugin
         password: {
             required: true,
             pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/,
-            
+
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 6
         }
-        
+
     },
 
     messages :{
@@ -7155,7 +7121,7 @@ $('#add_vehicle_owner').validate({ // initialize the plugin
             required : "Please Enter Confirm Password",
             equalTo: "Password Doesn't Match",
         }
-    
+
     }
 });
 
@@ -7198,10 +7164,10 @@ $('#edit_vehicle_owner').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             minlength: 6
         }
-        
+
     },
 
     messages :{
@@ -7250,11 +7216,11 @@ $('#edit_vehicle_owner').validate({ // initialize the plugin
 
 
 
-<script>  
+<script>
 
-$(document).ready(function(){ 
+$(document).ready(function(){
  // var i = '0';
-  
+
    var newFields = $('');
 
    $("#total_days_hotel").keyup(function(e){
@@ -7265,13 +7231,13 @@ $(document).ready(function(){
        if (n+1) {
            if (n > newFields.length) {
                addFields(n);
-               
+
            } else {
                removeFields(n);
            }
        }
    });
-   
+
    function addFields(n) {
        for (i = newFields.length; i < n; i++) {
             var day=i+1;
@@ -7283,11 +7249,10 @@ $(document).ready(function(){
                                 <select class="form-control state_id" style="width: 100%;" attr-type="state" name="state_id[]" required="required">
                                     <option value="">Select State Name</option>
                                     <?php
-                                    foreach($state_name_data as $state_name_info) 
-                                    {  
-                                    ?>
+foreach ($state_name_data as $state_name_info) {
+    ?>
                                     <option value="<?php echo $state_name_info['id']; ?>"><?php echo $state_name_info['state_name']; ?></option>
-                                <?php } ?>
+                                <?php }?>
                                 </select>
                             </td>
 
@@ -7295,9 +7260,9 @@ $(document).ready(function(){
                                 <select class="form-control city_id" style="width: 100%;" attr-type="city" name="city_id[]" required="required">
                                     <option value="">Select City Name</option>
                                     <?php
-                                    //foreach($state_name_data as $state_name_info) 
-                                    //{  
-                                    ?>
+//foreach($state_name_data as $state_name_info)
+//{
+?>
                                     <option value="<?php //echo $state_name_info['id']; ?>"><?php //echo $state_name_info['state_name']; ?></option>
                                 <?php //} ?>
                                 </select>
@@ -7306,9 +7271,9 @@ $(document).ready(function(){
                                 <select class="form-control hotel_name_id" style="width: 100%;" name="hotel_name_id[]" required="required">
                                     <option value="">Select Hotel Name</option>
                                     <?php
-                                    //foreach($state_name_data as $state_name_info) 
-                                    //{  
-                                    ?>
+//foreach($state_name_data as $state_name_info)
+//{
+?>
                                     <option value="<?php //echo $state_name_info['id']; ?>"><?php //echo $state_name_info['state_name']; ?></option>
                                 <?php //} ?>
                               </select>
@@ -7316,31 +7281,31 @@ $(document).ready(function(){
                             <td>
                                 <textarea class="form-control short_description" name="short_description[]" placeholder="Enter Short Description" required="required"></textarea>
                             </td>
-                      
+
                             <td>
                                 <input type="checkbox" class="form-control in_travel" name="in_travel[]" id="in_travel" value="Travel">&nbsp;&nbsp; Travel
                                 <input type="hidden" class="form-control travel_yes" name="travel_yes[]" value="">
                             </td>
                       </tr>`);
            var newInput = input.clone();
-           
+
            newFields = newFields.add(newInput);
            newInput.appendTo('#main_row_hotel');
         }
    }
-   
+
    function removeFields(n) {
        var removeField = newFields.slice(n).remove();
        newFields = newFields.not(removeField);
    }
-   
+
        //  for (i = 0; i <= n; i++) {
        //     var newInput = input.clone();
-           
+
        //     newFields = newFields.add(newInput);
        //     newInput.appendTo('#newFields');
        // }
-       
+
    });
 
 // });
@@ -7356,17 +7321,17 @@ $(document).ready(function(){
 <!-- package -> hotel add  state wise city display dependency start -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
     // alert('hiiiiii');
- 
+
     // district change
     $(document).on("change","select",function(){
         // alert('hiiiiii');
-     
+
       var attr_val = $(this).attr('attr-type');
-      var currentRow=$(this).closest("tr"); 
+      var currentRow=$(this).closest("tr");
         // alert(attr_val);
 
       if(attr_val == 'state'){
@@ -7378,17 +7343,16 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
         //   $('.city_id').find('option').not(':first').remove();
           currentRow.find(".city_id").find('option').not(':first').remove();
-       
-            var col3=currentRow.text(); 
 
-          $.each(response,function(index,data){       
+            var col3=currentRow.text();
+
+          $.each(response,function(index,data){
             currentRow.find(".city_id").append('<option value="'+data['id']+'">'+data['city_name']+'</option>');
           });
-         
+
         }
      });
     }
@@ -7403,15 +7367,14 @@ $(document).ready(function(){
                 data: {did: did},
                 dataType: 'json',
                 success: function(response){
-                console.log(response);
-                
+
                 // $('.hotel_name_id').find('option').not(':first').remove();
                 currentRow.find(".hotel_name_id").find('option').not(':first').remove();
-            
-                $.each(response,function(index,data){       
+
+                $.each(response,function(index,data){
                     currentRow.find(".hotel_name_id").append('<option value="'+data['id']+'">'+data['hotel_name']+'</option>');
                 });
-                
+
                 }
             });
         }
@@ -7424,17 +7387,17 @@ $(document).ready(function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
     // alert('hiiiiii');
- 
+
     // district change
     $(document).on("change","select",function(){
         // alert('hiiiiii');
-     
+
       var attr_val = $(this).attr('attr-type');
-      var currentRow=$(this).closest("tr"); 
+      var currentRow=$(this).closest("tr");
         // alert(attr_val);
 
       if(attr_val == 'state'){
@@ -7446,17 +7409,16 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
         //   $('.city_id').find('option').not(':first').remove();
           currentRow.find(".city_id").find('option').not(':first').remove();
-       
-            var col3=currentRow.text(); 
 
-          $.each(response,function(index,data){       
+            var col3=currentRow.text();
+
+          $.each(response,function(index,data){
             currentRow.find(".city_id").append('<option value="'+data['id']+'">'+data['city_name']+'</option>');
           });
-         
+
         }
      });
     }
@@ -7471,15 +7433,14 @@ $(document).ready(function(){
                 data: {did: did},
                 dataType: 'json',
                 success: function(response){
-                console.log(response);
-                
+
                 // $('.hotel_name_id').find('option').not(':first').remove();
                 currentRow.find(".hotel_name_id").find('option').not(':first').remove();
-            
-                $.each(response,function(index,data){       
+
+                $.each(response,function(index,data){
                     currentRow.find(".hotel_name_id").append('<option value="'+data['id']+'">'+data['hotel_name']+'</option>');
                 });
-                
+
                 }
             });
         }
@@ -7498,18 +7459,18 @@ $(document).ready(function(){
 //   alert(chx) ;
   if(chx == true){
 // alert(chx);
-  var currentRow=$(this).closest("tr"); 
-  currentRow.find('.city_id').attr('readOnly',true); 
-  currentRow.find('.state_id').attr('readOnly',true); 
-  currentRow.find('.hotel_name_id').attr('readOnly',true); 
+  var currentRow=$(this).closest("tr");
+  currentRow.find('.city_id').attr('readOnly',true);
+  currentRow.find('.state_id').attr('readOnly',true);
+  currentRow.find('.hotel_name_id').attr('readOnly',true);
   currentRow.find('.short_description').attr('readOnly',true);
   }
   else if(chx == false){
-  var currentRow=$(this).closest("tr"); 
-  currentRow.find('.city_id').attr('readOnly',false); 
-  currentRow.find('.state_id').attr('readOnly',false); 
-  currentRow.find('.hotel_name_id').attr('readOnly',false); 
-  currentRow.find('.short_description').attr('readOnly',false); 
+  var currentRow=$(this).closest("tr");
+  currentRow.find('.city_id').attr('readOnly',false);
+  currentRow.find('.state_id').attr('readOnly',false);
+  currentRow.find('.hotel_name_id').attr('readOnly',false);
+  currentRow.find('.short_description').attr('readOnly',false);
   }
 //   $(this).closest('tr').find('input:text, select,textarea').prop("readOnly", chx);
 });
@@ -7519,7 +7480,7 @@ $(document).ready(function(){
 <!-- admin-> package_hotel-> add -> check box select ->then input box fetch value -->
 <script language=javascript>
 $(document).on("click",'.in_travel',function(){
-    var currentRow=$(this).closest("tr"); 
+    var currentRow=$(this).closest("tr");
     var hotel_check = $(this).is(':checked');
     if (hotel_check == true){
         currentRow.find(".travel_yes").val('Travel');
@@ -7536,14 +7497,14 @@ $(document).on("click",'.in_travel',function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#state_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/package_hotel/get_city',
@@ -7551,14 +7512,13 @@ $(document).on("click",'.in_travel',function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#city_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#city_id').append('<option value="'+data['id']+'">'+data['city_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7567,14 +7527,14 @@ $(document).on("click",'.in_travel',function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#state_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/tour_creation_hotel/get_city',
@@ -7582,14 +7542,13 @@ $(document).on("click",'.in_travel',function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#city_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#city_id').append('<option value="'+data['id']+'">'+data['city_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7598,14 +7557,14 @@ $(document).on("click",'.in_travel',function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#city_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/package_hotel/get_hotel_name',
@@ -7613,14 +7572,13 @@ $(document).on("click",'.in_travel',function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#hotel_name_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#hotel_name_id').append('<option value="'+data['id']+'">'+data['hotel_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7629,14 +7587,14 @@ $(document).on("click",'.in_travel',function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#city_id').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/tour_creation_hotel/get_hotel_name',
@@ -7644,14 +7602,13 @@ $(document).on("click",'.in_travel',function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#hotel_name_id').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#hotel_name_id').append('<option value="'+data['id']+'">'+data['hotel_name']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7660,24 +7617,24 @@ $(document).on("click",'.in_travel',function(){
 
 <script>
 $(document).ready(function(){
-   
+
         // alert('hiiii');
   var chx = $(this).is(':checked');
 //   alert(chx) ;
   if(chx == true){
 // alert(chx);
-  var currentRow=$(this).closest("tr"); 
-  currentRow.find('.city_id').attr('readOnly',true); 
-  currentRow.find('.state_id').attr('readOnly',true); 
-  currentRow.find('.hotel_name_id').attr('readOnly',true); 
+  var currentRow=$(this).closest("tr");
+  currentRow.find('.city_id').attr('readOnly',true);
+  currentRow.find('.state_id').attr('readOnly',true);
+  currentRow.find('.hotel_name_id').attr('readOnly',true);
   currentRow.find('.short_description').attr('readOnly',true);
   }
   else if(chx == false){
-  var currentRow=$(this).closest("tr"); 
-  currentRow.find('.city_id').attr('readOnly',false); 
-  currentRow.find('.state_id').attr('readOnly',false); 
-  currentRow.find('.hotel_name_id').attr('readOnly',false); 
-  currentRow.find('.short_description').attr('readOnly',false); 
+  var currentRow=$(this).closest("tr");
+  currentRow.find('.city_id').attr('readOnly',false);
+  currentRow.find('.state_id').attr('readOnly',false);
+  currentRow.find('.hotel_name_id').attr('readOnly',false);
+  currentRow.find('.short_description').attr('readOnly',false);
   }
 //   $(this).closest('tr').find('input:text, select,textarea').prop("readOnly", chx);
 });
@@ -7687,14 +7644,14 @@ $(document).ready(function(){
 <!-- Agent add info (state,district,taluka) start -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#agent_state').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/agent/get_district',
@@ -7702,14 +7659,13 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#agent_district').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#agent_district').append('<option value="'+data['id']+'">'+data['district']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7718,14 +7674,14 @@ $(document).ready(function(){
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#agent_district').change(function(){
       var did = $(this).val();
-    //   alert(did); 
+    //   alert(did);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/agent/get_taluka',
@@ -7733,14 +7689,13 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
-        
+
           $('#agent_taluka').find('option').not(':first').remove();
-       
-          $.each(response,function(index,data){       
+
+          $.each(response,function(index,data){
              $('#agent_taluka').append('<option value="'+data['id']+'">'+data['taluka']+'</option>');
           });
-         
+
         }
      });
    });
@@ -7763,14 +7718,14 @@ $('#add_vehicle_type').validate({ // initialize the plugin
         vehicle_type_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_type_name : {
             required : "Please Enter Vehicle Type Name",
         },
-    
+
     }
 });
 
@@ -7790,14 +7745,14 @@ $('#edit_vehicle_type').validate({ // initialize the plugin
         vehicle_type_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_type_name : {
             required : "Please Enter Vehicle Type Name",
         },
-    
+
     }
 });
 
@@ -7818,14 +7773,14 @@ $('#add_vehicle_fuel').validate({ // initialize the plugin
         vehicle_fuel_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_fuel_name : {
             required : "Please Enter Vehicle Fuel Name",
         },
-    
+
     }
 });
 
@@ -7845,14 +7800,14 @@ $('#edit_vehicle_fuel').validate({ // initialize the plugin
         vehicle_fuel_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_fuel_name : {
             required : "Please Enter Vehicle Fuel Name",
         },
-    
+
     }
 });
 
@@ -7873,14 +7828,14 @@ $('#add_vehicle_brand').validate({ // initialize the plugin
         vehicle_brand_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_brand_name : {
             required : "Please Enter Vehicle Brand Name",
         },
-    
+
     }
 });
 
@@ -7900,14 +7855,14 @@ $('#edit_vehicle_brand').validate({ // initialize the plugin
         vehicle_brand_name: {
             required: true,
         },
-        
+
     },
 
     messages :{
         vehicle_brand_name : {
             required : "Please Enter Vehicle Brand Name",
         },
-    
+
     }
 });
 
@@ -8023,15 +7978,15 @@ $('#document_checker').validate({ // initialize the plugin
 <!-- add dates in that select slot  -->
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#year_slot').change(function(){
       var did = $(this).val();
       var pid = $('#package_id').val();
-    //   alert(pid); 
+    //   alert(pid);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/package_dates/get_slot',
@@ -8039,18 +7994,16 @@ $('#document_checker').validate({ // initialize the plugin
         data: {did: did,pid: pid},
         dataType: 'json',
         success: function(response){
-        // console.log(response);
-        // alert(response);
-        
+
           $('#single_seat_cost').find('input').not(':first').remove();
-          
-          $.each(response,function(index,data){       
-            // alert(data['single_seat_cost']); 
+
+          $.each(response,function(index,data){
+            // alert(data['single_seat_cost']);
             $('#single_seat_cost').val(data['single_seat_cost']);
             $('#twin_seat_cost').val(data['twin_seat_cost']);
             $('#three_four_sharing_cost').val(data['three_four_sharing_cost']);
         });
-         
+
         }
      });
    });
@@ -8059,15 +8012,15 @@ $('#document_checker').validate({ // initialize the plugin
 
 <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
- 
+  var baseURL= "<?php echo base_url(); ?>";
+
   $(document).ready(function(){
- 
+
     // district change
     $('#year_slot').change(function(){
       var did = $(this).val();
       var pid = $('#package_id').val();
-    //   alert(pid); 
+    //   alert(pid);
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>admin/tour_creation_dates/get_slot',
@@ -8075,18 +8028,16 @@ $('#document_checker').validate({ // initialize the plugin
         data: {did: did,pid: pid},
         dataType: 'json',
         success: function(response){
-        // console.log(response);
-        // alert(response);
-        
+
           $('#single_seat_cost').find('input').not(':first').remove();
-          
-          $.each(response,function(index,data){       
-            // alert(data['single_seat_cost']); 
+
+          $.each(response,function(index,data){
+            // alert(data['single_seat_cost']);
             $('#single_seat_cost').val(data['single_seat_cost']);
             $('#twin_seat_cost').val(data['twin_seat_cost']);
             $('#three_four_sharing_cost').val(data['three_four_sharing_cost']);
         });
-         
+
         }
      });
    });
@@ -8133,7 +8084,6 @@ $("#approve_service").click(function() {
         });
         // alert(is_approve);
     // var is_approve = approve.join(",");
-    // console.log(is_approve);
 
     var service_cost = [];
 
@@ -8144,14 +8094,14 @@ $("#approve_service").click(function() {
     // alert(service_cost);
 
     var id=[];
-    $('input[name="id[]"]').each(function() {          
+    $('input[name="id[]"]').each(function() {
         id.push($(this).val()); //result undefine
     });
 
     if (is_approve!='' && service_cost>'0') {
         // alert('hiii');
         $.ajax({
-            url:"<?php echo base_url();?>admin/final_booking_details/approve_extra_services",
+            url:"<?php echo base_url(); ?>admin/final_booking_details/approve_extra_services",
             method:"POST",
             data:{
                 enquiry_id:enquiry_id,
@@ -8166,10 +8116,10 @@ $("#approve_service").click(function() {
             success: function(response) {
                 // alert(response);
                 // exit();
-               
+
                 if (response == true) {
                     // alert('Doneeeee');
-                    window.location.href = "<?= base_url() ?>admin/final_booking_details/details/"+enquiry_id;
+                    window.location.href = "<?=base_url()?>admin/final_booking_details/details/"+enquiry_id;
 
                 } else {
                     alert('wrong');
@@ -8179,7 +8129,7 @@ $("#approve_service").click(function() {
 
         });
     }
-    
+
 });
 </script>
 
@@ -8190,9 +8140,9 @@ $("#approve_service").click(function() {
 	var element2=document.getElementById('other_role');
     if(val=='Other')
     element.style.display='block';
-    else  
+    else
     element.style.display='none';
-	element2.value="";	
+	element2.value="";
     }
 </script>
 
@@ -8400,13 +8350,12 @@ $('#edit_train').validate({ // initialize the plugin
 <script>
 
     var i=1;
-    
+
     $('#add_more_place').click(function() {
         $('.select2').select2()
-       // alert('hhhh');
             i++;
-            
-var structure = $(`<div class="row" id="new_row`+i+`"> 
+
+var structure = $(`<div class="row" id="new_row`+i+`">
 
                         <div class="col-md-6">
                         <div class="form-group">
@@ -8428,7 +8377,7 @@ var structure = $(`<div class="row" id="new_row`+i+`">
                             <input type="time" class="form-control" name="closing_time[]" id="closing_time`+i+`" placeholder="Enter closing time" required="required">
                         </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                         <div class="form-group">
                             <label>Open Days</label>
@@ -8456,16 +8405,16 @@ var structure = $(`<div class="row" id="new_row`+i+`">
                         <label>Is It Entry Ticket Cost </span></label>
                         <div class="form-group">
                             <input type="radio" id="Yes`+i+`" class="ticket_yes_no`+i+`" name="ticket_yes_no[]" value="Yes" > &nbsp;
-                            <label>Yes</label>  &nbsp; &nbsp; 
+                            <label>Yes</label>  &nbsp; &nbsp;
                             <input type="radio" id="No`+i+`" class="ticket_yes_no`+i+`" name="ticket_yes_no[]" value="No"> &nbsp;
                             <label>No</label><br>
                         </div>
                         </div>
                         <div class="col-md-4 if_ticket_yes_div">
-                            <div class="form-group">
-                                <label>Enter Ticket Cost </span></label>
-                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+i+`" placeholder="Enter cost" required="required" />
-                            </div>
+                        <div class="form-group">
+                            <label>Enter Ticket Cost </span></label>
+                            <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+i+`" placeholder="Enter cost" required="required" />
+                        </div>
                         </div>
 
                         <div class="col-md-4">
@@ -8474,11 +8423,10 @@ var structure = $(`<div class="row" id="new_row`+i+`">
                             <select class="select2" multiple="multiple" data-placeholder="Select Vehicle Types" style="width: 100%;" name="allow_vehicle_types[]" id="allow_vehicle_types`+i+`" required="required">
                                 <option value="">Select types</option>
                                 <?php
-                                foreach($vehicle_type as $vehicle_type_info) 
-                                { 
-                                ?>
+foreach ($vehicle_type as $vehicle_type_info) {
+    ?>
                                 <option value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
-                            <?php } ?>
+                            <?php }?>
                             </select>
                         </div>
                         </div>
@@ -8497,11 +8445,11 @@ var structure = $(`<div class="row" id="new_row`+i+`">
                             </div>
                         </div>
                     </div>`);
-    $('#main_row').append(structure); 
+    $('#main_row').append(structure);
     $('.select2').select2()
 
     // $(".if_ticket_yes_div").hide();
-        
+
         $('input[name="ticket_yes_no[]"]').change(function() {
             if ($(this).val() === 'Yes') {
                 element.closest('.if_ticket_yes_div').show(error);
@@ -8516,9 +8464,9 @@ var structure = $(`<div class="row" id="new_row`+i+`">
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
+$(document).on('click', '.btn_remove', function(){
+           var button_id = $(this).attr("id");
+           $('#new_row'+button_id+'').remove();
       });
 
 </script>
@@ -8824,28 +8772,42 @@ $('#edit_measuring_type').validate({ // initialize the plugin
         var newFields = $();
 
         $("#tour_creation_total_days").keyup(function (e) {
-            alert('hhhhhhhhhhhhhhhhhhhhhhhhh');
             e.preventDefault();
             var n = this.value || 0;
             $('#myInput').val(n);
+            var input_type= $(this).attr('attr_input_type');
 
-            if (n >= 0) {
-                if (n > newFields.length) {
-                    addFields(n);
+            if(input_type=="new"){
+                if (n >= 0) {
+                    if (n > newFields.length) {
+                        addFields(n);
+                    } else {
+                        removeFields(n);
+                    }
                 } else {
-                    removeFields(n);
+                    // If total days is less than 1, clear the accordion
+                    $("#accordion").empty();
                 }
-            } else {
-                // If total days is less than 1, clear the accordion
-                $("#accordion").empty();
+            }else if(input_type=="old"){
+                if (n >= 0) {
+                    if (n > newFields.length) {
+                        addFields_old(n);
+                    } else {
+                        removeFields(n);
+                    }
+                } else {
+                    // If total days is less than 1, clear the accordion
+                    $("#accordion").empty();
+                }
             }
+
         });
 
         function addFields(n) {
             for (var i = 0; i < n; i++) {
                 var day = i + 1;
                 var input = `
-                <form id="form_123" method="post" enctype="multipart/form-data">
+                <form id="form_123" class="form_cls" method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header" id="heading${day}" data-toggle="collapse" data-target="#collapse${day}" aria-expanded="false" aria-controls="collapse${day}">
                             <h5 class="mb-0">
@@ -8855,7 +8817,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                                 </button>
                             </h5>
                         </div>
-                        
+
                         <div id="collapse${day}" class="collapse" aria-labelledby="heading${day}" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="row">
@@ -8876,13 +8838,13 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                                             </div>
                                             <div class="col-md-6 mb-4">
                                                 <label>Select District <span class="text-danger">*</label>
-                                                <select class="select_css district" name="district" attr_district="district" required="required" attr_day="${day}">
+                                                <select class="select_css district" name="district[]" attr_district="district" required="required" attr_day="${day}">
                                                     <option value="">Select district</option>
                                                     <?php
-                                                    foreach($district_data as $district_info){ 
+                                                foreach ($district_data as $district_info) {
                                                     ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
+                                                    <option value="<?php echo $district_info['select_district']; ?> "><?php echo $district_info['district']; ?></option>
+                                                    <?php }?>
                                                 </select>
                                             </div>
                                             <div class="col-md-12">
@@ -8944,15 +8906,14 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                 newFields = newFields.add(newInput);
                 newInput.appendTo('#accordion');
             }
-        }
-        
-        
+        }    
                 // Add a click event handler for the "Add row" buttons
                 var p=1;
                 $('#accordion').on('click', '.add-row', function () {
+                    alert('gggggggggggg');
                     p++;
                     var day = $(this).attr('data-day');
-                    
+                    alert(day);
                     var newRow = $(`
                         <tr>
                             <td>${p}</td>
@@ -8976,32 +8937,225 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
                                     // district change
 
-                        var totaldays = $('#tour_creation_total_days').val();
-                        var district_id = $("[attr_day=" + day + "]").val();
+            // var totaldays = $('#tour_creation_total_days').val();
+            // var district_id = $("[attr_day=" + day + "]").val();
 
-                    $.ajax({
-                        url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
-                        method: 'post',
-                        data: {did: district_id},
-                        dataType: 'json',
-                        success: function(response){
-                        var place_name= newRow.find('.place_name'+day);
-                        place_name.empty();
-                        place_name.append('<option value="">Select Place</option>');
-
-                        $.each(response,function(index,data){  
-                            place_name.append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
-                        });
-                        }
-                    });
-                                // Add a click event handler for the "Remove" buttons in the newly added row
-                                $('.remove-row').click(function () {
-                                    $(this).closest('tr').remove();
-                                });
+          
+                    // Add a click event handler for the "Remove" buttons in the newly added row
+                    // $('.remove-row').click(function () {
+                    //     $(this).closest('tr').remove();
+                    // });
                 });
 
-                
+             
         
+
+        function addFields_old(n) {
+            for (var i = 0; i < n; i++) {
+                var prev_days =$('input[name="prev_days_val"]').val();
+                var new_day = i + 1;
+                var day = parseInt(prev_days) + parseInt(new_day);
+                var input = `
+                <form id="form_123" class="form_cls" method="post" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-header" id="heading${day}" data-toggle="collapse" data-target="#collapse${day}" aria-expanded="false" aria-controls="collapse${day}">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" >
+                                    Day ${day} Fields
+                                    <i class="rotate-icon"></i>
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapse${day}" class="collapse" aria-labelledby="heading${day}" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Tour Number <span class="text-danger">*</label>
+                                                    <input type="number" readonly class="form-control" name="tour_number[]" id="tour_number" placeholder="Tour Number" required value="<?php echo $id; ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Day Number <span class="text-danger">*</label>
+                                                    <input type="number" readonly class="form-control" name="day_number[]" id="day_number" placeholder="Enter Day Number" required value="${day}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label>Select District <span class="text-danger">*</label>
+                                                <select class="select_css district" name="district[]" attr_district="district" required="required" attr_day="${day}">
+                                                    <option value="">Select district</option>
+                                                    <?php
+                                                foreach ($district_data as $district_info) {
+                                                    ?>
+                                                    <option value="<?php echo $district_info['select_district']; ?> "><?php echo $district_info['district']; ?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <table border="1" class="table table-bordered" id="table_${day}">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr no.</th>
+                                                                <th>Places <span class="text-danger">*</th>
+                                                                <th>Time <span class="text-danger">*</th>
+                                                                <th>Visit Time <span class="text-danger">*</th>
+                                                                <th>Details</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>${day}</td>
+                                                                <td>
+                                                                    <select class="select_css select_place place_name${day}" name="place_name[]" id="place_name" attr_time="${day}" required="required">
+                                                                        <option value="">Select Place</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td><input readonly type="input" name="time[]" id="time" value=""></td>
+                                                                <td><input type="time" class="form-control" name="visit_time[]" id="visit_time" placeholder="Enter Visit Time" required></td>
+                                                                <td><input type="text" class="form-control" name="details[]" id="details" placeholder="Enter Details"></td>
+                                                                <td>
+                                                                    <button class="btn btn-success add-row" id="add_tr${day}" type="button" data-day="${day}">Add row</button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label style="display: block;">Upload Image ${day} <span class="text-danger">*</label>
+                                                    <input type="file" name="image_name[]" id="image_name" required="required">
+                                                    <br><span class="text-danger">Please select only JPG, PNG, JPEG format files.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Itinerary For Day ${day} <span class="text-danger">*</span></label>
+                                                    <textarea class="form-control iternary_desc" name="iternary_desc" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success add-row_district" type="button" data-day="${day}">Add another district</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary form-control daywise_submit" style="width:10%;">Submit</button>
+                        </div>
+                    </div>
+                </form>`;
+                var newInput = $(input);
+                newFields = newFields.add(newInput);
+                var add_new_acordian='#accordion'+prev_days;
+                newInput.appendTo('.card-body');
+            }
+        }
+                // Add a click event handler for the "Add row" buttons
+                // var p=1;
+                // $(document).on('click', '.add-row', function () {
+                //     console.log('hiii');
+            
+
+              
+
+                // });
+
+                var xyz=0;
+                $('.add-row_district').click(function () {
+                    xyz++;
+
+                    var day = $(this).data('day');
+                    var new_district_day = `
+
+                            <div class="card-body new_district${day}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Day Number <span class="text-danger">*</label>
+                                                    <input type="number" readonly class="form-control" name="day_number" id="day_number" placeholder="Enter Day Number" value="${day}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Select District <span class="text-danger">*</label>
+                                                <select class="select_css district" name="district${xyz}" attr_district="district" required="required" attr_day="${day}_${xyz}">
+                                                <option value="">Select Place</option>
+                                                    <?php
+                                                        foreach ($district_data as $district_info) {
+                                                    ?>
+                                                    <option value="<?php echo $district_info['select_district']; ?> "><?php echo $district_info['district']; ?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <table border="1" class="table table-bordered" id="table_${day}_${xyz}">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sr no.</th>
+                                                                <th>Places <span class="text-danger">*</th>
+                                                                <th>Time <span class="text-danger">*</th>
+                                                                <th>Visit Time <span class="text-danger">*</th>
+                                                                <th>Details</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>${day}</td>
+                                                                <td>
+                                                                    <select class="select_css place_name${day}_${xyz}" name="place_name${xyz}[]" id="place_name" attr_another_num="${xyz}" required="required">
+                                                                        <option value="">Select district</option>
+                                                                    </select>
+                                                                    <input readonly class="time" type="hidden" name="new_dist_row_no" id="time" value="">
+                                                                </td>
+                                                                <td><input readonly class="time" type="input" name="time${xyz}[]" id="time" value=""></td>
+                                                                <td><input type="time" class="form-control" name="visit_time${xyz}[]" id="visit_time" placeholder="Enter Visit Time" required></td>
+                                                                <td><input type="text" class="form-control" name="details${xyz}[]" id="details" placeholder="Enter Details"></td>
+                                                                <td>
+                                                                    <button class="btn btn-success add-row" type="button" data-day="${day}_${xyz}" attr_another_num_btn="${xyz}">Add row</button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label style="display: block;">Upload Image ${day} <span class="text-danger">*</label>
+                                                    <input type="file" name="image_name${xyz}[]" id="image_name" required="required">
+                                                    <br><span class="text-danger">Please select only JPG, PNG, JPEG format files.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Itinerary For Day ${day} <span class="text-danger">*</span></label>
+                                                    <textarea class="form-control iternary_desc" name="iternary_desc" id="iternary_desc" placeholder="Enter Itinerary Description" required="required"></textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger remove_d_row" type="button">Remove</button>
+                                </div>
+                            </div> `;
+
+                    // Append the new row to the table
+                    $(`#accordion #collapse${day}`).append(new_district_day);
+                    // Add a click event handler for the "Remove" buttons in the newly added row
+                    $('.remove_d_row').click(function () {
+                        $(this).closest(`.new_district${day}`).remove();
+                    });
+                });
 
         function removeFields(n) {
             var removeField = newFields.slice(n).remove();
@@ -9028,17 +9182,16 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
 <script type='text/javascript'>
     // baseURL variable
-    var baseURL= "<?php echo base_url();?>";
-    
+    var baseURL= "<?php echo base_url(); ?>";
+
     $(document).ready(function(){
-    
+
         // district change
         $(document).on("change",".district",function(){
-            alert('ggggggggg');
             var totaldays = $('#tour_creation_total_days').val();
             var district_id = $(this).val();
             var day_no = $(this).attr('attr_day');
-            alert(day_no);
+
         $.ajax({
             url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
             method: 'post',
@@ -9048,20 +9201,19 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
             var closestTable = $(this).closest("table");
 
-            console.log(closestTable.closest("tr"));
 
                 $('.place_name'+day_no).find('option').not(':first').remove();
-            $.each(response,function(index,data){   
+            $.each(response,function(index,data){
                 $('.place_name'+day_no).append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
             });
-            
+
             }
         });
         });
     });
 </script>
 
-<script>
+<!-- <script>
      $(document).on("change","select",function(){
          var selectedOption=$(this).val();
            var select_name=$(this).attr('name');
@@ -9075,48 +9227,46 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                var from_series_id=$(this).val();
                if(from_series_id!="")
                {
-                   
+
           $('.place_name').attr("disabled", false);
                }else{
           $('.place_name').attr("disabled", true);
-                   
+
                }
           });
 
      });
-</script>
+</script> -->
 
-<!-- <script type='text/javascript'>
+<script type='text/javascript'>
     // baseURL variable
-    var baseURL= "<?php echo base_url();?>";
-    
+    var baseURL= "<?php echo base_url(); ?>";
+
     $(document).ready(function(){
         // district change
         $(document).on("change",".district",function(){
-            alert('fvfvfvfvfvfvfvfvfvfvfvfvfvfvfvfvfvfvfvvfvfvfvfvfvfv');
             var totaldays = $('#tour_creation_total_days').val();
             var district_id = $(this).val();
             var day_no = $(this).attr('attr_day');
-            alert(district_id);
         $.ajax({
             url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
             method: 'post',
             data: {did: district_id},
             dataType: 'json',
             success: function(response){
-            
+
             var closestTable = $(this).closest("table");
 
                 $('.place_name'+day_no).find('option').remove();
                 $('.place_name'+day_no).append('<option value="">Select Place</option>');
-            $.each(response,function(index,data){   
+            $.each(response,function(index,data){
                 $('.place_name'+day_no).append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
             });
             }
         });
         });
     });
-</script> -->
+</script>
 
 <!--  -->
 
@@ -9130,19 +9280,26 @@ $('#edit_measuring_type').validate({ // initialize the plugin
         $(document).on("change", "#place_name", function () {
 
             var time_data = $(this).val();
-            // alert(time_data);
+            var added_id = $(this).attr('attr_another_num');
+            // alert(typeof added_id);
 
+            if(typeof added_id != 'undefined'){
+                var time_input_name = 'time'+added_id+'[]';
+            }else{
+                var time_input_name = 'time[]';
+            }
+            alert(time_input_name);
             var closestTr = $(this).closest("tr");
 
             $.ajax({
-                url: '<?= base_url() ?>admin/tour_creation_iternary/gettime',
+                url: '<?=base_url()?>admin/tour_creation_iternary/gettime',
                 method: 'post',
                 data: { did: time_data },
                 dataType: 'json',
                 success: function (response) {
 
                     // Find the input element within the same row and update its value
-                    var timeInput = closestTr.find('input[name="time[]"]');
+                    var timeInput = closestTr.find('input[name="'+time_input_name+'"]');
                     timeInput.val(response[0]['req_time']);
 
                     // If you expect multiple time values and want to append them to the same input field, you can use the following code
@@ -9174,70 +9331,100 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 <script>
       $(document).ready(function(){
         // alert('hii');
-    $(document).on('click','.daywise_submit', function () {
-        // alert('hoooo');
-        // console.log('formData',formData);
+        $(document).on('click','.daywise_submit', function () {
+            // var closestTable = $(this).closest("table");
+            // console.log(closestTable.closest("tr"));
+            var closest_form = $(this).closest('#form_123');
+        var total_days = closest_form.find('#total_days').val();
 
-        var total_days = $('#total_days').val();
-
-        var tour_number = $('#tour_number').val();
-        // alert(tour_number);
-        var day_number = $('input[name="day_number[]"]').map(function() {
+        var tour_number = closest_form.find('#tour_number').val();
+        var day_number = closest_form.find('#day_number').val();
+        var district = closest_form.find('select[name="district[]"]').map(function() {
         return $(this).val();
         }).get();
-        console.log('day_number',day_number);
+
+        var select_place_values = closest_form.find('select[name="place_name[]"]').map(function() {
+        return $(this).val();
+        }).get();
+
+        var time_values = closest_form.find('input[name="time[]"]').map(function() {
+        return $(this).val();
+        }).get();
+
+        var visit_time_values = closest_form.find('input[name="visit_time[]"]').map(function() {
+        return $(this).val();
+        }).get();
+
+        var details_values = closest_form.find('input[name="details[]"]').map(function() {
+        return $(this).val();
+        }).get();
+
+        var iternary_desc=$('#iternary_desc').val();
+
+        // var iternary_desc = closest_form.find('textarea[name="iternary_desc"]').map(function() {
+        // return $(this).val();
+        // }).get();
+
+        // var image_name = $(this).closest('#form_123').find('input[name="image_name[]"]').map(function () {
+        //     return this.value; // $(this).val()
+        // }).get();
+
+        // var image_name = $(this).closest('#form_123').find('#image_name').map(function () {
+        //         return this.value;
+        //     }).get();
+
+        // var total_days = $('#total_days').val();
+
+        // var tour_number = $('#tour_number').val();
+        // var day_number = $('#day_number').val();
+        // alert(tour_number);
+        // var day_number = $('input[name="day_number"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // var day_number = $('#day_number').val();
         // alert(day_number);
         // var district = $(".district option:selected").val();
         // alert(district);
-        var district = $('select[name="district[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('district',district);
+        // var district = $('select[name="district[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(district);
 
         // var select_place = $('input[name="place_name[]"]').val();
-        var select_place_values = $('select[name="place_name[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('select_place_values',select_place_values);
+        // var select_place_values = $('select[name="place_name[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(select_place_values);
-        var time_values = $('input[name="time[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('time_values',time_values);
+        // var time_values = $('input[name="time[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(time_values);
-        var visit_time_values = $('input[name="visit_time[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('visit_time_values',visit_time_values);
+        // var visit_time_values = $('input[name="visit_time[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(visit_time_values);
-        var details_values = $('input[name="details[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('details_values',details_values);
+        // var details_values = $('input[name="details[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(details_values);
 
-        var iternary_desc = $('textarea[name="iternary_desc[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('iternary_desc',iternary_desc);
+        // var iternary_desc = $('textarea[name="iternary_desc[]"]').map(function() {
+        // return $(this).val();
+        // }).get();
         // alert(visit_time_values);
         // var iternary_desc = $('#iternary_desc').val();
         // alert(iternary_desc);
 
 
 // exit();
-        var image_name = $('input[name="image_name[]"]').map(function () {
-            return this.value; // $(this).val()
-        }).get();
+        // var image_name = $('input[name="image_name[]"]').map(function () {
+        //     return this.value; // $(this).val()
+        // }).get();
 
-        //   alert(image_name);
         // var image_name = $('#image_name').map(function () {
         //         return this.value;
         //     }).get();
 
-            // alert(image_name);
 
         $.ajax({
             method: 'post',
@@ -9265,7 +9452,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                               }
                           },
                       });
-    });    
+    });
 });
 
  </script>
@@ -9514,7 +9701,7 @@ $('#add_Expences_checker').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -9531,10 +9718,10 @@ $('#add_Expences_checker').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             // minlength: 6
 
-        }  
+        }
     },
 
     messages :{
@@ -9591,7 +9778,7 @@ $('#edit_Expences_checker').validate({ // initialize the plugin
             required: true,
             maxlength:10,
             minlength:10,
-            
+
         },
         mobile_number2: {
             maxlength:10,
@@ -9608,10 +9795,10 @@ $('#edit_Expences_checker').validate({ // initialize the plugin
         },
         confirm_pass: {
             required: true,
-            equalTo: "#password", 
+            equalTo: "#password",
             // minlength: 6
 
-        }  
+        }
     },
 
     messages :{
@@ -10013,8 +10200,8 @@ $('#edit_for_cust').validate({ // initialize the plugin
 
 <script type='text/javascript'>
     // baseURL variable
-    var baseURL= "<?php echo base_url();?>";
-    
+    var baseURL= "<?php echo base_url(); ?>";
+
     $(document).ready(function(){
         // district change
         $(document).on("change","#vehicle_bus_type",function(){
@@ -10025,297 +10212,16 @@ $('#edit_for_cust').validate({ // initialize the plugin
             data: {vehicle_bus_type_id: vehicle_bus_type_id},
             dataType: 'json',
             success: function(response){
-            
+
             // var closestTable = $(this).closest("table");
 
                 $('#vehicle_rto_registration').find('option').remove();
                 $('#vehicle_rto_registration').append('<option value="">Select RTO Registration No</option>');
-            $.each(response,function(index,data){   
+            $.each(response,function(index,data){
                 $('#vehicle_rto_registration').append('<option value="'+data['id']+'">'+data['registration_number']+'</option>');
             });
             }
         });
         });
     });
-</script>
-
-<script type='text/javascript'>
-    // baseURL variable
-    var baseURL = "<?php echo base_url(); ?>";
-    $(document).ready(function () {
-   
-        $(document).on("change", "#vehicle_bus_type_bus_open", function () {
-
-            var vehicle_bus_type_string = $(this).val();
-            var vehicle_bus_type_data = vehicle_bus_type_string.split("/");
-            var vehicle_bus_type_id =vehicle_bus_type_data[0];
-            // alert(vehicle_bus_type_data[0]);
-
-            $.ajax({
-                url:'<?=base_url()?>admin/bus_open/getseat_preference',
-                method: 'post',
-                data: { vehicle_bus_type_id: vehicle_bus_type_id },
-                dataType: 'json',
-                success: function (response) {
-                    var seatCount = response['total_seat_count'];
-                    var new_district_day ='';
-
-                                                for (var a = 1; a <= seatCount; a++) {
-                     new_district_day += `<li>
-                                                <input class="hold_class" id="hold_class_i${a}" type="checkbox" value="${a}" 
-                                                    name="admin_hold_seats[]"/>
-                                                <label class="label" for="hold_class_i${a}"  style="width: 40px">${a}</label>
-                                            </li>`;
-
-                                                }
-                                                console.log(new_district_day);
-
-                    // var new_district_day = `</ul>
-                    //                         </div>
-                    //                     </div>
-                    //                 </div> `;
-                    $(`#append_pref_data`).empty();
-                // Append the new row to the table
-                $(`#append_pref_data`).append(new_district_day);   
-
-
-                }
-            });
-        });
-    });
-</script>
-
-<script type='text/javascript'>  
-    // baseURL variable
-    var baseURL = "<?php echo base_url(); ?>";
-    $(document).ready(function () {
-   
-        // Function to fetch seat preferences
-        function fetchSeatPreferences() {
-            var vehicle_bus_type_string = $("#vehicle_bus_type_bus_open").val();
-            var vehicle_bus_type_data = vehicle_bus_type_string.split("/");
-            var vehicle_bus_type_id = vehicle_bus_type_data[0];
-
-            var adminholdseat = $("#admin_hold_seats").val();
-            // Convert the comma-separated string to an array
-            var adminHoldSeatArray = adminholdseat.split(",");
-
-            $.ajax({
-                url: '<?=base_url()?>admin/bus_open/getseat_preference',
-                method: 'post',
-                data: { vehicle_bus_type_id: vehicle_bus_type_id },
-                dataType: 'json',
-                success: function (response) {
-                    var seatCount = response['total_seat_count'];
-                    var new_district_day = '';
-
-                    for (var a = 1; a <= seatCount; a++) {
-                        // Check if the value of a exists in adminHoldSeatArray
-                        var isChecked = adminHoldSeatArray.includes(a.toString()) ? 'checked' : '';
-                        
-                        new_district_day += `<li>
-                                                <input class="hold_class" id="hold_class_i${a}" type="checkbox" value="${a}" 
-                                                    name="admin_hold_seats[]" ${isChecked}/>
-                                                <label class="label" for="hold_class_i${a}"  style="width: 40px">${a}</label>
-                                            </li>`;
-                    }
-
-                    console.log(new_district_day);
-
-                    $(`#append_pref_data`).empty();
-                    $(`#append_pref_data`).append(new_district_day);
-                }
-            });
-        }
-
-        // Bind change event to the select box
-        $("#vehicle_bus_type_bus_open").on("change", fetchSeatPreferences);
-
-        // Trigger change event on page load if a value is pre-selected
-        if ($("#vehicle_bus_type_bus_open").val()) {
-            fetchSeatPreferences();
-        }
-    });
-</script>
-
-<!-- Assign Vehicle To Tour Validation -->
-<script>
-$(document).ready(function () {
-
-$('#assign_vehicle').validate({ // initialize the plugin
-    errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
-    
-  },
-    rules: {
-        tour_number: {
-            required: true,
-        },
-        tour_date: {
-            required: true,
-        },
-        vehicle_bus_type: {
-            required: true,
-        },
-        vehicle_rto_registration: {
-            required: true,
-        },
-    },
-
-    messages :{
-        tour_number : {
-            required : "Please select tour",
-        },
-        tour_date : {
-            required : "Please select tour date",
-        },
-        vehicle_bus_type : {
-            required : "Please select bus type",
-        },
-        vehicle_rto_registration : {
-            required : "Please select vehicle rto registration",
-        }
-    },
-
-    highlight: function(element, errorClass) {
-
-    }
-});
-
-});
-
-</script>
-
-<!-- Assign Vehicle To Tour Validation -->
-
-<!-- Bus Open Validation -->
-<script>
-$(document).ready(function () {
-
-$('#add_bus_open').validate({ // initialize the plugin
-    errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
-    
-  },
-    rules: {
-        tour_number: {
-            required: true,
-        },
-        tour_date: {
-            required: true,
-        },
-        vehicle_bus_type: {
-            required: true,
-        },
-    },
-
-    messages :{
-        tour_number : {
-            required : "Please select tour",
-        },
-        tour_date : {
-            required : "Please select tour date",
-        },
-        vehicle_bus_type : {
-            required : "Please select bus type",
-        },
-    },
-
-    highlight: function(element, errorClass) {
-
-    }
-});
-
-});
-
-</script>
-
-<script>
-$(document).ready(function () {
-
-$('#edit_bus_open').validate({ // initialize the plugin
-    errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
-    
-  },
-    rules: {
-        tour_number: {
-            required: true,
-        },
-        tour_date: {
-            required: true,
-        },
-        vehicle_bus_type: {
-            required: true,
-        },
-    },
-
-    messages :{
-        tour_number : {
-            required : "Please select tour",
-        },
-        tour_date : {
-            required : "Please select tour date",
-        },
-        vehicle_bus_type : {
-            required : "Please select bus type",
-        },
-    },
-
-    highlight: function(element, errorClass) {
-
-    }
-});
-
-});
-
-</script>
-
-<!-- bus Open Validation -->
-
-<script>
-$(document).ready(function () {
-
-$('#vehicle_details_admin').validate({ // initialize the plugin
-    errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
-    
-  },
-    rules: {
-        vehicle_bus_type: {
-            required: true,
-        },
-        vehicle_type: {
-            required: true,
-        },
-        seat_capacity: {
-            required: true,
-        },
-        air_conditionar: {
-            required: true,
-        },
-    },
-
-    messages :{
-        vehicle_bus_type : {
-            required : "Please select bus type",
-        },
-        vehicle_type : {
-            required : "Please select vehicle type",
-        },
-        seat_capacity : {
-            required : "Please select seat capacity",
-        },
-        air_conditionar : {
-            required : "Please select air conditionar",
-        },
-    },
-
-    highlight: function(element, errorClass) {
-
-    }
-});
-
-});
-
 </script>

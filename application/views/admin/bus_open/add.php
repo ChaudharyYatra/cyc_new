@@ -134,17 +134,16 @@ input:disabled+label {
               <!-- form start -->
               <form method="post" enctype="multipart/form-data"  id="add_bus_open">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tour Details</label>
-                                <select class="form-control" name="tour_number" id="tour_number">
-                                <option value="">Select tour title</option>
-                                <?php foreach($packages_data as $packages_data_value){ ?> 
-                                    <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
-                                <?php } ?>
-                                </select>
-                            </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tour Details</label>
+                            <select class="form-control" name="tour_number" id="tour_number">
+                            <option value="">Select tour title</option>
+                            <?php foreach($packages_data as $packages_data_value){ ?> 
+                                <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
+                            <?php } ?>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -168,7 +167,6 @@ input:disabled+label {
                                         <option value="<?php echo $bus_type_data['bus_id'];?>/<?php echo $bus_type_data['vehicle_id'];?>"><?php echo $bus_type_data['bus_type']. ' ==> '. $bus_type_data['seat_capacity'];?> Seater</option>
                                         <?php } ?>
                             </select>
-                          </div>
                         </div>
 
                         <div class="col-md-8">
@@ -184,7 +182,8 @@ input:disabled+label {
                       
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> 
+                  <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
 					
                 

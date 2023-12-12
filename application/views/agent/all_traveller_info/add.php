@@ -152,9 +152,10 @@
                                 <tr style="background:#a19f9f; color:white;">
                                     <th style="width:10%;">For credentials</th>
                                     <th style="width:17%;">Mr / Mrs</th>
+                                    <th style="width:15%;">Last name</th>
                                     <th style="width:15%;">First name</th>
                                     <th style="width:15%;">Middle name</th>
-                                    <th style="width:15%;">Last name</th>
+                                    
                                     <th style="width:10%;">DOB</th>
                                     <th style="width:10%;">Age</th>
                                     <th style="width:15%;">Relation</th>
@@ -205,6 +206,19 @@
                                     </select>
                                     
                                 </td>
+
+                                <td>
+                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $img_count; ?>" attr_for_search="<?php echo $img_count; ?>" autocomplete="off"
+
+                                    value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['last_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+
+                                    <div id="user_name">
+                                        <ul id="search-results3<?php echo $img_count;?>">
+                                            
+                                        </ul>
+                                    </div>
+
+                                </td>
                                 
                                 <td>
                                     <input type="text" style="text-transform: capitalize;" class="form-control row_set first_name" name="first_name[]" id="first_name<?php echo $img_count; ?>" attr_for_search="<?php echo $img_count; ?>" autocomplete="off"
@@ -229,18 +243,7 @@
                                     
 
                                 </td>
-                                <td>
-                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $img_count; ?>" attr_for_search="<?php echo $img_count; ?>" autocomplete="off"
-
-                                    value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['last_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-
-                                    <div id="user_name">
-                                        <ul id="search-results3<?php echo $img_count;?>">
-                                            
-                                        </ul>
-                                    </div>
-
-                                </td>
+                                
                                 <td>
                                     <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['dob'];} ?>">
                                 </td>
@@ -315,6 +318,27 @@
                                     </select>
                                 </td>
                                 <td>
+                                <?php if(!empty($all_traveller_info)){ ?>
+                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
+                                    value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['last_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                <?php } else if($i==1){ 
+                                foreach($traveller_booking_info as $traveller_booking_info_value){ 
+                                    ?>
+                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
+                                    value="<?php echo $traveller_booking_info_value['srname']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                <?php } } else{ ?> 
+                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
+                                    value="" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                <?php  } ?>
+
+                                    <div id="user_name">
+                                        <ul id="search-results3<?php echo $i;?>">
+                                            
+                                        </ul>
+                                    </div>
+
+                                </td>
+                                <td>
                                 <?php if(!empty($all_traveller_info)){ ?> 
                                     <input type="text" style="text-transform: capitalize;" class="form-control row_set first_name" name="first_name[]" id="first_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
                                     value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['first_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
@@ -357,27 +381,7 @@
                                     </div>
 
                                 </td>
-                                <td>
-                                <?php if(!empty($all_traveller_info)){ ?>
-                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
-                                    value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['last_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                <?php } else if($i==1){ 
-                                foreach($traveller_booking_info as $traveller_booking_info_value){ 
-                                    ?>
-                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
-                                    value="<?php echo $traveller_booking_info_value['srname']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                <?php } } else{ ?> 
-                                    <input type="text" style="text-transform: capitalize;" class="form-control row_set last_name" name="last_name[]" id="last_name<?php echo $i; ?>" attr_for_search="<?php echo $i; ?>" autocomplete="off"
-                                    value="" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                <?php  } ?>
-
-                                    <div id="user_name">
-                                        <ul id="search-results3<?php echo $i;?>">
-                                            
-                                        </ul>
-                                    </div>
-
-                                </td>
+                                
                                 <td>
                                     <input type="date" class="form-control row_set" name="dob[]" id="dob<?php echo $i ?>" max="<?php echo date("Y-m-d");?>">
                                 </td>

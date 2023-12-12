@@ -444,34 +444,34 @@
                             <div class="form-group">
                             <label>Flat No. / Bunglow No.</label>
                             <!-- <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder=""> -->
-                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['flat_no'];} ?>">
+                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['flat_no'];} ?>">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Building / House Name</label>
                             <!-- <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder=""> -->
-                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['building_house_nm'];} ?>">
+                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['building_house_nm'];} ?>">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Street Name</label>
                             <!-- <input type="text" class="form-control" name="street_name" id="street_name" placeholder=""> -->
-                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['street_name'];} ?>">
+                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['street_name'];} ?>">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Landmark</label>
                             <!-- <input type="text" class="form-control" name="landmark" id="landmark" placeholder=""> -->
-                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['landmark'];} ?>">
+                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['landmark'];} ?>">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                             <label>Area</label>
-                            <input type="text" class="form-control" name="area" id="area" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['area'];} ?>" required>
+                            <input type="text" class="form-control" name="area" id="area" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['area'];} ?>" required>
                             </div>
                         </div>
 
@@ -547,7 +547,7 @@
                             <div class="form-group">
                             <label>City Name</label>
                             <!-- <input type="text" class="form-control" name="all_traveller_city" id="all_traveller_city" placeholder="" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"> -->
-                            <input type="text" class="form-control" name="all_traveller_city" id="all_traveller_city" placeholder="" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['city_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" class="form-control" name="all_traveller_city" id="all_traveller_city" placeholder="" style="text-transform: capitalize;" value="<?php if(!empty($all_traveller_info_value)){ echo $all_traveller_info_value['city_name'];} ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                         </div>
                         <div class="col-md-4">

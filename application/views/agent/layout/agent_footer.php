@@ -1715,6 +1715,7 @@ $(document).ready(function() {
             }
         })
     });
+
     $('[id^="relation"]').each(function() {
         $(this).rules('add', {
             required: true,
@@ -1724,6 +1725,20 @@ $(document).ready(function() {
                 // minlength: "Enter at least {0} characters",
             }
         })
+    });
+
+    $('[name^="for_credentials[]"]').change(function () {
+        // alert(this.checked);
+    if (this.checked) {
+        var currentRow = $(this).closest("tr");
+        var col3 = currentRow.find('input[name="mobile_number[]"]');
+        col3.rules('add', {
+            required: true,
+            messages: {
+                required: "Mobile number is required",
+            }
+        });
+    }
     });
 
 });
@@ -5616,17 +5631,6 @@ $(document).ready(function(){
     });
 });
 </script> -->
-
-<script>
-    $('#yes').change(function () {
-    if(this.checked) {
-        var currentRow = $(this).closest("tr");
-        var col3 = currentRow.find('input[name="mobile_number[]"]').attr('required', true);
-        // $('#mobile_number').attr('required', true);
-    }
-});
-
-</script>
 
 <script>
 $("#final_booking_submit").click(function() {

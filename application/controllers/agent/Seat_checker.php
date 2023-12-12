@@ -66,6 +66,9 @@ class Seat_checker extends CI_Controller {
         $p='yes';
         
         $bus_type= '';
+
+        // echo $iid; die;
+
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('pack_id', 'Package', 'required');
