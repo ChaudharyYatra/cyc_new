@@ -40,7 +40,7 @@
             <div class="card card-primary">
                 <div class="card-body">
                     <div class="row">
-                    <img src="<?php echo base_url(); ?>uploads/do_not_delete/Packages.png" class="card-img-top card-image" alt="...">
+                    <img src="<?php echo base_url(); ?>uploads/do_not_delete/Packages.png" class="card-img-top card-image" alt="Tour Image">
                     <div class="card-body">
                         <h2 class="mt-2">Booking Confirmed! 🎉✈️</h2>
                         <h5 class="mt-4">Your booking is confirmed. We will send your credentials to the provided mobile number and email address.</h5>

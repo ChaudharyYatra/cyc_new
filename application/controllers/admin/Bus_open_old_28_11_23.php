@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Assign_vehicle extends CI_Controller{
+class Bus_open extends CI_Controller{
 
 	public function __construct()
 	{
@@ -12,28 +12,26 @@ class Assign_vehicle extends CI_Controller{
         }
 	
         
-        $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/assign_vehicle";
-        $this->module_title       = "Assign Vehicle To Tour";
-        $this->module_url_slug    = "assign_vehicle";
-        $this->module_view_folder = "assign_vehicle/";    
+        $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/bus_open";
+        $this->module_title       = "Tour Wise Bus Open";
+        $this->module_url_slug    = "bus_open";
+        $this->module_view_folder = "bus_open/";    
 	}
 
 	public function index()
 	{  
         $record = array();
         $fields = "bus_open.*,packages.tour_number,packages.tour_title,package_date.journey_date,
-        vehicle_details.registration_number,vehicle_owner.vehicle_owner_name,bus_type.bus_type";
+        vehicle_details_dummy.registration_number,bus_type.bus_type";
         $this->db->order_by('bus_open.id','desc');
         $this->db->where('bus_open.is_deleted','no');
         $this->db->where('bus_open.is_active','yes');
-        $this->db->where('bus_open.vehicle_rto_registration !=','');
         $this->db->join("packages", 'bus_open.package_id=packages.id','left');
+        // $this->db->join("bus_type", 'bus_open.vehicle_bus_type=bus_type.id','left');
         $this->db->join("package_date", 'bus_open.package_date_id=package_date.id','left');
-        $this->db->join("vehicle_details", 'bus_open.vehicle_rto_registration=vehicle_details.id','left');
-        $this->db->join("vehicle_owner", 'vehicle_details.vehicle_owner_id=vehicle_owner.id','left');
-        $this->db->join("bus_type", 'bus_open.vehicle_bus_type=bus_type.id','left');
+        $this->db->join("vehicle_details_dummy", 'bus_open.vehicle_bus_type=vehicle_details_dummy.id','left');
+        $this->db->join("bus_type", 'bus_type.id=bus_open.vehicle_bus_type','left');
         $arr_data = $this->master_model->getRecords('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
-        // print_r($arr_data); die;
 
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
@@ -51,40 +49,38 @@ class Assign_vehicle extends CI_Controller{
             $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
             $this->form_validation->set_rules('tour_date', 'tour_date', 'required');
             $this->form_validation->set_rules('vehicle_bus_type', 'vehicle_bus_type', 'required');
-            $this->form_validation->set_rules('vehicle_rto_registration', 'vehicle_rto_registration', 'required');
+            // $this->form_validation->set_rules('vehicle_rto_registration', 'vehicle_rto_registration', 'required');
 
             if($this->form_validation->run() == TRUE)
             {
                 $tour_number = $this->input->post('tour_number');
                 $tour_date = $this->input->post('tour_date');
                 $vehicle_bus_type = $this->input->post('vehicle_bus_type');
-                $vehicle_rto_registration = $this->input->post('vehicle_rto_registration');
+                // $vehicle_rto_registration = $this->input->post('vehicle_rto_registration');
                 
-                // $arr_insert = array(
-                //     'package_id'   =>   $tour_number,
-                //     'package_date_id'   =>   $tour_date,
-                //     'vehicle_bus_type'   =>   $vehicle_bus_type,
-                //     'vehicle_rto_registration'   =>   $vehicle_rto_registration,
-                //     'bus_open_status'   =>   'yes'
-                // );
-                // $inserted_id = $this->master_model->insertRecord('assign_vehicle',$arr_insert,true);
-
-                $arr_update = array(
-                    // 'vehicle_bus_type'   =>   $vehicle_bus_type,
-                    'vehicle_rto_registration'   =>   $vehicle_rto_registration
+                $arr_insert = array(
+                    'package_id'   =>   $tour_number,
+                    'package_date_id'   =>   $tour_date,
+                    'vehicle_bus_type'   =>   $vehicle_bus_type,
+                    // 'vehicle_rto_registration'   =>   $vehicle_rto_registration,
+                    'bus_open_status'   =>   'yes'
                 );
-                $arr_where     = array('package_id'   =>   $tour_number,
-                                        'vehicle_bus_type'   =>   $vehicle_bus_type,
-                                       'package_date_id'   =>   $tour_date,);
-               $this->master_model->updateRecord('bus_open',$arr_update,$arr_where);
+                $inserted_id = $this->master_model->insertRecord('bus_open',$arr_insert,true);
 
                 $arr_update = array(
                     'bus_open_status'   =>  'yes'
                 );
-                $arr_where     = array("id" => $vehicle_rto_registration);
-                $id=$this->master_model->updateRecord('vehicle_details',$arr_update,$arr_where);
+                $arr_where     = array("id" => $tour_date,
+                                        "package_id" => $tour_number);
+                $this->master_model->updateRecord('package_date',$arr_update,$arr_where);
+
+                // $arr_update = array(
+                //     'bus_open_status'   =>  'yes'
+                // );
+                // $arr_where     = array("id" => $vehicle_rto_registration);
+                // $this->master_model->updateRecord('vehicle_details',$arr_update,$arr_where);
                                
-                if($id > 0)
+                if($inserted_id > 0)
                 {    
                     $this->session->set_flashdata('success_message'," Tour Wise Bus Open Added Successfully.");
                     redirect($this->module_url_path.'/index');
@@ -108,27 +104,31 @@ class Assign_vehicle extends CI_Controller{
     $add_journey_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
 
     $record_bus_type = array();
-    $fields = "bus_type.*";
+    $fields = "bus_type.*,vehicle_details_dummy.*,vehicle_details_dummy.id as vehicle_id, bus_type.id as bus_id";
     $this->db->where('bus_type.is_deleted','no');
-    // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+    $this->db->join("vehicle_details_dummy", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','right');
+    $this->db->group_by('vehicle_bus_type, seat_capacity');
     $record_bus_type = $this->master_model->getRecords('bus_type',array('bus_type.is_deleted'=>'no'),$fields);
-    // print_r($record_bus_type);
-    // die;
 
     $record = array();
-    $fields = "vehicle_details_dummy.*,vehicle_owner.id as vid,vehicle_owner.vehicle_owner_name";
-    $this->db->order_by('vehicle_details_dummy.id','ASC');
-    $this->db->where('vehicle_details_dummy.is_deleted','no'); 
-    $this->db->where('vehicle_details_dummy.is_active','yes');
-    $this->db->where('vehicle_details_dummy.added_by !=','admin');
-    $this->db->where('vehicle_details_dummy.status','approved');
-    $this->db->join("vehicle_owner", 'vehicle_details_dummy.vehicle_owner_id=vehicle_owner.id','left');
-    $vehicle_details = $this->master_model->getRecords('vehicle_details_dummy',array('vehicle_details_dummy.is_deleted'=>'no'),$fields);
+    $fields = "vehicle_details.*,vehicle_owner.id as vid,vehicle_owner.vehicle_owner_name";
+    $this->db->order_by('vehicle_details.id','ASC');
+    $this->db->where('vehicle_details.is_deleted','no'); 
+    $this->db->where('vehicle_details.is_active','yes');
+    $this->db->where('vehicle_details.status','approved');
+    $this->db->join("vehicle_owner", 'vehicle_details.vehicle_owner_id=vehicle_owner.id','left');
+    $vehicle_details = $this->master_model->getRecords('vehicle_details',array('vehicle_details.is_deleted'=>'no'),$fields);
+
+    $this->db->order_by('id','ASC');
+    $this->db->where('is_deleted','no');
+    $this->db->where('is_active','yes');
+    $bus_type = $this->master_model->getRecords('bus_type');
 
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['packages_data'] = $packages_data;
+        $this->arr_view_data['bus_type'] = $bus_type;
         $this->arr_view_data['record_bus_type'] = $record_bus_type;
         $this->arr_view_data['add_journey_date'] = $add_journey_date;
         $this->arr_view_data['vehicle_details'] = $vehicle_details;
@@ -245,20 +245,13 @@ class Assign_vehicle extends CI_Controller{
                     $vehicle_rto_registration = $this->input->post('vehicle_rto_registration');
                    
                     $arr_update = array(
-                        // 'vehicle_bus_type'   =>   $vehicle_bus_type,
+                        'package_id'   =>   $tour_number,
+                        'package_date_id'   =>   $tour_date,
+                        'vehicle_bus_type'   =>   $vehicle_bus_type,
                         'vehicle_rto_registration'   =>   $vehicle_rto_registration
                     );
-                    $arr_where     = array('package_id'   =>   $tour_number,
-                                            'vehicle_bus_type'   =>   $vehicle_bus_type,
-                                           'package_date_id'   =>   $tour_date,);
+                    $arr_where     = array("id" => $id);
                    $this->master_model->updateRecord('bus_open',$arr_update,$arr_where);
-    
-                    $arr_update = array(
-                        'bus_open_status'   =>  'yes'
-                    );
-                    $arr_where     = array("id" => $vehicle_rto_registration);
-                    $id=$this->master_model->updateRecord('vehicle_details',$arr_update,$arr_where);
-
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
@@ -289,12 +282,6 @@ class Assign_vehicle extends CI_Controller{
         $packages_data = $this->master_model->getRecords('packages');
         //  print_r($packages_data); die;
 
-        $record_bus_type = array();
-        $fields = "bus_type.*";
-        $this->db->where('bus_type.is_deleted','no');
-        // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-        $record_bus_type = $this->master_model->getRecords('bus_type',array('bus_type.is_deleted'=>'no'),$fields);
-
         $record = array();
         $fields = "packages.*,package_date.journey_date,package_date.id as p_date_id";
         $this->db->where('packages.is_deleted','no');
@@ -312,12 +299,17 @@ class Assign_vehicle extends CI_Controller{
         $this->db->join("vehicle_owner", 'vehicle_details.vehicle_owner_id=vehicle_owner.id','left');
         $vehicle_details = $this->master_model->getRecords('vehicle_details',array('vehicle_details.is_deleted'=>'no'),$fields);
         // print_r($vehicle_details); die; 
+
+        $this->db->order_by('id','ASC');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $bus_type = $this->master_model->getRecords('bus_type');
         
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['packages_data']        = $packages_data;
+        $this->arr_view_data['bus_type']        = $bus_type;
         $this->arr_view_data['add_journey_date']        = $add_journey_date;
         $this->arr_view_data['vehicle_details']        = $vehicle_details;
-        $this->arr_view_data['record_bus_type']        = $record_bus_type;
         $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -451,17 +443,6 @@ class Assign_vehicle extends CI_Controller{
         $this->arr_view_data["module_url_path"] = $this->module_url_path;
         $this->arr_view_data["middle_content"] = $this->module_view_folder . "add_seat_preference";
         $this->load->view("admin/layout/admin_combo", $this->arr_view_data);
-    }
-
-    public function get_rtonumber(){ 
-       $vehicle_bus_type_id = $this->input->post('vehicle_bus_type_id');
-                        $this->db->where('is_deleted','no');
-                        $this->db->where('is_active','yes');
-                        $this->db->where('added_by !=','admin');
-                        $this->db->where('vehicle_details.vehicle_bus_type',$vehicle_bus_type_id);   
-                        $data = $this->master_model->getRecords('vehicle_details');
-                        // print_r($data);
-        echo json_encode($data);
     }
    
 }

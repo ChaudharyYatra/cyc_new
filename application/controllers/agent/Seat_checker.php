@@ -70,6 +70,9 @@ class Seat_checker extends CI_Controller {
         $p='yes';
         
         $bus_type= '';
+
+        // echo $iid; die;
+
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('pack_id', 'Package', 'required');
@@ -149,7 +152,7 @@ class Seat_checker extends CI_Controller {
 
             $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
                        third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
-                       third_class_price,fourth_class_price,window_class_price,admin_hold_seats,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
+                       third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.admin_hold_seats,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
             $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.vehicle_bus_type','left');
             $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
             $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.vehicle_bus_type','left');

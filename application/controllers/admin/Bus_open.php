@@ -27,7 +27,7 @@ class Bus_open extends CI_Controller{
         $this->db->where('bus_open.is_deleted','no');
         $this->db->where('bus_open.is_active','yes');
         $this->db->join("packages", 'bus_open.package_id=packages.id','left');
-        $this->db->join("bus_type", 'bus_open.vehicle_bus_type=bus_type.id','left');
+        // $this->db->join("bus_type", 'bus_open.vehicle_bus_type=bus_type.id','left');
         $this->db->join("package_date", 'bus_open.package_date_id=package_date.id','left');
         $this->db->join("vehicle_details_dummy", 'bus_open.vehicle_bus_type=vehicle_details_dummy.id','left');
         $this->db->join("bus_type", 'bus_type.id=bus_open.vehicle_bus_type','left');
@@ -119,16 +119,11 @@ class Bus_open extends CI_Controller{
     $this->db->join("vehicle_owner", 'vehicle_details.vehicle_owner_id=vehicle_owner.id','left');
     $vehicle_details = $this->master_model->getRecords('vehicle_details',array('vehicle_details.is_deleted'=>'no'),$fields);
 
-    $this->db->order_by('id','ASC');
-    $this->db->where('is_deleted','no');
-    $this->db->where('is_active','yes');
-    $bus_type = $this->master_model->getRecords('bus_type');
-
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['packages_data'] = $packages_data;
-        $this->arr_view_data['bus_type'] = $bus_type;
+        // $this->arr_view_data['bus_type'] = $bus_type;
         $this->arr_view_data['record_bus_type'] = $record_bus_type;
         $this->arr_view_data['add_journey_date'] = $add_journey_date;
         $this->arr_view_data['vehicle_details'] = $vehicle_details;

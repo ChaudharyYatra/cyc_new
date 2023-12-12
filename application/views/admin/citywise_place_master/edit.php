@@ -1,3 +1,9 @@
+<style>
+  .if_ticket_yes_div {
+      display: none; /* Hide the div by default */
+  }
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -160,7 +166,15 @@
                           <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost" value="<?php echo $info['ticket_cost']; ?>" placeholder="Enter cost" required="required" />
                       </div>
                     </div>
-                    <?php }?>
+                    <?php } else { ?>
+
+                    <div class="col-md-4 if_ticket_yes_div">
+                        <div class="form-group">
+                            <label>Enter Ticket Cost</label>
+                            <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost" value="<?php echo $info['ticket_cost']; ?>" placeholder="Enter cost" required="required" />
+                        </div>
+                    </div>
+                    <?php } ?>
 
                     <div class="col-md-4">
                       <div class="form-group">
@@ -218,3 +232,23 @@
     <!-- /.content -->
   </div>
  
+  <script>
+    // Get the radio buttons and the div to show/hide
+    var yesRadio = document.getElementById('Yes');
+    var noRadio = document.getElementById('No');
+    var ticketCostInput = document.getElementById('ticket_cost');
+    var ticketCostDiv = document.querySelector('.if_ticket_yes_div');
+
+    // Add event listeners to the radio buttons
+    yesRadio.addEventListener('change', function () {
+        ticketCostDiv.style.display = this.checked ? 'block' : 'none';
+    });
+
+    noRadio.addEventListener('change', function () {
+        ticketCostDiv.style.display = this.checked ? 'none' : 'block';
+        ticketCostInput.value = ''; // Clear the value when "No" is selected
+    });
+
+    // Set the initial display based on the default checked radio button
+    ticketCostDiv.style.display = yesRadio.checked ? 'block' : 'none';
+</script>
