@@ -5015,7 +5015,7 @@ $('.data_amt').keyup(function(){
 
         var did = $('#pack_id').val();
         var checker_pack_id = $('#new_pack_date_id').val();
-        var seat_book_date_data=<?php echo json_encode($new_pack_date_id); ?>;
+        var seat_book_date_data=<?php echo json_encode($final_seat_book_date_data); ?>;
         // alert(seat_book_date_data);
         if(did!='')
         {

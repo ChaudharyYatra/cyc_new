@@ -5,7 +5,6 @@ class Booking_enquiry extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
-        // $this->load->model('member_1');
 	    $this->arr_view_data = [];
         if($this->session->userdata('chy_admin_id')=="") 
         { 
@@ -42,118 +41,7 @@ class Booking_enquiry extends CI_Controller{
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
 	}
 	
-    public function ajax_list() {
-        $columns = array(
-            0 => 'id',
-            1 => 'tour_number',
-            2 => 'tour_title',
-            3 => 'agent_name',
-            4 => 'first_name',
-            5 => 'email',
-            6 => 'mobile_number',
-        );
-        $limit = $this->input->post('length');
-        $start = $this->input->post('start');
-        $col = $columns[$this->input->post('order')[0]['column']];
-        $dir = $this->input->post('order')[0]['dir'];
-        //$dir ="desc";
-
-        $totalData = $this->master_model->all_enq_count(0);
-
-        $totalFiltered = $totalData;
-
-        if (empty($this->input->post('search')['value'])) {
-            $users = $this->master_model->all_enq($limit, $start, $col, $dir, 0);
-            // echo $this->db->last_query();
-        } else {
-            $search = $this->input->post('search')['value'];
-
-            $users = $this->master_model->enq_search($limit, $start, $search, $col, $dir, 0);
-            // echo $this->db->last_query();
-            $totalFiltered = $this->master_model->enq_search_count($search, 0);
-        }
-        // print_r($users);
-        // die;
-        $data = array();
-        if (!empty($users)) {
-
-            $i = intval($start)+1;
-            foreach ($users as $dat) {
-
-                $enq_id=$dat->id;
-                    $query=$this->db->query("select * from domestic_followup where booking_enquiry_id=$enq_id AND domestic_followup.is_last='yes'");
-                    $followupdata=$query->row_array();
-
-                    
-                    if($followupdata > 0)
-                    {
-                
-                        $status= '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default'.$i.'">Status</button>';
-                     
-                    }else{
-                
-                        $status= '<h5 style="color:red;">No Followup</h5>';
-                } 
-                
-                // if ($dat->status == 'Active') {
-                //     $status = '<span class="badge badge-success badge-pill">' . $dat->status . '</span>';
-                // } elseif ($dat->status == 'Block') {
-                //     $status = '<span class="badge badge-danger  badge-pill">' . $dat->status . '</span>';
-                // } else {
-                //     $status = '<span class="badge badge-warning badge-pill">' . $dat->status . '</span>';
-                // }
-
-                $customer_name=$dat->first_name.' '.$dat->last_name;
-                $nestedData['id'] = $i;
-                $nestedData['tour_number'] = $dat->tour_number;
-                $nestedData['tour_title'] = $dat->tour_title;
-                $nestedData['agent_name'] = $dat->agent_name;
-                $nestedData['first_name'] = $customer_name;
-                $nestedData['email'] = $dat->email;
-                $nestedData['mobile_number'] = $dat->mobile_number;
-                $nestedData['status'] = $status;
-                $data[] = $nestedData;
-                $i++;
-            }
-        }
-
-        $json_data = array(
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data,
-            'query' => $this->db->last_query()
-        );
-
-        echo json_encode($json_data);
-    }
-
-    // function getLists(){
-    //     $data = $row = array();
-        
-    //     // Fetch member's records
-    //     $memData = $this->member_1->getRows($_POST);
-        
-    //     $i = $_POST['start'];
-    //     foreach($memData as $member){
-    //         $i++;
-    //         $created = date( 'jS M Y', strtotime($member->created));
-    //         $status = ($member->status == 1)?'Active':'Inactive';
-    //         $data[] = array($i, $member->first_name, $member->last_name, $member->email, $member->gender, $member->country, $created, $status);
-    //     }
-        
-    //     $output = array(
-    //         "draw" => $_POST['draw'],
-    //         "recordsTotal" => $this->member_1->countAll(),
-    //         "recordsFiltered" => $this->member_1->countFiltered($_POST),
-    //         "data" => $data,
-    //     );
-        
-    //     // Output to JSON format
-    //     echo json_encode($output);
-    // }
-
-    
+	
 	public function import(){
                 $data = array();
                 $memData = array();

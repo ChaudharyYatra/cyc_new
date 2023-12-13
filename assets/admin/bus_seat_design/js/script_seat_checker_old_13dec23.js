@@ -23,8 +23,7 @@
             var temp_hold_seats_data=temp_hold_data;
             }else{
             var temp_hold_seats_data='';
-            }
-
+    // console.log('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq',array_data);
     var total_seat_count = array_data.total_seat_count;
     var new_first_string = array_data.first_cls_seats;
     var new_first_array = new_first_string.split(',');
@@ -40,8 +39,7 @@
 
     var admin_hold_string = array_data.admin_hold_seats;
     var admin_hold_array = admin_hold_string.split(',');
-    
-    console.log('admin_hold_arrayadmin_hold_arrayadmin_hold_array',admin_hold_array);
+    // console.log('admin_hold_arrayadmin_hold_arrayadmin_hold_array',admin_hold_array);
 
     var first_cls_cnt = new_first_array.length;
     var second_cls_cnt = new_second_array.length;
@@ -100,7 +98,7 @@
     }
 
     var def = [];
-for (var q = 1; q <= total_seat_count; q++) {
+    for (var q = 1; q <= total_seat_count; q++) {
     var q_string = q.toString();
 
     if ($.inArray(q_string, new_fourth_array) != '-1') {
@@ -108,10 +106,10 @@ for (var q = 1; q <= total_seat_count; q++) {
     } else {
         def.splice(q, q, '');
     }
-}
+    }
 
     var final=[];
-for(var p=0; p<total_seat_count; p++) {
+    for(var p=0; p<total_seat_count; p++) {
     add_p = parseInt(p) + parseInt(1);
     var p_string = add_p.toString();
 
@@ -127,7 +125,7 @@ for(var p=0; p<total_seat_count; p++) {
     else if($.inArray(p_string, new_fourth_array) != '-1') {
         final.push(def[p]);
     }
-}
+ }
 
     var final_filtered_a = final.filter(elm => elm);
 
@@ -1499,7 +1497,7 @@ for(var p=0; p<total_seat_count; p++) {
                                 
                                 
                                 
-// AAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVAAAAAAAAAAAAAAAAAAAAIIIIIIIIIIIIIIIIILLLLLLLLLLAAAAAAAAAABBBBBBBBBBLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                       
+            // AAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVAAAAAAAAAAAAAAAAAAAAIIIIIIIIIIIIIIIIILLLLLLLLLLAAAAAAAAAABBBBBBBBBBLLLLLLLLLLLEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE                       
                                 
                                 // else if(seat_type.indexOf(check_str_window_fourth)!=-1 && seat_type.indexOf(check_str_window_economy)==-1)
                                 // {
@@ -1880,7 +1878,7 @@ for(var p=0; p<total_seat_count; p++) {
 
 
 
-// SSSSSSSSSSSSSEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEECCCCCCCCCCCCCCCCCCCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+            // SSSSSSSSSSSSSEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEEEEECCCCCCCCCCCCCCCCCCCTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 
                                 else if(selected_cls.indexOf(check_str_window_fourth)!=-1 && selected_cls.indexOf(check_str_window_economy)==-1)
                                 {
@@ -2232,7 +2230,14 @@ for(var p=0; p<total_seat_count; p++) {
                                         $("[attr_win_remove=win_" + this.settings.id + "]").remove();
                                         total += parseInt(this.data().price);      
                                     }
-                                    
+                                    // else if(click_id != prev_seat_number_id && click_id == next_seat_number_id && click_id != current_seat_number_id
+                                    //     && current_prev_cls.indexOf(check_str)==-1 && current_next_cls.indexOf(check_str)!=-1
+                                    //     && current_cls.indexOf(check_str)!=-1 && ($.inArray('focused', current_next_cls_array) != '-1' 
+                                    //     || $.inArray('available', current_next_cls_array) != '-1') && $.inArray('selected', current_prev_cls_array) != '-1')
+                                    // {   
+                                    //     // alert('n12');
+                                    //     total += parseInt(this.data().price);    
+                                    // }
                                     else if(click_id != prev_seat_number_id && click_id == next_seat_number_id && click_id != current_seat_number_id
                                         && current_prev_cls.indexOf(check_str)!=-1 && current_cls.indexOf(check_str)!=-1
                                         && current_next_cls.indexOf(check_str)==-1  && ($.inArray('focused', current_next_cls_array) != '-1' 
@@ -2455,7 +2460,7 @@ for(var p=0; p<total_seat_count; p++) {
 
 
 
-// AAAAAAAAAAAAALLLLLLLLLLLLRRRRRRRRRRRRREEEEEEEEEEEEAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDYYYYYYYYYYYYYY SSSSSSSSSSSSSSSEEEEEEEEEEEEEEEEEELLLLLLLLLLLLEEEEEEEEEECCCCCCCCTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+            // AAAAAAAAAAAAALLLLLLLLLLLLRRRRRRRRRRRRREEEEEEEEEEEEAAAAAAAAAAAAAAAAADDDDDDDDDDDDDDDDDDDDDYYYYYYYYYYYYYY SSSSSSSSSSSSSSSEEEEEEEEEEEEEEEEEELLLLLLLLLLLLEEEEEEEEEECCCCCCCCTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
 
                                 else if(selected_cls.indexOf(check_str_window_fourth)!=-1 && selected_cls.indexOf(check_str_window_economy)==-1)
                                 {
@@ -2959,4 +2964,5 @@ for(var p=0; p<total_seat_count; p++) {
 
         $('#cart-item-' + last_row_first_idid).remove();
     }
-}    
+ }    
+}

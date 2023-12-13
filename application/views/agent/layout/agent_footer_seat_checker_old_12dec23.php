@@ -5,7 +5,7 @@
         <!--<b>Version</b> 3.2.0-->
     </div>
     <center><strong>Copyright &copy; <?php echo date(
-        'Y'
+        "Y"
     ); ?>.</strong> All rights reserved.</center>
 </footer>
 
@@ -19,17 +19,17 @@
 
 <script>
 
-<?php if (!empty($bus_info)) { ?>
+<?php if(!empty($bus_info)){ ?>
 
-var js_array =<?php echo json_encode($bus_info); ?>;
+var js_array =<?php echo json_encode($bus_info);?>;
 
 // console.log(js_array);
 
-  <?php } else { ?>
+  <?php   }else{ ?>
 
         var js_array=[];
 
-   <?php } ?>
+   <?php  } ?>
 
 </script>
 
@@ -130,12 +130,12 @@ var js_array =<?php echo json_encode($bus_info); ?>;
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
-<?php if ($bus_type == '2x2') { ?>
-    <script src="<?php echo base_url(); ?>assets/admin/bus_seat_design/js/jquery.seat-charts_seat_checker.js"></script>
-    <script src="<?php echo base_url(); ?>assets/admin/bus_seat_design/js/script_seat_checker.js"></script>
-<?php } elseif ($bus_type == '1x2') { ?>
-    <script src="<?php echo base_url(); ?>assets/admin/bus_seat_design/js/jquery.seat-charts_seat_checker_1by2.js"></script>
-    <script src="<?php echo base_url(); ?>assets/admin/bus_seat_design/js/script_seat_checker_1by2.js"></script>
+<?php if($bus_type=='2x2'){ ?>
+    <script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/jquery.seat-charts_seat_checker.js"></script>
+    <script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/script_seat_checker.js"></script>
+<?php }else if($bus_type=='1x2'){ ?>
+    <script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/jquery.seat-charts_seat_checker_1by2.js"></script>
+    <script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/script_seat_checker_1by2.js"></script>
 <?php } ?>
 
 <!-- Page specific script -->
@@ -273,15 +273,15 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     <?php
-    $this->db->where('id', $this->session->userdata('agent_sess_id'));
+    $this->db->where("id", $this->session->userdata("agent_sess_id"));
     $check_login_data = $this->master_model->getRecord(
-        'agent',
-        '',
-        'password_change'
+        "agent",
+        "",
+        "password_change"
     );
     if (
-        $check_login_data['password_change'] == 'no' &&
-        $this->router->fetch_method() == 'change_password'
+        $check_login_data["password_change"] == "no" &&
+        $this->router->fetch_method() == "change_password"
     ) { ?>
     $("#agent_change_password").modal("show");
     <?php }
@@ -462,15 +462,7 @@ $(document).ready(function() {
 
                 <tr>
                                     <td>
-                                    <input type="radio" id="yes" name="for_credentials[]" value="<?php echo $all_traveller_info_value[
-                                        'id'
-                                    ]; ?>" <?php if (
-    isset($all_traveller_info_value['for_credentials'])
-) {
-    if ($all_traveller_info_value['for_credentials'] == 'yes') {
-        echo 'checked';
-    }
-} ?>>
+                                    <input type="radio" id="yes" name="for_credentials[]" value="<?php echo $all_traveller_info_value['id']; ?>" <?php if(isset($all_traveller_info_value['for_credentials'])){if($all_traveller_info_value['for_credentials']=='yes'){echo "checked";}} ?>>
                             
                                     </td>
                                     <td><select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs">
@@ -490,7 +482,7 @@ $(document).ready(function() {
                                     </td>
                                     <td>
                                         <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date(
-                                            'Y-m-d'
+                                            "Y-m-d"
                                         ); ?>">
                                     </td>
                                     <td>
@@ -498,11 +490,11 @@ $(document).ready(function() {
                                     </td>
                                     <td>
                                         <input type="date" class="form-control row_set" name="anniversary_date[]" id="anniversary_date" max="<?php echo date(
-                                            'Y-m-d'
+                                            "Y-m-d"
                                         ); ?>" value="<?php if (
     !empty($all_traveller_info_value)
 ) {
-    echo $all_traveller_info_value['anniversary_date'];
+    echo $all_traveller_info_value["anniversary_date"];
 } ?>">
                                     </td>
                                     <td>
@@ -510,7 +502,7 @@ $(document).ready(function() {
                                             !empty($all_traveller_info_value)
                                         ) {
                                             echo $all_traveller_info_value[
-                                                'mobile_number'
+                                                "mobile_number"
                                             ];
                                         } ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                     </td>
@@ -522,9 +514,9 @@ $(document).ready(function() {
                                             as $relation_data_info
                                         ) { ?>
                                         <option value="<?php echo $relation_data_info[
-                                            'id'
+                                            "id"
                                         ]; ?>"><?php echo $relation_data_info[
-    'relation'
+    "relation"
 ]; ?></option>
                                         <?php } ?>
                                     </select>
@@ -684,9 +676,9 @@ $('#add_more').click(function() {
                         <option value="">Select Stationary Requirement</option>
                         <?php foreach ($stationary_data as $stationary) { ?> 
                                     <option value="<?php echo $stationary[
-                                        'id'
+                                        "id"
                                     ]; ?>"><?php echo $stationary[
-    'stationary_name'
+    "stationary_name"
 ]; ?></option> 
                                     <?php } ?>
                          </select>
@@ -1906,7 +1898,7 @@ $(document).ready(function() {
     //   alert(did); 
       // AJAX request
       $.ajax({
-        url:'<?= base_url() ?>agent/all_traveller_info/get_taluka',
+        url:'<?=base_url()?>agent/all_traveller_info/get_taluka',
         method: 'post',
         data: {did: did},
         dataType: 'json',
@@ -2643,15 +2635,7 @@ $(document).ready(function() {
                     </style>
                     <tr>
                                 <td>
-                                <input type="radio" id="yes" name="for_credentials[]" value="<?php echo $all_traveller_info_value[
-                                    'id'
-                                ]; ?>" <?php if (
-    isset($all_traveller_info_value['for_credentials'])
-) {
-    if ($all_traveller_info_value['for_credentials'] == 'yes') {
-        echo 'checked';
-    }
-} ?>>
+                                <input type="radio" id="yes" name="for_credentials[]" value="<?php echo $all_traveller_info_value['id']; ?>" <?php if(isset($all_traveller_info_value['for_credentials'])){if($all_traveller_info_value['for_credentials']=='yes'){echo "checked";}} ?>>
                           
                                 </td>
                                     <td><select class="select_css row_set1" name="mrandmrs[]" id="mrandmrs">
@@ -2671,7 +2655,7 @@ $(document).ready(function() {
                                     </td>
                                     <td>
                                         <input type="date" class="form-control row_set" name="dob[]" id="dob" max="<?php echo date(
-                                            'Y-m-d'
+                                            "Y-m-d"
                                         ); ?>">
                                     </td>
                                     <td>
@@ -2679,11 +2663,11 @@ $(document).ready(function() {
                                     </td>
                                     <td>
                                         <input type="date" class="form-control row_set" name="anniversary_date[]" id="anniversary_date" max="<?php echo date(
-                                            'Y-m-d'
+                                            "Y-m-d"
                                         ); ?>" value="<?php if (
     !empty($all_traveller_info_value)
 ) {
-    echo $all_traveller_info_value['anniversary_date'];
+    echo $all_traveller_info_value["anniversary_date"];
 } ?>">
                                     </td>
                                     <td>
@@ -2691,7 +2675,7 @@ $(document).ready(function() {
                                             !empty($all_traveller_info_value)
                                         ) {
                                             echo $all_traveller_info_value[
-                                                'mobile_number'
+                                                "mobile_number"
                                             ];
                                         } ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                     </td>
@@ -2706,9 +2690,9 @@ $(document).ready(function() {
                                             as $relation_data_info
                                         ) { ?>
                                         <option value="<?php echo $relation_data_info[
-                                            'id'
+                                            "id"
                                         ]; ?>"><?php echo $relation_data_info[
-    'relation'
+    "relation"
 ]; ?></option>
                                         <?php } ?>
                                     </select>
@@ -5015,46 +4999,33 @@ $('.data_amt').keyup(function(){
 
         var did = $('#pack_id').val();
         var checker_pack_id = $('#new_pack_date_id').val();
-        var seat_book_date_data=<?php echo json_encode($new_pack_date_id); ?>;
-        // alert(seat_book_date_data);
-        if(did!='')
-        {
-            $.ajax({
-                url:'<?= base_url() ?>agent/booking_basic_info/get_tourdate',
-                method: 'post',
-                data: {did: did},
-                dataType: 'json',
-                success: function(response){
-                console.log(response);
-                $('#pack_date_id').find('option').not(':first').remove();
-                $.each(response,function(index,data){     
-                    
-                var optionValue = data['id'];
-                var optionText = data['journey_date'];
-
-                    $('#pack_date_id').append('<option value="'+optionValue+'">'+optionText+'</option>');
-                    // if(data['id']==checker_pack_id)
-                    // {
-                    //             $('#pack_date_id').val(checker_pack_id);
-                    // }
-                    if (optionValue == seat_book_date_data) {
-                        $('#pack_date_id').val(optionValue);
-                    }
-                });
-                }
-            });
-            $('#pack_id').trigger('change');
+        if(did!=''){
+  $.ajax({
+    url:'<?=base_url()?>agent/booking_basic_info/get_tourdate',
+    method: 'post',
+    data: {did: did},
+    dataType: 'json',
+    success: function(response){
+    console.log(response);
+      $('#pack_date_id').find('option').not(':first').remove();
+      $.each(response,function(index,data){      
+         $('#pack_date_id').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
+         if(data['id']==checker_pack_id)
+         {
+                    $('#pack_date_id').val(checker_pack_id);
+         }
+      });
+    }
+ });
+ $('#pack_id').trigger('change');
         }
-
-
-        
 
     $('#pack_id').change(function(){
 
     var did = $(this).val();
 
       $.ajax({
-        url:'<?= base_url() ?>agent/booking_basic_info/get_tourdate',
+        url:'<?=base_url()?>agent/booking_basic_info/get_tourdate',
         method: 'post',
         data: {did: did},
         dataType: 'json',
@@ -5350,11 +5321,11 @@ $(document).ready(function(){
 <script type='text/javascript'>
 
   $(document).ready(function(){
-    <?php if (!empty($bus_info)) { ?>
-        var js_array1 =<?php echo json_encode($final_booked_data); ?>;
-  <?php } else { ?>
+    <?php if(!empty($bus_info)){ ?>
+        var js_array1 =<?php echo json_encode($final_booked_data);?>;
+  <?php   }else{ ?>
         var js_array1=[];
-   <?php } ?>
+   <?php  } ?>
 
     var booke_data = $('#booked_data').val();
     var is_main_page = $('#is_main_page').val();
@@ -5562,7 +5533,7 @@ $(document).ready(function(){
   $(".booknow_submit").click(function() {  
 
         var enq_id =  $("#domestic_enquiry_id").val();
-        window.location.href = "<?= base_url() ?>agent/booking_preview/index/"+enq_id;
+        window.location.href = "<?=base_url()?>agent/booking_preview/index/"+enq_id;
 
                 });  
       });  
@@ -5577,11 +5548,11 @@ $(document).ready(function(){
 $(document).ready(function(){
 
 
-    <?php if (!empty($bus_info)) { ?>
-        var temp_array =<?php echo json_encode($temp_booking_data); ?>;
-  <?php } else { ?>
+    <?php if(!empty($bus_info)){ ?>
+        var temp_array =<?php echo json_encode($temp_booking_data);?>;
+  <?php   }else{ ?>
         var temp_array=[];
-   <?php } ?>
+   <?php  } ?>
 // alert(temp_array);
 
   var temp_booke_data = $('#temp_booked_data').val();

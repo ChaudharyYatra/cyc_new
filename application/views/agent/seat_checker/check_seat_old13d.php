@@ -116,13 +116,13 @@
                                   // die;
                                   ?>  
 
-                                  <?php if(count($tour_no_title) == 1 && empty($new_pack_id)){ ?>
+                                  <?php if(count($tour_no_title) == 1 && empty($final_seat_book_data)){ ?>
                                     <?php foreach($tour_no_title as $tour_no_title_info){ ?>
                                     <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$tour_no_title_info['package_id']){
                                     echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
                                     <?php } ?>
-                                  <?php } else if(!empty($new_pack_id)){?>
-                                    <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
+                                  <?php } else if(!empty($final_seat_book_data)){?>
+                                    <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$final_seat_book_data){
                                     echo "selected";} ?>><?php echo $packages_data_booking['tour_title'];?></option>
                                   <?php }else{?>
                                     <option value="<?php echo $packages_data_booking['package_id'];?>" <?php if($packages_data_booking['package_id']==$new_pack_id){
@@ -225,7 +225,10 @@
                       var temp_booking_data_id=<?php echo json_encode($temp_booking_data_id);?>;
                     </script>
 
-                    
+                    <!-- <input type="hidden" id="admin_hold_data" value='<?php //print_r($admin_hold_data); ?>'>
+                    <script>
+                      var admin_hold_data=<?php //echo json_encode($admin_hold_data);?>;
+                    </script> -->
 
                     
                           <h2>Booking Details</h2>

@@ -64,18 +64,31 @@ class Seat_checker extends CI_Controller {
         $this->db->where('bus_seat_book.is_active','yes');
         $this->db->where('enquiry_id',$iid);
         $bus_seat_book_data = $this->master_model->getRecord('bus_seat_book','',$fields);
+        // echo $bus_seat_book_data['package_id'];
+        // die;
+        // $final_seat_book_data=array();
+        // foreach($bus_seat_book_data as $booking_data)
+        // {
+        //     array_push($final_seat_book_data, $booking_data['package_id']);
+        // }
 
         $fields = "bus_seat_book.tour_dates";
         $this->db->where('bus_seat_book.is_deleted','no');
         $this->db->where('bus_seat_book.is_active','yes');
         $this->db->where('enquiry_id',$iid);
         $bus_seat_book_date_data = $this->master_model->getRecord('bus_seat_book','',$fields);
+        // $final_seat_book_date_data=array();
+        // foreach($bus_seat_book_date_data as $booking_date_data)
+        // {
+        //     array_push($final_seat_book_date_data, $booking_date_data['tour_dates']);
+        // }
 
         $final_booked_data=array();
         $temp_booking_data=array();
         $temp_booking_data_id=array();
         $bus_info=array();
-      
+        // $bus_seat_book_data=array();
+        // $bus_seat_book_date_data=array();
         
         $p='yes';
         
@@ -157,15 +170,16 @@ class Seat_checker extends CI_Controller {
                 
 
 
-            $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
-                       third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
-                       third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
-            $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.dummy_vehicle_id','left');
-            $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
-            $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.dummy_vehicle_id','left');
-            $this->db->where('package_id',$pack_id);
-            $this->db->where('package_date_id',$pack_date_id );
-            $bus_info = $this->master_model->getRecord('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
+                $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
+                third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
+                third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
+     $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.dummy_vehicle_id','left');
+     $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
+     $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.dummy_vehicle_id','left');
+     $this->db->where('package_id',$pack_id);
+     $this->db->where('package_date_id',$pack_date_id );
+     $bus_info = $this->master_model->getRecord('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
+
 
             if($bus_info==''){
                 $this->session->set_flashdata('error_message',"Bus is not open, Please cantact to admin.");
@@ -183,17 +197,9 @@ class Seat_checker extends CI_Controller {
             }
         }else if(!$this->input->post('submit'))
         {
-            if(!empty($bus_seat_book_data) || !empty($bus_seat_book_date_data) )
-            {
-                $pack_id    = $bus_seat_book_data['package_id']; 
-                $pack_date_id    = $bus_seat_book_date_data['tour_dates']; 
-            }else if(empty($bus_seat_book_data) || empty($bus_seat_book_date_data) )
-            {
-                $pack_id= ''; 
-                $pack_date_id= ''; 
-            }
-            
-// die;
+            $pack_id    = $bus_seat_book_data['package_id']; 
+            $pack_date_id    = $bus_seat_book_date_data['tour_dates']; 
+
             $fields = "bus_seat_book.seat_orignal_id";
             $this->db->where('bus_seat_book.package_id',$pack_id);
             $this->db->where('bus_seat_book.is_book','yes');
@@ -214,7 +220,6 @@ class Seat_checker extends CI_Controller {
             foreach($temp_booked_seats_data as $temp_booked_data){
                 array_push($temp_booking_data, $temp_booked_data['seat_orignal_id']);
             }
-
             $fields = "bus_seat_book.seat_id";
             $this->db->where('bus_seat_book.package_id',$pack_id);
             $this->db->where('bus_seat_book.enquiry_id',$iid);
@@ -261,26 +266,26 @@ class Seat_checker extends CI_Controller {
             
 
 
-        $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
-                   third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
-                   third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
-        $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.dummy_vehicle_id','left');
-        $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
-        $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.dummy_vehicle_id','left');
-        $this->db->where('package_id',$pack_id);
-        $this->db->where('package_date_id',$pack_date_id );
-        $bus_info = $this->master_model->getRecord('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
+            $fields = "bus_open.*,vehicle_details_dummy.*,vehicle_seat_preference_dummy.total_seat_count,first_cls_seats,second_cls_seats,
+            third_cls_seats,fourth_cls_seats,first_class_price,second_class_price,
+            third_class_price,fourth_class_price,window_class_price,vehicle_seat_preference_dummy.vehicle_id,bus_type.bus_type";
+ $this->db->join("vehicle_details_dummy", 'vehicle_details_dummy.id=bus_open.dummy_vehicle_id','left');
+ $this->db->join("bus_type", 'bus_type.id=vehicle_details_dummy.vehicle_bus_type','left');
+ $this->db->join("vehicle_seat_preference_dummy", 'vehicle_seat_preference_dummy.vehicle_id=bus_open.dummy_vehicle_id','left');
+ $this->db->where('package_id',$pack_id);
+ $this->db->where('package_date_id',$pack_date_id );
+ $bus_info = $this->master_model->getRecord('bus_open',array('bus_open.is_deleted'=>'no'),$fields);
+//  print_r($bus_info); die;
 
-        // $pack_id    = $bus_seat_book_data['package_id']; 
-        // $pack_date_id    = $bus_seat_book_date_data['tour_dates']; 
-        if($bus_info=='' && $pack_id=='' && $pack_date_id==''){
-            // $this->session->set_flashdata('error_message',"Bus is not open, Please cantact to admin.");
-            $p='yes';
-            $bus_type= '';
-        }else{
-            $p='no';
-            $bus_type= $bus_info['bus_type'];
-        }
+
+        // if($bus_info==''){
+        //     $this->session->set_flashdata('error_message',"Bus is not open, Please cantact to admin.");
+        //     $p='yes';
+        //     $bus_type= '';
+        // }else{
+        //     $p='no';
+        //     $bus_type= $bus_info['bus_type'];
+        // }
         } 
 
         $this->arr_view_data['tour_no_title'] = $tour_no_title;
@@ -289,8 +294,8 @@ class Seat_checker extends CI_Controller {
         $this->arr_view_data['new_pack_date_id'] = $pack_date_id;
         $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
         $this->arr_view_data['listing_page'] = 'yes';
-        // $this->arr_view_data['final_seat_book_data'] = $pack_id;
-        // $this->arr_view_data['final_seat_book_date_data'] = $pack_date_id;
+        $this->arr_view_data['final_seat_book_data'] = $bus_seat_book_data['package_id'];
+        $this->arr_view_data['final_seat_book_date_data'] = $bus_seat_book_date_data['tour_dates'];
         $this->arr_view_data['final_booked_data'] = $final_booked_data;
         $this->arr_view_data['temp_booking_data'] = $temp_booking_data;
         $this->arr_view_data['temp_booking_data_id'] = $temp_booking_data_id;

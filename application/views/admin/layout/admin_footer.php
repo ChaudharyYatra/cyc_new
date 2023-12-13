@@ -108,6 +108,40 @@
   });
 </script>
 
+<script>
+    $(document).ready(function () {
+    	
+        $('#memListTable').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            //dom: 'Bfrtip',
+            ajax: {
+                url: "<?php echo base_url('admin/booking_enquiry/ajax_list'); ?>",
+                dataType: "json",
+                type: "POST",
+            },
+            columns: [
+                {data: "id"},
+                {data: "tour_number"},
+                {data: "tour_title"},
+                {data: "agent_name"},
+                {data: "first_name"},
+                {data: "email"},
+                {data: "mobile_number"},
+                {data: "status"}
+                // {data: "created_at"},
+                // {data: "action"}
+            ],
+            "aaSorting": [[ 0, "desc" ]],
+            "lengthMenu": [[10, 50, 100, 500], [10, 50, 100, 500]],
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        });
+
+    });
+
+</script>
+
 
 <script>
   $(function () {
@@ -10319,3 +10353,4 @@ $('#vehicle_details_admin').validate({ // initialize the plugin
 });
 
 </script>
+
