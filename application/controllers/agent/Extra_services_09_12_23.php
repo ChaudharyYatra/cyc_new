@@ -5,7 +5,7 @@
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Srs_form extends CI_Controller {
+class Extra_services extends CI_Controller {
 	 
 	function __construct() {
 
@@ -14,13 +14,14 @@ class Srs_form extends CI_Controller {
         { 
                 redirect(base_url().'agent/login'); 
         }
-        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/srs_form";
+        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/extra_services";
         $this->module_url_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_url_path_back    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
-        $this->module_title       = "Booking Confirmation OTP";
-        $this->module_view_folder = "srs_form/";
+        $this->module_url_booking_preview   =  base_url().$this->config->item('agent_panel_slug')."/booking_preview";
+        $this->module_title       = "Extra Services";
+        $this->module_view_folder = "extra_services/";
         $this->arr_view_data = [];
 	 }
 
@@ -90,15 +91,6 @@ class Srs_form extends CI_Controller {
         $this->db->where('is_active','yes');
         $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
-
-
-        // $fields = "booking_payment_details.*,booking_payment_details.id as book_pay_details_id,return_customer_booking_payment_details.*,return_customer_booking_payment_details.id as return_custom_details_id,extra_services_details.*,extra_services_details.id as extra_services_details_id";
-        // $this->db->where('booking_payment_details.is_deleted','no');
-        // $this->db->where('booking_payment_details.enquiry_id',$iid);
-        // $this->db->join("return_customer_booking_payment_details", 'booking_payment_details.id=return_customer_booking_payment_details.booking_payment_details_id','left');
-        // $this->db->join("extra_services_details", 'booking_payment_details.enquiry_id=extra_services_details.enquiry_id','left');
-        // $booking_preview_fetch_data = $this->master_model->getRecords('booking_payment_details',array('booking_payment_details.is_deleted'=>'no'),$fields);
-        // // print_r($booking_preview_fetch_data); die;
         
         $this->db->where('is_deleted','no');
         $this->db->where('extra_services_details.enquiry_id',$iid);
@@ -175,342 +167,152 @@ class Srs_form extends CI_Controller {
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
 
     }
-    public function cust_otp_back_btn()
+    public function extra_services($iid)
     { 
         // echo 'hiiiii IN Controller'; die;
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
-            $booking_amt = $this->input->post('booking_amt');
-            $final_amt = $this->input->post('final_amt');
-            $payment_type = $this->input->post('payment_type');
+        if($this->input->post('extra_services'))
+        {
             $mobile_no = $this->input->post('mobile_no');
-            $pending_amt = $this->input->post('pending_amt');
-            $select_transaction = $this->input->post('select_transaction');
-            // print_r($select_transaction);
-            
-            $upi_holder_name = $this->input->post('upi_holder_name');
-            $upi_payment_type = $this->input->post('upi_payment_type');
-            // print_r($upi_holder_name); die;
-            $upi_self_no = $this->input->post('upi_self_no');
-            $upi_reason = $this->input->post('upi_reason');
-
-            $qr_holder_name = $this->input->post('qr_holder_name');
-            $qr_mobile_number = $this->input->post('qr_mobile_number');
-            $qr_payment_type = $this->input->post('qr_payment_type');
-            $qr_upi_no = $this->input->post('qr_upi_no');
-
-
-            $upi_no = $this->input->post('upi_no');
-            $cheque = $this->input->post('cheque');
-            $bank_name = $this->input->post('bank_name');
-            $drawn_on_date = $this->input->post('drawn_on_date');
-
-            $netbanking_payment_type = $this->input->post('netbanking_payment_type');
-            $net_banking_acc_no = $this->input->post('net_banking_acc_no');
-            $net_acc_holder_nm = $this->input->post('net_acc_holder_nm');
-            $net_banking_branch_name = $this->input->post('net_banking_branch_name');
-            $net_banking_utr_no = $this->input->post('net_banking_utr_no');
-            $netbanking_bank_name = $this->input->post('netbanking_bank_name');
-            $netbanking_date = $this->input->post('netbanking_date');
-
-            // $cash_2000 = $this->input->post('cash_2000');
-            // $total_cash_2000 = $this->input->post('total_cash_2000');
-            $cash_500 = $this->input->post('cash_500');
-            $total_cash_500 = $this->input->post('total_cash_500');
-            $cash_200 = $this->input->post('cash_200');
-            $total_cash_200 = $this->input->post('total_cash_200');
-            $cash_100 = $this->input->post('cash_100');
-            $total_cash_100 = $this->input->post('total_cash_100');
-            $cash_50 = $this->input->post('cash_50');
-            $total_cash_50 = $this->input->post('total_cash_50');
-            $cash_20 = $this->input->post('cash_20');
-            $total_cash_20 = $this->input->post('total_cash_20');
-            $cash_10 = $this->input->post('cash_10');
-            $total_cash_10 = $this->input->post('total_cash_10');
-            $cash_5 = $this->input->post('cash_5');
-            $total_cash_5 = $this->input->post('total_cash_5');
-            $cash_2 = $this->input->post('cash_2');
-            $total_cash_2 = $this->input->post('total_cash_2');
-            $cash_1 = $this->input->post('cash_1');
-            $total_cash_1 = $this->input->post('total_cash_1');
-            $total_cash_amt = $this->input->post('total_cash_amt');
-
-
-            $return_cash_500 = $this->input->post('return_cash_500');
-            $return_total_cash_500 = $this->input->post('return_total_cash_500');
-            $return_cash_200 = $this->input->post('return_cash_200');
-            $return_total_cash_200 = $this->input->post('return_total_cash_200');
-            $return_cash_100 = $this->input->post('return_cash_100');
-            $return_total_cash_100 = $this->input->post('return_total_cash_100');
-            $return_cash_50 = $this->input->post('return_cash_50');
-            $return_total_cash_50 = $this->input->post('return_total_cash_50');
-            $return_cash_20 = $this->input->post('return_cash_20');
-            $return_total_cash_20 = $this->input->post('return_total_cash_20');
-            $return_cash_10 = $this->input->post('return_cash_10');
-            $return_total_cash_10 = $this->input->post('return_total_cash_10');
-            $return_cash_5 = $this->input->post('return_cash_5');
-            $return_total_cash_5 = $this->input->post('return_total_cash_5');
-            $return_cash_2 = $this->input->post('return_cash_2');
-            $return_total_cash_2 = $this->input->post('return_total_cash_2');
-            $return_cash_1 = $this->input->post('return_cash_1');
-            $return_total_cash_1 = $this->input->post('return_total_cash_1');
-            $return_total_cash_amt = $this->input->post('return_total_cash_amt');
-
-            
-
             $enquiry_id = $this->input->post('enquiry_id');
-            $traveller_id = $this->input->post('traveller_id');
-            $package_id = $this->input->post('package_id');
-            $journey_date = $this->input->post('journey_date');
-            $package_date_id = $this->input->post('package_date_id');
-            
 
             $extra_sevices_id = $this->input->post('extra_sevices_id');
-            $booking_payment_details_id = $this->input->post('booking_payment_details_id');
-            $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
 
+        // $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+        //================================================================================================================== 
+       
+        $extra_services = $this->input->post('extra_services');
+            // print_r($extra_services); die;
+        if($this->input->post('select_services')!=''){
+           $select_services = implode(",",$this->input->post('select_services'));
+        }else{
+           $select_services = '';
+        }    
 
-                //     $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+       $selected_services=explode(',',$select_services);
 
-                //     $alphabet = '1234567890';
-                //     $otp = str_shuffle($alphabet);
-                //     $traveler_otp = substr($otp, 0, '6'); 
+       // print_r($selected_services); 
+       // $ccc=count($selected_services);
+       
+       for($i=0;$i<count($selected_services);$i++){
+           
+        $arr_insert2 = array(
+           'select_services' => $selected_services[$i],
+           'extra_services' => $extra_services,
+           'enquiry_id' => $enquiry_id
+       );
 
-                //     $from_email='test@choudharyyatra.co.in';
-                    
-                //     $authKey = "1207168241267288907";
-                    
-                // $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-                // $senderId  = "CYCPLN";
-                
-                // $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
-                
-                //  $apiurl = str_replace(" ", '%20', $apiurl); 
-                    
-                    
-                //     $ch = curl_init($apiurl);
-                //             $get_url = $apiurl;
-                //             curl_setopt($ch, CURLOPT_POST,0);
-                //             curl_setopt($ch, CURLOPT_URL, $get_url);
-                //             curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                //             curl_setopt($ch, CURLOPT_HEADER,0);
-                //             curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-                //     $return_val = curl_exec($ch); 
-                    
-            
-                $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+        $this->db->where('is_deleted', 'no');
+        $this->db->where('extra_services_details.enquiry_id', $enquiry_id);
+        $existing_services_details = $this->master_model->getRecords('extra_services_details');
+        if(!empty($existing_services_details)){
+        foreach ($existing_services_details as $existing_service) {
+        if (in_array($existing_service['select_services'], $selected_services)) {
+            $arr_insert2 = array(
+                'extra_services' => $extra_services
+            );
 
-                $arr_insert = array(
-                    // 'booking_reference_no'  =>  $booking_reference_no,
-                    'final_amt'   =>   $final_amt,
-                    'payment_type'   =>   $payment_type,
-                    'booking_amt'   =>   $booking_amt,
-                    'pending_amt'   =>   $pending_amt,
-                    'booking_tm_mobile_no'   =>   $mobile_no,
-                    'select_transaction'   =>   $select_transaction,
-                    
-                    'UPI_holder_name'   =>   $upi_holder_name,
-                    'upi_payment_type'   =>   $upi_payment_type,
-                    'UPI_transaction_no'   =>   $upi_self_no,
-                    'UPI_reason'   =>   $upi_reason,
+        $arr_where = array("id" => $existing_service['id']);
+        $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
 
-                    'QR_holder_name'   =>   $qr_holder_name,
-                    'QR_mobile_number'   =>   $qr_mobile_number,
-                    'QR_payment_type'   =>   $qr_payment_type,
-                    'QR_transaction_no'   =>   $qr_upi_no,
+        $key = array_search($existing_service['select_services'], $selected_services);
+        unset($selected_services[$key]);
+        } else {
+        $arr_update = array(
+            'select_services' => $selected_services[$i],
+        );
 
-                    'upi_no'   =>   $upi_no,
-                    'cheque'   =>   $cheque,
-                    'bank_name'   =>   $bank_name,
-                    'drawn_on_date'   =>   $drawn_on_date,
-
-                    'netbanking_payment_type'   =>   $netbanking_payment_type,
-                    'net_banking_acc_no'   =>   $net_banking_acc_no,
-                    'net_banking_acc_holder_nm'   =>   $net_acc_holder_nm,
-                    'net_banking_branch_name'   =>   $net_banking_branch_name,
-                    'net_banking'   =>   $net_banking_utr_no,
-                    'netbanking_bank_name'   =>   $netbanking_bank_name,
-                    'netbanking_date'   =>   $netbanking_date,
-
-                    'booking_reference_no'  =>  $booking_reference_no,
-                    'package_date_id' => $package_date_id,
-                    'enquiry_id' => $enquiry_id,
-                    'package_id' => $package_id,
-                    'traveller_id' => $traveller_id,
-
-                    // 'select_services' => $select_services,
-                    // 'extra_services' => $extra_services,
-
-                    // 'cash_2000'   =>   $cash_2000,
-                    // 'total_cash_2000'   =>   $total_cash_2000,
-                    'cash_500'   =>   $cash_500,
-                    'total_cash_500'   =>   $total_cash_500,
-                    'cash_200'   =>   $cash_200,
-                    'total_cash_200'   =>   $total_cash_200,
-                    'cash_100'   =>   $cash_100,
-                    'total_cash_100'   =>   $total_cash_100,
-                    'cash_50'   =>   $cash_50,
-                    'total_cash_50'   =>   $total_cash_50,
-                    'cash_20'   =>   $cash_20,
-                    'total_cash_20'   =>   $total_cash_20,
-                    'cash_10'   =>   $cash_10,
-                    'total_cash_10'   =>   $total_cash_10,
-
-                    'cash_5'   =>   $cash_5,
-                    'total_cash_5'   =>   $total_cash_5,
-                    'cash_2'   =>   $cash_2,
-                    'total_cash_2'   =>   $total_cash_2,
-                    'cash_1'   =>   $cash_1,
-                    'total_cash_1'   =>   $total_cash_1,
-                    'total_cash_amt'   =>   $total_cash_amt,
-
-                    // 'traveler_otp'   =>   $traveler_otp,
-                    // 'booking_status'   =>  'confirm'
-                );
-
-                $this->db->where('is_deleted','no');
-                $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
-                $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
-                // print_r($booking_payment_details); die;
-                
-                // print_r($arr_insert); die;
-                if(!empty($booking_payment_details)){
-                    $arr_where     = array("id" => $booking_payment_details_id);
-                    $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
-                }else{
-                    $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
-                 $insertid = $this->db->insert_id();
-                }
-                
-                if($select_transaction == 'CASH'){
-                 $arr_insert_return = array(
-                    'select_transaction'   =>   $select_transaction,
-
-                    'return_cash_500'   =>   $return_cash_500,
-                    'return_total_cash_500'   =>   $return_total_cash_500,
-                    'return_cash_200'   =>   $return_cash_200,
-                    'return_total_cash_200'   =>   $return_total_cash_200,
-                    'return_cash_100'   =>   $return_cash_100,
-                    'return_total_cash_100'   =>   $return_total_cash_100,
-                    'return_cash_50'   =>   $return_cash_50,
-                    'return_total_cash_50'   =>   $return_total_cash_50,
-                    'return_cash_20'   =>   $return_cash_20,
-                    'return_total_cash_20'   =>   $return_total_cash_20,
-                    'return_cash_10'   =>   $return_cash_10,
-                    'return_total_cash_10'   =>   $return_total_cash_10,
-
-                    'return_cash_5'   =>   $return_cash_5,
-                    'return_total_cash_5'   =>   $return_total_cash_5,
-                    'return_cash_2'   =>   $return_cash_2,
-                    'return_total_cash_2'   =>   $return_total_cash_2,
-                    'return_cash_1'   =>   $return_cash_1,
-                    'return_total_cash_1'   =>   $return_total_cash_1,
-                    'return_total_cash_amt'   =>   $return_total_cash_amt,
-                    'enquiry_id' => $enquiry_id,
-                    'booking_payment_details_id'   =>   $insertid
-                );
-                // print_r($arr_insert); die;
-
-                $this->db->where('is_deleted','no');
-                $this->db->where('return_customer_booking_payment_details.enquiry_id',$enquiry_id);
-                $return_customer_booking_payment_details = $this->master_model->getRecord('return_customer_booking_payment_details');
-                // print_r($return_customer_booking_payment_details); die;
-
-                if(!empty($return_customer_booking_payment_details)){
-                    $arr_where     = array("id" => $return_customer_booking_payment_id);
-                    $inserted_id = $this->master_model->updateRecord('return_customer_booking_payment_details',$arr_insert_return,$arr_where);
-                } else{
-                $inserted_id = $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert_return,true);
-                }
+        $arr_where = array("id" => $existing_service['id']);
+        $this->master_model->updateRecord('extra_services_details', $arr_update, $arr_where);
             }
-                // $arr_update = array(
-                //     'booking_reference_no'  =>  $booking_reference_no
-                // );
-                // $arr_where     = array("id" => $enquiry_id);
-                // $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
-
-                    //================================================================================================================== 
-                
-                    $extra_services = $this->input->post('extra_services');
-
-                    if($this->input->post('select_services')!=''){
-                    $select_services = implode(",",$this->input->post('select_services'));
-                    }else{
-                    $select_services = '';
-                    }    
-
-                $selected_services=explode(',',$select_services);
-
-                // print_r($selected_services); 
-                // $ccc=count($selected_services);
-                
-                for($i=0;$i<count($selected_services);$i++){
-                    
+        }
+            }else{
+                foreach ($selected_services as $selected_service) {
                     $arr_insert2 = array(
-                    'select_services' => $selected_services[$i],
-                    'extra_services' => $extra_services,
-                    // 'booking_reference_no'  =>  $booking_reference_no,
-                    // 'package_date_id' => $package_date_id,
-                    'enquiry_id' => $enquiry_id,
-                    // 'package_id' => $package_id,
-                    // 'traveller_id' => $traveller_id
-                );
-
-                    $this->db->where('is_deleted', 'no');
-                    $this->db->where('extra_services_details.enquiry_id', $enquiry_id);
-                    $existing_services_details = $this->master_model->getRecords('extra_services_details');
-                if(!empty($existing_services_details)){
-                    foreach ($existing_services_details as $existing_service) {
-                    if (in_array($existing_service['select_services'], $selected_services)) {
-                        $arr_insert2 = array(
-                            'extra_services' => $extra_services,
-                        );
-
-                    $arr_where = array("id" => $existing_service['id']);
-                    $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
-
-                    $key = array_search($existing_service['select_services'], $selected_services);
-                    unset($selected_services[$key]);
-                } else {
-                    $arr_update = array(
-                        'select_services' => $selected_services[$i],
+                        'select_services' => $selected_service,
+                        'extra_services'  => $extra_services,
+                        'enquiry_id'      => $enquiry_id,
                     );
-
-                    $arr_where = array("id" => $existing_service['id']);
-                    $this->master_model->updateRecord('extra_services_details', $arr_update, $arr_where);
+                $inserted_id = $this->master_model->insertRecord('extra_services_details',$arr_insert2,true);
                 }
             }
-                }else{
-                    foreach ($selected_services as $selected_service) {
-                        $arr_insert2 = array(
-                            'select_services' => $selected_service,
-                            'extra_services'  => $extra_services,
-                            'enquiry_id'      => $enquiry_id,
-                        );
-                    $inserted_id = $this->master_model->insertRecord('extra_services_details',$arr_insert2,true);
-                    }
-                }
-                    // $this->db->where('is_deleted','no');
-                    // $this->db->where('extra_services_details.enquiry_id',$enquiry_id);
-                    // $this->db->where('extra_services_details.select_services', $selected_services[$i]);
-                    // $extra_services_details = $this->master_model->getRecords('extra_services_details');
-                    // // print_r($extra_services_details); die;
-
-                    // if(!empty($extra_services_details)){
-                    //     $arr_where     = array("id" => $extra_services_details[0]['id']);
-                    //     $inserted_id = $this->master_model->updateRecord('extra_services_details',$arr_insert2,$arr_where);
-                    // } else{
-                    
-                    // }
-            }
-            if($inserted_id!=''){
-            echo true;
-        }else {
-            echo false;
+        }
+   
+        if($inserted_id > 0)
+        {    
+            $this->session->set_flashdata('success_message',"Final Booking Done Successfully.");
+            redirect($this->module_url_booking_preview.'/index/'.$enquiry_id);
+        }
+        else
+        {
+            $this->session->set_flashdata('error_message'," Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+        }
+        redirect($this->module_url_path.'/index');
         }
 
-                
+
+        $record = array();
+        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id";
+        $this->db->where('booking_basic_info.is_deleted','no');
+        $this->db->where('domestic_enquiry_id',$iid);
+        $this->db->join("packages", 'packages.id=booking_basic_info.tour_no','left');
+        $this->db->join("package_date", 'package_date.id=booking_basic_info.tour_date','left');
+        $this->db->join("package_hotel", 'package_hotel.package_id=packages.id','left');
+        $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
+
+        $fields = "extra_services_details.*,special_req_master.id as special_req_id,special_req_master.service_name";
+            $this->db->where('extra_services_details.is_deleted','no');
+            $this->db->where('extra_services_details.enquiry_id',$iid);
+            // $this->db->group_by('extra_services');
+            $this->db->join("special_req_master", 'extra_services_details.select_services= special_req_master.id','left');
+            $extra_services_details = $this->master_model->getRecords('extra_services_details',array('extra_services_details.is_deleted'=>'no'),$fields);
+            // print_r($extra_services_details); die;
+
+            $extra=array();
+            foreach($extra_services_details as $special_req_master_data_value) 
+            { 
+                array_push($extra,$special_req_master_data_value);
+                // print_r($extra);
+            }
+                // print_r($extra);
+
+        $record = array();
+        $fields = "all_traveller_info.*,relation.relation";
+        $this->db->where('all_traveller_info.is_deleted','no');
+        $this->db->where('all_traveller_info.domestic_enquiry_id',$iid);
+        $this->db->join("relation", 'relation.id=all_traveller_info.all_traveller_relation','left');
+        $arr_data = $this->master_model->getRecords('all_traveller_info',array('all_traveller_info.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('extra_services_details.enquiry_id',$iid);
+        // $this->db->group_by('extra_services');
+        $extra_services = $this->master_model->getRecord('extra_services_details');
+        // print_r($extra_services); die;
+
+        $record = array();
+        $fields = "special_req_master.*";
+        $this->db->where('special_req_master.is_deleted','no');
+        $this->db->where('special_req_master.is_active','yes');
+        $special_req_master_data = $this->master_model->getRecords('special_req_master',array('special_req_master.is_deleted'=>'no'),$fields);
+        // print_r($special_req_master_data); die;
+
+        $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
+        $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
+        $this->arr_view_data['extra_services_details']        = $extra_services_details;
+        $this->arr_view_data['extra_services']        = $extra_services;
+        $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
+        $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['action']          = 'extra_services';
+        $this->arr_view_data['page_title']      = " extra_services ".$this->module_title;
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_booking_preview'] = $this->module_url_booking_preview;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
+        $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+                    
     }
 
 
@@ -824,7 +626,7 @@ class Srs_form extends CI_Controller {
             $agent_sess_name = $this->session->userdata('agent_name');
             $id=$this->session->userdata('agent_sess_id');
                 
-                // $booking_tm_mobile_no = $this->input->post('booking_tm_mobile_no');
+                $booking_tm_mobile_no = $this->input->post('booking_tm_mobile_no');
                 $crediential_mobile_no = $this->input->post('crediential_mobile_no');
 
                 $enquiry_id = $this->input->post('enquiry_id');
@@ -893,6 +695,44 @@ class Srs_form extends CI_Controller {
 
             $booking_payment_details_id = $this->input->post('booking_payment_details_id');
 
+            // $extra_services = $this->input->post('extra_services');
+            // $select_services = $this->input->post('select_services');
+
+            // if ($this->input->post('select_services')) {
+            //     $select_services = implode(",", $this->input->post('select_services'));
+            // } else {
+            //     $select_services = '';
+            // }
+            
+            // $extra_services = $this->input->post('extra_services'); // Make sure $extra_services is defined
+            
+            // $selected_services = explode(',', $select_services);
+
+            // foreach ($selected_services as $selected_service) {
+            //     $arr_insert2 = array(
+            //         'select_services' => $selected_service,
+            //         'extra_services' => $extra_services,
+            //         'enquiry_id' => $enquiry_id,
+            //     );
+
+                
+            //     $existing_service = $this->master_model->getRecord('extra_services_details', array('select_services' => $selected_service, 'enquiry_id' => $enquiry_id));
+
+            //     // print_r($existing_service);
+            //     // die;
+            //     if (!empty($existing_service)) {
+            //         // Update existing record
+            //         // echo 'if';
+            //         $arr_where = array("id" => $existing_service['id']);
+            //         $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
+            //     } else {
+            //         // Insert new record
+            //         // echo 'else';
+            //         $inserted_id = $this->master_model->insertRecord('extra_services_details', $arr_insert2, true);
+            //     }
+            // }
+            
+// die;
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
@@ -927,6 +767,69 @@ class Srs_form extends CI_Controller {
                 // print_r($arr_insert); die;
                     $arr_where     = array("enquiry_id" => $enquiry_id);
                     $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+
+            // -------------------------------------------------------------------------------------------------
+                    // $extra_services = $this->input->post('extra_services');
+                    // print_r($extra_services); die;
+
+            //         if($this->input->post('select_services')!=''){
+            //            $select_services = implode(",",$this->input->post('select_services'));
+            //         }else{
+            //            $select_services = '';
+            //         }    
+            
+            //        $selected_services=explode(',',$select_services);
+            
+            //        // print_r($selected_services); 
+            //        // $ccc=count($selected_services);
+                   
+            //        for($i=0;$i<count($selected_services);$i++){
+                       
+            //         $arr_insert2 = array(
+            //            'select_services' => $selected_services[$i],
+            //            'extra_services' => $extra_services[$i],
+            //            // 'booking_reference_no'  =>  $booking_reference_no,
+            //            // 'package_date_id' => $package_date_id,
+            //            'enquiry_id' => $enquiry_id,
+            //            // 'package_id' => $package_id,
+            //            // 'traveller_id' => $traveller_id
+            //        );
+            
+            //         $this->db->where('is_deleted', 'no');
+            //         $this->db->where('extra_services_details.enquiry_id', $enquiry_id);
+            //         $existing_services_details = $this->master_model->getRecords('extra_services_details');
+            //     if(!empty($existing_services_details)){
+            //         foreach ($existing_services_details as $existing_service) {
+            //         if (in_array($existing_service['select_services'], $selected_services)) {
+            //             $arr_insert2 = array(
+            //                 'extra_services' => $extra_services,
+            //             );
+            
+            //         $arr_where = array("id" => $existing_service['id']);
+            //         $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
+            
+            //         $key = array_search($existing_service['select_services'], $selected_services);
+            //         unset($selected_services[$key]);
+            //     } else {
+            //         $arr_update = array(
+            //             'select_services' => $selected_services[$i],
+            //         );
+            
+            //         $arr_where = array("id" => $existing_service['id']);
+            //         $this->master_model->updateRecord('extra_services_details', $arr_update, $arr_where);
+            //     }
+            // }
+            //     }else{
+            //         foreach ($selected_services as $selected_service) {
+            //             $arr_insert2 = array(
+            //                 'select_services' => $selected_service,
+            //                 'extra_services'  => $extra_services,
+            //                 'enquiry_id'      => $enquiry_id,
+            //             );
+            //         $inserted_id = $this->master_model->insertRecord('extra_services_details',$arr_insert2,true);
+            //         }
+            //     }
+            // }
         if($inserted_id!=''){   
            echo true;
 
@@ -1032,10 +935,48 @@ class Srs_form extends CI_Controller {
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
-            $verify_otp = $this->input->post('verify_otp');
-            $enquiry_id = $this->input->post('enquiry_id'); 
+             $verify_otp = $this->input->post('verify_otp');
+             $mobile_no = $this->input->post('mobile_no'); 
+             $enquiry_id = $this->input->post('enquiry_id'); 
+            // echo $booking_ref_no = $this->input->post('booking_ref_no');  die;
+
             $crediential_mobile_no = $this->input->post('crediential_mobile_no');
-		    
+		    $extra_services = $this->input->post('extra_services');
+            $selected_services = $this->input->post('select_services');
+            // print_r($select_services); die;
+
+
+            $extra_services = $this->input->post('extra_services'); // Make sure $extra_services is defined
+            
+            // $selected_services = explode(',', $select_services);
+
+            foreach ($selected_services as $selected_service) {
+                $arr_insert2 = array(
+                    'select_services' => $selected_service,
+                    'extra_services' => $extra_services,
+                    'enquiry_id' => $enquiry_id,
+                );
+
+                
+                $existing_service = $this->master_model->getRecord('extra_services_details', array('select_services' => $selected_service, 'enquiry_id' => $enquiry_id));
+
+                // print_r($existing_service);
+                // die;
+                if (!empty($existing_service)) {
+                    // Update existing record
+                    // echo 'if';
+                    $arr_where = array("id" => $existing_service['id']);
+                    $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
+                } else {
+                    // Insert new record
+                    // echo 'else';
+                    $inserted_id = $this->master_model->insertRecord('extra_services_details', $arr_insert2, true);
+                }
+            }
+
+            // echo $crediential_mobile_no; 
+            // echo $enquiry_id;
+            // echo $verify_otp; die;
             $record = array();
             $fields = "booking_payment_details.*";
             $this->db->where('is_deleted','no');
@@ -1100,5 +1041,7 @@ class Srs_form extends CI_Controller {
             }else {
                 echo 'false';
             }
+// die;
+        
     }
 }

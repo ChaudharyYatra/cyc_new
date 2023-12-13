@@ -60,8 +60,7 @@
                         <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_booking_enquiry_data_info['id']; ?>">
                     <?php } ?>
             <div class="d-flex justify-content-center">
-                <a href="<?php echo $module_final_booking; ?>/index"><button type="button" class="btn btn-primary mb-3" name="submit" id="submit">Submit</button></a>
-                <button type="button" class="btn btn-primary mb-3 button_css" name="submit" id="submit">Procced for Receipt</button>
+                <a href="<?php echo $module_booking_payment_details; ?>/index/<?php echo $enquiry_id; ?>"><button type="button" class="btn btn-primary mb-3 button_css" name="confirm_submit" id="confirm_submit">Procced for Receipt</button></a>
             </div>
         </div>
         <div class="col-md-1"></div>

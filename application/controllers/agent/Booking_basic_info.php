@@ -37,7 +37,6 @@ class Booking_basic_info extends CI_Controller {
         
          $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
-        //  $this->arr_view_data['arr_data']        = $arr_data;
          $this->arr_view_data['page_title']      = $this->module_title." List";
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
