@@ -513,7 +513,25 @@ class Booking_payment_details extends CI_Controller {
                  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
                  $insertid = $this->db->insert_id();
                 }
-                
+
+
+                $arr_insert = array(
+                    'payment_confirmed_status'   =>  'Pending'
+                );
+                $record = array();
+                $fields = "final_booking.*";
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+
+                if(!empty($final_booking_details)){
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
+
         if($inserted_id!=''){
            echo true;
 
@@ -934,11 +952,6 @@ class Booking_payment_details extends CI_Controller {
             $this->db->where('enquiry_id',$enquiry_id);
             $booking_payment_details_info = $this->master_model->getRecord('booking_payment_details');
 
-            $record = array();
-            $fields = "final_booking.*";
-            $this->db->where('is_deleted','no');
-            $this->db->where('enquiry_id',$enquiry_id);
-            $final_booking_details = $this->master_model->getRecord('final_booking');
 
             // print_r($booking_payment_details_info); die;
 
@@ -965,9 +978,16 @@ class Booking_payment_details extends CI_Controller {
                     'traveller_id'   =>   $traveller_id,
                     'booking_reference_no'  =>  $booking_reference_no,
                     'agent_id'   =>   $id,
-                    'booking_status'   =>  'confirm'
+                    'payment_confirmed_status'   =>  'Payment Completed'
                 );
               
+                $record = array();
+                $fields = "final_booking.*";
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+
+                // print_r($final_booking_details); die;
 
                 if(!empty($final_booking_details)){
                 $arr_where     = array("enquiry_id" => $enquiry_id);

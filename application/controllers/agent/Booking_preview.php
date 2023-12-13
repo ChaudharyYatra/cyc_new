@@ -204,12 +204,20 @@ class Booking_preview extends CI_Controller {
                 'traveller_id' => $traveller_id,
                 'package_date_id' => $package_date_id,
                 'agent_id'   =>  $id
-                // 'booking_status'   =>  'confirm'
             );
-            
-            $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
 
             
+            $this->db->where('is_deleted','no');
+            $this->db->where('enquiry_id',$enquiry_id);
+            $final_booking_details = $this->master_model->getRecord('final_booking');
+
+            if(!empty($final_booking_details)){
+                $arr_where     = array("enquiry_id" => $enquiry_id);
+                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+            }else{
+             $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+             $insertid = $this->db->insert_id();
+            }
 
             $arr_insert = array(
                 'enquiry_id' => $enquiry_id,
@@ -217,7 +225,6 @@ class Booking_preview extends CI_Controller {
                 'traveler_id' => $traveller_id,
                 'package_date_id' => $package_date_id,
                 'take_enquiry_by_agent_id'   =>  $id
-                // 'tour_status'   =>  'confirm'
             );
             $this->db->where('is_deleted','no');
             $this->db->where('confirm_booking.traveler_id',$traveller_id);
@@ -239,7 +246,6 @@ class Booking_preview extends CI_Controller {
                     'traveller_id' => $traveller_id,
                     'package_date_id' => $package_date_id,
                     'booking_preview_status'   =>  'Done'
-                    // 'booking_status'   =>  'confirm'
                 );
                 // print_r($arr_insert); die;
 

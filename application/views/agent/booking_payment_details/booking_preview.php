@@ -197,22 +197,22 @@
                                     
                                 </tr>
 
-                                <tr>
+                                <tr id="payment_type_tr" style='display:contents;'>
                                     <th>Payment Type</th>
-                                    <td>&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance" <?php if(!empty($booking_payment_details['payment_type'])){if("Advance" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Advance
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part" <?php if(!empty($booking_payment_details['payment_type'])){if("Part" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Part
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full" <?php if(!empty($booking_payment_details['payment_type'])){if("Full" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Full</td>
+                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance" <?php if(!empty($booking_payment_details['payment_type'])){if("Advance" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Advance
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part" <?php if(!empty($booking_payment_details['payment_type'])){if("Part" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Part
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full" <?php if(!empty($booking_payment_details['payment_type'])){if("Full" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Full</td>
                                     
                                 </tr>
 
-                                <tr>
+                                <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Booking Amount</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_amt'];} ?>" required onkeyup="validate()">
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>
                                     <td>
                                     <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
@@ -221,10 +221,8 @@
 
                                 <tr>
                                     <th>Payment</th>
-                                    <td>&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value); 
-                                  this.blur();' value="Now">&nbsp;&nbsp;Now
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value); 
-                                  this.blur();' value="Later">&nbsp;&nbsp;Later
+                                    <td>&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Now">&nbsp;&nbsp;Now
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later
                                     </td>
                                     
                                 </tr>

@@ -8168,11 +8168,19 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
         var mob_no_div=document.getElementById('cheque_tr');
         var cash_no_div=document.getElementById('cash_tr');
 
+        var payment_type_tr=document.getElementById('payment_type_tr');
+        var booking_amount_tr=document.getElementById('booking_amount_tr');
+        var pending_amount_tr=document.getElementById('pending_amount_tr');
+
         if (val == 'Now') {
             element_tr_now.style.display = 'contents';
             element_div_now.style.display = 'block';
             element_tr_later.style.display = 'none';
             give_reson_submit.style.display = 'none';
+            payment_type_tr.style.display = 'contents';
+            booking_amount_tr.style.display = 'table-row';
+            pending_amount_tr.style.display = 'table-row';
+
         } else if (val == 'Later') {
             element_tr_now.style.display = 'none';
             element_div_now.style.display = 'none';
@@ -8182,7 +8190,9 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
             upi_no_div.style.display = 'none';
             rq_div.style.display = 'none';
             mob_no_div.style.display = 'none';
-            cash_no_div.style.display = 'none';
+            payment_type_tr.style.display = 'none';
+            booking_amount_tr.style.display = 'none';
+            pending_amount_tr.style.display = 'none';
 
         } else {
             element_tr_now.style.display = 'none';
@@ -8193,6 +8203,7 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
         }
 
         element_select.value = "";
+
     }
 </script>
 <!-- booking payment details hide and show part -->
@@ -8641,6 +8652,7 @@ function later_reason(element){
     }
 }
 </script>
+
 
 
 

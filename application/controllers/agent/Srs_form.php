@@ -1073,7 +1073,19 @@ class Srs_form extends CI_Controller {
                 );
                 // print_r($arr_insert); die;
                 // $arr_where     = array("enquiry_id" => $enquiry_id);
-                $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert, true);
+                $record = array();
+                $fields = "final_booking.*";
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+
+                if(!empty($final_booking_details)){
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
 
                 $arr_update = array(
                     'booking_done'   =>   'yes'
