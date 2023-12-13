@@ -5383,9 +5383,6 @@ $(document).ready(function() {
             booking_amt: {
                 required: true,
             },
-            payment_now_later: {
-                required: true,
-            },
             booking_tm_mobile_no:{
                 required: true,
                 validMobile: true
@@ -5430,9 +5427,6 @@ $(document).ready(function() {
             },
             booking_amt: {
                 required: "Please booking amount",
-            },
-            payment_now_later: {
-                required: "Please select Payment",
             },
             extra_services:{
                 required: "Please select yes or no",
@@ -5570,7 +5564,7 @@ $(document).ready(function() {
         if (booking_tm_mobile_no != '') {
             // alert('IN hiiiii');
             $.ajax({
-                url: "<?php echo base_url(); ?>agent/booking_payment_details/send_otp",
+                url: "<?php echo base_url(); ?>agent/booking_preview/send_otp",
                 type: "post",
                 data: {
                     enquiry_id: enquiry_id,
@@ -5582,17 +5576,6 @@ $(document).ready(function() {
                         console.log(responce);
                         // alert(responce);
                         // var booking_ref_no = $('#booking_ref_no').val(responce);
-                        Swal.fire({
-                        title: 'Check OTP',
-                        text: 'Please check Resend OTP on mobile number: ' + booking_tm_mobile_no,
-                        icon: 'info',
-                        showCancelButton: false,
-                        confirmButtonText: 'OK',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Optionally, you can perform additional actions here
-                        }
-                    });
                         
                     }
                 }
@@ -5743,22 +5726,22 @@ $('#submit_otp').keyup(function(){
 </script> -->
 
 <script>
-// function validate() {
+function validate() {
     
-//     var valid = true;
-//     valid = checkEmpty($("#booking_tm_mobile_no")) && checkEmpty($("#booking_amt")) ;
+    var valid = true;
+    valid = checkEmpty($("#booking_tm_mobile_no")) && checkEmpty($("#booking_amt")) ;
     
-//         // $("#select_transaction").click(function() {
-//         //   if($("select").val() == '' && valid!='')
-//         //   $("#submit_otp").prop( "disabled", true);
-//         //   else $("#submit_otp").prop( "disabled", false);
-//         // });
+        // $("#select_transaction").click(function() {
+        //   if($("select").val() == '' && valid!='')
+        //   $("#submit_otp").prop( "disabled", true);
+        //   else $("#submit_otp").prop( "disabled", false);
+        // });
      
-//           $("#submit_otp").attr("disabled", true);
-//           if (valid) {
-//               $("#submit_otp").attr("disabled", false);
-//           }
-//   }
+          $("#submit_otp").attr("disabled", true);
+          if (valid) {
+              $("#submit_otp").attr("disabled", false);
+          }
+  }
   
     //   $("#select_transaction").click(function() {
     //       if($("select").val() == '')
@@ -6128,7 +6111,7 @@ $(document).ready(function(){
 
         //                   console.log('now done');
 
-                          window.location.href = "<?=base_url()?>agent/extra_services/index/"+enq_id;
+                          window.location.href = "<?=base_url()?>agent/extra_services/extra_services/"+enq_id;
 
                     //      }
 
@@ -6239,7 +6222,7 @@ function empty() {
 
 <script>
     $(document).ready(function(){ 
-    const target = document.getElementById('payment_final_booking_submit');
+    const target = document.getElementById('final_booking_submit');
     target.disabled = true;
     $('#otp').on('keyup', function() {
         
@@ -7012,6 +6995,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 <script>
 $(document).ready(function() {
     $("#back-button_booking_preview").click(function() {
+
         var enquiry_id = $('#enquiry_id').val();
         var package_id = $('#package_id').val();
         var journey_date = $('#journey_date').val();
@@ -7037,10 +7021,10 @@ $(document).ready(function() {
                     if (responce != false && responce !='') {
                         // alert(responce);
                         var booking_ref_no = $('#booking_ref_no').val(responce);
-                        window.location.href = "<?=base_url()?>agent/extra_services/index/"+enquiry_id;
+                        window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+enquiry_id;
 
                     }
-                    window.location.href = "<?=base_url()?>agent/extra_services/index/"+enquiry_id;
+                    window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+enquiry_id;
                 }
             });
     // }
@@ -7402,7 +7386,7 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
         // $("#all_traveller_info").validate().resetForm();  error
         // jQuery('#all_traveller_info').unbind('submit').submit();
 
-        window.location.href = "<?=base_url()?>agent/extra_services/index/"+iid;
+        window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+iid;
         // window.history.back();
     }
 });
@@ -7414,6 +7398,10 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
     $(document).ready(function() {
         $("#booking_submit_otp").click(function() {
             var crediential_mobile_no = $('#crediential_mobile_no').val();
+            // var srs_remark = $('#srs_remark').val();
+            // var final_amt = $('#final_amt').val();
+            // var booking_amt = $('#booking_amt').val();
+            // var pending_amt = $('#pending_amt').val();
             var enquiry_id = $('#enquiry_id').val();
             var package_id = $('#package_id').val();
             var journey_date = $('#journey_date').val();
@@ -7421,14 +7409,28 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
             var traveller_id = $('#traveller_id').val();
             var booking_payment_details_id = $('#booking_payment_details_id').val();
 
+            // var extra_services = $('input[name="extra_services"]:checked').val();
+            // // alert(extra_services);
+            // var select_services = $('#select_services').val();
+            // alert(select_services);
+            // var select_services_array = (typeof select_services === 'string' && select_services !== '') ? select_services.split(',') : [];
+            // alert(select_services_array);
+
             var formData = new FormData();
             formData.append('enquiry_id', enquiry_id);
+            // formData.append('srs_remark', srs_remark);
             formData.append('booking_payment_details_id', booking_payment_details_id);
             formData.append('package_id', package_id);
             formData.append('journey_date', journey_date);
             formData.append('package_date_id', package_date_id);
             formData.append('traveller_id', traveller_id);
+            // formData.append('booking_amt', booking_amt);
+            // formData.append('final_amt', final_amt);
             formData.append('crediential_mobile_no', crediential_mobile_no);
+
+            // formData.append('extra_services', extra_services);
+            // // formData.append('select_services', select_services);
+            // formData.append('select_services', select_services);
 
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/srs_form/booking_confirm_otp",
@@ -7507,21 +7509,21 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
 $(document).ready(function() {
     $("#booking_re_send_otp").click(function() {
         // alert('hiiiiiiiiiii');
-        // var booking_tm_mobile_no = $('#mobile_no').val();  
+        var booking_tm_mobile_no = $('#mobile_no').val();  
         var crediential_mobile_no = $('#crediential_mobile_no').val();  
         var enquiry_id = $('#enquiry_id').val();
         
         // alert(booking_tm_mobile_no);
         // alert(enquiry_id);
 
-        if (crediential_mobile_no != '') {
+        if (booking_tm_mobile_no != '') {
             // alert('IN hiiiii');
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/srs_form/booking_resend_otp",
                 type: "post",
                 data: {
                     enquiry_id: enquiry_id,
-                    // booking_tm_mobile_no: booking_tm_mobile_no,
+                    booking_tm_mobile_no: booking_tm_mobile_no,
                     crediential_mobile_no: crediential_mobile_no
                 },
                 dataType: 'json',
@@ -7546,8 +7548,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
 <!-- <script>
     $('#booking_confirm_submit').click(function(){
         // Toggle visibility
@@ -7560,14 +7560,51 @@ $(document).ready(function() {
     $("#booking_confirm_submit").click(function() {
 
     var verify_otp = $("#booking_otp").val(); 
+    // alert(verify_otp);
+    var mobile_no = $('#mobile_no').val();
+    // var booking_ref_no = $('#booking_ref_no').val(); 
+    // alert(mobile_no);
     var enquiry_id = $('#enquiry_id').val(); 
+    // alert(enquiry_id);
+    
+    
     var journey_date  = $("#journey_date").val();
+    
     var traveller_id  = $("#traveller_id").val();
+    // alert(traveller_id);
+    var enquiry_id    = $("#enquiry_id").val();
     var hotel_name_id    = $("#hotel_name_id").val();
     var package_date_id    = $("#package_date_id").val();
     var package_id    = $("#package_id").val();
+    // alert(package_id);
 
     var crediential_mobile_no = $('#crediential_mobile_no').val();
+    var extra_services = $('input[name="extra_services"]:checked').val();
+    
+    var select_services = [''];
+    // alert(select_services);
+    if(extra_services == 'yes'){    
+    var select_services = $('#select_services').val();
+    }
+    //  alert(select_services);
+    if (!extra_services) {
+        // If extra_services is empty, show SweetAlert
+        Swal.fire({
+            title: 'Error',
+            text: 'Please select extra services',
+            icon: 'error',
+        });
+        return;
+    }
+
+    if (extra_services === 'yes' && select_services.length === 0) {
+    Swal.fire({
+      title: 'Please Select Services',
+      text: 'You must select at least one service.',
+      icon: 'error',
+    });
+    return;
+    }
     
     if (verify_otp != '') {
         $.ajax({
@@ -7575,10 +7612,14 @@ $(document).ready(function() {
             url: '<?= base_url() ?>agent/srs_form/booking_confirm_verify_otp',
             data: {
                 verify_otp: verify_otp,
+                mobile_no: mobile_no,
                 crediential_mobile_no: crediential_mobile_no,
+                extra_services: extra_services,
+                select_services: select_services,
                 enquiry_id: enquiry_id,
                 journey_date: journey_date,
                 traveller_id: traveller_id,
+                enquiry_id: enquiry_id,
                 hotel_name_id: hotel_name_id,
                 package_date_id: package_date_id,
                 package_id: package_id
@@ -7611,23 +7652,6 @@ $(document).ready(function() {
         });
     }
     
-});
-</script>
-
-<script>
-document.getElementById("booking_confirm_back").addEventListener("click", function() {
-    var iid = $("#enquiry_id").val();
-    
-    if (confirm('Are You Sure You Want Without booking confirm go back?')) {
-        // User clicked "OK," do nothing or submit the form here
-        window.location.href = "<?=base_url()?>agent/booking_preview/index/"+iid;
-    } else {
-        // $("#all_traveller_info").validate().resetForm();  error
-        // jQuery('#all_traveller_info').unbind('submit').submit();
-
-        window.location.href = "<?=base_url()?>agent/srs_form/index/"+iid;
-        // window.history.back();
-    }
 });
 </script>
 
@@ -7676,565 +7700,65 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
 <!-- extra services ajax code  -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    $("#extra_service_submit").click(function() {
-    
-    // alert(other_services); die;
-    var enquiry_id = $('#enquiry_id').val();
-    var journey_date  = $("#journey_date").val();
-    var traveller_id  = $("#traveller_id").val();
-    var hotel_name_id    = $("#hotel_name_id").val();
-    var package_date_id    = $("#package_date_id").val();
-    var package_id    = $("#package_id").val();
-    // var crediential_mobile_no = $('#crediential_mobile_no').val();
-    var extra_services = $('input[name="extra_services"]:checked').val();
-    
-    var select_services = [''];
-    var other_services = '';
-    if(extra_services === 'yes'){    
-    var select_services = $('#select_services').val();
-    // alert(select_services);
-    // var other_services = $('#other_services').val();
-    if (select_services == 'Other'){
-        var other_services = $('#other_services').val();
-        // alert(other_services);
-        if(other_services == ''){
-        Swal.fire({
-            title: 'Please Enter Services',
-            text: 'Enter Other Services.',
-            icon: 'error',
-        });
-        return;
-    }
-    }
-    }
+    $("#extra_services").click(function() {
 
-    if (!extra_services) {
-        Swal.fire({
-            title: 'Error',
-            text: 'Please select extra services',
-            icon: 'error',
-        });
-        return;
-    }
-
-    if (extra_services === 'yes' && select_services.length === 0) {
-    Swal.fire({
-      title: 'Please Select Services',
-      text: 'You must select at least one service.',
-      icon: 'error',
-    });
-    return;
-    }
-
-    
-    
-        $.ajax({
-            type: "POST",
-            url: '<?= base_url() ?>agent/extra_services/booking_confirm_verify_otp2',
-            data: {
-                other_services: other_services,
-                extra_services: extra_services,
-                select_services: select_services,
-                enquiry_id: enquiry_id,
-                journey_date: journey_date,
-                traveller_id: traveller_id,
-                hotel_name_id: hotel_name_id,
-                package_date_id: package_date_id,
-                package_id: package_id
-            },
-            //  dataType: 'json',
-            //  cache: false,
-            success: function(response) {
-                // alert('hiiiiiii');
-                if (responce = true) {
-                        // alert('hioooooooooooooo');
-                        window.location.href = "<?= base_url() ?>agent/booking_preview/index/" + enquiry_id;
-                    }
-            },
-
-        });
-    
-});
-</script>
-<script type="text/javascript">
-    function tour_title(val){
-    var element=document.getElementById('other_service_div');
-	var element2=document.getElementById('other_services');
-    if(val=='Other')
-    element.style.display='block';
-    else  
-    element.style.display='none';
-	element2.value="";	
-    }
-</script>
-
-
-<!-- back button -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    document.getElementById("back_button_extra_services").addEventListener("click", function() {
-    var iid = $("#enquiry_id").val();
-    
-    if (confirm('Are You Sure You Want Save This Record?')) {
-        // User clicked "OK," do nothing or submit the form here
-    // $("#back_button_extra_services").click(function() {
-    
-    // alert(other_services); die;
-    var enquiry_id = $('#enquiry_id').val();
-    var journey_date  = $("#journey_date").val();
-    var traveller_id  = $("#traveller_id").val();
-    var hotel_name_id    = $("#hotel_name_id").val();
-    var package_date_id    = $("#package_date_id").val();
-    var package_id    = $("#package_id").val();
-    // var crediential_mobile_no = $('#crediential_mobile_no').val();
-    var extra_services = $('input[name="extra_services"]:checked').val();
-    
-    var select_services = [''];
-    if(extra_services === 'yes'){    
-    var select_services = $('#select_services').val();
-    // alert(select_services); die;
-
-    if (select_services == 'Other'){
-        var other_services = $('#other_services').val();
-        if(other_services == ''){
-        Swal.fire({
-            title: 'Please Enter Services',
-            text: 'Enter Other Services.',
-            icon: 'error',
-        });
-        return;
-    }
-    }
-    }
-
-    if (!extra_services) {
-        Swal.fire({
-            title: 'Error',
-            text: 'Please select extra services',
-            icon: 'error',
-        });
-        return;
-    }
-
-    if (extra_services === 'yes' && select_services.length === 0) {
-    Swal.fire({
-      title: 'Please Select Services',
-      text: 'You must select at least one service.',
-      icon: 'error',
-    });
-    return;
-    }
-
-    
-    
-        $.ajax({
-            type: "POST",
-            url: '<?= base_url() ?>agent/extra_services/booking_confirm_verify_otp_back_button',
-            data: {
-                other_services: other_services,
-                extra_services: extra_services,
-                select_services: select_services,
-                enquiry_id: enquiry_id,
-                journey_date: journey_date,
-                traveller_id: traveller_id,
-                hotel_name_id: hotel_name_id,
-                package_date_id: package_date_id,
-                package_id: package_id
-            },
-            //  dataType: 'json',
-            //  cache: false,
-            success: function(response) {
-                // alert('hiiiiiii');
-                if (responce = true) {
-                        // alert('hioooooooooooooo');
-                        window.location.href = "<?= base_url() ?>agent/seat_type_room_type/add_bus/" + enquiry_id;
-                    }
-            },
-
-        });
-    
-// });
-
-} else {
-        // $("#all_traveller_info").validate().resetForm();  error
-        // jQuery('#all_traveller_info').unbind('submit').submit();
-
-        window.location.href = "<?=base_url()?>agent/seat_type_room_type/add_bus/"+iid;
-        // window.history.back();
-    }
-
-});
-</script>
-<!-- extra services ajax code  -->
-
-<!-- booking payment details hide and show part -->
-<!-- <script type="text/javascript">
-    function payment_otp(val){
-    var element=document.getElementById('other_payment_mode_div');
-	var element2=document.getElementById('select_transaction');
-    if(val=='Now')
-    element.style.display='block';
-    else  
-    element.style.display='none';
-	element2.value="";	
-    }
-</script> -->
-
-<!-- <script type="text/javascript">
-    function payment_otp(val) {
-        var element_tr = document.getElementById('other_payment_mode_tr');
-        var element_div = document.getElementById('other_payment_mode_div');
-        var element_select = document.getElementById('select_transaction');
-
-        if (val == 'Now') {
-            element_tr.style.display = 'block';
-            element_div.style.display = 'block';
-        } else {
-            element_tr.style.display = 'none';
-            element_div.style.display = 'none';
-        }
-
-        element_select.value = "";
-    }
-    
-</script> -->
-
-
-<script type="text/javascript">
-    function payment_otp(val) {
-        var element_tr_now = document.getElementById('other_payment_mode_tr');
-        var element_div_now = document.getElementById('other_payment_mode_div');
-        var element_select = document.getElementById('select_transaction');
-        
-        var element_tr_later = document.getElementById('give_reason_tr');
-        var give_reson_submit = document.getElementById('give_reson_submit');
-
-        var element=document.getElementById('net_banking_tr');
-        var upi_no_div=document.getElementById('upi_no_div');
-        var rq_div=document.getElementById('rq_div');
-        var mob_no_div=document.getElementById('cheque_tr');
-        var cash_no_div=document.getElementById('cash_tr');
-
-        if (val == 'Now') {
-            element_tr_now.style.display = 'contents';
-            element_div_now.style.display = 'block';
-            element_tr_later.style.display = 'none';
-            give_reson_submit.style.display = 'none';
-        } else if (val == 'Later') {
-            element_tr_now.style.display = 'none';
-            element_div_now.style.display = 'none';
-            element_tr_later.style.display = 'contents';
-            give_reson_submit.style.display = 'block';
-            element.style.display = 'none';
-            upi_no_div.style.display = 'none';
-            rq_div.style.display = 'none';
-            mob_no_div.style.display = 'none';
-            cash_no_div.style.display = 'none';
-
-        } else {
-            element_tr_now.style.display = 'none';
-            element_div_now.style.display = 'none';
-            element_tr_later.style.display = 'none';
-            give_reson_submit.style.display = 'none';
-
-        }
-
-        element_select.value = "";
-    }
-</script>
-<!-- booking payment details hide and show part -->
-<!-- booking payemnt details send otp -->
-<script>
-$(document).ready(function() {
-    $("#submit_otp").click(function() {
-        // alert('hiiiiiiiiiii');
-        var mobile_no = $('#booking_tm_mobile_no').val();  
-        var final_amt = $('#final_amt').val();
-
-        var payment_type = $("input[name='payment_type']:checked").val();
-        var selectedId = "";
-        if (payment_type === undefined) {
-            // No radio button is checked, insert a default value
-            payment_type = ""; // You can change this to your desired default value
-        } else {
-            // Loop through radio buttons to find the one with the selected value
-            $("input[name='payment_type']").each(function() {
-                if ($(this).val() === payment_type) {
-                    selectedId = $(this).attr("id");
-                    return false; // Exit the loop once a match is found
-                }
-            });
-        }
-
-        var booking_amt = $('#booking_amt').val(); 
-        var pending_amt = $('#pending_amt').val();
-        // var payment_now_later = $('#payment_now_later').val();
-        var payment_now_later = $("input[name='payment_now_later']:checked").val();
-
-
-        var upi_no = $('#upi_no').val();
-        var cheque = $('#cheque').val();
-        var bank_name = $('#bank_name').val();
-        var drawn_on_date = $('#drawn_on_date').val();
-
-
-        // var netbanking_payment_type = $('#netbanking_payment_type').val();
-        var netbanking_payment_type = $("input[name='netbanking_payment_type']:checked").val();
-        var selectedId = "";
-        if (netbanking_payment_type === undefined) {
-            // No radio button is checked, insert a default value
-            netbanking_payment_type = ""; // You can change this to your desired default value
-        } else {
-            // Loop through radio buttons to find the one with the selected value
-            $("input[name='netbanking_payment_type']").each(function() {
-                if ($(this).val() === netbanking_payment_type) {
-                    selectedId = $(this).attr("id");
-                    return false; // Exit the loop once a match is found
-                }
-            });
-        }
-
-
-        // alert(netbanking_payment_type);
-        var net_banking_utr_no = $('#net_banking_utr_no').val();
-        var net_banking_acc_no = $('#net_banking_acc_no').val();
-        var net_acc_holder_nm = $('#net_acc_holder_nm').val();
-        var net_banking_branch_name = $('#net_banking_branch_name').val();
-        var netbanking_bank_name = $('#netbanking_bank_name').val();
-        var netbanking_date = $('#netbanking_date').val();
-
-        var upi_holder_name = $('#select_upi_no').val();
-        var upi_payment_type = $('#upi_payment_type').val();
-        // alert(upi_payment_type);
-        var upi_self_no = $('#self_upi_no').val();
-        var upi_reason = $('#reason').val();
-
-
-        var qr_holder_name = $('#select_qr_upi_no').val();
-        var qr_mobile_number = $('#qr_mobile_number').val();
-        var qr_payment_type = $('#qr_payment_type').val();
-        var qr_upi_no = $('#qr_upi_no').val();
-
-
-        var select_transaction =($('#select_transaction :selected').val());
-        // alert(select_transaction);
-        // var cash_2000 = $('#cash_2000').val();
-        // var total_cash_2000 = $('#total_cash_2000').val();
-        var cash_500 = $('#cash_500').val();
-        var total_cash_500 = $('#total_cash_500').val();
-        // alert(total_cash_500);
-        var cash_200 = $('#cash_200').val();
-        var total_cash_200 = $('#total_cash_200').val();
-        var cash_100 = $('#cash_100').val();
-        var total_cash_100 = $('#total_cash_100').val();
-        var cash_50 = $('#cash_50').val();
-        var total_cash_50 = $('#total_cash_50').val();
-        var cash_20 = $('#cash_20').val();
-        var total_cash_20 = $('#total_cash_20').val();
-        var cash_10 = $('#cash_10').val();
-        var total_cash_10 = $('#total_cash_10').val();
-
-        var cash_5 = $('#cash_5').val();
-        var total_cash_5 = $('#total_cash_5').val();
-        // alert(total_cash_5);
-        var cash_2 = $('#cash_2').val();
-        var total_cash_2 = $('#total_cash_2').val();
-        var cash_1 = $('#cash_1').val();
-        var total_cash_1 = $('#total_cash_1').val();
-
-        var total_cash_amt = $('#total_cash_amt').val();
-
-        var return_cash_500 = $('#return_cash_500').val();
-        var return_total_cash_500 = $('#return_total_cash_500').val();
-        // alert(return_total_cash_500);
-        var return_cash_200 = $('#return_cash_200').val();
-        var return_total_cash_200 = $('#return_total_cash_200').val();
-        var return_cash_100 = $('#return_cash_100').val();
-        var return_total_cash_100 = $('#return_total_cash_100').val();
-        var return_cash_50 = $('#return_cash_50').val();
-        var return_total_cash_50 = $('#return_total_cash_50').val();
-        var return_cash_20 = $('#return_cash_20').val();
-        var return_total_cash_20 = $('#return_total_cash_20').val();
-        var return_cash_10 = $('#return_cash_10').val();
-        var return_total_cash_10 = $('#return_total_cash_10').val();
-        var return_cash_5 = $('#return_cash_5').val();
-        var return_total_cash_5 = $('#return_total_cash_5').val();
-        var return_cash_2 = $('#return_cash_2').val();
-        var return_total_cash_2 = $('#return_total_cash_2').val();
-        var return_cash_1 = $('#return_cash_1').val();
-        var return_total_cash_1 = $('#return_total_cash_1').val();
-
-        var return_total_cash_amt = $('#return_total_cash_amt').val();
-
-        // alert(mobile_no);
-        var enquiry_id = $('#enquiry_id').val();
-        var package_id = $('#package_id').val();
-        var journey_date = $('#journey_date').val();
-        var package_date_id = $('#package_date_id').val();
-        var traveller_id = $('#traveller_id').val();
-
-
-        // var extra_sevices_id = $('#extra_sevices_id').val();
-        var booking_payment_details_id = $('#booking_payment_details_id').val();
-        var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
-
-        // var extra_services = $('input[name="extra_services"]:checked').val();
-
-        // if(extra_services=='yes'){
-        //     // alert('yessssssssssss');
-        //     var select_services = $('#select_services').val();
-        // }else {
-        //     // alert('nooooooooooooooooo');
-        //     var select_services =[];
-        // }
-
-        // alert(select_services);
-        
-        
-        // alert(extra_services); 
-        // alert(select_services); 
-        if (mobile_no != '') {
-            // alert('IN hiiiii');
-            $.ajax({
-                url: "<?php echo base_url(); ?>agent/booking_payment_details/cust_otp",
-                type: "post",
-                data: {
-                    enquiry_id: enquiry_id,
-                    // extra_sevices_id: extra_sevices_id,
-                    booking_payment_details_id: booking_payment_details_id,
-                    return_customer_booking_payment_id: return_customer_booking_payment_id,
-                    package_id: package_id,
-                    journey_date: journey_date,
-                    package_date_id: package_date_id,
-                    traveller_id: traveller_id,
-                    booking_amt: booking_amt,
-                    final_amt: final_amt,
-                    payment_type: payment_type,
-                    mobile_no: mobile_no,
-                    pending_amt: pending_amt,
-                    payment_now_later: payment_now_later,
-                    upi_no: upi_no,
-                    cheque: cheque,
-                    bank_name: bank_name,
-                    drawn_on_date: drawn_on_date,
-
-                    netbanking_payment_type: netbanking_payment_type,
-                    net_banking_acc_no: net_banking_acc_no,
-                    net_acc_holder_nm: net_acc_holder_nm,
-                    net_banking_branch_name: net_banking_branch_name,
-                    net_banking_utr_no: net_banking_utr_no,
-                    netbanking_bank_name: netbanking_bank_name,
-                    netbanking_date: netbanking_date,
-                    
-                    upi_holder_name: upi_holder_name,
-                    upi_payment_type: upi_payment_type,
-                    upi_self_no: upi_self_no,
-                    upi_reason: upi_reason,
-                    
-                    qr_holder_name: qr_holder_name,
-                    qr_mobile_number: qr_mobile_number,
-                    qr_payment_type: qr_payment_type,
-                    qr_upi_no: qr_upi_no,
-                    
-                    select_transaction: select_transaction,
-                    // cash_2000: cash_2000,
-                    // total_cash_2000: total_cash_2000,
-                    cash_500: cash_500,
-                    total_cash_500: total_cash_500,
-                    cash_200: cash_200,
-                    total_cash_200: total_cash_200,
-                    cash_100: cash_100,
-                    total_cash_100: total_cash_100,
-                    cash_50: cash_50,
-                    total_cash_50: total_cash_50,
-                    cash_20: cash_20,
-                    total_cash_20: total_cash_20,
-                    cash_10: cash_10,
-                    total_cash_10: total_cash_10,
-                    cash_5: cash_5,
-                    total_cash_5: total_cash_5,
-                    cash_2: cash_2,
-                    total_cash_2: total_cash_2,
-                    cash_1: cash_1,
-                    total_cash_1: total_cash_1,
-                    total_cash_amt: total_cash_amt,
-
-                    return_cash_500: return_cash_500,
-                    return_total_cash_500: return_total_cash_500,
-                    return_cash_200: return_cash_200,
-                    return_total_cash_200: return_total_cash_200,
-                    return_cash_100: return_cash_100,
-                    return_total_cash_100: return_total_cash_100,
-                    return_cash_50: return_cash_50,
-                    return_total_cash_50: return_total_cash_50,
-                    return_cash_20: return_cash_20,
-                    return_total_cash_20: return_total_cash_20,
-                    return_cash_10: return_cash_10,
-                    return_total_cash_10: return_total_cash_10,
-                    return_cash_5: return_cash_5,
-                    return_total_cash_5: return_total_cash_5,
-                    return_cash_2: return_cash_2,
-                    return_total_cash_2: return_total_cash_2,
-                    return_cash_1: return_cash_1,
-                    return_total_cash_1: return_total_cash_1,
-                    return_total_cash_amt: return_total_cash_amt,
-
-                    // select_services: select_services,
-                    // extra_services: extra_services
-                },
-                // dataType: 'json',
-                success: function(responce) {
-                    if (responce != false && responce !='') {
-                        // alert(responce);
-                        var booking_ref_no = $('#booking_ref_no').val(responce);
-                        Swal.fire({
-                        title: 'Check OTP',
-                        text: 'Please check OTP on mobile number: ' + mobile_no,
-                        icon: 'info',
-                        showCancelButton: false,
-                        confirmButtonText: 'OK',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Optionally, you can perform additional actions here
-                        }
-                    });
-                    }
-                }
-            });
-        }
-    });
-});
-</script>
-<!-- booking payemnt details send otp -->
-<!-- booking payemnt details verify otp -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-$("#payment_final_booking_submit").click(function() {
-
-    var verify_otp = $("#otp").val();
-    var mobile_no = $('#booking_tm_mobile_no').val(); 
+    var verify_otp = $("#booking_otp").val(); 
+    // alert(verify_otp);
+    var mobile_no = $('#mobile_no').val();
     // var booking_ref_no = $('#booking_ref_no').val(); 
-    // alert(booking_ref_no);
+    // alert(mobile_no);
     var enquiry_id = $('#enquiry_id').val(); 
+    // alert(enquiry_id);
     
     
     var journey_date  = $("#journey_date").val();
     
     var traveller_id  = $("#traveller_id").val();
+    // alert(traveller_id);
     var enquiry_id    = $("#enquiry_id").val();
     var hotel_name_id    = $("#hotel_name_id").val();
     var package_date_id    = $("#package_date_id").val();
     var package_id    = $("#package_id").val();
     // alert(package_id);
 
+    var crediential_mobile_no = $('#crediential_mobile_no').val();
+    var extra_services = $('input[name="extra_services"]:checked').val();
+    
+    var select_services = [''];
+    // alert(select_services);
+    if(extra_services == 'yes'){    
+    var select_services = $('#select_services').val();
+    }
+    //  alert(select_services);
+    if (!extra_services) {
+        // If extra_services is empty, show SweetAlert
+        Swal.fire({
+            title: 'Error',
+            text: 'Please select extra services',
+            icon: 'error',
+        });
+        return;
+    }
+
+    if (extra_services === 'yes' && select_services.length === 0) {
+    Swal.fire({
+      title:'Please Select Services',
+      text: 'You must select at least one service.',
+      icon: 'error',
+    });
+    return;
+    }
+    
     if (verify_otp != '') {
         $.ajax({
             type: "POST",
-            url: '<?= base_url() ?>agent/booking_payment_details/verify_otp',
+            url: '<?= base_url() ?>agent/srs_form/booking_confirm_verify_otp',
             data: {
                 verify_otp: verify_otp,
                 mobile_no: mobile_no,
-                // booking_ref_no: booking_ref_no,
+                crediential_mobile_no: crediential_mobile_no,
+                extra_services: extra_services,
+                select_services: select_services,
                 enquiry_id: enquiry_id,
                 journey_date: journey_date,
                 traveller_id: traveller_id,
@@ -8246,149 +7770,64 @@ $("#payment_final_booking_submit").click(function() {
             //  dataType: 'json',
             //  cache: false,
             success: function(response) {
-                    if (response == true) {
+                // alert(response);
+                if (response == 'true') {
+                    // Replace the standard alert with SweetAlert success message
                     Swal.fire({
-                        title: 'Success',
-                        text: 'Verify OTP Successfully',
+                        title: 'Verify OTP Successfully',
                         icon: 'success',
-                        confirmButtonText: 'OK'
                     }).then((result) => {
+                        // Redirect to the specified URL after the user clicks "OK"
                         if (result.isConfirmed) {
-                            $("#submit_otp").prop('disabled', true);
-                            window.location.href = "<?= base_url() ?>agent/payment_receipt/index/"+enquiry_id;
+                            window.location.href = "<?= base_url() ?>agent/extra_services/extra_services/" + enquiry_id;
                         }
                     });
                 } else {
                     Swal.fire({
-                        title: 'Error',
-                        text: 'You Entered Wrong OTP. Please check it and submit the correct OTP',
+                        title: 'Wrong OTP',
+                        text: 'You Entered Wrong OTP. Please check it and submit the right OTP',
                         icon: 'error',
-                        confirmButtonText: 'OK'
                     });
                 }
             },
-
         });
     }
     
 });
 </script>
-<!-- booking payemnt details verify otp -->
-<!-- booking payemnt details submit and proceed -->
-<script>
-$(document).ready(function() {
-    $("#reason_submit_button").click(function() {
-        // alert('hiiiiiiiiiii');
-        var mobile_no = $('#booking_tm_mobile_no').val();  
-        var final_amt = $('#final_amt').val();
-
-        var payment_type = $("input[name='payment_type']:checked").val();
-        var selectedId = "";
-        if (payment_type === undefined) {
-            // No radio button is checked, insert a default value
-            payment_type = ""; // You can change this to your desired default value
-        } else {
-            // Loop through radio buttons to find the one with the selected value
-            $("input[name='payment_type']").each(function() {
-                if ($(this).val() === payment_type) {
-                    selectedId = $(this).attr("id");
-                    return false; // Exit the loop once a match is found
-                }
-            });
-        }
-
-        var booking_amt = $('#booking_amt').val(); 
-        var pending_amt = $('#pending_amt').val();
-        var payment_now_later = $("input[name='payment_now_later']:checked").val();
-        // alert(payment_now_later);
-        var later_payment_reason = $('#later_payment_reason').val();
-        var enquiry_id = $('#enquiry_id').val();
-        var package_id = $('#package_id').val();
-        var journey_date = $('#journey_date').val();
-        var package_date_id = $('#package_date_id').val();
-        var traveller_id = $('#traveller_id').val();
-
-        var booking_payment_details_id = $('#booking_payment_details_id').val();
-        var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
-
-        
-        if (mobile_no != '') {
-            // alert('IN hiiiii');
-            $.ajax({
-                url: "<?php echo base_url(); ?>agent/booking_payment_details/reason_submit_proceed",
-                type: "post",
-                data: {
-                    enquiry_id: enquiry_id,
-                    later_payment_reason: later_payment_reason,
-                    booking_payment_details_id: booking_payment_details_id,
-                    return_customer_booking_payment_id: return_customer_booking_payment_id,
-                    package_id: package_id,
-                    journey_date: journey_date,
-                    package_date_id: package_date_id,
-                    traveller_id: traveller_id,
-                    booking_amt: booking_amt,
-                    final_amt: final_amt,
-                    payment_type: payment_type,
-                    mobile_no: mobile_no,
-                    pending_amt: pending_amt,
-                    payment_now_later: payment_now_later
-                },
-                // dataType: 'json',
-                success: function(responce) {
-                    if (responce != false && responce !='') {
-                        // alert(responce);
-                        var booking_ref_no = $('#booking_ref_no').val(responce);
-                        Swal.fire({
-                        title: 'Payment Details Info',
-                        text: 'This Payment Details Fill On Todays Only',
-                        icon: 'info',
-                        showCancelButton: false,
-                        confirmButtonText: 'OK',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Optionally, you can perform additional actions here
-                            window.location.href = "<?= base_url() ?>agent/domestic_booking_process/index";
-                        }
-                    });
-                    }
-                }
-            });
-        }
-    });
-});
-</script>
-<!-- booking payemnt details submit and proceed -->
 
 <!-- <script>
-function later_reason(element){
-    var payment_type = $('input[name="payment_type"]:checked').val();
-    var booking_amt = $('#booking_amt').val();
-    var payment_now_later = $('input[name="payment_now_later"]:checked').val();
-    var later_payment_reason = $(element).val();
+$(document).ready(function() { 
+    $('#extra_services').validate({ // initialize the plugin
+        errorPlacement: function($error, $element) {
+            $error.appendTo($element.closest("div"));
+        },
+        rules: {
+            extra_services: {
+                required: true,
+            },
+            "select_services[]": {
+                required: function(element) {
+                    var action = $("#extra_services").val();
+                    if (action == "yes") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        },
 
-    if (later_payment_reason !== '' || payment_type !== '' || booking_amt !== '' || payment_now_later !== '') {
-        $("#reason_submit_button").prop("disabled", false);
-    } else {
-        $("#reason_submit_button").prop("disabled", true);
-    }
-}
+        messages: {
+            extra_services: {
+                required: "Please Select Extra Service",
+            },
+            "select_services[]": {
+                required: "Please Select Services Name-Cost",
+            }
+        }
+    });
+
+});
 </script> -->
-
-<script>
-function later_reason(element){
-    var payment_type = $('input[name="payment_type"]:checked').val();
-    var booking_amt = $('#booking_amt').val();
-    var payment_now_later = $('input[name="payment_now_later"]:checked').val();
-    var later_payment_reason = $(element).val();
-
-    if (later_payment_reason !== '' && payment_type !== '' && booking_amt !== '' && payment_now_later !== '') {
-        $("#reason_submit_button").prop("disabled", false);
-    } else {
-        $("#reason_submit_button").prop("disabled", true);
-    }
-}
-</script>
-
-
-
-
+<!-- extra services ajax code  -->

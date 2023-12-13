@@ -5,6 +5,7 @@ class Booking_enquiry extends CI_Controller{
 	public function __construct()
 	{
 		parent::__construct();
+        $this->load->model('member_1');
 	    $this->arr_view_data = [];
         if($this->session->userdata('chy_admin_id')=="") 
         { 
@@ -41,8 +42,6 @@ class Booking_enquiry extends CI_Controller{
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
 	}
 	
-
-    
 
     
 	public function import(){

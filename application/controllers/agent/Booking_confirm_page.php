@@ -20,6 +20,7 @@ class Booking_confirm_page extends CI_Controller {
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
         $this->module_final_booking   =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
+        $this->module_booking_payment_details   =  base_url().$this->config->item('agent_panel_slug')."/booking_payment_details";
         $this->module_title       = "Booking Confirmation";
         $this->module_view_folder = "booking_confirm_page/";
         $this->arr_view_data = [];
@@ -176,6 +177,7 @@ class Booking_confirm_page extends CI_Controller {
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_booking_payment_details'] = $this->module_booking_payment_details;
         $this->arr_view_data['module_url_path_back'] = $this->module_url_path_back;
         $this->arr_view_data['module_final_booking'] = $this->module_final_booking;
         $this->arr_view_data['module_url_booking_process'] = $this->module_url_booking_process;

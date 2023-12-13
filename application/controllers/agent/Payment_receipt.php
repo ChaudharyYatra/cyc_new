@@ -59,16 +59,19 @@ class Payment_receipt extends CI_Controller {
         $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
         $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
         $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
         $this->db->join("packages", 'final_booking.package_id=packages.id','left');
         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
         $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
         // print_r($payment_receipt); die;
 
-        $payment_rupee = isset($payment_receipt['booking_amt']);
+        $payment_rupee = $payment_receipt['booking_amt'];
+        // print_r($payment_rupee); die;
         // $payment_rupee = $payment_receipt['booking_amt']=== null ? 0 : count($payment_receipt['booking_amt']);
 
         // $len = $cOTLdata['char_data'] === null ? 0 : count($cOTLdata['char_data']);
         $pay= $this->getIndianCurrency($payment_rupee);
+        // print_r($pay); die;
         
         
          $this->arr_view_data['agent_sess_name']        = $agent_sess_name;

@@ -30,7 +30,7 @@
               <div class="card-body">
                   <?php  if(count($arr_data) > 0 ) 
               { ?>
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="memListTable" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>SN</th>

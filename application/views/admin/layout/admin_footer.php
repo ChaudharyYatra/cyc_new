@@ -90,6 +90,71 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
+<!-- this script use for admin booking enquiry index  for pagination-->
+<!-- <link href="<?php //echo base_url(); ?>assets/DataTables/css/datatables.min.css" rel="stylesheet">
+<script src="<?php //echo base_url(); ?>assets/DataTables/js/datatables.min.js"></script>
+<script src="<?php //echo base_url(); ?>assets/js/jquery.min.js"></script> -->
+<!-- this script use for admin booking enquiry index  for pagination-->
+
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script> -->
+
+
+<!-- <script>
+    $(document).ready(function () {
+        $('#bookingEnquiryTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "<?php //echo base_url('admin/booking_enquiry') ?>",
+                "dataType": "json",
+                "type": "POST",
+                "data": {
+                    '<?php //echo $this->security->get_csrf_token_name(); ?>': '<?php //echo $this->security->get_csrf_hash(); ?>'
+                }
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "ftaken_by" },
+                { "data": "agent_id" },
+                { "data": "MrandMrs" },
+                { "data": "first_name" },
+                { "data": "last_name" },
+                { "data": "created_at" },
+            ]
+        });
+    });
+</script> -->
+
+<script>
+$(document).ready(function(){
+    // alert('hhhhhhhhhh');
+    $('#memListTable').DataTable({
+        
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('admin/booking_enquiry/getLists/'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [{ 
+            "targets": [0],
+      "paging": true,
+            "orderable": false,
+      "responsive": true,
+      "ordering": true,
+        }]
+    });
+});
+</script>
+
 <script>
   $(function () {
     $("#example1").DataTable({

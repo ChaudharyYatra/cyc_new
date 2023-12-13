@@ -533,6 +533,12 @@ public function deleteRecord($tbl_name,$id)
 		$rst=$this->db->get_where($tbl_name,$condition);
 		return $rst->row_array();
 	}
+
+	public function countFiltered($postData){
+        $this->_get_datatables_query($postData);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
 	
 }
 ?>
