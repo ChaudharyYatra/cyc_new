@@ -1360,9 +1360,9 @@
                 </div>
 
 
-                <!-- <div class="card-footer">
-                <a href="<?php //echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
-                </div> -->
+                <div class="card-footer">
+                <a href="<?php echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                </div>
               <!-- /.card-header -->
               <!-- form start -->
                 

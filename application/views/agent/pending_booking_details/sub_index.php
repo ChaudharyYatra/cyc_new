@@ -1,3 +1,9 @@
+
+<style>
+  .btn_css{
+    padding:5px;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,12 +40,12 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Traveller Name</th>
                     <th>Package Name</th>
                     <th>Package Date</th>
                     <th>Booking Date</th>
-                    <!-- <th>Hotel Name</th> -->
                     <th>Booking Reference No</th>
-                    <th>Booking Status</th>
+                    <th>Booking Payment Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -49,21 +55,22 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($arr_data); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
+                    <td style="text-transform: capitalize;"><?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
                     <td><?php echo $info['tour_title'] ?></td>
-                    <td><?php echo $info['journey_date'] ?></td>
-                    <td><?php echo $info['booking_date'] ?></td>
-                    <!-- <td><?php //echo $info['hotel_name'] ?></td> -->
+                    <td><?php echo date("d-m-Y",strtotime($info['journey_date'])); ?></td>
+                    <td><?php echo date("d-m-Y",strtotime($info['booking_date'])); ?></td>
                     <td><?php echo $info['booking_reference_no'] ?></td>
-                    <td><?php echo $info['booking_status'] ?></td>
+                    <td><?php echo $info['payment_confirmed_status'] ?></td>
                     
 
                     <td>
-                    <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+                    <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css">View</button></a>
+                    <a href="<?php echo $module_pay_pending_amt;?>/index/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment</button></a>
                     </td>
-                    
                   </tr>
                   
 

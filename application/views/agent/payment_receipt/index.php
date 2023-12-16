@@ -224,27 +224,20 @@
 
                 
                 <div class="row mb-3">
-                    <?php if($payment_receipt['select_transaction']=='CASH'){?>
-                    <div class="col-md-4 rupees_css">
-                        <div class="amt-css ml-4">
-                            <h3 class="ml-2 rupees text-center">₹  <?php echo $payment_receipt['booking_amt']; ?>/-</h3>
-                        </div>
+                    <!-- <?php //if($payment_receipt['select_transaction']=='CASH'){?> -->
+                    <div class="col-md-4">
+                        <!-- <div class="amt-css ml-4">
+                            <h3 class="ml-2 rupees text-center">₹  <?php //echo $payment_receipt['booking_amt']; ?>/-</h3>
+                        </div> -->
                     </div>
 
                     
-                    <div class="col-md-6 mt-2 box-padding">
-                        <div class="amt-css ml-4">
+                    <div class="col-md-6">
+                        <!-- <div class="amt-css ml-4">
                             <div class="row">
                                 <div class="col-md-6">
                                     <h6 class="mt-2 ml-3 text-center">Particulars</h6>  
                                     <div class="row">
-                                        <!-- <div class="col-md-5">
-                                            <h6 class="mt-2 ml-3">2000 X</h6>
-                                        </div>
-                                        <div class="col-md-7">
-                                            <input type="text" readonly class="form-control input_css mt-2" name="enq_seat_count" id="enq_seat_count" value="<?php //echo $payment_receipt['cash_2000']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-                                        </div> -->
-
                                         <div class="col-md-5 mt-2">
                                             <h6 class="mt-2 ml-3">500 X</h6>
                                         </div>
@@ -297,13 +290,6 @@
                                 <div class="col-md-6">
                                     <h6 class="mt-2 ml-3 text-center">Rupees</h6>  
                                     <div class="row">
-                                        <!-- <div class="col-md-2 mt-2">
-                                            =
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" readonly class="form-control input_css mt-2" name="enq_seat_count" id="enq_seat_count" value="<?php //echo $payment_receipt['total_cash_2000']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-                                        </div> -->
-
                                         <div class="col-md-2 mt-3">
                                             =
                                         </div>
@@ -356,16 +342,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <?php } else{ ?>
+                    <!-- <?php //} else{ ?> -->
                     <div class="col-md-6"></div>
                     <div class="col-md-6">
                         <div class="amt-css ml-4 float-right">
                             <h3 class="ml-2 rupees">₹  <?php echo $payment_receipt['booking_amt']; ?>/-</h3>
                         </div>
                     </div>
-                    <?php }?>
+                    <!-- <?php //}?> -->
                 </div>
                 
                 <div class="row">

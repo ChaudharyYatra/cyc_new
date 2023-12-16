@@ -10,7 +10,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
-              
             </ol>
           </div>
         </div>
@@ -34,10 +33,10 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Traveller Name</th>
                     <th>Package Name</th>
                     <th>Package Date</th>
                     <th>Booking Date</th>
-                    <!-- <th>Hotel Name</th> -->
                     <th>Booking Reference No</th>
                     <th>Booking Status</th>
                     <th>Action</th>
@@ -49,15 +48,16 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($arr_data); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
+                    <td style="text-transform: capitalize;"><?php echo $info['first_name']?> <?php echo $info['middle_name']?> <?php echo $info['last_name']?></td>
                     <td><?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['booking_date'] ?></td>
-                    <!-- <td><?php //echo $info['hotel_name'] ?></td> -->
                     <td><?php echo $info['booking_reference_no'] ?></td>
-                    <td><?php echo $info['booking_status'] ?></td>
+                    <td><?php echo $info['payment_confirmed_status'] ?></td>
                     
 
                     <td>

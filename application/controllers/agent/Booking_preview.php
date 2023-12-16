@@ -910,4 +910,73 @@ class Booking_preview extends CI_Controller {
 // // die;
         
 //     }
+
+public function get_upi_qr_code(){ 
+    $taluka_data = $this->input->post('did');
+        // print_r($taluka_data); die;
+                        $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        $this->db->where('id',$taluka_data);   
+                        $data = $this->master_model->getRecords('qr_code_master');
+                        // print_r($data); die;
+        echo json_encode($data); 
+    }
+
+    public function get_upi_code(){
+
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        $did_upi = $this->input->post('did');
+        // print_r($did_upi); die;
+        $taluka_data = $this->input->post('self_data');
+        // print_r($taluka_data);
+        // $taluka_data_1 = $this->input->post('other_data');
+        // print_r($taluka_data_1); die;
+
+        if($taluka_data == 'self'){
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('id',$id);   
+            $data = $this->master_model->getRecords('agent');
+            // print_r($data); die;
+        }else{
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('id',$did_upi);   
+            $data = $this->master_model->getRecords('qr_code_master');
+            // print_r($data); die;
+        }
+            echo json_encode($data); 
+
+        }
+
+        public function get_QR_code(){ 
+
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+    
+            $did_upi = $this->input->post('qr_did');
+            // print_r($did_upi); die;
+            $taluka_data = $this->input->post('qr_self_data');
+            // print_r($taluka_data);
+            // $taluka_data_1 = $this->input->post('other_data');
+            // print_r($taluka_data_1); die;
+    
+            if($taluka_data == 'self'){
+                $this->db->where('is_deleted','no');
+                $this->db->where('is_active','yes');
+                $this->db->where('id',$id);   
+                $data = $this->master_model->getRecords('agent');
+                // print_r($data); die;
+            }else{
+                $this->db->where('is_deleted','no');
+                $this->db->where('is_active','yes');
+                $this->db->where('id',$did_upi);   
+                $data = $this->master_model->getRecords('qr_code_master');
+                // print_r($data); die;
+            }
+                echo json_encode($data); 
+    
+            }
 }

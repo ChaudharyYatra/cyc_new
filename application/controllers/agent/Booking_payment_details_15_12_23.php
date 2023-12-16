@@ -178,15 +178,95 @@ class Booking_payment_details extends CI_Controller {
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
+            $booking_amt = $this->input->post('booking_amt');
+            $final_amt = $this->input->post('final_amt');
+            $payment_type = $this->input->post('payment_type');
             $mobile_no = $this->input->post('mobile_no');
-            $hotel_name_id = $this->input->post('hotel_name_id');
+            $pending_amt = $this->input->post('pending_amt');
+            $payment_now_later = $this->input->post('payment_now_later');
+            $select_transaction = $this->input->post('select_transaction');
+            // print_r($select_transaction);
+            
+            $upi_holder_name = $this->input->post('upi_holder_name');
+            $upi_payment_type = $this->input->post('upi_payment_type');
+            // print_r($upi_holder_name); die;
+            $upi_self_no = $this->input->post('upi_self_no');
+            $upi_reason = $this->input->post('upi_reason');
+
+            $qr_holder_name = $this->input->post('qr_holder_name');
+            $qr_mobile_number = $this->input->post('qr_mobile_number');
+            $qr_payment_type = $this->input->post('qr_payment_type');
+            $qr_upi_no = $this->input->post('qr_upi_no');
+
+
+            $upi_no = $this->input->post('upi_no');
+            $cheque = $this->input->post('cheque');
+            $bank_name = $this->input->post('bank_name');
+            $drawn_on_date = $this->input->post('drawn_on_date');
+
+            $netbanking_payment_type = $this->input->post('netbanking_payment_type');
+            $net_banking_acc_no = $this->input->post('net_banking_acc_no');
+            $net_acc_holder_nm = $this->input->post('net_acc_holder_nm');
+            $net_banking_branch_name = $this->input->post('net_banking_branch_name');
+            $net_banking_utr_no = $this->input->post('net_banking_utr_no');
+            $netbanking_bank_name = $this->input->post('netbanking_bank_name');
+            $netbanking_date = $this->input->post('netbanking_date');
+
+            // $cash_2000 = $this->input->post('cash_2000');
+            // $total_cash_2000 = $this->input->post('total_cash_2000');
+            $cash_500 = $this->input->post('cash_500');
+            $total_cash_500 = $this->input->post('total_cash_500');
+            $cash_200 = $this->input->post('cash_200');
+            $total_cash_200 = $this->input->post('total_cash_200');
+            $cash_100 = $this->input->post('cash_100');
+            $total_cash_100 = $this->input->post('total_cash_100');
+            $cash_50 = $this->input->post('cash_50');
+            $total_cash_50 = $this->input->post('total_cash_50');
+            $cash_20 = $this->input->post('cash_20');
+            $total_cash_20 = $this->input->post('total_cash_20');
+            $cash_10 = $this->input->post('cash_10');
+            $total_cash_10 = $this->input->post('total_cash_10');
+            $cash_5 = $this->input->post('cash_5');
+            $total_cash_5 = $this->input->post('total_cash_5');
+            $cash_2 = $this->input->post('cash_2');
+            $total_cash_2 = $this->input->post('total_cash_2');
+            $cash_1 = $this->input->post('cash_1');
+            $total_cash_1 = $this->input->post('total_cash_1');
+            $total_cash_amt = $this->input->post('total_cash_amt');
+
+
+            $return_cash_500 = $this->input->post('return_cash_500');
+            $return_total_cash_500 = $this->input->post('return_total_cash_500');
+            $return_cash_200 = $this->input->post('return_cash_200');
+            $return_total_cash_200 = $this->input->post('return_total_cash_200');
+            $return_cash_100 = $this->input->post('return_cash_100');
+            $return_total_cash_100 = $this->input->post('return_total_cash_100');
+            $return_cash_50 = $this->input->post('return_cash_50');
+            $return_total_cash_50 = $this->input->post('return_total_cash_50');
+            $return_cash_20 = $this->input->post('return_cash_20');
+            $return_total_cash_20 = $this->input->post('return_total_cash_20');
+            $return_cash_10 = $this->input->post('return_cash_10');
+            $return_total_cash_10 = $this->input->post('return_total_cash_10');
+            $return_cash_5 = $this->input->post('return_cash_5');
+            $return_total_cash_5 = $this->input->post('return_total_cash_5');
+            $return_cash_2 = $this->input->post('return_cash_2');
+            $return_total_cash_2 = $this->input->post('return_total_cash_2');
+            $return_cash_1 = $this->input->post('return_cash_1');
+            $return_total_cash_1 = $this->input->post('return_total_cash_1');
+            $return_total_cash_amt = $this->input->post('return_total_cash_amt');
+
             $enquiry_id = $this->input->post('enquiry_id');
             $traveller_id = $this->input->post('traveller_id');
             $package_id = $this->input->post('package_id');
             $journey_date = $this->input->post('journey_date');
             $package_date_id = $this->input->post('package_date_id');
-            $booking_payment_details_id = $this->input->post('booking_payment_details_id');
 
+            $extra_sevices_id = $this->input->post('extra_sevices_id');
+            $booking_payment_details_id = $this->input->post('booking_payment_details_id');
+            $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
+
+
+            $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
@@ -217,13 +297,72 @@ class Booking_payment_details extends CI_Controller {
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
                 $arr_insert = array(
-                    'booking_tm_mobile_no'  =>  $mobile_no,
-                    'enquiry_id'  =>  $enquiry_id,
-                    'traveller_id'  =>  $traveller_id,
-                    'package_id'  =>  $package_id,
-                    'package_date_id'  =>  $package_date_id,
+                    // 'booking_reference_no'  =>  $booking_reference_no,
+                    'final_amt'   =>   $final_amt,
+                    'payment_type'   =>   $payment_type,
+                    'booking_amt'   =>   $booking_amt,
+                    'pending_amt'   =>   $pending_amt,
+                    'payment_now_later'   =>   $payment_now_later,
+                    'booking_tm_mobile_no'   =>   $mobile_no,
+                    'select_transaction'   =>   $select_transaction,
+                    
+                    'UPI_holder_name'   =>   $upi_holder_name,
+                    'upi_payment_type'   =>   $upi_payment_type,
+                    'UPI_transaction_no'   =>   $upi_self_no,
+                    'UPI_reason'   =>   $upi_reason,
+
+                    'QR_holder_name'   =>   $qr_holder_name,
+                    'QR_mobile_number'   =>   $qr_mobile_number,
+                    'QR_payment_type'   =>   $qr_payment_type,
+                    'QR_transaction_no'   =>   $qr_upi_no,
+
+                    'upi_no'   =>   $upi_no,
+                    'cheque'   =>   $cheque,
+                    'bank_name'   =>   $bank_name,
+                    'drawn_on_date'   =>   $drawn_on_date,
+
+                    'netbanking_payment_type'   =>   $netbanking_payment_type,
+                    'net_banking_acc_no'   =>   $net_banking_acc_no,
+                    'net_banking_acc_holder_nm'   =>   $net_acc_holder_nm,
+                    'net_banking_branch_name'   =>   $net_banking_branch_name,
+                    'net_banking'   =>   $net_banking_utr_no,
+                    'netbanking_bank_name'   =>   $netbanking_bank_name,
+                    'netbanking_date'   =>   $netbanking_date,
+
                     'booking_reference_no'  =>  $booking_reference_no,
-                    'traveler_otp'  =>  $traveler_otp
+                    'package_date_id' => $package_date_id,
+                    'enquiry_id' => $enquiry_id,
+                    'package_id' => $package_id,
+                    'traveller_id' => $traveller_id,
+
+                    // 'select_services' => $select_services,
+                    // 'extra_services' => $extra_services,
+
+                    // 'cash_2000'   =>   $cash_2000,
+                    // 'total_cash_2000'   =>   $total_cash_2000,
+                    'cash_500'   =>   $cash_500,
+                    'total_cash_500'   =>   $total_cash_500,
+                    'cash_200'   =>   $cash_200,
+                    'total_cash_200'   =>   $total_cash_200,
+                    'cash_100'   =>   $cash_100,
+                    'total_cash_100'   =>   $total_cash_100,
+                    'cash_50'   =>   $cash_50,
+                    'total_cash_50'   =>   $total_cash_50,
+                    'cash_20'   =>   $cash_20,
+                    'total_cash_20'   =>   $total_cash_20,
+                    'cash_10'   =>   $cash_10,
+                    'total_cash_10'   =>   $total_cash_10,
+
+                    'cash_5'   =>   $cash_5,
+                    'total_cash_5'   =>   $total_cash_5,
+                    'cash_2'   =>   $cash_2,
+                    'total_cash_2'   =>   $total_cash_2,
+                    'cash_1'   =>   $cash_1,
+                    'total_cash_1'   =>   $total_cash_1,
+                    'total_cash_amt'   =>   $total_cash_amt,
+
+                    'traveler_otp'   =>   $traveler_otp,
+                    'booking_status'   =>  'confirm'
                 );
                 // print_r($arr_insert); die;
 
@@ -241,8 +380,50 @@ class Booking_payment_details extends CI_Controller {
                  $insertid = $this->db->insert_id();
                 }
                 
+                 if($select_transaction == 'CASH'){
+                 $arr_insert_return = array(
+                    'select_transaction'   =>   $select_transaction,
+
+                    'return_cash_500'   =>   $return_cash_500,
+                    'return_total_cash_500'   =>   $return_total_cash_500,
+                    'return_cash_200'   =>   $return_cash_200,
+                    'return_total_cash_200'   =>   $return_total_cash_200,
+                    'return_cash_100'   =>   $return_cash_100,
+                    'return_total_cash_100'   =>   $return_total_cash_100,
+                    'return_cash_50'   =>   $return_cash_50,
+                    'return_total_cash_50'   =>   $return_total_cash_50,
+                    'return_cash_20'   =>   $return_cash_20,
+                    'return_total_cash_20'   =>   $return_total_cash_20,
+                    'return_cash_10'   =>   $return_cash_10,
+                    'return_total_cash_10'   =>   $return_total_cash_10,
+
+                    'return_cash_5'   =>   $return_cash_5,
+                    'return_total_cash_5'   =>   $return_total_cash_5,
+                    'return_cash_2'   =>   $return_cash_2,
+                    'return_total_cash_2'   =>   $return_total_cash_2,
+                    'return_cash_1'   =>   $return_cash_1,
+                    'return_total_cash_1'   =>   $return_total_cash_1,
+                    'return_total_cash_amt'   =>   $return_total_cash_amt,
+                    'enquiry_id' => $enquiry_id,
+                    'booking_payment_details_id'   =>   $insertid
+                );
+                // print_r($arr_insert); die;
+                $this->db->where('is_deleted','no');
+                $this->db->where('return_customer_booking_payment_details.enquiry_id',$enquiry_id);
+                $return_customer_booking_payment_details = $this->master_model->getRecord('return_customer_booking_payment_details');
+                // print_r($return_customer_booking_payment_details); die;
+
+                if(!empty($return_customer_booking_payment_details)){
+                    $arr_where     = array("id" => $return_customer_booking_payment_id);
+                    $inserted_id = $this->master_model->updateRecord('return_customer_booking_payment_details',$arr_insert_return,$arr_where);
+                } else{
+                $inserted_id = $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert_return,true);
+                }
+            }
+                
         if($inserted_id!=''){
            echo true;
+
        }else {
            echo false;
        }
@@ -759,12 +940,8 @@ class Booking_payment_details extends CI_Controller {
         $id=$this->session->userdata('agent_sess_id');
 
              $verify_otp = $this->input->post('verify_otp');
-            //  print_r($verify_otp);
              $mobile_no = $this->input->post('mobile_no'); 
-            //  print_r($mobile_no);
              $enquiry_id = $this->input->post('enquiry_id'); 
-            //  print_r($enquiry_id); die;
-
             // echo $booking_ref_no = $this->input->post('booking_ref_no');  die;
 
             $record = array();
@@ -774,105 +951,27 @@ class Booking_payment_details extends CI_Controller {
             $this->db->where('booking_tm_mobile_no',$mobile_no);
             $this->db->where('enquiry_id',$enquiry_id);
             $booking_payment_details_info = $this->master_model->getRecord('booking_payment_details');
-            // print_r($booking_payment_details_info); die;
+
 
             // print_r($booking_payment_details_info); die;
 
             if($booking_payment_details_info !=''){
 
+                
                 $journey_date  = $this->input->post('journey_date');
+
                 $traveller_id  = $this->input->post('traveller_id');
                 $enquiry_id    = $this->input->post('enquiry_id'); 
                 $hotel_name_id    = $this->input->post('hotel_name_id'); 
                 $package_date_id    = $this->input->post('package_date_id'); 
-                $package_id    = $this->input->post('package_id');
+                $package_id    = $this->input->post('package_id'); 
                 $today = date('y-m-d');
-                $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
-
-                $booking_amt = $this->input->post('booking_amt');
-                $final_amt = $this->input->post('final_amt');
-                $payment_type = $this->input->post('payment_type');
-                $mobile_no = $this->input->post('mobile_no');
-                $pending_amt = $this->input->post('pending_amt');
-                $payment_now_later = $this->input->post('payment_now_later');
-                $select_transaction = $this->input->post('select_transaction');
-                // print_r($select_transaction);
                 
-                $upi_holder_name = $this->input->post('upi_holder_name');
-                $upi_payment_type = $this->input->post('upi_payment_type');
-                // print_r($upi_holder_name); die;
-                $upi_self_no = $this->input->post('upi_self_no');
-                $upi_reason = $this->input->post('upi_reason');
-
-                $qr_holder_name = $this->input->post('qr_holder_name');
-                $qr_mobile_number = $this->input->post('qr_mobile_number');
-                $qr_payment_type = $this->input->post('qr_payment_type');
-                $qr_upi_no = $this->input->post('qr_upi_no');
-
-
-                $upi_no = $this->input->post('upi_no');
-                $cheque = $this->input->post('cheque');
-                $bank_name = $this->input->post('bank_name');
-                $drawn_on_date = $this->input->post('drawn_on_date');
-
-                $netbanking_payment_type = $this->input->post('netbanking_payment_type');
-                $net_banking_acc_no = $this->input->post('net_banking_acc_no');
-                $net_acc_holder_nm = $this->input->post('net_acc_holder_nm');
-                $net_banking_branch_name = $this->input->post('net_banking_branch_name');
-                $net_banking_utr_no = $this->input->post('net_banking_utr_no');
-                $netbanking_bank_name = $this->input->post('netbanking_bank_name');
-                $netbanking_date = $this->input->post('netbanking_date');
-
-                // $cash_2000 = $this->input->post('cash_2000');
-                // $total_cash_2000 = $this->input->post('total_cash_2000');
-                $cash_500 = $this->input->post('cash_500');
-                $total_cash_500 = $this->input->post('total_cash_500');
-                $cash_200 = $this->input->post('cash_200');
-                $total_cash_200 = $this->input->post('total_cash_200');
-                $cash_100 = $this->input->post('cash_100');
-                $total_cash_100 = $this->input->post('total_cash_100');
-                $cash_50 = $this->input->post('cash_50');
-                $total_cash_50 = $this->input->post('total_cash_50');
-                $cash_20 = $this->input->post('cash_20');
-                $total_cash_20 = $this->input->post('total_cash_20');
-                $cash_10 = $this->input->post('cash_10');
-                $total_cash_10 = $this->input->post('total_cash_10');
-                $cash_5 = $this->input->post('cash_5');
-                $total_cash_5 = $this->input->post('total_cash_5');
-                $cash_2 = $this->input->post('cash_2');
-                $total_cash_2 = $this->input->post('total_cash_2');
-                $cash_1 = $this->input->post('cash_1');
-                $total_cash_1 = $this->input->post('total_cash_1');
-                $total_cash_amt = $this->input->post('total_cash_amt');
-
-
-                $return_cash_500 = $this->input->post('return_cash_500');
-                $return_total_cash_500 = $this->input->post('return_total_cash_500');
-                // print_r($return_total_cash_500); die;
-                $return_cash_200 = $this->input->post('return_cash_200');
-                $return_total_cash_200 = $this->input->post('return_total_cash_200');
-                $return_cash_100 = $this->input->post('return_cash_100');
-                $return_total_cash_100 = $this->input->post('return_total_cash_100');
-                $return_cash_50 = $this->input->post('return_cash_50');
-                $return_total_cash_50 = $this->input->post('return_total_cash_50');
-                $return_cash_20 = $this->input->post('return_cash_20');
-                $return_total_cash_20 = $this->input->post('return_total_cash_20');
-                $return_cash_10 = $this->input->post('return_cash_10');
-                $return_total_cash_10 = $this->input->post('return_total_cash_10');
-                $return_cash_5 = $this->input->post('return_cash_5');
-                $return_total_cash_5 = $this->input->post('return_total_cash_5');
-                $return_cash_2 = $this->input->post('return_cash_2');
-                $return_total_cash_2 = $this->input->post('return_total_cash_2');
-                $return_cash_1 = $this->input->post('return_cash_1');
-                $return_total_cash_1 = $this->input->post('return_total_cash_1');
-                $return_total_cash_amt = $this->input->post('return_total_cash_amt');
-
-                $extra_sevices_id = $this->input->post('extra_sevices_id');
-                $booking_payment_details_id = $this->input->post('booking_payment_details_id');
-                $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
+                $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
                 $arr_insert = array(
                     'enquiry_id'   =>   $enquiry_id,
+                    'hotel_name_id'   =>   $hotel_name_id,
                     'package_date_id'   =>   $package_date_id,
                     'package_id'   =>   $package_id,
                     'booking_date'   =>   $today,
@@ -881,7 +980,6 @@ class Booking_payment_details extends CI_Controller {
                     'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
-                // print_r($arr_insert); die;
               
                 $record = array();
                 $fields = "final_booking.*";
@@ -900,109 +998,10 @@ class Booking_payment_details extends CI_Controller {
 
 
                 $arr_update = array(
-                    'final_amt'   =>   $final_amt,
-                    'payment_type'   =>   $payment_type,
-                    'booking_amt'   =>   $booking_amt,
-                    'pending_amt'   =>   $pending_amt,
-                    'payment_now_later'   =>   $payment_now_later,
-                    'booking_tm_mobile_no'   =>   $mobile_no,
-                    'select_transaction'   =>   $select_transaction,
-                    
-                    'UPI_holder_name'   =>   $upi_holder_name,
-                    'upi_payment_type'   =>   $upi_payment_type,
-                    'UPI_transaction_no'   =>   $upi_self_no,
-                    'UPI_reason'   =>   $upi_reason,
-
-                    'QR_holder_name'   =>   $qr_holder_name,
-                    'QR_mobile_number'   =>   $qr_mobile_number,
-                    'QR_payment_type'   =>   $qr_payment_type,
-                    'QR_transaction_no'   =>   $qr_upi_no,
-
-                    'upi_no'   =>   $upi_no,
-                    'cheque'   =>   $cheque,
-                    'bank_name'   =>   $bank_name,
-                    'drawn_on_date'   =>   $drawn_on_date,
-
-                    'netbanking_payment_type'   =>   $netbanking_payment_type,
-                    'net_banking_acc_no'   =>   $net_banking_acc_no,
-                    'net_banking_acc_holder_nm'   =>   $net_acc_holder_nm,
-                    'net_banking_branch_name'   =>   $net_banking_branch_name,
-                    'net_banking'   =>   $net_banking_utr_no,
-                    'netbanking_bank_name'   =>   $netbanking_bank_name,
-                    'netbanking_date'   =>   $netbanking_date,
-
-                    'booking_reference_no'  =>  $booking_reference_no,
-                    'package_date_id' => $package_date_id,
-                    'enquiry_id' => $enquiry_id,
-                    'package_id' => $package_id,
-                    'traveller_id' => $traveller_id,
-
-                    // 'select_services' => $select_services,
-                    // 'extra_services' => $extra_services,
-
-                    // 'cash_2000'   =>   $cash_2000,
-                    // 'total_cash_2000'   =>   $total_cash_2000,
-                    'cash_500'   =>   $cash_500,
-                    'total_cash_500'   =>   $total_cash_500,
-                    'cash_200'   =>   $cash_200,
-                    'total_cash_200'   =>   $total_cash_200,
-                    'cash_100'   =>   $cash_100,
-                    'total_cash_100'   =>   $total_cash_100,
-                    'cash_50'   =>   $cash_50,
-                    'total_cash_50'   =>   $total_cash_50,
-                    'cash_20'   =>   $cash_20,
-                    'total_cash_20'   =>   $total_cash_20,
-                    'cash_10'   =>   $cash_10,
-                    'total_cash_10'   =>   $total_cash_10,
-
-                    'cash_5'   =>   $cash_5,
-                    'total_cash_5'   =>   $total_cash_5,
-                    'cash_2'   =>   $cash_2,
-                    'total_cash_2'   =>   $total_cash_2,
-                    'cash_1'   =>   $cash_1,
-                    'total_cash_1'   =>   $total_cash_1,
-                    'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
                 $arr_where     = array("enquiry_id" => $enquiry_id);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
-
-
-                $arr_insert = array(
-                    'return_cash_500'   =>   $return_cash_500 ,
-                    'return_total_cash_500'   =>   $return_total_cash_500  ,
-
-                    'return_cash_200'   =>   $return_cash_200  ,
-                    'return_total_cash_200'   =>   $return_total_cash_200  ,
-
-                    'return_cash_100'   =>   $return_cash_100  ,
-                    'return_total_cash_100'   =>   $return_total_cash_100  ,
-
-                    'return_cash_50'   =>   $return_cash_50  ,
-                    'return_total_cash_50'   =>   $return_total_cash_50  ,
-
-                    'return_cash_20'   =>   $return_cash_20  ,
-                    'return_total_cash_20'   =>   $return_total_cash_20  ,
-
-                    'return_cash_10'   =>   $return_cash_10  ,
-                    'return_total_cash_10'   =>   $return_total_cash_10  ,
-
-                    'return_cash_5'   =>   $return_cash_5  ,
-                    'return_total_cash_5'   =>   $return_total_cash_5  ,
-
-                    'return_cash_2'   =>   $return_cash_2   ,
-                    'return_total_cash_2'   =>   $return_total_cash_2   ,
-
-                    'return_cash_1'   =>   $return_cash_1   ,
-                    'return_total_cash_1'   =>   $return_total_cash_1   ,
-
-                    'return_total_cash_amt'   =>   $return_total_cash_amt   ,
-                    'enquiry_id'   =>   $enquiry_id  ,
-                    'booking_payment_details_id'   =>   $booking_payment_details_id ,
-
-                    'select_transaction'   =>   $select_transaction
-                );
-                $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert,true);
 
                 $arr_update = array(
                     'booking_done'   =>   'yes'

@@ -222,7 +222,7 @@
                                 <tr>
                                     <th>Payment</th>
                                     <td>&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Now">&nbsp;&nbsp;Now
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later
+                                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later -->
                                     </td>
                                     
                                 </tr>

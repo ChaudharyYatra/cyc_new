@@ -5,7 +5,7 @@
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Booking_payment_details extends CI_Controller {
+class Pay_pending_amount extends CI_Controller {
 	 
 	function __construct() {
 
@@ -14,14 +14,14 @@ class Booking_payment_details extends CI_Controller {
         { 
                 redirect(base_url().'agent/login'); 
         }
-        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/booking_payment_details";
+        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/pay_pending_amount";
         $this->module_url_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_url_path_back    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
         $this->module_url_pending_payment   =  base_url().$this->config->item('agent_panel_slug')."/pending_booking_details";
-        $this->module_title       = "Booking Payment Details";
-        $this->module_view_folder = "booking_payment_details/";
+        $this->module_title       = "Booking Payment Amount";
+        $this->module_view_folder = "pay_pending_amount/";
         $this->arr_view_data = [];
 	 }
 
@@ -167,7 +167,7 @@ class Booking_payment_details extends CI_Controller {
         $this->arr_view_data['module_url_pending_payment'] = $this->module_url_pending_payment;
         $this->arr_view_data['module_url_booking_process'] = $this->module_url_booking_process;
         $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
-        $this->arr_view_data['middle_content']  = $this->module_view_folder."booking_preview";
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
 
     }
@@ -848,7 +848,6 @@ class Booking_payment_details extends CI_Controller {
 
                 $return_cash_500 = $this->input->post('return_cash_500');
                 $return_total_cash_500 = $this->input->post('return_total_cash_500');
-                // print_r($return_total_cash_500); die;
                 $return_cash_200 = $this->input->post('return_cash_200');
                 $return_total_cash_200 = $this->input->post('return_total_cash_200');
                 $return_cash_100 = $this->input->post('return_cash_100');
@@ -866,7 +865,6 @@ class Booking_payment_details extends CI_Controller {
                 $return_cash_1 = $this->input->post('return_cash_1');
                 $return_total_cash_1 = $this->input->post('return_total_cash_1');
                 $return_total_cash_amt = $this->input->post('return_total_cash_amt');
-
                 $extra_sevices_id = $this->input->post('extra_sevices_id');
                 $booking_payment_details_id = $this->input->post('booking_payment_details_id');
                 $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
@@ -967,7 +965,6 @@ class Booking_payment_details extends CI_Controller {
                 $arr_where     = array("enquiry_id" => $enquiry_id);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
-
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
                     'return_total_cash_500'   =>   $return_total_cash_500  ,
@@ -1003,7 +1000,7 @@ class Booking_payment_details extends CI_Controller {
                     'select_transaction'   =>   $select_transaction
                 );
                 $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert,true);
-
+                
                 $arr_update = array(
                     'booking_done'   =>   'yes'
                 );

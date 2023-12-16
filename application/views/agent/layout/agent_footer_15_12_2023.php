@@ -8213,15 +8213,149 @@ $(document).ready(function() {
     $("#submit_otp").click(function() {
         var mobile_no = $('#booking_tm_mobile_no').val();  
         var final_amt = $('#final_amt').val();
+
+        var payment_type = $("input[name='payment_type']:checked").val();
+        var selectedId = "";
+        if (payment_type === undefined) {
+            // No radio button is checked, insert a default value
+            payment_type = ""; // You can change this to your desired default value
+        } else {
+            // Loop through radio buttons to find the one with the selected value
+            $("input[name='payment_type']").each(function() {
+                if ($(this).val() === payment_type) {
+                    selectedId = $(this).attr("id");
+                    return false; // Exit the loop once a match is found
+                }
+            });
+        }
+
+        var booking_amt = $('#booking_amt').val(); 
+        var pending_amt = $('#pending_amt').val();
+        // var payment_now_later = $('#payment_now_later').val();
+        var payment_now_later = $("input[name='payment_now_later']:checked").val();
+
+
+        var upi_no = $('#upi_no').val();
+        var cheque = $('#cheque').val();
+        var bank_name = $('#bank_name').val();
+        var drawn_on_date = $('#drawn_on_date').val();
+
+
+        // var netbanking_payment_type = $('#netbanking_payment_type').val();
+        var netbanking_payment_type = $("input[name='netbanking_payment_type']:checked").val();
+        var selectedId = "";
+        if (netbanking_payment_type === undefined) {
+            // No radio button is checked, insert a default value
+            netbanking_payment_type = ""; // You can change this to your desired default value
+        } else {
+            // Loop through radio buttons to find the one with the selected value
+            $("input[name='netbanking_payment_type']").each(function() {
+                if ($(this).val() === netbanking_payment_type) {
+                    selectedId = $(this).attr("id");
+                    return false; // Exit the loop once a match is found
+                }
+            });
+        }
+
+
+        // alert(netbanking_payment_type);
+        var net_banking_utr_no = $('#net_banking_utr_no').val();
+        var net_banking_acc_no = $('#net_banking_acc_no').val();
+        var net_acc_holder_nm = $('#net_acc_holder_nm').val();
+        var net_banking_branch_name = $('#net_banking_branch_name').val();
+        var netbanking_bank_name = $('#netbanking_bank_name').val();
+        var netbanking_date = $('#netbanking_date').val();
+
+        var upi_holder_name = $('#select_upi_no').val();
+        var upi_payment_type = $('#upi_payment_type').val();
+        // alert(upi_payment_type);
+        var upi_self_no = $('#self_upi_no').val();
+        var upi_reason = $('#reason').val();
+
+
+        var qr_holder_name = $('#select_qr_upi_no').val();
+        var qr_mobile_number = $('#qr_mobile_number').val();
+        var qr_payment_type = $('#qr_payment_type').val();
+        var qr_upi_no = $('#qr_upi_no').val();
+
+
+        var select_transaction =($('#select_transaction :selected').val());
+        // alert(select_transaction);
+        // var cash_2000 = $('#cash_2000').val();
+        // var total_cash_2000 = $('#total_cash_2000').val();
+        var cash_500 = $('#cash_500').val();
+        var total_cash_500 = $('#total_cash_500').val();
+        // alert(total_cash_500);
+        var cash_200 = $('#cash_200').val();
+        var total_cash_200 = $('#total_cash_200').val();
+        var cash_100 = $('#cash_100').val();
+        var total_cash_100 = $('#total_cash_100').val();
+        var cash_50 = $('#cash_50').val();
+        var total_cash_50 = $('#total_cash_50').val();
+        var cash_20 = $('#cash_20').val();
+        var total_cash_20 = $('#total_cash_20').val();
+        var cash_10 = $('#cash_10').val();
+        var total_cash_10 = $('#total_cash_10').val();
+
+        var cash_5 = $('#cash_5').val();
+        var total_cash_5 = $('#total_cash_5').val();
+        // alert(total_cash_5);
+        var cash_2 = $('#cash_2').val();
+        var total_cash_2 = $('#total_cash_2').val();
+        var cash_1 = $('#cash_1').val();
+        var total_cash_1 = $('#total_cash_1').val();
+
+        var total_cash_amt = $('#total_cash_amt').val();
+
+        var return_cash_500 = $('#return_cash_500').val();
+        var return_total_cash_500 = $('#return_total_cash_500').val();
+        // alert(return_total_cash_500);
+        var return_cash_200 = $('#return_cash_200').val();
+        var return_total_cash_200 = $('#return_total_cash_200').val();
+        var return_cash_100 = $('#return_cash_100').val();
+        var return_total_cash_100 = $('#return_total_cash_100').val();
+        var return_cash_50 = $('#return_cash_50').val();
+        var return_total_cash_50 = $('#return_total_cash_50').val();
+        var return_cash_20 = $('#return_cash_20').val();
+        var return_total_cash_20 = $('#return_total_cash_20').val();
+        var return_cash_10 = $('#return_cash_10').val();
+        var return_total_cash_10 = $('#return_total_cash_10').val();
+        var return_cash_5 = $('#return_cash_5').val();
+        var return_total_cash_5 = $('#return_total_cash_5').val();
+        var return_cash_2 = $('#return_cash_2').val();
+        var return_total_cash_2 = $('#return_total_cash_2').val();
+        var return_cash_1 = $('#return_cash_1').val();
+        var return_total_cash_1 = $('#return_total_cash_1').val();
+
+        var return_total_cash_amt = $('#return_total_cash_amt').val();
+
+        // alert(mobile_no);
         var enquiry_id = $('#enquiry_id').val();
         var package_id = $('#package_id').val();
         var journey_date = $('#journey_date').val();
         var package_date_id = $('#package_date_id').val();
         var traveller_id = $('#traveller_id').val();
-        var hotel_name_id    = $("#hotel_name_id").val();
-        var booking_payment_details_id    = $("#booking_payment_details_id").val();
 
+
+        // var extra_sevices_id = $('#extra_sevices_id').val();
+        var booking_payment_details_id = $('#booking_payment_details_id').val();
+        var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
+
+        // var extra_services = $('input[name="extra_services"]:checked').val();
+
+        // if(extra_services=='yes'){
+        //     // alert('yessssssssssss');
+        //     var select_services = $('#select_services').val();
+        // }else {
+        //     // alert('nooooooooooooooooo');
+        //     var select_services =[];
+        // }
+
+        // alert(select_services);
         
+        
+        // alert(extra_services); 
+        // alert(select_services); 
         if (mobile_no != '') {
             // alert('IN hiiiii');
             $.ajax({
@@ -8229,13 +8363,86 @@ $(document).ready(function() {
                 type: "post",
                 data: {
                     enquiry_id: enquiry_id,
+                    booking_payment_details_id: booking_payment_details_id,
+                    return_customer_booking_payment_id: return_customer_booking_payment_id,
                     package_id: package_id,
                     journey_date: journey_date,
                     package_date_id: package_date_id,
                     traveller_id: traveller_id,
+                    booking_amt: booking_amt,
+                    final_amt: final_amt,
+                    payment_type: payment_type,
                     mobile_no: mobile_no,
-                    hotel_name_id: hotel_name_id,
-                    booking_payment_details_id: booking_payment_details_id,
+                    pending_amt: pending_amt,
+                    payment_now_later: payment_now_later,
+                    upi_no: upi_no,
+                    cheque: cheque,
+                    bank_name: bank_name,
+                    drawn_on_date: drawn_on_date,
+
+                    netbanking_payment_type: netbanking_payment_type,
+                    net_banking_acc_no: net_banking_acc_no,
+                    net_acc_holder_nm: net_acc_holder_nm,
+                    net_banking_branch_name: net_banking_branch_name,
+                    net_banking_utr_no: net_banking_utr_no,
+                    netbanking_bank_name: netbanking_bank_name,
+                    netbanking_date: netbanking_date,
+                    
+                    upi_holder_name: upi_holder_name,
+                    upi_payment_type: upi_payment_type,
+                    upi_self_no: upi_self_no,
+                    upi_reason: upi_reason,
+                    
+                    qr_holder_name: qr_holder_name,
+                    qr_mobile_number: qr_mobile_number,
+                    qr_payment_type: qr_payment_type,
+                    qr_upi_no: qr_upi_no,
+                    
+                    select_transaction: select_transaction,
+                    // cash_2000: cash_2000,
+                    // total_cash_2000: total_cash_2000,
+                    cash_500: cash_500,
+                    total_cash_500: total_cash_500,
+                    cash_200: cash_200,
+                    total_cash_200: total_cash_200,
+                    cash_100: cash_100,
+                    total_cash_100: total_cash_100,
+                    cash_50: cash_50,
+                    total_cash_50: total_cash_50,
+                    cash_20: cash_20,
+                    total_cash_20: total_cash_20,
+                    cash_10: cash_10,
+                    total_cash_10: total_cash_10,
+                    cash_5: cash_5,
+                    total_cash_5: total_cash_5,
+                    cash_2: cash_2,
+                    total_cash_2: total_cash_2,
+                    cash_1: cash_1,
+                    total_cash_1: total_cash_1,
+                    total_cash_amt: total_cash_amt,
+
+                    return_cash_500: return_cash_500,
+                    return_total_cash_500: return_total_cash_500,
+                    return_cash_200: return_cash_200,
+                    return_total_cash_200: return_total_cash_200,
+                    return_cash_100: return_cash_100,
+                    return_total_cash_100: return_total_cash_100,
+                    return_cash_50: return_cash_50,
+                    return_total_cash_50: return_total_cash_50,
+                    return_cash_20: return_cash_20,
+                    return_total_cash_20: return_total_cash_20,
+                    return_cash_10: return_cash_10,
+                    return_total_cash_10: return_total_cash_10,
+                    return_cash_5: return_cash_5,
+                    return_total_cash_5: return_total_cash_5,
+                    return_cash_2: return_cash_2,
+                    return_total_cash_2: return_total_cash_2,
+                    return_cash_1: return_cash_1,
+                    return_total_cash_1: return_total_cash_1,
+                    return_total_cash_amt: return_total_cash_amt,
+
+                    // select_services: select_services,
+                    // extra_services: extra_services
                 },
                 // dataType: 'json',
                 success: function(responce) {
@@ -8266,139 +8473,20 @@ $(document).ready(function() {
 <script>
 $("#payment_final_booking_submit").click(function() {
 
-    // alert('hiiiiiiiii'); 
-
-    var verify_otp = $('#otp').val(); 
+    var verify_otp = $("#otp").val();
     var mobile_no = $('#booking_tm_mobile_no').val(); 
+    // var booking_ref_no = $('#booking_ref_no').val(); 
+    // alert(booking_ref_no);
     var enquiry_id = $('#enquiry_id').val(); 
-    // alert(enquiry_id);
+    
+    
     var journey_date  = $("#journey_date").val();
+    
     var traveller_id  = $("#traveller_id").val();
     var enquiry_id    = $("#enquiry_id").val();
     var hotel_name_id    = $("#hotel_name_id").val();
     var package_date_id    = $("#package_date_id").val();
     var package_id    = $("#package_id").val();
-
-    var final_amt = $('#final_amt').val();
-
-    var payment_type = $("input[name='payment_type']:checked").val();
-    var selectedId = "";
-    if (payment_type === undefined) {
-        // No radio button is checked, insert a default value
-        payment_type = ""; // You can change this to your desired default value
-    } else {
-        // Loop through radio buttons to find the one with the selected value
-        $("input[name='payment_type']").each(function() {
-            if ($(this).val() === payment_type) {
-                selectedId = $(this).attr("id");
-                return false; // Exit the loop once a match is found
-            }
-        });
-    }
-
-    var booking_amt = $('#booking_amt').val(); 
-    var pending_amt = $('#pending_amt').val();
-    // var payment_now_later = $('#payment_now_later').val();
-    var payment_now_later = $("input[name='payment_now_later']:checked").val();
-
-
-    var upi_no = $('#upi_no').val();
-    var cheque = $('#cheque').val();
-    var bank_name = $('#bank_name').val();
-    var drawn_on_date = $('#drawn_on_date').val();
-
-
-    // var netbanking_payment_type = $('#netbanking_payment_type').val();
-    var netbanking_payment_type = $("input[name='netbanking_payment_type']:checked").val();
-    var selectedId = "";
-    if (netbanking_payment_type === undefined) {
-        // No radio button is checked, insert a default value
-        netbanking_payment_type = ""; // You can change this to your desired default value
-    } else {
-        // Loop through radio buttons to find the one with the selected value
-        $("input[name='netbanking_payment_type']").each(function() {
-            if ($(this).val() === netbanking_payment_type) {
-                selectedId = $(this).attr("id");
-                return false; // Exit the loop once a match is found
-            }
-        });
-    }
-
-
-    // alert(netbanking_payment_type);
-    var net_banking_utr_no = $('#net_banking_utr_no').val();
-    var net_banking_acc_no = $('#net_banking_acc_no').val();
-    var net_acc_holder_nm = $('#net_acc_holder_nm').val();
-    var net_banking_branch_name = $('#net_banking_branch_name').val();
-    var netbanking_bank_name = $('#netbanking_bank_name').val();
-    var netbanking_date = $('#netbanking_date').val();
-
-    var upi_holder_name = $('#select_upi_no').val();
-    var upi_payment_type = $('#upi_payment_type').val();
-    // alert(upi_payment_type);
-    var upi_self_no = $('#self_upi_no').val();
-    var upi_reason = $('#reason').val();
-
-
-    var qr_holder_name = $('#select_qr_upi_no').val();
-    var qr_mobile_number = $('#qr_mobile_number').val();
-    var qr_payment_type = $('#qr_payment_type').val();
-    var qr_upi_no = $('#qr_upi_no').val();
-
-
-    var select_transaction =($('#select_transaction :selected').val());
-    // alert(select_transaction);
-    // var cash_2000 = $('#cash_2000').val();
-    // var total_cash_2000 = $('#total_cash_2000').val();
-    var cash_500 = $('#cash_500').val();
-    var total_cash_500 = $('#total_cash_500').val();
-    // alert(total_cash_500);
-    var cash_200 = $('#cash_200').val();
-    var total_cash_200 = $('#total_cash_200').val();
-    var cash_100 = $('#cash_100').val();
-    var total_cash_100 = $('#total_cash_100').val();
-    var cash_50 = $('#cash_50').val();
-    var total_cash_50 = $('#total_cash_50').val();
-    var cash_20 = $('#cash_20').val();
-    var total_cash_20 = $('#total_cash_20').val();
-    var cash_10 = $('#cash_10').val();
-    var total_cash_10 = $('#total_cash_10').val();
-
-    var cash_5 = $('#cash_5').val();
-    var total_cash_5 = $('#total_cash_5').val();
-    // alert(total_cash_5);
-    var cash_2 = $('#cash_2').val();
-    var total_cash_2 = $('#total_cash_2').val();
-    var cash_1 = $('#cash_1').val();
-    var total_cash_1 = $('#total_cash_1').val();
-
-    var total_cash_amt = $('#total_cash_amt').val();
-
-    var return_cash_500 = $('#return_cash_500').val();
-    var return_total_cash_500 = $('#return_total_cash_500').val();
-    // alert(return_total_cash_500);
-    var return_cash_200 = $('#return_cash_200').val();
-    var return_total_cash_200 = $('#return_total_cash_200').val();
-    var return_cash_100 = $('#return_cash_100').val();
-    var return_total_cash_100 = $('#return_total_cash_100').val();
-    var return_cash_50 = $('#return_cash_50').val();
-    var return_total_cash_50 = $('#return_total_cash_50').val();
-    var return_cash_20 = $('#return_cash_20').val();
-    var return_total_cash_20 = $('#return_total_cash_20').val();
-    var return_cash_10 = $('#return_cash_10').val();
-    var return_total_cash_10 = $('#return_total_cash_10').val();
-    var return_cash_5 = $('#return_cash_5').val();
-    var return_total_cash_5 = $('#return_total_cash_5').val();
-    var return_cash_2 = $('#return_cash_2').val();
-    var return_total_cash_2 = $('#return_total_cash_2').val();
-    var return_cash_1 = $('#return_cash_1').val();
-    var return_total_cash_1 = $('#return_total_cash_1').val();
-
-    var return_total_cash_amt = $('#return_total_cash_amt').val();
-
-    var booking_payment_details_id = $('#booking_payment_details_id').val();
-    var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
-    
     // alert(package_id);
 
     if (verify_otp != '') {
@@ -8408,82 +8496,14 @@ $("#payment_final_booking_submit").click(function() {
             data: {
                 verify_otp: verify_otp,
                 mobile_no: mobile_no,
+                // booking_ref_no: booking_ref_no,
                 enquiry_id: enquiry_id,
                 journey_date: journey_date,
                 traveller_id: traveller_id,
+                enquiry_id: enquiry_id,
                 hotel_name_id: hotel_name_id,
                 package_date_id: package_date_id,
-                package_id: package_id,
-
-                booking_payment_details_id: booking_payment_details_id,
-                return_customer_booking_payment_id: return_customer_booking_payment_id,
-                booking_amt: booking_amt,
-                final_amt: final_amt,
-                payment_type: payment_type,
-                pending_amt: pending_amt,
-                payment_now_later: payment_now_later,
-                upi_no: upi_no,
-                cheque: cheque,
-                bank_name: bank_name,
-                drawn_on_date: drawn_on_date,
-                netbanking_payment_type: netbanking_payment_type,
-                net_banking_acc_no: net_banking_acc_no,
-                net_acc_holder_nm: net_acc_holder_nm,
-                net_banking_branch_name: net_banking_branch_name,
-                net_banking_utr_no: net_banking_utr_no,
-                netbanking_bank_name: netbanking_bank_name,
-                netbanking_date: netbanking_date,
-                
-                upi_holder_name: upi_holder_name,
-                upi_payment_type: upi_payment_type,
-                upi_self_no: upi_self_no,
-                upi_reason: upi_reason,
-                
-                qr_holder_name: qr_holder_name,
-                qr_mobile_number: qr_mobile_number,
-                qr_payment_type: qr_payment_type,
-                qr_upi_no: qr_upi_no,
-                
-                select_transaction: select_transaction,
-                cash_500: cash_500,
-                total_cash_500: total_cash_500,
-                cash_200: cash_200,
-                total_cash_200: total_cash_200,
-                cash_100: cash_100,
-                total_cash_100: total_cash_100,
-                cash_50: cash_50,
-                total_cash_50: total_cash_50,
-                cash_20: cash_20,
-                total_cash_20: total_cash_20,
-                cash_10: cash_10,
-                total_cash_10: total_cash_10,
-                cash_5: cash_5,
-                total_cash_5: total_cash_5,
-                cash_2: cash_2,
-                total_cash_2: total_cash_2,
-                cash_1: cash_1,
-                total_cash_1: total_cash_1,
-                total_cash_amt: total_cash_amt,
-
-                return_cash_500: return_cash_500,
-                return_total_cash_500: return_total_cash_500,
-                return_cash_200: return_cash_200,
-                return_total_cash_200: return_total_cash_200,
-                return_cash_100: return_cash_100,
-                return_total_cash_100: return_total_cash_100,
-                return_cash_50: return_cash_50,
-                return_total_cash_50: return_total_cash_50,
-                return_cash_20: return_cash_20,
-                return_total_cash_20: return_total_cash_20,
-                return_cash_10: return_cash_10,
-                return_total_cash_10: return_total_cash_10,
-                return_cash_5: return_cash_5,
-                return_total_cash_5: return_total_cash_5,
-                return_cash_2: return_cash_2,
-                return_total_cash_2: return_total_cash_2,
-                return_cash_1: return_cash_1,
-                return_total_cash_1: return_total_cash_1,
-                return_total_cash_amt: return_total_cash_amt,
+                package_id: package_id
             },
             //  dataType: 'json',
             //  cache: false,
