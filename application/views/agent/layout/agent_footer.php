@@ -7947,7 +7947,8 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
     var select_services = $('#select_services').val();
     // alert(select_services);
     // var other_services = $('#other_services').val();
-    if (select_services == 'Other'){
+    // if (select_services == 'Other'){
+        if($.inArray('Other', select_services) != '-1'){   
         var other_services = $('#other_services').val();
         // alert(other_services);
         if(other_services == ''){
@@ -7960,7 +7961,6 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
     }
     }
     }
-
     if (!extra_services) {
         Swal.fire({
             title: 'Error',
@@ -7979,6 +7979,7 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
     return;
     }
 
+// alert(other_services);
     
     
         $.ajax({
@@ -8010,16 +8011,71 @@ document.getElementById("booking_confirm_back").addEventListener("click", functi
 });
 </script>
 <script type="text/javascript">
-    function tour_title(val){
-    var element=document.getElementById('other_service_div');
-	var element2=document.getElementById('other_services');
-    if(val=='Other')
-    element.style.display='block';
-    else  
-    element.style.display='none';
-	element2.value="";	
+    // function tour_title(val){
+    // var element=document.getElementById('other_service_div');
+	// var element2=document.getElementById('other_services');
+    // if(val=='Other')
+    // element.style.display='block';
+    // else  
+    // element.style.display='none';
+	// element2.value="";	
+    // }
+
+$(document).ready(function(){
+    $("#other_service_div").hide();
+
+    $('#select_services').change(function() {
+        // $("#other_service_div").hide();
+        var did = $('#select_services').val();
+        var did_other = $('#other_services').val();
+        var did_extra_services = $('input[name="extra_services"]:checked').val();
+        // console.log(did);
+        // console.log(did_other);
+        // if(did=='Other')
+        if(did_extra_services == 'yes'){
+            if($.inArray('Other', did) != '-1')
+            {
+            // alert('fffffffff');
+            // did.style.display='block';
+            $("#other_service_div").show();
+                }else{  
+                // did.style.display='none';
+            $("#other_service_div").hide();
+
+                did_other.value="";
+                }
+        }
+    });
+});
+
+
+$(document).ready(function(){
+    var did = $('#select_services').val();
+    var did_extra_services = $('input[name="extra_services"]:checked').val();
+    // alert(did_extra_services);
+    if(did_extra_services == 'yes'){
+    if($.inArray('Other', did) != '-1'){
+    $("#other_service_div").show();
     }
+    }
+});
+
+$(document).ready(function(){
+    var did = $('#select_services').val();
+    var did_extra_services = $('input[name="extra_services"]:checked').val();
+    // alert(did_extra_services);
+    if(did_extra_services == 'no'){
+    $("#extra_services_div2").hide();
+    $("#extra_services_div1").hide();
+    }else{
+    $("#extra_services_div2").show();
+    $("#extra_services_div1").show();
+    }
+});
+
 </script>
+
+
 
 
 <!-- back button -->

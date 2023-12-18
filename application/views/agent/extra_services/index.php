@@ -104,24 +104,24 @@
                         </div>
                         <div class="col-md-6">
                             <?php 
-                        foreach($arr_data as $info) 
-                        { 
+                            foreach($arr_data as $info) 
+                            { 
                             // print_r($info); die;
                             $enq = $info['domestic_enquiry_id'];
-                        ?>
-                        <?php if($info['for_credentials']=='yes'){?>
-                        <input type="hidden" class="form-control" name="traveller_id" id="traveller_id" value="<?php echo $info['id']; ?>">
-                        <label hidden>Credentials give to this mobile number</label>
-                        <input type="hidden" class="form-control" disabled name="crediential_mobile_no" id="crediential_mobile_no" value="<?php echo $info['mobile_number']; ?>">
+                            ?>
+                            <?php if($info['for_credentials']=='yes'){?>
+                            <input type="hidden" class="form-control" name="traveller_id" id="traveller_id" value="<?php echo $info['id']; ?>">
+                            <label hidden>Credentials give to this mobile number</label>
+                            <input type="hidden" class="form-control" disabled name="crediential_mobile_no" id="crediential_mobile_no" value="<?php echo $info['mobile_number']; ?>">
 
-                        <?php } }?>
+                            <?php } }?>
                             <div class="mt-3">
-                            <label for="coupon_question">Do You Want Extra Services ?</label>
-                        
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="extra_services_yes" name="extra_services" class="extra_services_yes_no" value="yes" onclick="show2();" <?php if(!empty($extra_services['extra_services'])){if("yes" == $extra_services['extra_services']) {echo 'checked';}}?>/>
-                                <label for="Yes" id="extra_services_yes">Yes</label> &nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="extra_services_no" name="extra_services" class="extra_services_yes_no" value="no" onclick="show1();" <?php if(!empty($extra_services['extra_services'])){if("no" == $extra_services['extra_services']) {echo 'checked';}}?>/>
-                                <label for="No" id="extra_services_no">No</label>
+                                <label for="coupon_question">Do You Want Extra Services ?</label>
+                            
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="extra_services_yes" name="extra_services" class="extra_services_yes_no" value="yes" onclick="show2();" <?php if(!empty($extra_services['extra_services'])){if("yes" == $extra_services['extra_services']) {echo 'checked';}}?>/>
+                                    <label for="Yes" id="extra_services_yes">Yes</label> &nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="extra_services_no" name="extra_services" class="extra_services_yes_no" value="no" onclick="show1();" <?php if(!empty($extra_services['extra_services'])){if("no" == $extra_services['extra_services']) {echo 'checked';}}?>/>
+                                    <label for="No" id="extra_services_no">No</label>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -129,17 +129,15 @@
                         <div class="col-md-3">
                         </div>
                         <?php 
-                         if(!empty($extra_services['extra_services'])=='yes'){
+                         if(!empty($extra_services['extra_services']) && $extra_services['extra_services'] == 'yes'){
                             // print_r('fsgfsgdfggsgf');
                             ?>
                         <div class="col-md-3" id="extra_services_div1">
                             <label>Services Name-Cost</label>
-                        </div>
+                        </div>  
                         <div class="col-md-3" id="extra_services_div2">
                             <div class="form-group">
-                                
-                                <select class="select2" multiple="multiple" data-placeholder="Select Services" style="width: 100%;" name="select_services[]" id="select_services" onchange='CheckColors(this.value); 
-                                  this.blur();'>
+                                <select class="select2" multiple="multiple" data-placeholder="Select Services" style="width: 100%;" name="select_services[]" id="select_services">
                                 <option value="">Select Services</option>
                                 <?php
                                     foreach($extra_services_details as $extra_services_details_value) 
@@ -173,7 +171,7 @@
                                 if($extra_services_details_value['select_services'] == 'Other'){
                         ?>
                         <div class="col-md-3">
-                            <div id="other_service_div" style='display:block;'>
+                            <div id="other_service_div">
                             <label>Other Services Name</label>
                                     <div class="form-group">
                                         <input type="text" class="form-control mealplan_css" name="other_services" id="other_services" placeholder="Enter services name" value="<?php echo $extra_services_details_value['other_services']; ?>">
@@ -189,8 +187,8 @@
                         </div>
                         <div class="col-md-3 hide" id="extra_services_div2">
                             <div class="form-group">
-                                <select class="select2" multiple="multiple" data-placeholder="Select Services" style="width: 100%;" name="select_services[]" id="select_services" onchange='tour_title(this.value); 
-                                  this.blur();'>
+                            <!-- onchange='tour_title(this.value); this.blur();' -->
+                                <select class="select2" multiple="multiple" data-placeholder="Select Services" style="width: 100%;" name="select_services[]" id="select_services">
                                 <option value="">Select Services</option>
                                 <option value="Other">Other</option>
                                 <?php
@@ -207,7 +205,7 @@
                         </div>
                                         
                         <div class="col-md-3">
-                            <div id="other_service_div" style='display:none;'>
+                            <div id="other_service_div">
                             <label>Other Services Name</label>
                                     <div class="form-group">
                                         <input type="text" class="form-control mealplan_css" name="other_services" id="other_services" placeholder="Enter services name">
@@ -292,9 +290,11 @@
     function show1(){
     document.getElementById('extra_services_div1').style.display = 'none';
     document.getElementById('extra_services_div2').style.display ='none';
+    document.getElementById('other_service_div').style.display ='none';
     }
     function show2(){
     document.getElementById('extra_services_div1').style.display = 'block';
     document.getElementById('extra_services_div2').style.display = 'block';
+    // document.getElementById('other_service_div').style.display ='block';
     }
 </script>

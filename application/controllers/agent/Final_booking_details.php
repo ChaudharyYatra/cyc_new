@@ -167,7 +167,8 @@ class Final_booking_details extends CI_Controller {
         $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
         // print_r($booking_payment_details); die;
 
-        $enquiry = isset($booking_payment_details['enquiry_id']);
+        $enquiry = ($booking_payment_details['enquiry_id']);
+        $package_date = ($booking_payment_details['package_date_id']);
         // print_r($enquiry); die;
 
         $this->db->where('is_deleted','no');
@@ -188,6 +189,7 @@ class Final_booking_details extends CI_Controller {
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['enquiry']        = $enquiry;
+        $this->arr_view_data['package_date']        = $package_date;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;

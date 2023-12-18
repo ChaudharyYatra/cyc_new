@@ -101,7 +101,7 @@ class Extra_services extends CI_Controller {
         $fields = "extra_services_details.*,special_req_master.id as special_req_id,special_req_master.service_name";
         $this->db->where('extra_services_details.is_deleted','no');
         $this->db->where('extra_services_details.enquiry_id',$iid);
-        // $this->db->group_by('extra_services');
+        // $this->db->group_by('extra_services');   
         $this->db->join("special_req_master", 'extra_services_details.select_services= special_req_master.id','left');
         $extra_services_details = $this->master_model->getRecords('extra_services_details',array('extra_services_details.is_deleted'=>'no'),$fields);
         // print_r($extra_services_details); die;
@@ -171,6 +171,7 @@ class Extra_services extends CI_Controller {
 
     public function booking_confirm_verify_otp2()
     { 
+        // print_r($_REQUEST);
         // echo 'hiiiii IN Controller'; die;
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
@@ -188,34 +189,87 @@ class Extra_services extends CI_Controller {
 
             $extra_services = $this->input->post('extra_services'); // Make sure $extra_services is defined
             $other_services = $this->input->post('other_services');
+            
 
             
             // $selected_services = explode(',', $select_services);
+            if($extra_services == 'yes'){
+                foreach ($selected_services as $selected_service){
+                    if($selected_service=="Other"){
+                    $arr_insert2 = array(
+                        'select_services' => $selected_service,
+                        'extra_services' => $extra_services,
+                        'enquiry_id' => $enquiry_id,
+                        'other_services' => $other_services
+                    );
+                    }else{
+                        $arr_insert2 = array(
+                            'select_services' => $selected_service,
+                            'extra_services' => $extra_services,
+                            'enquiry_id' => $enquiry_id,
+                            'other_services' => ''
+                        );
+                    }
 
-            foreach ($selected_services as $selected_service){
-                $arr_insert2 = array(
-                    'select_services' => $selected_service,
-                    'extra_services' => $extra_services,
-                    'enquiry_id' => $enquiry_id,
-                    'other_services' => $other_services
-                );
+                    // print_r($arr_insert2); 
+                    
+                    $existing_service = $this->master_model->getRecord('extra_services_details', array('select_services' => $selected_service, 'enquiry_id' => $enquiry_id));
 
-                
-                $existing_service = $this->master_model->getRecord('extra_services_details', array('select_services' => $selected_service, 'enquiry_id' => $enquiry_id));
-
-                // print_r($existing_service);
-                // die;
-                if (!empty($existing_service)) {
-                    // Update existing record
-                    // echo 'if';
-                    $arr_where = array("id" => $existing_service['id']);
-                    $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
-                } else {
-                    // Insert new record
-                    // echo 'else';
-                    $inserted_id = $this->master_model->insertRecord('extra_services_details', $arr_insert2, true);
+                    // print_r($existing_service);
+                    // die;
+                    if (!empty($existing_service)) {
+                        // Update existing record
+                        // echo 'if';
+                        $arr_where = array("id" => $existing_service['id']);
+                        $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
+                    } else {
+                        // Insert new record
+                        // echo 'else';
+                        $inserted_id = $this->master_model->insertRecord('extra_services_details', $arr_insert2, true);
+                    }
                 }
+
+                    $existing_services = $this->master_model->getRecords('extra_services_details', array('enquiry_id' => $enquiry_id));
+
+                    foreach ($existing_services as $existing_service) {
+                        // Check if the service is not in the selected services array
+                        if (!in_array($existing_service['select_services'], $selected_services)) {
+                            // Delete the record for the removed service
+                            $this->master_model->deleteRecord('extra_services_details', array('id' => $existing_service['id']));
+                        }
+                    }
+            }else{
+                foreach ($selected_services as $selected_service){
+                    
+                        $arr_insert2 = array(
+                            'extra_services' => $extra_services,
+                            'enquiry_id' => $enquiry_id
+                        );
+
+                    $existing_service = $this->master_model->getRecord('extra_services_details', array('select_services' => $selected_service, 'enquiry_id' => $enquiry_id));
+                    if (!empty($existing_service)) {
+                        // Update existing record
+                        // echo 'if';
+                        $arr_where = array("id" => $existing_service['id']);
+                        $inserted_id = $this->master_model->updateRecord('extra_services_details', $arr_insert2, $arr_where);
+                    } else {
+                        // Insert new record
+                        // echo 'else';
+                        $inserted_id = $this->master_model->insertRecord('extra_services_details', $arr_insert2, true);
+                    }
+                }
+
+                $existing_services = $this->master_model->getRecords('extra_services_details', array('enquiry_id' => $enquiry_id));
+
+                    foreach ($existing_services as $existing_service) {
+                        // Check if the service is not in the selected services array
+                        if (!in_array($existing_service['select_services'], $selected_services)) {
+                            // Delete the record for the removed service
+                            $this->master_model->deleteRecord('extra_services_details', array('id' => $existing_service['id']));
+                        }
+                    }
             }
+
 
             if($enquiry_id!=''){
                 return true;
