@@ -127,7 +127,7 @@
     });
 </script> -->
 
-<script>
+<!-- <script>
 $(document).ready(function(){
     // alert('hhhhhhhhhh');
     $('#memListTable').DataTable({
@@ -140,7 +140,7 @@ $(document).ready(function(){
         "order": [],
         // Load data from an Ajax source
         "ajax": {
-            "url": "<?php echo base_url('admin/booking_enquiry/getLists/'); ?>",
+            "url": "<?php //echo base_url('admin/booking_enquiry/getLists/'); ?>",
             "type": "POST"
         },
         //Set column definition initialisation properties
@@ -153,7 +153,7 @@ $(document).ready(function(){
         }]
     });
 });
-</script>
+</script> -->
 
 <script>
   $(function () {
