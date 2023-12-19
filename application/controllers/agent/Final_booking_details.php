@@ -15,6 +15,7 @@ class Final_booking_details extends CI_Controller {
                 redirect(base_url().'agent/login');
         }
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
+        $this->module_pending_amt    =  base_url().$this->config->item('agent_panel_slug')."/pending_amount";
         $this->module_url_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_url_path_back    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
@@ -34,6 +35,7 @@ class Final_booking_details extends CI_Controller {
          $fields = "packages.*,final_booking.package_id,final_booking.package_date_id,package_date.id as p_date_id,package_date.journey_date,booking_enquiry.id";
          $this->db->where('packages.is_deleted','no');
          $this->db->where('packages.is_active','yes');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
          $this->db->group_by('package_date.id','package.id'); 
          $this->db->join("final_booking", 'final_booking.package_id=packages.id','right');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','right');
@@ -62,13 +64,18 @@ class Final_booking_details extends CI_Controller {
         $id=$this->session->userdata('agent_sess_id');
 
         $record = array();
-        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id";
+        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id,package_date.id as p_date_id";
         $this->db->where('booking_basic_info.is_deleted','no');
         $this->db->where('domestic_enquiry_id',$iid);
         $this->db->join("packages", 'packages.id=booking_basic_info.tour_no','left');
         $this->db->join("package_date", 'package_date.id=booking_basic_info.tour_date','left');
         $this->db->join("package_hotel", 'package_hotel.package_id=packages.id','left');
         $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
+
+        foreach($traveller_booking_info  as $traveller_booking_pdate){
+            $p_date = $traveller_booking_pdate['p_date_id'];
+        }
+        // print_r($p_date); die; 
 
         $record = array();
         $fields = "all_traveller_info.*,relation.relation,courtesy_titles.courtesy_titles_name";
@@ -185,6 +192,7 @@ class Final_booking_details extends CI_Controller {
            
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
+        $this->arr_view_data['p_date']        = $p_date;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
@@ -227,6 +235,7 @@ class Final_booking_details extends CI_Controller {
          $this->db->where('final_booking.is_deleted','no');
          $this->db->where('final_booking.package_date_id',$id);
          $this->db->where('all_traveller_info.for_credentials','yes');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
          $this->db->join("packages", 'final_booking.package_id=packages.id','left');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
          $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
@@ -239,6 +248,7 @@ class Final_booking_details extends CI_Controller {
          $this->arr_view_data['listing_page']    = 'yes';
          $this->arr_view_data['arr_data']        = $arr_data;
          $this->arr_view_data['page_title']      = $this->module_title." List";
+         $this->arr_view_data['module_pending_amt'] = $this->module_pending_amt;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."sub_index";
