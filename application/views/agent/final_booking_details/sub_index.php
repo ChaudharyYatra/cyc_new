@@ -62,6 +62,8 @@
 
                     <td>
                     <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+
+                    <a href="<?php echo $module_pending_amt;?>/index/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment</button></a>
                     </td>
                     
                   </tr>

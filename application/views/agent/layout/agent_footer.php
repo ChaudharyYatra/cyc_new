@@ -8635,7 +8635,102 @@ function later_reason(element){
 
 
 
+<script>
+$(document).ready(function() {
+    $("#pending_amt_submit_otp").click(function() {
+        var mobile_no = $('#booking_tm_mobile_no').val();  
+        // alert(mobile_no);
+        var final_amt = $('#final_amt').val();
+        var enquiry_id = $('#enquiry_id').val();
+        var package_id = $('#package_id').val();
+        var journey_date = $('#journey_date').val();
+        var package_date_id = $('#package_date_id').val();
+        var traveller_id = $('#traveller_id').val();
+        var hotel_name_id    = $("#hotel_name_id").val();
+        var booking_payment_details_id    = $("#booking_payment_details_id").val();
 
+        
+        if (mobile_no != '') {
+            // alert('IN hiiiii');
+            $.ajax({ 
+                url: "<?php echo base_url(); ?>agent/pending_amount/cust_otp",
+                type: "post",
+                data: {
+                    enquiry_id: enquiry_id,
+                    package_id: package_id,
+                    journey_date: journey_date,
+                    package_date_id: package_date_id,
+                    traveller_id: traveller_id,
+                    mobile_no: mobile_no,
+                    hotel_name_id: hotel_name_id,
+                    booking_payment_details_id: booking_payment_details_id,
+                },
+                // dataType: 'json',
+                success: function(responce) {
+                    if (responce != false && responce !='') {
+                        // alert(responce);
+                        var booking_ref_no = $('#booking_ref_no').val(responce);
+                        Swal.fire({
+                        title: 'Check OTP',
+                        text: 'Please check OTP on mobile number: ' + mobile_no,
+                        icon: 'info',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Optionally, you can perform additional actions here
+                        }
+                    });
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
 
+<script>
+$(document).ready(function() {
+    $("#pending_amt_re_send_otp").click(function() {
+        alert('hiiiiiiiiiii');
+        var booking_tm_mobile_no = $('#booking_tm_mobile_no').val();  
+        var enquiry_id = $('#enquiry_id').val();
+        
+        // alert(booking_tm_mobile_no);
+        // alert(enquiry_id);
 
+        if (booking_tm_mobile_no != '') {
+            // alert('IN hiiiii');
+            $.ajax({
+                url: "<?php echo base_url(); ?>agent/pending_amount/send_otp",
+                type: "post",
+                data: {
+                    enquiry_id: enquiry_id,
+                    booking_tm_mobile_no: booking_tm_mobile_no
+                },
+                dataType: 'json',
+                success: function(responce) {
+                    if (responce != false && responce !='') {
+                        console.log(responce);
+                        // alert(responce);
+                        // var booking_ref_no = $('#booking_ref_no').val(responce);
+                        Swal.fire({
+                        title: 'Check OTP',
+                        text: 'Please check Resend OTP on mobile number: ' + booking_tm_mobile_no,
+                        icon: 'info',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Optionally, you can perform additional actions here
+                        }
+                    });
+                        
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
 
