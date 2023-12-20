@@ -201,27 +201,6 @@ class Booking_preview extends CI_Controller {
             $arr_insert = array(
                 'enquiry_id' => $enquiry_id,
                 'package_id' => $package_id,
-                'traveller_id' => $traveller_id,
-                'package_date_id' => $package_date_id,
-                'agent_id'   =>  $id
-            );
-
-            
-            $this->db->where('is_deleted','no');
-            $this->db->where('enquiry_id',$enquiry_id);
-            $final_booking_details = $this->master_model->getRecord('final_booking');
-
-            if(!empty($final_booking_details)){
-                $arr_where     = array("enquiry_id" => $enquiry_id);
-                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
-            }else{
-             $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
-             $insertid = $this->db->insert_id();
-            }
-
-            $arr_insert = array(
-                'enquiry_id' => $enquiry_id,
-                'package_id' => $package_id,
                 'traveler_id' => $traveller_id,
                 'package_date_id' => $package_date_id,
                 'take_enquiry_by_agent_id'   =>  $id
@@ -260,9 +239,31 @@ class Booking_preview extends CI_Controller {
                     $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
                 }else{
                  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
-                 $insertid = $this->db->insert_id();
+                 $insertid_booking_payment_details = $this->db->insert_id();
                 }
                 
+
+                $arr_insert = array(
+                    'enquiry_id' => $enquiry_id,
+                    'package_id' => $package_id,
+                    'traveller_id' => $traveller_id,
+                    'package_date_id' => $package_date_id,
+                    'booking_payment_details_id' => $insertid_booking_payment_details,
+                    'agent_id'   =>  $id
+                );
+    
+                
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+    
+                if(!empty($final_booking_details)){
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
 
                 
         if($inserted_id!=''){

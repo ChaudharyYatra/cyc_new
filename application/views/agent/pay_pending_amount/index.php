@@ -187,6 +187,7 @@
                                     <th>Mobile Number</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
+                                    <input type="hidden" class="form-control" name="inserted_id" id="inserted_id" value="">
                                     </td>
                                 </tr>
                                 
@@ -1306,12 +1307,12 @@
                                             <th><input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
                                             <p id="least_count"></p>
                                             </th>
-                                            <th><button type="button" class="btn btn-success" name="submit" id="payment_final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
+                                            <th><button type="button" class="btn btn-success" name="pay_pending_amt_payment_final_booking_submit" id="pay_pending_amt_payment_final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
                                         </tr>
                                     </table>
                                     <div class="row justify-content-center">
                                         <div class="col-md-3">
-                                            <center><th><button type="button" class="btn btn-primary mb-3" name="submit_otp" id="submit_otp"  disabled>Send OTP</button></th></center>
+                                            <center><th><button type="button" class="btn btn-primary mb-3" name="pay_pending_amt_submit_otp" id="pay_pending_amt_submit_otp"  disabled>Send OTP</button></th></center>
                                         </div>
                                         <div class="col-md-4">
                                             <center><th><button type="button" class="btn btn-primary mb-3" name="re_send_otp" id="re_send_otp" disabled>Resend OTP</button></th></center>

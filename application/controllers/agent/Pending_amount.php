@@ -20,6 +20,7 @@ class Pending_amount extends CI_Controller {
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
         $this->module_url_pending_payment   =  base_url().$this->config->item('agent_panel_slug')."/pending_booking_details";
+        $this->module_url_final_booking_details   =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
         $this->module_title       = "Booking Payment Amount";
         $this->module_view_folder = "pending_amount/";
         $this->arr_view_data = [];
@@ -129,6 +130,7 @@ class Pending_amount extends CI_Controller {
         // print_r($booking_payment_details); die;
 
         $enquiry = isset($booking_payment_details['enquiry_id']);
+        $enquiry_id = $booking_payment_details['package_date_id'];
         // print_r($enquiry); die;
 
         $this->db->where('is_deleted','no');
@@ -143,12 +145,19 @@ class Pending_amount extends CI_Controller {
         $qr_image_details = $this->master_model->getRecord('booking_payment_details');
         // print_r($qr_image_details); die;    
 
+        $this->db->where('is_deleted','no');
+        $this->db->where('booking_payment_details.enquiry_id',$iid);
+        $booking_payment_details_all = $this->master_model->getRecords('booking_payment_details');
+        // print_r($booking_payment_details_all); die;
+
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['enquiry']        = $enquiry;
+        $this->arr_view_data['enquiry_id']        = $enquiry_id;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
+        $this->arr_view_data['booking_payment_details_all']        = $booking_payment_details_all;
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
         $this->arr_view_data['extra_services_details']        = $extra_services_details;
@@ -167,6 +176,7 @@ class Pending_amount extends CI_Controller {
         $this->arr_view_data['module_url_pending_payment'] = $this->module_url_pending_payment;
         $this->arr_view_data['module_url_booking_process'] = $this->module_url_booking_process;
         $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
+        $this->arr_view_data['module_url_final_booking_details'] = $this->module_url_final_booking_details;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
 
@@ -239,7 +249,7 @@ class Pending_amount extends CI_Controller {
                 
                 
         if($inserted_id!=''){
-           echo true;
+           echo $insertid;
        }else {
            echo false;
        }
@@ -865,6 +875,8 @@ class Pending_amount extends CI_Controller {
                 $extra_sevices_id = $this->input->post('extra_sevices_id');
                 $booking_payment_details_id = $this->input->post('booking_payment_details_id');
                 $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
+                $inserted_id_prev = $this->input->post('inserted_id');
+                // print_r($inserted_id); die;
 
                 $arr_insert = array(
                     'enquiry_id'   =>   $enquiry_id,
@@ -873,6 +885,7 @@ class Pending_amount extends CI_Controller {
                     'booking_date'   =>   $today,
                     'traveller_id'   =>   $traveller_id,
                     'booking_reference_no'  =>  $booking_reference_no,
+                    'booking_payment_details_id'  =>  $inserted_id_prev,
                     'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
@@ -886,12 +899,13 @@ class Pending_amount extends CI_Controller {
 
                 // print_r($final_booking_details); die;
 
-                if(!empty($final_booking_details)){
-                $arr_where     = array("enquiry_id" => $enquiry_id);
-                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
-                } else{
+                // if(!empty($final_booking_details)){
+                // $arr_where     = array("enquiry_id" => $enquiry_id);
+                // $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                // } else{
+                // $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+                // }
                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
-                }
 
 
                 $arr_update = array(
@@ -959,9 +973,19 @@ class Pending_amount extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
-                $arr_where     = array("enquiry_id" => $enquiry_id);
+                // echo $inserted_id; 
+                $arr_where     = array("enquiry_id" => $enquiry_id,
+                                        "id"=>$inserted_id_prev);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
+                $arr_update2 = array(
+                    'run_pending_amt'   =>   $pending_amt
+                );
+                $arr_where2     = array("enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_payment_details',$arr_update2,$arr_where2);
+
+                // die;
+                if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
                     'return_total_cash_500'   =>   $return_total_cash_500  ,
@@ -992,12 +1016,12 @@ class Pending_amount extends CI_Controller {
 
                     'return_total_cash_amt'   =>   $return_total_cash_amt   ,
                     'enquiry_id'   =>   $enquiry_id  ,
-                    'booking_payment_details_id'   =>   $booking_payment_details_id ,
+                    'booking_payment_details_id'   =>   $inserted_id_prev ,
 
                     'select_transaction'   =>   $select_transaction
                 );
                 $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert,true);
-                
+                }
                 $arr_update = array(
                     'booking_done'   =>   'yes'
                 );

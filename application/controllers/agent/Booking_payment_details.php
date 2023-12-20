@@ -967,7 +967,7 @@ class Booking_payment_details extends CI_Controller {
                 $arr_where     = array("enquiry_id" => $enquiry_id);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
-
+                if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
                     'return_total_cash_500'   =>   $return_total_cash_500  ,
@@ -1003,7 +1003,8 @@ class Booking_payment_details extends CI_Controller {
                     'select_transaction'   =>   $select_transaction
                 );
                 $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert,true);
-
+                }
+                
                 $arr_update = array(
                     'booking_done'   =>   'yes'
                 );

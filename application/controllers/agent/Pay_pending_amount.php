@@ -232,17 +232,20 @@ class Pay_pending_amount extends CI_Controller {
                 $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
                 // print_r($booking_payment_details); die;
                 
+                $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                $insertid = $this->db->insert_id();
+
                 // print_r($arr_insert); die;
-                if(!empty($booking_payment_details)){
-                    $arr_where     = array("id" => $booking_payment_details_id);
-                    $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
-                }else{
-                 $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
-                 $insertid = $this->db->insert_id();
-                }
+                // if(!empty($booking_payment_details)){
+                //     $arr_where     = array("id" => $booking_payment_details_id);
+                //     $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                // }else{
+                //  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                //  $insertid = $this->db->insert_id();
+                // }
                 
         if($inserted_id!=''){
-           echo true;
+           echo $insertid;
        }else {
            echo false;
        }
@@ -764,7 +767,7 @@ class Pay_pending_amount extends CI_Controller {
             //  print_r($mobile_no);
              $enquiry_id = $this->input->post('enquiry_id'); 
             //  print_r($enquiry_id); die;
-
+            $inserted_id_prev = $this->input->post('inserted_id');
             // echo $booking_ref_no = $this->input->post('booking_ref_no');  die;
 
             $record = array();
@@ -773,6 +776,7 @@ class Pay_pending_amount extends CI_Controller {
             $this->db->where('traveler_otp',$verify_otp);
             $this->db->where('booking_tm_mobile_no',$mobile_no);
             $this->db->where('enquiry_id',$enquiry_id);
+            $this->db->where('id',$inserted_id_prev);
             $booking_payment_details_info = $this->master_model->getRecord('booking_payment_details');
             // print_r($booking_payment_details_info); die;
 
@@ -868,6 +872,8 @@ class Pay_pending_amount extends CI_Controller {
                 $extra_sevices_id = $this->input->post('extra_sevices_id');
                 $booking_payment_details_id = $this->input->post('booking_payment_details_id');
                 $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
+                $inserted_id_prev = $this->input->post('inserted_id');
+                // print_r($inserted_id_prev); die;
 
                 $arr_insert = array(
                     'enquiry_id'   =>   $enquiry_id,
@@ -875,6 +881,7 @@ class Pay_pending_amount extends CI_Controller {
                     'package_id'   =>   $package_id,
                     'booking_date'   =>   $today,
                     'traveller_id'   =>   $traveller_id,
+                    'booking_payment_details_id'  =>  $inserted_id_prev,
                     'booking_reference_no'  =>  $booking_reference_no,
                     'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
@@ -889,12 +896,13 @@ class Pay_pending_amount extends CI_Controller {
 
                 // print_r($final_booking_details); die;
 
-                if(!empty($final_booking_details)){
-                $arr_where     = array("enquiry_id" => $enquiry_id);
-                $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
-                } else{
                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
-                }
+                // if(!empty($final_booking_details)){
+                // $arr_where     = array("enquiry_id" => $enquiry_id);
+                // $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                // } else{
+                // $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+                // }
 
 
                 $arr_update = array(
@@ -962,9 +970,11 @@ class Pay_pending_amount extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
-                $arr_where     = array("enquiry_id" => $enquiry_id);
+                $arr_where     = array("enquiry_id" => $enquiry_id,
+                                       "id"=>$inserted_id_prev);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
+                if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
                     'return_total_cash_500'   =>   $return_total_cash_500  ,
@@ -995,12 +1005,13 @@ class Pay_pending_amount extends CI_Controller {
 
                     'return_total_cash_amt'   =>   $return_total_cash_amt   ,
                     'enquiry_id'   =>   $enquiry_id  ,
-                    'booking_payment_details_id'   =>   $booking_payment_details_id ,
+                    'booking_payment_details_id'   =>   $inserted_id_prev ,
 
                     'select_transaction'   =>   $select_transaction
                 );
                 $this->master_model->insertRecord('return_customer_booking_payment_details',$arr_insert,true);
-                
+                }
+
                 $arr_update = array(
                     'booking_done'   =>   'yes'
                 );

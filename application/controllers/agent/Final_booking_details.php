@@ -169,6 +169,15 @@ class Final_booking_details extends CI_Controller {
         }
             // print_r($extra);
 
+        // print_r($booking_payment_details_all); die;
+        // print_r($booking_payment_details_all); die;
+
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('booking_payment_details.enquiry_id',$iid);
+        $booking_payment_details_all = $this->master_model->getRecords('booking_payment_details');
+        // print_r($booking_payment_details_all); die;
+
         $this->db->where('is_deleted','no');
         $this->db->where('booking_payment_details.enquiry_id',$iid);
         $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
@@ -202,6 +211,7 @@ class Final_booking_details extends CI_Controller {
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
         $this->arr_view_data['extra_services_details']        = $extra_services_details;
+        $this->arr_view_data['booking_payment_details_all']        = $booking_payment_details_all;
         $this->arr_view_data['extra']        = $extra;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['extra_services_deatils']        = $extra_services_deatils;
@@ -241,6 +251,7 @@ class Final_booking_details extends CI_Controller {
          $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
          $this->db->join("booking_payment_details", 'final_booking.enquiry_id=booking_payment_details.enquiry_id','right');
          $this->db->join("all_traveller_info", 'final_booking.enquiry_id=all_traveller_info.domestic_enquiry_id','right');
+         $this->db->group_by('enquiry_id');
          $arr_data = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 
