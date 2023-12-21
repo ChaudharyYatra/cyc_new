@@ -991,6 +991,12 @@ class Pay_pending_amount extends CI_Controller {
                                        "id"=>$inserted_id_prev);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
+                $arr_update2 = array(
+                    'run_pending_amt'   =>   $pending_amt
+                );
+                $arr_where2     = array("enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_payment_details',$arr_update2,$arr_where2);
+
                 if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
