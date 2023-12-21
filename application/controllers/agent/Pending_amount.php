@@ -799,6 +799,7 @@ class Pending_amount extends CI_Controller {
                 $booking_amt = $this->input->post('booking_amt');
                 $final_amt = $this->input->post('final_amt');
                 $payment_type = $this->input->post('payment_type');
+                // print_r($payment_type); die;
                 $mobile_no = $this->input->post('mobile_no');
                 $pending_amt = $this->input->post('pending_amt');
                 $payment_now_later = $this->input->post('payment_now_later');
@@ -973,6 +974,7 @@ class Pending_amount extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                // print_r($arr_update); die;
                 // echo $inserted_id; 
                 $arr_where     = array("enquiry_id" => $enquiry_id,
                                         "id"=>$inserted_id_prev);

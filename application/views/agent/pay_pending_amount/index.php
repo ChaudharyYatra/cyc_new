@@ -188,6 +188,7 @@
                                     <td>
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
                                     <input type="hidden" class="form-control" name="inserted_id" id="inserted_id" value="">
+                                    <input type="hidden" class="form-control" name="booking_payment_details_id" id="booking_payment_details_id" placeholder="" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['id'];} ?>">
                                     </td>
                                 </tr>
                                 
@@ -200,23 +201,23 @@
 
                                 <tr id="payment_type_tr" style='display:contents;'>
                                     <th>Payment Type</th>
-                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance" <?php if(!empty($booking_payment_details['payment_type'])){if("Advance" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Advance
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part" <?php if(!empty($booking_payment_details['payment_type'])){if("Part" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Part
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full" <?php if(!empty($booking_payment_details['payment_type'])){if("Full" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Full</td>
+                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance">&nbsp;&nbsp;Advance
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part">&nbsp;&nbsp;Part
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full">&nbsp;&nbsp;Full</td>
                                     
                                 </tr>
 
                                 <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Booking Amount</th>
                                     <td>
-                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_amt'];} ?>" required onkeyup="validate()">
+                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" required onkeyup="validate()">
                                     </td>
                                 </tr>
 
                                 <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>
                                     <td>
-                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
+                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount">
                                     </td>
                                 </tr>
 
@@ -231,7 +232,7 @@
                                 <tr id="other_payment_mode_tr" style='display:none;'>
                                     <th>Payment Mode</th>
                                     <td>
-                                    <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details(this.value); 
+                                    <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details_pending_payment(this.value); 
                                         this.blur();'required="required">
                                         <option value="">Select Transaction</option>
                                         <option value="CASH" <?php if(!empty($booking_payment_details['select_transaction'])){if("CASH" == $booking_payment_details['select_transaction']) {echo 'selected';}}?>>CASH</option>
@@ -266,51 +267,51 @@
                                         <!-- &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male">&nbsp;&nbsp;Male
                                         &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female">&nbsp;&nbsp;Female -->
 
-                                        <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate()" value="NEFT"  <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("NEFT" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;NEFT
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate()" value="RTGS" <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("RTGS" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;RTGS
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="netpayment_validate()" value="IMPS"  <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("IMPS" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;IMPS
+                                        <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate_pending_payment()" value="NEFT"  <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("NEFT" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;NEFT
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate_pending_payment()" value="RTGS" <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("RTGS" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;RTGS
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="netpayment_validate_pending_payment()" value="IMPS"  <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("IMPS" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;IMPS
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Number</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate()" placeholder="Enter Account No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_acc_no'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate_pending_payment()" placeholder="Enter Account No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_acc_no'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Holder Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate()" placeholder="Enter Account Holder Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_acc_holder_nm'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate_pending_payment()" placeholder="Enter Account Holder Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_acc_holder_nm'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Branch Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="netbank_branch_nm_validate()" placeholder="Enter Branch Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_branch_name'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="netbank_branch_nm_validate_pending_payment()" placeholder="Enter Branch Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking_branch_name'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">UTR No</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate_pending_payment()" placeholder="Enter UTR No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_bank_name'];}?>" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate_pending_payment()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_bank_name'];}?>" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_date'];}?>">
+                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate_pending_payment()" placeholder="" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_date'];}?>">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -325,51 +326,51 @@
                                         <!-- &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male">&nbsp;&nbsp;Male
                                         &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female">&nbsp;&nbsp;Female -->
 
-                                        <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate()" value="NEFT">&nbsp;&nbsp;NEFT
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate()" value="RTGS">&nbsp;&nbsp;RTGS
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="netpayment_validate()" value="IMPS">&nbsp;&nbsp;IMPS
+                                        <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate_pending_payment()" value="NEFT">&nbsp;&nbsp;NEFT
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate_pending_payment()" value="RTGS">&nbsp;&nbsp;RTGS
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="netpayment_validate_pending_payment()" value="IMPS">&nbsp;&nbsp;IMPS
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Number</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate_pending_payment()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Holder Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate_pending_payment()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Branch Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="netbank_branch_nm_validate()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="netbank_branch_nm_validate_pending_payment()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">UTR No</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate_pending_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate_pending_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="">
+                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate_pending_payment()" placeholder="">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -384,7 +385,7 @@
                                         <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
+                                        <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option class="self_upi" attr_self="self" value="Self">Self</option>
@@ -402,7 +403,7 @@
                                             <h6 class="text-center float-right">Payment Type</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate()">
+                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate_pending_payment()">
                                                 <option value="">Select Transaction</option>
                                                 <option value="Google Pay" <?php if(!empty($booking_payment_details['upi_payment_type'])){if("Google Pay" == $booking_payment_details['upi_payment_type']) {echo 'selected';}}?>>Google Pay</option>
                                                 <option value="BHIM App" <?php if(!empty($booking_payment_details['upi_payment_type'])){if("BHIM App" == $booking_payment_details['upi_payment_type']) {echo 'selected';}}?>>BHIM App</option>
@@ -424,14 +425,14 @@
                                             <h6 class="text-center float-right">UTR No</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate_pending_payment()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-5 mt-2">
                                             <h6 class="text-center float-right">reason</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate()" placeholder="Enter Reason" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_reason'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate_pending_payment()" placeholder="Enter Reason" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_reason'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -443,7 +444,7 @@
                                         <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
+                                        <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option class="self_upi" attr_self="self" value="Self">Self</option>
@@ -461,7 +462,7 @@
                                             <h6 class="text-center float-right">Payment Type</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate()">
+                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate_pending_payment()">
                                                 <option value="">Select Transaction</option>
                                                 <option value="Google Pay">Google Pay</option>
                                                 <option value="BHIM App">BHIM App</option>
@@ -483,14 +484,14 @@
                                             <h6 class="text-center float-right">UTR No</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate_pending_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-5 mt-2">
                                             <h6 class="text-center float-right">reason</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate_pending_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -505,7 +506,7 @@
                                         <h6 class="text-center">UPI ID Holder Name</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
+                                        <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option value="Self">Self</option>
@@ -522,14 +523,14 @@
                                         <h6 class="text-center">Mobile Number</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate()" placeholder="Enter Mobile Number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['QR_mobile_number'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate_pending_payment()" placeholder="Enter Mobile Number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['QR_mobile_number'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Payment Type</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate()">
+                                        <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate_pending_payment()">
                                             <option value="">Select Transaction</option>
                                             <option value="Google Pay" <?php if(!empty($booking_payment_details['QR_payment_type'])){if("Google Pay" == $booking_payment_details['QR_payment_type']) {echo 'selected';}}?>>Google Pay</option>
                                             <option value="BHIM App" <?php if(!empty($booking_payment_details['QR_payment_type'])){if("BHIM App" == $booking_payment_details['QR_payment_type']) {echo 'selected';}}?>>BHIM App</option>
@@ -544,7 +545,7 @@
                                         <h6 class="text-center">UTR No</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['QR_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate_pending_payment()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['QR_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
 
@@ -569,7 +570,7 @@
                                         <h6 class="text-center">QR Holder Name</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
+                                        <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option value="Self">Self</option>
@@ -586,14 +587,14 @@
                                         <h6 class="text-center">Mobile Number</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate()" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate_pending_payment()" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Payment Type</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate()">
+                                        <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate_pending_payment()">
                                             <option value="">Select Transaction</option>
                                             <option value="Google Pay">Google Pay</option>
                                             <option value="BHIM App">BHIM App</option>
@@ -608,7 +609,7 @@
                                         <h6 class="text-center">UTR No</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate_pending_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
 
@@ -630,21 +631,21 @@
                                         <h6 class="text-center">Cheque Number</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate()" placeholder="Enter Cheque Number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['cheque'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate_pending_payment()" placeholder="Enter Cheque Number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['cheque'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Bank Name</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate()" placeholder="Enter Bank Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['bank_name'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate_pending_payment()" placeholder="Enter Bank Name" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['bank_name'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Drawn On Date</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['drawn_on_date'];}?>" placeholder="Select Date">
+                                        <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate_pending_payment()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['drawn_on_date'];}?>" placeholder="Select Date">
                                     </div>
                                 </div>
                             </div>
@@ -655,21 +656,21 @@
                                         <h6 class="text-center">Cheque Number</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate_pending_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Bank Name</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate_pending_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
 
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Drawn On Date</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate()" placeholder="Select Date">
+                                        <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate_pending_payment()" placeholder="Select Date">
                                     </div>
                                 </div>
                             </div>
@@ -1315,7 +1316,7 @@
                                             <center><th><button type="button" class="btn btn-primary mb-3" name="pay_pending_amt_submit_otp" id="pay_pending_amt_submit_otp"  disabled>Send OTP</button></th></center>
                                         </div>
                                         <div class="col-md-4">
-                                            <center><th><button type="button" class="btn btn-primary mb-3" name="re_send_otp" id="re_send_otp" disabled>Resend OTP</button></th></center>
+                                            <center><th><button type="button" class="btn btn-primary mb-3" name="pay_pending_amt_re_send_otp" id="pay_pending_amt_re_send_otp" disabled>Resend OTP</button></th></center>
                                         </div>
                                     </div>
                                 </div>

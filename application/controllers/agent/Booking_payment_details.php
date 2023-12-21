@@ -300,6 +300,7 @@ class Booking_payment_details extends CI_Controller {
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
+                if($payment_now_later == 'Now'){
                 $arr_insert = array(
                     // 'booking_reference_no'  =>  $booking_reference_no,
                     'final_amt'   =>   $final_amt,
@@ -332,7 +333,38 @@ class Booking_payment_details extends CI_Controller {
                  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
                  $insertid = $this->db->insert_id();
                 }
-
+                }else{
+                    $arr_insert = array(
+                        // 'booking_reference_no'  =>  $booking_reference_no,
+                        'final_amt'   =>   $final_amt,
+                        // 'pending_amt'   =>   $pending_amt,
+                        'payment_now_later'   =>   $payment_now_later,
+                        'booking_tm_mobile_no'   =>   $mobile_no,
+    
+                        'booking_reference_no'  =>  $booking_reference_no,
+                        'package_date_id' => $package_date_id,
+                        'enquiry_id' => $enquiry_id,
+                        'package_id' => $package_id,
+                        'traveller_id' => $traveller_id,
+                        'payment_reason' => $later_payment_reason,
+                        'payment_confirmed_status'   =>  'Pending'
+                    );
+                    // print_r($arr_insert); die;
+    
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
+                    $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
+                    // print_r($booking_payment_details); die;
+                    
+                    // print_r($arr_insert); die;
+                    if(!empty($booking_payment_details)){
+                        $arr_where     = array("id" => $booking_payment_details_id);
+                        $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                    }else{
+                     $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                     $insertid = $this->db->insert_id();
+                    }
+                }
 
                 $arr_insert = array(
                     'payment_confirmed_status'   =>  'Pending'
@@ -904,6 +936,7 @@ class Booking_payment_details extends CI_Controller {
                     'payment_type'   =>   $payment_type,
                     'booking_amt'   =>   $booking_amt,
                     'pending_amt'   =>   $pending_amt,
+                    'run_pending_amt'   =>   $pending_amt,
                     'payment_now_later'   =>   $payment_now_later,
                     'booking_tm_mobile_no'   =>   $mobile_no,
                     'select_transaction'   =>   $select_transaction,

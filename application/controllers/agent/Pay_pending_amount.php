@@ -873,6 +873,7 @@ class Pay_pending_amount extends CI_Controller {
                 $booking_payment_details_id = $this->input->post('booking_payment_details_id');
                 $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
                 $inserted_id_prev = $this->input->post('inserted_id');
+                $booking_payment_details_id_for_later = $this->input->post('booking_payment_details_id_for_later');
                 // print_r($inserted_id_prev); die;
 
                 $arr_insert = array(
@@ -905,11 +906,27 @@ class Pay_pending_amount extends CI_Controller {
                 // }
 
 
+                $arr_update_later = array(
+                    'payment_confirmed_status'   =>  'Inprocess'
+                );
+                $arr_where_later    = array("enquiry_id" => $enquiry_id,
+                                       "id"=>$booking_payment_details_id_for_later);
+                $this->master_model->updateRecord('booking_payment_details',$arr_update_later,$arr_where_later);
+
+                $arr_update_later = array(
+                    'payment_confirmed_status'   =>  'Inprocess'
+                );
+                $arr_where_later    = array("enquiry_id" => $enquiry_id,
+                                       "booking_payment_details_id"=>$booking_payment_details_id_for_later);
+                $this->master_model->updateRecord('final_booking',$arr_update_later,$arr_where_later);
+
+
                 $arr_update = array(
                     'final_amt'   =>   $final_amt,
                     'payment_type'   =>   $payment_type,
                     'booking_amt'   =>   $booking_amt,
                     'pending_amt'   =>   $pending_amt,
+                    'run_pending_amt'   =>   $pending_amt,
                     'payment_now_later'   =>   $payment_now_later,
                     'booking_tm_mobile_no'   =>   $mobile_no,
                     'select_transaction'   =>   $select_transaction,

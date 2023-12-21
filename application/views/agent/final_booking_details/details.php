@@ -619,7 +619,7 @@
                         
                         <td>
                             <?php if($info['select_transaction'] == 'UPI'){
-                            echo $info['upi_no'];
+                            echo $info['UPI_transaction_no'];
                             ?>
                             <?php }else if($info['select_transaction'] == 'QR Code'){
                             echo $info['QR_transaction_no'];
