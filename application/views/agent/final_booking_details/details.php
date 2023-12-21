@@ -589,7 +589,7 @@
                 <div class="card-body">
                   <h5> Transaction History :</h5>
                     <?php  if(count($booking_payment_details_all) > 0 ) 
-                    { ?>
+                    { ?>s
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -615,7 +615,11 @@
                         <td><?php echo date("d-m-Y",strtotime($info['created_at'])) ?></td>
                         <td><?php echo $info['booking_amt'] ?></td>
                         <td><?php echo $info['pending_amt'] ?></td>
-                        <td><?php echo $info['select_transaction'] ?></td>
+                        <td><?php if($info['select_transaction']== 'CASH' || $info['select_transaction']== 'UPI' || $info['select_transaction']== 'QR Code' || $info['select_transaction']== 'Cheque' || $info['select_transaction']== 'Net Banking'){
+                                echo $info['select_transaction']; ?> 
+                        <?php }else{
+                                echo $info['payment_now_later'] ?>
+                        <?php } ?></td>
                         
                         <td>
                             <?php if($info['select_transaction'] == 'UPI'){
@@ -635,7 +639,11 @@
                             ?>
                             <?php } ?>
                         </td>
-                        <td><?php echo $info['payment_type'] ?></td>
+                        <td><?php if($info['payment_type']== 'Advance' || $info['payment_type']== 'Part' || $info['payment_type']== 'Full'){
+                                echo $info['payment_type']; ?>
+                            <?php } else{ 
+                                echo $info['payment_reason']; ?>
+                            <?php } ?></td>
                         </tr>
                         <?php $i++; } ?>
                         </tbody>
