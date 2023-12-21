@@ -8209,6 +8209,10 @@ $(document).ready(function(){
     
 </script> -->
 
+<!-- <script>
+
+</script> -->
+
 
 <script type="text/javascript">
     function payment_otp(val) {
@@ -8249,7 +8253,12 @@ $(document).ready(function(){
             mob_no_div.style.display = 'none';
             payment_type_tr.style.display = 'none';
             booking_amount_tr.style.display = 'none';
-            pending_amount_tr.style.display = 'none';
+            pending_amount_tr.style.display = 'table-row';
+
+            var sourceValue = document.getElementById('final_amt').value;
+            // alert(sourceValue);
+            // Set the value to the target textbox
+            document.getElementById('pending_amt').value = sourceValue;
 
         } else {
             element_tr_now.style.display = 'none';
@@ -8263,6 +8272,7 @@ $(document).ready(function(){
 
     }
 </script>
+
 <!-- booking payment details hide and show part -->
 <!-- booking payemnt details send otp -->
 <script>
@@ -8355,6 +8365,7 @@ $("#payment_final_booking_submit").click(function() {
 
     var booking_amt = $('#booking_amt').val(); 
     var pending_amt = $('#pending_amt').val();
+    // alert(pending_amt);
     // var payment_now_later = $('#payment_now_later').val();
     var payment_now_later = $("input[name='payment_now_later']:checked").val();
 
@@ -8851,7 +8862,7 @@ $("#pending_amt_payment_final_booking_submit").click(function() {
     }
 
     var booking_amt = $('#next_booking_amt').val(); 
-    var pending_amt = $('#pending_amt').val();
+    var pending_amt = $('#result_box').val();
     // var payment_now_later = $('#payment_now_later').val();
     var payment_now_later = $("input[name='payment_now_later']:checked").val();
 

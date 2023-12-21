@@ -272,35 +272,37 @@ class Booking_payment_details extends CI_Controller {
             $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
             $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
-            $alphabet = '1234567890';
-            $otp = str_shuffle($alphabet);
-            $traveler_otp = substr($otp, 0, '6'); 
-
-            $from_email='test@choudharyyatra.co.in';
             
-            $authKey = "1207168241267288907";
-            
-        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        $senderId  = "CYCPLN";
-        
-        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
-        
-         $apiurl = str_replace(" ", '%20', $apiurl); 
-            
-            
-            $ch = curl_init($apiurl);
-                    $get_url = $apiurl;
-                    curl_setopt($ch, CURLOPT_POST,0);
-                    curl_setopt($ch, CURLOPT_URL, $get_url);
-                    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                    curl_setopt($ch, CURLOPT_HEADER,0);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-            $return_val = curl_exec($ch); 
-               
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
                 if($payment_now_later == 'Now'){
+
+                    $alphabet = '1234567890';
+                    $otp = str_shuffle($alphabet);
+                    $traveler_otp = substr($otp, 0, '6'); 
+
+                    $from_email='test@choudharyyatra.co.in';
+                    
+                    $authKey = "1207168241267288907";
+                    
+                $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+                    
+                    
+                    $ch = curl_init($apiurl);
+                            $get_url = $apiurl;
+                            curl_setopt($ch, CURLOPT_POST,0);
+                            curl_setopt($ch, CURLOPT_URL, $get_url);
+                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                            curl_setopt($ch, CURLOPT_HEADER,0);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                    $return_val = curl_exec($ch); 
+               
                 $arr_insert = array(
                     // 'booking_reference_no'  =>  $booking_reference_no,
                     'final_amt'   =>   $final_amt,
@@ -337,10 +339,10 @@ class Booking_payment_details extends CI_Controller {
                     $arr_insert = array(
                         // 'booking_reference_no'  =>  $booking_reference_no,
                         'final_amt'   =>   $final_amt,
-                        // 'pending_amt'   =>   $pending_amt,
+                        'pending_amt'   =>   $pending_amt,
+                        'run_pending_amt'   =>   $pending_amt,
                         'payment_now_later'   =>   $payment_now_later,
                         'booking_tm_mobile_no'   =>   $mobile_no,
-    
                         'booking_reference_no'  =>  $booking_reference_no,
                         'package_date_id' => $package_date_id,
                         'enquiry_id' => $enquiry_id,
@@ -997,6 +999,7 @@ class Booking_payment_details extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                // print_r($arr_update); die;
                 $arr_where     = array("enquiry_id" => $enquiry_id);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);
 
