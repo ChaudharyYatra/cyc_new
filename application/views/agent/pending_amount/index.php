@@ -271,10 +271,19 @@
                                 <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>
                                     <td>
-                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
+                                    <input readonly type="text" class="form-control" name="pending_amt" id="result_box" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
+                                    <input readonly type="hidden" class="form-control" name="updatepending_amt" id="updatepending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
+
                                     <input readonly type="hidden" class="form-control" name="old_pending_amt" id="old_pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
                                     </td>
                                 </tr>
+
+                                <!-- <tr id="pending_amount_tr" style='display:table-row;'>
+                                    <th>Pending Amount</th>
+                                    <td>
+                                    <input readonly type="text" class="form-control" name="result_box" id="result_box" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
+                                    </td>
+                                </tr> -->
 
                                 <tr>
                                     <th>Payment</th>
