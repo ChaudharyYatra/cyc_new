@@ -10130,3 +10130,21 @@ $(document).ready(function() {
     });
 </script>
 <!-- pending booking payment amount disabled and enbled-->
+<!-- Pending Final booking preview final amt calculation -->
+<script>
+    $(document).ready(function() {
+        // Initial value from the hidden textbox
+        var initialPendingAmt = parseFloat($("#updatepending_amt").val()) || 0;
+        // alert(initialPendingAmt);
+
+        $("#next_booking_amt").on("input", function() {
+            var nextBookingAmt = parseFloat($(this).val()) || 0;
+            var newPendingAmt = initialPendingAmt - nextBookingAmt;
+            // alert(newPendingAmt);
+            
+            // Display the result in another textbox (e.g., result_box)
+            $("#result_box").val(newPendingAmt);
+        });
+    });
+</script>
+<!-- Final booking preview final amt calculation -->
