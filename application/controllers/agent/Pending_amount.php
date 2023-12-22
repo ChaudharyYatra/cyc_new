@@ -130,8 +130,8 @@ class Pending_amount extends CI_Controller {
         // print_r($booking_payment_details); die;
 
         $enquiry = isset($booking_payment_details['enquiry_id']);
-        $enquiry_id = !empty($booking_payment_details['package_date_id']);
-        // print_r($enquiry); die;
+        $enquiry_id = $booking_payment_details['package_date_id'];
+        // print_r($enquiry_id); die;
 
         $this->db->where('is_deleted','no');
         $this->db->where('return_customer_booking_payment_details.enquiry_id',$iid);

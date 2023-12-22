@@ -173,20 +173,22 @@ input:disabled+label {
 
                         <div class="col-md-8">
                           <div class="form-group">
-                              <!-- <label>Seat Numbers</label> -->
+                          <label>Hold Seat</label>
                               <div class="book-tbl">
                                   <ul class="new_seat_design_ul" id="append_pref_data">
-
                                   </ul>
                               </div>
                           </div>
                         </div>
-                      
+                        <div class="col-md-4">
+                        </div>
                 <!-- /.card-body -->
+                <div class="col-md-12">
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> 
+                  <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
-					
+                </div>
                 
               </form>
             </div>

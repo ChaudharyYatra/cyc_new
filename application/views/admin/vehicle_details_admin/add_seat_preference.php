@@ -400,7 +400,7 @@ input:disabled+label {
 
 
 
-                                <div class="row" id="main_row">
+                                <!-- <div class="row" id="main_row">
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Hold Seats</label>
@@ -414,18 +414,11 @@ input:disabled+label {
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <!-- <label>Seat Numbers</label> -->
                                             <div class="book-tbl">
                                                 <ul class="new_seat_design_ul">
 
                                                 <?php 
-                                                // print_r($seat_preference_data);
-                                                // die;
-                                                // $fist_seats=explode(',',$seat_preference_data['first_cls_seats']);
-                                                // $second_seats=explode(',',$seat_preference_data['second_cls_seats']);
-                                                // $third_seats=explode(',',$seat_preference_data['third_cls_seats']);
                                                 $admin_hold_seats=explode(',',$seat_preference_data['admin_hold_seats']);
-                                                // $array_combine = array_merge($second_seats,$fist_seats,$third_seats);
 
                                                 $seat_count=$vehicle_details_data['seat_capacity'];
                                                 for($a=1; $a<=$seat_count; $a++){
@@ -447,7 +440,7 @@ input:disabled+label {
                                         
                                     </div>
                                     <hr>
-                                </div>
+                                </div> -->
 
 
 
@@ -697,7 +690,7 @@ input:disabled+label {
 
 
 
-                                <div class="row" id="main_row">
+                                <!-- <div class="row" id="main_row">
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Hold Seats</label>
@@ -711,7 +704,6 @@ input:disabled+label {
                                     </div>
                                     <div class="col-md-8">
                                         <div class="form-group">
-                                            <!-- <label>Seat Numbers</label> -->
                                             <div class="book-tbl">
                                                 <ul class="new_seat_design_ul">
 
@@ -737,7 +729,7 @@ input:disabled+label {
                                         
                                     </div>
                                     <hr>
-                                </div>
+                                </div> -->
 
 
 

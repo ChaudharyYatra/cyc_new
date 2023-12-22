@@ -241,7 +241,7 @@ class Final_booking_details extends CI_Controller {
          $record = array();
          $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name,
          booking_payment_details.enquiry_id as enq,booking_payment_details.srs_image_name,all_traveller_info.first_name,all_traveller_info.middle_name,
-         all_traveller_info.last_name";
+         all_traveller_info.last_name,booking_payment_details.run_pending_amt";
          $this->db->where('final_booking.is_deleted','no');
          $this->db->where('final_booking.package_date_id',$id);
          $this->db->where('all_traveller_info.for_credentials','yes');

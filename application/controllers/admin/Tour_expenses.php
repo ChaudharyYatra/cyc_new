@@ -55,13 +55,22 @@ class Tour_expenses extends CI_Controller {
         public function get_date(){ 
             // POST data 
             // $all_b=array();
-           $date_data = $this->input->post('did');
+            $today= date('Y-m-d');
+            $date_data = $this->input->post('did');
             // print_r($boarding_office_location); die;
-                            $this->db->where('is_deleted','no');
-                            $this->db->where('is_active','yes');
-                            $this->db->where('package_id',$date_data);   
-                            $data = $this->master_model->getRecords('package_date');
+                            // $this->db->where('is_deleted','no');
+                            // $this->db->where('is_active','yes');
+                            // $this->db->where('package_id',$date_data);   
+                            // $data = $this->master_model->getRecords('package_date');
 
+                            $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        // $this->db->where('bus_open_status','yes');
+                        $this->db->where('journey_date >=',$today);
+                        $this->db->where('package_id',$date_data);
+                        $data = $this->master_model->getRecords('package_date');
+        //    print_r($data); die;
+                    
             echo json_encode($data);
         }
 

@@ -46,6 +46,8 @@ class Bus_open extends CI_Controller{
     {   
         if($this->input->post('submit'))
         {
+            // print_r($_REQUEST);
+            // die;
             $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
             $this->form_validation->set_rules('tour_date', 'tour_date', 'required');
             $this->form_validation->set_rules('vehicle_bus_type', 'vehicle_bus_type', 'required');

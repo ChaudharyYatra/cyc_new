@@ -57,13 +57,19 @@
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['booking_date'] ?></td>
                     <td><?php echo $info['booking_reference_no'] ?></td>
-                    <td><?php echo $info['payment_confirmed_status'] ?></td>
+                    <td><?php if($info['run_pending_amt'] !== '0'){
+                      echo 'Pending Payment';
+                      } else{
+                      echo $info['payment_confirmed_status'] ?>
+                      <?php } ?>  
+                    </td>
                     
 
                     <td>
-                    <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
-
-                    <a href="<?php echo $module_pending_amt;?>/index/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment</button></a>
+                      <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+                    <?php if($info['run_pending_amt'] !== '0'){?>
+                      <a href="<?php echo $module_pending_amt;?>/index/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment</button></a>
+                    <?php }?>  
                     </td>
                     
                   </tr>
