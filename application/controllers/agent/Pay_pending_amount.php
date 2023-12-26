@@ -143,10 +143,16 @@ class Pay_pending_amount extends CI_Controller {
         $qr_image_details = $this->master_model->getRecord('booking_payment_details');
         // print_r($qr_image_details); die;    
 
+        $this->db->where('is_deleted','no');
+        $this->db->where('booking_payment_details.enquiry_id',$iid);
+        $booking_payment_details_all = $this->master_model->getRecords('booking_payment_details');
+        // print_r($booking_payment_details_all); die;
+
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['booking_payment_details_all']        = $booking_payment_details_all;
         $this->arr_view_data['enquiry']        = $enquiry;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
