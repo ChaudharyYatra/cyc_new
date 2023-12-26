@@ -463,7 +463,7 @@
                                             <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
-                                                <option value="Self">Self</option>
+                                                <option value="Self" attr_self="self">Self</option>
                                                 <?php
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 

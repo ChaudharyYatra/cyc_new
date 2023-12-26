@@ -7011,9 +7011,11 @@ function empty() {
     $('#select_qr_upi_no').change(function () {
       var imageUrl = '<?php echo base_url(); ?>uploads/QR_code_image/';
       var qr_did = $('#select_qr_upi_no').val();
+    //   alert(qr_did);
 
       qrselectedOption = $("#select_qr_upi_no option:selected");
       var qr_self_data = qrselectedOption.attr('attr_self');
+    //   alert(qr_self_data);
       var qr_other_data = qrselectedOption.attr('attr_other');
 
       // AJAX request
@@ -7043,7 +7045,6 @@ function empty() {
     });
   });
 </script>
-
  
 <!-- dependency for booking preview page upi and QR code  -->
 
