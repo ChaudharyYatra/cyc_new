@@ -169,78 +169,6 @@
                 <input type="hidden" class="form-control" name="extra_sevices_id" id="extra_sevices_id" value="<?php if(isset($extra_services_details_value)){echo $extra_services_details_value['id'];} ?>">
                 <?php } ?>
 
-
-                <div class="card-body">
-                    <?php  if(count($booking_payment_details_all) > 0 ) 
-                    { ?>
-                    <table id="" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                        <th>SN</th>
-                        <th>Payment Date</th>
-                        <th>Paid Amount</th>
-                        <th>Pending Amount</th>
-                        <th>Transaction Type</th>
-                        <th>UPI No/Acc No</th>
-                        <th>Payment Type</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php  
-                        
-                        $i=1; 
-                        foreach($booking_payment_details_all as $info) 
-                        // print_r($info);
-                        { 
-                        ?>
-                        <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo date("d-m-Y",strtotime($info['created_at'])) ?></td>
-                        <td><?php echo $info['booking_amt'] ?></td>
-                        <td><?php echo $info['pending_amt'] ?></td>
-                        
-                        <td>
-                        <?php if($info['select_transaction']== 'CASH' || $info['select_transaction']== 'UPI' || $info['select_transaction']== 'QR Code' || $info['select_transaction']== 'Cheque' || $info['select_transaction']== 'Net Banking'){
-                                echo $info['select_transaction']; ?> 
-                        <?php }else{
-                                echo $info['payment_now_later'] ?>
-                        <?php } ?>
-                        </td>
-                        
-                        <td>
-                            <?php if($info['select_transaction'] == 'UPI'){
-                            echo $info['UPI_transaction_no'];
-                            ?>
-                            <?php }else if($info['select_transaction'] == 'QR Code'){
-                            echo $info['QR_transaction_no'];
-                            ?>
-                            <?php } else if($info['select_transaction'] == 'Cheque'){
-                            echo $info['cheque'];    
-                            ?>
-                            <?php } else if($info['select_transaction'] == 'Net Banking'){
-                            echo $info['net_banking_acc_no'];
-                            ?>
-                            <?php }else{
-                            echo '-';
-                            ?>
-                            <?php } ?>
-                        </td>
-                        <td>
-                            <?php if($info['payment_type']== 'Advance' || $info['payment_type']== 'Part' || $info['payment_type']== 'Full'){
-                                echo $info['payment_type']; ?>
-                            <?php } else{ 
-                                echo $info['payment_reason']; ?>
-                            <?php } ?>
-                        </td>
-                        </tr>
-                        <?php $i++; } ?>
-                        </tbody>
-                    </table>
-                    <?php } ?>
-                </div>
-                
-
-
                 <input type="hidden" class="form-control" name="booking_payment_details_id" id="booking_payment_details_id" value="<?php if(isset($booking_payment_details)){echo $booking_payment_details['id'];} ?> ">
                 <input type="hidden" class="form-control" name="return_customer_booking_payment_id" id="return_customer_booking_payment_id" value="<?php if(isset($return_customer_booking_payment_details)){echo $return_customer_booking_payment_details['id'];} ?>">
                 <div class="card-body">
@@ -917,6 +845,74 @@
                     </div>
                 </div>
 
+                <div class="card-body">
+                    <?php  if(count($booking_payment_details_all) > 0 ) 
+                    { ?>
+                    <table id="" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                        <th>SN</th>
+                        <th>Payment Date</th>
+                        <th>Paid Amount</th>
+                        <th>Pending Amount</th>
+                        <th>Transaction Type</th>
+                        <th>UPI No/Acc No</th>
+                        <th>Payment Type</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php  
+                        
+                        $i=1; 
+                        foreach($booking_payment_details_all as $info) 
+                        // print_r($info);
+                        { 
+                        ?>
+                        <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo date("d-m-Y",strtotime($info['created_at'])) ?></td>
+                        <td><?php echo $info['booking_amt'] ?></td>
+                        <td><?php echo $info['pending_amt'] ?></td>
+                        
+                        <td>
+                        <?php if($info['select_transaction']== 'CASH' || $info['select_transaction']== 'UPI' || $info['select_transaction']== 'QR Code' || $info['select_transaction']== 'Cheque' || $info['select_transaction']== 'Net Banking'){
+                                echo $info['select_transaction']; ?> 
+                        <?php }else{
+                                echo $info['payment_now_later'] ?>
+                        <?php } ?>
+                        </td>
+                        
+                        <td>
+                            <?php if($info['select_transaction'] == 'UPI'){
+                            echo $info['UPI_transaction_no'];
+                            ?>
+                            <?php }else if($info['select_transaction'] == 'QR Code'){
+                            echo $info['QR_transaction_no'];
+                            ?>
+                            <?php } else if($info['select_transaction'] == 'Cheque'){
+                            echo $info['cheque'];    
+                            ?>
+                            <?php } else if($info['select_transaction'] == 'Net Banking'){
+                            echo $info['net_banking_acc_no'];
+                            ?>
+                            <?php }else{
+                            echo '-';
+                            ?>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <?php if($info['payment_type']== 'Advance' || $info['payment_type']== 'Part' || $info['payment_type']== 'Full'){
+                                echo $info['payment_type']; ?>
+                            <?php } else{ 
+                                echo $info['payment_reason']; ?>
+                            <?php } ?>
+                        </td>
+                        </tr>
+                        <?php $i++; } ?>
+                        </tbody>
+                    </table>
+                    <?php } ?>
+                </div>
 
                 <!-- <div class="card-footer">
                 <a href="<?php //echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
