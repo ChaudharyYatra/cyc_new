@@ -8748,6 +8748,11 @@ $('#add_QR_code').validate({ // initialize the plugin
         upi_id: {
             required: true,
         },
+        mobile_number: {
+            required: true,
+            maxlength: 10,
+            minlength: 10
+        },
         image_name: {
             required: true,
         },
@@ -8781,6 +8786,11 @@ $('#add_QR_code').validate({ // initialize the plugin
 
         upi_id : {
             required : "Please Enter UPI Id",
+        },
+        mobile_number: {
+            required: "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
         }
 
     }

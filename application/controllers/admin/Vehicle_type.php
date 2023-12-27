@@ -52,7 +52,7 @@ class Vehicle_type extends CI_Controller{
                 $vehicle_type_exist_data = $this->master_model->getRecords('vehicle_type');
                 if(count($vehicle_type_exist_data) > 0)
                 {
-                    $this->session->set_flashdata('error_message',"Hotel".$vehicle_type_name." Already Exist.");
+                    $this->session->set_flashdata('error_message',$vehicle_type_name." Already Exist.");
                     redirect($this->module_url_path.'/add');
                 }
                 $inserted_id = $this->master_model->insertRecord('vehicle_type',$arr_insert,true);
@@ -191,7 +191,7 @@ class Vehicle_type extends CI_Controller{
                     $bus_master_exist_data = $this->master_model->getRecords('vehicle_type');
                     if(count($bus_master_exist_data) > 0)
                     {
-                        $this->session->set_flashdata('error_message',"Bus".$vehicle_type_name." Already Exist.");
+                        $this->session->set_flashdata('error_message',$vehicle_type_name." Already Exist.");
                         redirect($this->module_url_path.'/add');
                     }
 

@@ -55,6 +55,27 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>GST Number</label>
+                            <input type="text" class="form-control" name="gst_no" id="gst_no" placeholder="Enter GST Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>UPI Number</label>
+                            <input type="text" class="form-control" name="upi_no" id="upi_no" placeholder="Enter UPI Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>PAN Number</label>
+                            <input type="text" class="form-control" name="pan_no" id="pan_no" placeholder="Enter PAN Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label>Email Address</label>
                             <input type="text" class="form-control" name="email_address" id="email_address" placeholder="Enter Email Address">
                         </div>
@@ -64,6 +85,54 @@
                         <div class="form-group">
                             <label>Company Address</label>
                             <textarea class="form-control" name="comp_address" id="comp_address" placeholder="Enter Company Address"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Account Details</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Bank Name</label>
+                            <input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Enter Bank Name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Account Number</label>
+                            <input type="text" class="form-control" name="acc_no" id="acc_no" placeholder="Enter Account Number">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Account Holder Name</label>
+                            <input type="text" class="form-control" name="acc_holder_name" id="acc_holder_name" placeholder="Enter Account Holder Name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>IFSC Code</label>
+                            <input type="text" class="form-control" name="ifsc_code" id="ifsc_code" placeholder="Enter ifsc code">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>MICR Code</label>
+                            <input type="text" class="form-control" name="micr_code" id="micr_code" placeholder="Enter MICR Code">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Branch Name</label>
+                            <input type="text" class="form-control" name="branch_name" id="branch_name" placeholder="Enter Branch Name">
                         </div>
                     </div>
               </div>

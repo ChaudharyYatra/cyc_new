@@ -84,7 +84,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Mobile Number</label>
-                            <input type="text" class="form-control" name="mobile_number" id="mobile_number" value="<?php echo $info['mobile_number'];?>" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" class="form-control" name="mobile_number" id="mobile_number" value="<?php echo $info['mobile_number'];?>" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
 

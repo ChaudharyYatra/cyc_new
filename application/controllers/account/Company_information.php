@@ -52,7 +52,20 @@ class Company_information extends CI_Controller{
             $this->form_validation->set_rules('company_name', 'company_name', 'required');      
             $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');      
             $this->form_validation->set_rules('email_address', 'email_address', 'required');      
-            $this->form_validation->set_rules('comp_address', 'comp_address', 'required');      
+            $this->form_validation->set_rules('comp_address', 'comp_address', 'required');
+
+            $this->form_validation->set_rules('gst_no', 'gst_no', 'required');      
+            $this->form_validation->set_rules('upi_no', 'upi_no', 'required');      
+            $this->form_validation->set_rules('pan_no', 'pan_no', 'required');   
+            
+            $this->form_validation->set_rules('bank_name', 'bank_name', 'required');      
+            $this->form_validation->set_rules('acc_no', 'acc_no', 'required');      
+            $this->form_validation->set_rules('acc_holder_name', 'acc_holder_name', 'required');      
+            $this->form_validation->set_rules('ifsc_code', 'ifsc_code', 'required');      
+            $this->form_validation->set_rules('micr_code', 'micr_code', 'required');      
+            $this->form_validation->set_rules('branch_name', 'branch_name', 'required');      
+            
+
             
             if($this->form_validation->run() == TRUE)
             {
@@ -60,11 +73,35 @@ class Company_information extends CI_Controller{
                 $mobile_number = $this->input->post('mobile_number');
                 $email_address =$this->input->post('email_address');
                 $comp_address =$this->input->post('comp_address');
+
+                $gst_no =$this->input->post('gst_no');
+                $upi_no =$this->input->post('upi_no');
+                $pan_no =$this->input->post('pan_no');
+
+                $bank_name =$this->input->post('bank_name');
+                $acc_no =$this->input->post('acc_no');
+                $acc_holder_name =$this->input->post('acc_holder_name');
+                $ifsc_code =$this->input->post('ifsc_code');
+                $micr_code =$this->input->post('micr_code');
+                $branch_name =$this->input->post('branch_name');
+
                 $arr_insert = array(               
                     'company_name'  => $company_name,
                     'mobile_number'  => $mobile_number,
                     'email_address'  => $email_address,
-                    'comp_address'  => $comp_address
+                    'comp_address'  => $comp_address,
+
+                    'gst_no'  => $gst_no,
+                    'upi_no'  => $upi_no,
+                    'pan_no'  => $pan_no,
+
+                    'bank_name'  => $bank_name,
+                    'acc_no'  => $acc_no,
+                    'acc_holder_name'  => $acc_holder_name,
+                    'ifsc_code'  => $ifsc_code,
+                    'micr_code'  => $micr_code,
+                    'branch_name'  => $branch_name
+
                 ); 
                                 
                 $inserted_id = $this->master_model->insertRecord('company_information',$arr_insert,true);
@@ -158,22 +195,54 @@ class Company_information extends CI_Controller{
             $arr_data = $this->master_model->getRecords('company_information');
             if($this->input->post('submit'))
             {
-                $this->form_validation->set_rules('company_name', 'company_name', 'required');
-                $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');
-                $this->form_validation->set_rules('email_address', 'email_address', 'required');
+                $this->form_validation->set_rules('company_name', 'company_name', 'required');      
+                $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');      
+                $this->form_validation->set_rules('email_address', 'email_address', 'required');      
                 $this->form_validation->set_rules('comp_address', 'comp_address', 'required');
-                // $this->form_validation->set_rules('image_name','Image', '');
+
+                $this->form_validation->set_rules('gst_no', 'gst_no', 'required');      
+                $this->form_validation->set_rules('upi_no', 'upi_no', 'required');      
+                $this->form_validation->set_rules('pan_no', 'pan_no', 'required');   
+                
+                $this->form_validation->set_rules('bank_name', 'bank_name', 'required');      
+                $this->form_validation->set_rules('acc_no', 'acc_no', 'required');      
+                $this->form_validation->set_rules('acc_holder_name', 'acc_holder_name', 'required');      
+                $this->form_validation->set_rules('ifsc_code', 'ifsc_code', 'required');      
+                $this->form_validation->set_rules('micr_code', 'micr_code', 'required');      
+                $this->form_validation->set_rules('branch_name', 'branch_name', 'required');
                 if($this->form_validation->run() == TRUE)
                 {
-                    $company_name = trim($this->input->post('company_name'));
-                    $mobile_number = trim($this->input->post('mobile_number'));
-                    $email_address = trim($this->input->post('email_address'));
-                    $comp_address = trim($this->input->post('comp_address'));
+                    $company_name = $this->input->post('company_name');
+                    $mobile_number = $this->input->post('mobile_number');
+                    $email_address =$this->input->post('email_address');
+                    $comp_address =$this->input->post('comp_address');
+
+                    $gst_no =$this->input->post('gst_no');
+                    $upi_no =$this->input->post('upi_no');
+                    $pan_no =$this->input->post('pan_no');
+
+                    $bank_name =$this->input->post('bank_name');
+                    $acc_no =$this->input->post('acc_no');
+                    $acc_holder_name =$this->input->post('acc_holder_name');
+                    $ifsc_code =$this->input->post('ifsc_code');
+                    $micr_code =$this->input->post('micr_code');
+                    $branch_name =$this->input->post('branch_name');
                     $arr_update = array(
                         'company_name'  => $company_name,
                         'mobile_number'  => $mobile_number,
                         'email_address'  => $email_address,
-                        'comp_address'  => $comp_address
+                        'comp_address'  => $comp_address,
+
+                        'gst_no'  => $gst_no,
+                        'upi_no'  => $upi_no,
+                        'pan_no'  => $pan_no,
+
+                        'bank_name'  => $bank_name,
+                        'acc_no'  => $acc_no,
+                        'acc_holder_name'  => $acc_holder_name,
+                        'ifsc_code'  => $ifsc_code,
+                        'micr_code'  => $micr_code,
+                        'branch_name'  => $branch_name
                     );
                 
                     $arr_where     = array("id" => $id);

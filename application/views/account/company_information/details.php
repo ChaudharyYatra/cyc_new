@@ -39,10 +39,10 @@
               <div class="card-body">
                 <table id="" class="table table-bordered table-hover">
                   <tr>
-					<th>Company Name</th>
+					          <th>Company Name</th>
                     <td><?php echo $info['company_name']; ?></td>
 
-				    <th>Mobile Number</th>
+				            <th>Mobile Number</th>
                     <td><?php echo $info['mobile_number']; ?></td>
                   </tr>
                   
@@ -52,6 +52,43 @@
 
                     <th>Company Address</th>
                     <td><?php echo $info['comp_address']; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th>GST Number</th>
+                    <td><?php echo $info['gst_no']; ?></td>
+
+                    <th>UPI Number</th>
+                    <td><?php echo $info['upi_no']; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th>PAN Number</th>
+                    <td><?php echo $info['pan_no']; ?></td>
+
+                    <th>Bank Name</th>
+                    <td><?php echo $info['bank_name']; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th>Account Number</th>
+                    <td><?php echo $info['acc_no']; ?></td>
+
+                    <th>Account Holder Name</th>
+                    <td><?php echo $info['acc_holder_name']; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th>IFSC Code</th>
+                    <td><?php echo $info['ifsc_code']; ?></td>
+
+                    <th>MICR Code</th>
+                    <td><?php echo $info['micr_code']; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th>Branch Name</th>
+                    <td><?php echo $info['branch_name']; ?></td>
                   </tr>
 
                   </table>
