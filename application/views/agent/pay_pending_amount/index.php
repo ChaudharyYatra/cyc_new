@@ -215,19 +215,19 @@
                                 <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>
                                     <td>
-                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount">
+                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <!-- <tr>
                                     <th>Payment</th>
                                     <td>&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Now">&nbsp;&nbsp;Now
-                                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later -->
                                     </td>
                                     
-                                </tr>
+                                </tr> -->
+                                <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later -->
 
-                                <tr id="other_payment_mode_tr" style='display:none;'>
+                                <tr id="other_payment_mode_tr">
                                     <th>Payment Mode</th>
                                     <td>
                                     <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details_pending_payment(this.value); 

@@ -1,0 +1,128 @@
+<style>
+  .mealplan_css{
+            border: 1px solid red !important;
+        }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><?php echo $module_title; ?></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
+              
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <?php $this->load->view('admin/layout/admin_alert'); ?>
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"><?php echo $page_title; ?></h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <?php
+                   foreach($expenses_account as $info) 
+                   { 
+                     ?>
+              <form method="post" enctype="multipart/form-data" id="edit_expenses">
+                <div class="card-body">
+                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <!-- <label>Parent Group</label>
+                            <input type="text" class="form-control" name="parent_group" id="parent_group" placeholder="Enter Parent Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required"> -->
+                            <label>Voucher Type</label>
+                            <select class="select_css" style="width: 100%;" name="voucher_type" id="voucher_type">
+                            <option value="">Select Voucher Type</option>
+                            <?php
+                                foreach($voucher_types as $voucher_types_info) 
+                                { 
+                                //   print_r($arr_data_info);
+                            ?>
+                                <option value="<?php echo $voucher_types_info['id']; ?>" <?php if($voucher_types_info['id']==$info['voucher_type_id']) { echo "selected"; } ?>><?php echo $voucher_types_info['voucher_type']; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Particular(for which expenses)</label>
+                            <input type="text" class="form-control" name="particular_expenses" id="particular_expenses" value="<?php echo $info['particular_expenses']; ?>" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <select class="select_css" style="width: 100%;" name="company_name" id="company_name">
+                            <option value="">Select Company Name</option>
+                            <?php
+                                foreach($company_information as $company_information_info) 
+                                { 
+                                  // print_r($arr_data_info);
+                            ?>
+                                <option value="<?php echo $company_information_info['id']; ?>" <?php if($company_information_info['id']==$info['company_name_id']) { echo "selected"; } ?>><?php echo $company_information_info['company_name']; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Account Number</label>
+                            <input type="text" class="form-control" name="account_no" id="account_no" placeholder="Enter account number" value="<?php echo $info['acc_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="text" class="form-control" name="amount" id="amount" placeholder="Enter amount" value="<?php echo $info['amount']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Details</label>
+                            <textarea class="form-control" name="expenses_details" id="expenses_details"  placeholder="Enter details"><?php echo $info['expenses_details']; ?></textarea>
+                        </div>
+                    </div>
+              </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>
+					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                </div>
+              </form>
+              <?php } ?>
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  
+
+</body>
+</html>

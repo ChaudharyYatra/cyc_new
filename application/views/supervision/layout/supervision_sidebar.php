@@ -340,6 +340,12 @@
                                   <p>Audit Trail</p>
                               </a>
                             </li>
+                            <li class="nav-item">
+                              <a href="<?php echo base_url(); ?>account/expenses/index" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Expenses</p>
+                              </a>
+                            </li>
 
                             </ul>
                         </li>

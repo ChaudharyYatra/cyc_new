@@ -39,16 +39,27 @@
               <form method="post" enctype="multipart/form-data" id="add_group">
                 <div class="card-body">
                  <div class="row">
-                    <div class="col-md-6">
+                      <div class="col-md-6">
                         <div class="form-group">
                             <label>Group Name</label>
                             <input type="text" class="form-control" name="group_name" id="group_name" placeholder="Enter Group Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                         </div>
-                    </div>
+                      </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <!-- <label>Parent Group</label>
+                            <input type="text" class="form-control" name="parent_group" id="parent_group" placeholder="Enter Parent Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required"> -->
                             <label>Parent Group</label>
-                            <input type="text" class="form-control" name="parent_group" id="parent_group" placeholder="Enter Parent Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                            <select class="select_css" style="width: 100%;" name="parent_group" id="parent_group">
+                            <option value="">Select group name</option>
+                            <?php
+                                foreach($arr_data as $arr_data_info) 
+                                { 
+                                  // print_r($arr_data_info);
+                            ?>
+                                <option value="<?php echo $arr_data_info['id']; ?>"><?php echo $arr_data_info['group_name']; ?></option>
+                            <?php } ?>
+                          </select>
                         </div>
                     </div>
                     <div class="col-md-6">

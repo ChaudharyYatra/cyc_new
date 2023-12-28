@@ -6896,7 +6896,7 @@ function empty() {
      });
    });
  });
- </script>
+</script>
 
  <!-- Agent add info (state,district,taluka) start -->
 <script type='text/javascript'>

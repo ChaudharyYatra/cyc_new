@@ -634,7 +634,7 @@ $('#edit_ledger').validate({ // initialize the plugin
 <!-- Ledgers information add , edit validation -->
 
 <!-- Accounting in that group master validation -->
-<script>
+<!-- <script>
 $(document).ready(function () {
 
 $('#add_group').validate({ // initialize the plugin
@@ -644,9 +644,11 @@ $('#add_group').validate({ // initialize the plugin
     rules: {
         group_name: {
             required: true,
-        },
-        parent_group: {
-            required: true,
+            depends: function(element) {
+            var action = $("#parent_group").val();
+            var action2 = $("#group_name").val();
+            return action == action2;
+        }
         },
         group_code: {
             required: true,
@@ -656,9 +658,7 @@ $('#add_group').validate({ // initialize the plugin
     messages :{
         group_name : {
             required : "Please enter group name",
-        },
-        parent_group : {
-            required : "Please enter parent group",
+            depends : "Parent group and Group name is not same. <br> Please enter another group name",
         },
         group_code : {
             required : "Please enter group code",
@@ -667,7 +667,25 @@ $('#add_group').validate({ // initialize the plugin
 });
 });
 
+</script> -->
+<script>
+  $(document).ready(function () {
+    $("#submit_slider").click(function (event) {
+      // Get the values of parent_group and group_name
+      var parentGroupValue = $("#parent_group").val();
+      alert(parentGroupValue);
+      var groupNameValue = $("#group_name").val();
+      alert(groupNameValue);
+
+      // Check if the values are the same
+      if (parentGroupValue === groupNameValue) {
+        alert("Parent group and group name cannot be the same.");
+        event.preventDefault(); // Prevent form submission
+      }
+    });
+  });
 </script>
+
 <script>
 $(document).ready(function () {
 
@@ -3414,6 +3432,93 @@ $('#edit_price_lists_master').validate({ // initialize the plugin
 </script>
 <!-- Inventory Masters in that price lists Master validation -->
 
+<!-- account expenses company name wise account no ajax -->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+    $('#company_name').change(function(){
+        var did = $('#company_name').val();
+      $.ajax({
+        url:'<?=base_url()?>account/expenses/get_company_account_no',
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#account_no').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){   
+            $('#account_no').val(data['acc_no']);
+          });
+         
+        }
+     });
+   });
+ });
+</script>
+<!-- account expenses company name wise account no ajax -->
+
+<!-- expensess add validation  -->
+<script>
+$(document).ready(function () {
+
+$('#add_expenses').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        voucher_type: {
+            required: true,
+        },
+        particular_expenses: {
+            required: true,
+        },
+        company_name: {
+            required: true,
+        },
+        account_no: {
+            required: true,
+        },
+        amount: {
+            required: true,
+        },
+        expenses_details: {
+            required: true,
+        }
+        
+    },
+
+    messages :{
+        voucher_type : {
+            required : "Please select voucher type",
+        },
+        particular_expenses : {
+            required : "Please enter particular expenses",
+        },
+        company_name : {
+            required : "Please select company name",
+        },
+        account_no : {
+            required : "Please enter account no",
+        },
+        amount : {
+            required : "Please enter amount",
+        },
+        expenses_details : {
+            required : "Please enter details",
+        }
+        
+    
+    }
+});
+
+});
+
+</script>
+<!-- expensess add validation  -->
 
 
 
