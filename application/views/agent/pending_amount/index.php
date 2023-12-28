@@ -778,7 +778,7 @@
                         </div>
                     </div>
 
-                    <div id="other_payment_mode_div" style='display:none;'>
+                    <div id="other_payment_mode_div">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
