@@ -634,56 +634,100 @@ $('#edit_ledger').validate({ // initialize the plugin
 <!-- Ledgers information add , edit validation -->
 
 <!-- Accounting in that group master validation -->
-<!-- <script>
-$(document).ready(function () {
-
-$('#add_group').validate({ // initialize the plugin
-    errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
-  },
-    rules: {
-        group_name: {
-            required: true,
-            depends: function(element) {
-            var action = $("#parent_group").val();
-            var action2 = $("#group_name").val();
-            return action == action2;
-        }
-        },
-        group_code: {
-            required: true,
-        }
-    },
-
-    messages :{
-        group_name : {
-            required : "Please enter group name",
-            depends : "Parent group and Group name is not same. <br> Please enter another group name",
-        },
-        group_code : {
-            required : "Please enter group code",
-        }
-    }
-});
-});
-
-</script> -->
 <script>
   $(document).ready(function () {
-    $("#submit_slider").click(function (event) {
-      // Get the values of parent_group and group_name
-      var parentGroupValue = $("#parent_group").val();
-      alert(parentGroupValue);
-      var groupNameValue = $("#group_name").val();
-      alert(groupNameValue);
 
-      // Check if the values are the same
-      if (parentGroupValue === groupNameValue) {
-        alert("Parent group and group name cannot be the same.");
-        event.preventDefault(); // Prevent form submission
+    $('#add_group').validate({ // initialize the plugin
+      errorPlacement: function($error, $element) {
+        $error.appendTo($element.closest("div"));
+      },
+      rules: {
+        group_name: {
+          required: true,
+          notEqualTo: "#get_group_code", // Check if it is equal to #get_group_code
+        },
+        group_code: {
+          required: true,
+        }
+      },
+
+      messages: {
+        group_name: {
+          required: "Please enter group name",
+          notEqualTo: "Group name and Parent group Not be the same.",
+        },
+        group_code: {
+          required: "Please enter group code",
+        }
       }
     });
+
   });
+</script>
+<script>
+  $(document).ready(function () {
+
+    $('#add_group').validate({ // initialize the plugin
+      errorPlacement: function($error, $element) {
+        $error.appendTo($element.closest("div"));
+      },
+      rules: {
+        group_name: {
+          required: true,
+          notEqualTo: "#get_group_code", // Check if it is equal to #get_group_code
+        },
+        group_code: {
+          required: true,
+        }
+      },
+
+      messages: {
+        group_name: {
+          required: "Please enter group name",
+          notEqualTo: "Group name and Parent group Not be the same.",
+        },
+        group_code: {
+          required: "Please enter group code",
+        }
+      }
+    });
+
+  });
+
+  $(document).ready(function () {
+
+$('#edit_group').validate({ // initialize the plugin
+  errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+  rules: {
+    group_name: {
+      required: true,
+      notEqualTo: "#get_group_code", // Check if it is equal to #get_group_code
+    },
+    group_code: {
+      required: true,
+    },
+    parent_group: {
+      required: true,
+    }
+  },
+
+  messages: {
+    group_name: {
+      required: "Please enter group name",
+      notEqualTo: "Group name and Parent group Not be the same.",
+    },
+    group_code: {
+      required: "Please enter group code",
+    },
+    parent_group: {
+      required: "Please enter parent group",
+    }
+  }
+});
+
+});
 </script>
 
 <script>
@@ -3467,7 +3511,7 @@ $(document).ready(function () {
 
 $('#add_expenses').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
+    $error.appendTo($element.closest("div,td"));
   },
     rules: {
         voucher_type: {
@@ -3487,8 +3531,30 @@ $('#add_expenses').validate({ // initialize the plugin
         },
         expenses_details: {
             required: true,
+        },
+        tour_expenses_type: {
+            required: true,
+        },
+        single_particular_expenses: {
+            required: function(element) {
+                var action = $("#single_expenses_type").val();
+                if (action == "1") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        single_total_amount: {
+            required: function(element) {
+                var action = $("#single_expenses_type").val();
+                if (action == "1") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
-        
     },
 
     messages :{
@@ -3509,19 +3575,426 @@ $('#add_expenses').validate({ // initialize the plugin
         },
         expenses_details : {
             required : "Please enter details",
+        },
+        tour_expenses_type : {
+            required : "Please enter tour expenses type",
+        },
+        single_particular_expenses : {
+            required : "Please enter Particular expense",
+        },
+        single_total_amount : {
+            required : "Please enter total amount",
         }
         
     
     }
 });
 
+$('[name^="particular_expenses"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Please select particular expense",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="amount"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Please enter amount",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+});
+
+
+$(document).ready(function () {
+
+$('#edit_expenses').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div,td"));
+  },
+    rules: {
+        voucher_type: {
+            required: true,
+        },
+        particular_expenses: {
+            required: true,
+        },
+        company_name: {
+            required: true,
+        },
+        account_no: {
+            required: true,
+        },
+        amount: {
+            required: true,
+        },
+        expenses_details: {
+            required: true,
+        },
+        tour_expenses_type: {
+            required: true,
+        },
+        single_particular_expenses: {
+            required: function(element) {
+                var action = $("#single_expenses_type").val();
+                if (action == "1") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        single_total_amount: {
+            required: function(element) {
+                var action = $("#single_expenses_type").val();
+                if (action == "1") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    },
+
+    messages :{
+        voucher_type : {
+            required : "Please select voucher type",
+        },
+        particular_expenses : {
+            required : "Please enter particular expenses",
+        },
+        company_name : {
+            required : "Please select company name",
+        },
+        account_no : {
+            required : "Please enter account no",
+        },
+        amount : {
+            required : "Please enter amount",
+        },
+        expenses_details : {
+            required : "Please enter details",
+        },
+        tour_expenses_type : {
+            required : "Please enter tour expenses type",
+        },
+        single_particular_expenses : {
+            required : "Please enter Particular expense",
+        },
+        single_total_amount : {
+            required : "Please enter total amount",
+        }
+        
+    
+    }
+});
+
+$('[name^="particular_expenses"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Please select particular expense",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="amount"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Please enter amount",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
 });
 
 </script>
-<!-- expensess add validation  -->
+<!-- expensess add validation -->
+<!-- group ajax parent group-->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+    $('#parent_group').change(function(){
+        var did = $('#parent_group').val();
+      $.ajax({
+        url:'<?=base_url()?>account/group/get_group_name',
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#get_group_code').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){   
+            $('#get_group_code').val(data['group_name']);
+          });
+         
+        }
+     });
+   });
+ });
+</script>
+<!-- group ajax parent group-->
+
+<!-- add more code for expenses account -->
+<script>
+    $(document).ready(function() {
+
+    function updateExpenseAmount() {
+        var totalRate = 0;
+        $(".amount").each(function() {
+            var rate = parseFloat($(this).val());
+            if (!isNaN(rate)) {
+                totalRate += rate;
+                // alert(totalRate);
+            }
+        });
+
+        $("#multiple_total_amount").val(totalRate.toFixed(2)); // You can adjust the number of decimal places as needed.
+    }
+
+    // Add more rows when the "Add More" button is clicked
+
+    $("#expenses_add_more").click(function() {
+        var expence = $(this).attr('attr_add_id');
+        
+        var i= parseInt(expence)+parseInt(1);
+        // alert(i);
+        var expence = $(this).attr('attr_add_id',i);
+        var newRow = `
+            <tr>
+            <td><input type="text" class="form-control" name="particular_expenses[]" id="particular_expenses`+i+`" placeholder="Enter particular expenses"></td>
+            <td><input type="text" class="form-control amount" name="amount[]" id="amount`+i+`" placeholder="Enter amount"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </td>
+            </tr>
+        `;
+        $("#table tbody").append(newRow);
+        i++;
+    });
+
+    // Remove a row when the "Remove" button is clicked
+    $(document).on("click", ".remove-row", function() {
+        $(this).closest("tr").remove();
+        updateExpenseAmount(); // Recalculate the total when a row is removed
+    });
+
+    // Update per_unit_rate when quantity or rate changes in any row
+    $(document).on("input", ".amount", function() {
+        // Loop through all rows and update their per_unit_rate
+        $("#table tbody tr").each(function() {
+            // updatePerUnitRate(this);
+        });
+        updateExpenseAmount(); // Recalculate the total when a rate or quantity changes
+    });
+
+    });
+</script>
+<!-- add more code for expenses account -->
+<!-- expenses edit more for expenses account -->
+<script>
+    $(document).ready(function() {
+        // Function to update per_unit_rate field for a specific row
+        // function updatePerUnitRate(row) {
+        //     var quantity = parseFloat($(row).find(".quantity").val());
+        //     var rate = parseFloat($(row).find(".rate").val());
+
+        //     if (!isNaN(quantity) && !isNaN(rate) && quantity !== 0) {
+        //         var perUnitRate = rate / quantity;
+        //         $(row).find(".per_unit_rate").val(perUnitRate.toFixed(2)); // You can adjust the number of decimal places as needed.
+        //     } else {
+        //         $(row).find(".per_unit_rate").val('');
+        //     }
+        // }
+
+        // Function to update expense_amt field
+        function updateExpenseAmount() {
+            var totalRate = 0;
+            $(".amount").each(function() {
+                var rate = parseFloat($(this).val());
+                if (!isNaN(rate)) {
+                    totalRate += rate;
+                }
+            });
+
+            $("#multiple_total_amount").val(totalRate.toFixed(2)); // You can adjust the number of decimal places as needed.
+        }
+
+        // Add more rows when the "Add More" button is clicked
+        var i=1;
+        $("#expenses_edit_more").click(function() {
+
+            // var expence = $(this).attr('attr_add_id');
+            
+            // var i= parseInt(expence)+parseInt(1);
+            // // alert(i);
+            // var expence = $(this).attr('attr_add_id',i);
+
+            // alert(i);
+            var newRow = `
+                <tr>
+                <td><input type="text" class="form-control" name="edit_particular_expenses[]" id="edit_particular_expenses`+i+`" placeholder="Enter particular expenses"></td>
+                <td><input type="text" class="form-control amount" name="edit_amount[]" id="edit_amount`+i+`" placeholder="Enter amount"></td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+                </tr>
+            `;
+            $("#table tbody").append(newRow);
+            i++;
+            initializeValidationForNewRow(i - 1);
+        });
 
 
+        function initializeValidationForNewRow(rowIndex) {
+            // Define rules and messages for the newly added row
+            $('#edit_particular_expenses' + rowIndex).rules('add', {
+                required: true,
+                messages: {
+                    required: "Please enter particular expense"
+                }
+            });
 
+            $('#edit_amount' + rowIndex).rules('add', {
+                required: true,
+                messages: {
+                    required: "Please enter amount"
+                }
+            });
+        }
+
+        // Call the initializeValidationForNewRow function for any existing rows
+        $(".dynamic-row").each(function (index) {
+            initializeValidationForNewRow(index + 1);
+        });
+
+
+                // Remove a row when the "Remove" button is clicked
+                $(document).on("click", ".remove-row", function() {
+                    $(this).closest("tr").remove();
+                    updateExpenseAmount(); // Recalculate the total when a row is removed
+                });
+
+                // Update per_unit_rate when quantity or rate changes in any row
+                $(document).on("input", ".amount", function() {
+                    // Loop through all rows and update their per_unit_rate
+                    $("#table tbody tr").each(function() {
+                        // updatePerUnitRate(this);
+                    });
+
+                    updateExpenseAmount(); // Recalculate the total when a rate or quantity changes
+                });
+                
+            });
+</script>
+
+<!-- <script>
+  $(".delete_instruction").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>account/expenses/add_more_delete',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script> -->
+
+
+<script>
+    $(".delete_instruction").click(function() {
+    var delete_add_more_tour_expenses_id =  $(this).attr('value');
+
+    if (delete_add_more_tour_expenses_id !== '') {
+        // Store the current total amount
+        var currentTotalAmount = parseFloat($("#multiple_total_amount").val());
+
+        // Retrieve the amount value of the row being deleted
+        var deletedAmount = parseFloat($(this).closest("tr").find(".amount").val());
+
+        if (!isNaN(deletedAmount)) {
+            // Subtract the deleted amount from the current total
+            var newTotalAmount = currentTotalAmount - deletedAmount;
+
+            // Update the #multiple_total_amount field with the new total
+            $("#multiple_total_amount").val(newTotalAmount.toFixed(2));
+
+            // Display a confirmation dialog
+            var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+            if (confirmDelete) {
+                // User clicked "OK," send the AJAX request to delete the record
+                $.ajax({
+                    type: "POST",
+                    url: '<?=base_url()?>account/expenses/add_more_delete',
+                    data: {
+                        request_id: delete_add_more_tour_expenses_id
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if (response === true) {
+                            // The record was successfully deleted
+                            alert("Record deleted successfully.");
+                            // You can add further handling here
+                        } else {
+                            alert('Record deleted successfully.');
+                        }
+                    },
+                });
+            }
+        } else {
+            // Handle the case where the amount is not a valid number
+            alert("Invalid amount value for deletion.");
+        }
+    }
+});
+
+</script>
+<!-- expenses edit more for expenses account -->
 
 
 

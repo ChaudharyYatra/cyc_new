@@ -8928,7 +8928,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
 <!--  -->
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         var newFields = $();
 
@@ -8988,10 +8988,10 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                                                 <select class="select_css district" name="district" attr_district="district" required="required" attr_day="${day}">
                                                     <option value="">Select district</option>
                                                     <?php
-                                                    foreach($district_data as $district_info){ 
+                                                    //($district_data as $district_info){ 
                                                     ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
+                                                    <option value="<?php //echo $district_info['id'];?>"><?php //echo $district_info['district']; ?></option>
+                                                    <?php //} ?>
                                                 </select>
                                             </div>
                                             <div class="col-md-12">
@@ -9089,7 +9089,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                         var district_id = $("[attr_day=" + day + "]").val();
 
                     $.ajax({
-                        url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
+                        url:'<?//=base_url()?>admin/tour_creation_iternary/getplaces',
                         method: 'post',
                         data: {did: district_id},
                         dataType: 'json',
@@ -9132,7 +9132,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                 .removeClass('collapsed');
         });
     });
-</script>
+</script> -->
 
 
 <script type='text/javascript'>
@@ -9143,11 +9143,11 @@ $('#edit_measuring_type').validate({ // initialize the plugin
     
         // district change
         $(document).on("change",".district",function(){
-            alert('ggggggggg');
+            // alert('ggggggggg');
             var totaldays = $('#tour_creation_total_days').val();
             var district_id = $(this).val();
             var day_no = $(this).attr('attr_day');
-            alert(day_no);
+            // alert(district_id);
         $.ajax({
             url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
             method: 'post',
@@ -9155,22 +9155,95 @@ $('#edit_measuring_type').validate({ // initialize the plugin
             dataType: 'json',
             success: function(response){
 
-            var closestTable = $(this).closest("table");
+            // var closestTable = $(this).closest("table");
 
-            console.log(closestTable.closest("tr"));
+            // console.log(closestTable.closest("tr"));
 
-                $('.place_name'+day_no).find('option').not(':first').remove();
+                $('.place_name').find('option').not(':first').remove();
             $.each(response,function(index,data){   
-                $('.place_name'+day_no).append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
+                $('.place_name').append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
             });
             
             }
         });
         });
+
+        $("#add_tr").click(function() {
+            var i = $('.place_name').length + 1; // Get the total number of existing rows
+            
+            var newRow = `
+                <tr>
+                    <td>${i}</td>
+                    <td>
+                        <select class="select_css select_place place_name" name="place_name[]" id="place_name${i}" required="required">
+                            <option value="">Select Place</option>
+                        </select>
+                    </td>
+                    <td><input readonly type="input" name="time[]" id="time${i}" value=""></td>
+                    <td><input type="time" class="form-control" name="visit_time[]" id="visit_time${i}" placeholder="Enter Visit Time" required></td>
+                    <td><input type="text" class="form-control" name="details[]" id="details${i}" placeholder="Enter Details"></td>
+                    <td>
+                        <button class="btn btn-danger remove-row" type="button">Remove</button>
+                    </td>
+                </tr>
+            `;
+            $("#table tbody").append(newRow);
+
+            // Clone the options from the first dropdown to the new one
+            var optionsClone = $('.place_name:first').html();
+            $(`#place_name${i}`).html(optionsClone);
+
+            i++;
+        });
+
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
     });
+
 </script>
 
-<script>
+<!-- add iternery add more code  -->
+
+<!-- <script>
+    $(document).ready(function() {
+    $("#add_tr").click(function() {
+        var expence = $(this).attr('attr_add_id');
+        
+        var i= parseInt(expence)+parseInt(1);
+        // alert(i);
+        var expence = $(this).attr('attr_add_id',i);
+        var newRow = `
+            <tr>
+            <td>`+i+`</td>
+            <td>
+                <select class="select_css select_place place_name" name="place_name[]" id="place_name`+i+`" required="required">
+                <option value="">Select Place</option>
+                </select>
+            </td>
+            <td><input readonly type="input" name="time[]" id="time`+i+`" value=""></td>
+            <td><input type="time" class="form-control" name="visit_time[]" id="visit_time`+i+`" placeholder="Enter Visit Time" required></td>
+            <td><input type="text" class="form-control" name="details[]" id="details`+i+`" placeholder="Enter Details"></td>
+            <td>
+                <button class="btn btn-danger remove-row" type="button">Remove</button>
+            </td>
+            </tr>
+        `;
+        $("#table tbody").append(newRow);
+        i++;
+    });
+
+    // Remove a row when the "Remove" button is clicked
+    $(document).on("click", ".remove-row", function() {
+        $(this).closest("tr").remove();
+    });
+    });
+</script> -->
+
+<!-- add iternery add more code  -->
+
+<!-- <script>
      $(document).on("change","select",function(){
          var selectedOption=$(this).val();
            var select_name=$(this).attr('name');
@@ -9193,11 +9266,11 @@ $('#edit_measuring_type').validate({ // initialize the plugin
           });
 
      });
-</script>
+</script> -->
 
 <!-- <script type='text/javascript'>
     // baseURL variable
-    var baseURL= "<?php echo base_url();?>";
+    var baseURL= "<?php //echo base_url();?>";
     
     $(document).ready(function(){
         // district change
@@ -9208,7 +9281,7 @@ $('#edit_measuring_type').validate({ // initialize the plugin
             var day_no = $(this).attr('attr_day');
             alert(district_id);
         $.ajax({
-            url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
+            url:'<?//=base_url()?>admin/tour_creation_iternary/getplaces',
             method: 'post',
             data: {did: district_id},
             dataType: 'json',
@@ -9236,11 +9309,8 @@ $('#edit_measuring_type').validate({ // initialize the plugin
     $(document).ready(function () {
 
         // district change
-        $(document).on("change", "#place_name", function () {
-
+        $(document).on("change", ".place_name", function () {
             var time_data = $(this).val();
-            // alert(time_data);
-
             var closestTr = $(this).closest("tr");
 
             $.ajax({
@@ -9249,17 +9319,8 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                 data: { did: time_data },
                 dataType: 'json',
                 success: function (response) {
-
-                    // Find the input element within the same row and update its value
                     var timeInput = closestTr.find('input[name="time[]"]');
                     timeInput.val(response[0]['req_time']);
-
-                    // If you expect multiple time values and want to append them to the same input field, you can use the following code
-                    // var timeInput = closestTr.find('input[name="time"]');
-                    // $.each(response, function (index, data) {
-                    //     timeInput.val(timeInput.val() + data['req_time'] + ' '); // Append values with a space separator
-                    // });
-
                 }
             });
         });
@@ -9281,101 +9342,76 @@ $('#edit_measuring_type').validate({ // initialize the plugin
 
 
 <script>
-      $(document).ready(function(){
-        // alert('hii');
-    $(document).on('click','.daywise_submit', function () {
-        // alert('hoooo');
-        // console.log('formData',formData);
+//     $(document).ready(function(){
+//         // alert('hii');
+//     $(document).on('click','.daywise_submit', function () {
+//         // alert('hoooo');
+//         // console.log('formData',formData);
 
-        var total_days = $('#total_days').val();
+//         var total_days = $('#tour_creation_total_days').val();
+//         var tour_number = $('#tour_number').val();
+//         var day_number = $('#day_number').val();
+//         // var day_no = $(this).attr('attr_day');
+//         var district = $(".district option:selected").val();
+//         // alert(district);
+//         var iternary_desc = $('#iternary_desc').val();
 
-        var tour_number = $('#tour_number').val();
-        // alert(tour_number);
-        var day_number = $('input[name="day_number[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('day_number',day_number);
-        // var day_number = $('#day_number').val();
-        // alert(day_number);
-        // var district = $(".district option:selected").val();
-        // alert(district);
-        var district = $('select[name="district[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('district',district);
-        // alert(district);
+//         // var select_place = $('input[name="place_name[]"]').val();
+//         var select_place_values = $('select[name="place_name[]"]').map(function() {
+//         return $(this).val();
+//         }).get();
+//         console.log('select_place_values',select_place_values);
+//         // alert(select_place_values);
+//         var time_values = $('input[name="time[]"]').map(function() {
+//         return $(this).val();
+//         }).get();
+//         console.log('time_values',time_values);
+//         // alert(time_values);
+//         var visit_time_values = $('input[name="visit_time[]"]').map(function() {
+//         return $(this).val();
+//         }).get();
+//         console.log('visit_time_values',visit_time_values);
+//         // alert(visit_time_values);
+//         var details_values = $('input[name="details[]"]').map(function() {
+//         return $(this).val();
+//         }).get();
+//         console.log('details_values',details_values);
+//         // var image_name = $('input[name="image_name[]"]').map(function () {
+//         //     return this.value; // $(this).val()
+//         // }).get();
+//         // alert(image_name);
 
-        // var select_place = $('input[name="place_name[]"]').val();
-        var select_place_values = $('select[name="place_name[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('select_place_values',select_place_values);
-        // alert(select_place_values);
-        var time_values = $('input[name="time[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('time_values',time_values);
-        // alert(time_values);
-        var visit_time_values = $('input[name="visit_time[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('visit_time_values',visit_time_values);
-        // alert(visit_time_values);
-        var details_values = $('input[name="details[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('details_values',details_values);
-        // alert(details_values);
-
-        var iternary_desc = $('textarea[name="iternary_desc[]"]').map(function() {
-        return $(this).val();
-        }).get();
-        console.log('iternary_desc',iternary_desc);
-        // alert(visit_time_values);
-        // var iternary_desc = $('#iternary_desc').val();
-        // alert(iternary_desc);
-
-
-// exit();
-        var image_name = $('input[name="image_name[]"]').map(function () {
-            return this.value; // $(this).val()
-        }).get();
-
-        //   alert(image_name);
-        // var image_name = $('#image_name').map(function () {
-        //         return this.value;
-        //     }).get();
-
-            // alert(image_name);
-
-        $.ajax({
-            method: 'post',
-                          url:'<?=base_url()?>admin/tour_creation_iternary/insert_daywise_iternary',
-                          data: { tour_number: tour_number,
-                            day_number: day_number,
-                            district: district,
-                            select_place_values: select_place_values,
-                            time_values: time_values,
-                            visit_time_values: visit_time_values,
-                            details_values: details_values,
-                            iternary_desc: iternary_desc,
-                            // image_names: image_name
-                        },
-                          dataType: 'json',
-                          cache: false,
-                          success: function(response) {
-                            // alert(response);
-                              if (response.message === 'Data inserted successfully') {
-                                //   alert('success');
-                                // window.location.href = "<?//=base_url()?>admin/day_wise_tour_itinerary/add";
-                              } else {
-                                  alert('error');
-
-                              }
-                          },
-                      });
-    });    
-});
+//         // var image_name_fetch = $('#image_name').val();
+//         // alert(image_name);
+//         $.ajax({
+//             method: 'post',
+//                           url:'<?//=base_url()?>admin/tour_creation_iternary/insert_daywise_iternary',
+//                           data: { 
+//                             total_days: total_days,
+//                             tour_number: tour_number,
+//                             day_number: day_number,
+//                             district: district,
+//                             iternary_desc: iternary_desc,
+//                             select_place_values: select_place_values,
+//                             time_values: time_values,
+//                             visit_time_values: visit_time_values,
+//                             details_values: details_values,
+//                             // image_name_fetch: image_name_fetch
+//                         },
+//                           dataType: 'json',
+//                           cache: false,
+//                           success: function(response) {
+//                             // alert(response);
+//                               if (response.message === 'Data inserted successfully') {
+//                                 //   alert('success');
+//                                 // window.location.href = "<?//=base_url()?>admin/day_wise_tour_itinerary/add";
+//                               } else {
+//                                   alert('error');
+//                               }
+//                           },
+//                       });
+//     });    
+// });
 
  </script>
 
@@ -10429,3 +10465,167 @@ $('#vehicle_details_admin').validate({ // initialize the plugin
 
 </script>
 
+<!-- tour creation edit add more  -->
+<script>
+     var baseURL= "<?php echo base_url();?>";
+    $(document).ready(function() {
+// Add more rows when the "Add More" button is clicked
+
+$(document).on("change",".district",function(){
+            // alert('ggggggggg');
+            var totaldays = $('#tour_creation_total_days').val();
+            var district_id = $(this).val();
+            var day_no = $(this).attr('attr_day');
+            // alert(district_id);
+        $.ajax({
+            url:'<?=base_url()?>admin/tour_creation_iternary/getplaces',
+            method: 'post',
+            data: {did: district_id},
+            dataType: 'json',
+            success: function(response){
+
+            // var closestTable = $(this).closest("table");
+
+            // console.log(closestTable.closest("tr"));
+
+                $('.edit_place_name').find('option').not(':first').remove();
+            $.each(response,function(index,data){   
+                $('.edit_place_name').append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
+            });
+            
+            }
+        });
+        });
+
+// var i=2;
+$("#edit_tr").click(function() {
+    var i = $('.edit_place_name').length + 2; // Get the total number of existing rows
+    // var expence = $(this).attr('attr_add_id');
+    // var i= parseInt(expence)+parseInt(1);
+    // // alert(i);
+    // var expence = $(this).attr('attr_add_id',i);
+    // alert(i);
+    var newRow = `
+        <tr>
+        <td>${i}</td>
+        <td>
+            <select class="select_css select_place edit_place_name" name="edit_place_name[]" id="edit_place_name${i}" required="required">
+                <option value="">Select Place</option>
+                <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                    <option value="<?php echo $citywise_place_master_info['id']; ?>"><?php echo $citywise_place_master_info['place_name']; ?></option>
+                <?php } ?>
+            </select>
+        </td>
+        <td><input readonly type="input" name="edit_time[]" id="edit_time${i}" value=""></td>
+        <td><input type="time" class="form-control" name="edit_visit_time[]" id="edit_visit_time${i}" placeholder="Enter Visit Time" required></td>
+        <td><input type="text" class="form-control" name="edit_details[]" id="edit_details${i}" placeholder="Enter Details"></td>
+        <td>
+            <button type="button" class="btn btn-danger remove-row">Remove</button>
+        </td>
+        </tr>
+    `;
+    $("#table tbody").append(newRow);
+
+    var optionsClone = $('.edit_place_name:first').html();
+    $(`#edit_place_name${i}`).html(optionsClone);
+
+    i++;
+    initializeValidationForNewRow(i - 1);
+});
+
+
+function initializeValidationForNewRow(rowIndex) {
+// Define rules and messages for the newly added row
+$('#add_expense_type_row' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Select expense head"
+}
+});
+
+$('#add_expense_category_row' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Select sub expense head"
+}
+});
+
+$('#add_product_name' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Select product name"
+}
+});
+
+$('#add_measuring_unit' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Select unit"
+}
+});
+
+$('#add_quantity' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Enter quantity"
+}
+});
+
+$('#add_rate' + rowIndex).rules('add', {
+required: true,
+messages: {
+    required: "Enter rate"
+}
+});
+}
+
+// Call the initializeValidationForNewRow function for any existing rows
+$(".dynamic-row").each(function (index) {
+initializeValidationForNewRow(index + 1);
+});
+
+
+// Remove a row when the "Remove" button is clicked
+$(document).on("click", ".remove-row", function() {
+    $(this).closest("tr").remove();
+});
+
+});
+</script>
+<!-- tour creation edit add more  -->
+
+<!-- tour craetion edit delete -->
+<script>
+  $(".delete_instruction").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/tour_creation_iternary/add_more_delete',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+<!-- tour craetion edit delete -->

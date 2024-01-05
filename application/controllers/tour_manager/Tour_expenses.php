@@ -211,7 +211,7 @@ class Tour_expenses extends CI_Controller {
             else{
                $new_img_filename  = '';
             }
-// ==============================upload image 2===============================================================//
+            // ==============================upload image 2===============================================================//
 
                 $expense_type  = $this->input->post('expense_type');
                 // print_r($expense_type); die;
@@ -560,7 +560,7 @@ class Tour_expenses extends CI_Controller {
                 'update_remark' =>   $update_remark,
                 'image_name' =>   $filename,
                 'image_name_2' =>   $new_img_filename,
-                'pax_type' =>   $pax_type
+                'pax_type' =>   $pax_types
                 // 'package_date_id' =>   $tour_number
 
                  );

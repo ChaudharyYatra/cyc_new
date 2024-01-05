@@ -60,6 +60,8 @@
                                 <option value="<?php echo $arr_data_info['id']; ?>"><?php echo $arr_data_info['group_name']; ?></option>
                             <?php } ?>
                           </select>
+                          <input type="hidden" class="form-control" name="get_group_code" id="get_group_code">
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -91,6 +93,13 @@
     <!-- /.content -->
   </div>
   
+  <!-- <script>
+    function update(){
+      sel = document.getElementById("parent_group");
+      display = document.getElementById("get_group_code");
+      display.value = sel.value;
+    }
+  </script> -->
 
 </body>
 </html>

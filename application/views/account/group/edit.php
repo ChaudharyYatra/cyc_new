@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label>Parent Group</label>
                             <!-- <input type="text" class="form-control" name="parent_group" id="parent_group" placeholder="Enter Parent Name" value="<?php //echo $info['parent_group']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required"> -->
-                            <select class="select_css" style="width: 100%;" name="group_name_id" id="group_name_id" required="required">
+                            <select class="select_css" style="width: 100%;" name="parent_group" id="parent_group" required="required">
                             <option value="">Select group name</option>
                             <?php
                                 foreach($arr_data_group as $arr_data_group_info) 
@@ -63,6 +63,7 @@
                                 <option value="<?php echo $arr_data_group_info['id']; ?>" <?php if($arr_data_group_info['id']==$info['parent_group']) { echo "selected"; } ?>><?php echo $arr_data_group_info['group_name']; ?></option>
                             <?php } ?>
                           </select>
+                          <input type="hidden" class="form-control" name="get_group_code" id="get_group_code">
                           </div>
                     </div>
                     <div class="col-md-6">

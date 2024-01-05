@@ -10,7 +10,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
-              
             </ol>
           </div>
         </div>
@@ -99,7 +98,7 @@
                                 echo rtrim($aid, '='); ?>" ><button class="dropdown-item">Add Dates</button></a>
                             <?php } ?>
                             
-							            <a href="<?php echo $module_url_path_iternary; ?>/add/<?php echo $info['id']; ?>" ><button class="dropdown-item">Add Itinerary</button></a>		
+                            <a href="<?php echo $module_url_path_iternary; ?>/add/<?php echo $info['id']; ?>/<?php echo $info['tour_number_of_days']; ?>" ><button class="dropdown-item">Add Itinerary</button></a>			
 							            <a href="<?php echo $module_url_path_hotel;?>/add/<?php echo $info['id'];  ?>" ><button class="dropdown-item">Add Hotel</button></a>
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
 					                  echo rtrim($aid, '='); ?>" title="Delete"><button class="dropdown-item">Delete</button></a>

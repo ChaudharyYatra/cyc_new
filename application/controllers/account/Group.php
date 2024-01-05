@@ -278,4 +278,20 @@ class Group extends CI_Controller{
     }
    
 
+    public function get_group_name(){
+
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        $did_upi = $this->input->post('did');
+        
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('id',$did_upi);   
+            $data = $this->master_model->getRecords('group');
+            
+            echo json_encode($data); 
+
+        }
+
 }

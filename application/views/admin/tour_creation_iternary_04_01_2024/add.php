@@ -74,7 +74,7 @@
                                   </div>
                                   <div class="col-md-6 mb-4">
                                       <label>Select District <span class="text-danger">*</label>
-                                      <select class="select_css district" name="district" attr_district="district" required="required">
+                                      <select class="select_css district" name="district" required="required">
                                           <option value="">Select district</option>
                                           <?php
                                           foreach($district_data as $district_info){ 
@@ -141,7 +141,7 @@
                   <!-- /.card-body -->
                   <div class="card-footer">
                     <!-- <button type="submit" class="btn btn-primary form-control" name="submit" value="submit" style="width:10%;">Submit</button> -->
-                    <input type="submit" class="btn btn-primary form-control" name="submit" style="width:10%;"></input>
+                    <button type="submit" class="btn btn-primary form-control" name="submit" style="width:10%;">Submit</button>
                     <a href="<?php echo $module_url_path; ?>/index/<?php echo $id; ?>"><button type="button" class="btn btn-danger" >Cancel</button></a>
                   </div>
                   </div>
@@ -151,87 +151,14 @@
             </div>
             <!-- /.card -->
             </div>
-            <!--/.col (left) -->
-            <!-- right column -->
-            <div class="col-md-6">
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
 
-            </div>
-            <!--/.col (right) -->
-
-
-            
           </div>
-          <!-- /.row -->
-
-          <div class="col-12">
-              <?php $this->load->view('admin/layout/admin_alert'); ?>
-            <div class="card">
-             
-              <!-- /.card-header -->
-              <div class="card-body">
-                  <?php  if(count($tour_creation_iternary) > 0 ) 
-              { ?>
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>SN</th>
-                    <th>Package Name</th>
-                    <th>District Name</th>
-                    <th>Place Name</th>
-                    <th>Day Number</th>
-                    <th>Iternary Description</th>
-                    <th>Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php  
-                  
-                   $i=1; 
-                   foreach($tour_creation_iternary as $info) 
-                   { 
-                    // print_r($info); die;
-                     ?>
-                  <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo $info['tour_title'];?></td>
-                    <td><?php echo $info['district'];?></td>
-                    <td><?php echo $info['city_place'];?></td>
-                    <td><?php echo $info['day_number'];?></td>
-                    <td><?php echo $info['iternary_desc'];?></td>
-                    <!-- <td>
-                        <?php 
-                        //if($info['is_active']=='yes')
-                          //{
-                        ?>
-                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
-                        <?php //} else { ?>
-                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
-                        <?php //} ?>
-                    </td> -->
-                    <td>
-                          <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
-					                  echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp;
-                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
-					                  echo rtrim($aid, '='); ?>/<?php $pid=base64_encode($info['tour_creation_addmore']); 
-					                  echo rtrim($pid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
-                          
-                    </td>
-                  </tr>
-                  <?php $i++; } ?>
-                  </tbody>
-                </table>
-                 <?php } else
-                { echo '<div class="alert alert-danger alert-dismissable">
-                <i class="fa fa-ban"></i>
-                <b>Alert!</b>
-                Sorry No records available
-              </div>' ; } ?>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

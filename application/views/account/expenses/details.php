@@ -28,6 +28,7 @@
             <?php
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
             <div class="card card-primary">
               <div class="card-header">
@@ -39,34 +40,46 @@
               <div class="card-body">
                 <table id="" class="table table-bordered table-hover">
                   <tr>
-				  <th>Voucher Type</th>
+				          <th>Voucher Type</th>
                   <td><?php echo $info['voucher_type']; ?></td>
 
-                  <th>Particular(for which expenses)</th>
-                  <td><?php echo $info['particular_expenses']; ?></td>
-                  </tr>
-                  <tr>
                   <th>Company Name</th>
                   <td><?php echo $info['company_name']; ?></td>
 
-                  <th>Account Number</th>
-                  <td><?php echo $info['acc_no']; ?></td>
                   </tr>
                   <tr>
-                  <th>Amount</th>
-                  <td><?php echo $info['amount']; ?></td>
+                  <th>Account Number</th>
+                  <td><?php echo $info['account_no_id']; ?></td>
 
                   <th>Details</th>
                   <td><?php echo $info['expenses_details']; ?></td>
                   </tr>
-                  </table>
+
+                  <tr>
+                  <?php if($info['tour_expenses_type'] == '1'){ ?>
+                    <th>Amount</th>
+                    <td><?php echo $info['single_total_amount']; ?></td>
+                  <?php }else{ ?>
+                    <th>Amount</th>
+                    <td><?php echo $info['multiple_total_amount']; ?></td>
+                  <?php }  ?>
+
+                  <?php if($info['tour_expenses_type'] == '1'){ ?>
+                      <th>Particular(for which expenses)</th>
+                      <td> <?php echo $info['single_particular_expenses'];?> </td>
+                  <!-- <?php //}else{ ?>
+                      <th>Multiple Particular(for which expenses)</th>
+                      <td> <?php //echo $info['particular_expenses'];?> </td> -->
+                  <?php }  ?>
+                  </tr>
+                </table>
               </div>
               
-        <br>
-        <div class="row">
+              <br>
+              <div class="row">
 
 
-            </div>
+              </div>
             <?php } ?>
           <!--/.col (left) -->
           <!-- right column -->
@@ -79,6 +92,62 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
+
+    <?php
+    foreach($arr_data as $info) 
+    { 
+    // print_r($info); die;
+    ?>
+    <?php if($info['tour_expenses_type'] == '0')
+    { ?>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+              <?php $this->load->view('admin/layout/admin_alert'); ?>
+            <div class="card">
+             
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>SN</th>
+                    <th>Multiple Particular(for which expense)</th>
+                    <th>Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <?php  
+                   $i=1; 
+                   foreach($arr_data_details as $info)
+                   { 
+                    // print_r($info); die;
+                     ?>
+                  <tr>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo $info['particular_expenses'] ?></td>
+                    <td><?php echo $info['amount'] ?></td>
+                  </tr>
+                  
+                  <?php $i++; } ?>
+                  
+                  </tbody>
+                  
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <?php } } ?>
   </div>
   
 

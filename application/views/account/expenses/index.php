@@ -35,6 +35,7 @@
                     <th>SN</th>
                     <th>Voucher Type</th>
                     <th>Company Name</th>
+                    <th>Expense Type</th>
                     <th>Account Number</th>
                     <th>Amount</th>
                     <th>Is Active?</th>
@@ -43,17 +44,30 @@
                   </thead>
                   <tbody>
                   <?php  
-                  
                    $i=1; 
                    foreach($arr_data as $info)
                    { 
+                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['voucher_type'] ?></td>
                     <td><?php echo $info['company_name'] ?></td>
+                    <td>
+                    <?php if($info['tour_expenses_type'] == '1'){
+                      echo 'Single Expense';
+                    }else{
+                      echo 'Multiple Expense';
+                    ?>
+                    <?php } ?>
+                    </td>
                     <td><?php echo $info['acc_no'] ?></td>
-                    <td><?php echo $info['amount'] ?></td>
+                    <td><?php if($info['tour_expenses_type'] == '1'){
+                    echo $info['single_total_amount']; 
+                    } else{
+                    echo $info['multiple_total_amount'];?>
+                    <?php } ?>
+                    </td>
                     
                     <td>
                         <?php 
@@ -61,19 +75,19 @@
                           {
                         ?>
                         <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
+							            echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
                         <?php } else { ?>
                         <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
+							            echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
                         <?php } ?>
                     </td>
                     <td>
                           <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
-					   echo rtrim($aid, '='); ?>" title="Edit"><i class="fa fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp;
+					                  echo rtrim($aid, '='); ?>" title="Edit"><i class="fa fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp;
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
-					   echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+					                  echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
-					   echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+					                  echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
                         
                     </td>
                   </tr>
