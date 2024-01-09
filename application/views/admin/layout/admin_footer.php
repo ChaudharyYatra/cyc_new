@@ -10594,6 +10594,7 @@ $(document).on("click", ".remove-row", function() {
 </script>
 <!-- tour creation edit add more  -->
 
+
 <!-- tour craetion edit delete -->
 <script>
   $(".delete_instruction").click(function() { 
