@@ -183,10 +183,25 @@
                             <h5>Final Payment Details :</h5>
                             
                             <table id="example2" class="table table-bordered table-hover table-striped">
+
                                 <tr>
                                     <th>Mobile Number</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
+                                    </td>
+                                </tr>
+
+                                <tr style="display:none;">
+                                    <th>Mobile Number</th>
+                                    <td>
+                                    <input type="text" class="form-control" name="mobile_no" id="mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
+                                    </td>
+                                </tr>
+
+                                <tr id="relation_row" style="display:none;">
+                                    <th>Relation</th>
+                                    <td>
+                                    <input type="text" class="form-control" name="relation" id="relation"  placeholder="Enter relation" required onkeyup="validate()">
                                     </td>
                                 </tr>
                                 
@@ -331,17 +346,34 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Account Number</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="transaction_upi_validate()">
+                                            <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                                <option value="">Select Account Number</option>
+                                                
+                                                <?php
+                                                    foreach($upi_qr_data as $upi_qr_data_value) 
+                                                    { 
+                                                ?>
+                                                    <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['account_number'];?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <!-- <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Number</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                        </div>
+                                        </div> -->
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Account Holder Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" readonly class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -352,17 +384,17 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">UTR No</h6>
-                                        </div>
-                                        <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                        </div>
-
-                                        <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                            <h6 class="text-center">UTR No</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -670,6 +702,22 @@
                                 <center><h4 class="mb-4">Amount Receiver Details</h4></center>
 
                                     <div class="col-md-6 mt-1">
+                                        <h6 class="text-center">Name On Cheque</h6>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="transaction_upi_validate()">
+                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                            <option value="">Select Name On Cheque</option>
+                                            <?php
+                                                foreach($upi_qr_data as $upi_qr_data_value) 
+                                                { 
+                                            ?>
+                                                <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Cheque Bank Name</h6>
                                     </div>
                                     <div class="col-md-6">

@@ -90,6 +90,13 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>Account Number</label>
+                            <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
                           <label>Upload QR Image</label><br>
                           <input type="file" name="image_name" id="image_nam" required="required">
                           <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>

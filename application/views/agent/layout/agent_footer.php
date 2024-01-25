@@ -6898,6 +6898,86 @@ function empty() {
  });
 </script>
 
+<!-- new for account name and show account holder name -->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#net_banking_acc_no').change(function(){
+        var did = $('#net_banking_acc_no').val();
+        // alert(did);
+    
+      // AJAX request
+      $.ajax({
+        url:'<?=base_url()?>agent/booking_preview/get_account_holder_name',
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#net_acc_holder_nm').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){   
+            $('#net_acc_holder_nm').val(data['full_name']);
+          });
+         
+        }
+     });
+   });
+ });
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('#booking_tm_mobile_no').keyup(function(){
+        var mobile_no = $('#mobile_no').val();
+        var booking_tm_mobile_no = $(this).val();
+
+        // Send AJAX request
+        $.ajax({
+            url: '<?=base_url()?>agent/booking_payment_details/checkMobileMatch',
+            method: 'POST',
+            data: { mobile_no: mobile_no, booking_tm_mobile_no: booking_tm_mobile_no },
+            dataType: 'json',
+            success: function(response){
+                // Update visibility of the "Relation" tr based on the response
+                if(response.isMatch) {
+                    // The mobile numbers match, hide the "Relation" tr
+                    $('#relation_row').hide();
+                    relationInput.removeAttr('required');
+                } else {
+                    // The mobile numbers do not match, show the "Relation" tr
+                    $('#relation_row').show();
+                    relationInput.attr('required', true);
+                }
+            },
+            error: function(){
+                console.log('Error in AJAX request.');
+            }
+        });
+    });
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Submit reason button action
+        $("#submitReasonBtn").click(function() {
+            var reason = $("#later_payment_reason").val();
+            // Handle the submission of the reason (e.g., send it to the server)
+            console.log("Reason submitted:", reason);
+            // You may want to redirect or perform additional actions here
+            // Close the reason modal
+            $("#reasonModal").modal("hide");
+        });
+    });
+</script>
+
  <!-- Agent add info (state,district,taluka) start -->
 <script type='text/javascript'>
   // baseURL variable
@@ -8643,6 +8723,90 @@ $(document).ready(function() {
                     mobile_no: mobile_no,
                     pending_amt: pending_amt,
                     payment_now_later: payment_now_later
+                },
+                // dataType: 'json',
+                success: function(responce) {
+                    if (responce != false && responce !='') {
+                        // alert(responce);
+                        var booking_ref_no = $('#booking_ref_no').val(responce);
+                        Swal.fire({
+                        title: 'Payment Details Info',
+                        text: 'This Payment Details Fill On Todays Only',
+                        icon: 'info',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Optionally, you can perform additional actions here
+                            window.location.href = "<?= base_url() ?>agent/pending_booking_details/index";
+                        }
+                    });
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
+
+
+<script>
+$(document).ready(function() {
+    $("#reason_submit_button").click(function() {
+        // alert('hiiiiiiiiiii');
+        var mobile_no = $('#booking_tm_mobile_no').val();  
+        var final_amt = $('#final_amt').val();
+
+        var payment_type = $("input[name='payment_type']:checked").val();
+        var selectedId = "";
+        if (payment_type === undefined) {
+            // No radio button is checked, insert a default value
+            payment_type = ""; // You can change this to your desired default value
+        } else {
+            // Loop through radio buttons to find the one with the selected value
+            $("input[name='payment_type']").each(function() {
+                if ($(this).val() === payment_type) {
+                    selectedId = $(this).attr("id");
+                    return false; // Exit the loop once a match is found
+                }
+            });
+        }
+
+        var booking_amt = $('#booking_amt').val(); 
+        var pending_amt = $('#pending_amt').val();
+        var payment_now_later = $("input[name='payment_now_later']:checked").val();
+        // alert(payment_now_later);
+        var later_payment_reason = $('#later_payment_reason').val();
+        var enquiry_id = $('#enquiry_id').val();
+        var package_id = $('#package_id').val();
+        var journey_date = $('#journey_date').val();
+        var package_date_id = $('#package_date_id').val();
+        var traveller_id = $('#traveller_id').val();
+
+        var booking_payment_details_id = $('#booking_payment_details_id').val();
+        var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
+
+        
+        if (mobile_no != '') {
+            // alert('IN hiiiii');
+            $.ajax({
+                url: "<?php echo base_url(); ?>agent/booking_confirm_page/reason_submit_proceed",
+                type: "post",
+                data: {
+                    enquiry_id: enquiry_id,
+                    later_payment_reason: later_payment_reason,
+                    // booking_payment_details_id: booking_payment_details_id,
+                    // return_customer_booking_payment_id: return_customer_booking_payment_id,
+                    // package_id: package_id,
+                    // journey_date: journey_date,
+                    // package_date_id: package_date_id,
+                    // traveller_id: traveller_id,
+                    // booking_amt: booking_amt,
+                    // final_amt: final_amt,
+                    // payment_type: payment_type,
+                    // mobile_no: mobile_no,
+                    // pending_amt: pending_amt,
+                    // payment_now_later: payment_now_later
                 },
                 // dataType: 'json',
                 success: function(responce) {

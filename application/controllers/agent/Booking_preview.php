@@ -952,6 +952,24 @@ public function get_upi_qr_code(){
 
         }
 
+        public function get_account_holder_name(){
+
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+    
+            $did_upi = $this->input->post('did');
+            // print_r($did_upi); die;
+ 
+                $this->db->where('is_deleted','no');
+                $this->db->where('is_active','yes');
+                $this->db->where('id',$did_upi);   
+                $data = $this->master_model->getRecords('qr_code_master');
+                // print_r($data); die;
+           
+                echo json_encode($data); 
+    
+            }
+
         public function get_QR_code(){ 
 
             $agent_sess_name = $this->session->userdata('agent_name');

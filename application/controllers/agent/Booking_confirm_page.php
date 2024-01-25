@@ -187,4 +187,109 @@ class Booking_confirm_page extends CI_Controller {
 
     }
 
+    public function reason_submit_proceed()
+    { 
+        // echo 'hiiiii IN Controller'; die;
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        $record = array();
+        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id";
+        $this->db->where('booking_basic_info.is_deleted','no');
+        $this->db->where('domestic_enquiry_id',$iid);
+        $this->db->join("packages", 'packages.id=booking_basic_info.tour_no','left');
+        $this->db->join("package_date", 'package_date.id=booking_basic_info.tour_date','left');
+        $this->db->join("package_hotel", 'package_hotel.package_id=packages.id','left');
+        $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
+
+        $record = array();
+        $fields = "all_traveller_info.*,relation.relation";
+        $this->db->where('all_traveller_info.is_deleted','no');
+        $this->db->where('all_traveller_info.domestic_enquiry_id',$iid);
+        $this->db->join("relation", 'relation.id=all_traveller_info.all_traveller_relation','left');
+        $arr_data = $this->master_model->getRecords('all_traveller_info',array('all_traveller_info.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
+
+
+            $booking_amt = $this->input->post('booking_amt');
+            // $final_amt = $this->input->post('final_amt');
+            $later_payment_reason = $this->input->post('later_payment_reason');
+            // $payment_type = $this->input->post('payment_type');
+            // $mobile_no = $this->input->post('mobile_no');
+            // $pending_amt = $this->input->post('pending_amt');
+            $payment_now_later = $this->input->post('payment_now_later');
+            $enquiry_id = $this->input->post('enquiry_id');
+            $traveller_id = $this->input->post('traveller_id');
+            $package_id = $this->input->post('package_id');
+            // $journey_date = $this->input->post('journey_date');
+            $package_date_id = $this->input->post('package_date_id');
+            // $booking_payment_details_id = $this->input->post('booking_payment_details_id');
+            // $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
+            $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+
+            
+            
+                // $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+
+                
+                    $arr_insert = array(
+                        'booking_reference_no'  =>  $booking_reference_no,
+                        // 'final_amt'   =>   $final_amt,
+                        // 'pending_amt'   =>   $pending_amt,
+                        // 'run_pending_amt'   =>   $pending_amt,
+                        'payment_now_later'   =>   'Later',
+                        // 'booking_tm_mobile_no'   =>   $mobile_no,
+                        'package_date_id' => $package_date_id,
+                        'enquiry_id' => $enquiry_id,
+                        'package_id' => $package_id,
+                        'traveller_id' => $traveller_id,
+                        'payment_reason' => $later_payment_reason,
+                        'payment_confirmed_status'   =>  'Pending'
+                    );
+                    // print_r($arr_insert); die;
+    
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
+                    $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
+                    // print_r($booking_payment_details); die;
+                    
+                    // print_r($arr_insert); die;
+                    if(!empty($booking_payment_details)){
+                        $arr_where     = array("id" => $booking_payment_details_id);
+                        $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                    }else{
+                     $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                     $insertid = $this->db->insert_id();
+                    }
+                
+
+                $arr_insert = array(
+                    'payment_confirmed_status'   =>  'Pending'
+                );
+                $record = array();
+                $fields = "final_booking.*";
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+
+                if(!empty($final_booking_details)){
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
+
+        if($inserted_id!=''){
+           echo true;
+
+       }else {
+           echo false;
+       }
+
+       $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
+       $this->arr_view_data['arr_data']        = $arr_data;
+
+    }
+
 }

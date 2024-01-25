@@ -425,6 +425,7 @@ class Booking_payment_details extends CI_Controller {
             $upi_no = $this->input->post('upi_no');
             $cheque = $this->input->post('cheque');
             $bank_name = $this->input->post('bank_name');
+            $name_on_cheque = $this->input->post('name_on_cheque');
             $drawn_on_date = $this->input->post('drawn_on_date');
 
             $netbanking_payment_type = $this->input->post('netbanking_payment_type');
@@ -546,6 +547,7 @@ class Booking_payment_details extends CI_Controller {
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
+                    'name_on_cheque'   =>   $name_on_cheque,
                     'drawn_on_date'   =>   $drawn_on_date,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
@@ -1202,6 +1204,17 @@ class Booking_payment_details extends CI_Controller {
         }
             echo json_encode($data); 
 
+        }
+
+        public function checkMobileMatch() {
+            $mobile_no = $this->input->post('mobile_no');
+            $booking_tm_mobile_no = $this->input->post('booking_tm_mobile_no');
+    
+            // Compare the two mobile numbers
+            $isMatch = ($mobile_no == $booking_tm_mobile_no) ? true : false;
+    
+            // Return JSON response
+            echo json_encode(array('isMatch' => $isMatch));
         }
 
         public function get_QR_code(){ 
