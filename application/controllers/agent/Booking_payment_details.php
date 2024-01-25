@@ -412,11 +412,13 @@ class Booking_payment_details extends CI_Controller {
             $upi_payment_type = $this->input->post('upi_payment_type');
             // print_r($upi_holder_name); die;
             $upi_self_no = $this->input->post('upi_self_no');
+            $upi_transaction_date = $this->input->post('upi_transaction_date');
             $upi_reason = $this->input->post('upi_reason');
 
             $qr_holder_name = $this->input->post('qr_holder_name');
             $qr_mobile_number = $this->input->post('qr_mobile_number');
             $qr_payment_type = $this->input->post('qr_payment_type');
+            $qr_transaction_date = $this->input->post('qr_transaction_date');
             $qr_upi_no = $this->input->post('qr_upi_no');
 
 
@@ -533,10 +535,12 @@ class Booking_payment_details extends CI_Controller {
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
                     'UPI_reason'   =>   $upi_reason,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
                     'QR_transaction_no'   =>   $qr_upi_no,
 
                     'upi_no'   =>   $upi_no,

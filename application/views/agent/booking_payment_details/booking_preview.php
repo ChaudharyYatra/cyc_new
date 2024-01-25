@@ -206,7 +206,7 @@
                                 </tr>
 
                                 <tr id="booking_amount_tr" style='display:table-row;'>
-                                    <th>Booking Amount</th>
+                                    <th>Depositing Amount</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_amt'];} ?>" required onkeyup="validate()">
                                     </td>
@@ -219,16 +219,16 @@
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr style='display:none;'>
                                     <th>Payment</th>
-                                    <td>&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Now">&nbsp;&nbsp;Now
+                                    <td>&nbsp;&nbsp;<input type="radio" checked name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Now">&nbsp;&nbsp;Now
                                         &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later
                                     </td>
                                     
                                 </tr>
 
-                                <tr id="other_payment_mode_tr" style='display:none;'>
-                                    <th>Payment Mode</th>
+                                <tr>
+                                    <th>Amount Receiving Mode</th>
                                     <td>
                                     <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details(this.value); 
                                         this.blur();'required="required">
@@ -309,7 +309,7 @@
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_date'];}?>">
+                                            <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['netbanking_date'];}?>">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -317,6 +317,7 @@
                             <?php } else { ?>
                                 <div class="" id="net_banking_tr" style='display:none;'>
                                 <div class="row cash_payment_div">
+                                        <center><h4 class="mb-4">Amount Receiver Details</h4></center>
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Payment Type</h6>
                                         </div>
@@ -368,7 +369,7 @@
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="">
+                                            <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" max="<?php echo date("Y-m-d");?>" onchange="netbank_date_validate()" placeholder="">
                                         </div>
                                     <!-- </div> -->
                                 </div>
@@ -438,6 +439,7 @@
                             <?php } else{ ?>
                             <div class="" id="upi_no_div" style='display:none;'>
                                 <div class="row cash_payment_div">
+                                    <center><h4 class="mb-4">Amount Receiver Details</h4></center>
                                     <div class="col-md-5 mt-1">
                                         <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                     </div>
@@ -476,6 +478,13 @@
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" readonly class="form-control" name="self_upi_no" id="self_upi_no" placeholder="Enter Self UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        </div>
+
+                                        <div class="col-md-5 mt-2">
+                                            <h6 class="text-center float-right">Transaction Date</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                         </div>
 
                                         <div class="col-md-5 mt-2">
@@ -564,6 +573,7 @@
                             <?php } else { ?>
                             <div class="" id="rq_div" style='display:none;'>
                                 <div class="row cash_payment_div">
+                                    <center><h4 class="mb-4">Amount Receiver Details</h4></center>
                                     <div class="col-md-6 mt-1">
                                         <h6 class="text-center">QR Holder Name</h6>
                                     </div>
@@ -589,7 +599,7 @@
                                     </div>
 
                                     <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">Payment Type</h6>
+                                        <h6 class="text-center">QR Code App Name</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
                                         <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate()">
@@ -601,6 +611,13 @@
                                             <option value="SBI pay">SBI pay</option>
                                             <option value="Bank of Baroda UPI">Bank of Baroda UPI</option>
                                         </select>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Transaction Date</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                     </div>
 
                                     <div class="col-md-6 mt-2">
@@ -650,18 +667,20 @@
                             <?php } else{ ?>
                             <div class="" id="cheque_tr" style='display:none;'>
                                 <div class="row cash_payment_div">
+                                <center><h4 class="mb-4">Amount Receiver Details</h4></center>
+
                                     <div class="col-md-6 mt-1">
-                                        <h6 class="text-center">Cheque Number</h6>
+                                        <h6 class="text-center">Cheque Bank Name</h6>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
 
                                     <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">Bank Name</h6>
+                                        <h6 class="text-center">Cheque Number</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">
@@ -1292,7 +1311,7 @@
                     </div>
                 </div>
 
-                    <div id="other_payment_mode_div" style='display:none;'>
+                    <div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">

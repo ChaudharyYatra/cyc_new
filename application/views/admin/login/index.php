@@ -48,7 +48,7 @@
           <input type="password" class="form-control" placeholder="Password" name="pass_login" id="pass_login">
           <div class="input-group-append">
               <div class="input-group-text">
-              <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password"></span>
+              <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Password"></span>
             </div>
           </div>
         </div>

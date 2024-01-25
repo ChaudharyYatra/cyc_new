@@ -36,7 +36,7 @@
                   <div class="col-md-6"> 
                     <div class="form-group">
                       <label>Relation</label>
-                      <input type="text" class="form-control" name="relation" id="relation" placeholder="Enter Relation" oninput="this.value = this.value.replace(/[^a-zA-Z/- ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                      <input type="text" class="form-control" name="relation" id="relation" placeholder="Enter Relation" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                     </div>
                   </div>
                 </div>

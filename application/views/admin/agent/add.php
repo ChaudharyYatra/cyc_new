@@ -216,7 +216,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label>UPI ID</label>
-                              <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                              <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" oninput="validateInput(event)">
                           </div>
                         </div>
 
@@ -331,6 +331,19 @@ $("body").on('click', '.toggle-password2', function() {
   }
 
 });
+</script>
+
+<script>
+function validateInput(event) {
+    // Get the current input value
+    let inputValue = event.target.value;
+
+    // Replace any characters that are not numbers, alphabets, or @ with an empty string
+    let sanitizedValue = inputValue.replace(/[^a-zA-Z0-9@]/g, '');
+
+    // Update the input field value with the sanitized value
+    event.target.value = sanitizedValue;
+}
 </script>
   
 
