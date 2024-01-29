@@ -379,12 +379,14 @@ class Pay_pending_amount extends CI_Controller {
             $final_amt = $this->input->post('final_amt');
             $payment_type = $this->input->post('payment_type');
             $mobile_no = $this->input->post('mobile_no');
+            $relation = $this->input->post('relation');
             $pending_amt = $this->input->post('pending_amt');
             $select_transaction = $this->input->post('select_transaction');
             // print_r($select_transaction);
             
             $upi_holder_name = $this->input->post('upi_holder_name');
             $upi_payment_type = $this->input->post('upi_payment_type');
+            $upi_transaction_date = $this->input->post('upi_transaction_date');
             // print_r($upi_holder_name); die;
             $upi_self_no = $this->input->post('upi_self_no');
             $upi_reason = $this->input->post('upi_reason');
@@ -392,12 +394,14 @@ class Pay_pending_amount extends CI_Controller {
             $qr_holder_name = $this->input->post('qr_holder_name');
             $qr_mobile_number = $this->input->post('qr_mobile_number');
             $qr_payment_type = $this->input->post('qr_payment_type');
+            $qr_transaction_date = $this->input->post('qr_transaction_date');
             $qr_upi_no = $this->input->post('qr_upi_no');
 
 
             $upi_no = $this->input->post('upi_no');
             $cheque = $this->input->post('cheque');
             $bank_name = $this->input->post('bank_name');
+            $name_on_cheque = $this->input->post('name_on_cheque');
             $drawn_on_date = $this->input->post('drawn_on_date');
 
             $netbanking_payment_type = $this->input->post('netbanking_payment_type');
@@ -502,21 +506,25 @@ class Pay_pending_amount extends CI_Controller {
                     'booking_amt'   =>   $booking_amt,
                     'pending_amt'   =>   $pending_amt,
                     'booking_tm_mobile_no'   =>   $mobile_no,
+                    'relation'   =>   $relation,
                     'select_transaction'   =>   $select_transaction,
                     
                     'UPI_holder_name'   =>   $upi_holder_name,
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
                     'UPI_reason'   =>   $upi_reason,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
                     'QR_transaction_no'   =>   $qr_upi_no,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
+                    'name_on_cheque'   =>   $name_on_cheque,
                     'drawn_on_date'   =>   $drawn_on_date,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
@@ -803,6 +811,7 @@ class Pay_pending_amount extends CI_Controller {
                 $final_amt = $this->input->post('final_amt');
                 $payment_type = $this->input->post('payment_type');
                 $mobile_no = $this->input->post('mobile_no');
+                $relation = $this->input->post('relation');
                 $pending_amt = $this->input->post('pending_amt');
                 $payment_now_later = $this->input->post('payment_now_later');
                 $select_transaction = $this->input->post('select_transaction');
@@ -812,17 +821,20 @@ class Pay_pending_amount extends CI_Controller {
                 $upi_payment_type = $this->input->post('upi_payment_type');
                 // print_r($upi_holder_name); die;
                 $upi_self_no = $this->input->post('upi_self_no');
+                $upi_transaction_date = $this->input->post('upi_transaction_date');
                 $upi_reason = $this->input->post('upi_reason');
 
                 $qr_holder_name = $this->input->post('qr_holder_name');
                 $qr_mobile_number = $this->input->post('qr_mobile_number');
                 $qr_payment_type = $this->input->post('qr_payment_type');
+                $qr_transaction_date = $this->input->post('qr_transaction_date');
                 $qr_upi_no = $this->input->post('qr_upi_no');
 
 
                 $upi_no = $this->input->post('upi_no');
                 $cheque = $this->input->post('cheque');
                 $bank_name = $this->input->post('bank_name');
+                $name_on_cheque = $this->input->post('name_on_cheque');
                 $drawn_on_date = $this->input->post('drawn_on_date');
 
                 $netbanking_payment_type = $this->input->post('netbanking_payment_type');
@@ -935,21 +947,25 @@ class Pay_pending_amount extends CI_Controller {
                     'run_pending_amt'   =>   $pending_amt,
                     'payment_now_later'   =>   $payment_now_later,
                     'booking_tm_mobile_no'   =>   $mobile_no,
+                    'relation'   =>   $relation,
                     'select_transaction'   =>   $select_transaction,
                     
                     'UPI_holder_name'   =>   $upi_holder_name,
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
                     'UPI_reason'   =>   $upi_reason,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
                     'QR_transaction_no'   =>   $qr_upi_no,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
+                    'name_on_cheque'   =>   $name_on_cheque,
                     'drawn_on_date'   =>   $drawn_on_date,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,

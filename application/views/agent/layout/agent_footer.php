@@ -6949,6 +6949,7 @@ $(document).ready(function(){
                 if(response.isMatch) {
                     // The mobile numbers match, hide the "Relation" tr
                     $('#relation_row').hide();
+                    $('#relation').val('');
                     relationInput.removeAttr('required');
                 } else {
                     // The mobile numbers do not match, show the "Relation" tr

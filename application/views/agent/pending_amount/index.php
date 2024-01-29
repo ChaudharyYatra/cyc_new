@@ -181,10 +181,19 @@
                             
                             <table id="example2" class="table table-bordered table-hover table-striped">
                                 <tr>
-                                    <th>Mobile Number</th>
+                                    <th>Mobile Number For OTP</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
                                     <input type="hidden" class="form-control" name="inserted_id" id="inserted_id" value="">
+
+                                    <input type="hidden" class="form-control" name="mobile_no" id="mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
+                                    </td>
+                                </tr>
+
+                                <tr id="relation_row" style="display:none;">
+                                    <th>Relation</th>
+                                    <td>
+                                    <input type="text" class="form-control" name="relation" id="relation"  placeholder="Enter relation" required onkeyup="validate()">
                                     </td>
                                 </tr>
                                 
@@ -205,7 +214,7 @@
 
 
                                 <tr id="booking_amount_tr" style='display:table-row;'>
-                                    <th>Booking Amount</th>
+                                    <th>Depositing Amount</th>
                                     <td>
                                     <input type="text" class="form-control" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required>
                                     </td>
@@ -236,7 +245,7 @@
                                 <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_now_later" id="payment_now_later" onchange='payment_otp(this.value);' value="Later">&nbsp;&nbsp;Later -->
 
                                 <tr id="other_payment_mode_tr">
-                                    <th>Payment Mode</th>
+                                    <th>Amount Receiving Mode</th>
                                     <td>
                                     <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details_final_payment(this.value); 
                                         this.blur();'required="required">
@@ -265,6 +274,8 @@
 
                                 <div class="" id="net_banking_tr" style='display:none;'>
                                     <div class="row cash_payment_div">
+                                        <center><h4 class="mb-4">Amount Receiver Details</h4></center>
+
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Payment Type</h6>
                                             </div>
@@ -281,14 +292,31 @@
                                                 <h6 class="text-center">Account Number</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate_final_payment()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="transaction_upi_validate()">
+                                                <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                                    <option value="">Select Account Number</option>
+                                                    
+                                                    <?php
+                                                        foreach($upi_qr_data as $upi_qr_data_value) 
+                                                        { 
+                                                    ?>
+                                                        <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['account_number'];?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
+
+                                            <!-- <div class="col-md-6 mt-2">
+                                                <h6 class="text-center">Account Number</h6>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate_final_payment()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            </div> -->
 
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Account Holder Name</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate_final_payment()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" readonly class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate_final_payment()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
 
                                             <div class="col-md-6 mt-2">
@@ -299,17 +327,17 @@
                                             </div>
 
                                             <div class="col-md-6 mt-2">
-                                                <h6 class="text-center">UTR No</h6>
-                                            </div>
-                                            <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                            </div>
-
-                                            <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Bank Name</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
                                                 <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
+                                                <h6 class="text-center">UTR / Transaction No.</h6>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
 
                                             <div class="col-md-6 mt-2">
@@ -325,6 +353,7 @@
 
                                 <div class="" id="upi_no_div" style='display:none;'>
                                     <div class="row cash_payment_div">
+                                        <center><h4 class="mb-4">Amount Receiver Details</h4></center>
                                         <div class="col-md-5 mt-1">
                                             <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                         </div>
@@ -366,7 +395,14 @@
                                             </div>
 
                                             <div class="col-md-5 mt-2">
-                                                <h6 class="text-center float-right">UTR No</h6>
+                                                <h6 class="text-center float-right">Transaction Date</h6>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                            </div>
+
+                                            <div class="col-md-5 mt-2">
+                                                <h6 class="text-center float-right">UTR / Transaction No.</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
                                                 <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -384,6 +420,7 @@
                             
                                 <div class="" id="rq_div" style='display:none;'>
                                     <div class="row cash_payment_div">
+                                        <center><h4 class="mb-4">Amount Receiver Details</h4></center>
                                         <div class="col-md-6 mt-1">
                                             <h6 class="text-center">QR Holder Name</h6>
                                         </div>
@@ -409,7 +446,7 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">Payment Type</h6>
+                                            <h6 class="text-center">QR Code App Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate_final_payment()">
@@ -424,7 +461,14 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">UTR No</h6>
+                                            <h6 class="text-center">Transaction Date</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                            <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -442,18 +486,36 @@
                             
                                 <div class="" id="cheque_tr" style='display:none;'>
                                     <div class="row cash_payment_div">
+                                        <center><h4 class="mb-4">Amount Receiver Details</h4></center>
+
                                         <div class="col-md-6 mt-1">
-                                            <h6 class="text-center">Cheque Number</h6>
+                                            <h6 class="text-center">Name On Cheque</h6>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <div class="col-md-6 mt-1">
+                                            <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="transaction_upi_validate()">
+                                            <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                                <option value="">Select Name On Cheque</option>
+                                                <?php
+                                                    foreach($upi_qr_data as $upi_qr_data_value) 
+                                                    { 
+                                                ?>
+                                                    <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">Bank Name</h6>
+                                            <h6 class="text-center">Cheque Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                            <h6 class="text-center">Cheque Number</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">

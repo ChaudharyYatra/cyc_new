@@ -124,7 +124,7 @@
                         </div>
                         <div class="modal-body">
                             <label for="later_payment_reason">Please enter reason why traveler cannot proceed with Receipt:</label>
-                            <textarea class="form-control select_css" name="later_payment_reason" id="later_payment_reason"></textarea>
+                            <textarea class="form-control select_css" name="later_payment_reason" id="later_payment_reason" required></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" name="reason_submit_button" value="submit_back" id="reason_submit_button">Submit & Proceed</button>

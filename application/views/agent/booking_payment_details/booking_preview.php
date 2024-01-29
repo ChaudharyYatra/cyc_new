@@ -185,7 +185,7 @@
                             <table id="example2" class="table table-bordered table-hover table-striped">
 
                                 <tr>
-                                    <th>Mobile Number</th>
+                                    <th>Mobile Number For OTP</th>
                                     <td>
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
                                     </td>
@@ -307,7 +307,7 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">UTR No</h6>
+                                            <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -391,7 +391,7 @@
                                         </div>
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">UTR No</h6>
+                                            <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -453,7 +453,7 @@
                                         </div>
 
                                         <div class="col-md-5 mt-2">
-                                            <h6 class="text-center float-right">UTR No</h6>
+                                            <h6 class="text-center float-right">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -520,7 +520,7 @@
                                         </div>
 
                                         <div class="col-md-5 mt-2">
-                                            <h6 class="text-center float-right">UTR No</h6>
+                                            <h6 class="text-center float-right">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -581,7 +581,7 @@
                                     </div>
 
                                     <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">UTR No</h6>
+                                        <h6 class="text-center">UTR / Transaction No.</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
                                         <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate()" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['QR_transaction_no'];}?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -653,7 +653,7 @@
                                     </div>
 
                                     <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">UTR No</h6>
+                                        <h6 class="text-center">UTR / Transaction No.</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
                                         <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
@@ -720,7 +720,7 @@
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">Cheque Bank Name</h6>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mt-2">
                                         <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
 

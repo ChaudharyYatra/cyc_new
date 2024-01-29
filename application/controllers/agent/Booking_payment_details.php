@@ -404,6 +404,7 @@ class Booking_payment_details extends CI_Controller {
             $final_amt = $this->input->post('final_amt');
             $payment_type = $this->input->post('payment_type');
             $mobile_no = $this->input->post('mobile_no');
+            $relation = $this->input->post('relation');
             $pending_amt = $this->input->post('pending_amt');
             $select_transaction = $this->input->post('select_transaction');
             // print_r($select_transaction);
@@ -530,6 +531,7 @@ class Booking_payment_details extends CI_Controller {
                     'booking_amt'   =>   $booking_amt,
                     'pending_amt'   =>   $pending_amt,
                     'booking_tm_mobile_no'   =>   $mobile_no,
+                    'relation'   =>   $relation,
                     'select_transaction'   =>   $select_transaction,
                     
                     'UPI_holder_name'   =>   $upi_holder_name,
@@ -833,6 +835,7 @@ class Booking_payment_details extends CI_Controller {
                 $final_amt = $this->input->post('final_amt');
                 $payment_type = $this->input->post('payment_type');
                 $mobile_no = $this->input->post('mobile_no');
+                $relation = $this->input->post('relation');
                 $pending_amt = $this->input->post('pending_amt');
                 $payment_now_later = $this->input->post('payment_now_later');
                 $select_transaction = $this->input->post('select_transaction');
@@ -947,6 +950,7 @@ class Booking_payment_details extends CI_Controller {
                     'run_pending_amt'   =>   $pending_amt,
                     'payment_now_later'   =>   $payment_now_later,
                     'booking_tm_mobile_no'   =>   $mobile_no,
+                    'relation'   =>   $relation,
                     'select_transaction'   =>   $select_transaction,
                     
                     'UPI_holder_name'   =>   $upi_holder_name,
