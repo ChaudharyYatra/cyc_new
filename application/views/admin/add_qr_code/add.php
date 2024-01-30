@@ -41,7 +41,7 @@
                  <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Full Name</label>
+                            <label>Full Name (As Per Bank Record)</label>
                             <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Enter Full Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                         </div>
                     </div>
@@ -73,41 +73,63 @@
                         <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
                         </div>
                     </div>  -->
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Mobile Number</label>
-                            <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                    <div class="card-body">
+                      <div class="row" id="main_row_for_add_more_bank">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input type="text" class="form-control" name="mobile_number[]" id="mobile_number" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>UPI ID</label>
-                            <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>UPI ID</label>
+                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Account Number</label>
-                            <input type="text" class="form-control" name="account_number" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Account Number</label>
+                                <input type="text" class="form-control" name="account_number[]" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Upload QR Image</label><br>
-                          <input type="file" name="image_name" id="image_nam" required="required">
-                          <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Bank Name</label>
+                                <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                            </div>
                         </div>
-                    </div>
+
+                        <!-- <span class="req_field">*</span> -->
+                        <div class="col-md-6">
+                          <label>Is This A Company Account ?</label>
+                          <div class="form-group">
+                              <input type="radio" id="Yes" name="company_account_yes_no[]" value="Yes" > &nbsp;
+                              <label>Yes</label>  &nbsp; &nbsp; 
+                              <input type="radio" id="No" name="company_account_yes_no[]" value="No"> &nbsp;
+                              <label>No</label><br>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Upload QR Image</label><br>
+                              <input type="file" name="image_name[]" id="image_nam" required="required">
+                              <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            </div>
+                        </div>
+                      </div> 
+                    </div> 
                     
               </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
+                  <button type="button" class="btn btn-primary" name="submit" value="add_more_bank" id="add_more_bank">Add More Bank Details</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>
-					<a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
             </div>

@@ -94,21 +94,39 @@ class Add_qr_code extends CI_Controller{
               
                 $full_name = trim($this->input->post('full_name'));
                 $role_name = trim($this->input->post('role_name'));
-                $other_role = trim($this->input->post('other_role'));
                 $mobile_number = trim($this->input->post('mobile_number'));
                 $account_number = trim($this->input->post('account_number'));
-                $upi_id = trim($this->input->post('upi_id'));
-                $arr_insert = array(               
-                    'full_name'  => $full_name,
-                    'Role_name'  => $role_name,
-                    'mobile_number'  => $mobile_number,
-                    'account_number'  => $account_number,
-                    'other_role_name'  => $other_role,
-                    'qr_code_image'      => $filename,
-                    'upi_id'  => $upi_id
-                ); 
+                $bank_name = trim($this->input->post('bank_name'));
+                $company_account_yes_no  = $this->input->post('company_account_yes_no');
+                $other_role = trim($this->input->post('other_role'));
+                // $upi_id = trim($this->input->post('upi_id'));
+                $upi_id = $this->input->post('upi_id');
+                
+
+                $count = count($upi_id);
+                for($i=0;$i<$count;$i++)
+                {
+                    $arr_insert = array(               
+                        'full_name'  => $full_name,
+                        'Role_name'  => $role_name,
+
+                        // 'mobile_number'  => $mobile_number,
+                        // 'account_number'  => $account_number,
+                        'other_role_name'  => $other_role,
+                        // 'qr_code_image'      => $filename,
+                        // 'upi_id'  => $upi_id,
+
+                        'mobile_number'   =>   $_POST["mobile_number"][$i],
+                        'upi_id'   =>   $_POST["upi_id"][$i],
+                        'account_number'   =>   $_POST["account_number"][$i],
+                        'bank_name'   =>   $_POST["bank_name"][$i],
+                        'company_account_yes_no'   =>   $_POST["company_account_yes_no"][$i],
+                        'qr_code_image'   =>   $_POST["qr_code_image"][$i],
+                        // 'upi_id'  => $upi_id
+                    ); 
                                 
-                $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
+                    $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
+                }
                                
                 if($inserted_id > 0)
                 {

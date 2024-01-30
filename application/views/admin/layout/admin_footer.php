@@ -11272,3 +11272,75 @@ $(document).on("click", ".remove-row", function() {
 });
 </script>
 <!-- day to day program edit delete -->
+    
+<script>
+        var i=1;
+    $('#add_more_bank').click(function() {
+       // alert('hhhh');
+            i++;
+    var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
+                            <div class="col-md-6 mt-2">
+                                <div class="form-group">
+                                    <label>Mobile Number</label>
+                                    <input type="text" class="form-control" name="mobile_number[]" id="mobile_number" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                                <div class="form-group">
+                                    <label>UPI ID</label>
+                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account Number</label>
+                                    <input type="text" class="form-control" name="account_number[]" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Bank Name</label>
+                                    <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
+                                </div>
+                            </div>
+
+                            <!-- <span class="req_field">*</span> -->
+                            <div class="col-md-6">
+                                <label>Is This A Company Account ?</label>
+                                <div class="form-group">
+                                    <input type="radio" id="Yes" name="company_account_yes_no[]" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="No" name="company_account_yes_no[]" value="No"> &nbsp;
+                                    <label>No</label><br>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Upload QR Image</label><br>
+                                    <input type="file" name="image_name[]" id="image_nam" required="required">
+                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                                <div class="form-group">
+                                <label></label>
+                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                                </div>
+                            </div>  
+                        </div> `);
+$('#main_row_for_add_more_bank').append(structure); 
+
+});
+
+
+$(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
+
+</script>
