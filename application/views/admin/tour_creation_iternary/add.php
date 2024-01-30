@@ -14,6 +14,9 @@
           color: #fff;
           font-weight: bold;
         }
+        .add_more{
+          padding: 7px !important;
+        }
     </style>
     
 <!-- Content Wrapper. Contains page content -->
@@ -27,7 +30,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/index/<?php echo $id; ?>"><button class="btn btn-primary">Back</button></a>
+              <a href="<?php echo $module_url_tour_creation; ?>/index"><button class="btn btn-primary">Back</button></a>
               
             </ol>
           </div>
@@ -42,7 +45,7 @@
           <!-- left column -->
           <div class="col-md-12">
             <!-- jquery validation -->
-            <?php $this->load->view('admin/layout/admin_alert'); ?>
+            <!-- <?php //$this->load->view('admin/layout/admin_alert'); ?> -->
             <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title"><?php echo $page_title; ?></h3>
@@ -74,7 +77,7 @@
                                   </div>
                                   <div class="col-md-6 mb-4">
                                       <label>Select District <span class="text-danger">*</label>
-                                      <select class="select_css district" name="district" attr_district="district" required="required">
+                                      <select class="select_css district" name="district" id="district" attr_district="district" required="required">
                                           <option value="">Select district</option>
                                           <?php
                                           foreach($district_data as $district_info){ 
@@ -91,25 +94,27 @@
                                                       <th>Sr no.</th>
                                                       <th>Places <span class="text-danger">*</th>
                                                       <th>Time <span class="text-danger">*</th>
-                                                      <th>Visit Time <span class="text-danger">*</th>
+                                                      <th>Visit From Time <span class="text-danger">* </th>
+                                                      <th>Visit To Time <span class="text-danger">* </th>
                                                       <th>Details</th>
                                                       <th>Action</th>
                                                   </tr>
                                               </thead>
-                                              <tbody>
+                                              <tbody id="qwer">
                                                   <?php $i=1;?>
                                                   <tr>
-                                                      <td><?php echo $i;?></td>
+                                                      <td><?php echo $i;?>  <input type="hidden" class="form-control" name="prev_id[]" value=""></td>
                                                       <td>
                                                           <select class="select_css select_place place_name" name="place_name[]" id="place_name" required="required">
                                                               <option value="">Select Place</option>
                                                           </select>
                                                       </td>
                                                       <td><input readonly type="input" name="time[]" id="time" value=""></td>
-                                                      <td><input type="time" class="form-control" name="visit_time[]" id="visit_time" placeholder="Enter Visit Time" required></td>
+                                                      <td><input type="time" class="form-control" name="from_visit_time[]" id="from_visit_time" placeholder="Enter Visit Time" required></td>
+                                                      <td><input type="time" class="form-control" name="to_visit_time[]" id="to_visit_time" placeholder="Enter Visit Time" required></td>
                                                       <td><input type="text" class="form-control" name="details[]" id="details" placeholder="Enter Details"></td>
                                                       <td>
-                                                          <button class="btn btn-success add-row" attr_add_id="1" id="add_tr" type="button">Add More</button>
+                                                          <button class="add_more btn btn-success add-row" attr_add_id="1" id="add_tr" type="button">Add More</button>
                                                       </td>
                                                   </tr>
                                                   <?php $i++; ?>
@@ -198,23 +203,13 @@
                     <td><?php echo $info['city_place'];?></td>
                     <td><?php echo $info['day_number'];?></td>
                     <td><?php echo $info['iternary_desc'];?></td>
-                    <!-- <td>
-                        <?php 
-                        //if($info['is_active']=='yes')
-                          //{
-                        ?>
-                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
-                        <?php //} else { ?>
-                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
-                        <?php //} ?>
-                    </td> -->
                     <td>
                           <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
 					                  echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp;
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $pid=base64_encode($info['tour_creation_addmore']); 
 					                  echo rtrim($pid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['tour_creation_addmore']; ?>/<?php echo $info['package_id']; ?>/<?php echo $info['total_days']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
                           
                     </td>
                   </tr>

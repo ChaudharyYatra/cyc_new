@@ -9180,7 +9180,8 @@ $('#edit_measuring_type').validate({ // initialize the plugin
                         </select>
                     </td>
                     <td><input readonly type="input" name="time[]" id="time${i}" value=""></td>
-                    <td><input type="time" class="form-control" name="visit_time[]" id="visit_time${i}" placeholder="Enter Visit Time" required></td>
+                    <td><input type="time" class="form-control" name="from_visit_time[]" id="from_visit_time${i}" placeholder="Enter Visit Time" required></td>
+                    <td><input type="time" class="form-control" name="to_visit_time[]" id="to_visit_time${i}" placeholder="Enter Visit Time" required></td>
                     <td><input type="text" class="form-control" name="details[]" id="details${i}" placeholder="Enter Details"></td>
                     <td>
                         <button class="btn btn-danger remove-row" type="button">Remove</button>
@@ -10499,7 +10500,7 @@ $(document).on("change",".district",function(){
 
 // var i=2;
 $("#edit_tr").click(function() {
-    var i = $('.edit_place_name').length + 2; // Get the total number of existing rows
+    var i = $('.edit_place_name').length + 1; // Get the total number of existing rows
     // var expence = $(this).attr('attr_add_id');
     // var i= parseInt(expence)+parseInt(1);
     // // alert(i);
@@ -10517,7 +10518,8 @@ $("#edit_tr").click(function() {
             </select>
         </td>
         <td><input readonly type="input" name="edit_time[]" id="edit_time${i}" value=""></td>
-        <td><input type="time" class="form-control" name="edit_visit_time[]" id="edit_visit_time${i}" placeholder="Enter Visit Time" required></td>
+        <td><input type="time" class="form-control" name="edit_from_visit_time[]" id="edit_from_visit_time${i}" placeholder="Enter Visit Time" required></td>
+        <td><input type="time" class="form-control" name="edit_to_visit_time[]" id="edit_to_visit_time${i}" placeholder="Enter Visit Time" required></td>
         <td><input type="text" class="form-control" name="edit_details[]" id="edit_details${i}" placeholder="Enter Details"></td>
         <td>
             <button type="button" class="btn btn-danger remove-row">Remove</button>
@@ -10630,3 +10632,643 @@ $(document).on("click", ".remove-row", function() {
 });
 </script>
 <!-- tour craetion edit delete -->
+
+<script>
+  $(".selectall").click(function(){
+          $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+
+  });
+</script>
+
+<!-- agent wise enquiry report ajax-->
+<script>  
+ $(document).ready(function(){
+    $("#expenses_submit").click(function() { 
+        var agent_name = $('#agent_name').val();
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val(); 
+        var isChecked = [];
+        $.each($("input[name='enquiry_status[]']:checked"), function(){
+            isChecked.push($(this).val());
+        });
+        //    console.log(isChecked);
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>admin/agentwise_enquiry_report/tour_expenses_data",  
+                     method:"POST",  
+                     data:{agent_name:agent_name,from_date:from_date,to_date:to_date,isChecked:isChecked},  
+                     dataType: 'json',
+                     success:function(response){ 
+                        var expenses_id = 0;
+                        $('#tid').empty();
+                        $.each(response,function(index,data){  
+                            expenses_id++;
+                            console.log(data);
+                            $('#tid').append(`<tr><td>`+ expenses_id +`</td>
+                            <td>`+ data['first_name'] +` `+ data['last_name'] +`</td>
+                            <td>`+ data['email'] +`</td>
+                            <td>`+ data['mobile_number'] +`</td>
+                            <td>`+ data['gender'] +`</td>
+                            <td>`+ data['tour_title'] +`</td>
+                                    </tr>`);
+                        });
+                    } 
+                });  
+          }); 
+      });  
+ </script>
+
+ <!-- agent wise enquiry report ajax-->
+ <!-- agent wise check status enquiry report ajax-->
+<script>  
+ $(document).ready(function(){
+    $("#enquiry_status_submit").click(function() { 
+        var agent_name = $('#agent_name').val();
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val(); 
+        var enquiry_status = $('input[name="enquiry_status"]:checked').val();
+        // var enquiry_status = $('#enquiry_status').val(); 
+        // alert(enquiry_status);
+        // var isChecked = [];
+        // $.each($("input[name='enquiry_status[]']:checked"), function(){
+        //     isChecked.push($(this).val());
+        // });
+        //    console.log(isChecked);
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>admin/agentwise_check_status_enquiry/check_status_enquiry",  
+                     method:"POST",  
+                     data:{agent_name:agent_name,from_date:from_date,to_date:to_date,enquiry_status:enquiry_status},  
+                     dataType: 'json',
+                     success:function(response){ 
+                        var expenses_id = 0;
+                        $('#tid').empty();
+                        $.each(response,function(index,data){  
+                            expenses_id++;
+                            console.log(data);
+                            $('#tid').append(`<tr><td>`+ expenses_id +`</td>
+                            <td>`+ data['first_name'] +` `+ data['last_name'] +`</td>
+                            <td>`+ data['email'] +`</td>
+                            <td>`+ data['mobile_number'] +`</td>
+                            <td>`+ data['gender'] +`</td>
+                            <td>`+ data['tour_title'] +`</td>
+                                    </tr>`);
+                        });
+                    } 
+                });  
+          }); 
+      });  
+ </script>
+<!-- agent wise check status enquiry report ajax-->
+
+<!-- package wise enquiry report ajax-->
+<script>  
+ $(document).ready(function(){
+    $("#packagewise_enquiry_submit").click(function() { 
+        var package_title = $('#package_title').val();
+        // alert(package_title);
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val(); 
+        var isChecked = [];
+        $.each($("input[name='enquiry_status[]']:checked"), function(){
+            isChecked.push($(this).val());
+        });
+        //    console.log(isChecked);
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>admin/packagewise_booking_enquiry/packagewise_data",  
+                     method:"POST",  
+                     data:{package_title:package_title,from_date:from_date,to_date:to_date,isChecked:isChecked},  
+                     dataType: 'json',
+                     success:function(response){ 
+                        var expenses_id = 0;
+                        $('#tid').empty();
+                        $.each(response,function(index,data){  
+                            expenses_id++;
+                            console.log(data);
+                            $('#tid').append(`<tr><td>`+ expenses_id +`</td>
+                            <td>`+ data['first_name'] +` `+ data['last_name'] +`</td>
+                            <td>`+ data['email'] +`</td>
+                            <td>`+ data['mobile_number'] +`</td>
+                            <td>`+ data['gender'] +`</td>
+                            <td>`+ data['tour_title'] +`</td>
+                                    </tr>`);
+                        });
+                    } 
+                });  
+          }); 
+      });  
+ </script>
+
+ <!-- package wise enquiry report ajax-->
+
+ <!-- Agent wise Payement status report ajax-->
+<script>  
+ $(document).ready(function(){
+    $("#agentwise_payment_submit").click(function() { 
+        var agent_name = $('#agent_name').val();
+        // alert(agent_name);
+        var from_date = $('#from_date').val();
+        var to_date = $('#to_date').val(); 
+        var isChecked = [];
+        $.each($("input[name='enquiry_status[]']:checked"), function(){
+            isChecked.push($(this).val());
+        });
+        //    console.log(isChecked);
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>admin/agentwise_payment_status/agentwise_payment",  
+                     method:"POST",  
+                     data:{agent_name:agent_name,from_date:from_date,to_date:to_date,isChecked:isChecked},  
+                     dataType: 'json',
+                     success:function(response){ 
+                        var expenses_id = 0;
+                        $('#tid').empty();
+                        $.each(response,function(index,data){  
+                            expenses_id++;
+                            console.log(data);
+                            $('#tid').append(`<tr><td>`+ expenses_id +`</td>
+                            <td>`+ data['first_name'] +` `+ data['last_name'] +`</td>
+                            <td>`+ data['email'] +`</td>
+                            <td>`+ data['mobile_number'] +`</td>
+                            <td>`+ data['gender'] +`</td>
+                            <td>`+ data['tour_title'] +`</td>
+                            <td>`+ data['payment_confirmed_status'] +`</td>
+                                    </tr>`);
+                        });
+                    } 
+                });  
+          }); 
+      });  
+ </script>
+
+ <!-- Agent wise Payement status report ajax-->
+
+ <!-- Admin -> tour creation day to day program-->
+ <script>
+    $(document).ready(function(){
+        var count = $('#tour_no_of_days').val();
+        var tbody = $('#daily_attendance_table_add');
+        // Clear any existing content in the tbody
+        tbody.empty();
+        // alert(count);
+            for(var i=1; i<=count; i++){
+                var img_count=parseInt(i)+1;
+            
+                // alert(i);
+        var structure = $(`<?php foreach($arr_data as $info) 
+                    { ?>
+                                <tr>
+                                    <td>`+i+`</td>
+                                    <td>
+                                    <button class="btn btn-primary">
+                                        <a href="<?php echo $module_daily_program_data;?>/add/<?php $aid=base64_encode($info['id']); 
+                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
+                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css">Day `+i+`</button></a>
+                                    </button>
+                                    </td>
+                                    <td>
+                                        <a href="" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> &nbsp;/&nbsp;
+
+                                        <a href="<?php echo $module_daily_program_data;?>/edit/<?php $aid=base64_encode($info['id']); 
+                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
+                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css"><i class="fas fa-edit" aria-hidden="true" style="color:blue" ;="" title="edit"></i></a> &nbsp;/&nbsp;
+                                        
+                                        <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red"; title="delete"></i></a>
+                                        
+                                        <!-- <a href="<?php //echo $module_url_path;?>/delete/<?php //$aid=base64_encode($info['id']); 
+                                                    //echo rtrim($aid, '='); ?> /<?php //$did=base64_encode($info['add_more_id']); 
+                                                    //echo rtrim($did, '='); ?>" class="itinerary_css"><i class="fa fa-trash" aria-hidden="true" style="color:red" ;=""></i></a> -->
+                                        </div>
+                                    </div>
+                                    </td>
+
+
+                                </tr>
+                                <?php  } ?>`);
+                    
+        
+            //alert(i);                       
+            tbody.append(structure); 
+        }
+    });
+
+</script>
+<!-- Admin -> tour creation day to day program-->
+
+<!-- Daily Program Data add more  -->
+
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#travel_add_more").click(function() {
+            var expence = $(this).attr('travel_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('travel_attr_add_id',i);
+            var newRow = `
+            <tr>
+                <td>
+                    <select class="select_css" name="travel_activity_type[]" id="travel_activity_type`+i+`">
+                        <option value="">Select Activity Type</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Visit">Visit</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="travel_start_point[]" id="travel_start_point`+i+`" >
+                        <option value="">Select start point</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="travel_start_time[]" id="travel_start_time`+i+`"></td>
+                <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                <td>
+                    <select class="select_css" name="travel_to_place[]" id="travel_to_place`+i+`">
+                        <option value="">Select To Place</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="travel_end_time[]" id="travel_end_time`+i+`"></td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+            </tr>
+            `;
+            $("#table1 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#edit_travel_add_more").click(function() {
+            var expence = $(this).attr('edit_travel_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('edit_travel_attr_add_id',i);
+            var newRow = `
+            <tr>
+                <td>
+                    <select class="select_css" name="edit_travel_activity_type[]" id="edit_travel_activity_type`+i+`">
+                        <option value="">Select Activity Type</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Visit">Visit</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="edit_travel_start_point[]" id="edit_travel_start_point`+i+`" >
+                        <option value="">Select start point</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="edit_travel_start_time[]" id="edit_travel_start_time`+i+`"></td>
+                <td><input type="text" class="form-control quantity" name="edit_travel_distance[]" id="edit_travel_distance`+i+`"></td>
+                <td>
+                    <select class="select_css" name="edit_travel_to_place[]" id="edit_travel_to_place`+i+`">
+                        <option value="">Select To Place</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="edit_travel_end_time[]" id="edit_travel_end_time`+i+`"></td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+            </tr>
+            `;
+            $("#edit_table1 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#visit_add_more").click(function() {
+            var expence = $(this).attr('visit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('visit_attr_add_id',i);
+            var newRow = `
+            <tr>
+            <td>
+                <select class="select_css" name="visit_activity_type[]" id="visit_activity_type`+i+`">
+                    <option value="">Select Activity Type</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Visit">Visit</option>
+                </select>
+            </td>
+            <td>
+                <select class="select_css" name="visit_start_point[]" id="visit_start_point`+i+`">
+                    <option value="">Select start point</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="visit_start_time[]" id="visit_start_time`+i+`"></td>
+            <td><input type="text" class="form-control quantity" name="visit_distance[]" id="visit_distance`+i+`"></td>
+            <td>
+                <select class="select_css" name="visit_to_place[]" id="visit_to_place`+i+`">
+                    <option value="">Select To Place</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="visit_end_time[]" id="visit_end_time`+i+`"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </td>
+            </tr>
+            `;
+            $("#table2 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#edit_visit_add_more").click(function() {
+            var expence = $(this).attr('edit_visit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('edit_visit_attr_add_id',i);
+            var newRow = `
+            <tr>
+            <td>
+                <select class="select_css" name="edit_visit_activity_type[]" id="edit_visit_activity_type`+i+`">
+                    <option value="">Select Activity Type</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Visit">Visit</option>
+                </select>
+            </td>
+            <td>
+                <select class="select_css" name="edit_visit_start_point[]" id="edit_visit_start_point`+i+`">
+                    <option value="">Select start point</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="edit_visit_start_time[]" id="edit_visit_start_time`+i+`"></td>
+            <td><input type="text" class="form-control quantity" name="edit_visit_distance[]" id="edit_visit_distance`+i+`"></td>
+            <td>
+                <select class="select_css" name="edit_visit_to_place[]" id="edit_visit_to_place`+i+`">
+                    <option value="">Select To Place</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="edit_visit_end_time[]" id="edit_visit_end_time`+i+`"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </td>
+            </tr>
+            `;
+            $("#edit_table2 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#travel_visit_add_more").click(function() {
+            var expence = $(this).attr('travel_visit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('travel_visit_attr_add_id',i);
+            var newRow = `
+            <tr>
+            <td>
+                <select class="select_css" name="travel_visit_activity_type[]" id="travel_visit_activity_type`+i+`">
+                    <option value="">Select Activity Type</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Visit">Visit</option>
+                </select>
+            </td>
+            <td>
+                <select class="select_css" name="travel_visit_start_point[]" id="travel_visit_start_point`+i+`">
+                    <option value="">Select start point</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="travel_visit_start_time[]" id="travel_visit_start_time`+i+`"></td>
+            <td><input type="text" class="form-control quantity" name="travel_visit_distance[]" id="travel_visit_distance`+i+`"></td>
+            <td>
+                <select class="select_css" name="travel_visit_to_place[]" id="travel_visit_to_place`+i+`">
+                    <option value="">Select To Place</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="travel_visit_end_time[]" id="travel_visit_end_time`+i+`"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </td>
+            </tr>
+            `;
+            $("#table3 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#edit_travel_visit_add_more").click(function() {
+            var expence = $(this).attr('edit_travel_visit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('edit_travel_visit_attr_add_id',i);
+            var newRow = `
+            <tr>
+            <td>
+                <select class="select_css" name="edit_travel_visit_activity_type[]" id="edit_travel_visit_activity_type`+i+`">
+                    <option value="">Select Activity Type</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Visit">Visit</option>
+                </select>
+            </td>
+            <td>
+                <select class="select_css" name="edit_travel_visit_start_point[]" id="edit_travel_visit_start_point`+i+`">
+                    <option value="">Select start point</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="edit_travel_visit_start_time[]" id="edit_travel_visit_start_time`+i+`"></td>
+            <td><input type="text" class="form-control quantity" name="edit_travel_visit_distance[]" id="edit_travel_visit_distance`+i+`"></td>
+            <td>
+                <select class="select_css" name="edit_travel_visit_to_place[]" id="edit_travel_visit_to_place`+i+`">
+                    <option value="">Select To Place</option>
+                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                    <?php } ?>
+                </select>
+            </td>
+            <td><input type="time" class="form-control quantity" name="edit_travel_visit_end_time[]" id="edit_travel_visit_end_time`+i+`"></td>
+            <td>
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </td>
+            </tr>
+            `;
+            $("#edit_table3 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+
+<!-- Daily Program Data add more  -->
+
+<!-- day to day program edit delete -->
+<script>
+  $(".breakfast_delete_add_more").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/daily_program_data/breakfast_add_more_delete',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+<script>
+  $(".lunch_delete_add_more").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/daily_program_data/lunch_add_more_delete',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+<script>
+  $(".dinner_delete_add_more").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/daily_program_data/dinner_add_more_delete',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+<!-- day to day program edit delete -->

@@ -39,6 +39,7 @@
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="<?php echo base_url(); ?>admin/vehicle_details_admin/index" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -50,7 +51,43 @@
                         <i class="far fa-circle nav-icon"></i>
                         <p>Assign Tour Vehicle</p>
                     </a>
-                </li>                
+                </li>  
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Report Generation
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/agentwise_enquiry_report/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Agentwise Enquiry Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/agentwise_check_status_enquiry/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Agentwise Check Status Enquiry</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a href="<?php //echo base_url(); ?>admin/packagewise_booking_enquiry/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Packagewise Booking Enquiry</p>
+                            </a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a href="<?php echo base_url(); ?>admin/agentwise_payment_status/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Agentwise Payment Status</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>              
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -424,6 +461,13 @@
                                     <a href="<?php echo base_url(); ?>admin/expences_checker_master/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Expences Checker Master</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>admin/food_menu_master/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Food Menu Master</p>
                                     </a>
                                 </li>
 
@@ -819,6 +863,15 @@
                         <i class="nav-icon fa fa-download" aria-hidden="true"></i>
                         <p>
                             Document download list
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/pending_booking_details/index" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Pending Payment Booking
                         </p>
                     </a>
                 </li>

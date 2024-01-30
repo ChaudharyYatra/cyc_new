@@ -74,6 +74,12 @@
 
                       <input type="hidden" class="form-control" name="domestic_enquiry_id" id="domestic_enquiry_id" value="<?php echo $agent_all_travaller_info['domestic_enquiry_id']; ?>">
                       <input type="hidden" class="form-control" name="is_main_page" id="is_main_page" value="yes">
+                      <input type="hidden" class="form-control" name="btn_disabled" id="btn_disabled" value="<?php echo $p;?>">
+                      <input type="hidden" class="form-control" name="enquiry_seat_count" id="enquiry_seat_count" value="<?php echo $agent_booking_enquiry_data['seat_count'];?>">
+                      <input type="hidden" class="form-control" name="new_pack_id" id="new_pack_id" value="<?php print_r($new_pack_id);?>">
+                      <input type="hidden" class="form-control" name="new_pack_date_id" id="new_pack_date_id" value="<?php echo $new_pack_date_id;?>">
+                      <input type="hidden" class="form-control" name="booking_enq_id" id="booking_enq_id" value="<?php echo $agent_booking_enquiry_data['id']; ?>">
+                      <input type="hidden" id="bdata" value='<?php print_r($bus_info); ?>'>
                       
                       <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
                         { 
@@ -114,6 +120,11 @@
                     <script>
                       var temp_hold_data=<?php echo json_encode($temp_hold_data);?>;
                     </script> 
+
+                    <input type="hidden" id="temp_hold_data" value='<?php print_r($temp_booking_data_id); ?>'>
+                    <script>
+                      var temp_booking_data_id=<?php echo json_encode($temp_booking_data_id);?>;
+                    </script>
                           <h2>Booking Details</h2>
 
                           <h3> Selected Seats (<span id="counter">0</span>):</h3>

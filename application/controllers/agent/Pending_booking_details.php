@@ -35,7 +35,7 @@ class Pending_booking_details extends CI_Controller {
         $fields = "packages.*,final_booking.package_id,final_booking.package_date_id,package_date.id as p_date_id,package_date.journey_date,booking_enquiry.id";
         $this->db->where('packages.is_deleted','no');
         $this->db->where('packages.is_active','yes');
-        $this->db->where('final_booking.payment_confirmed_status','Pending');
+        $this->db->where('final_booking.payment_confirmed_status','Payment Not Paid');
         $this->db->group_by('package_date.id','package.id'); 
         $this->db->join("final_booking", 'final_booking.package_id=packages.id','right');
         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','right');
@@ -68,7 +68,7 @@ class Pending_booking_details extends CI_Controller {
          $this->db->where('final_booking.is_deleted','no');
          $this->db->where('final_booking.package_date_id',$id);
          $this->db->where('final_booking.agent_id',$iid);
-         $this->db->where('final_booking.payment_confirmed_status','Pending');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Not Paid');
          $this->db->where('all_traveller_info.for_credentials','yes');
          $this->db->join("packages", 'final_booking.package_id=packages.id','left');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');

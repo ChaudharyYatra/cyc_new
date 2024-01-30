@@ -13,18 +13,30 @@
         padding: 10px;
     }
 
-    input.largerCheckbox {
-        width: 30px;
-        height: 30px;
+    .hide {
+    display: none;
+    }
+    
+    #least_count{
+        font-weight:400;
+        color:red;
+    }
+    #booking_least_count{
+        font-weight:400;
+        color:red;
     }
 
-    .text_center{
-        text-align: center;
+    #qr_code_image img{
+        width:40%;
+        height:40%;
     }
-    .text_center_web{
-        text-align: -webkit-center;
+    #qr_mode_code_image img{
+        width:100%;
+        height:100%;
     }
-
+    .enq_id{
+        color:white;
+    }
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -37,6 +49,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
+              <!-- <a href="<?php //echo $module_url_path; ?>/sub_index/<?php //echo $package_date;?>"><button class="btn btn-primary">Back</button></a> -->
               <a href="<?php echo $module_url_path; ?>/sub_index/<?php echo $p_date;?>"><button class="btn btn-primary">Back</button></a>
             </ol>
           </div>
@@ -51,9 +64,9 @@
           <!-- left column -->
             <div class="col-md-12">
             <!-- jquery validation -->
-            <?php $this->load->view('admin/layout/admin_alert'); ?>
+            <?php $this->load->view('agent/layout/agent_alert'); ?>
 
-           
+            <form method="post" enctype="multipart/form-data" id="final_booking_preview">
 
             <div class="card card-primary">
               <div class="card-header">
@@ -92,19 +105,20 @@
                         <div class="col-md-1">
                             <div><?php echo $traveller_booking_info_value['seat_count']; ?></div>
                         </div>
-
                         <input type="hidden" class="form-control" name="hotel_name_id" id="hotel_name_id" value="<?php echo $traveller_booking_info_value['hotel_name_id']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $traveller_booking_info_value['tour_date']; ?>">
                         <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']; ?>">
                         <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['pid']; ?>">
                         <input type="hidden" class="form-control" name="journey_date" id="journey_date" value="<?php echo $traveller_booking_info_value['journey_date']; ?>">
-                        
+                        <!-- <input type="hidden" class="form-control" name="booking_on" id="booking_on" value="<?php //echo $booking_payment_details['created_at']; ?>"> -->
                     
+                        <!-- <input type="hidden" class="form-control" name="booking_ref_no" id="booking_ref_no" value=""> -->
                     </div>
                 <?php } ?>
+                
               </div>
 
-                <div class="card-body">
+              <div class="card-body">
                     <?php  if(count($arr_data) > 0 ) 
                     { ?>
                     <table id="example1" class="table table-bordered table-striped">
@@ -129,14 +143,18 @@
                         { 
                         ?>
                         <tr>
+                        <?php if($info['for_credentials']=='yes'){?>
+                        <input type="hidden" class="form-control" name="traveller_id" id="traveller_id" value="<?php echo $info['id']; ?>">
+                        <?php } ?>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $info['mr/mrs'] ?> <?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
+                        <td><?php echo $info['courtesy_titles_name'] ?>. <?php echo $info['first_name'] ?> <?php echo $info['middle_name'] ?> <?php echo $info['last_name'] ?></td>
                         <td>
-                            <?php if($info['dob']=='0000-00-00') { ?>
+                             <?php if($info['dob']=='0000-00-00') { ?>
                                 NA
                             <?php } else{ ?>
                                 <?php echo date("d-m-Y",strtotime($info['dob'])) ?>
                             <?php }?>
+                            
                         </td>
                         <td><?php echo $info['age'] ?></td>
                         <td>
@@ -147,7 +165,7 @@
                             <?php }?>
                         </td>
                         <td><?php echo $info['mobile_number'] ?></td>
-                        <td><?php echo $info['all_traveller_relation'] ?></td>
+                        <td><?php echo $info['relation'] ?></td>
                         <td>
                             <img src="<?php echo base_url(); ?>uploads/traveller/<?php echo $info['image_name']; ?>" width="70px;" height="30px;" alt="Image">
                             <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php echo base_url(); ?>uploads/traveller/<?php echo $info['image_name']; ?>">Download</a>
@@ -271,6 +289,55 @@
                     <?php } ?>
                 </div>
 
+
+                <div class="card-body">
+                    <h5>Extra Services Details :</h5>
+                    <table class="table table-bordered">
+                        <tr >
+                            <th>Do You Want Extra Services ? </th>
+                            <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input disabled type="radio" id="extra_services_yes" name="extra_services" class="extra_services_yes_no" value="yes" onclick="show2();" <?php if(!empty($extra_services['extra_services'])){if("yes" == $extra_services['extra_services']) {echo 'checked';}}?>/>
+                                <label for="Yes" id="extra_services_yes">Yes</label> &nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input disabled type="radio" id="extra_services_no" name="extra_services" class="extra_services_yes_no" value="no" onclick="show1();" <?php if(!empty($extra_services['extra_services'])){if("no" == $extra_services['extra_services']) {echo 'checked';}}?>/>
+                                <label for="No" id="extra_services_no">No</label></th>
+                        </tr>
+                    </table>
+                    <?php 
+                        if($extra_services['extra_services']=='yes'){
+                        ?>
+                    
+                    <table id="example2" class="table table-bordered table-hover table-striped">
+                        <tr style="border-bottom: 2px solid;">
+                            <th>SN</th>
+                            <th>Services Name</th>
+                            <th>Other Services Name</th>
+                        </tr>
+                        <?php
+                    $i=1;
+                    foreach($extra_services_deatils as $extra_services_deatils_info) 
+                    { 
+                        // print_r($extra_services_deatils); die;
+                    ?>
+                        <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php if($extra_services_deatils_info['select_services'] == 'Other'){
+                                echo $extra_services_deatils_info['select_services'];
+                                }else {
+                                echo $extra_services_deatils_info['service_name'];
+                                }  ?>
+                                </td>
+                            <td><?php if($extra_services_deatils_info['select_services'] == 'Other'){
+                                echo $extra_services_deatils_info['other_services'];
+                                }else {
+                                    echo '-';
+                                    } ?></td>
+                        </tr>
+                        <?php $i++; } ?>
+                    </table>
+                    
+                    <?php } ?>
+
+                </div>
+
                 <div class="card-body">
                     <h5>Hotel Details :</h5>
                     <?php
@@ -309,8 +376,6 @@
                     </table>
                     <?php } ?>
                 </div>
-                
-                <!--  -->
 
                 <div class="card-body">
                     <h5> Details :</h5>
@@ -367,7 +432,7 @@
                             </td>
                             
                         </tr>
-                        <?php } ?>
+                        <?php } ?> 
                     
                         <?php if($info['total_twobed_oneroom']!= '') { ?>    
                         <tr>
@@ -413,8 +478,8 @@
                             </td>
 
                         </tr>
-                        <?php } ?>         
-                               
+                        <?php } ?>  
+
                         <?php if($info['total_threebed_oneroom']!= '') { ?>
                         <tr>
                             <th>3</th>
@@ -521,314 +586,95 @@
                     <?php } ?>
                 </div>
 
-
-
-            <div class="card-body">
-                <h5> Extra Services :</h5>
-                <form id="approve_extra_services_admin" style="border: 1px solid #cdcdcd; padding: 15px;">
-                    <?php  if(count($extra_services_details_data) > 0 ) 
-                    { ?>
+                <div class="card-body">
+                  <h5> Transaction History :</h5>
+                    <?php  if(count($booking_payment_details_all) > 0 ) 
+                    { ?>s
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                        <th class="text_center">SN</th>
-                        <th class="text_center">Services Name</th>
-                        <th class="text_center">Approval</th>
-                        <th class="text_center">Cost</th>
+                        <th>SN</th>
+                        <th>Payment Date</th>
+                        <th>Paid Amount</th>
+                        <th>Pending Amount</th>
+                        <th>Transaction Type</th>
+                        <th>UPI No/Acc No</th>
+                        <th>Payment Type</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php  
                         
                         $i=1; 
-                        foreach($extra_services_details_data as $info) 
+                        foreach($booking_payment_details_all as $info) 
+                        // print_r($info);
                         { 
                         ?>
                         <tr>
                         <td><?php echo $i; ?></td>
-                        <td class="text_center">
-                        <?php 
-                            echo $info['select_services'];
-                            ?> 
-
-                        </td>    
-                        <td class="text_center">
-                            <?php 
-                                $quali1=array();
-                                  $p = $info['is_approve'];
-                                  $quali1 = explode(',',$p);
-                                  // print_r($quali1); die;
+                        <td><?php echo date("d-m-Y",strtotime($info['created_at'])) ?></td>
+                        <td><?php echo $info['booking_amt'] ?></td>
+                        <td><?php echo $info['pending_amt'] ?></td>
+                        <td><?php if($info['select_transaction']== 'CASH' || $info['select_transaction']== 'UPI' || $info['select_transaction']== 'QR Code' || $info['select_transaction']== 'Cheque' || $info['select_transaction']== 'Net Banking'){
+                                echo $info['select_transaction']; ?> 
+                        <?php }else{
+                                echo $info['payment_now_later'] ?>
+                        <?php } ?></td>
+                        
+                        <td>
+                            <?php if($info['select_transaction'] == 'UPI'){
+                            echo $info['UPI_transaction_no'];
                             ?>
-                            <input type="checkbox" class="largerCheckbox" id="extra_services" name="is_approve[]" value="yes" <?php if(in_array('yes',$quali1)) {echo 'checked';}?>>
-                            <label for="extra_services"> </label>
-                            
-                        </td>   
-                        <td class="text_center_web">
-                            <input type="hidden" class="form-control table_id" name="id[]" id="tble_id" value="<?php echo $info['id']; ?>">
-                            <input type="text" style="width: 50%;" class="form-control row_set" name="service_cost[]" id="service_cost" value="<?php echo $info['service_cost']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            <?php }else if($info['select_transaction'] == 'QR Code'){
+                            echo $info['QR_transaction_no'];
+                            ?>
+                            <?php } else if($info['select_transaction'] == 'Cheque'){
+                            echo $info['cheque'];    
+                            ?>
+                            <?php } else if($info['select_transaction'] == 'Net Banking'){
+                            echo $info['net_banking_acc_no'];
+                            ?>
+                            <?php }else{
+                            echo '-';
+                            ?>
+                            <?php } ?>
                         </td>
-
+                        <td><?php if($info['payment_type']== 'Advance' || $info['payment_type']== 'Part' || $info['payment_type']== 'Full'){
+                                echo $info['payment_type']; ?>
+                            <?php } else{ 
+                                echo $info['payment_reason']; ?>
+                            <?php } ?></td>
                         </tr>
                         <?php $i++; } ?>
                         </tbody>
-                        
                     </table>
                     <?php } ?>
-
-                    <center><button type="button" class="btn btn-primary" id="approve_service" name="approve_service" style="width:10%;">Submit</button></center>
-                </form>
-            </div>
-
-                <?php
-                   foreach($booking_payment_details_data as $info) 
-                   { 
-                ?>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Payment Details :</h5>
-                            
-                            <table id="example2" class="table table-bordered table-hover table-striped">
-                                <tr>
-                                    <th>Mobile Number</th>
-                                    <td>
-                                    <input readonly type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" value="<?php echo $info['booking_tm_mobile_no']; ?>" minlength="10" maxlength="10" placeholder="Enter mobile number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
-                                    </td>
-                                </tr>
-                                
-                                <tr>
-                                    <th>Final Total</th>
-                                    <?php $final_total = $total_hotel_amount + $seat_total_cost; ?>
-                                    <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $final_total ?>" required></td>
-                                    
-                                </tr>
-
-                                <tr>
-                                    <th>Payment Type</th>
-                                    <td>&nbsp;&nbsp;<input type="radio" disabled name="payment_type" id="payment_type" value="Advance" <?php if(isset($info['payment_type'])){if("Advance"==$info['payment_type']){echo "checked";}} ?>>&nbsp;&nbsp;Advance
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" disabled name="payment_type" id="payment_type" value="Part" <?php if(isset($info['payment_type'])){if("Part"==$info['payment_type']){echo "checked";}} ?>>&nbsp;&nbsp;Part
-                                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" disabled name="payment_type" id="payment_type" value="Full" <?php if(isset($info['payment_type'])){if("Full"==$info['payment_type']){echo "checked";}} ?>>&nbsp;&nbsp;Full</td>
-                                    
-                                </tr>
-
-                                <tr>
-                                    <th>Booking Amount</th>
-                                    <td>
-                                    <input readonly type="text" class="form-control" name="booking_amt" id="booking_amt" value="<?php echo $info['booking_amt']; ?>" placeholder="Enter booking amount" required onkeyup="validate()">
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th>Pending Amount</th>
-                                    <td>
-                                    <input readonly type="text" class="form-control" name="pending_amt" id="pending_amt" value="<?php echo $info['pending_amt']; ?>" placeholder="Enter pending amount" required>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th>Payment Mode</th>
-                                    <td>
-                                    <select disabled class="select_css" name="select_transaction" id="select_transaction" onchange='account_details(this.value); 
-                                        this.blur();'required="required">
-                                        <option value="">Select Transaction</option>
-                                        <option value="CASH" <?php if(isset($info['select_transaction'])){if('CASH' == $info['select_transaction']) {echo 'selected';}}?>>CASH</option>
-                                        <option value="UPI" <?php if(isset($info['select_transaction'])){if('UPI' == $info['select_transaction']) {echo 'selected';}}?>>UPI</option>
-                                        <option value="Cheque" <?php if(isset($info['select_transaction'])){if('Cheque' == $info['select_transaction']) {echo 'selected';}}?>>Cheque</option>
-                                        <option value="Net Banking" <?php if(isset($info['select_transaction'])){if('Net Banking' == $info['select_transaction']) {echo 'selected';}}?>>Net Banking</option>
-                                    </select>
-                                    </td>
-                                </tr>
-                                
-                                <?php if($info['upi_no']!= '') { ?> 
-                                <tr id="upi_no_div">
-                                    
-                                    <th>UPI Payment Transaction Number</th>
-                                    <td>
-                                        <input readonly type="text" class="form-control" name="upi_no" id="upi_no" placeholder="Enter Transaction Number" value="<?php echo $info['upi_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                                
-                                <?php if($info['net_banking']!= '') { ?> 
-                                <tr id="net_banking_tr">
-                                    
-                                    <th>Net Banking Transaction Number</th>
-                                    <td>
-                                        <input readonly type="text" class="form-control" name="net_banking" id="net_banking" value="<?php echo $info['net_banking']; ?>" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </td>
-                                </tr>
-                                <?php } ?>
-
-                            </table>
-
-                            <?php if($info['cheque']!= '') { ?> 
-                            <div class="" id="cheque_tr">
-                                <div class="row cash_payment_div">
-                                    <div class="col-md-6 mt-1">
-                                        <h6 class="text-center">Cheque Number</h6>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input readonly type="text" class="form-control" name="cheque" id="cheque" value="<?php echo $info['cheque']; ?>" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">Bank Name</h6>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <input readonly type="text" class="form-control" name="bank_name" id="bank_name" value="<?php echo $info['bank_name']; ?>" placeholder="Enter Bank Name">
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">Drawn On Date</h6>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <input readonly type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" value="<?php echo $info['drawn_on_date']; ?>" placeholder="Select Date">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php } ?>
-
-                            <?php if($info['total_cash_amt']>'0') { ?> 
-                            <div class="row cash_payment_div" id="cash_tr">
-
-                                    <div class="col-md-6">
-                                        <h6 class="text-center">Particulars</h6>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6 class="text-center">Rupees</h6>
-                                    </div>
-                                
-                                    <div class="col-md-2">
-                                        <label id="amt_cash">2000 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="2000" name="cash_2000" id="cash_2000" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_2000" id="total_cash_2000" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>500 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="500" name="cash_500" id="cash_500" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_500" id="total_cash_500" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>200 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="200" name="cash_200" id="cash_200" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_200" id="total_cash_200" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>100 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="100" name="cash_100" id="cash_100" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_100" id="total_cash_100" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>50 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="50" name="cash_50" id="cash_50" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_50" id="total_cash_50" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>20 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="20" name="cash_20" id="cash_20" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_20" id="total_cash_20" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label>10 x </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" class="form-control data_amt" attr-amt="10" name="cash_10" id="cash_10" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-                                    <div class="col-md-1">
-                                        =
-                                    </div>
-                                    <div class="col-md-5">
-                                        <input readonly type="text" class="form-control" name="total_cash_10" id="total_cash_10" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-
-                                    <div class="col-md-2">
-                                    <label> </label>
-                                    </div>
-                                    <div class="col-md-4 mt-3 text-center">
-                                        <h5>Total</h5>
-                                    </div>
-                                    <div class="col-md-1 mt-3">
-                                        =
-                                    </div>
-                                    <div class="col-md-5 mt-2">
-                                        <input readonly type="text" class="form-control" name="total_cash_amt" id="total_cash_amt" value="<?php echo $info['total_cash_amt']; ?>" placeholder="Total Cash" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                    </div>
-                                
-                            </div>
-                            <?php } ?>
-                        </div>
-
-                        <div class="col-md-3">
-
-                        </div>
-                    </div>
-
-
-                    
                 </div>
-                <?php } ?>
 
-                <!--  -->
-
+                <!-- <div class="card-footer">
+                <button type="submit" class="btn btn-warning" name="submit_back" value="submit_back" id="back-button_booking_preview">Back</button>
+                <button type="button" class="btn btn-success" name="submit_next" id="submit_next">Next</button>
+                <a href="<?php //echo $module_url_booking_process; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+                </div> -->
               <!-- /.card-header -->
               <!-- form start -->
                 
-            </div>
+            
             <!-- /.card -->
 
                                             
+
+                <!-- <div class="card-footer"> -->
+                    <!-- <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button> -->
+                    
+                    <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')"><button type="submit" class="btn btn-warning" name="submit_back_preview" value="submit_back_preview" id="submit_back_preview">Back</button></a> -->
+                    <!-- <a onclick="return confirm('Are You Sure You Want Save This Record?')" href="<?php //echo $module_url_path_back; ?>/add_bus/<?php //echo $enquiry_id; ?>"><button type="button" class="btn btn-warning" name="submit_back_preview" value="submit_back_preview" id="submit_back_preview">Back</button></a> -->
+                    <!-- <a href="<?php //echo $module_url_path_back; ?>/add_bus/<?php //echo $enquiry_id; ?>/1"><button type="button" class="btn btn-warning" name="back_btn">Back</button></a> -->
+                <!-- </div> -->
             </div>
+            </form>
+        </div>
+
             
           <!--/.col (left) -->
           <!-- right column -->
@@ -842,6 +688,67 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
   
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal_send" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <form method="post" action="<?php echo $module_url_path;?>/edit" enctype="multipart/form-data">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SRS form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 mb-2">
+                    <div class="form-group">
+                    <label>Upload SRS Image / PDF</label><br>
+                    <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
+                    { ?>
+                    <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
+                    <?php } ?>
+                    <input type="file" name="image_name" id="image_nam">
+                    <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
+                    <br>
+                    <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <label class="col-form-label">Comment:</label>
+                  <textarea class="form-control" name="srs_remark" id="srs_remark"></textarea>
+                  
+                </div>
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit" name="submit" value="send">Send</button>
+            </div> -->
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit_doc" name="submit_doc" value="send">Send</button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+</div>
+
+<script>
+    function show1(){
+    document.getElementById('extra_services_div1').style.display = 'none';
+    document.getElementById('extra_services_div2').style.display ='none';
+    }
+    function show2(){
+    document.getElementById('extra_services_div1').style.display = 'block';
+    document.getElementById('extra_services_div2').style.display = 'block';
+    }
+</script>

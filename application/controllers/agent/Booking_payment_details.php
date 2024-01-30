@@ -276,8 +276,39 @@ class Booking_payment_details extends CI_Controller {
             
                 $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
-                if($payment_now_later == 'Now'){
-
+                if($payment_now_later == 'Later'){
+                    $arr_insert = array(
+                        // 'booking_reference_no'  =>  $booking_reference_no,
+                        'final_amt'   =>   $final_amt,
+                        'pending_amt'   =>   $pending_amt,
+                        'run_pending_amt'   =>   $pending_amt,
+                        'payment_now_later'   =>   $payment_now_later,
+                        'booking_tm_mobile_no'   =>   $mobile_no,
+                        'booking_reference_no'  =>  $booking_reference_no,
+                        'package_date_id' => $package_date_id,
+                        'enquiry_id' => $enquiry_id,
+                        'package_id' => $package_id,
+                        'traveller_id' => $traveller_id,
+                        'payment_reason' => $later_payment_reason,
+                        'payment_confirmed_status'   =>  'Payment Not Paid'
+                    );
+                    // print_r($arr_insert); die;
+    
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
+                    $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
+                    // print_r($booking_payment_details); die;
+                    
+                    // print_r($arr_insert); die;
+                    if(!empty($booking_payment_details)){
+                        $arr_where     = array("id" => $booking_payment_details_id);
+                        $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                    }else{
+                     $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                     $insertid = $this->db->insert_id();
+                    }
+                    
+                }else{
                     $alphabet = '1234567890';
                     $otp = str_shuffle($alphabet);
                     $traveler_otp = substr($otp, 0, '6'); 
@@ -335,41 +366,10 @@ class Booking_payment_details extends CI_Controller {
                  $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
                  $insertid = $this->db->insert_id();
                 }
-                }else{
-                    $arr_insert = array(
-                        // 'booking_reference_no'  =>  $booking_reference_no,
-                        'final_amt'   =>   $final_amt,
-                        'pending_amt'   =>   $pending_amt,
-                        'run_pending_amt'   =>   $pending_amt,
-                        'payment_now_later'   =>   $payment_now_later,
-                        'booking_tm_mobile_no'   =>   $mobile_no,
-                        'booking_reference_no'  =>  $booking_reference_no,
-                        'package_date_id' => $package_date_id,
-                        'enquiry_id' => $enquiry_id,
-                        'package_id' => $package_id,
-                        'traveller_id' => $traveller_id,
-                        'payment_reason' => $later_payment_reason,
-                        'payment_confirmed_status'   =>  'Pending'
-                    );
-                    // print_r($arr_insert); die;
-    
-                    $this->db->where('is_deleted','no');
-                    $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
-                    $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
-                    // print_r($booking_payment_details); die;
-                    
-                    // print_r($arr_insert); die;
-                    if(!empty($booking_payment_details)){
-                        $arr_where     = array("id" => $booking_payment_details_id);
-                        $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
-                    }else{
-                     $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
-                     $insertid = $this->db->insert_id();
-                    }
                 }
 
                 $arr_insert = array(
-                    'payment_confirmed_status'   =>  'Pending'
+                    'payment_confirmed_status'   =>  'Payment Not Paid'
                 );
                 $record = array();
                 $fields = "final_booking.*";
@@ -914,6 +914,7 @@ class Booking_payment_details extends CI_Controller {
                 $booking_payment_details_id = $this->input->post('booking_payment_details_id');
                 $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
 
+                if($final_amt == $booking_amt){
                 $arr_insert = array(
                     'enquiry_id'   =>   $enquiry_id,
                     'package_date_id'   =>   $package_date_id,
@@ -924,6 +925,18 @@ class Booking_payment_details extends CI_Controller {
                     'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                }else{
+                $arr_insert = array(
+                    'enquiry_id'   =>   $enquiry_id,
+                    'package_date_id'   =>   $package_date_id,
+                    'package_id'   =>   $package_id,
+                    'booking_date'   =>   $today,
+                    'traveller_id'   =>   $traveller_id,
+                    'booking_reference_no'  =>  $booking_reference_no,
+                    'agent_id'   =>   $id,
+                    'payment_confirmed_status'   =>  'In Process'
+                );  
+                }
                 // print_r($arr_insert); die;
               
                 $record = array();
@@ -941,7 +954,7 @@ class Booking_payment_details extends CI_Controller {
                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
                 }
 
-
+                if($final_amt == $booking_amt){
                 $arr_update = array(
                     'final_amt'   =>   $final_amt,
                     'payment_type'   =>   $payment_type,
@@ -1009,6 +1022,74 @@ class Booking_payment_details extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                }else{
+                    $arr_update = array(
+                        'final_amt'   =>   $final_amt,
+                        'payment_type'   =>   $payment_type,
+                        'booking_amt'   =>   $booking_amt,
+                        'pending_amt'   =>   $pending_amt,
+                        'run_pending_amt'   =>   $pending_amt,
+                        'payment_now_later'   =>   $payment_now_later,
+                        'booking_tm_mobile_no'   =>   $mobile_no,
+                        'select_transaction'   =>   $select_transaction,
+                        
+                        'UPI_holder_name'   =>   $upi_holder_name,
+                        'upi_payment_type'   =>   $upi_payment_type,
+                        'UPI_transaction_no'   =>   $upi_self_no,
+                        'UPI_reason'   =>   $upi_reason,
+    
+                        'QR_holder_name'   =>   $qr_holder_name,
+                        'QR_mobile_number'   =>   $qr_mobile_number,
+                        'QR_payment_type'   =>   $qr_payment_type,
+                        'QR_transaction_no'   =>   $qr_upi_no,
+    
+                        'upi_no'   =>   $upi_no,
+                        'cheque'   =>   $cheque,
+                        'bank_name'   =>   $bank_name,
+                        'drawn_on_date'   =>   $drawn_on_date,
+    
+                        'netbanking_payment_type'   =>   $netbanking_payment_type,
+                        'net_banking_acc_no'   =>   $net_banking_acc_no,
+                        'net_banking_acc_holder_nm'   =>   $net_acc_holder_nm,
+                        'net_banking_branch_name'   =>   $net_banking_branch_name,
+                        'net_banking'   =>   $net_banking_utr_no,
+                        'netbanking_bank_name'   =>   $netbanking_bank_name,
+                        'netbanking_date'   =>   $netbanking_date,
+    
+                        'booking_reference_no'  =>  $booking_reference_no,
+                        'package_date_id' => $package_date_id,
+                        'enquiry_id' => $enquiry_id,
+                        'package_id' => $package_id,
+                        'traveller_id' => $traveller_id,
+    
+                        // 'select_services' => $select_services,
+                        // 'extra_services' => $extra_services,
+    
+                        // 'cash_2000'   =>   $cash_2000,
+                        // 'total_cash_2000'   =>   $total_cash_2000,
+                        'cash_500'   =>   $cash_500,
+                        'total_cash_500'   =>   $total_cash_500,
+                        'cash_200'   =>   $cash_200,
+                        'total_cash_200'   =>   $total_cash_200,
+                        'cash_100'   =>   $cash_100,
+                        'total_cash_100'   =>   $total_cash_100,
+                        'cash_50'   =>   $cash_50,
+                        'total_cash_50'   =>   $total_cash_50,
+                        'cash_20'   =>   $cash_20,
+                        'total_cash_20'   =>   $total_cash_20,
+                        'cash_10'   =>   $cash_10,
+                        'total_cash_10'   =>   $total_cash_10,
+    
+                        'cash_5'   =>   $cash_5,
+                        'total_cash_5'   =>   $total_cash_5,
+                        'cash_2'   =>   $cash_2,
+                        'total_cash_2'   =>   $total_cash_2,
+                        'cash_1'   =>   $cash_1,
+                        'total_cash_1'   =>   $total_cash_1,
+                        'total_cash_amt'   =>   $total_cash_amt,
+                        'payment_confirmed_status'   =>  'In Process'
+                    );
+                }
                 // print_r($arr_update); die;
                 $arr_where     = array("enquiry_id" => $enquiry_id);
                 $this->master_model->updateRecord('booking_payment_details',$arr_update,$arr_where);

@@ -16,6 +16,7 @@ class Tour_creation_iternary extends CI_Controller {
         }
         $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation_iternary";
         $this->add_more_module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/add_more_tour_expenses";
+        $this->module_url_tour_creation    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation";
         $this->module_title       = "Tour creation iternary";
         $this->module_url_slug    = "tour_creation_iternary";
         $this->module_view_folder = "tour_creation_iternary/";
@@ -29,26 +30,25 @@ class Tour_creation_iternary extends CI_Controller {
         public function index()
         {
 
-        $fields = "tour_expenses.*,packages.tour_number,packages.tour_title,packages.package_type,
-        package_type.package_type,package_date.journey_date,package_date.id as did";
-        $this->db->where('assign_staff.is_deleted','no');
-        $this->db->where('tour_expenses.tour_manager_id',$id);
-        $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
-        $this->db->join("package_type", 'packages.package_type=package_type.id','left');
-        $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
-        $this->db->join("assign_staff", 'tour_expenses.tour_manager_id=assign_staff.name','left');
-        // $this->db->join("tour_expenses", 'assign_staff.package_id=tour_expenses.package_id','left');
-        $this->db->group_by('tour_expenses.package_id');
-        $this->db->group_by('tour_expenses.package_date_id');
-        $arr_data_assign_staff = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
+            $record = array();
+            $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
+            add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district,
+            add_more_tour_creation_iternary.id as tour_creation_addmore";
+            $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+            $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+            $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+            $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+            $tour_creation_iternary = $this->master_model->getRecords('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
         // print_r($arr_data_assign_staff); die;
 
         $this->arr_view_data['listing_page']    = 'yes';
         // $this->arr_view_data['arr_data']        = $arr_data;
-        $this->arr_view_data['arr_data_assign_staff']        = $arr_data_assign_staff;
+        // $this->arr_view_data['arr_data_assign_staff']        = $arr_data_assign_staff;
+        $this->arr_view_data['tour_creation_iternary']        = $tour_creation_iternary;
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_tour_creation'] = $this->module_url_tour_creation;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
         
@@ -151,9 +151,22 @@ class Tour_creation_iternary extends CI_Controller {
     
             $place_name = $this->input->post('place_name');
             $time = $this->input->post('time');
-            $visit_time = $this->input->post('visit_time');
+            $from_visit_time = $this->input->post('from_visit_time');
+            $to_visit_time = $this->input->post('to_visit_time');
             $details = $this->input->post('details');
+            $prev_id = $this->input->post('prev_id');
 
+            $tour_creation_iternary = array();
+            $fields = "tour_creation_iternary.*";
+            // $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+            $this->db->where('tour_creation_iternary.district',$district);
+            $this->db->where('tour_creation_iternary.package_id',$tour_number);
+            $tour_creation_iternary_data = $this->master_model->getRecord('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+            $tour_creation_iternary_id= $tour_creation_iternary_data['id'];
+            // print_r($tour_creation_iternary_data); die;
+
+            if(empty($tour_creation_iternary_data))
+            {
                 $arr_insert = array(
                     'total_days'  => $total_days,
                     'package_id'  => $tour_number,
@@ -163,28 +176,64 @@ class Tour_creation_iternary extends CI_Controller {
                     'iternary_desc'  => $iternary_desc
                     ); 
                 $inserted_id = $this->master_model->insertRecord('tour_creation_iternary',$arr_insert,true);
-                // $insert_id();
                 $current_tour_creation_id = $this->db->insert_id(); 
+            }else{
+                $arr_update = array(
+                    'total_days'  => $total_days,
+                    'package_id'  => $tour_number,
+                    'day_number'  => $day_number,
+                    'district'  => $district,
+                    'image_name'  => $filename,
+                    'iternary_desc'  => $iternary_desc
+                    ); 
+
+                    $arr_where = array("id" => $tour_creation_iternary_id);
+                    $this->master_model->updateRecord('tour_creation_iternary',$arr_update,$arr_where);
+                    $current_tour_creation_id = $tour_creation_iternary_id; 
+            }
                 // print_r($current_tour_expenses_id); die;
                
                 $count = count($place_name);
-                // print_r($count); die;
+                // echo $count; die;
                 for($i=0;$i<$count;$i++)
                 {
-                    $arr_insert = array(               
-                        'place_name'  => $_POST["place_name"][$i],
-                        'time'  => $_POST["time"][$i],
-                        'visit_time'  => $_POST["visit_time"][$i],
-                        'details'  => $_POST["details"][$i],
-                        'tour_creation_iternary_id'  => $current_tour_creation_id
-                    ); 
-                    $inserted_id = $this->master_model->insertRecord('add_more_tour_creation_iternary',$arr_insert,true);
+                    if($_POST["place_name"][$i]!=''){
+                        if($prev_id[$i]=='')
+                        {
+                            $arr_insert = array(               
+                                'place_name'  => $_POST["place_name"][$i],
+                                'time'  => $_POST["time"][$i],
+                                'from_visit_time'  => $_POST["from_visit_time"][$i],
+                                'to_visit_time'  => $_POST["to_visit_time"][$i],
+                                'details'  => $_POST["details"][$i],
+                                'tour_creation_iternary_id'  => $current_tour_creation_id,
+                                // 'district_id'  => $district,
+                                // 'day_number'  => $day_number
+                            ); 
+                            $inserted_id = $this->master_model->insertRecord('add_more_tour_creation_iternary',$arr_insert,true);
+                        }else{
+                            $arr_update = array(               
+                                'place_name'  => $_POST["place_name"][$i],
+                                'time'  => $_POST["time"][$i],
+                                'from_visit_time'  => $_POST["from_visit_time"][$i],
+                                'to_visit_time'  => $_POST["to_visit_time"][$i],
+                                'details'  => $_POST["details"][$i],
+                                'tour_creation_iternary_id'  => $current_tour_creation_id,
+                                // 'district_id'  => $district,
+                                // 'day_number'  => $day_number
+                            ); 
+                            $arr_where = array("id" => $prev_id[$i]);
+                            $inserted_id=$this->master_model->updateRecord('add_more_tour_creation_iternary',$arr_update,$arr_where);
+                        }
+                    }
+                   
                 }
 
                 if($inserted_id > 0)
                 {
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
-                    redirect($this->module_url_path.'/index');
+                    // redirect($this->module_url_path.'/index');
+                    redirect($this->module_url_path.'/add/'.$id.'/'.$did);
                 }
                 else
                 {
@@ -192,6 +241,7 @@ class Tour_creation_iternary extends CI_Controller {
                 }
             //  redirect($this->module_seat_type_room_type.'/add/'.$iid);
                 redirect($this->module_url_path.'/index');
+                redirect($this->module_url_path.'/add/'.$id.'/'.$did);
             // }   
         }   
 
@@ -203,8 +253,9 @@ class Tour_creation_iternary extends CI_Controller {
 
         $record = array();
         $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
-        add_more_tour_creation_iternary.visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district,
+        add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district,
         add_more_tour_creation_iternary.id as tour_creation_addmore";
+        $this->db->where('add_more_tour_creation_iternary.is_deleted','no');
         $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
         $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
         $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
@@ -217,6 +268,7 @@ class Tour_creation_iternary extends CI_Controller {
          $this->arr_view_data['did']        = $did;
          $this->arr_view_data['district_data']        = $district_data;
          $this->arr_view_data['tour_creation_iternary']        = $tour_creation_iternary;
+         $this->arr_view_data['module_url_tour_creation'] = $this->module_url_tour_creation;
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -333,7 +385,8 @@ class Tour_creation_iternary extends CI_Controller {
 
                 $place_name  = $this->input->post('place_name');
                 $time  = $this->input->post('time');
-                $visit_time  = $this->input->post('visit_time');
+                $from_visit_time  = $this->input->post('from_visit_time');
+                $to_visit_time  = $this->input->post('to_visit_time');
                 $details  = $this->input->post('details');
                 // print_r($details); die;
 
@@ -359,7 +412,8 @@ class Tour_creation_iternary extends CI_Controller {
                         $arr_update = array(
                         'place_name'   =>   $_POST["place_name"][$i],
                         'time'   =>   $_POST["time"][$i],
-                        'visit_time'   =>   $_POST["visit_time"][$i],
+                        'from_visit_time'   =>   $_POST["from_visit_time"][$i],
+                        'to_visit_time'   =>   $_POST["to_visit_time"][$i],
                         'details'   =>   $_POST["details"][$i]
                         ); 
                         // print_r($arr_update); die;
@@ -371,7 +425,8 @@ class Tour_creation_iternary extends CI_Controller {
 
                     $edit_place_name  = $this->input->post('edit_place_name');
                     $edit_time  = $this->input->post('edit_time');
-                    $edit_visit_time  = $this->input->post('edit_visit_time');
+                    $edit_from_visit_time  = $this->input->post('edit_from_visit_time');
+                    $edit_to_visit_time  = $this->input->post('edit_to_visit_time');
                     $edit_details  = $this->input->post('edit_details');
                     $tour_creation_iternary_id  = $this->input->post('tour_creation_iternary_id');
 
@@ -384,7 +439,8 @@ class Tour_creation_iternary extends CI_Controller {
                     $arr_insert = array(
                     'place_name'   =>   $_POST["edit_place_name"][$i],
                     'time'   =>   $_POST["edit_time"][$i],
-                    'visit_time'   =>   $_POST["edit_visit_time"][$i],
+                    'edit_from_visit_time'   =>   $_POST["edit_from_visit_time"][$i],
+                    'edit_to_visit_time'   =>   $_POST["edit_to_visit_time"][$i],
                     'details'   =>   $_POST["edit_details"][$i],
                     'tour_creation_iternary_id' => $tour_creation_iternary_id
                     
@@ -413,8 +469,12 @@ class Tour_creation_iternary extends CI_Controller {
 
                 $record = array();
                 $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
-                add_more_tour_creation_iternary.visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
+                add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
                 add_more_tour_creation_iternary.id as tour_creation_addmore,district_table.id as dis_id,add_more_tour_creation_iternary.id as add_more_tour_creation_id";
+                $this->db->where('add_more_tour_creation_iternary.is_deleted','no');
+                $this->db->where('add_more_tour_creation_iternary.is_active','yes');
+                $this->db->where('tour_creation_iternary.is_deleted','no');
+                $this->db->where('tour_creation_iternary.is_active','yes');
                 $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
                 $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
                 $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
@@ -431,8 +491,12 @@ class Tour_creation_iternary extends CI_Controller {
 
                  $record = array();
                 $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
-                add_more_tour_creation_iternary.visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
+                add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
                 add_more_tour_creation_iternary.id as tour_creation_addmore,district_table.id as dis_id,add_more_tour_creation_iternary.id as add_more_tour_creation_id";
+                $this->db->where('add_more_tour_creation_iternary.is_deleted','no');
+                $this->db->where('add_more_tour_creation_iternary.is_active','yes');
+                $this->db->where('tour_creation_iternary.is_deleted','no');
+                $this->db->where('tour_creation_iternary.is_active','yes');
                 $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
                 $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
                 $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
@@ -496,56 +560,71 @@ class Tour_creation_iternary extends CI_Controller {
         return true; 
     }
 
-    public function details($id,$pd_id,$pid)
+    public function details($id)
     {
         $tour_expenses_id=base64_decode($id);
-        $package_id=base64_decode($pid);
-        $package_date_id=base64_decode($pd_id);
-
-        $supervision_sess_name = $this->session->userdata('supervision_name');
-        $iid = $this->session->userdata('supervision_sess_id');
-
+ 
         $record = array();
-        $fields = "tour_expenses.*,expense_type.expense_type_name,expense_category.expense_category,
-        packages.tour_number,packages.tour_title,package_date.journey_date,hotel_advance_payment.advance_amt,expense_category.expense_category as exp_cat";
-        $this->db->where('tour_expenses.is_deleted','no');
-        $this->db->where('tour_expenses.id',$tour_expenses_id);
-        $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
-        $this->db->join("expense_category", 'tour_expenses.expense_category_id=expense_category.id','left');
-        $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
-        $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
-        $this->db->join("hotel_advance_payment", 'tour_expenses.package_id=hotel_advance_payment.tour_number','left');
-        $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
-        
-
+        $fields = "tour_creation_iternary.*,tour_creation.tour_title,district_table.district as dis,district_table.id as dis_id";
+        $this->db->where('tour_creation_iternary.is_deleted','no');
+        $this->db->where('tour_creation_iternary.id',$tour_expenses_id);
+        // $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+        $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+        // $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+        $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+        $tour_creation_iternary = $this->master_model->getRecords('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+        // print_r($tour_creation_iternary); die;
+ 
         $record = array();
-        $fields = "add_more_tour_expenses.*,expense_category.expense_category,expense_type.expense_type_name";
-        $this->db->where('add_more_tour_expenses.is_deleted','no');
-        $this->db->where('add_more_tour_expenses.tour_expenses_id',$tour_expenses_id);
-        $this->db->join("expense_category", 'add_more_tour_expenses.product_name=expense_category.id','left');
-        $this->db->join("expense_type", 'add_more_tour_expenses.expense_type=expense_type.id','left');
-        $add_more_tour_expenses_all = $this->master_model->getRecords('add_more_tour_expenses',array('add_more_tour_expenses.is_deleted'=>'no'),$fields);
-        // print_r($add_more_tour_expenses_all); die;
-    
-
-        $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
-        $this->arr_view_data['tour_expenses_all']        = $tour_expenses_all;
-        $this->arr_view_data['add_more_tour_expenses_all']        = $add_more_tour_expenses_all;
-        $this->arr_view_data['package_id']        = $package_id;
-        $this->arr_view_data['package_date_id']        = $package_date_id;
+        $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
+        add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
+        add_more_tour_creation_iternary.id as tour_creation_addmore,district_table.id as dis_id,add_more_tour_creation_iternary.id as add_more_tour_creation_id";
+        $this->db->where('tour_creation_iternary.is_deleted','no');
+        $this->db->where('tour_creation_iternary.id',$tour_expenses_id);
+        $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+        $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+        $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+        $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+        $add_more_tour_creation_iternary = $this->master_model->getRecords('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+        // print_r($add_more_tour_creation_iternary); die;
+ 
+        $record = array();
+        $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
+        add_more_tour_creation_iternary.from_visit_time,add_more_tour_creation_iternary.to_visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,district_table.district as dis,
+        add_more_tour_creation_iternary.id as tour_creation_addmore,district_table.id as dis_id,add_more_tour_creation_iternary.id as add_more_tour_creation_id";
+        $this->db->where('tour_creation_iternary.is_deleted','no');
+        $this->db->where('tour_creation_iternary.id',$tour_expenses_id);
+        $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+        $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+        $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+        $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+        $add_tour_creation_iternary = $this->master_model->getRecord('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+        // print_r($add_more_tour_creation_iternary); die;
+ 
+        $add_iternary_pack_id = $add_tour_creation_iternary['package_id'];
+        $add_iternary_total_days = $add_tour_creation_iternary['total_days'];
+        // print_r($add_tour_creation_iternary); die;
+ 
+        $this->arr_view_data['tour_creation_iternary']        = $tour_creation_iternary;
+        $this->arr_view_data['add_more_tour_creation_iternary']        = $add_more_tour_creation_iternary;
+        $this->arr_view_data['add_iternary_pack_id']        = $add_iternary_pack_id;
+        $this->arr_view_data['add_iternary_total_days']        = $add_iternary_total_days;
         $this->arr_view_data['page_title']      = $this->module_title." Details ";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_tour_creation'] = $this->module_url_tour_creation;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."details";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
 
-    public function delete($tour_exp_id)
+    public function delete($tour_exp_id,$package_id,$total_days)
     {
         if($tour_exp_id!='')
         {   
+        // echo $tour_exp_id;
+
             $this->db->where('id',$tour_exp_id);
-            $arr_data = $this->master_model->getRecords('tour_expenses');
+            $arr_data = $this->master_model->getRecords('add_more_tour_creation_iternary');
             // print_r($arr_data); die;
 
             if(empty($arr_data))
@@ -556,21 +635,24 @@ class Tour_creation_iternary extends CI_Controller {
             $arr_update = array('is_deleted' => 'yes');
             $arr_where = array("id" => $tour_exp_id);
                  
-            if($this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where))
+            if($this->master_model->updateRecord('add_more_tour_creation_iternary',$arr_update,$arr_where))
             {
                 $this->session->set_flashdata('success_message',$this->module_title.' Deleted Successfully.');
+                redirect($this->module_url_path.'/add/'.$package_id.'/'.$total_days);
             }
             else
             {
                 $this->session->set_flashdata('error_message','Oops,Something Went Wrong While Deleting Record.');
+                redirect($this->module_url_path.'/add/'.$package_id.'/'.$total_days);
             }
         }
         else
         {
-           
+            echo 'else';
                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
         }
-        redirect($this->module_url_path.'/index');  
+        // die;
+        redirect($this->module_url_path.'/add/'.$package_id.'/'.$total_days);
     }
    
 
@@ -605,47 +687,68 @@ class Tour_creation_iternary extends CI_Controller {
 }
 
 
-// Active/Inactive
-  
-// public function active_inactive($id,$type)
-// {
-// //   $id=base64_decode($id);
-//     if($id!='' && ($type == "yes" || $type == "no") )
-//     {   
-//         $this->db->where('id',$id);
-//         $arr_data = $this->master_model->getRecords('tour_creation_iternary');
-//         if(empty($arr_data))
-//         {
-//            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
-//            redirect($this->module_url_path.'/index');
-//         }   
+        public function tour_coast_details($id,$did)
+        {  
+ 
+            // $record = array();
+            // $fields = "citywise_place_master.*,district_table.district";
+            // $this->db->join("district_table", 'citywise_place_master.select_district=district_table.id','left');
+            // $this->db->group_by('select_district'); 
+            // $district_data = $this->master_model->getRecords('citywise_place_master',array('citywise_place_master.is_deleted'=>'no'),$fields);
 
-//         $arr_update =  array();
+            $record = array();
+            $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
+            add_more_tour_creation_iternary.visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,
+            district_table.district,add_more_tour_creation_iternary.id as tour_creation_addmore, citywise_place_master.approximate_hall_rate,
+            citywise_place_master.separate_room_rate,citywise_place_master.dharmshala_rate,citywise_place_master.state_tax,citywise_place_master.ticket_cost";
+            $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+            $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+            $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+            $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+            // $this->db->where('tour_creation_iternary.package_id',$id);
+            $tour_creation_iternary = $this->master_model->getRecords('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+            // print_r($tour_creation_iternary); die;
 
-//         if($type == 'yes')
-//         {
-//             $arr_update['is_active'] = "no";
-//         }
-//         else
-//         {
-//             $arr_update['is_active'] = "yes";
-//         }
-        
-//         if($this->master_model->updateRecord('tour_creation_iternary',$arr_update,array('id' => $id)))
-//         {
-//             $this->session->set_flashdata('success_message',$this->module_title.' Updated Successfully.');
-//         }
-//         else
-//         {
-//          $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
-//         }
-//     }
-//     else
-//     {
-//        $this->session->set_flashdata('error_message','Invalid Selection Of Record');
-//     }
-//     redirect($this->module_url_path.'/index');   
-// }
+            $this->arr_view_data['action'] = 'add';
+            $this->arr_view_data['id'] = $id;
+            $this->arr_view_data['did'] = $did;
+            // $this->arr_view_data['district_data']        = $district_data;
+            $this->arr_view_data['tour_creation_iternary']        = $tour_creation_iternary;
+            $this->arr_view_data['page_title']      = " Add ".$this->module_title;
+            $this->arr_view_data['module_title']    = $this->module_title;
+            $this->arr_view_data['module_url_path'] = $this->module_url_path;
+            $this->arr_view_data['middle_content']  = $this->module_view_folder."tour_coast_details";
+            $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
+        }
 
+public function fetch_day_data()  
+        {  
+                $tour_number_val=$this->input->post('tour_number_val');
+                $day_number_val=$this->input->post('day_number_val');
+                $district_val=$this->input->post('district_val');
+             
+                $record = array();
+                $fields = "citywise_place_master.*,district_table.district";
+                $this->db->join("district_table", 'citywise_place_master.select_district=district_table.id','left');
+                $this->db->where('citywise_place_master.select_district',$district_val);
+                // $this->db->group_by('select_district'); 
+                $data['district_data'] = $this->master_model->getRecords('citywise_place_master',array('citywise_place_master.is_deleted'=>'no'),$fields);
+        // print_r($district_data); die;
+
+                $tour_creation_iternary = array();
+                $fields = "tour_creation_iternary.*,add_more_tour_creation_iternary.place_name,add_more_tour_creation_iternary.time,
+                add_more_tour_creation_iternary.visit_time,add_more_tour_creation_iternary.details,tour_creation.tour_title,citywise_place_master.place_name as city_place,
+                add_more_tour_creation_iternary.id as tour_creation_addmore_id";
+                $this->db->join("add_more_tour_creation_iternary", 'tour_creation_iternary.id=add_more_tour_creation_iternary.tour_creation_iternary_id','left');
+                $this->db->join("tour_creation", 'tour_creation_iternary.package_id=tour_creation.id','left');
+                $this->db->join("citywise_place_master", 'add_more_tour_creation_iternary.place_name=citywise_place_master.id','left');
+                // $this->db->join("district_table", 'tour_creation_iternary.district=district_table.id','left');
+                $this->db->where('tour_creation_iternary.package_id',$tour_number_val);
+                $this->db->where('add_more_tour_creation_iternary.district_id',$district_val);
+                $this->db->where('add_more_tour_creation_iternary.day_number',$day_number_val);
+                $data['tour_creation_iternary'] = $this->master_model->getRecords('tour_creation_iternary',array('tour_creation_iternary.is_deleted'=>'no'),$fields);
+                // print_r($tour_creation_iternary); die;
+                echo json_encode($data);
+        }
 
 }

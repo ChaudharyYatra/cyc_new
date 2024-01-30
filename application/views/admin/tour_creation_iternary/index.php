@@ -28,7 +28,7 @@
              
               <!-- /.card-header -->
               <div class="card-body">
-                  <?php  if(count($arr_data) > 0 ) 
+                  <?php  if(count($tour_creation_iternary) > 0 ) 
               { ?>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
@@ -46,7 +46,7 @@
                   <?php  
                   
                    $i=1; 
-                   foreach($arr_data as $info) 
+                   foreach($tour_creation_iternary  as $info) 
                    { 
                      ?>
                   <tr>
@@ -66,7 +66,7 @@
                         <?php } ?>
                     </td>
                     <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id']; ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                    <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id']; ?>/<?php echo $info['tour_creation_addmore']; ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
                           
                     </td>

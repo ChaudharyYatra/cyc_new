@@ -342,9 +342,9 @@
                                     
                                     <?php $i=1;
                                     foreach($add_more_tour_expenses_all as $add_more_tour_expenses_all_value){ 
-                                         ?>
+                                        ?>
                                         <tr>
-                                        <input type="hidden" class="form-control quantity" name="add_more_expenses_id[]" id="add_more_expenses_id" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" required>
+                                            <input type="hidden" class="form-control quantity" name="add_more_expenses_id[]" id="add_more_expenses_id" placeholder="Enter quantity" value="<?php echo $add_more_tour_expenses_all_value['id']; ?>" required>
                                             <td>
                                                 <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row<?php echo $i;?>">
                                                     <option value="">Select </option>

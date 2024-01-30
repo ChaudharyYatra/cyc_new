@@ -5171,9 +5171,9 @@ $('#edit_tour_photo').validate({ // initialize the plugin
         var count = $('#tour_no_of_days').val();
     
             for(var i=1; i<=count; i++){
-                var img_count=parseInt(i)+1;
+                // var img_count=parseInt(i)+1;
             
-                // alert(i);
+                // alert(count);
         var structure = $(`<tr>
                     <?php foreach($arr_data as $info) 
                     { ?>
@@ -5190,7 +5190,7 @@ $('#edit_tour_photo').validate({ // initialize the plugin
                                 </tr>
                                 <?php  } ?>`);
                     
-         
+        
             //alert(i);                       
             $('#daily_attendance_table_add').append(structure); 
         }

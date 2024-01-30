@@ -887,6 +887,7 @@ class Pending_amount extends CI_Controller {
                 $inserted_id_prev = $this->input->post('inserted_id');
                 // print_r($inserted_id); die;
 
+                if($pending_amt == '0'){
                 $arr_insert = array(
                     'enquiry_id'   =>   $enquiry_id,
                     'package_date_id'   =>   $package_date_id,
@@ -898,6 +899,19 @@ class Pending_amount extends CI_Controller {
                     'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                }else{
+                $arr_insert = array(
+                    'enquiry_id'   =>   $enquiry_id,
+                    'package_date_id'   =>   $package_date_id,
+                    'package_id'   =>   $package_id,
+                    'booking_date'   =>   $today,
+                    'traveller_id'   =>   $traveller_id,
+                    'booking_reference_no'  =>  $booking_reference_no,
+                    'booking_payment_details_id'  =>  $inserted_id_prev,
+                    'agent_id'   =>   $id,
+                    'payment_confirmed_status'   =>  'In Process'
+                );  
+                }
                 // print_r($arr_insert); die;
               
                 $record = array();
@@ -915,8 +929,40 @@ class Pending_amount extends CI_Controller {
                 // $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
                 // }
                 $inserted_id = $this->master_model->insertRecord('final_booking',$arr_insert,true);
+                
+                //==================================================
 
+                if($pending_amt == '0'){
+                    $arr_update2 = array(
+                        'payment_confirmed_status'   =>  'Payment Completed'
+                    );
+                }else{
+                    $arr_update2 = array(
+                        'payment_confirmed_status'   =>  'In Process'
+                    );
+                }
+                $arr_where2     = array("enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_payment_details',$arr_update2,$arr_where2);
 
+                //==================================================
+                
+                //==================================================
+
+                if($pending_amt == '0'){
+                    $arr_update2 = array(
+                        'payment_confirmed_status'   =>  'Payment Completed'
+                    );
+                }else{
+                    $arr_update2 = array(
+                        'payment_confirmed_status'   =>  'In Process'
+                    );
+                }
+                $arr_where2     = array("enquiry_id" => $enquiry_id);
+                $this->master_model->updateRecord('final_booking',$arr_update2,$arr_where2);
+
+                //==================================================
+
+                if($pending_amt == '0'){
                 $arr_update = array(
                     'final_amt'   =>   $final_amt,
                     'payment_type'   =>   $payment_type,
@@ -982,6 +1028,73 @@ class Pending_amount extends CI_Controller {
                     'total_cash_amt'   =>   $total_cash_amt,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
+                }else{
+                $arr_update = array(
+                    'final_amt'   =>   $final_amt,
+                    'payment_type'   =>   $payment_type,
+                    'booking_amt'   =>   $booking_amt,
+                    'pending_amt'   =>   $pending_amt,
+                    'payment_now_later'   =>   $payment_now_later,
+                    'booking_tm_mobile_no'   =>   $mobile_no,
+                    'select_transaction'   =>   $select_transaction,
+                    
+                    'UPI_holder_name'   =>   $upi_holder_name,
+                    'upi_payment_type'   =>   $upi_payment_type,
+                    'UPI_transaction_no'   =>   $upi_self_no,
+                    'UPI_reason'   =>   $upi_reason,
+
+                    'QR_holder_name'   =>   $qr_holder_name,
+                    'QR_mobile_number'   =>   $qr_mobile_number,
+                    'QR_payment_type'   =>   $qr_payment_type,
+                    'QR_transaction_no'   =>   $qr_upi_no,
+
+                    'upi_no'   =>   $upi_no,
+                    'cheque'   =>   $cheque,
+                    'bank_name'   =>   $bank_name,
+                    'drawn_on_date'   =>   $drawn_on_date,
+
+                    'netbanking_payment_type'   =>   $netbanking_payment_type,
+                    'net_banking_acc_no'   =>   $net_banking_acc_no,
+                    'net_banking_acc_holder_nm'   =>   $net_acc_holder_nm,
+                    'net_banking_branch_name'   =>   $net_banking_branch_name,
+                    'net_banking'   =>   $net_banking_utr_no,
+                    'netbanking_bank_name'   =>   $netbanking_bank_name,
+                    'netbanking_date'   =>   $netbanking_date,
+
+                    'booking_reference_no'  =>  $booking_reference_no,
+                    'package_date_id' => $package_date_id,
+                    'enquiry_id' => $enquiry_id,
+                    'package_id' => $package_id,
+                    'traveller_id' => $traveller_id,
+
+                    // 'select_services' => $select_services,
+                    // 'extra_services' => $extra_services,
+
+                    // 'cash_2000'   =>   $cash_2000,
+                    // 'total_cash_2000'   =>   $total_cash_2000,
+                    'cash_500'   =>   $cash_500,
+                    'total_cash_500'   =>   $total_cash_500,
+                    'cash_200'   =>   $cash_200,
+                    'total_cash_200'   =>   $total_cash_200,
+                    'cash_100'   =>   $cash_100,
+                    'total_cash_100'   =>   $total_cash_100,
+                    'cash_50'   =>   $cash_50,
+                    'total_cash_50'   =>   $total_cash_50,
+                    'cash_20'   =>   $cash_20,
+                    'total_cash_20'   =>   $total_cash_20,
+                    'cash_10'   =>   $cash_10,
+                    'total_cash_10'   =>   $total_cash_10,
+
+                    'cash_5'   =>   $cash_5,
+                    'total_cash_5'   =>   $total_cash_5,
+                    'cash_2'   =>   $cash_2,
+                    'total_cash_2'   =>   $total_cash_2,
+                    'cash_1'   =>   $cash_1,
+                    'total_cash_1'   =>   $total_cash_1,
+                    'total_cash_amt'   =>   $total_cash_amt,
+                    'payment_confirmed_status'   =>  'In Process'
+                );    
+                }
                 // print_r($arr_update); die;
                 // echo $inserted_id; 
                 $arr_where     = array("enquiry_id" => $enquiry_id,

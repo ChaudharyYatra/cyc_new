@@ -58,9 +58,9 @@
                     <td><?php echo $info['booking_date'] ?></td>
                     <td><?php echo $info['booking_reference_no'] ?></td>
                     <td><?php if($info['run_pending_amt'] !== '0'){
-                      echo 'Pending Payment';
+                      echo 'In Process';
                       } else{
-                      echo $info['payment_confirmed_status'] ?>
+                      echo 'Payment Completed' ?>
                       <?php } ?>  
                     </td>
                     
