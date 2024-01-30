@@ -7132,7 +7132,16 @@ function transaction_upi_validate() {
 
 function payment_type_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date"));
+        $("#submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#submit_otp").attr("disabled", false);
+        }
+}
+
+function transaction_date_upi_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7168,7 +7177,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_mobile_no_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7177,7 +7186,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_payment_type_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date"));
+        $("#submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#submit_otp").attr("disabled", false);
+        }
+}
+
+function qr_transaction_date_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7193,9 +7211,9 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
         }
 }
 
-function cheque_no_validate() {
+function cheque_name_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7204,7 +7222,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_banknm_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
+        $("#submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#submit_otp").attr("disabled", false);
+        }
+}
+
+function cheque_no_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7213,7 +7240,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_date_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7231,7 +7258,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_accno_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7249,16 +7276,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_branch_nm_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no"));
-        $("#submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#submit_otp").attr("disabled", false);
-        }
-}
-
-function netbank_utr_no_validate() {
-var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7267,7 +7285,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_bank_nm_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no"));
+        $("#submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#submit_otp").attr("disabled", false);
+        }
+}
+
+function netbank_utr_no_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -7276,7 +7303,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_date_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#submit_otp").attr("disabled", true);
         if (valid) {
             $("#submit_otp").attr("disabled", false);
@@ -9344,16 +9371,26 @@ function transaction_upi_validate_final_payment() {
 
 function payment_type_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
+function transaction_date_upi_validate_final_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+        $("#pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+
 function utr_no_validate_final_payment() {
     var valid = true;
-    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
+    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
           $("#pending_amt_submit_otp").attr("disabled", true);
           if (valid) {
               $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9380,7 +9417,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_mobile_no_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9389,7 +9426,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_payment_type_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date"));
+        $("#pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function qr_transaction_date_validate_final_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9398,16 +9444,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_utr_no_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
-function cheque_no_validate_final_payment() {
+function cheque_name_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9416,7 +9462,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_banknm_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
+        $("#pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function cheque_no_validate_final_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9425,7 +9480,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_date_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9443,7 +9498,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_accno_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9452,7 +9507,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_accno_holder_nm_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9461,16 +9516,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_branch_nm_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no"));
-        $("#pending_amt_submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#pending_amt_submit_otp").attr("disabled", false);
-        }
-}
-
-function netbank_utr_no_validate_final_payment() {
-var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9479,7 +9525,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_bank_nm_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
+        $("#pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function netbank_utr_no_validate_final_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -9488,7 +9543,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_date_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pending_amt_submit_otp").attr("disabled", false);
@@ -10061,7 +10116,16 @@ function transaction_upi_validate_pending_payment() {
 
 function payment_type_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date"));
+        $("#pay_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pay_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function upi_transaction_date_validate_pending_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10070,7 +10134,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) 
 
 function utr_no_validate_pending_payment() {
     var valid = true;
-    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
+    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
           $("#pay_pending_amt_submit_otp").attr("disabled", true);
           if (valid) {
               $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10079,7 +10143,7 @@ function utr_no_validate_pending_payment() {
 
 function reason_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10088,7 +10152,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) 
 
 function qr_hoder_name_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_payment_type"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10106,7 +10170,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_payment_type_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date"));
+        $("#pay_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pay_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function transaction_date_validate_pending_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10115,16 +10188,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function qr_utr_no_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
-function cheque_no_validate_pending_payment() {
+function cheque_name_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10133,7 +10206,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_banknm_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
+        $("#pay_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pay_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function cheque_no_validate_pending_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10142,7 +10224,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && chec
 
 function cheque_date_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10160,34 +10242,25 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_accno_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
-function netbank_accno_holder_nm_validate_pending_payment() {
-var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name"));
-        $("#pay_pending_amt_submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#pay_pending_amt_submit_otp").attr("disabled", false);
-        }
-}
+// function netbank_accno_holder_nm_validate_pending_payment() {
+// var valid = true;
+// valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name"));
+//         $("#pay_pending_amt_submit_otp").attr("disabled", true);
+//         if (valid) {
+//             $("#pay_pending_amt_submit_otp").attr("disabled", false);
+//         }
+// }
 
 function netbank_branch_nm_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no"));
-        $("#pay_pending_amt_submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#pay_pending_amt_submit_otp").attr("disabled", false);
-        }
-}
-
-function netbank_utr_no_validate_pending_payment() {
-var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10196,7 +10269,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_bank_nm_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no"));
+        $("#pay_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#pay_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function netbank_utr_no_validate_pending_payment() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
@@ -10205,7 +10287,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 function netbank_date_validate_pending_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#netbanking_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#netbanking_bank_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
         $("#pay_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#pay_pending_amt_submit_otp").attr("disabled", false);
