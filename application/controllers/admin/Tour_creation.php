@@ -13,6 +13,7 @@ class Tour_creation extends CI_Controller{
         $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation";
         $this->module_url_path_dates    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation_dates";
 		$this->module_url_path_iternary    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation_iternary";
+        $this->module_day_to_day_program    =  base_url().$this->config->item('admin_panel_slug')."/day_to_day_program";
 		$this->module_url_path_hotel    =  base_url().$this->config->item('admin_panel_slug')."/tour_creation_hotel";
         $this->module_title       = "Tour Creation";
         $this->module_url_slug    = "tour_creation";
@@ -45,6 +46,7 @@ class Tour_creation extends CI_Controller{
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_day_to_day_program'] = $this->module_day_to_day_program;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
        
@@ -409,6 +411,7 @@ class Tour_creation extends CI_Controller{
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_day_to_day_program'] = $this->module_day_to_day_program;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }

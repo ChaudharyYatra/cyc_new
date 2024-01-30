@@ -2,7 +2,6 @@
   .blink{
     color:red;
   }
-
   .add_product{
     border:1px solid gray;
   }
@@ -155,6 +154,7 @@
                 </table>
               </div>
               
+              <?php if(!empty($tour_expenses_all_info['tour_expenses_type'])=='0'){?>
               <div class="card-body">
                 <div class="accordion accordion-flush" id="accordion">
                   <div class="accordion-item">
@@ -205,16 +205,15 @@
                   </div>
                 </div>
               </div>
+              <?php } ?>
               <?php $expences_id = $tour_expenses_all_info['t_expences_id']; ?>
 
               <input type="hidden" readonly class="form-control" name="expense_id" id="expense_id" value="<?php echo $tour_expenses_all_info['t_expences_id']; ?>" required>
-
               <input type="hidden" readonly class="form-control" name="tour_manager_id" id="tour_manager_id" value="<?php echo $aid ?>" required>
               <input type="hidden" readonly class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $td_aid ?>" required>
                
               <!-- Add Approve and Hold buttons -->
                 <div class="text-center mt-4">
-
                   <?php 
                     if($tour_expenses_all_info['approval']=='no' && $tour_expenses_all_info['hold']=='yes')
                       {
@@ -274,7 +273,6 @@
 
                             <button type="button" attr_hold="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary hold" name="submit" value="submit">Submit Hold</button>
                         </form>
-                        
                       </div>
                     </div>
                     <div class="col-md-4 col-sm-4">

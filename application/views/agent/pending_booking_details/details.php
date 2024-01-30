@@ -615,8 +615,6 @@
                                             <h6 class="text-center">Payment Type</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                        <!-- &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male">&nbsp;&nbsp;Male
-                                        &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female">&nbsp;&nbsp;Female -->
 
                                         <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate()" value="NEFT"  <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("NEFT" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;NEFT
                                         &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate()" value="RTGS" <?php if(!empty($booking_payment_details['netbanking_payment_type'])){if("RTGS" == $booking_payment_details['netbanking_payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;RTGS
@@ -674,8 +672,6 @@
                                             <h6 class="text-center">Payment Type</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                        <!-- &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male">&nbsp;&nbsp;Male
-                                        &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female">&nbsp;&nbsp;Female -->
 
                                         <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate()" value="NEFT">&nbsp;&nbsp;NEFT
                                         &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate()" value="RTGS">&nbsp;&nbsp;RTGS
@@ -723,7 +719,6 @@
                                         <div class="col-md-6 mt-2">
                                             <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate()" placeholder="">
                                         </div>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                             <?php } ?>
@@ -737,7 +732,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
-                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option class="self_upi" attr_self="self" value="Self">Self</option>
                                             <?php
@@ -749,7 +743,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- <div id="upi_no_reason_div" style='display:none;'> -->
                                         <div class="col-md-5 mt-2">
                                             <h6 class="text-center float-right">Payment Type</h6>
                                         </div>
@@ -785,7 +778,6 @@
                                         <div class="col-md-6 mt-2">
                                             <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate()" placeholder="Enter Reason" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['UPI_reason'];}?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
-                                    <!-- </div> -->
                                 </div>
                             </div>
                             <?php } else{ ?>
@@ -796,7 +788,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
-                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option class="self_upi" attr_self="self" value="Self">Self</option>
                                             <?php
@@ -808,7 +799,6 @@
                                         </select>
                                     </div>
 
-                                    <!-- <div id="upi_no_reason_div" style='display:none;'> -->
                                         <div class="col-md-5 mt-2">
                                             <h6 class="text-center float-right">Payment Type</h6>
                                         </div>
@@ -858,7 +848,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
-                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option value="Self">Self</option>
                                             <?php
@@ -922,7 +911,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
-                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
                                             <option value="Self">Self</option>
                                             <?php
@@ -1048,19 +1036,6 @@
                                             <h6 class="text-center">Rupees</h6>
                                         </div>
                                     
-                                        <!-- <div class="col-md-2">
-                                            <label id="amt_cash">2000 x </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control data_amt" attr-amt="2000" name="cash_2000" id="cash_2000" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                        </div>
-                                        <div class="col-md-1">
-                                            =
-                                        </div>
-                                        <div class="col-md-5">
-                                            <input readonly type="text" class="form-control" name="total_cash_2000" id="total_cash_2000" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                        </div> -->
-
                                         <div class="col-md-2">
                                         <label>500 x </label>
                                         </div>
@@ -1352,19 +1327,6 @@
                                             <h6 class="text-center">Rupees</h6>
                                         </div>
                                     
-                                        <!-- <div class="col-md-2">
-                                            <label id="amt_cash">2000 x </label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <input type="text" class="form-control data_amt" attr-amt="2000" name="cash_2000" id="cash_2000" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                        </div>
-                                        <div class="col-md-1">
-                                            =
-                                        </div>
-                                        <div class="col-md-5">
-                                            <input readonly type="text" class="form-control" name="total_cash_2000" id="total_cash_2000" placeholder="Enter Rupees" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
-                                        </div> -->
-
                                         <div class="col-md-2">
                                         <label>500 x </label>
                                         </div>

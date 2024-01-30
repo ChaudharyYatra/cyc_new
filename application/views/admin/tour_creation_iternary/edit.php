@@ -108,14 +108,15 @@
                                                       <th>Sr no.</th>
                                                       <th>Places <span class="text-danger">*</th>
                                                       <th>Time <span class="text-danger">*</th>
-                                                      <th>Visit Time <span class="text-danger">*</th>
+                                                      <th>Visit From Time <span class="text-danger">* </th>
+                                                      <th>Visit To Time <span class="text-danger">* </th>
                                                       <th>Details</th>
                                                       <th>Action</th>
                                                   </tr>
                                               </thead>
+                                              <?php $i=1;?>
                                               <?php foreach($tour_creation_iternary as $tour_creation_iternary_info){ ?>
                                               <tbody>
-                                                  <?php $i=1;?>
                                                   <tr>
                                                       <td><?php echo $i;?></td>
                                                       <td>
@@ -127,10 +128,11 @@
                                                           </select>
                                                       </td>
                                                       <td><input readonly type="input" name="time[]" id="time<?php echo $i;?>" value="<?php echo $tour_creation_iternary_info['time']; ?>"></td>
-                                                      <td><input type="time" class="form-control" name="visit_time[]" id="visit_time<?php echo $i;?>" placeholder="Enter Visit Time" required value="<?php echo $tour_creation_iternary_info['visit_time']; ?>"></td>
+                                                      <td><input type="time" class="form-control" name="from_visit_time[]" id="from_visit_time<?php echo $i;?>" placeholder="Enter from visit time" required value="<?php echo $tour_creation_iternary_info['from_visit_time']; ?>"></td>
+                                                      <td><input type="time" class="form-control" name="to_visit_time[]" id="to_visit_time<?php echo $i;?>" placeholder="Enter to visit time" required value="<?php echo $tour_creation_iternary_info['to_visit_time']; ?>"></td>
                                                       <td><input type="text" class="form-control" name="details[]" id="details<?php echo $i;?>" placeholder="Enter Details" value="<?php echo $tour_creation_iternary_info['details']; ?>"></td>
                                                       <td>
-                                                      <a onclick="return confirm('Are You Sure You Want To Delete This Record? ')" href="<?php echo $module_url_path;?>/add_more_delete/<?php echo $tour_creation_iternary_info['add_more_tour_creation_id']; ?>" title="delete"><button value="<?php echo $tour_creation_iternary_info['add_more_tour_creation_id']; ?>" class="btn btn-primary delete_instruction">Delete</button></a>
+                                                      <a href="<?php echo $module_url_path;?>/add_more_delete/<?php echo $tour_creation_iternary_info['add_more_tour_creation_id']; ?>" title="delete"><button value="<?php echo $tour_creation_iternary_info['add_more_tour_creation_id']; ?>" class="btn btn-primary delete_instruction">Delete</button></a>
                                                       </td>
                                                   </tr>
                                                   <?php $i++; ?>

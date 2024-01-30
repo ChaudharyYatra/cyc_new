@@ -5964,83 +5964,73 @@ $(document).ready(function(){
 
 
 <script>
-
 function fetch_new_hold(){
 
-        var enq_id =  $("#domestic_enquiry_id").val();
+var enq_id =  $("#domestic_enquiry_id").val();
+var package_id =  $("#package_id").val();
+var tour_dates =  $("#tour_dates").val();
+var hold_seat = $('.hold');
+var attributeValues = [];
 
-        var package_id =  $("#package_id").val();
+hold_seat.each(function() {
+var attributeValue = $(this).attr('id');
+attributeValues.push(attributeValue);
+});
 
-        var tour_dates =  $("#tour_dates").val();
+var temp_array_hold = [];
 
-        var temp_array_hold = [];
+$.ajax({
+url: '<?php echo base_url(); ?>agent/seat_type_room_type/fetch_new_hold',
+method:"post",  
+data:{
+enq_id: enq_id,
+package_id: package_id,
+tour_dates:tour_dates
+},  
+dataType: 'json',
+success: function(response){  
+if(response.length>0){
+var temp_array_hold =response;
+}else{
+var temp_array_hold=[];
+}
 
-   $.ajax({
+var uniqueTo_attributeValues=[];
+var uniqueTo_temp_array_hold=[];
+// Find elements unique to array1
+var uniqueTo_attributeValues = attributeValues.filter(function(item) {
+return temp_array_hold.indexOf(item) === -1;
+});
 
-  url: '<?php echo base_url(); ?>agent/seat_type_room_type/fetch_new_hold',
+  for(var i=0; i<temp_array_hold.length;i++)
+{
+var seat_data_id=temp_array_hold[i];
+var abc="#"+seat_data_id;
+$(abc).css("color", "white");
+$(abc).removeClass("available");
+$(abc).addClass("hold");
+}
 
-  method:"post",  
+for(var i=0; i<uniqueTo_attributeValues.length;i++)
+{
+var seat_data_id=uniqueTo_attributeValues[i];
+var abc="#"+seat_data_id;
+$(abc).css("color", "white");
+$(abc).removeClass("hold");
+$(abc).addClass("available");
+// sc.status(abc, 'available');
+// $(abc).status('available');
+}
 
-  data:{
-
-        enq_id: enq_id,
-
-        package_id: package_id,
-
-        tour_dates:tour_dates
-
-    },  
-
-  dataType: 'json',
-
-  success: function(response){  
-
-     if(response.length>0){
-
-        var temp_array_hold =response;
-
-    }else{
-
-        var temp_array_hold=[];
-
-    }
-
-
-
-          for(var i=0; i<temp_array_hold.length;i++)
-
-  {
-
-      var seat_data_id=temp_array_hold[i];
-
-
-
-      var abc="#"+seat_data_id;
-
-      $(abc).css("color", "white");
-
-      $(abc).removeClass("available");
-
-      $(abc).addClass("hold");
-
-
-
-  }
-
-  }
-
- });
-
+}
+});
 }
 
 
 
 $(document).ready(function(){
-
- setInterval(fetch_new_hold,5000);
-
+setInterval(fetch_new_hold,5000);
 });
-
 </script>
 
 <!-- for bus seat selected -->

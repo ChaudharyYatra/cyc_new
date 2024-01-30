@@ -63,7 +63,7 @@ class Tour_expenses extends CI_Controller {
                             // $this->db->where('package_id',$date_data);   
                             // $data = $this->master_model->getRecords('package_date');
 
-                            $this->db->where('is_deleted','no');
+                        $this->db->where('is_deleted','no');
                         $this->db->where('is_active','yes');
                         // $this->db->where('bus_open_status','yes');
                         $this->db->where('journey_date >=',$today);

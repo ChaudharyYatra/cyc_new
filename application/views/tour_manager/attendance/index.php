@@ -89,15 +89,14 @@
                     ?>
                     <td> Done Tour </td>
                      <?php } ?>
-                    
 
-                     <td>
-                        <button class="btn btn-primary">
-                            <a href="<?php echo $module_url_take_attendance;?>/take_attendance/<?php $aid=base64_encode($info['package_id']); 
-                                    echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['did']); 
-                                    echo rtrim($did, '='); ?>" class="itinerary_css">Attendance</button></a>
-                        </button>
-                     </td>
+                    <td>
+                      <button class="btn btn-primary">
+                          <a href="<?php echo $module_url_take_attendance;?>/take_attendance/<?php $aid=base64_encode($info['package_id']); 
+                                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['did']); 
+                                  echo rtrim($did, '='); ?>" class="itinerary_css">Attendance</button></a>
+                      </button>
+                    </td>
                      
                   </tr>
                   

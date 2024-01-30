@@ -313,7 +313,6 @@ class Tour_expenses extends CI_Controller {
                 }
                 }
                          //sleep(2);
-
                 // if()
                 //          $arr_insert = array(
                 //             'expense_type' =>   $expense_type,
@@ -560,7 +559,7 @@ class Tour_expenses extends CI_Controller {
                 'update_remark' =>   $update_remark,
                 'image_name' =>   $filename,
                 'image_name_2' =>   $new_img_filename,
-                'pax_type' =>   $pax_types
+                'pax_type' =>   $pax_type
                 // 'package_date_id' =>   $tour_number
 
                  );
@@ -740,8 +739,7 @@ class Tour_expenses extends CI_Controller {
         }
         else
         {
-           
-               $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
         }
         redirect($this->module_url_path.'/index');  
 
