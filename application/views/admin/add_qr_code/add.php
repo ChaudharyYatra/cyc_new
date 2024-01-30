@@ -121,6 +121,7 @@
                               <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                             </div>
                         </div>
+                        
                       </div> 
                     </div> 
                     
