@@ -44,7 +44,7 @@ class Add_qr_code extends CI_Controller{
         {        
             $this->form_validation->set_rules('full_name', 'full_name', 'required');      
             $this->form_validation->set_rules('role_name', 'role_name', 'required');      
-            $this->form_validation->set_rules('upi_id', 'upi_id', 'required');      
+            // $this->form_validation->set_rules('upi_id', 'upi_id', 'required');      
             
             if($this->form_validation->run() == TRUE)
             {
@@ -126,6 +126,7 @@ class Add_qr_code extends CI_Controller{
                     ); 
                                 
                     $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
+                   
                 }
                                
                 if($inserted_id > 0)
