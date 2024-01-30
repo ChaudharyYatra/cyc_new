@@ -193,7 +193,16 @@
                                 <tr id="relation_row" style="display:none;">
                                     <th>Relation</th>
                                     <td>
-                                    <input type="text" class="form-control" name="relation" id="relation"  placeholder="Enter relation" required onkeyup="validate()">
+                                    <select class="select_css" name="relation" id="relation" onkeyup="validate()">
+                                        <option value="">Select</option>
+                                        <?php
+                                        foreach($relation_data as $relation_data_info){ 
+                                        ?>
+                                        <option value="<?php echo $relation_data_info['id'];?>" <?php if(isset($all_traveller_info_value['all_traveller_relation'])){if($relation_data_info['id'] == $all_traveller_info_value['all_traveller_relation']) {echo 'selected';}}?>><?php echo $relation_data_info['relation'];?></option>
+                                        
+                                        <?php } ?>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" name="relation" id="relation"  placeholder="Enter relation" required onkeyup="validate()"> -->
                                     </td>
                                 </tr>
                                 
@@ -292,7 +301,7 @@
                                                 <h6 class="text-center">Account Number</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="transaction_upi_validate()">
+                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="netbank_accno_validate_final_payment()">
                                                 <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                     <option value="">Select Account Number</option>
                                                     
@@ -398,7 +407,7 @@
                                                 <h6 class="text-center float-right">Transaction Date</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                                <input type="date" class="form-control" onchange="transaction_date_upi_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                             </div>
 
                                             <div class="col-md-5 mt-2">
@@ -464,7 +473,7 @@
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                            <input type="date" class="form-control" onchange="qr_transaction_date_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -492,7 +501,7 @@
                                             <h6 class="text-center">Name On Cheque</h6>
                                         </div>
                                         <div class="col-md-6 mt-1">
-                                            <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="transaction_upi_validate()">
+                                            <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select Name On Cheque</option>
                                                 <?php

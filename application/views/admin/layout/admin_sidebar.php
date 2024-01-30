@@ -588,6 +588,12 @@
                                         <p>Measuring Unit Master</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>admin/upi_apps_name/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>UPI App Name</p>
+                                    </a>
+                                </li>
 
                             </ul>
                         </li>

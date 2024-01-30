@@ -1945,6 +1945,59 @@ $('#edit_aboutus').validate({ // initialize the plugin
 </script>
 <!-- jquery validation on edit about us  -->
 
+<!-- jquery validation on add payment_app_name -->
+<script>
+$(document).ready(function () {
+
+$('#add_payment_app_name').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+  
+    rules: {
+        payment_app_name: {
+            required: true,
+        }
+    },
+
+    messages :{
+        payment_app_name : {
+            required : "Please enter App Name",
+        }
+    }
+});
+});
+
+</script>
+<!-- jquery validation on add payment_app_name  -->
+
+<!-- jquery validation on edit payment_app_name -->
+<script>
+$(document).ready(function () {
+
+$('#edit_payment_app_name').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        payment_app_name: {
+            required: true,
+        }
+
+    },
+
+    messages :{
+        payment_app_name : {
+            required : "Please enter App Name",
+        }
+    }
+});
+
+});
+
+</script>
+<!-- jquery validation on edit payment_app_name  -->
+
 <!-- jquery validation on add privacy Policy -->
 <script>
 $(document).ready(function () {

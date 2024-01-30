@@ -151,7 +151,12 @@ class Add_qr_code extends CI_Controller{
         $this->db->where('role_name !=', 'agent');
         $role_type_data = $this->master_model->getRecords('role_type');
 
+        $this->db->order_by('id', 'desc');
+        $this->db->where('is_deleted', 'no');
+        $upi_apps_name = $this->master_model->getRecords('upi_apps_name');
+
         $this->arr_view_data['action']          = 'add';
+        $this->arr_view_data['upi_apps_name'] = $upi_apps_name;
         $this->arr_view_data['role_type_data'] = $role_type_data;
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;

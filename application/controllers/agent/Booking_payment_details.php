@@ -141,7 +141,11 @@ class Booking_payment_details extends CI_Controller {
         // $this->db->where('booking_payment_details.QR_holder_name',$iid);
         $this->db->join("qr_code_master", 'booking_payment_details.QR_holder_name=qr_code_master.id','left');
         $qr_image_details = $this->master_model->getRecord('booking_payment_details');
-        // print_r($qr_image_details); die;    
+        // print_r($qr_image_details); die;
+        
+        $this->db->where('is_deleted','no');
+        $relation_data = $this->master_model->getRecords('relation');
+        // print_r($relation_data); die;
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
@@ -153,6 +157,7 @@ class Booking_payment_details extends CI_Controller {
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
         $this->arr_view_data['extra_services_details']        = $extra_services_details;
         $this->arr_view_data['extra']        = $extra;
+        $this->arr_view_data['relation_data']        = $relation_data;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
         $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
