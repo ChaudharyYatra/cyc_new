@@ -41,92 +41,66 @@ class Add_qr_code extends CI_Controller{
     public function add()
     {   
         if($this->input->post('submit'))
-        {        
-            $this->form_validation->set_rules('full_name', 'full_name', 'required');      
-            $this->form_validation->set_rules('role_name', 'role_name', 'required');      
-            // $this->form_validation->set_rules('upi_id', 'upi_id', 'required');      
-            
-            if($this->form_validation->run() == TRUE)
-            {
-                $file_name     = $_FILES['image_name']['name'];
-                $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg');
+        {     
+                $full_name = $this->input->post('full_name');
+                $role_name = $this->input->post('role_name');
+                $other_role = $this->input->post('other_role');
 
-                if($file_name!="")
-                {               
-                    $ext = explode('.',$_FILES['image_name']['name']); 
-                    $config['file_name']   = $this->input->post('txtEmp_id').'.'.$ext[1];
-
-                    if(!in_array($ext[1],$arr_extension))
-                    {
-                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                        redirect($this->module_url_path.'/add');  
-                    }
-                }
-                $file_name_to_dispaly =  $this->config->item('project_name').''.round(microtime(true)).str_replace(' ','_',$file_name);
-
-                $config['upload_path']   = './uploads/QR_code_image/';
-                $config['allowed_types'] = 'png|jpg|jpeg|PNG|JPEG|JPG';
-                $config['max_size']      = '10000';
-                $config['file_name']     =  $file_name_to_dispaly;
-                $config['overwrite']     =  TRUE;
-
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config); // Important
-
-                if(!$this->upload->do_upload('image_name'))
-                {  
-                    $data['error'] = $this->upload->display_errors();
-                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    redirect($this->module_url_path);  
-                }
-
-                if($file_name!="")
-                {
-                    $file_name = $this->upload->data();
-                    $filename = $file_name_to_dispaly;
-                    // if($old_img_name!='') unlink('./uploads/award/'.$old_img_name);
-                }
-
-                else
-                {
-                    $filename = $this->input->post('image_name',TRUE);
-                }
-              
-                $full_name = trim($this->input->post('full_name'));
-                $role_name = trim($this->input->post('role_name'));
-                $mobile_number = trim($this->input->post('mobile_number'));
-                $account_number = trim($this->input->post('account_number'));
-                $bank_name = trim($this->input->post('bank_name'));
-                $company_account_yes_no  = $this->input->post('company_account_yes_no');
-                $other_role = trim($this->input->post('other_role'));
-                // $upi_id = trim($this->input->post('upi_id'));
+                $mobile_number = $this->input->post('mobile_number');
+                // print_r($mobile_number); die;
                 $upi_id = $this->input->post('upi_id');
+                $account_number = $this->input->post('account_number');
+                $bank_name = $this->input->post('bank_name');
+                // $company_account_yes_no  = $this->input->post('company_account_yes_no');
+                $upi_app_name = $this->input->post('upi_app_name');
                 
+                $arr_insert = array(
+                    'full_name'   =>   $_POST["full_name"],
+                    'Role_name'   =>   $_POST["role_name"],
+                    'other_role_name'   =>   $_POST["other_role"]
+                );
+                $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
+                $insertid = $this->db->insert_id();
 
                 $count = count($upi_id);
                 for($i=0;$i<$count;$i++)
                 {
-                    $arr_insert = array(               
-                        'full_name'  => $full_name,
-                        'Role_name'  => $role_name,
 
-                        // 'mobile_number'  => $mobile_number,
-                        // 'account_number'  => $account_number,
-                        'other_role_name'  => $other_role,
-                        // 'qr_code_image'      => $filename,
-                        // 'upi_id'  => $upi_id,
+                    $company_name = '';
+                    if (isset($_POST['company_account_yes_no'][$i])) {
+                        $company_name = $_POST['company_account_yes_no'][$i];
+                    }
 
+                    $_FILES['file']['name']     = $_FILES['image_name']['name'][$i]; 
+                    $_FILES['file']['type']     = $_FILES['image_name']['type'][$i]; 
+                    $_FILES['file']['tmp_name'] = $_FILES['image_name']['tmp_name'][$i]; 
+                    $_FILES['file']['error']     = $_FILES['image_name']['error'][$i]; 
+                    $_FILES['file']['size']     = $_FILES['image_name']['size'][$i]; 
+                     
+                    $uploadPath = './uploads/QR_code_image/'; 
+                    $config['upload_path'] = $uploadPath; 
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+
+                    $this->load->library('upload', $config); 
+                    $this->upload->initialize($config); 
+
+                    if($this->upload->do_upload('file')){ 
+                        // Uploaded file data 
+                        $fileData = $this->upload->data(); 
+                    }
+
+                    $arr_insert = array(
                         'mobile_number'   =>   $_POST["mobile_number"][$i],
                         'upi_id'   =>   $_POST["upi_id"][$i],
                         'account_number'   =>   $_POST["account_number"][$i],
                         'bank_name'   =>   $_POST["bank_name"][$i],
-                        'company_account_yes_no'   =>   $_POST["company_account_yes_no"][$i],
-                        'qr_code_image'   =>   $_POST["qr_code_image"][$i],
-                        // 'upi_id'  => $upi_id
+                        'company_account_yes_no'   =>   $company_name,
+                        'upi_app_name'   =>   $_POST["upi_app_name"][$i],
+                        'qr_code_image'   =>   $fileData['file_name'],
+                        'qr_code_master_id'  => $insertid
                     ); 
                                 
-                    $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
-                   
+                    $inserted_id = $this->master_model->insertRecord('qr_code_add_more',$arr_insert,true);
                 }
                                
                 if($inserted_id > 0)
@@ -134,13 +108,11 @@ class Add_qr_code extends CI_Controller{
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                     redirect($this->module_url_path.'/index');
                 }
-
                 else
                 {
                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
                 }
                 redirect($this->module_url_path.'/index');
-            }   
         }  
         // $this->db->order_by('id','desc');
         // $this->db->where('is_deleted','no');

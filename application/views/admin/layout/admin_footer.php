@@ -11335,28 +11335,28 @@ $(document).on("click", ".remove-row", function() {
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" name="mobile_number[]" id="mobile_number" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    <input type="text" class="form-control" name="mobile_number[]" id="mobile_number`+i+`" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
                             </div>
 
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <label>UPI ID</label>
-                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Account Number</label>
-                                    <input type="text" class="form-control" name="account_number[]" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Bank Name</label>
-                                    <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
+                                    <input type="text" class="form-control" name="bank_name[]" id="bank_name`+i+`" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
                                 </div>
                             </div>
 
@@ -11364,17 +11364,29 @@ $(document).on("click", ".remove-row", function() {
                             <div class="col-md-6">
                                 <label>Is This A Company Account ?</label>
                                 <div class="form-group">
-                                    <input type="radio" id="Yes" name="company_account_yes_no[]" value="Yes" > &nbsp;
+                                    <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
                                     <label>Yes</label>  &nbsp; &nbsp; 
-                                    <input type="radio" id="No" name="company_account_yes_no[]" value="No"> &nbsp;
+                                    <input type="radio" id="No`+i+`" name="company_account_yes_no[`+i+`]" value="No"> &nbsp;
                                     <label>No</label><br>
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label>UPI App Name</label>
+                                    <select class="form-control" name="upi_app_name[]" id="upi_app_name`+i+`">
+                                    <option value="">Select App Name</option>
+                                    <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                        <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                                    <?php } ?>
+                                    </select>
+                                </div>
+                            </div> 
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Upload QR Image</label><br>
-                                    <input type="file" name="image_name[]" id="image_nam" required="required">
+                                    <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
                                     <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                                 </div>
                             </div>

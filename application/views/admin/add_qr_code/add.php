@@ -115,6 +115,18 @@
                         </div>
 
                         <div class="col-md-6">
+                          <div class="form-group">
+                          <label>UPI App Name</label>
+                              <select class="form-control" name="upi_app_name[]" id="upi_app_name">
+                              <option value="">Select App Name</option>
+                              <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                  <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                              <?php } ?>
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
                             <div class="form-group">
                               <label>Upload QR Image</label><br>
                               <input type="file" name="image_name[]" id="image_nam" required="required">
@@ -128,7 +140,7 @@
               </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="button" class="btn btn-primary" name="submit" value="add_more_bank" id="add_more_bank">Add More Bank Details</button>
+                  <button type="button" class="btn btn-success" name="submit" value="add_more_bank" id="add_more_bank">Add More Bank Details</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>
 					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
