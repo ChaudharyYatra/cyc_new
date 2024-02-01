@@ -954,6 +954,52 @@ public function get_upi_qr_code(){
             // $this->db->group_by('full_name', 'asc'); 
             $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
             // $data = $this->master_model->getRecords('qr_code_master');
+            // print_r($data); die;
+            echo json_encode($data); 
+        }
+    }
+
+    public function get_upi_id_no_code(){
+
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $id=$this->session->userdata('agent_sess_id');
+
+        $did_upi = $this->input->post('did');
+        $upi_no_id = $this->input->post('upi_no_id');
+        $upi_holder_name_id = $this->input->post('upi_holder_name_id');
+
+
+            $record = array();
+            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
+            $this->db->where('qr_code_master.is_deleted','no');
+            $this->db->where('qr_code_master.is_active','yes');
+            $this->db->where('qr_code_add_more.is_active','yes');
+            $this->db->where('qr_code_add_more.is_active','yes');
+            $this->db->where('qr_code_add_more.id',$upi_no_id); 
+            $this->db->join("qr_code_add_more", 'qr_code_master.id = qr_code_add_more.qr_code_master_id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name = upi_apps_name.id','left');
+            // $this->db->group_by('full_name', 'asc'); 
+            $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+
+        // if($taluka_data == 'self'){
+            // $this->db->where('is_deleted','no');
+            // $this->db->where('is_active','yes');
+            // $this->db->where('id',$upi_no_id);   
+            // $data = $this->master_model->getRecords('qr_code_add_more');
+            // print_r($data); die;
+        // }else{
+        //     $record = array();
+        //     $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
+        //     $this->db->where('qr_code_master.is_deleted','no');
+        //     $this->db->where('qr_code_master.is_active','yes');
+        //     $this->db->where('qr_code_add_more.is_active','yes');
+        //     $this->db->where('qr_code_add_more.is_active','yes');
+        //     $this->db->where('qr_code_master.id',$did_upi); 
+        //     $this->db->join("qr_code_add_more", 'qr_code_master.id = qr_code_add_more.qr_code_master_id','left');
+        //     $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name = upi_apps_name.id','left');
+        //     // $this->db->group_by('full_name', 'asc'); 
+        //     $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+            // $data = $this->master_model->getRecords('qr_code_master');
 
             // print_r($data); die;
 
@@ -962,7 +1008,7 @@ public function get_upi_qr_code(){
             // $this->db->where('id',$did_upi);   
             // $data = $this->master_model->getRecords('qr_code_master');
             // print_r($data); die;
-        }
+        // }
             echo json_encode($data); 
         }
 

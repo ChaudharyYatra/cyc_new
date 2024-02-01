@@ -6918,12 +6918,47 @@ function empty() {
             // Add new options based on the response
             $.each(response, function(index, data){   
               $('#upi_payment_type').append('<option value="' + data['id'] + '">' + data['payment_app_name'] + '</option>');
-              $('#upi_no_id').val(data['add_more_id']);
+            //   $('#upi_no_id').append('<option value="' + data['id'] + '">' + data['add_more_id'] + '</option>');
+            // //   $('#upi_no_id').val(data['add_more_id']);
+            //   $('#upi_holder_name_id').val(data['id']);
             });
           }
         });
     });
   });
+</script>
+
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#upi_payment_type').change(function(){
+        var did = $('#upi_payment_type').val();
+        var upi_no_id = $('#upi_no_id').val();
+        var upi_holder_name_id = $('#upi_holder_name_id').val();
+        // alert(did);
+    
+      // AJAX request
+      $.ajax({
+        url:'<?=base_url()?>agent/booking_preview/get_upi_id_no_code',
+        method: 'post',
+        data: {did: did,upi_no_id: upi_no_id,upi_holder_name_id: upi_holder_name_id},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+          $('#self_upi_no').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){   
+            $('#self_upi_no').val(data['upi_id']);
+            $('#upi_no_id').val(data['add_more_id']);
+          });
+        }
+     });
+   });
+ });
 </script>
 
 <!-- new for account name and show account holder name -->
