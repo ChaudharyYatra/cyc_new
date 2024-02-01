@@ -86,18 +86,18 @@ class Booking_payment_details extends CI_Controller {
         $bus_seat_book_data = $this->master_model->getRecords('bus_seat_book',array('bus_seat_book.is_deleted'=>'no'),$fields);
         // print_r($bus_seat_book_data); die; 
 
-        $record = array();
-        $fields = "qr_code_master.*, qr_code_add_more.*,qr_code_add_more.id as add_more.id";
-        $this->db->where('qr_code_master.is_deleted','no');
-        $this->db->where('qr_code_master.is_active','yes');
-        $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
-        $this->db->group_by('full_name', 'asc'); 
-        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
-
-
-        // $this->db->where('is_deleted','no');
-        // $this->db->where('is_active','yes');
+        // $record = array();
+        // $fields = "qr_code_master.*, qr_code_add_more.*,qr_code_add_more.id as add_more.id";
+        // $this->db->where('qr_code_master.is_deleted','no');
+        // $this->db->where('qr_code_master.is_active','yes');
+        // $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
+        // $this->db->group_by('full_name', 'asc'); 
         // $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
 
 

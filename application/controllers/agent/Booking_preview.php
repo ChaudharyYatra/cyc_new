@@ -943,13 +943,19 @@ public function get_upi_qr_code(){
             // print_r($data); die;
         }else{
             $record = array();
-            $fields = "qr_code_master.*, qr_code_add_more.*,qr_code_add_more.id as add_more_id";
+            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
             $this->db->where('qr_code_master.is_deleted','no');
             $this->db->where('qr_code_master.is_active','yes');
+            $this->db->where('qr_code_add_more.is_active','yes');
+            $this->db->where('qr_code_add_more.is_active','yes');
             $this->db->where('qr_code_master.id',$did_upi); 
-            $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
-            $this->db->group_by('full_name', 'asc'); 
-            $data = $this->master_model->getRecords('qr_code_master');
+            $this->db->join("qr_code_add_more", 'qr_code_master.id = qr_code_add_more.qr_code_master_id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name = upi_apps_name.id','left');
+            // $this->db->group_by('full_name', 'asc'); 
+            $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+            // $data = $this->master_model->getRecords('qr_code_master');
+
+            // print_r($data); die;
 
             // $this->db->where('is_deleted','no');
             // $this->db->where('is_active','yes');
@@ -958,7 +964,6 @@ public function get_upi_qr_code(){
             // print_r($data); die;
         }
             echo json_encode($data); 
-
         }
 
         public function get_account_holder_name(){

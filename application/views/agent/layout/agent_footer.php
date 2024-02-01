@@ -6897,7 +6897,7 @@ function empty() {
     // district change
     $('#select_upi_no').change(function(){
         var did = $('#select_upi_no').val();
-        alert(did);
+        // alert(did);
         selectedOption = $("#select_upi_no option:selected");
         var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
@@ -6913,10 +6913,12 @@ function empty() {
 
             // Clear existing options
             $('#upi_payment_type').find('option').not(':first').remove();
+            // $('#upi_no_id').find('option').not(':first').remove();
 
             // Add new options based on the response
             $.each(response, function(index, data){   
-              $('#upi_payment_type').append('<option value="' + data['id'] + '">' + data['upi_app_name'] + '</option>');
+              $('#upi_payment_type').append('<option value="' + data['id'] + '">' + data['payment_app_name'] + '</option>');
+              $('#upi_no_id').val(data['add_more_id']);
             });
           }
         });

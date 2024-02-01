@@ -20,10 +20,15 @@ class Add_qr_code extends CI_Controller{
 
 	public function index()
 	{
-        $fields = "qr_code_master.*,role_type.role_name";
-        $this->db->order_by('id','desc');
+        $fields = "qr_code_master.*,role_type.role_name,qr_code_add_more.mobile_number,qr_code_add_more.upi_id,
+        qr_code_add_more.account_number,qr_code_add_more.bank_name,qr_code_add_more.company_account_yes_no,qr_code_add_more.qr_code_image,qr_code_add_more.upi_app_name,
+        upi_apps_name.payment_app_name,qr_code_add_more.id as qr_add_more_id,qr_code_add_more.is_active as qr_code_is_active";
+        $this->db->order_by('id','ASC');
         $this->db->where('qr_code_master.is_deleted','no');
+        $this->db->where('qr_code_add_more.is_deleted','no');
         $this->db->join("role_type", 'qr_code_master.role_name=role_type.id','left');
+        $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
         $arr_data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
         $this->arr_view_data['listing_page']    = 'yes';
@@ -138,19 +143,16 @@ class Add_qr_code extends CI_Controller{
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
 
-    
-   
-    
-   
   // Active/Inactive
   
   public function active_inactive($id,$type)
     {
-	  $id=base64_decode($id);
-        if($id!='' && ($type == "yes" || $type == "no") )
+	  $did=base64_decode($id);
+    //   print_r($id); die;
+        if($did!='' && ($type == "yes" || $type == "no") )
         {   
-            $this->db->where('id',$id);
-            $arr_data = $this->master_model->getRecords('qr_code_master');
+            $this->db->where('id',$did);
+            $arr_data = $this->master_model->getRecords('qr_code_add_more');
             if(empty($arr_data))
             {
                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -168,7 +170,7 @@ class Add_qr_code extends CI_Controller{
                 $arr_update['is_active'] = "yes";
             }
             
-            if($this->master_model->updateRecord('qr_code_master',$arr_update,array('id' => $id)))
+            if($this->master_model->updateRecord('qr_code_add_more',$arr_update,array('id' => $did)))
             {
                 $this->session->set_flashdata('success_message',$this->module_title.' Updated Successfully.');
             }
@@ -293,15 +295,32 @@ class Add_qr_code extends CI_Controller{
             }
         }
         
+        // $this->db->order_by('id','desc');
+        // $this->db->where('is_deleted','no');
+        // $this->db->where('id',$id);
+        // $qr_code_master_data = $this->master_model->getRecords('qr_code_master');
+
+        $fields = "qr_code_master.*,role_type.role_name,qr_code_add_more.mobile_number,qr_code_add_more.upi_id,
+        qr_code_add_more.account_number,qr_code_add_more.bank_name,qr_code_add_more.company_account_yes_no,qr_code_add_more.qr_code_image,qr_code_add_more.upi_app_name,
+        upi_apps_name.payment_app_name,qr_code_add_more.id as qr_add_more_id,qr_code_add_more.is_active as qr_code_is_active";
         $this->db->order_by('id','desc');
-        $this->db->where('is_deleted','no');
-        $this->db->where('id',$id);
-        $qr_code_master_data = $this->master_model->getRecords('qr_code_master');
+        $this->db->where('qr_code_master.is_deleted','no');
+        $this->db->where('qr_code_add_more.id',$id);
+        $this->db->join("role_type", 'qr_code_master.role_name=role_type.id','left');
+        $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+        $qr_code_master_data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
 
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $role_type_data = $this->master_model->getRecords('role_type');
+
+        $this->db->order_by('id', 'desc');
+        $this->db->where('is_deleted', 'no');
+        $upi_apps_name = $this->master_model->getRecords('upi_apps_name');
         
+        $this->arr_view_data['upi_apps_name']   = $upi_apps_name;
         $this->arr_view_data['qr_code_master_data']   = $qr_code_master_data;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['role_type_data']        = $role_type_data;
@@ -319,7 +338,7 @@ class Add_qr_code extends CI_Controller{
         if($id!='')
         {   
             $this->db->where('id',$id);
-            $arr_data = $this->master_model->getRecords('qr_code_master');
+            $arr_data = $this->master_model->getRecords('qr_code_add_more');
 
             if(empty($arr_data))
             {
@@ -329,7 +348,7 @@ class Add_qr_code extends CI_Controller{
             $arr_update = array('is_deleted' => 'yes');
             $arr_where = array("id" => $id);
                  
-            if($this->master_model->updateRecord('qr_code_master',$arr_update,$arr_where))
+            if($this->master_model->updateRecord('qr_code_add_more',$arr_update,$arr_where))
             {
                 $this->session->set_flashdata('success_message',$this->module_title.' Deleted Successfully.');
             }

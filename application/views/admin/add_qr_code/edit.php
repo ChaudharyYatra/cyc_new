@@ -89,9 +89,19 @@
                     </div>
 
                     <div class="col-md-6">
+                      <label>Is This A Company Account ?</label>
+                      <div class="form-group">
+                          <input type="radio" id="Yes" name="company_account_yes_no[]" value="Yes" <?php if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='Yes') {echo'checked';}}?>> &nbsp;
+                          <label>Yes</label>  &nbsp; &nbsp; 
+                          <input type="radio" id="No" name="company_account_yes_no[]" value="No" <?php if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='No') {echo'checked';}}?>> &nbsp;
+                          <label>No</label><br>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label>UPI ID</label>
-                            <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" value="<?php echo $info['upi_id']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            <label>Bank Name</label>
+                            <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" value="<?php echo $info['bank_name'];?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                         </div>
                     </div>
 
@@ -99,6 +109,25 @@
                         <div class="form-group">
                             <label>Account Number</label>
                             <input type="text" class="form-control" name="account_number" id="account_number" value="<?php echo $info['account_number'];?>" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                      <label>UPI App Name</label>
+                          <select class="form-control" name="upi_app_name[]" id="upi_app_name">
+                          <option value="">Select App Name</option>
+                          <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                              <option value="<?php echo $upi_apps_name_value['id'];?>" <?php if(isset($info['upi_app_name'])){if($upi_apps_name_value['id'] == $info['upi_app_name']) {echo 'selected';}}?>><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                          <?php } ?>
+                          </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>UPI ID</label>
+                            <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" value="<?php echo $info['upi_id']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
 

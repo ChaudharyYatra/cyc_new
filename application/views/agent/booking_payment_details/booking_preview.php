@@ -507,6 +507,7 @@
                                                 <option value="">Select Transaction</option>
                                                 <!-- Dynamic options will be added here using JavaScript -->
                                             </select>
+                                            <input type="text" readonly class="form-control" name="upi_no_id" id="upi_no_id">
                                         </div>
 
                                         <div class="col-md-5 mt-2">
