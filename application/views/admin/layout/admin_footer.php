@@ -11339,17 +11339,14 @@ $(document).on("click", ".remove-row", function() {
                                 </div>
                             </div>
 
+                            <!-- <span class="req_field">*</span> -->
                             <div class="col-md-6 mt-2">
+                                <label>Is This A Company Account ?</label>
                                 <div class="form-group">
-                                    <label>UPI ID</label>
-                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Account Number</label>
-                                    <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="No`+i+`" name="company_account_yes_no[`+i+`]" value="No"> &nbsp;
+                                    <label>No</label><br>
                                 </div>
                             </div>
 
@@ -11360,14 +11357,10 @@ $(document).on("click", ".remove-row", function() {
                                 </div>
                             </div>
 
-                            <!-- <span class="req_field">*</span> -->
                             <div class="col-md-6">
-                                <label>Is This A Company Account ?</label>
                                 <div class="form-group">
-                                    <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
-                                    <label>Yes</label>  &nbsp; &nbsp; 
-                                    <input type="radio" id="No`+i+`" name="company_account_yes_no[`+i+`]" value="No"> &nbsp;
-                                    <label>No</label><br>
+                                    <label>Account Number</label>
+                                    <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
                             </div>
 
@@ -11383,7 +11376,14 @@ $(document).on("click", ".remove-row", function() {
                                 </div>
                             </div> 
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>UPI ID</label>
+                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Upload QR Image</label><br>
                                     <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
@@ -11391,7 +11391,7 @@ $(document).on("click", ".remove-row", function() {
                                 </div>
                             </div>
 
-                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                            <div class="col-md-2 pt-4 d-flex justify-content-center align-self-center">
                                 <div class="form-group">
                                 <label></label>
                                     <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>

@@ -942,10 +942,19 @@ public function get_upi_qr_code(){
             $data = $this->master_model->getRecords('agent');
             // print_r($data); die;
         }else{
-            $this->db->where('is_deleted','no');
-            $this->db->where('is_active','yes');
-            $this->db->where('id',$did_upi);   
+            $record = array();
+            $fields = "qr_code_master.*, qr_code_add_more.*,qr_code_add_more.id as add_more_id";
+            $this->db->where('qr_code_master.is_deleted','no');
+            $this->db->where('qr_code_master.is_active','yes');
+            $this->db->where('qr_code_master.id',$did_upi); 
+            $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
+            $this->db->group_by('full_name', 'asc'); 
             $data = $this->master_model->getRecords('qr_code_master');
+
+            // $this->db->where('is_deleted','no');
+            // $this->db->where('is_active','yes');
+            // $this->db->where('id',$did_upi);   
+            // $data = $this->master_model->getRecords('qr_code_master');
             // print_r($data); die;
         }
             echo json_encode($data); 

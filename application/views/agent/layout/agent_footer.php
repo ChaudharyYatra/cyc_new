@@ -6851,7 +6851,7 @@ function empty() {
  });
  </script>
 
-<script type='text/javascript'>
+<!-- <script type='text/javascript'>
   // baseURL variable
   var baseURL= "<?php echo base_url();?>";
  
@@ -6886,6 +6886,42 @@ function empty() {
      });
    });
  });
+</script> -->
+
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL = "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#select_upi_no').change(function(){
+        var did = $('#select_upi_no').val();
+        alert(did);
+        selectedOption = $("#select_upi_no option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/booking_preview/get_upi_code',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#upi_payment_type').find('option').not(':first').remove();
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#upi_payment_type').append('<option value="' + data['id'] + '">' + data['upi_app_name'] + '</option>');
+            });
+          }
+        });
+    });
+  });
 </script>
 
 <!-- new for account name and show account holder name -->

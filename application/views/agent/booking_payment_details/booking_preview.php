@@ -505,12 +505,7 @@
                                         <div class="col-md-6 mt-2">
                                             <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate()">
                                                 <option value="">Select Transaction</option>
-                                                <option value="Google Pay">Google Pay</option>
-                                                <option value="BHIM App">BHIM App</option>
-                                                <option value="PhonePe">PhonePe</option>
-                                                <option value="Paytm">Paytm</option>
-                                                <option value="SBI pay">SBI pay</option>
-                                                <option value="Bank of Baroda UPI">Bank of Baroda UPI</option>
+                                                <!-- Dynamic options will be added here using JavaScript -->
                                             </select>
                                         </div>
 

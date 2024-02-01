@@ -82,27 +82,6 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>UPI ID</label>
-                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Account Number</label>
-                                <input type="text" class="form-control" name="account_number[]" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Bank Name</label>
-                                <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                            </div>
-                        </div>
-
                         <!-- <span class="req_field">*</span> -->
                         <div class="col-md-6">
                           <label>Is This A Company Account ?</label>
@@ -115,6 +94,20 @@
                         </div>
 
                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Bank Name</label>
+                                <input type="text" class="form-control" name="bank_name[]" id="bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Account Number</label>
+                                <input type="text" class="form-control" name="account_number[]" id="account_number" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
                           <div class="form-group">
                           <label>UPI App Name</label>
                               <select class="form-control" name="upi_app_name[]" id="upi_app_name">
@@ -124,6 +117,13 @@
                               <?php } ?>
                               </select>
                           </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>UPI ID</label>
+                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                            </div>
                         </div>
 
                         <div class="col-md-6">
