@@ -103,7 +103,7 @@ class Booking_payment_details extends CI_Controller {
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
         $upi_qr__add_more_data = $this->master_model->getRecords('qr_code_add_more');
-        // print_r($upi_qr_data); die;
+        // print_r($upi_qr__add_more_data); die;
 
 
         // $fields = "booking_payment_details.*,booking_payment_details.id as book_pay_details_id,return_customer_booking_payment_details.*,return_customer_booking_payment_details.id as return_custom_details_id,extra_services_details.*,extra_services_details.id as extra_services_details_id";

@@ -306,10 +306,10 @@
                                                     <option value="">Select Account Number</option>
                                                     
                                                     <?php
-                                                        foreach($upi_qr_data as $upi_qr_data_value) 
+                                                        foreach($upi_qr__add_more_data as $upi_qr__add_more_data_value) 
                                                         { 
                                                     ?>
-                                                        <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['account_number'];?></option>
+                                                        <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </div>
@@ -339,7 +339,7 @@
                                                 <h6 class="text-center">Bank Name</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input readonly type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
 
                                             <div class="col-md-6 mt-2">
