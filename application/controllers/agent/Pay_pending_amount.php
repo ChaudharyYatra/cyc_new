@@ -1656,4 +1656,16 @@ class Pay_pending_amount extends CI_Controller {
 // die;
         
     }
+
+    public function get_payment_type(){ 
+        $today= date('Y-m-d');
+        $enquiry_id = $this->input->post('enquiry_id');
+         // print_r($boarding_office_location); die;
+                         $this->db->where('is_deleted','no');
+                         // $this->db->where('is_active','yes');
+                         $this->db->where('enquiry_id',$enquiry_id);
+                         $data = $this->master_model->getRecords('booking_payment_details');
+                         // print_r($data); die;
+         echo json_encode($data);
+     }
 }

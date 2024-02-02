@@ -53,6 +53,13 @@
                 </a>
                </li>
 
+               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/add_qr_code/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add account and QR code master</p>
+                </a>
+               </li>
+
             </ul>
           </li>
           
