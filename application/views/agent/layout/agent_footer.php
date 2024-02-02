@@ -6869,7 +6869,7 @@ function empty() {
     //   alert(did); 
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>agent/booking_preview/get_upi_code',
+        url:'<?//=base_url()?>agent/booking_preview/get_upi_code',
         method: 'post',
         data: {self_data: self_data,other_data: other_data,did: did},
         dataType: 'json',
@@ -6913,11 +6913,12 @@ function empty() {
 
             // Clear existing options
             $('#upi_payment_type').find('option').not(':first').remove();
-            // $('#upi_no_id').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
 
             // Add new options based on the response
             $.each(response, function(index, data){   
-              $('#upi_payment_type').append('<option value="' + data['id'] + '">' + data['payment_app_name'] + '</option>');
+              $('#upi_payment_type').append('<option value="' + data['add_more_id'] + '">' + data['payment_app_name'] + '</option>');
             //   $('#upi_no_id').append('<option value="' + data['id'] + '">' + data['add_more_id'] + '</option>');
             // //   $('#upi_no_id').val(data['add_more_id']);
             //   $('#upi_holder_name_id').val(data['id']);
@@ -6925,6 +6926,32 @@ function empty() {
           }
         });
     });
+
+        // upi_payment_type change as per payment app
+        
+        $('#upi_payment_type').change(function(){
+        var selectedPaymentType = $(this).val();
+        // alert(selectedPaymentType);
+
+            // AJAX request for self_upi_no
+            $.ajax({
+                url: '<?=base_url()?>agent/booking_preview/get_self_upi_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    
+                    $('#self_upi_no').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#self_upi_no').val(data['upi_id']);
+                    });
+                    
+                }
+            });
+        });
+
   });
 </script>
 

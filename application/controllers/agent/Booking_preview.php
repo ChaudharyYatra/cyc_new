@@ -912,15 +912,15 @@ class Booking_preview extends CI_Controller {
         
 //     }
 
-public function get_upi_qr_code(){ 
-    $taluka_data = $this->input->post('did');
-        // print_r($taluka_data); die;
-                        $this->db->where('is_deleted','no');
-                        $this->db->where('is_active','yes');
-                        $this->db->where('id',$taluka_data);   
-                        $data = $this->master_model->getRecords('qr_code_master');
-                        // print_r($data); die;
-        echo json_encode($data); 
+    public function get_upi_qr_code(){ 
+        $taluka_data = $this->input->post('did');
+            // print_r($taluka_data); die;
+                            $this->db->where('is_deleted','no');
+                            $this->db->where('is_active','yes');
+                            $this->db->where('id',$taluka_data);   
+                            $data = $this->master_model->getRecords('qr_code_master');
+                            // print_r($data); die;
+            echo json_encode($data); 
     }
 
     public function get_upi_code(){
@@ -957,6 +957,20 @@ public function get_upi_qr_code(){
             // print_r($data); die;
             echo json_encode($data); 
         }
+    }
+
+    public function get_self_upi_no(){ 
+
+        $selectedPaymentType = $this->input->post('selectedPaymentType');
+            // print_r($taluka_data); die;
+
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('id',$selectedPaymentType);   
+            $data = $this->master_model->getRecords('qr_code_add_more');
+            // print_r($data); die;
+            
+            echo json_encode($data); 
     }
 
     public function get_upi_id_no_code(){
