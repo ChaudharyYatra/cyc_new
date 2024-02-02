@@ -212,22 +212,23 @@
                                     <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $final_total ?>" required></td>
                                     
                                 </tr>
-
-                                <tr id="payment_type_tr" style='display:contents;'>
-                                    <th>Payment Type</th>
-                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance">&nbsp;&nbsp;Advance
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part">&nbsp;&nbsp;Part
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full">&nbsp;&nbsp;Full</td>
                                     
-                                </tr>
-
-
                                 <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Depositing Amount</th>
                                     <td>
                                     <input type="text" class="form-control" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required>
                                     </td>
                                 </tr>
+                                <tr id="payment_type_tr" style='display:contents;'>
+                                    <th>Payment Type</th>
+                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_advance" value="Advance">&nbsp;&nbsp;Advance
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_part" value="Part">&nbsp;&nbsp;Part
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_full" value="Full">&nbsp;&nbsp;Full</td>
+                                    
+                                </tr>
+
+
+                                
 
                                 <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>

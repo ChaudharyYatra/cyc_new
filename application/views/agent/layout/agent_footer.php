@@ -4845,14 +4845,7 @@ $(".selectall").click(function() {
 <!-- for bus seat selected -->
 
 <!-- Final booking preview final amt calculation -->
-<script>
-    
-$("#booking_amt").on("keyup", function() {
-var val = +this.value || 0;
-$("#pending_amt").val($("#final_amt").val() - val);
-});
 
-</script>
 <!-- Final booking preview final amt calculation -->
 
 <!-- Bank transaction ---------------------------------------- -->
@@ -9088,23 +9081,78 @@ $(document).ready(function() {
 
 <!-- pending amount Next Booking Amount calculation -->
 <script>
-    
-// $("#next_booking_amt").on("keyup", function() {
-// var val = +this.value || 0;
-// $("#pending_amt").val($("#pending_amt").val() - val);
-// });
-
-
-$("#next_booking_amt").on("keyup", function() {
+    $(document).ready(function(){
+        $("#booking_amt").on("keyup", function() {
+ 
+            var enquiry_id=$("#enquiry_id").val();
+            var final_amt=$("#final_amt").val();
+            var current_val=$(this).val();
+            $.ajax({
+                url:'<?=base_url()?>agent/pay_pending_amount/get_payment_type',
+                method: 'post',
+                data: {enquiry_id: enquiry_id},
+                dataType: 'json',
+                success: function(response){
+                console.log(response);
+                if(response.length === 0 && current_val!=final_amt)
+                {
+                    $('#payment_type_advance').prop("checked", true);
+                }else if(response.length === 0 && current_val==final_amt)
+                {
+                    $('#payment_type_full').prop("checked", true);
+                }else if(response.length != 0)
+                {
+                    $('#payment_type_part').prop("checked", true);
+                }
+ 
+ 
+ 
+                //   $('#pack_date_id').find('option').not(':first').remove();
+                //   $.each(response,function(index,data){      
+                //      $('#pack_date_id').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
+                //   });
+                }
+            });
+           
+        var val = +this.value || 0;
+        $("#pending_amt").val($("#final_amt").val() - val);
+        });
+    });    
+ 
+ 
+    $("#next_booking_amt").on("keyup", function() {
+ 
+        var enquiry_id=$("#enquiry_id").val();
+            var final_amt=$("#final_amt").val();
+            var current_val=$(this).val();
+            $.ajax({
+                url:'<?=base_url()?>agent/pay_pending_amount/get_payment_type',
+                method: 'post',
+                data: {enquiry_id: enquiry_id},
+                dataType: 'json',
+                success: function(response){
+                console.log(response);
+                if(response.length === 0 && current_val!=final_amt)
+                {
+                    $('#payment_type_advance').prop("checked", true);
+                }else if(response.length === 0 && current_val==final_amt)
+                {
+                    $('#payment_type_full').prop("checked", true);
+                }else if(response.length != 0)
+                {
+                    $('#payment_type_part').prop("checked", true);
+                }
+ 
+                }
+            });
+ 
+ 
     var val = +this.value || 0;
-    // alert(val)
     var finalAmt = +$("#old_pending_amt").val() || 0;
     var pendingAmt = finalAmt - val;
-    // alert(pendingAmt);
     console.log(pendingAmt);
     $("#pending_amt").val(pendingAmt);
 });
-
 </script>
 <!-- pending amount Next Booking Amount calculation -->
 
@@ -10497,3 +10545,90 @@ $(document).ready(function() {
     });
 </script>
 <!-- Final booking preview final amt calculation -->
+
+<!------------------------------------ add qr code for agent ----------------------------------------->
+
+<script>
+        var i=1;
+    $('#edit_add_more_bank').click(function() {
+       // alert('hhhh');
+            i++;
+    var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label>Mobile Number</label>
+                                    <input type="text" class="form-control" name="mobile_number[]" id="mobile_number`+i+`" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-6 mt-2">
+                                <label>Is This A Company Account ?</label>
+                                <div class="form-group">
+                                    <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="No`+i+`" name="company_account_yes_no[`+i+`]" value="No"> &nbsp;
+                                    <label>No</label><br>
+                                </div>
+                            </div> -->
+
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
+                                    <label>Bank Name</label>
+                                    <input type="text" class="form-control" name="bank_name[]" id="bank_name`+i+`" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Account Number</label>
+                                    <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label>UPI App Name</label>
+                                    <select class="form-control" name="upi_app_name[]" id="upi_app_name`+i+`">
+                                    <option value="">Select App Name</option>
+                                    <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                        <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                                    <?php } ?>
+                                    </select>
+                                </div>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>UPI ID</label>
+                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Upload QR Image</label><br>
+                                    <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
+                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                                <div class="form-group">
+                                <label></label>
+                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                                </div>
+                            </div>  
+                        </div> `);
+$('#edit_main_row_for_add_more_bank').append(structure); 
+
+});
+
+
+$(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
+
+</script>
+<!------------------------------------ add qr code for agent ----------------------------------------->
+

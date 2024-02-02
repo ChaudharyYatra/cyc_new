@@ -34,8 +34,9 @@
                   <tr>
                     <th>SN</th>
                     <th>Full Name</th>
-                    <th>Role Name</th>
-                    <th>Other Role Name</th>
+                    <!-- <th>Role Name</th>
+                    <th>Other Role Name</th> -->
+                    <th>Mobile Number</th>
                     <th>Bank Name</th>
                     <th>Account Number</th>
                     <th>UPI App Name</th>
@@ -54,17 +55,18 @@
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['full_name'] ?></td>
-                    <?php if($info['Role_name']=='Other'){?>
-                    <td><?php echo $info['Role_name'] ?></td>
-                    <?php } else{?>
-                    <td><?php echo $info['role_name'] ?></td>
-                    <?php } ?>
+                    <!-- <?php //if($info['Role_name']=='Other'){?>
+                    <td><?php //echo $info['Role_name'] ?></td>
+                    <?php //} else{?>
+                    <td><?php //echo $info['role_name'] ?></td>
+                    <?php //} ?>
 
-                    <?php if($info['Role_name']=='Other'){?>
-                    <td><?php echo $info['other_role_name'] ?></td>
-                    <?php } else{?>
+                    <?php //if($info['Role_name']=='Other'){?>
+                    <td><?php //echo $info['other_role_name'] ?></td>
+                    <?php //} else{?>
                     <td>--</td>
-                    <?php } ?>
+                    <?php //} ?> -->
+                    <td><?php echo $info['mobile_number'] ?></td>
                     <td><?php echo $info['bank_name'] ?></td>
                     <td><?php echo $info['account_number'] ?></td>
                     <td><?php echo $info['payment_app_name'] ?></td>
@@ -86,11 +88,12 @@
                         <?php } ?>
                     </td>
                     <td>
-                        <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['qr_add_more_id']); 
-                          echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['id']); 
-                          echo rtrim($did, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                        <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['qr_add_more_id']); 
-                          echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['qr_add_more_id']); 
+					   echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['id']); 
+             echo rtrim($did, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['qr_add_more_id']); 
+					   echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                        
                     </td>
                   </tr>
                   

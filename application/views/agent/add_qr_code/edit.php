@@ -47,23 +47,22 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Full Name</label>
-                            <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Enter Full Name" value="<?php echo $info['full_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                            <input readonly type="text" class="form-control" name="full_name" id="full_name" placeholder="Enter Full Name" value="<?php echo $info['full_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                         </div>
                     </div>
                       
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="form-group">
                         <label>Role Name</label>
                             <select class="form-control" name="role_name" id="role_name" onchange='role_name_div(this.value);'>
                             <option value="">Select Role Name</option>
-                            <option value="Other" <?php if(isset($info['Role_name'])){if("Other" == $info['Role_name']) {echo 'selected';}}?>>Other</option>
-                            <?php foreach($role_type_data as $role_type_data_value){ ?> 
-                                <!-- <option value="<?php //echo $role_type_data_value['id'];?>"><?php //echo $role_type_data_value['role_name'];?></option> -->
-                                <option value="<?php echo $role_type_data_value['id'];?>" <?php if(isset($info['Role_name'])){if($role_type_data_value['id'] == $info['Role_name']) {echo 'selected';}}?>><?php echo $role_type_data_value['role_name'];?></option>
-                            <?php } ?>
+                            <option value="Other" <?php //if(isset($info['Role_name'])){if("Other" == $info['Role_name']) {echo 'selected';}}?>>Other</option>
+                            <?php //foreach($role_type_data as $role_type_data_value){ ?> 
+                                <option value="<?php //echo $role_type_data_value['id'];?>" <?php //if(isset($info['Role_name'])){if($role_type_data_value['id'] == $info['Role_name']) {echo 'selected';}}?>><?php echo $role_type_data_value['role_name'];?></option>
+                            <?php //} ?>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
                     <?php if($info['Role_name']!='Other'){?>
                     <div class="col-md-6" id="other_role_name" style='display:none;'>
@@ -88,15 +87,15 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <label>Is This A Company Account ?</label>
                       <div class="form-group">
-                          <input type="radio" id="Yes" name="company_account_yes_no" value="Yes" <?php if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='Yes') {echo'checked';}}?>> &nbsp;
+                          <input type="radio" id="Yes" name="company_account_yes_no" value="Yes" <?php //if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='Yes') {echo'checked';}}?>> &nbsp;
                           <label>Yes</label>  &nbsp; &nbsp; 
-                          <input type="radio" id="No" name="company_account_yes_no" value="No" <?php if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='No') {echo'checked';}}?>> &nbsp;
+                          <input type="radio" id="No" name="company_account_yes_no" value="No" <?php //if(isset($info['company_account_yes_no'])){if($info['company_account_yes_no']=='No') {echo'checked';}}?>> &nbsp;
                           <label>No</label><br>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -153,7 +152,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>
-					<a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+					          <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
               <?php } ?>

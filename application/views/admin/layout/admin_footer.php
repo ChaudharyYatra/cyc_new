@@ -11332,7 +11332,7 @@ $(document).on("click", ".remove-row", function() {
        // alert('hhhh');
             i++;
     var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
-                            <div class="col-md-6 mt-2">
+                            <div class="col-md-6 mt-4">
                                 <div class="form-group">
                                     <label>Mobile Number</label>
                                     <input type="text" class="form-control" name="mobile_number[]" id="mobile_number`+i+`" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
@@ -11340,7 +11340,7 @@ $(document).on("click", ".remove-row", function() {
                             </div>
 
                             <!-- <span class="req_field">*</span> -->
-                            <div class="col-md-6 mt-2">
+                            <div class="col-md-6 mt-4">
                                 <label>Is This A Company Account ?</label>
                                 <div class="form-group">
                                     <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
@@ -11390,8 +11390,9 @@ $(document).on("click", ".remove-row", function() {
                                     <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                                 </div>
                             </div>
-
-                            <div class="col-md-2 pt-4 d-flex justify-content-center align-self-center">
+                            <div class="col-md-5">
+                            </div>          
+                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
                                 <div class="form-group">
                                 <label></label>
                                     <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
