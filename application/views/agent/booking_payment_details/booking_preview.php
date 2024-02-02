@@ -363,10 +363,10 @@
                                                 <option value="">Select Account Number</option>
                                                 
                                                 <?php
-                                                    foreach($upi_qr_data as $upi_qr_data_value) 
+                                                    foreach($upi_qr__add_more_data as $upi_qr__add_more_data_value) 
                                                     { 
                                                 ?>
-                                                    <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['account_number'];?></option>
+                                                    <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -396,7 +396,7 @@
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" readonly class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -628,25 +628,20 @@
                                     </div>
 
                                     <div class="col-md-6 mt-2">
-                                        <h6 class="text-center">Mobile Number</h6>
-                                    </div>
-                                    <div class="col-md-6 mt-2">
-                                        <input type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate()" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
-                                    </div>
-
-                                    <div class="col-md-6 mt-2">
                                         <h6 class="text-center">QR Code App Name</h6>
                                     </div>
                                     <div class="col-md-6 mt-2">
                                         <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate()">
                                             <option value="">Select Transaction</option>
-                                            <option value="Google Pay">Google Pay</option>
-                                            <option value="BHIM App">BHIM App</option>
-                                            <option value="PhonePe">PhonePe</option>
-                                            <option value="Paytm">Paytm</option>
-                                            <option value="SBI pay">SBI pay</option>
-                                            <option value="Bank of Baroda UPI">Bank of Baroda UPI</option>
+
                                         </select>
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Mobile Number</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <input readonly type="text" class="form-control" name="qr_mobile_number" id="qr_mobile_number" onkeyup="qr_mobile_no_validate()" placeholder="Enter Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
 
                                     <div class="col-md-6 mt-2">

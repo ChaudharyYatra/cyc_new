@@ -959,20 +959,6 @@ class Booking_preview extends CI_Controller {
         }
     }
 
-    public function get_self_upi_no(){ 
-
-        $selectedPaymentType = $this->input->post('selectedPaymentType');
-            // print_r($taluka_data); die;
-
-            $this->db->where('is_deleted','no');
-            $this->db->where('is_active','yes');
-            $this->db->where('id',$selectedPaymentType);   
-            $data = $this->master_model->getRecords('qr_code_add_more');
-            // print_r($data); die;
-            
-            echo json_encode($data); 
-    }
-
     public function get_upi_id_no_code(){
 
         // $agent_sess_name = $this->session->userdata('agent_name');
@@ -1026,6 +1012,20 @@ class Booking_preview extends CI_Controller {
             echo json_encode($data); 
         }
 
+        public function get_self_upi_no(){
+ 
+            $selectedPaymentType = $this->input->post('selectedPaymentType');
+                // print_r($taluka_data); die;
+    
+                $this->db->where('is_deleted','no');
+                $this->db->where('is_active','yes');
+                $this->db->where('id',$selectedPaymentType);  
+                $data = $this->master_model->getRecords('qr_code_add_more');
+                // print_r($data); die;
+            
+                echo json_encode($data);
+        }
+
         public function get_account_holder_name(){
 
             $agent_sess_name = $this->session->userdata('agent_name');
@@ -1042,6 +1042,42 @@ class Booking_preview extends CI_Controller {
            
                 echo json_encode($data); 
     
+            }
+
+            public function get_account_bank_name(){
+
+                $agent_sess_name = $this->session->userdata('agent_name');
+                $id=$this->session->userdata('agent_sess_id');
+        
+                $did_upi = $this->input->post('did');
+                // print_r($did_upi); die;
+     
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('id',$did_upi);   
+                    $data = $this->master_model->getRecords('qr_code_add_more');
+                    // print_r($data); die;
+               
+                    echo json_encode($data); 
+        
+            }
+
+            public function get_account_hold_name(){
+
+                $agent_sess_name = $this->session->userdata('agent_name');
+                $id=$this->session->userdata('agent_sess_id');
+        
+                $did_upi = $this->input->post('net_banking_acc_no');
+                // print_r($did_upi); die;
+     
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('id',$did_upi);   
+                    $data = $this->master_model->getRecords('qr_code_master');
+                    // print_r($data); die;
+               
+                    echo json_encode($data); 
+        
             }
 
         public function get_QR_code(){ 

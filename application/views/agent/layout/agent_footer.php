@@ -6919,9 +6919,7 @@ function empty() {
             // Add new options based on the response
             $.each(response, function(index, data){   
               $('#upi_payment_type').append('<option value="' + data['add_more_id'] + '">' + data['payment_app_name'] + '</option>');
-            //   $('#upi_no_id').append('<option value="' + data['id'] + '">' + data['add_more_id'] + '</option>');
-            // //   $('#upi_no_id').val(data['add_more_id']);
-            //   $('#upi_holder_name_id').val(data['id']);
+            
             });
           }
         });
@@ -6954,6 +6952,146 @@ function empty() {
 
   });
 </script>
+
+<!-- for OR code -->
+
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL = "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#select_qr_upi_no').change(function(){
+        var did = $('#select_qr_upi_no').val();
+        // alert(did);
+        selectedOption = $("#select_qr_upi_no option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/booking_preview/get_upi_code',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#qr_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#qr_mobile_number').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#qr_payment_type').append('<option value="' + data['add_more_id'] + '">' + data['payment_app_name'] + '</option>');
+            
+            });
+          }
+        });
+    });
+
+        // upi_payment_type change as per payment app
+        
+        $('#qr_payment_type').change(function(){
+        var selectedPaymentType = $(this).val();
+        // alert(selectedPaymentType);
+
+            // AJAX request for self_upi_no
+            $.ajax({
+                url: '<?=base_url()?>agent/booking_preview/get_self_upi_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    
+                    $('#qr_mobile_number').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#qr_mobile_number').val(data['mobile_number']);
+                    });
+                    
+                }
+            });
+        });
+
+  });
+</script>
+
+<!-- For Net Banking -->
+
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL = "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#net_banking_acc_no').change(function(){
+        var did = $('#net_banking_acc_no').val();
+        // alert(did);
+        selectedOption = $("#net_banking_acc_no option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/booking_preview/get_account_bank_name',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#netbanking_bank_name').find('option').not(':first').remove();
+            // for remove upi id also
+            // $('#net_acc_holder_nm').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                
+                $('#netbanking_bank_name').val(data['bank_name']);
+            
+            });
+          }
+        });
+    });
+
+        // upi_payment_type change as per payment app
+        
+        $('#net_banking_acc_no').change(function(){
+        // var net_banking_acc_no = $(this).val();
+        var selectedOption = $('#net_banking_acc_no option:selected');
+        var net_banking_acc_no = selectedOption.attr('attr_qr_master_id');
+        // alert(net_banking_acc_no);
+
+            // AJAX request for self_upi_no
+            $.ajax({
+                url: '<?=base_url()?>agent/booking_preview/get_account_hold_name',
+                method: 'post',
+                data: {net_banking_acc_no: net_banking_acc_no},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    
+                    $('#net_acc_holder_nm').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#net_acc_holder_nm').val(data['full_name']);
+                    });
+                    
+                }
+            });
+        });
+
+  });
+</script>
+
+
+<!--  -->
 
 <script type='text/javascript'>
   // baseURL variable
