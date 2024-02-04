@@ -9243,8 +9243,6 @@ $(document).ready(function() {
                     $('#payment_type_part').prop("checked", true);
                 }
  
- 
- 
                 //   $('#pack_date_id').find('option').not(':first').remove();
                 //   $.each(response,function(index,data){      
                 //      $('#pack_date_id').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');

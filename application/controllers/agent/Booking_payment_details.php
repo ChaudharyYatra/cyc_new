@@ -100,11 +100,6 @@ class Booking_payment_details extends CI_Controller {
         $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $upi_qr__add_more_data = $this->master_model->getRecords('qr_code_add_more');
-        // print_r($upi_qr__add_more_data); die;
-
 
         // $fields = "booking_payment_details.*,booking_payment_details.id as book_pay_details_id,return_customer_booking_payment_details.*,return_customer_booking_payment_details.id as return_custom_details_id,extra_services_details.*,extra_services_details.id as extra_services_details_id";
         // $this->db->where('booking_payment_details.is_deleted','no');
@@ -160,6 +155,8 @@ class Booking_payment_details extends CI_Controller {
         $relation_data = $this->master_model->getRecords('relation');
         // print_r($relation_data); die;
 
+        
+
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
@@ -173,7 +170,6 @@ class Booking_payment_details extends CI_Controller {
         $this->arr_view_data['relation_data']        = $relation_data;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
-        $this->arr_view_data['upi_qr__add_more_data']        = $upi_qr__add_more_data;
         $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
         $this->arr_view_data['traveller_id_data']        = $traveller_id_data;
         $this->arr_view_data['seat_type_room_type_data']        = $seat_type_room_type_data;
@@ -1298,7 +1294,7 @@ class Booking_payment_details extends CI_Controller {
             $this->db->where('is_active','yes');
             $this->db->where('id',$id);   
             $data = $this->master_model->getRecords('agent');
-            // print_r($data); die;
+            // // print_r($data); die;
         }else{
             $this->db->where('is_deleted','no');
             $this->db->where('is_active','yes');
