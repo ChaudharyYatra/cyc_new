@@ -488,7 +488,7 @@
                                         <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
-                                            <option class="self_upi" attr_self="self" value="Self">Self</option>
+                                            <option class="self_upi" attr_self="self" value="<?php echo $upi_qr_master_id;?>">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -617,7 +617,7 @@
                                         <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
-                                            <option value="Self" attr_self="self">Self</option>
+                                            <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 

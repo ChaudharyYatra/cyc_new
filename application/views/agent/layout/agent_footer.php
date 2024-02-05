@@ -1323,7 +1323,7 @@ $('#received').attr("disabled", true);
 $('.received_qty').on('keyup', function() {
 
     var p = $(this).val();
-    console.log(p);
+    // console.log(p);
     var currentRow = $(this).closest("tr");
     var col3 = currentRow.find("td:eq(2)").text();
     console.log(parseInt(col3));
@@ -1430,7 +1430,7 @@ $("#submit").click(function() {
             //  dataType: 'json',
             //  cache: false,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 if (response = true) {
                     window.location.href = "<?= base_url() ?>admin/profile_edit_req/index";
 
@@ -1797,7 +1797,7 @@ $('#tour_no').change(function() {
         },
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            // console.log(response);
 
             $('#boarding_office_location').find('option').not(':first').remove();
 
@@ -1832,7 +1832,7 @@ function tour_dates() {
         },
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            // console.log(response);
 
             $('#tour_date').find('option').not(':first').remove();
 
@@ -1867,7 +1867,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
                 $('#all_traveller_district').find('option').not(':first').remove();
 
@@ -1898,7 +1898,7 @@ $(document).ready(function() {
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
         
           $('#all_traveller_taluka').find('option').not(':first').remove();
        
@@ -1924,7 +1924,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
                 $('#all_traveller_taluka').find('option').not(':first').remove();
 
@@ -1962,7 +1962,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
                 $('#inter_boarding_office_location').find('option').not(':first').remove();
 
@@ -1997,7 +1997,7 @@ function inter_tour_dates() {
         },
         dataType: 'json',
         success: function(response) {
-            console.log(response);
+            // console.log(response);
 
             $('#inter_tour_date').find('option').not(':first').remove();
 
@@ -2878,7 +2878,7 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 // var p = response['mobile_number1'];
                 $('#hotel_type').val(response['hotel_type_name']);
             }
@@ -5513,7 +5513,7 @@ $('.data_amt').keyup(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
           $('#pack_date_id').find('option').not(':first').remove();
           $.each(response,function(index,data){      
              $('#pack_date_id').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
@@ -5588,7 +5588,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(responce) {
                     if (responce != false && responce !='') {
-                        console.log(responce);
+                        // console.log(responce);
                         // alert(responce);
                         // var booking_ref_no = $('#booking_ref_no').val(responce);
                         Swal.fire({
@@ -6830,7 +6830,7 @@ function empty() {
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
         
           $('#qr_code_image').find('img').not(':first').remove();
        
@@ -6881,6 +6881,8 @@ function empty() {
  });
 </script> -->
 
+<!-- for UPI -->
+
 <script type='text/javascript'>
   // baseURL variable
   var baseURL = "<?php echo base_url();?>";
@@ -6899,6 +6901,7 @@ function empty() {
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
           method: 'post',
+        //   self_data: self_data,
           data: {self_data: self_data, other_data: other_data, did: did},
           dataType: 'json',
           success: function(response){
@@ -6931,7 +6934,7 @@ function empty() {
                 data: {selectedPaymentType: selectedPaymentType},
                 dataType: 'json',
                 success: function(response){
-                    console.log(response);
+                    // console.log(response);
                     
                     $('#self_upi_no').find('option').not(':first').remove();
                 
@@ -6946,6 +6949,77 @@ function empty() {
   });
 </script>
 
+
+
+<!-- <script type='text/javascript'>
+  // baseURL variable
+  var baseURL = "<?php //echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#select_upi_no').change(function(){
+
+        var selectedOption = $('#select_upi_no option:selected');
+        var did = selectedOption.attr('attr_self_value');
+        
+        // var did = $('#select_upi_no').val();
+        // alert(did);
+        // selectedOption = $("#select_upi_no option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+
+        // AJAX request
+        $.ajax({
+          url: '<?//=base_url()?>agent/booking_preview/get_upi_code',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#upi_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#upi_payment_type').append('<option value="' + data['add_more_id'] + '">' + data['payment_app_name'] + '</option>');
+            
+            });
+          }
+        });
+    });
+
+        // upi_payment_type change as per payment app
+        
+        $('#upi_payment_type').change(function(){
+        var selectedPaymentType = $(this).val();
+        // alert(selectedPaymentType);
+
+            // AJAX request for self_upi_no
+            $.ajax({
+                url: '<?//=base_url()?>agent/booking_preview/get_self_upi_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    
+                    $('#self_upi_no').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#self_upi_no').val(data['upi_id']);
+                    });
+                    
+                }
+            });
+        });
+
+  });
+</script> -->
+
 <!-- for OR code -->
 
 <script type='text/javascript'>
@@ -6959,17 +7033,18 @@ function empty() {
         var did = $('#select_qr_upi_no').val();
         // alert(did);
         selectedOption = $("#select_qr_upi_no option:selected");
-        var self_data = selectedOption.attr('attr_self');
+        // var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
 
         // AJAX request
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
           method: 'post',
-          data: {self_data: self_data, other_data: other_data, did: did},
+        //   self_data: self_data, 
+          data: {other_data: other_data, did: did},
           dataType: 'json',
           success: function(response){
-            console.log(response);
+            // console.log(response);
 
             // Clear existing options
             $('#qr_payment_type').find('option').not(':first').remove();
@@ -6998,7 +7073,7 @@ function empty() {
                 data: {selectedPaymentType: selectedPaymentType},
                 dataType: 'json',
                 success: function(response){
-                    console.log(response);
+                    // console.log(response);
                     
                     $('#qr_mobile_number').find('option').not(':first').remove();
                 
@@ -7036,7 +7111,7 @@ function empty() {
           data: {self_data: self_data, other_data: other_data, did: did},
           dataType: 'json',
           success: function(response){
-            console.log(response);
+            // console.log(response);
 
             // Clear existing options
             $('#netbanking_bank_name').find('option').not(':first').remove();
@@ -7068,7 +7143,7 @@ function empty() {
                 data: {net_banking_acc_no: net_banking_acc_no},
                 dataType: 'json',
                 success: function(response){
-                    console.log(response);
+                    // console.log(response);
                     
                     $('#net_acc_holder_nm').find('option').not(':first').remove();
                 
@@ -7084,7 +7159,7 @@ function empty() {
 </script>
 
 
-<!--  -->
+<!-- end payment modes ajax  -->
 
 <script type='text/javascript'>
   // baseURL variable
@@ -7106,7 +7181,7 @@ function empty() {
         data: {did: did,upi_no_id: upi_no_id,upi_holder_name_id: upi_holder_name_id},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
           $('#self_upi_no').find('option').not(':first').remove();
        
           $.each(response,function(index,data){   
@@ -7138,7 +7213,7 @@ function empty() {
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
         
           $('#net_acc_holder_nm').find('option').not(':first').remove();
        
@@ -7218,7 +7293,7 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
         
           $('#agent_district').find('option').not(':first').remove();
        
@@ -7249,7 +7324,7 @@ $(document).ready(function(){
         data: {did: did},
         dataType: 'json',
         success: function(response){
-        console.log(response);
+        // console.log(response);
         
           $('#agent_taluka').find('option').not(':first').remove();
        
@@ -7331,7 +7406,7 @@ $(document).ready(function(){
         },
         dataType: 'json',
         success: function (response) {
-          console.log(response);
+        //   console.log(response);
 
           // Clear existing images
           $('#qr_mode_code_image').empty();
@@ -9194,7 +9269,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(responce) {
                     if (responce != false && responce !='') {
-                        console.log(responce);
+                        // console.log(responce);
                         // alert(responce);
                         // var booking_ref_no = $('#booking_ref_no').val(responce);
                         Swal.fire({
@@ -9231,7 +9306,7 @@ $(document).ready(function() {
                 data: {enquiry_id: enquiry_id},
                 dataType: 'json',
                 success: function(response){
-                console.log(response);
+                // console.log(response);
                 if(response.length === 0 && current_val!=final_amt)
                 {
                     $('#payment_type_advance').prop("checked", true);
@@ -9267,7 +9342,7 @@ $(document).ready(function() {
                 data: {enquiry_id: enquiry_id},
                 dataType: 'json',
                 success: function(response){
-                console.log(response);
+                // console.log(response);
                 if(response.length === 0 && current_val!=final_amt)
                 {
                     $('#payment_type_advance').prop("checked", true);
@@ -10255,7 +10330,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(responce) {
                     if (responce != false && responce !='') {
-                        console.log(responce);
+                        // console.log(responce);
                         // alert(responce);
                         // var booking_ref_no = $('#booking_ref_no').val(responce);
                         Swal.fire({

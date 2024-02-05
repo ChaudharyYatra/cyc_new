@@ -936,6 +936,7 @@ class Booking_preview extends CI_Controller {
         // print_r($taluka_data_1); die;
 
         if($taluka_data == 'self'){
+            // echo 'yessss'; die;
             $record = array();
             $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
             $this->db->where('qr_code_master.is_deleted','no');
@@ -947,7 +948,7 @@ class Booking_preview extends CI_Controller {
             $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name = upi_apps_name.id','left');
             // $this->db->group_by('full_name', 'asc'); 
             $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
-
+            // print_r($data); die;
             // $data = $this->master_model->getRecords('qr_code_master');
             // print_r($data); die;
             // $this->db->where('is_deleted','no');
@@ -969,8 +970,9 @@ class Booking_preview extends CI_Controller {
             $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
             // $data = $this->master_model->getRecords('qr_code_master');
             // print_r($data); die;
-            echo json_encode($data); 
+            // echo json_encode($data); 
         }
+        echo json_encode($data); 
     }
 
     public function get_upi_id_no_code(){
