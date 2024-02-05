@@ -97,6 +97,7 @@ class Booking_payment_details extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
+        $this->db->where('qr_code_master.is_agent','No');
         $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
 

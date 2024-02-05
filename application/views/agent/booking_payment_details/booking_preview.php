@@ -530,10 +530,10 @@
                                             <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
-                                        <div class="col-md-5 mt-2">
+                                        <div class="col-md-5 mt-2" id="upi_reason" style='display:none;'>
                                             <h6 class="text-center float-right">reason</h6>
                                         </div>
-                                        <div class="col-md-6 mt-2">
+                                        <div class="col-md-6 mt-2" id="upi_reason_input" style='display:none;'>
                                             <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
                                     <!-- </div> -->

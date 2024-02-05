@@ -6940,6 +6940,14 @@ function empty() {
                 
                     $.each(response,function(index,data){   
                         $('#self_upi_no').val(data['upi_id']);
+                        
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#upi_reason').css('display', 'block');
+                            $('#upi_reason_input').css('display', 'block');
+                        } else {
+                            $('#upi_reason').css('display', 'none');
+                            $('#upi_reason_input').css('display', 'none');
+                        }
                     });
                     
                 }
@@ -9016,7 +9024,16 @@ $(document).ready(function() {
         var pending_amt = $('#pending_amt').val();
         var payment_now_later = $("input[name='payment_now_later']:checked").val();
         // alert(payment_now_later);
-        var later_payment_reason = $('#later_payment_reason').val();
+        var later_payment_reason = $('#later_payment_reason').val().trim();
+
+        if (later_payment_reason === '') {
+            alert('Please enter a reason before submitting.');
+            $('#later_payment_reason').css('border-color', 'red');
+            return false; // Prevent form submission
+        }else{
+            $('#later_payment_reason').css('border-color', ''); 
+        }
+        
         var enquiry_id = $('#enquiry_id').val();
         var package_id = $('#package_id').val();
         var journey_date = $('#journey_date').val();
@@ -9027,7 +9044,7 @@ $(document).ready(function() {
         var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
 
         
-        if (mobile_no != '') {
+        if (mobile_no != '' && later_payment_reason != '') {
             // alert('IN hiiiii');
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/booking_payment_details/reason_submit_proceed",
@@ -9074,7 +9091,7 @@ $(document).ready(function() {
 </script>
 
 
-<script>
+<!-- <script>
 $(document).ready(function() {
     $("#reason_submit_button").click(function() {
         // alert('hiiiiiiiiiii');
@@ -9100,7 +9117,16 @@ $(document).ready(function() {
         var pending_amt = $('#pending_amt').val();
         var payment_now_later = $("input[name='payment_now_later']:checked").val();
         // alert(payment_now_later);
-        var later_payment_reason = $('#later_payment_reason').val();
+        var later_payment_reason = $('#later_payment_reason').val().trim();
+
+        if (later_payment_reason === '') {
+            alert('Please enter a reason before submitting.');
+            $('#later_payment_reason').css('border-color', 'red');
+            return false; // Prevent form submission
+        }else{
+            $('#later_payment_reason').css('border-color', ''); 
+        }
+
         var enquiry_id = $('#enquiry_id').val();
         var package_id = $('#package_id').val();
         var journey_date = $('#journey_date').val();
@@ -9111,7 +9137,7 @@ $(document).ready(function() {
         var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
 
         
-        if (mobile_no != '') {
+        if (mobile_no != '' && later_payment_reason != '') {
             // alert('IN hiiiii');
             $.ajax({
                 url: "<?php echo base_url(); ?>agent/booking_confirm_page/reason_submit_proceed",
@@ -9155,7 +9181,7 @@ $(document).ready(function() {
         }
     });
 });
-</script>
+</script> -->
 <!-- booking payemnt details submit and proceed -->
 
 <!-- <script>
