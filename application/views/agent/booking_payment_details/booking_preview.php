@@ -627,6 +627,7 @@
                                         </select>
                                     </div>
 
+                                    
                                     <div class="col-md-6 mt-2">
                                         <h6 class="text-center">QR Code App Name</h6>
                                     </div>
