@@ -948,6 +948,7 @@ class Booking_preview extends CI_Controller {
             // $this->db->group_by('full_name', 'asc'); 
             $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
 
+            
             // $data = $this->master_model->getRecords('qr_code_master');
             // print_r($data); die;
             // $this->db->where('is_deleted','no');
