@@ -100,6 +100,11 @@ class Booking_payment_details extends CI_Controller {
         $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
 
+        foreach($upi_qr_data as $upi_qr_data_id) 
+        { 
+            $upi_qr_master_id = $upi_qr_data_id['agent_id'];
+        }
+
 
         // $fields = "booking_payment_details.*,booking_payment_details.id as book_pay_details_id,return_customer_booking_payment_details.*,return_customer_booking_payment_details.id as return_custom_details_id,extra_services_details.*,extra_services_details.id as extra_services_details_id";
         // $this->db->where('booking_payment_details.is_deleted','no');
@@ -170,6 +175,7 @@ class Booking_payment_details extends CI_Controller {
         $this->arr_view_data['relation_data']        = $relation_data;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
+        $this->arr_view_data['upi_qr_master_id']        = $upi_qr_master_id; 
         $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
         $this->arr_view_data['traveller_id_data']        = $traveller_id_data;
         $this->arr_view_data['seat_type_room_type_data']        = $seat_type_room_type_data;
