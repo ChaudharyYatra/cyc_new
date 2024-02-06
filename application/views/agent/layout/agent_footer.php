@@ -7041,15 +7041,14 @@ function empty() {
         var did = $('#select_qr_upi_no').val();
         // alert(did);
         selectedOption = $("#select_qr_upi_no option:selected");
-        // var self_data = selectedOption.attr('attr_self');
+        var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
 
         // AJAX request
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
           method: 'post',
-        //   self_data: self_data, 
-          data: {other_data: other_data, did: did},
+          data: {self_data: self_data,other_data: other_data, did: did},
           dataType: 'json',
           success: function(response){
             // console.log(response);
@@ -7057,7 +7056,7 @@ function empty() {
             // Clear existing options
             $('#qr_payment_type').find('option').not(':first').remove();
             // for remove upi id also
-            $('#qr_mobile_number').val('');
+            $('#qr_payment_type').val('');
 
             // Add new options based on the response
             $.each(response, function(index, data){   
@@ -7087,6 +7086,13 @@ function empty() {
                 
                     $.each(response,function(index,data){   
                         $('#qr_mobile_number').val(data['mobile_number']);
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#qr_reason').css('display', 'block');
+                            $('#qr_reason_input').css('display', 'block');
+                        } else {
+                            $('#qr_reason').css('display', 'none');
+                            $('#qr_reason_input').css('display', 'none');
+                        }
                     });
                     
                 }
@@ -7130,6 +7136,14 @@ function empty() {
             $.each(response, function(index, data){   
                 
                 $('#netbanking_bank_name').val(data['bank_name']);
+
+                if (data['company_account_yes_no'] === 'No') {
+                    $('#net_banking_reason').css('display', 'block');
+                    $('#net_banking_input').css('display', 'block');
+                } else {
+                    $('#net_banking_reason').css('display', 'none');
+                    $('#net_banking_input').css('display', 'none');
+                }
             
             });
           }
@@ -8787,6 +8801,9 @@ $("#payment_final_booking_submit").click(function() {
     var cheque = $('#cheque').val();
     var bank_name = $('#bank_name').val();
     var drawn_on_date = $('#drawn_on_date').val();
+    var name_on_cheque = $('#name_on_cheque').val();
+    var cheque_bank_name = $('#cheque_bank_name').val();
+    var cheque_reason_1 = $('#cheque_reason_1').val();
 
 
     // var netbanking_payment_type = $('#netbanking_payment_type').val();
@@ -8813,18 +8830,22 @@ $("#payment_final_booking_submit").click(function() {
     var net_banking_branch_name = $('#net_banking_branch_name').val();
     var netbanking_bank_name = $('#netbanking_bank_name').val();
     var netbanking_date = $('#netbanking_date').val();
+    var net_banking_reason_1 = $('#net_banking_reason_1').val();
 
     var upi_holder_name = $('#select_upi_no').val();
     var upi_payment_type = $('#upi_payment_type').val();
     // alert(upi_payment_type);
     var upi_self_no = $('#self_upi_no').val();
     var upi_reason = $('#reason').val();
+    var upi_transaction_date = $('#upi_transaction_date').val();
 
 
     var qr_holder_name = $('#select_qr_upi_no').val();
     var qr_mobile_number = $('#qr_mobile_number').val();
     var qr_payment_type = $('#qr_payment_type').val();
     var qr_upi_no = $('#qr_upi_no').val();
+    var qr_transaction_date = $('#qr_transaction_date').val();
+    var qr_reason_1 = $('#qr_reason_1').val();
 
 
     var select_transaction =($('#select_transaction :selected').val());
@@ -8879,6 +8900,9 @@ $("#payment_final_booking_submit").click(function() {
 
     var booking_payment_details_id = $('#booking_payment_details_id').val();
     var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
+
+
+    
     
     // alert(package_id);
 
@@ -8907,6 +8931,9 @@ $("#payment_final_booking_submit").click(function() {
                 cheque: cheque,
                 bank_name: bank_name,
                 drawn_on_date: drawn_on_date,
+                name_on_cheque: name_on_cheque,
+                cheque_bank_name: cheque_bank_name,
+                cheque_reason_1: cheque_reason_1,
                 netbanking_payment_type: netbanking_payment_type,
                 net_banking_acc_no: net_banking_acc_no,
                 net_acc_holder_nm: net_acc_holder_nm,
@@ -8914,16 +8941,20 @@ $("#payment_final_booking_submit").click(function() {
                 net_banking_utr_no: net_banking_utr_no,
                 netbanking_bank_name: netbanking_bank_name,
                 netbanking_date: netbanking_date,
+                net_banking_reason_1: net_banking_reason_1,
                 
                 upi_holder_name: upi_holder_name,
                 upi_payment_type: upi_payment_type,
                 upi_self_no: upi_self_no,
                 upi_reason: upi_reason,
+                upi_transaction_date: upi_transaction_date,
                 
                 qr_holder_name: qr_holder_name,
                 qr_mobile_number: qr_mobile_number,
                 qr_payment_type: qr_payment_type,
                 qr_upi_no: qr_upi_no,
+                qr_transaction_date: qr_transaction_date,
+                qr_reason_1: qr_reason_1,
                 
                 select_transaction: select_transaction,
                 cash_500: cash_500,
@@ -9439,6 +9470,9 @@ $("#pending_amt_payment_final_booking_submit").click(function() {
     var cheque = $('#cheque').val();
     var bank_name = $('#bank_name').val();
     var drawn_on_date = $('#drawn_on_date').val();
+    var name_on_cheque = $('#name_on_cheque').val();
+    var cheque_bank_name = $('#cheque_bank_name').val();
+    var cheque_reason_1 = $('#cheque_reason_1').val();
 
 
     // var netbanking_payment_type = $('#netbanking_payment_type').val();
@@ -9465,18 +9499,22 @@ $("#pending_amt_payment_final_booking_submit").click(function() {
     var net_banking_branch_name = $('#net_banking_branch_name').val();
     var netbanking_bank_name = $('#netbanking_bank_name').val();
     var netbanking_date = $('#netbanking_date').val();
+    var net_banking_reason_1 = $('#net_banking_reason_1').val();
 
     var upi_holder_name = $('#select_upi_no').val();
     var upi_payment_type = $('#upi_payment_type').val();
     // alert(upi_payment_type);
     var upi_self_no = $('#self_upi_no').val();
     var upi_reason = $('#reason').val();
+    var upi_transaction_date = $('#upi_transaction_date').val();
 
 
     var qr_holder_name = $('#select_qr_upi_no').val();
     var qr_mobile_number = $('#qr_mobile_number').val();
     var qr_payment_type = $('#qr_payment_type').val();
     var qr_upi_no = $('#qr_upi_no').val();
+    var qr_transaction_date = $('#qr_transaction_date').val();
+    var qr_reason_1 = $('#qr_reason_1').val();
 
 
     var select_transaction =($('#select_transaction :selected').val());
@@ -9560,6 +9598,10 @@ $("#pending_amt_payment_final_booking_submit").click(function() {
                 cheque: cheque,
                 bank_name: bank_name,
                 drawn_on_date: drawn_on_date,
+                name_on_cheque : name_on_cheque,
+                cheque_bank_name: cheque_bank_name,
+                cheque_reason_1: cheque_reason_1,
+                
                 netbanking_payment_type: netbanking_payment_type,
                 net_banking_acc_no: net_banking_acc_no,
                 net_acc_holder_nm: net_acc_holder_nm,
@@ -9567,16 +9609,20 @@ $("#pending_amt_payment_final_booking_submit").click(function() {
                 net_banking_utr_no: net_banking_utr_no,
                 netbanking_bank_name: netbanking_bank_name,
                 netbanking_date: netbanking_date,
+                net_banking_reason_1: net_banking_reason_1,
                 
                 upi_holder_name: upi_holder_name,
                 upi_payment_type: upi_payment_type,
                 upi_self_no: upi_self_no,
                 upi_reason: upi_reason,
+                upi_transaction_date: upi_transaction_date,
                 
                 qr_holder_name: qr_holder_name,
                 qr_mobile_number: qr_mobile_number,
                 qr_payment_type: qr_payment_type,
                 qr_upi_no: qr_upi_no,
+                qr_transaction_date: qr_transaction_date,
+                qr_reason_1: qr_reason_1,
                 
                 select_transaction: select_transaction,
                 cash_500: cash_500,
@@ -10122,6 +10168,9 @@ $("#pay_pending_amt_payment_final_booking_submit").click(function() {
     var cheque = $('#cheque').val();
     var bank_name = $('#bank_name').val();
     var drawn_on_date = $('#drawn_on_date').val();
+    var name_on_cheque = $('#name_on_cheque').val();
+    var cheque_bank_name = $('#cheque_bank_name').val();
+    var cheque_reason_1 = $('#cheque_reason_1').val();
 
 
     // var netbanking_payment_type = $('#netbanking_payment_type').val();
@@ -10148,18 +10197,22 @@ $("#pay_pending_amt_payment_final_booking_submit").click(function() {
     var net_banking_branch_name = $('#net_banking_branch_name').val();
     var netbanking_bank_name = $('#netbanking_bank_name').val();
     var netbanking_date = $('#netbanking_date').val();
+    var net_banking_reason_1 = $('#net_banking_reason_1').val();
 
     var upi_holder_name = $('#select_upi_no').val();
     var upi_payment_type = $('#upi_payment_type').val();
     // alert(upi_payment_type);
     var upi_self_no = $('#self_upi_no').val();
     var upi_reason = $('#reason').val();
+    var upi_transaction_date = $('#upi_transaction_date').val();
 
 
     var qr_holder_name = $('#select_qr_upi_no').val();
     var qr_mobile_number = $('#qr_mobile_number').val();
     var qr_payment_type = $('#qr_payment_type').val();
     var qr_upi_no = $('#qr_upi_no').val();
+    var qr_transaction_date = $('#qr_transaction_date').val();
+    var qr_reason_1 = $('#qr_reason_1').val();
 
 
     var select_transaction =($('#select_transaction :selected').val());
@@ -10243,7 +10296,11 @@ $("#pay_pending_amt_payment_final_booking_submit").click(function() {
                 upi_no: upi_no,
                 cheque: cheque,
                 bank_name: bank_name,
+                name_on_cheque: name_on_cheque,
+                cheque_bank_name: cheque_bank_name,
+                cheque_reason_1: cheque_reason_1,
                 drawn_on_date: drawn_on_date,
+
                 netbanking_payment_type: netbanking_payment_type,
                 net_banking_acc_no: net_banking_acc_no,
                 net_acc_holder_nm: net_acc_holder_nm,
@@ -10251,16 +10308,20 @@ $("#pay_pending_amt_payment_final_booking_submit").click(function() {
                 net_banking_utr_no: net_banking_utr_no,
                 netbanking_bank_name: netbanking_bank_name,
                 netbanking_date: netbanking_date,
+                net_banking_reason_1: net_banking_reason_1,
                 
                 upi_holder_name: upi_holder_name,
                 upi_payment_type: upi_payment_type,
                 upi_self_no: upi_self_no,
                 upi_reason: upi_reason,
+                upi_transaction_date: upi_transaction_date,
                 
                 qr_holder_name: qr_holder_name,
                 qr_mobile_number: qr_mobile_number,
                 qr_payment_type: qr_payment_type,
                 qr_upi_no: qr_upi_no,
+                qr_transaction_date: qr_transaction_date,
+                qr_reason_1: qr_reason_1,
                 
                 select_transaction: select_transaction,
                 cash_500: cash_500,
@@ -10867,5 +10928,192 @@ $(document).on('click', '.btn_remove', function(){
       });
 
 </script>
+
+<!--  add gent QR code validation ---------->
+<script>
+$(document).ready(function () {
+
+$('#add_QR_code_agent').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        "mobile_number[]": {
+            required: true,
+            maxlength: 10,
+            minlength: 10
+        },
+        "bank_name[]": {
+            required: true,
+        },
+        "account_number[]": {
+            required: true,
+        },
+        "upi_app_name[]": {
+            required: true,
+        },
+        "upi_id[]": {
+            required: true,
+        },
+        "image_name[]": {
+            required: true,
+        }
+    },
+
+    messages :{
+        "mobile_number[]": {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        "bank_name[]" : {
+            required : "Please enter bank name",
+        },
+        "account_number[]" : {
+            required : "Please enter account number",
+        },
+        "upi_app_name[]" : {
+            required : "Please select upi app name",
+        },
+        "upi_id[]" : {
+            required : "Please enter upi id",
+        },
+        "image_name[]" : {
+            required : "Please select image",
+        }
+    }
+});
+
+});
+
+</script>
+<!---  add gent QR code validation ----------->
+<!---  edit gent QR code validation ---------->
+<script>
+$(document).ready(function () {
+
+$('#edit_QR_code_agent').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        mobile_number: {
+            required: true,
+            maxlength: 10,
+            minlength: 10
+        },
+        bank_name: {
+            required: true,
+        },
+        account_number: {
+            required: true,
+        },
+        upi_app_name: {
+            required: true,
+        },
+        upi_id: {
+            required: true,
+        },
+        old_img_name: {
+            required: true,
+        }
+    },
+
+    messages :{
+        mobile_number: {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        bank_name: {
+            required : "Please enter bank name",
+        },
+        account_number: {
+            required : "Please enter account number",
+        },
+        upi_app_name: {
+            required : "Please select upi app name",
+        },
+        upi_id: {
+            required : "Please enter upi id",
+        },
+        old_img_name: {
+            required : "Please select image",
+        }
+    }
+});
+
+});
+
+</script>
+<!--  edit gent QR code validation ------------------->
 <!------------------------------------ add qr code for agent ----------------------------------------->
+
+<!--  -->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL = "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#name_on_cheque').change(function(){
+        var did = $('#name_on_cheque').val();
+        // alert(did);
+        selectedOption = $("#name_on_cheque option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/booking_preview/get_upi_code',
+          method: 'post',
+          data: {self_data: self_data,other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            $('#cheque_bank_name').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#cheque_bank_name').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#cheque_bank_name').append('<option value="' + data['add_more_id'] + '">' + data['bank_name'] + '</option>');
+            
+            });
+          }
+        });
+    });
+
+        // upi_payment_type change as per payment app
+        
+        $('#cheque_bank_name').change(function(){
+        var selectedPaymentType = $(this).val();
+        // alert(selectedPaymentType);
+
+            // AJAX request for self_upi_no
+            $.ajax({
+                url: '<?=base_url()?>agent/booking_preview/get_self_upi_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType},
+                dataType: 'json',
+                success: function(response){
+                    $.each(response,function(index,data){   
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#cheque_reason').css('display', 'block');
+                            $('#cheque_reason_input').css('display', 'block');
+                        } else {
+                            $('#cheque_reason').css('display', 'none');
+                            $('#cheque_reason_input').css('display', 'none');
+                        }
+                    });
+                    
+                }
+            });
+        });
+
+  });
+</script>
 

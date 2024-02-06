@@ -89,8 +89,14 @@ class Pay_pending_amount extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
+        $this->db->where('qr_code_master.is_agent','No');
         $upi_qr_data = $this->master_model->getRecords('qr_code_master');
         // print_r($upi_qr_data); die;
+
+        foreach($upi_qr_data as $upi_qr_data_id) 
+        { 
+            $upi_qr_master_id = $upi_qr_data_id['agent_id'];
+        }
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -171,6 +177,7 @@ class Pay_pending_amount extends CI_Controller {
         $this->arr_view_data['extra']        = $extra;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
+        $this->arr_view_data['upi_qr_master_id']        = $upi_qr_master_id;
         $this->arr_view_data['upi_qr__add_more_data']        = $upi_qr__add_more_data;
         $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
         $this->arr_view_data['traveller_id_data']        = $traveller_id_data;
@@ -840,6 +847,7 @@ class Pay_pending_amount extends CI_Controller {
                 $qr_payment_type = $this->input->post('qr_payment_type');
                 $qr_transaction_date = $this->input->post('qr_transaction_date');
                 $qr_upi_no = $this->input->post('qr_upi_no');
+                $qr_reason_1 = $this->input->post('qr_reason_1');
 
 
                 $upi_no = $this->input->post('upi_no');
@@ -847,6 +855,8 @@ class Pay_pending_amount extends CI_Controller {
                 $bank_name = $this->input->post('bank_name');
                 $name_on_cheque = $this->input->post('name_on_cheque');
                 $drawn_on_date = $this->input->post('drawn_on_date');
+                $cheque_bank_name = $this->input->post('cheque_bank_name');
+                $cheque_reason_1 = $this->input->post('cheque_reason_1');
 
                 $netbanking_payment_type = $this->input->post('netbanking_payment_type');
                 $net_banking_acc_no = $this->input->post('net_banking_acc_no');
@@ -855,6 +865,7 @@ class Pay_pending_amount extends CI_Controller {
                 $net_banking_utr_no = $this->input->post('net_banking_utr_no');
                 $netbanking_bank_name = $this->input->post('netbanking_bank_name');
                 $netbanking_date = $this->input->post('netbanking_date');
+                $net_banking_reason_1 = $this->input->post('net_banking_reason_1');
 
                 // $cash_2000 = $this->input->post('cash_2000');
                 // $total_cash_2000 = $this->input->post('total_cash_2000');
@@ -1020,12 +1031,15 @@ class Pay_pending_amount extends CI_Controller {
                     'QR_payment_type'   =>   $qr_payment_type,
                     'qr_transaction_date'   =>   $qr_transaction_date,
                     'QR_transaction_no'   =>   $qr_upi_no,
+                    'qr_reason'   =>   $qr_reason_1,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
                     'name_on_cheque'   =>   $name_on_cheque,
                     'drawn_on_date'   =>   $drawn_on_date,
+                    'cheque_select_bank_name'   =>   $cheque_bank_name,
+                    'cheque_reason'   =>   $cheque_reason_1,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
                     'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -1034,6 +1048,7 @@ class Pay_pending_amount extends CI_Controller {
                     'net_banking'   =>   $net_banking_utr_no,
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
+                    'net_banking_reason'   =>   $net_banking_reason_1,
 
                     'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,

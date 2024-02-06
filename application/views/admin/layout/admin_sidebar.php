@@ -855,6 +855,15 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/request_for_accept_payment_details/index" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Request From agent For Payment Details
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="<?php echo base_url(); ?>admin/bus_open/index" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>

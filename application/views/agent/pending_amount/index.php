@@ -356,6 +356,13 @@
                                             <div class="col-md-6 mt-2">
                                                 <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate_final_payment()" placeholder="">
                                             </div>
+
+                                            <div class="col-md-6 mt-2" id="net_banking_reason" style='display:none;'>
+                                            <h6 class="text-center">reason</h6>
+                                            </div>
+                                            <div class="col-md-6 mt-2" id="net_banking_input" style='display:none;'>
+                                                <input type="text" class="form-control" name="net_banking_reason_1" id="net_banking_reason_1" onkeyup="booking_net_banking_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            </div>
                                         <!-- </div> -->
                                     </div>
                                 </div>
@@ -371,7 +378,7 @@
                                             <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
-                                                <option class="self_upi" attr_self="self" value="Self">Self</option>
+                                                <option class="self_upi" attr_self="self" value="<?php echo $upi_qr_master_id;?>">Self</option>
                                                 <?php
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
@@ -381,8 +388,18 @@
                                             </select>
                                         </div>
 
+
+                                        <div class="col-md-5 mt-2">
+                                            <h6 class="text-center float-right">UPI Code App Name</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate_final_payment()">
+                                                <option value="">Select Transaction</option>
+
+                                            </select>
+                                        </div>
                                         <!-- <div id="upi_no_reason_div" style='display:none;'> -->
-                                            <div class="col-md-5 mt-2">
+                                            <!-- <div class="col-md-5 mt-2">
                                                 <h6 class="text-center float-right">Payment Type</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
@@ -395,7 +412,7 @@
                                                     <option value="SBI pay">SBI pay</option>
                                                     <option value="Bank of Baroda UPI">Bank of Baroda UPI</option>
                                                 </select>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md-5 mt-2">
                                                 <h6 class="text-center float-right">UPI ID Number</h6>
@@ -418,10 +435,10 @@
                                                 <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
 
-                                            <div class="col-md-5 mt-2">
+                                            <div class="col-md-5 mt-2" id="upi_reason" style='display:none;'>
                                                 <h6 class="text-center float-right">reason</h6>
                                             </div>
-                                            <div class="col-md-6 mt-2">
+                                            <div class="col-md-6 mt-2" id="upi_reason_input" style='display:none;'>
                                                 <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                         <!-- </div> -->
@@ -479,6 +496,12 @@
                                             <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
+                                        <div class="col-md-6 mt-2" id="qr_reason" style='display:none;'>
+                                            <h6 class="text-center">reason</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2" id="qr_reason_input" style='display:none;'>
+                                            <input type="text" class="form-control" name="qr_reason_1" id="qr_reason_1" onkeyup="booking_qr_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">QR code Image</h6>
@@ -500,12 +523,23 @@
                                             <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select Name On Cheque</option>
+                                                <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
                                                 <?php
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
                                                 ?>
                                                     <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
                                                 <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                            <h6 class="text-center">Bank Name</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="cheque_bank_name_validate()">
+                                                <option value="">Select Transaction</option>
+
                                             </select>
                                         </div>
 
@@ -529,7 +563,14 @@
                                         <div class="col-md-6 mt-2">
                                             <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate_final_payment()" placeholder="Select Date">
                                         </div>
-                                    </div>
+
+                                        <div class="col-md-6 mt-2" id="cheque_reason" style='display:none;'>
+                                            <h6 class="text-center">reason</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2" id="cheque_reason_input" style='display:none;'>
+                                            <input type="text" class="form-control" name="cheque_reason_1" id="cheque_reason_1" onkeyup="booking_cheque_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        </div>
+                                        </div>
                                 </div>
 
 

@@ -8798,27 +8798,39 @@ $('#add_QR_code').validate({ // initialize the plugin
         role_name: {
             required: true,
         },
-        upi_id: {
-            required: true,
+        other_role: {
+            required: function(element) {
+                var action = $("#role_name").val();
+                if (action == "Other") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         },
-        mobile_number: {
+        "mobile_number[]": {
             required: true,
             maxlength: 10,
             minlength: 10
         },
-        image_name: {
+        "company_account_yes_no[]": {
             required: true,
         },
-        other_role: {
-                required: function(element) {
-                    var action = $("#role_name").val();
-                    if (action == "Other") {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
+        "bank_name[]": {
+            required: true,
+        },
+        "account_number[]": {
+            required: true,
+        },
+        "upi_app_name[]": {
+            required: true,
+        },
+        "upi_id[]": {
+            required: true,
+        },
+        "image_name[]": {
+            required: true,
+        }
     },
 
     messages :{
@@ -8828,24 +8840,32 @@ $('#add_QR_code').validate({ // initialize the plugin
         role_name : {
             required : "Please Select Role Name",
         },
-
         other_role : {
             required : "Please Enter other role Name",
         },
-
-        image_name : {
-            required : "Please upload QR code image",
-        },
-
-        upi_id : {
-            required : "Please Enter UPI Id",
-        },
-        mobile_number: {
+        "mobile_number[]": {
             required: "Please enter mobile number",
             maxlength: "Please enter maximum 10 digit number",
             minlength: "Please enter minimum 10 digit number"
+        },
+        "company_account_yes_no[]": {
+            required : "Please select is company account",
+        },
+        "bank_name[]": {
+            required : "Please enter bank name",
+        },
+        "account_number[]": {
+            required : "Please enter account number",
+        },
+        "upi_app_name[]": {
+            required : "Please select upi app name",
+        },
+        "upi_id[]": {
+            required : "Please enter upi id",
+        },
+        "image_name[]": {
+            required : "Please select image",
         }
-
     }
 
 });

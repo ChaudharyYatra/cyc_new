@@ -25,7 +25,7 @@ class Add_qr_code extends CI_Controller{
 
         $fields = "qr_code_master.*,role_type.role_name,qr_code_add_more.mobile_number,qr_code_add_more.upi_id,
         qr_code_add_more.account_number,qr_code_add_more.bank_name,qr_code_add_more.company_account_yes_no,qr_code_add_more.qr_code_image,qr_code_add_more.upi_app_name,
-        upi_apps_name.payment_app_name,qr_code_add_more.id as qr_add_more_id,qr_code_add_more.is_active as qr_code_is_active";
+        upi_apps_name.payment_app_name,qr_code_add_more.id as qr_add_more_id,qr_code_add_more.is_active as qr_code_is_active,qr_code_add_more.status,qr_code_add_more.reject_remark";
         $this->db->order_by('id','ASC');
         $this->db->where('qr_code_master.is_deleted','no');
         $this->db->where('qr_code_add_more.is_deleted','no');
@@ -111,6 +111,7 @@ class Add_qr_code extends CI_Controller{
                         'upi_app_name'   =>   $_POST["upi_app_name"][$i],
                         'qr_code_image'   =>   $fileData['file_name'],
                         'qr_code_master_id'  => $insertid,
+                        'status'  => 'no',
                         'agent_id' => $id
                     ); 
                                 

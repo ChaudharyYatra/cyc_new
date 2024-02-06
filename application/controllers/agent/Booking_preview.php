@@ -938,7 +938,7 @@ class Booking_preview extends CI_Controller {
         if($taluka_data == 'self'){
             // echo 'yessss'; die;
             $record = array();
-            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
+            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name,qr_code_add_more.bank_name";
             $this->db->where('qr_code_master.is_deleted','no');
             $this->db->where('qr_code_master.is_active','yes');
             $this->db->where('qr_code_add_more.is_active','yes');
@@ -958,7 +958,7 @@ class Booking_preview extends CI_Controller {
             // print_r($data); die;
         }else{
             $record = array();
-            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name";
+            $fields = "qr_code_master.*,qr_code_add_more.id as add_more_id,upi_apps_name.payment_app_name,qr_code_add_more.bank_name";
             $this->db->where('qr_code_master.is_deleted','no');
             $this->db->where('qr_code_master.is_active','yes');
             $this->db->where('qr_code_add_more.is_active','yes');

@@ -9,7 +9,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
+              <!-- <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
+              
             </ol>
           </div>
         </div>
@@ -33,17 +34,14 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <!-- <th>Full Name</th> -->
-                    <!-- <th>Role Name</th>
-                    <th>Other Role Name</th> -->
                     <th>Mobile Number</th>
                     <th>Bank Name</th>
-                    <th>Account Number</th>
+                    <th>Account Name</th>
                     <th>UPI App Name</th>
                     <th>UPI Id</th>
-                    <th>Is Active?</th>
-                    <th>Status</th>
-                    <th>Reject Reason</th>
+                    <th>Upload QR Image</th>
+                    <th>Request Date</th>
+                    <th>status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -53,32 +51,18 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['mobile_number'] ?></td> 
-                    <td><?php echo $info['bank_name'] ?></td>
-                    <td><?php echo $info['account_number'] ?></td>
-                    <td><?php echo $info['payment_app_name'] ?></td>
-                    <td><?php echo $info['upi_id'] ?></td>
-                    <!-- <td>
-                      <img src="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>" width="90px;" height="60px;" alt="Image"><br>
-                      <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>">Download</a>
-                    </td> -->
-                    <td>
-                        <?php 
-                        if($info['qr_code_is_active']=='yes')
-                          {
-                        ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['qr_add_more_id']); 
-							            echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
-                        <?php } else { ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['qr_add_more_id']); 
-							            echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
-                        <?php } ?>
-                    </td>
-
-                    <td><?php if($info['status']=='no' && $info['reject_remark'] != ''){
+					<td><?php echo $info['mobile_number'] ?></td>
+					<td><?php echo $info['bank_name'] ?></td>
+					<td><?php echo $info['account_number'] ?></td>
+					<td><?php echo $info['payment_app_name'] ?></td>
+					<td><?php echo $info['upi_id'] ?></td>
+					<td><img src="<?php echo base_url(); ?>uploads/QR_code_image/<?php echo $info['qr_code_image']; ?>" width="80px;" height="70px;" alt="QR Image"></td>
+					<td><?php echo date("d-m-Y",strtotime($info['qr_add_creat_date'])) ?></td>
+					<td><?php if($info['status']=='no' && $info['reject_remark'] != ''){
                         echo 'Disapproved'; ?>
                     <?php } else if($info['status']=='yes'){  
                         echo 'Approved'; ?>
@@ -86,27 +70,24 @@
                         echo 'Pending';?>
                     <?php } ?>
                     </td>
-                    
-                    <td><?php 
-                    if($info['status'] == 'no' && $info['reject_remark'] != ''){ 
-                       ?>
-                    <a data-toggle="modal" data-target="#myModal<?php echo $i; ?>"><button class="btn btn-primary btn-sm">view</button></a>
-                    <?php }else if($info['status'] == 'yes'){
-                      echo '--'; ?>
-                    <?php } else{ 
-                      echo '--';?>
-                    <?php } ?>
-                    </td>
-
                     <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['qr_add_more_id']); 
-					   echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['id']); 
-             echo rtrim($did, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['qr_add_more_id']); 
-					   echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                    <?php 
+                        if($info['status']=='no')
+                          {
+                        ?>
+                        <!-- <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //$aid=base64_encode($info['id']); 
+                      //echo rtrim($aid, '=').'/'.$info['status']; ?>/<?php //$did=base64_encode($info['qr_add_more_id']); 
+                      //echo rtrim($did, '=')?>"><button class="btn btn-success btn-sm">Approved</button></a> -->
+
+                      <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['id'].'/'.$info['status']; ?>/<?php echo $info['qr_add_more_id']; ?>"><button class="btn btn-success btn-sm">Approved</button></a>
+                                <?php } else { ?>
+                                <a data-toggle="modal" data-target="#myModal<?php echo $i; ?>"><button class="btn btn-danger btn-sm">Disapproved</button></a>
+                                <?php } ?>
                     </td>
                   </tr>
-                  
+
+                  <!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal<?php //echo $i; ?>" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a> -->
+                  <!-- id="exampleModal<?php //echo $i; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" -->
 
                   <div class="modal fade" id="myModal<?php echo $i; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -123,21 +104,21 @@
                                 <label class="col-form-label">Reason Remark:</label>
                                 <input type="hidden" class="form-control" name="qr_id" id="qr_id" value="<?php echo $info['id'] ?>">
                                 <input type="hidden" class="form-control" name="qr_add_more_id" id="qr_add_more_id" value="<?php echo $info['qr_add_more_id'] ?>">
-                                <textarea readonly class="form-control" name="reject_reason" id="reject_reason" required><?php echo $info['reject_remark'] ?></textarea>
+                                <textarea class="form-control" name="reject_reason" id="reject_reason" required></textarea>
                               </div>
                             </div>
                           </div>
-                          <!-- <div class="modal-footer"> -->
+                          <div class="modal-footer">
                             <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                             <!-- <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button> -->
-                            <!-- <a onclick="return confirm('Are You Sure You Want To submit This Follow Up Record?')" href="<?php //echo $module_url_path;?>/add"><button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button></a> -->
-                          <!-- </div> -->
+                            <a onclick="return confirm('Are You Sure You Want To submit This Follow Up Record?')" href="<?php echo $module_url_path;?>/add"><button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button></a>
+                          </div>
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                   <?php $i++; } ?>
                   
                   </tbody>

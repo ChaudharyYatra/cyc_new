@@ -86,13 +86,12 @@ class Booking_payment_details extends CI_Controller {
         $bus_seat_book_data = $this->master_model->getRecords('bus_seat_book',array('bus_seat_book.is_deleted'=>'no'),$fields);
         // print_r($bus_seat_book_data); die; 
 
-        // $record = array();
-        // $fields = "qr_code_master.*, qr_code_add_more.*,qr_code_add_more.id as add_more.id";
-        // $this->db->where('qr_code_master.is_deleted','no');
-        // $this->db->where('qr_code_master.is_active','yes');
-        // $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
-        // $this->db->group_by('full_name', 'asc'); 
-        // $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+        $record = array();
+        $fields = "qr_code_master.*,qr_code_add_more.*,qr_code_add_more.id as add_more.id,qr_code_add_more.account_number";
+        $this->db->where('qr_code_master.is_deleted','no');
+        $this->db->where('qr_code_master.is_active','yes');
+        $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
+        $upi_qr__add_more_data = $this->master_model->getRecords('qr_code_master');
 
 
         $this->db->where('is_deleted','no');
@@ -168,6 +167,7 @@ class Booking_payment_details extends CI_Controller {
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['enquiry']        = $enquiry;
+        $this->arr_view_data['upi_qr__add_more_data']        = $upi_qr__add_more_data;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
         $this->arr_view_data['return_customer_booking_payment_details']        = $return_customer_booking_payment_details;
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
@@ -443,6 +443,7 @@ class Booking_payment_details extends CI_Controller {
             $qr_payment_type = $this->input->post('qr_payment_type');
             $qr_transaction_date = $this->input->post('qr_transaction_date');
             $qr_upi_no = $this->input->post('qr_upi_no');
+            $qr_reason_1 = $this->input->post('qr_reason_1');
 
 
             $upi_no = $this->input->post('upi_no');
@@ -450,6 +451,8 @@ class Booking_payment_details extends CI_Controller {
             $bank_name = $this->input->post('bank_name');
             $name_on_cheque = $this->input->post('name_on_cheque');
             $drawn_on_date = $this->input->post('drawn_on_date');
+            $cheque_bank_name = $this->input->post('cheque_bank_name');
+            $cheque_reason_1 = $this->input->post('cheque_reason_1');
 
             $netbanking_payment_type = $this->input->post('netbanking_payment_type');
             $net_banking_acc_no = $this->input->post('net_banking_acc_no');
@@ -458,6 +461,7 @@ class Booking_payment_details extends CI_Controller {
             $net_banking_utr_no = $this->input->post('net_banking_utr_no');
             $netbanking_bank_name = $this->input->post('netbanking_bank_name');
             $netbanking_date = $this->input->post('netbanking_date');
+            $net_banking_reason_1 = $this->input->post('net_banking_reason_1');
 
             // $cash_2000 = $this->input->post('cash_2000');
             // $total_cash_2000 = $this->input->post('total_cash_2000');
@@ -567,12 +571,15 @@ class Booking_payment_details extends CI_Controller {
                     'QR_payment_type'   =>   $qr_payment_type,
                     'qr_transaction_date'   =>   $qr_transaction_date,
                     'QR_transaction_no'   =>   $qr_upi_no,
+                    'QR_reason'   =>   $qr_reason_1,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
                     'name_on_cheque'   =>   $name_on_cheque,
                     'drawn_on_date'   =>   $drawn_on_date,
+                    'cheque_select_bank_name'   =>   $cheque_bank_name,
+                    'cheque_reason'   =>   $cheque_reason_1,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
                     'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -581,6 +588,7 @@ class Booking_payment_details extends CI_Controller {
                     'net_banking'   =>   $net_banking_utr_no,
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
+                    'net_banking_reason'   =>   $net_banking_reason_1,
 
                     'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,
@@ -867,6 +875,7 @@ class Booking_payment_details extends CI_Controller {
                 $upi_payment_type = $this->input->post('upi_payment_type');
                 // print_r($upi_holder_name); die;
                 $upi_self_no = $this->input->post('upi_self_no');
+                $upi_transaction_date = $this->input->post('upi_transaction_date');
                 $upi_reason = $this->input->post('upi_reason');
 
                 $qr_holder_name = $this->input->post('qr_holder_name');

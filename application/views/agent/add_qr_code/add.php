@@ -36,7 +36,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data" id="add_QR_code">
+              <form method="post" enctype="multipart/form-data" id="add_QR_code_agent">
                 <div class="card-body">
                  <div class="row">
                     <div class="col-md-6">
@@ -46,33 +46,6 @@
                         </div>
                     </div>
                       
-                    <!-- <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Role Name</label>
-                            <select class="form-control" name="role_name" id="role_name" onchange='role_name_div(this.value);'>
-                            <option value="">Select Role Name</option>
-                            <option value="Other">Other</option>
-                            <?php //foreach($role_type_data as $role_type_data_value){ ?> 
-                                <option value="<?php //echo $role_type_data_value['id'];?>"><?php //echo $role_type_data_value['role_name'];?></option>
-                            <?php //} ?>
-                            </select>
-                        </div>
-                    </div> -->
-
-                    <div class="col-md-6" id="other_role_name" style='display:none;'>
-                        <div class="form-group">
-                        <label>Other role type</label>
-                        <input type="text" class="form-control mealplan_css" name="other_role" id="other_role" placeholder="Enter role name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                        </div>
-                    </div>
-
-                    <!-- <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Upload QR Image</label><br>
-                        <input type="file" name="image_name" id="image_name_gallery" required="required" accept="image/*">
-                        <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
-                        </div>
-                    </div>  -->
                     <div class="card-body">
                       <div class="row" id="edit_main_row_for_add_more_bank">
                         <div class="col-md-6">
@@ -130,7 +103,7 @@
                             <div class="form-group">
                               <label>Upload QR Image</label><br>
                               <input type="file" name="image_name[]" id="image_nam" required="required">
-                              <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                              <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
                             </div>
                         </div>
                         

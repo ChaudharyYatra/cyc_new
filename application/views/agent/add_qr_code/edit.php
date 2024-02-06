@@ -41,7 +41,7 @@
                    { 
                     // print_r($info); die;
                      ?>
-              <form method="post" enctype="multipart/form-data" id="edit_QR_code">
+              <form method="post" enctype="multipart/form-data" id="edit_QR_code_agent">
                 <div class="card-body">
                  <div class="row">
                     <div class="col-md-6">
@@ -51,35 +51,6 @@
                         </div>
                     </div>
                       
-                    <!-- <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Role Name</label>
-                            <select class="form-control" name="role_name" id="role_name" onchange='role_name_div(this.value);'>
-                            <option value="">Select Role Name</option>
-                            <option value="Other" <?php //if(isset($info['Role_name'])){if("Other" == $info['Role_name']) {echo 'selected';}}?>>Other</option>
-                            <?php //foreach($role_type_data as $role_type_data_value){ ?> 
-                                <option value="<?php //echo $role_type_data_value['id'];?>" <?php //if(isset($info['Role_name'])){if($role_type_data_value['id'] == $info['Role_name']) {echo 'selected';}}?>><?php echo $role_type_data_value['role_name'];?></option>
-                            <?php //} ?>
-                            </select>
-                        </div>
-                    </div> -->
-
-                    <?php if($info['Role_name']!='Other'){?>
-                    <div class="col-md-6" id="other_role_name" style='display:none;'>
-                        <div class="form-group">
-                        <label>Other role type</label>
-                        <input type="text" class="form-control mealplan_css" name="other_role" id="other_role" placeholder="Enter role name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                        </div>
-                    </div>
-                    <?php } else{ ?>
-                        <div class="col-md-6" id="other_role_name" style='display:block;'>
-                        <div class="form-group">
-                        <label>Other role type</label>
-                        <input type="text" class="form-control mealplan_css" name="other_role" id="other_role" value="<?php echo $info['other_role_name'];?>" placeholder="Enter role name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                        </div>
-                    </div>
-                    <?php } ?>
-
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Mobile Number</label>

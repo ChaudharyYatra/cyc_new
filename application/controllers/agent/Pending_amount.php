@@ -88,10 +88,10 @@ class Pending_amount extends CI_Controller {
         // print_r($bus_seat_book_data); die; 
 
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
-        // print_r($upi_qr_data); die;
+        // $this->db->where('is_deleted','no');
+        // $this->db->where('is_active','yes');
+        // $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+        // // print_r($upi_qr_data); die;
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -159,12 +159,26 @@ class Pending_amount extends CI_Controller {
         $relation_data = $this->master_model->getRecords('relation');
         // print_r($relation_data); die;
 
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('qr_code_master.is_agent','No');
+        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+        // print_r($upi_qr_data); die;
+
+        foreach($upi_qr_data as $upi_qr_data_id) 
+        { 
+            $upi_qr_master_id = $upi_qr_data_id['agent_id'];
+        }
+
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['relation_data']        = $relation_data;
         $this->arr_view_data['enquiry']        = $enquiry;
+        $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
+        $this->arr_view_data['upi_qr_master_id']        = $upi_qr_master_id; 
         $this->arr_view_data['enquiry_id']        = $enquiry_id;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
         $this->arr_view_data['booking_payment_details_all']        = $booking_payment_details_all;
@@ -829,18 +843,23 @@ class Pending_amount extends CI_Controller {
                 $upi_payment_type = $this->input->post('upi_payment_type');
                 // print_r($upi_holder_name); die;
                 $upi_self_no = $this->input->post('upi_self_no');
+                $upi_transaction_date = $this->input->post('upi_transaction_date');
                 $upi_reason = $this->input->post('upi_reason');
 
                 $qr_holder_name = $this->input->post('qr_holder_name');
                 $qr_mobile_number = $this->input->post('qr_mobile_number');
                 $qr_payment_type = $this->input->post('qr_payment_type');
                 $qr_upi_no = $this->input->post('qr_upi_no');
-
+                $qr_transaction_date = $this->input->post('qr_transaction_date');
+                $qr_reason_1 = $this->input->post('qr_reason_1');
 
                 $upi_no = $this->input->post('upi_no');
                 $cheque = $this->input->post('cheque');
                 $bank_name = $this->input->post('bank_name');
+                $name_on_cheque = $this->input->post('name_on_cheque');
                 $drawn_on_date = $this->input->post('drawn_on_date');
+                $cheque_bank_name = $this->input->post('cheque_bank_name');
+                $cheque_reason_1 = $this->input->post('cheque_reason_1');
 
                 $netbanking_payment_type = $this->input->post('netbanking_payment_type');
                 $net_banking_acc_no = $this->input->post('net_banking_acc_no');
@@ -849,6 +868,7 @@ class Pending_amount extends CI_Controller {
                 $net_banking_utr_no = $this->input->post('net_banking_utr_no');
                 $netbanking_bank_name = $this->input->post('netbanking_bank_name');
                 $netbanking_date = $this->input->post('netbanking_date');
+                $net_banking_reason_1 = $this->input->post('net_banking_reason_1');
 
                 // $cash_2000 = $this->input->post('cash_2000');
                 // $total_cash_2000 = $this->input->post('total_cash_2000');
@@ -987,16 +1007,21 @@ class Pending_amount extends CI_Controller {
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
                     'UPI_reason'   =>   $upi_reason,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
                     'QR_transaction_no'   =>   $qr_upi_no,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
+                    'QR_reason'   =>   $qr_reason_1,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
                     'drawn_on_date'   =>   $drawn_on_date,
+                    'cheque_select_bank_name'   =>   $cheque_bank_name,
+                    'cheque_reason'   =>   $cheque_reason_1,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
                     'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -1005,6 +1030,7 @@ class Pending_amount extends CI_Controller {
                     'net_banking'   =>   $net_banking_utr_no,
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
+                    'net_banking_reason'   =>   $net_banking_reason_1,
 
                     'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,
@@ -1053,16 +1079,22 @@ class Pending_amount extends CI_Controller {
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
                     'UPI_reason'   =>   $upi_reason,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
                     'QR_transaction_no'   =>   $qr_upi_no,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
+                    'QR_reason'   =>   $qr_reason_1,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
                     'drawn_on_date'   =>   $drawn_on_date,
+                    'cheque_select_bank_name'   =>   $cheque_bank_name,
+                    'cheque_reason'   =>   $cheque_reason_1,
+
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
                     'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -1071,6 +1103,7 @@ class Pending_amount extends CI_Controller {
                     'net_banking'   =>   $net_banking_utr_no,
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
+                    'net_banking_reason'   =>   $net_banking_reason_1,
 
                     'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,
