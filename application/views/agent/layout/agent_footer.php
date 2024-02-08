@@ -6846,7 +6846,7 @@ function empty() {
 
 <!-- <script type='text/javascript'>
   // baseURL variable
-  var baseURL= "<?php echo base_url();?>";
+  var baseURL= "<?php //echo base_url();?>";
  
   $(document).ready(function(){
  

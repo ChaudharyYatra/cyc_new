@@ -37,7 +37,7 @@
                   
                   <div class="row"> 
 
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Select District</label>
                         <select class="select_css" name="select_district" id="select_district" required="required">
@@ -51,28 +51,40 @@
                         </select>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Approximate Hall Rate</label>
                         <input type="text" class="form-control" name="approximate_hall_rate" id="approximate_hall_rate" placeholder="Enter enter approximate hall rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Total Person</label>
+                        <input type="text" class="form-control" name="hall_total_person" id="hall_total_person" placeholder="Enter enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                      </div>
+                    </div>
 
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                       <div class="form-group">
                         <label>Separate Room Rate</label>
                         <input type="text" class="form-control" name="separate_room_rate" id="separate_room_rate" placeholder="Enter enter separate soom rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Dharmshala Rate</label>
                         <input type="text" class="form-control" name="dharmshala_rate" id="dharmshala_rate" placeholder="Enter enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Total Person</label>
+                        <input type="text" class="form-control" name="dharmshala_total_person" id="dharmshala_total_person" placeholder="Enter enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                      </div>
+                    </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>State Tax</label>
                         <input type="text" class="form-control" name="state_tax" id="state_tax" placeholder="Enter Train Name" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
@@ -87,30 +99,71 @@
 
                   <hr>
 
-                  <div class="row" id="main_row"> 
+                  <h3 class="text-center">Hotel Room Rate</h3>
+                  <div class="row" id="hotel_room_main_row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Room Type</label>
+                        <select class="form-control" style="width: 100%;" name="room_select" id="room_select" required="required">
+                            <option value="">Select Room Type</option>
+                            <option value="1">Sunday</option>
+                            <option value="2">Monday</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Room Rate</label>
+                        <input type="text" class="form-control" name="room_rate" id="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Total Person</label>
+                        <input type="text" class="form-control" name="room_total_person" id="room_total_person" placeholder="Enter enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 mt-4">
+                      <div class="form-group">
+                        
+                        <button type="button" class="btn btn-success" name="add_more_room_details" value="add_more_room_details" id="add_more_room_details">Add More Room</button>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <hr>
+
+                  <div class="row" id="main_row"> 
+                    <div class="row mb-4" style="border: 1px solid #959595;padding: 1rem;">
+
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>Place Name</label>
                         <input type="text" class="form-control" name="Place_name[]" id="Place_name" placeholder="Enter Name" required="required">
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Opening Time</label>
                         <input type="time" class="form-control" name="opening_time[]" id="opening_time" placeholder="Enter opening time" required="required">
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <div class="form-group">
                         <label>Closing Time</label>
                         <input type="time" class="form-control" name="closing_time[]" id="closing_time" placeholder="Enter closing time" required="required">
                       </div>
                     </div>
                       
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>Open Days</label>
                         <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="open_days[]" id="open_days" required="required">
@@ -126,14 +179,7 @@
                       </div>
                     </div>
 
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label>Required Time will it take to see this place</label>
-                        <input type="text" class="form-control" name="req_time[]" id="req_time" placeholder="Enter time" required="required">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                       <label>Is It Entry Ticket Cost </span></label>
                       <div class="form-group">
                           <input type="radio" id="Yes" name="ticket_yes_no[]" value="Yes" > &nbsp;
@@ -142,14 +188,22 @@
                           <label>No</label><br>
                       </div>
                     </div>
-                    <div class="col-md-4 if_ticket_yes_div">
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Required Time will it take to see this place</label>
+                        <input type="text" class="form-control" name="req_time[]" id="req_time" placeholder="Enter time" required="required">
+                      </div>
+                    </div>
+
+                    <div class="col-md-2 if_ticket_yes_div">
                       <div class="form-group">
                           <label>Enter Ticket Cost </span></label>
                           <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost" placeholder="Enter cost" required="required" />
                       </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
                         <label>Allowed Vehicle Types</label>
                         <select class="select2" multiple="multiple" data-placeholder="Select Vehicle Types" style="width: 100%;" name="allow_vehicle_types[]" id="allow_vehicle_types" required="required">
@@ -164,13 +218,14 @@
                       </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
-                        <label>Enter Nearest Railway Station Name</label>
+                        <label>Nearest Railway Station Name</label>
                         <input type="text" class="form-control" name="railway_station_name[]" id="railway_station_name" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                       </div>
                     </div>
 
+                    </div>
                   </div>
                  
 
