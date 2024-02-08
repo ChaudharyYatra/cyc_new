@@ -50,21 +50,9 @@ class State extends CI_Controller{
             {
                 $state_name = $this->input->post('state_name');
                 $country_id = $this->input->post('country_id');
-                $state_permit_rate = $this->input->post('state_permit_rate');
-                $all_india_permit_rate = $this->input->post('all_india_permit_rate');
-                $daily_tax_rate = $this->input->post('daily_tax_rate');
-                $weekly_tax_rate = $this->input->post('weekly_tax_rate');
-                $monthly_tax_rate = $this->input->post('monthly_tax_rate');
-                $yearly_tax_rate = $this->input->post('yearly_tax_rate');
                 $arr_insert = array(
                     'state_name'   =>   $state_name,
-                    'country_id'   =>   $country_id,
-                    'state_permit_rate'   =>   $state_permit_rate,
-                    'all_india_permit_rate'   =>   $all_india_permit_rate,
-                    'daily_tax_rate'   =>   $daily_tax_rate,
-                    'weekly_tax_rate'   =>   $weekly_tax_rate,
-                    'monthly_tax_rate'   =>   $monthly_tax_rate,
-                    'yearly_tax_rate'   =>   $yearly_tax_rate,
+                    'country_id'   =>   $country_id
                     
                 );
                 

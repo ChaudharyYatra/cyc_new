@@ -36,12 +36,6 @@
                     <th>SN</th>
                     <th>Country Name</th>
                     <th>State Name</th>
-                    <th>State Permit Rate</th>
-                    <th>All India Permit Rate</th>
-                    <th>Daily Tax Rate</th>
-                    <th>Weekly Daily Tax Rate</th>
-                    <th>Monthly Tax Rate</th>
-                    <th>Yearly Tax Rate</th>
                     <th>Is Active?</th>
                     <th>Action</th>
                   </tr>
@@ -57,12 +51,6 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['country_name'] ?></td>
                     <td><?php echo $info['state_name'] ?></td>
-                    <td><?php echo $info['state_permit_rate'] ?></td>
-                    <td><?php echo $info['all_india_permit_rate'] ?></td>
-                    <td><?php echo $info['daily_tax_rate'] ?></td>
-                    <td><?php echo $info['weekly_tax_rate'] ?></td>
-                    <td><?php echo $info['monthly_tax_rate'] ?></td>
-                    <td><?php echo $info['yearly_tax_rate'] ?></td>
                     <td>
                         <?php 
                         if($info['is_active']=='yes')
