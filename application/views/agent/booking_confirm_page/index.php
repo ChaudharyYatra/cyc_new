@@ -88,7 +88,9 @@
 
             <!-- Button to trigger the first modal -->
             
+            <input type="hidden" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($mob_no_booking_payment)){ echo $mob_no_booking_payment['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
 
+            
             <!-- First Modal -->
             <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -106,7 +108,7 @@
                             <!-- Open the second modal when clicking "No" -->
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#reasonModal">No</button>
                             <!-- Link to proceed if "Yes" is clicked -->
-                            <a href="<?php echo $module_booking_payment_details; ?>/index/<?php echo $enquiry_id; ?>"><button type="button" class="btn btn-primary button_css" name="confirm_submit" id="confirm_submit">Yes</button></a>
+                            <a href="<?php echo $module_booking_payment_details; ?>/index/<?php echo $enquiry_id; ?>"><button type="button" class="btn btn-primary button_css" name="proceed_yes_submit" id="proceed_yes_submit">Yes</button></a>
                         </div>
                     </div>
                 </div>
@@ -125,6 +127,7 @@
                         <div class="modal-body">
                             <label for="later_payment_reason">Please enter reason why traveler cannot proceed with Receipt:</label>
                             <textarea class="form-control select_css" name="later_payment_reason" id="later_payment_reason" required></textarea>
+                            <input hidden type="radio" name="payment_now_later" id="payment_now_later" value="Later" checked>&nbsp;&nbsp;
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" name="reason_submit_button" value="submit_back" id="reason_submit_button">Submit & Proceed</button>

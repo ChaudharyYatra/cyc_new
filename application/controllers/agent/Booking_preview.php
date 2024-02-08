@@ -1029,7 +1029,7 @@ class Booking_preview extends CI_Controller {
         }
 
         public function get_self_upi_no(){
- 
+
             $selectedPaymentType = $this->input->post('selectedPaymentType');
                 // print_r($taluka_data); die;
     

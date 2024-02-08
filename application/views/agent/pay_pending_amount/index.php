@@ -363,6 +363,7 @@
                                                     <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
                                                 <?php } ?>
                                             </select>
+                                            <input type="hidden" readonly class="form-control" name="net_banking_company_acc_yes_no" id="net_banking_company_acc_yes_no">
                                         </div>
 
                                         <!-- <div class="col-md-6 mt-2">
@@ -489,7 +490,7 @@
                                         <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
-                                            <option class="self_upi" attr_self="self" value="<?php echo $upi_qr_master_id;?>">Self</option>
+                                            <option class="self_upi" attr_self="self" value="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -509,6 +510,7 @@
                                                 <option value="">Select Transaction</option>
 
                                             </select>
+                                            <input type="hidden" readonly class="form-control" name="company_acc_yes_no" id="company_acc_yes_no">
                                         </div>
 
                                         <!-- <div class="col-md-5 mt-2">
@@ -661,6 +663,7 @@
                                             <option value="">Select Transaction</option>
 
                                         </select>
+                                        <input type="hidden" readonly class="form-control" name="qr_company_acc_yes_no" id="qr_company_acc_yes_no">
                                     </div>
 
                                     <div class="col-md-6 mt-2">
@@ -739,7 +742,7 @@
                                         <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate_pending_payment()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select Name On Cheque</option>
-                                            <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
+                                            <option value="self" attr_self="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -747,6 +750,7 @@
                                                 <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
                                             <?php } ?>
                                         </select>
+                                        <input type="hidden" readonly class="form-control" name="cheque_company_acc_yes_no" id="cheque_company_acc_yes_no">
                                     </div>
 
 
@@ -785,7 +789,7 @@
                                         <h6 class="text-center">reason</h6>
                                     </div>
                                     <div class="col-md-6 mt-2" id="cheque_reason_input" style='display:none;'>
-                                        <input type="text" class="form-control" name="cheque_reason_1" id="cheque_reason_1" onkeyup="booking_cheque_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                        <input type="text" class="form-control" name="cheque_reason_1" id="cheque_reason_1" onkeyup="booking_cheque_reason_validate_pending_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                     </div>
                                 </div>
                             </div>

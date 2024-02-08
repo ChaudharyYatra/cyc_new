@@ -65,7 +65,6 @@
                     <td><?php echo date("d-m-Y",strtotime($info['booking_date'])); ?></td>
                     <td><?php echo $info['booking_reference_no'] ?></td>
                     <td><?php echo $info['payment_confirmed_status'] ?></td>
-                    
 
                     <td>
                     <a href="<?php echo $module_url_path;?>/details/<?php echo $info['enquiry_id']; ?>" ><button type="button" class="btn btn-primary btn_css">View</button></a>

@@ -158,6 +158,7 @@ class Booking_confirm_page extends CI_Controller {
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
+        $this->arr_view_data['mob_no_booking_payment']        = $mob_no_booking_payment;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['mob_no_booking_payment'] = $mob_no_booking_payment;
         $this->arr_view_data['enquiry']        = $enquiry;
@@ -244,7 +245,7 @@ class Booking_confirm_page extends CI_Controller {
                         'package_id' => $package_id,
                         'traveller_id' => $traveller_id,
                         'payment_reason' => $later_payment_reason,
-                        'payment_confirmed_status'   =>  'Pending'
+                        'payment_confirmed_status'   =>  'Payment Not Paid'
                     );
                     // print_r($arr_insert); die;
     
@@ -264,7 +265,7 @@ class Booking_confirm_page extends CI_Controller {
                 
 
                 $arr_insert = array(
-                    'payment_confirmed_status'   =>  'Pending'
+                    'payment_confirmed_status'   =>  'Payment Not Paid'
                 );
                 $record = array();
                 $fields = "final_booking.*";
@@ -291,5 +292,5 @@ class Booking_confirm_page extends CI_Controller {
        $this->arr_view_data['arr_data']        = $arr_data;
 
     }
-
+    
 }

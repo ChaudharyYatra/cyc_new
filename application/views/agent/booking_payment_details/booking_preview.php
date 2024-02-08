@@ -369,6 +369,8 @@
                                                     <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
                                                 <?php } ?>
                                             </select>
+
+                                            <input type="hidden" readonly class="form-control" name="net_banking_company_acc_yes_no" id="net_banking_company_acc_yes_no">
                                         </div>
 
                                         <!-- <div class="col-md-6 mt-2">
@@ -382,7 +384,7 @@
                                             <h6 class="text-center">Account Holder Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" readonly class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" readonly class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -396,7 +398,7 @@
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" readonly class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" onkeyup="netbank_bank_nm_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" readonly class="form-control" name="netbanking_bank_name" id="netbanking_bank_name" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -495,7 +497,8 @@
                                         <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
-                                            <option class="self_upi" attr_self="self" value="<?php echo $upi_qr_master_id;?>">Self</option>
+                                            <!-- value="<?php //echo $upi_qr_master_id;?>" -->
+                                            <option class="self_upi" attr_self="self" value="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -514,6 +517,7 @@
                                                 <option value="">Select Transaction</option>
                                                 <!-- Dynamic options will be added here using JavaScript -->
                                             </select>
+                                            <input type="hidden" readonly class="form-control" name="company_acc_yes_no" id="company_acc_yes_no">
                                         </div>
 
                                         <div class="col-md-5 mt-2">
@@ -624,7 +628,7 @@
                                         <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select UPI ID Holder Name</option>
-                                            <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
+                                            <option value="self" attr_self="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -643,6 +647,7 @@
                                             <option value="">Select Transaction</option>
 
                                         </select>
+                                        <input type="hidden" readonly class="form-control" name="qr_company_acc_yes_no" id="qr_company_acc_yes_no">
                                     </div>
 
                                     <div class="col-md-6 mt-2">
@@ -721,7 +726,7 @@
                                         <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate()">
                                         <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                             <option value="">Select Name On Cheque</option>
-                                            <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
+                                            <option value="self" attr_self="self">Self</option>
                                             <?php
                                                 foreach($upi_qr_data as $upi_qr_data_value) 
                                                 { 
@@ -739,6 +744,7 @@
                                             <option value="">Select Transaction</option>
 
                                         </select>
+                                        <input type="hidden" readonly class="form-control" name="cheque_company_acc_yes_no" id="cheque_company_acc_yes_no">
                                     </div>
 
                                     <div class="col-md-6 mt-2">

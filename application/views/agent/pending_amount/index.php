@@ -313,6 +313,8 @@
                                                         <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
                                                     <?php } ?>
                                                 </select>
+
+                                                <input type="hidden" readonly class="form-control" name="net_banking_company_acc_yes_no" id="net_banking_company_acc_yes_no">
                                             </div>
 
                                             <!-- <div class="col-md-6 mt-2">
@@ -378,7 +380,7 @@
                                             <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
-                                                <option class="self_upi" attr_self="self" value="<?php echo $upi_qr_master_id;?>">Self</option>
+                                                <option class="self_upi" attr_self="self" value="self">Self</option>
                                                 <?php
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
@@ -397,6 +399,7 @@
                                                 <option value="">Select Transaction</option>
 
                                             </select>
+                                            <input type="hidden" readonly class="form-control" name="company_acc_yes_no" id="company_acc_yes_no">
                                         </div>
                                         <!-- <div id="upi_no_reason_div" style='display:none;'> -->
                                             <!-- <div class="col-md-5 mt-2">
@@ -473,6 +476,7 @@
                                                 <option value="">Select Transaction</option>
 
                                             </select>
+                                            <input type="hidden" readonly class="form-control" name="qr_company_acc_yes_no" id="qr_company_acc_yes_no">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -523,7 +527,7 @@
                                             <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select Name On Cheque</option>
-                                                <option value="<?php echo $upi_qr_master_id;?>" attr_self="self">Self</option>
+                                                <option value="self" attr_self="self">Self</option>
                                                 <?php
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
@@ -537,10 +541,11 @@
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="cheque_bank_name_validate()">
+                                            <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="cheque_bank_name_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
+                                        <input type="hidden" readonly class="form-control" name="cheque_company_acc_yes_no" id="cheque_company_acc_yes_no">
                                         </div>
 
                                         <div class="col-md-6 mt-2">

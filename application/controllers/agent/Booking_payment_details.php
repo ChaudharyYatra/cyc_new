@@ -151,7 +151,7 @@ class Booking_payment_details extends CI_Controller {
 
         $fields = "booking_payment_details.*,qr_code_master.qr_code_image";
         $this->db->where('booking_payment_details.is_deleted','no');
-        // $this->db->where('booking_payment_details.QR_holder_name',$iid);
+        // $this->db->where('booking_payment_details.QR_holder_name',$iid); 
         $this->db->join("qr_code_master", 'booking_payment_details.QR_holder_name=qr_code_master.id','left');
         $qr_image_details = $this->master_model->getRecord('booking_payment_details');
         // print_r($qr_image_details); die;
@@ -160,7 +160,6 @@ class Booking_payment_details extends CI_Controller {
         $relation_data = $this->master_model->getRecords('relation');
         // print_r($relation_data); die;
 
-        
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
@@ -285,12 +284,14 @@ class Booking_payment_details extends CI_Controller {
             $mobile_no = $this->input->post('mobile_no');
             $pending_amt = $this->input->post('pending_amt');
             $payment_now_later = $this->input->post('payment_now_later');
+            // print_r($payment_now_later); die;
             $enquiry_id = $this->input->post('enquiry_id');
             $traveller_id = $this->input->post('traveller_id');
             $package_id = $this->input->post('package_id');
             $journey_date = $this->input->post('journey_date');
             $package_date_id = $this->input->post('package_date_id');
             $booking_payment_details_id = $this->input->post('booking_payment_details_id');
+            // print_r($booking_payment_details_id); die;
             $return_customer_booking_payment_id = $this->input->post('return_customer_booking_payment_id');
             $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
@@ -323,7 +324,7 @@ class Booking_payment_details extends CI_Controller {
                     
                     // print_r($arr_insert); die;
                     if(!empty($booking_payment_details)){
-                        $arr_where     = array("id" => $booking_payment_details_id);
+                        $arr_where     = array("enquiry_id" => $booking_payment_details_id);
                         $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
                     }else{
                      $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
@@ -371,7 +372,7 @@ class Booking_payment_details extends CI_Controller {
                     'package_id' => $package_id,
                     'traveller_id' => $traveller_id,
                     'payment_reason' => $later_payment_reason,
-                    'payment_confirmed_status'   =>  'Pending'
+                    'payment_confirmed_status'   =>  'Payment Not Paid'
                 );
                 // print_r($arr_insert); die;
 
@@ -415,6 +416,129 @@ class Booking_payment_details extends CI_Controller {
        }
 
     }
+
+
+    public function reason_submit_proceed_yes()
+    { 
+        // echo 'hiiiii IN Controller'; die;
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+            $payment_now_later = $this->input->post('payment_now_later');
+            $enquiry_id = $this->input->post('enquiry_id');
+            $traveller_id = $this->input->post('traveller_id');
+            $package_id = $this->input->post('package_id');
+            $journey_date = $this->input->post('journey_date');
+            $package_date_id = $this->input->post('package_date_id');
+            $booking_payment_details_id = $this->input->post('booking_payment_details_id');
+            // print_r($booking_payment_details_id); die;
+            $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
+
+                if($payment_now_later == 'Later'){
+                    $arr_insert = array(
+                        'payment_now_later'   =>   $payment_now_later,
+                        'booking_reference_no'  =>  $booking_reference_no,
+                        'package_date_id' => $package_date_id,
+                        'enquiry_id' => $enquiry_id,
+                        'package_id' => $package_id,
+                        'traveller_id' => $traveller_id,
+                        'payment_confirmed_status'   =>  'Payment Not Paid'
+                    );
+                    // print_r($arr_insert); die;
+    
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
+                    $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
+                    // print_r($booking_payment_details); die;
+                    
+                    // print_r($arr_insert); die;
+                    if(!empty($booking_payment_details)){
+                        $arr_where     = array("enquiry_id" => $booking_payment_details_id);
+                        $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                    }else{
+                     $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                     $insertid = $this->db->insert_id();
+                    }
+                    
+                }else{
+                    $alphabet = '1234567890';
+                    $otp = str_shuffle($alphabet);
+                    $traveler_otp = substr($otp, 0, '6'); 
+
+                    $from_email='test@choudharyyatra.co.in';
+                    
+                    $authKey = "1207168241267288907";
+                    
+                $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+                    
+                    
+                    $ch = curl_init($apiurl);
+                            $get_url = $apiurl;
+                            curl_setopt($ch, CURLOPT_POST,0);
+                            curl_setopt($ch, CURLOPT_URL, $get_url);
+                            curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+                            curl_setopt($ch, CURLOPT_HEADER,0);
+                            curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+                    $return_val = curl_exec($ch); 
+               
+                $arr_insert = array(
+                    'payment_now_later'   =>   $payment_now_later,
+                    'booking_reference_no'  =>  $booking_reference_no,
+                    'package_date_id' => $package_date_id,
+                    'enquiry_id' => $enquiry_id,
+                    'package_id' => $package_id,
+                    'traveller_id' => $traveller_id,
+                    'payment_confirmed_status'   =>  'Payment Not Paid'
+                );
+                // print_r($arr_insert); die;
+
+                $this->db->where('is_deleted','no');
+                $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
+                $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
+                // print_r($booking_payment_details); die;
+                
+                // print_r($arr_insert); die;
+                if(!empty($booking_payment_details)){
+                    $arr_where     = array("id" => $booking_payment_details_id);
+                    $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
+                }
+
+                $arr_insert = array(
+                    'payment_confirmed_status'   =>  'Payment Not Paid'
+                );
+                $record = array();
+                $fields = "final_booking.*";
+                $this->db->where('is_deleted','no');
+                $this->db->where('enquiry_id',$enquiry_id);
+                $final_booking_details = $this->master_model->getRecord('final_booking');
+
+                if(!empty($final_booking_details)){
+                    $arr_where     = array("enquiry_id" => $enquiry_id);
+                    $inserted_id = $this->master_model->updateRecord('final_booking',$arr_insert,$arr_where);
+                }else{
+                 $inserted_id = $this->master_model->insertRecord('booking_payment_details',$arr_insert,true);
+                 $insertid = $this->db->insert_id();
+                }
+
+        if($inserted_id!=''){
+           echo true;
+
+       }else {
+           echo false;
+       }
+
+    }
+
+
 
     public function cust_otp_back_btn()
     { 
