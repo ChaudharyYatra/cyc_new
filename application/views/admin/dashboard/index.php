@@ -373,7 +373,11 @@ function drawChart10() {
 
     </script>
 
-
+<style>
+  .css_amt_not_paid{
+    margin: 6%;
+  }
+</style>
  
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -709,6 +713,83 @@ function drawChart10() {
           </div>
           <?php } ?>
           <!-- ./col -->
+
+
+          <?php 
+            if($arr_data['booking_payment_details_not_paid_count'] >0 ){
+          ?> 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a class="underline" href="<?php echo base_url(); ?>admin/pending_booking_details/index">
+            
+            <div class="small-box bg-info">
+              <div class="inner">
+                <div class="css_amt_not_paid">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h3><?php echo $arr_data['booking_payment_details_not_paid_count']; ?></h3>
+                    </div>
+                    <div class="col-md-9">
+                      <p>Booking Done But Amount Not Paid</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+          <?php } ?>
+
+
+          <?php 
+            if($arr_data['booking_payment_details_in_process_count'] >0 ){
+          ?> 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a class="underline" href="<?php echo base_url(); ?>admin/in_process_booking_details/agent_index">
+            
+            <div class="small-box bg-success">
+              <div class="inner">
+                <div class="css_amt_not_paid">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h3><?php echo $arr_data['booking_payment_details_in_process_count']; ?></h3>
+                    </div>
+                    <div class="col-md-9">
+                      <p>Booking Done But Amount In Process</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+          <?php } ?>
+
+          <?php 
+            if($arr_data['booking_payment_details_in_process_count'] >0 ){
+          ?> 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a class="underline" href="<?php echo base_url(); ?>admin/final_booking_details/agent_index">
+            
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <div class="css_amt_not_paid">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <h3 style="color:white;"><?php echo $arr_data['booking_payment_details_in_process_count']; ?></h3>
+                    </div>
+                    <div class="col-md-9">
+                      <p style="color:white;">Booking Done And Amount Completed</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+          <?php } ?>
 
           
 

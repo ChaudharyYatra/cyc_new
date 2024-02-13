@@ -267,6 +267,42 @@ class Final_booking_details extends CI_Controller {
         
      }
 
+
+     public function agent_index()
+     {
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $iid = $this->session->userdata('agent_sess_id');
+
+         $record = array();
+         $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name,
+         booking_payment_details.enquiry_id as enq,booking_payment_details.srs_image_name,all_traveller_info.first_name,all_traveller_info.middle_name,
+         all_traveller_info.last_name,booking_payment_details.run_pending_amt,agent.agent_name";
+         $this->db->where('final_booking.is_deleted','no');
+        //  $this->db->where('final_booking.package_date_id',$id);
+         $this->db->where('all_traveller_info.for_credentials','yes');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
+         $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+         $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
+         $this->db->join("booking_payment_details", 'final_booking.enquiry_id=booking_payment_details.enquiry_id','right');
+         $this->db->join("all_traveller_info", 'final_booking.enquiry_id=all_traveller_info.domestic_enquiry_id','right');
+         $this->db->group_by('enquiry_id');
+         $this->db->join("agent", 'final_booking.agent_id=agent.id','right');
+         $arr_data = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
+
+        //  $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['listing_page']    = 'yes';
+         $this->arr_view_data['arr_data']        = $arr_data;
+         $this->arr_view_data['page_title']      = $this->module_title." List";
+         $this->arr_view_data['module_pending_amt'] = $this->module_pending_amt;
+         $this->arr_view_data['module_title']    = $this->module_title;
+         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['middle_content']  = $this->module_view_folder."agent_index";
+         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
+        
+     }
+
      
     public function cust_otp()
     { 

@@ -107,7 +107,6 @@ class Add_qr_code extends CI_Controller{
                         'is_agent'   => 'No',
                         'qr_code_master_id'  => $insertid
                     ); 
-                                
                     $inserted_id = $this->master_model->insertRecord('qr_code_add_more',$arr_insert,true);
                 }
                                

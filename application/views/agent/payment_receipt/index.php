@@ -162,13 +162,13 @@
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['select_transaction']; ?> - <?php echo $payment_receipt['cheque']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                         
                         <?php } else if($payment_receipt['select_transaction'] == 'UPI'){?>
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['upi_payment_type']; ?> - <?php echo $payment_receipt['upi_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['payment_app_name']; ?> - <?php echo $payment_receipt['upi_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 
                         <?php } else if($payment_receipt['select_transaction'] == 'Net Banking'){?>
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['netbanking_payment_type']; ?> - <?php echo $payment_receipt['net_banking_acc_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['netbanking_payment_type']; ?> - <?php echo $payment_receipt['account_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 
                         <?php } else if($payment_receipt['select_transaction'] == 'QR Code'){?>
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['QR_payment_type']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['payment_app_name']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                         
                         <?php } else if($payment_receipt['select_transaction'] == 'CASH'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="-" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
@@ -185,6 +185,12 @@
                         <?php } else if($payment_receipt['select_transaction'] == 'Net Banking'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['netbanking_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     
+                        <?php } else if($payment_receipt['select_transaction'] == 'UPI'){?>
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['upi_transaction_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+
+                        <?php } else if($payment_receipt['select_transaction'] == 'QR Code'){?>
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['qr_transaction_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+
                         <?php } else{?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="-" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <?php } ?>

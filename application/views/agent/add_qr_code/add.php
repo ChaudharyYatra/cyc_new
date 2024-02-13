@@ -95,7 +95,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>UPI ID</label>
-                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                         </div>
 

@@ -5535,6 +5535,8 @@ $(document).ready(function() {
         var package_date_id = $('#package_date_id').val();
         var traveller_id = $('#traveller_id').val();
         var booking_payment_details_id = $('#booking_payment_details_id').val();
+        var total_amt = $('#total_amt').val();
+        // alert(total_amt);
         // var booking_on = $('#booking_on').val();
         
          
@@ -5548,6 +5550,7 @@ $(document).ready(function() {
                     package_id: package_id,
                     journey_date: journey_date,
                     package_date_id: package_date_id,
+                    total_amt: total_amt,
                     traveller_id: traveller_id
                     // booking_on: booking_on
                 },
@@ -8861,7 +8864,7 @@ $("#payment_final_booking_submit").click(function() {
     // alert(pending_amt);
     // var payment_now_later = $('#payment_now_later').val();
     var payment_now_later = $("input[name='payment_now_later']:checked").val();
-    alert(payment_now_later);
+    // alert(payment_now_later);
 
     var upi_no = $('#upi_no').val();
     var cheque = $('#cheque').val();
@@ -9353,25 +9356,31 @@ $(document).ready(function() {
 <script>
     $(document).ready(function(){
         $("#booking_amt").on("keyup", function() {
- 
             var enquiry_id=$("#enquiry_id").val();
+            // alert(enquiry_id);
             var final_amt=$("#final_amt").val();
-            var current_val=$(this).val();
+            // alert(final_amt);
+            var current_val=$("#booking_amt").val();
+            // alert(current_val);
+
             $.ajax({
                 url:'<?=base_url()?>agent/pay_pending_amount/get_payment_type',
                 method: 'post',
                 data: {enquiry_id: enquiry_id},
                 dataType: 'json',
                 success: function(response){
-                // console.log(response);
+                console.log(response);
                 if(response.length === 0 && current_val!=final_amt)
                 {
+                    // alert('jjjjjjjjj');
                     $('#payment_type_advance').prop("checked", true);
-                }else if(response.length === 0 && current_val==final_amt)
+                }else if(response.length === 0 && current_val===final_amt)
                 {
+                    // alert('bbbbbbbbb');
                     $('#payment_type_full').prop("checked", true);
                 }else if(response.length != 0)
                 {
+                    // alert('fffffffffffff');
                     $('#payment_type_part').prop("checked", true);
                 }
  

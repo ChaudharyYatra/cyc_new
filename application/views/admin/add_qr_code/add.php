@@ -86,9 +86,9 @@
                         <div class="col-md-6">
                           <label>Is This A Company Account ?</label>
                           <div class="form-group">
-                              <input type="radio" id="Yes" name="company_account_yes_no[]" value="Yes" > &nbsp;
+                              <input type="radio" id="Yes" name="company_account_yes_no[$i]" value="Yes" > &nbsp;
                               <label>Yes</label>  &nbsp; &nbsp; 
-                              <input type="radio" id="No" name="company_account_yes_no[]" value="No"> &nbsp;
+                              <input type="radio" id="No" name="company_account_yes_no[$i]" value="No"> &nbsp;
                               <label>No</label><br>
                           </div>
                         </div>
@@ -122,7 +122,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>UPI ID</label>
-                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                             </div>
                         </div>
 

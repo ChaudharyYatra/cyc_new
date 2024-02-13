@@ -490,7 +490,7 @@
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" onchange="qr_transaction_date_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                            <input type="date" class="form-control" onchange="qr_transaction_date_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                         </div>
 
                                         <div class="col-md-6 mt-2">
