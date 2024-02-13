@@ -100,42 +100,43 @@
                   <hr>
 
                   <h3 class="text-center">Hotel Room Rate</h3>
-                  <div class="row" id="hotel_room_main_row">
 
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Room Type</label>
-                        <select class="form-control" style="width: 100%;" name="room_select" id="room_select" required="required">
-                            <option value="">Select Room Type</option>
-                            <option value="1">Sunday</option>
-                            <option value="2">Monday</option>
-                        </select>
-                      </div>
+                    <table class="table table-bordered" id="hotel_room_table">
+                        <thead>
+                            <tr>
+                                <th>Room Type</th>
+                                <th>Room Rate</th>
+                                <th>Total Person</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hotel_room_body">
+                            <tr>
+                                <td>
+                                    <select class="form-control" style="width: 100%;" name="room_select" required="required">
+                                        <option value="">Select Room Type</option>
+                                        <option value="1">Sunday</option>
+                                        <option value="2">Monday</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="room_total_person" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn_remove" disabled>X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-success" name="add_more_room_details" id="add_more_room_details">Add More Room</button>
+                        </div>
                     </div>
-
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Room Rate</label>
-                        <input type="text" class="form-control" name="room_rate" id="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Total Person</label>
-                        <input type="text" class="form-control" name="room_total_person" id="room_total_person" placeholder="Enter enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3 mt-4">
-                      <div class="form-group">
-                        
-                        <button type="button" class="btn btn-success" name="add_more_room_details" value="add_more_room_details" id="add_more_room_details">Add More Room</button>
-
-                      </div>
-                    </div>
-
-                  </div>
 
                   <hr>
 

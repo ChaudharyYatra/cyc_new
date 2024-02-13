@@ -8678,63 +8678,40 @@ $(document).on('click', '.btn_remove', function(){
 
 </script>
 
-<script>
+    <script>
+        var i = 1;
 
-    var i=1;
-    
-    $('#add_more_room_details').click(function() {
-        
-       // alert('hhhh');
+        $('#add_more_room_details').click(function() {
             i++;
-            
-        var structure = $(`<div class="col-md-12">
-                            <div class="row mb-4" id="new_row`+i+`" style="border: 1px solid #959595;padding: 1rem;"> 
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Room Type</label>
-                                        <select class="form-control" style="width: 100%;" name="room_select" id="room_select" required="required">
-                                            <option value="">Select Room Type</option>
-                                            <option value="1">Sunday</option>
-                                            <option value="2">Monday</option>
-                                        </select>
-                                    </div>
-                                </div>
+            var structure = $(`
+                <tr id="new_row${i}">
+                    <td>
+                        <select class="form-control" style="width: 100%;" name="room_select" required="required">
+                            <option value="">Select Room Type</option>
+                            <option value="1">Sunday</option>
+                            <option value="2">Monday</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="room_total_person" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
+                    </td>
+                </tr>
+            `);
+            $('#hotel_room_body').append(structure);
+        });
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Room Rate</label>
-                                        <input type="text" class="form-control" name="room_rate" id="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Total Person</label>
-                                        <input type="text" class="form-control" name="room_total_person" id="room_total_person" placeholder="Enter enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                                    </div>
-                                </div>
-                            
-
-                                <div class="col-md-2 pt-4 d-flex justify-content-center align-self-center">
-                                    <div class="form-group">
-                                        <label></label>
-                                        <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`);
-    $('#hotel_room_main_row').append(structure); 
-
-});
-
-
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
-      });
-
-</script>
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#new_row' + button_id).remove();
+        });
+    </script>
 
 <script>
 $(document).ready(function () {
