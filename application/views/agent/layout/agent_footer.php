@@ -5794,6 +5794,29 @@ $('#submit_otp').keyup(function(){
   
 </script>
 
+<script>
+function validate() {
+    // Get values from the input boxes
+    var finalAmt = parseFloat(document.getElementById('final_amt').value);
+    var bookingAmt = parseFloat(document.getElementById('booking_amt').value);
+
+    // Calculate remaining amount
+    var remainingAmt = finalAmt - bookingAmt;
+
+    // Check if remaining amount is less than zero
+    if (remainingAmt < 0) {
+        alert("Remaining amount goes greater then final amount!");
+        // Reset the booking amount to prevent going below 0
+        document.getElementById('booking_amt').value = finalAmt;
+        // Recalculate remaining amount
+        remainingAmt = 0;
+    }
+
+    // Update the pending amount input box
+    document.getElementById('pending_amt').value = remainingAmt;
+}
+</script>
+
 
 <script>
 $(document).ready(function(){
