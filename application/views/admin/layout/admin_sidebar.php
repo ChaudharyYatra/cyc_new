@@ -883,7 +883,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>admin/pending_booking_details/index" class="nav-link">
+                    <a href="<?php echo base_url(); ?>admin/pending_booking_details/agent_index" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Pending Payment Booking
@@ -892,10 +892,19 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>admin/final_booking_details/index" class="nav-link">
+                    <a href="<?php echo base_url(); ?>admin/in_process_booking_details/agent_index" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
-                            Final Booking
+                            Inprocess Booking Payment
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/final_booking_details/agent_index" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Final Booking Completed
                         </p>
                     </a>
                 </li>

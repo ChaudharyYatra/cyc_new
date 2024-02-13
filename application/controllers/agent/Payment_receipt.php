@@ -63,8 +63,86 @@ class Payment_receipt extends CI_Controller {
         // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
         $this->db->join("packages", 'final_booking.package_id=packages.id','left');
         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
-        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
-        // print_r($payment_receipt); die;
+        $details_payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($details_payment_receipt); die;
+
+        if($details_payment_receipt['select_transaction'] == 'UPI'){
+            $record = array();
+            $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+            all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+            package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+            $this->db->where('final_booking.is_deleted','no');
+            $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+            $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+            $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+            $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+            $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+            $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+            $this->db->join("qr_code_add_more", 'booking_payment_details.upi_payment_type=qr_code_add_more.id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+            // print_r($payment_receipt); die;
+        }else if($details_payment_receipt['select_transaction'] == 'QR Code'){
+            $record = array();
+            $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+            all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+            package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+            $this->db->where('final_booking.is_deleted','no');
+            $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+            $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+            $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+            $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+            $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+            $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+            $this->db->join("qr_code_add_more", 'booking_payment_details.QR_payment_type=qr_code_add_more.id and booking_payment_details.QR_payment_type=qr_code_add_more.id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+            // print_r($payment_receipt); die;
+        }else if($details_payment_receipt['select_transaction'] == 'Net Banking'){
+            $record = array();
+            $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+            all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+            package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,,qr_code_add_more.account_number";
+            $this->db->where('final_booking.is_deleted','no');
+            $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+            $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+            $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+            $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+            $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+            $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+            $this->db->join("qr_code_add_more", 'booking_payment_details.net_banking_acc_no=qr_code_add_more.id');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+            // print_r($payment_receipt); die;
+        }else if($details_payment_receipt['select_transaction'] == 'Cheque'){
+            $record = array();
+            $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+            all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+            package_date.journey_date,booking_payment_details.id as booking_payement_id";
+            $this->db->where('final_booking.is_deleted','no');
+            $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+            $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+            $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+            $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+            $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+            $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+            $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+            // print_r($payment_receipt); die;
+        }else{
+            $record = array();
+            $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+            all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+            package_date.journey_date,booking_payment_details.id as booking_payement_id";
+            $this->db->where('final_booking.is_deleted','no');
+            $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+            $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+            $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+            $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+            $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+            $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+            $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+            // print_r($details_payment_receipt); die;
+        }
 
         $payment_rupee = $payment_receipt['booking_amt'];
         // print_r($payment_rupee); die;
@@ -164,8 +242,96 @@ public function index_pending($iid,$booking_payment_details_id)
    // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
    $this->db->join("packages", 'final_booking.package_id=packages.id','left');
    $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
-   $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+   $details_payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
    // print_r($payment_receipt); die;
+
+   if($details_payment_receipt['select_transaction'] == 'UPI'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $this->db->join("qr_code_add_more", 'booking_payment_details.upi_payment_type=qr_code_add_more.id','left');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt); die;
+   }else if($details_payment_receipt['select_transaction'] == 'QR Code'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $this->db->join("qr_code_add_more", 'booking_payment_details.QR_payment_type=qr_code_add_more.id');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt); die;
+   }else if($details_payment_receipt['select_transaction'] == 'Net Banking'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,,qr_code_add_more.account_number";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $this->db->join("qr_code_add_more", 'booking_payment_details.net_banking_acc_no=qr_code_add_more.id');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt); die;
+   }else if($details_payment_receipt['select_transaction'] == 'Cheque'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt); die;
+   }else{
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt); die;
+   }
 
    $payment_rupee = $payment_receipt['booking_amt'];
    // print_r($payment_rupee); die;
@@ -229,6 +395,8 @@ return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
 
 public function index_final($iid,$booking_payment_details_id)
 {
+    // print_r($iid);  die;
+    // print_r($booking_payment_details_id); die;
    $agent_sess_name = $this->session->userdata('agent_name');
    $id=$this->session->userdata('agent_sess_id');
    // if($this->input->post('submit'))
@@ -248,9 +416,9 @@ public function index_final($iid,$booking_payment_details_id)
    $this->db->where('all_traveller_info.for_credentials','yes');
    $this->db->join("relation", 'relation.id=all_traveller_info.all_traveller_relation','left');
    $arr_data = $this->master_model->getRecord('all_traveller_info',array('all_traveller_info.is_deleted'=>'no'),$fields);
-   // print_r($arr_data); die;
+//    print_r($arr_data); die;
    $traveller_id = $arr_data['id'];
-   // print_r($traveller_id); die;
+//    print_r($traveller_id); die;
 
    $record = array();
    $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
@@ -265,11 +433,110 @@ public function index_final($iid,$booking_payment_details_id)
    // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
    $this->db->join("packages", 'final_booking.package_id=packages.id','left');
    $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
-   $payment_receipt = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
-//    print_r($payment_receipt); die;
+   $details_payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+//    print_r($details_payment_receipt); die;
+
+   if($details_payment_receipt['select_transaction'] == 'UPI'){
+    $record = array();
+    $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+    all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+    package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+    $this->db->where('final_booking.is_deleted','no');
+    $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+    $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+    $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+    $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+    $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+    // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+    $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+    $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+    $this->db->join("qr_code_add_more", 'booking_payment_details.upi_payment_type=qr_code_add_more.id','left');
+    $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+    $payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+ //    print_r($details_payment_receipt); die;
+//  echo '1';
+   }else if($details_payment_receipt['select_transaction'] == 'QR Code'){
+    $record = array();
+    $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+    all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+    package_date.journey_date,booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name";
+    $this->db->where('final_booking.is_deleted','no');
+    $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+    $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+    $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+    $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+    $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+    // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+    $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+    $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+    $this->db->join("qr_code_add_more", 'booking_payment_details.QR_payment_type=qr_code_add_more.id');
+    $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+    $payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+ //    print_r($details_payment_receipt); die;
+//  echo '2';
+
+    }else if($details_payment_receipt['select_transaction'] == 'Net Banking'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id,qr_code_add_more.account_number";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $this->db->join("qr_code_add_more", 'booking_payment_details.net_banking_acc_no=qr_code_add_more.id');
+        $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+        $payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($payment_receipt);
+//  echo '3';
+
+    }else if($details_payment_receipt['select_transaction'] == 'Cheque'){
+        $record = array();
+        $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+        all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+        package_date.journey_date,booking_payment_details.id as booking_payement_id";
+        $this->db->where('final_booking.is_deleted','no');
+        $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+        $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+        $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+        $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+        $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+        // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+        $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+        $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+        $payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+     //    print_r($details_payment_receipt); die;
+//  echo '4';
+
+   }else{
+    $record = array();
+    $fields = "final_booking.*,booking_payment_details.*,agent.agent_name,all_traveller_info.mr/mrs,all_traveller_info.first_name,
+    all_traveller_info.middle_name,all_traveller_info.last_name,packages.tour_number,packages.tour_title,
+    package_date.journey_date,booking_payment_details.id as booking_payement_id";
+    $this->db->where('final_booking.is_deleted','no');
+    $this->db->where('booking_payment_details.traveller_id',$traveller_id);
+    $this->db->where('booking_payment_details.id',$booking_payment_details_id);
+    $this->db->join("booking_payment_details", 'final_booking.traveller_id=booking_payment_details.traveller_id','left');
+    $this->db->join("agent", 'final_booking.agent_id=agent.id','left');
+    $this->db->join("all_traveller_info", 'final_booking.traveller_id=all_traveller_info.id','left');
+    // $this->db->join("courtesy_titles", 'all_traveller_info.mr/mrs=courtesy_titles.id','left');
+    $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+    $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+    $payment_receipt  = $this->master_model->getRecord('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+ //    print_r($details_payment_receipt); die;
+//  echo '5';
+
+    }
+
+    // print_r($payment_receipt); die;
 
    $payment_rupee = $payment_receipt['booking_amt'];
-   // print_r($payment_rupee); die;
+//    print_r($payment_rupee); die;
    // $payment_rupee = $payment_receipt['booking_amt']=== null ? 0 : count($payment_receipt['booking_amt']);
 
    // $len = $cOTLdata['char_data'] === null ? 0 : count($cOTLdata['char_data']);

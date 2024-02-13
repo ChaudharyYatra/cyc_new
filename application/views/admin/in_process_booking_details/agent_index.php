@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/agent_index"><button class="btn btn-primary">back</button></a>
+              <!-- <a href="<?php //echo $module_url_path; ?>/agent_index"><button class="btn btn-primary">back</button></a> -->
             </ol>
           </div>
         </div>
@@ -33,8 +33,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Package Name</th>
-                    <th>Package Date</th>
+                    <th>Agent Name</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -45,22 +44,15 @@
                    foreach($arr_data as $info) 
                    { 
                      ?>
-                  <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo $info['tour_title'] ?></td>
-                    <td><?php echo date("d-m-Y",strtotime($info['journey_date'])); ?></td>
-                    <td>
-                    <a href="<?php echo $module_url_path;?>/sub_index/<?php echo $info['p_date_id']; ?>" ><button type="button" class="btn btn-primary">View Details</button></a>
-                     
-                    </td>
-                    
-                    
-                  </tr>
-                  
-                  <?php $i++; } ?>
-                  
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $info['agent_name'] ?></td>
+                        <td>
+                        <a href="<?php echo $module_url_path;?>/index/<?php echo $info['package_id']; ?>" ><button type="button" class="btn btn-primary">View In Process Payment Details</button></a>
+                        </td>
+                    </tr>
+                    <?php $i++; } ?>
                   </tbody>
-                  
                 </table>
                  <?php } else
                 { echo '<div class="alert alert-danger alert-dismissable">

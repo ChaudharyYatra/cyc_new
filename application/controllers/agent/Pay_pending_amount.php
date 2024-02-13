@@ -1097,12 +1097,14 @@ class Pay_pending_amount extends CI_Controller {
                     'UPI_holder_name'   =>   $upi_holder_name,
                     'upi_payment_type'   =>   $upi_payment_type,
                     'UPI_transaction_no'   =>   $upi_self_no,
+                    'upi_transaction_date'   =>   $upi_transaction_date,
                     'UPI_reason'   =>   $upi_reason,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
                     'QR_payment_type'   =>   $qr_payment_type,
                     'QR_transaction_no'   =>   $qr_upi_no,
+                    'qr_transaction_date'   =>   $qr_transaction_date,
 
                     'upi_no'   =>   $upi_no,
                     'cheque'   =>   $cheque,
@@ -1676,11 +1678,13 @@ class Pay_pending_amount extends CI_Controller {
         $today= date('Y-m-d');
         $enquiry_id = $this->input->post('enquiry_id');
          // print_r($boarding_office_location); die;
+
+        //  if()
                          $this->db->where('is_deleted','no');
-                         // $this->db->where('is_active','yes');
+                         $this->db->where('payment_confirmed_status !=','Payment Not Paid');
                          $this->db->where('enquiry_id',$enquiry_id);
                          $data = $this->master_model->getRecords('booking_payment_details');
-                         // print_r($data); die;
-         echo json_encode($data);
-     }
+                        //  print_r($data); die;
+        echo json_encode($data);
+    }
 }

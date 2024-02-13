@@ -35,6 +35,7 @@ class Assign_staff extends CI_Controller{
         $this->db->join("package_type", 'packages.package_type=package_type.id','left');
         $this->db->join("bus_open", 'package_date.id=bus_open.package_date_id and packages.id=bus_open.package_id','left');
         $this->db->where('bus_open.bus_open_status','yes');
+        $this->db->group_by('final_booking.package_id','final_booking.package_date_id');
         $arr_data = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
     //    print_r($arr_data); die;
 

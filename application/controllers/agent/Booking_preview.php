@@ -196,7 +196,7 @@ class Booking_preview extends CI_Controller {
             $journey_date = $this->input->post('journey_date');
             $package_date_id = $this->input->post('package_date_id');
             $booking_payment_details_id = $this->input->post('booking_payment_details_id');
-            // $booking_on = $this->input->post('booking_on');
+            $total_amt = $this->input->post('total_amt');
 
             $arr_insert = array(
                 'enquiry_id' => $enquiry_id,
@@ -224,6 +224,8 @@ class Booking_preview extends CI_Controller {
                     'package_id' => $package_id,
                     'traveller_id' => $traveller_id,
                     'package_date_id' => $package_date_id,
+                    'agent_id'   =>  $id,
+                    'final_amt'   =>  $total_amt,
                     'booking_preview_status'   =>  'Done'
                 );
                 // print_r($arr_insert); die;

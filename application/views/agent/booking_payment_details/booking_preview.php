@@ -223,9 +223,9 @@
 
                                 <tr id="payment_type_tr" style='display:contents;'>
                                     <th>Payment Type</th>
-                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Advance" <?php if(!empty($booking_payment_details['payment_type'])){if("Advance" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Advance
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Part" <?php if(!empty($booking_payment_details['payment_type'])){if("Part" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Part
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type" value="Full" <?php if(!empty($booking_payment_details['payment_type'])){if("Full" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Full</td>
+                                    <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_advance" value="Advance" <?php if(!empty($booking_payment_details['payment_type'])){if("Advance" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Advance
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_part" value="Part" <?php if(!empty($booking_payment_details['payment_type'])){if("Part" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Part
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_full" value="Full" <?php if(!empty($booking_payment_details['payment_type'])){if("Full" == $booking_payment_details['payment_type']) {echo 'checked';}}?>>&nbsp;&nbsp;Full</td>
                                     
                                 </tr>
 
