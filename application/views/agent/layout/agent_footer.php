@@ -5348,6 +5348,10 @@ $(document).ready(function() {
 </script>
 <!-- -==============================return to customer -->
 
+
+
+<!--  -->
+
 <script>
 $(document).ready(function() {
     $('#final_booking_preview').validate({ // initialize the plugin
