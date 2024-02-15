@@ -50,7 +50,7 @@
                     <td><?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td>
-                    <a href="<?php echo $module_url_path;?>/sub_index/<?php echo $info['p_date_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+                    <a href="<?php echo $module_url_path;?>/sub_index/<?php echo $info['agent_id']; ?>/<?php echo $info['package_id']; ?>/<?php echo $info['package_date_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
                      
                     </td>
                     

@@ -217,7 +217,7 @@
                                 <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Depositing Amount</th>
                                     <td>
-                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" required onkeyup="validate()">
+                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" required onkeyup="pending_amt_not_greater()">
                                     </td>
                                 </tr>
                                 <tr id="payment_type_tr" style='display:contents;'>

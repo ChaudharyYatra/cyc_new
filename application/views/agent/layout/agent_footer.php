@@ -5798,7 +5798,8 @@ $('#submit_otp').keyup(function(){
 </script>
 
 <script>
-function validate() {
+//============= firstly booking ======================================== 
+function booking_amt_not_greater() {
     // Get values from the input boxes
     var finalAmt = parseFloat(document.getElementById('final_amt').value);
     var bookingAmt = parseFloat(document.getElementById('booking_amt').value);
@@ -5818,6 +5819,59 @@ function validate() {
     // Update the pending amount input box
     document.getElementById('pending_amt').value = remainingAmt;
 }
+//============= firstly booking ======================================== 
+
+//============= final booking ======================================== 
+function final_amt_not_greater() {
+    // Get values from the input boxes
+    var updatepending_amt = parseFloat(document.getElementById('updatepending_amt').value);
+    // alert(result_box);
+    var next_booking_amt = parseFloat(document.getElementById('next_booking_amt').value);
+    // alert(next_booking_amt);
+    // Calculate remaining amount
+    var remainingAmt = updatepending_amt - next_booking_amt;
+    // alert(remainingAmt);
+
+    // Check if remaining amount is less than zero
+    if (remainingAmt < 0) {
+        alert("You Entered Wrong Amount");
+        // Reset the booking amount to prevent going below 0
+        document.getElementById('next_booking_amt').value = updatepending_amt;
+        // Recalculate remaining amount
+        remainingAmt = 0;
+    }
+
+    // Update the pending amount input box
+    document.getElementById('result_box').value = remainingAmt;
+}
+//============= final booking ======================================== 
+
+//============= Pending booking ======================================== 
+function pending_amt_not_greater() {
+    // Get values from the input boxes
+    var finalAmt = parseFloat(document.getElementById('final_amt').value);
+    var bookingAmt = parseFloat(document.getElementById('booking_amt').value);
+    var pending_amt = parseFloat(document.getElementById('pending_amt').value);
+
+    // if(finalAmt == pending_amt){
+        // Calculate remaining amount
+        var remainingAmt = finalAmt - bookingAmt;
+
+        // Check if remaining amount is less than zero
+        if (remainingAmt < 0) {
+            alert("Remaining amount goes greater then final amount!");
+            // Reset the booking amount to prevent going below 0
+            document.getElementById('booking_amt').value = finalAmt;
+            // Recalculate remaining amount
+            remainingAmt = 0;
+        }
+
+        // Update the pending amount input box
+        document.getElementById('pending_amt').value = remainingAmt;
+    // }
+}
+//============= Pending booking ======================================== 
+
 </script>
 
 
@@ -9337,7 +9391,7 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     $("#pending_amt_re_send_otp").click(function() {
-        alert('hiiiiiiiiiii');
+        // alert('hiiiiiiiiiii');
         var booking_tm_mobile_no = $('#booking_tm_mobile_no').val();  
         var enquiry_id = $('#enquiry_id').val();
         

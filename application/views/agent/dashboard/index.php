@@ -234,7 +234,7 @@ function drawChart() {
           <?php } ?>
 
           <?php 
-            if($arr_data['booking_payment_details_in_process_count'] >0 ){
+            if($arr_data['booking_payment_details_completed_count'] >0 ){
           ?> 
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -245,7 +245,7 @@ function drawChart() {
                 <div class="css_amt_not_paid">
                   <div class="row">
                     <div class="col-md-2">
-                      <h3 style="color:white;"><?php echo $arr_data['booking_payment_details_in_process_count']; ?></h3>
+                      <h3 style="color:white;"><?php echo $arr_data['booking_payment_details_completed_count']; ?></h3>
                     </div>
                     <div class="col-md-10">
                       <p style="color:white;">Booking Done And Amount Completed</p>

@@ -52,7 +52,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_final_booking_details; ?>/sub_index/<?php echo $enquiry_id ?>"><button class="btn btn-primary">Back</button></a>
+              <a href="<?php echo $module_url_final_booking_details; ?>/sub_index/<?php echo $p_id;?>/<?php echo $p_date_id;?>"><button class="btn btn-primary">Back</button></a>
             </ol>
           </div>
         </div>
@@ -216,7 +216,7 @@
                                 <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Depositing Amount</th>
                                     <td>
-                                    <input type="text" class="form-control" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required>
+                                    <input type="text" class="form-control" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required onkeyup="final_amt_not_greater()">
                                     </td>
                                 </tr>
                                 <tr id="payment_type_tr" style='display:contents;'>

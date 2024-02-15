@@ -19,6 +19,7 @@ class Payment_receipt extends CI_Controller {
         $this->module_booking_enquiry    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
         $this->domestic_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->domestic_final_booking    =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
+        $this->booking_completed_details    =  base_url().$this->config->item('agent_panel_slug')."/booking_completed_details";
         $this->module_title       = "Payment Receipt";
         $this->module_ursl_slug    = "payment_receipt";
         $this->module_view_folder = "payment_receipt/";
@@ -164,6 +165,7 @@ class Payment_receipt extends CI_Controller {
          $this->arr_view_data['module_all_traveller_info'] = $this->module_all_traveller_info;
          $this->arr_view_data['module_booking_enquiry'] = $this->module_booking_enquiry;
          $this->arr_view_data['domestic_final_booking'] = $this->domestic_final_booking;
+         $this->arr_view_data['booking_completed_details'] = $this->booking_completed_details;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
         
@@ -353,6 +355,7 @@ public function index_pending($iid,$booking_payment_details_id)
     $this->arr_view_data['module_all_traveller_info'] = $this->module_all_traveller_info;
     $this->arr_view_data['module_booking_enquiry'] = $this->module_booking_enquiry;
     $this->arr_view_data['domestic_final_booking'] = $this->domestic_final_booking;
+    $this->arr_view_data['booking_completed_details'] = $this->booking_completed_details;
     $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
     $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
    
@@ -555,6 +558,7 @@ public function index_final($iid,$booking_payment_details_id)
     $this->arr_view_data['module_all_traveller_info'] = $this->module_all_traveller_info;
     $this->arr_view_data['module_booking_enquiry'] = $this->module_booking_enquiry;
     $this->arr_view_data['domestic_final_booking'] = $this->domestic_final_booking;
+    $this->arr_view_data['booking_completed_details'] = $this->booking_completed_details;
     $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
     $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
    

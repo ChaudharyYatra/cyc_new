@@ -7,12 +7,11 @@
           <div class="col-sm-6">
             <h1><?php echo $page_title; ?></h1>
           </div>
-          <!-- <div class="col-sm-6">
+          <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
-              
+              <!-- <a href="<?php //echo $module_url_path; ?>/agent_index"><button class="btn btn-primary">back</button></a> -->
             </ol>
-          </div> -->
+          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -51,7 +50,8 @@
                     <td><?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td>
-                    <a href="<?php echo $module_url_path;?>/sub_index/<?php echo $info['package_id']; ?>/<?php echo $info['package_date_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+                    <a href="<?php echo $module_url_path;?>/sub_index/<?php echo $info['agent_id']; ?>/<?php echo $info['package_id']; ?>/<?php echo $info['package_date_id']; ?>" ><button type="button" class="btn btn-primary">View</button></a>
+                     
                     </td>
                     
                     

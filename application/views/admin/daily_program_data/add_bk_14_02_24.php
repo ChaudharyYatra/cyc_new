@@ -79,8 +79,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Tour No / Name</label>
-                                <input readonly type="text" class="form-control" name="tour_number" id="tour_number" value="<?php if(!empty($tour_creation_info)){ echo $tour_creation_info['tour_number'];} ?> - <?php if(!empty($tour_creation_info)){ echo $tour_creation_info['tour_title'];} ?>">
-                                <input type="hidden" class="form-control" name="tour_creation_id" id="tour_creation_id" value="<?php echo $tour_creation_info['id'];?>">
+                                <input readonly type="text" class="form-control" name="tour_number_1" id="tour_number_1" value="<?php if(!empty($tour_creation_info)){ echo $tour_creation_info['tour_number'];} ?> - <?php if(!empty($tour_creation_info)){ echo $tour_creation_info['tour_title'];} ?>">
+                                <input type="hidden" class="form-control" name="tour_number" id="tour_number" value="<?php echo $tour_creation_info['id'];?>">
                             </div>
                         </div>
                         <?php } ?>
@@ -92,6 +92,23 @@
                             </div>
                         </div>
 
+                        <!-- <div class="col-md-6">
+                            <div class="form-group remove_color">
+                                <label>Activity Type</label>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-md-6" id="sub_main_tour_div1" style='display:none;'>
+                            <div class="form-group remove_color">
+                                <label>Meals Type</label>
+                                <select class="select_css" name="meals_type" id="meals_type" required>
+                                    <option value="">Select Meals Type</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Dinner">Dinner</option>
+                                    <option value="Lunch">Lunch</option>
+                                </select>
+                            </div>
+                        </div> -->
                         <div class="col-md-6"></div>
                         <div class="col-md-12">
                             <div class="form-group">
@@ -118,16 +135,28 @@
                                         <tr>
                                             <!-- Activity type food type -->
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="Food">
+                                                <input readonly type="text" class="form-control quantity" name="breakfast_activity_type" id="breakfast_activity_type<?php echo $i;?>" value="Food">
+                                                <!-- <select class="select_css" name="food_activity_type" id="food_activity_type">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="Food">Food</option>
+                                                    <option value="Travel">Travel</option>
+                                                    <option value="Visit">Visit</option>
+                                                </select> -->
                                             </td>
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="Breakfast">  
+                                                <input readonly type="text" class="form-control quantity" name="breakfast_meals_type" id="breakfast_meals_type<?php echo $i;?>" value="Breakfast">  
+                                            <!-- <select class="select_css" name="meals_type" id="meals_type" required>
+                                                <option value="">Select Meals Type</option>
+                                                <option value="Breakfast">Breakfast</option>
+                                                <option value="Dinner">Dinner</option>
+                                                <option value="Lunch">Lunch</option>
+                                            </select> -->
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="breakfast_start_time" id="breakfast_start_time<?php echo $i;?>">
                                             </td>
                                             <td>
-                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="food_menu[]" id="food_menu<?php echo $i;?>">
+                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="breakfast_food_menu[]" id="breakfast_food_menu<?php echo $i;?>">
                                                     <option value="">Select Menu</option>
                                                     <?php foreach($food_menu_master as $food_menu_master_value) { ?>
                                                         <option value="<?php echo $food_menu_master_value['id'];?>"><?php echo $food_menu_master_value['food_menu_name'];?></option>
@@ -135,13 +164,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="breakfast_end_time" id="breakfast_end_time<?php echo $i;?>">
                                             </td>
-                                            <input readonly type="hidden" class="form-control" name="start_point[]" id="start_point" value="">
-                                            <input type="hidden" class="form-control" name="travel_distance[]" id="travel_distance">
-                                            <input type="hidden" class="form-control" name="to_place[]" id="to_place">
-
-
                                         </tr>
                                         <?php $i++; ?>
                                     </tbody>
@@ -176,37 +200,36 @@
                                         <?php $i=1;?>
                                         <tr>
                                             <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type">
+                                                <!-- <input readonly type="text" class="form-control quantity" name="travel_activity_type" id="travel_activity_type<?php echo $i;?>" value="Travel"> -->
+                                                <select class="select_css" name="travel_activity_type[]" id="travel_activity_type">
                                                     <option value="">Select Activity Type</option>
+                                                    <!-- <option value="Food">Food</option> -->
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css" name="travel_start_point[]" id="travel_start_point" >
                                                     <option value="">Select start point</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="travel_start_time[]" id="travel_start_time<?php echo $i;?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css" name="travel_to_place[]" id="travel_to_place">
                                                     <option value="">Select To Place</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="travel_end_time[]" id="travel_end_time<?php echo $i;?>"></td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" travel_attr_add_id="1" name="submit" value="travel_add_more" id="travel_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
-                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
-
                                         </tr>
                                         <?php $i++; ?>
                                     </tbody>
@@ -240,16 +263,16 @@
                                         <tr>
                                             <!-- Activity type food type -->
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="Food">
+                                                <input readonly type="text" class="form-control quantity" name="lunch_activity_type" id="lunch_activity_type<?php echo $i;?>" value="Food">
                                             </td>
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="Lunch">  
+                                                <input readonly type="text" class="form-control quantity" name="lunch_meals_type" id="lunch_meals_type<?php echo $i;?>" value="Lunch">  
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="lunch_start_time" id="lunch_start_time<?php echo $i;?>">
                                             </td>
                                             <td>
-                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="food_menu[]" id="food_menu<?php echo $i;?>">
+                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="lunch_food_menu[]" id="lunch_food_menu<?php echo $i;?>">
                                                     <option value="">Select Menu</option>
                                                     <?php foreach($food_menu_master as $food_menu_master_value) { ?>
                                                         <option value="<?php echo $food_menu_master_value['id'];?>"><?php echo $food_menu_master_value['food_menu_name'];?></option>
@@ -257,11 +280,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="lunch_end_time" id="lunch_end_time<?php echo $i;?>">
                                             </td>
-                                            <input readonly type="hidden" class="form-control" name="start_point[]" id="start_point" value="">
-                                            <input type="hidden" class="form-control" name="travel_distance[]" id="travel_distance">
-                                            <input type="hidden" class="form-control" name="to_place[]" id="to_place">
                                         </tr>
                                         <?php $i++; ?>
                                     </tbody>
@@ -297,38 +317,37 @@
                                         <?php $i=1;?>
                                         <tr>
                                         <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type">
+                                                <!-- <input readonly type="text" class="form-control quantity" name="travel_activity_type" id="travel_activity_type<?php echo $i;?>" value="Travel"> -->
+                                                <select class="select_css" name="visit_activity_type[]" id="visit_activity_type">
                                                     <option value="">Select Activity Type</option>
+                                                    <!-- <option value="Food">Food</option> -->
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css" name="visit_start_point[]" id="visit_start_point" >
                                                     <option value="">Select start point</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
-                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="visit_start_time[]" id="visit_start_time<?php echo $i;?>"></td>
+                                            <td><input type="text" class="form-control quantity" name="visit_distance[]" id="visit_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css" name="visit_to_place[]" id="visit_to_place">
                                                     <option value="">Select To Place</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="visit_end_time[]" id="visit_end_time<?php echo $i;?>"></td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" visit_attr_add_id="1" name="submit" value="visit_add_more" id="visit_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
-                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
                                         </tr>
-                                        
                                         <?php $i++; ?>
                                     </tbody>
                                 </table>
@@ -360,16 +379,16 @@
                                         <tr>
                                             <!-- Activity type food type -->
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="Food">
+                                                <input readonly type="text" class="form-control quantity" name="dinner_activity_type" id="dinner_activity_type<?php echo $i;?>" value="Food">
                                             </td>
                                             <td>
-                                                <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="Dinner">  
+                                                <input readonly type="text" class="form-control quantity" name="dinner_meals_type" id="dinner_meals_type<?php echo $i;?>" value="Dinner">  
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="dinner_start_time" id="dinner_start_time<?php echo $i;?>">
                                             </td>
                                             <td>
-                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="food_menu[]" id="food_menu<?php echo $i;?>">
+                                                <select class="form-control select2" multiple="multiple" data-placeholder="Select food menu" name="dinner_food_menu[]" id="dinner_food_menu<?php echo $i;?>">
                                                     <option value="">Select Menu</option>
                                                     <?php foreach($food_menu_master as $food_menu_master_value) { ?>
                                                         <option value="<?php echo $food_menu_master_value['id'];?>"><?php echo $food_menu_master_value['food_menu_name'];?></option>
@@ -377,11 +396,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>">
+                                                <input type="time" class="form-control quantity" name="dinner_end_time" id="dinner_end_time<?php echo $i;?>">
                                             </td>
-                                            <input readonly type="hidden" class="form-control" name="start_point[]" id="start_point" value="">
-                                            <input type="hidden" class="form-control" name="travel_distance[]" id="travel_distance">
-                                            <input type="hidden" class="form-control" name="to_place[]" id="to_place">
                                         </tr>
                                         <?php $i++; ?>
                                     </tbody>
@@ -416,36 +432,36 @@
                                         <?php $i=1;?>
                                         <tr>
                                         <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type">
+                                                <!-- <input readonly type="text" class="form-control quantity" name="travel_activity_type" id="travel_activity_type<?php echo $i;?>" value="Travel"> -->
+                                                <select class="select_css" name="travel_visit_activity_type[]" id="travel_visit_activity_type">
                                                     <option value="">Select Activity Type</option>
+                                                    <!-- <option value="Food">Food</option> -->
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css" name="travel_visit_start_point[]" id="travel_visit_start_point" >
                                                     <option value="">Select start point</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
-                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="travel_visit_start_time[]" id="travel_visit_start_time<?php echo $i;?>"></td>
+                                            <td><input type="text" class="form-control quantity" name="travel_visit_distance[]" id="travel_visit_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css" name="travel_visit_to_place[]" id="travel_visit_to_place">
                                                     <option value="">Select To Place</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>
+                                            <td><input type="time" class="form-control quantity" name="travel_visit_end_time[]" id="travel_visit_end_time<?php echo $i;?>"></td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" travel_visit_attr_add_id="1" name="submit" value="travel_visit_add_more" id="travel_visit_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
-                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
                                         </tr>
                                         <?php $i++; ?>
                                     </tbody>
@@ -456,6 +472,8 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
+                        <!-- <button type="submit" class="btn btn-success" name="booknow_submit" value="Book Now">Submit & Proceed</button>  -->
+                        <!-- <a href="<?php //echo $module_booking_basic_info; ?>/add/<?php //echo $enquiry_id;?>/1"><button type="button" class="btn btn-warning" name="back_btn">Back</button></a> -->
                         <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                     </div>
                 </form>

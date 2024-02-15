@@ -720,7 +720,7 @@ function drawChart10() {
           ?> 
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a class="underline" href="<?php echo base_url(); ?>admin/pending_booking_details/index">
+            <a class="underline" href="<?php echo base_url(); ?>admin/pending_booking_details/agent_index">
             
             <div class="small-box bg-info">
               <div class="inner">

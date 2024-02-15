@@ -10,7 +10,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/sub_index/<?php echo $p_date;?>"><button class="btn btn-primary">Back</button></a>
+              <a href="<?php echo $module_url_path; ?>/sub_index/<?php echo $agent_id;?>/<?php echo $p_id;?>/<?php echo $p_date_id;?>"><button class="btn btn-primary">Back</button></a>
             </ol>
           </div>
         </div>

@@ -232,7 +232,7 @@
                                 <tr id="booking_amount_tr" style='display:table-row;'>
                                     <th>Depositing Amount</th>
                                     <td>
-                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_amt'];} ?>" required onkeyup="validate()">
+                                    <input type="text" class="form-control" name="booking_amt" id="booking_amt" placeholder="Enter booking amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_amt'];} ?>" required onkeyup="booking_amt_not_greater()">
                                     </td>
                                 </tr>
 

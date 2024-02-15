@@ -70,11 +70,12 @@ class Dashboard extends CI_Controller{
         $this->db->where('payment_confirmed_status','Payment Not Paid'); 
         $booking_payment_details_not_paid = $this->master_model->getRecords('booking_payment_details');
         $arr_data['booking_payment_details_not_paid_count'] = count($booking_payment_details_not_paid);
-        // print_r($arr_data['booking_payment_details_count']); die;
+        // print_r($arr_data['booking_payment_details_not_paid_count']); die;
 
         $this->db->where('agent_id',$id);  
         $this->db->where('is_deleted','no'); 
         $this->db->where('payment_confirmed_status','In Process'); 
+        $this->db->group_by('booking_payment_details.enquiry_id'); 
         $booking_payment_details_in_process = $this->master_model->getRecords('booking_payment_details');
         $arr_data['booking_payment_details_in_process_count'] = count($booking_payment_details_in_process);
         // print_r($arr_data['booking_payment_details_in_process_count']); die;
@@ -82,9 +83,10 @@ class Dashboard extends CI_Controller{
         $this->db->where('agent_id',$id);  
         $this->db->where('is_deleted','no'); 
         $this->db->where('payment_confirmed_status','Payment Completed'); 
+        $this->db->group_by('booking_payment_details.enquiry_id'); 
         $booking_payment_details_completed = $this->master_model->getRecords('booking_payment_details');
         $arr_data['booking_payment_details_completed_count'] = count($booking_payment_details_completed);
-        // print_r($arr_data['booking_payment_details_in_process_count']); die;
+        // print_r($arr_data['booking_payment_details_completed_count']); die;
         // print_r($booking_payment_details_completed); die;
 
         // print_r($arr_data['booking_payment_details_count']); die;

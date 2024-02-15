@@ -374,8 +374,12 @@
         </div>
         <div class="card-footer">
         <!-- <input type="button" id="create_pdf" value="Generate PDF">  -->
-        <button class="btn btn-primary" id="download"> download pdf</button> 
+        <button class="btn btn-primary" id="download"> download pdf</button>
+        <?php if($payment_receipt['pending_amt'] == '0'){?> 
+            <a href="<?php echo $booking_completed_details;?>/index"><button type="submit" class="btn btn-success float-right" name="submit" value="submit">Final Submit</button> 
+        <?php }else{ ?>
             <a href="<?php echo $domestic_final_booking;?>/index"><button type="submit" class="btn btn-success float-right" name="submit" value="submit">Final Submit</button> 
+        <?php } ?>
             <!-- <button class="btn btn-success" onclick="generatePDF()">Generate Invoice</button> -->
         </div>
     </section>

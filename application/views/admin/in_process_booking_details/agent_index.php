@@ -48,7 +48,7 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $info['agent_name'] ?></td>
                         <td>
-                        <a href="<?php echo $module_url_path;?>/index/<?php echo $info['package_id']; ?>" ><button type="button" class="btn btn-primary">View In Process Payment Details</button></a>
+                        <a href="<?php echo $module_url_path;?>/index/<?php echo $info['agent_id']; ?>" ><button type="button" class="btn btn-primary">View In Process Payment Details</button></a>
                         </td>
                     </tr>
                     <?php $i++; } ?>

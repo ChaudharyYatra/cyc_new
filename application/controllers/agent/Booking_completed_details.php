@@ -5,7 +5,7 @@
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Final_booking_details extends CI_Controller {
+class Booking_completed_details extends CI_Controller {
 	 
 	function __construct() {
 
@@ -14,15 +14,15 @@ class Final_booking_details extends CI_Controller {
         { 
                 redirect(base_url().'agent/login');
         }
-        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
+        $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/booking_completed_details";
         $this->module_pending_amt    =  base_url().$this->config->item('agent_panel_slug')."/pending_amount";
         $this->module_url_booking_process    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process";
         $this->module_url_path_back    =  base_url().$this->config->item('agent_panel_slug')."/seat_type_room_type";
         $this->module_url_path_index   =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_process/index";
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
         $this->module_url_path_submit_next   =  base_url().$this->config->item('agent_panel_slug')."/srs_form";
-        $this->module_title       = "In process Booking Details";
-        $this->module_view_folder = "final_booking_details/";
+        $this->module_title       = "Booking Completed Details";
+        $this->module_view_folder = "booking_completed_details/";
         $this->arr_view_data = [];
 	 }
 
@@ -32,21 +32,20 @@ class Final_booking_details extends CI_Controller {
         $id = $this->session->userdata('agent_sess_id');
  
          $record = array();
-         $fields = "packages.*,final_booking.agent_id,final_booking.package_id,final_booking.package_date_id,
-         package_date.id as p_date_id,package_date.journey_date,booking_enquiry.id";
+         $fields = "packages.*,final_booking.agent_id,final_booking.package_id,final_booking.package_date_id,package_date.id as p_date_id,package_date.journey_date,booking_enquiry.id";
          $this->db->where('packages.is_deleted','no');
          $this->db->where('packages.is_active','yes');
+         $this->db->where('final_booking.agent_id',$id);
          $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
-         $this->db->or_where('final_booking.payment_confirmed_status','In Process');
          $this->db->group_by('package_date.id','package.id'); 
          $this->db->join("final_booking", 'final_booking.package_id=packages.id','right');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','right');
          $this->db->join("booking_enquiry", 'final_booking.enquiry_id=booking_enquiry.id','right');
-         $this->db->where('final_booking.agent_id',$id);
+        //  $this->db->where('booking_enquiry.agent_id',$id);
          $arr_data = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
  
-         $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+        //  $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
          $this->arr_view_data['arr_data']        = $arr_data;
          $this->arr_view_data['page_title']      = $this->module_title." List";
@@ -60,29 +59,30 @@ class Final_booking_details extends CI_Controller {
 
      public function details($iid)
      {
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $id=$this->session->userdata('agent_sess_id');
+        // echo $iid;
+
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $id=$this->session->userdata('agent_sess_id');
 
         $record = array();
         $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,
         packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id,
-        package_date.id as p_date_id,booking_payment_details.package_id,booking_payment_details.package_date_id,
-        booking_payment_details.agent_id";
+        package_date.id as p_date_id,booking_payment_details.package_id,booking_payment_details.package_date_id,booking_payment_details.agent_id";
         $this->db->where('booking_basic_info.is_deleted','no');
         $this->db->where('booking_payment_details.enquiry_id',$iid);
         $this->db->join("packages", 'packages.id=booking_basic_info.tour_no','left');
         $this->db->join("package_date", 'package_date.id=booking_basic_info.tour_date','left');
         $this->db->join("package_hotel", 'package_hotel.package_id=packages.id','left');
         $this->db->join("booking_payment_details", 'booking_basic_info.domestic_enquiry_id=booking_payment_details.enquiry_id','left');
-        $this->db->group_by('booking_payment_details.enquiry_id'); 
+        $this->db->group_by('booking_payment_details.enquiry_id');
         $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
-        // print_r($traveller_booking_info); die;
 
         foreach($traveller_booking_info  as $traveller_booking_pdate){
             $p_id = $traveller_booking_pdate['package_id'];
             $p_date_id = $traveller_booking_pdate['package_date_id'];
+            $agent_id = $traveller_booking_pdate['agent_id'];
         }
-        // print_r($p_id); die; 
+        // print_r($p_date); die; 
 
         $record = array();
         $fields = "all_traveller_info.*,relation.relation,courtesy_titles.courtesy_titles_name";
@@ -207,9 +207,10 @@ class Final_booking_details extends CI_Controller {
         // print_r($qr_image_details); die; 
            
 
-        $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
+        // $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['p_id']        = $p_id;
         $this->arr_view_data['p_date_id']        = $p_date_id;
+        $this->arr_view_data['agent_id']        = $agent_id;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
@@ -241,11 +242,10 @@ class Final_booking_details extends CI_Controller {
     }
 
 
-    public function sub_index($pid,$p_date_id)
+    public function sub_index($agent_id,$pid,$pdate_id)
      {
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $iid = $this->session->userdata('agent_sess_id');
-        // print_r($iid); die;
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $iid = $this->session->userdata('agent_sess_id');
 
          $record = array();
          $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name,
@@ -253,23 +253,26 @@ class Final_booking_details extends CI_Controller {
          all_traveller_info.last_name,booking_payment_details.run_pending_amt";
          $this->db->where('final_booking.is_deleted','no');
          $this->db->where('final_booking.package_id',$pid);
-         $this->db->where('final_booking.package_date_id',$p_date_id);
-         $this->db->where('booking_payment_details.agent_id',$iid);
+         $this->db->where('final_booking.package_date_id',$pdate_id);
+         $this->db->where('final_booking.agent_id',$agent_id);
          $this->db->where('all_traveller_info.for_credentials','yes');
-        //  $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
-         $this->db->where('final_booking.payment_confirmed_status','In Process');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
          $this->db->join("packages", 'final_booking.package_id=packages.id','left');
          $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
          $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
          $this->db->join("booking_payment_details", 'final_booking.enquiry_id=booking_payment_details.enquiry_id','right');
          $this->db->join("all_traveller_info", 'final_booking.enquiry_id=all_traveller_info.domestic_enquiry_id','right');
-        //  $this->db->join("agent", 'final_booking.agent_id=agent.id','right');
          $this->db->group_by('final_booking.enquiry_id');
          $arr_data = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 
-         $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+        foreach($arr_data  as $info){
+            $agent_id = $info['agent_id'];
+        }
+
+        //  $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
+         $this->arr_view_data['agent_id']        = $agent_id;
          $this->arr_view_data['arr_data']        = $arr_data;
          $this->arr_view_data['page_title']      = $this->module_title." List";
          $this->arr_view_data['module_pending_amt'] = $this->module_pending_amt;
@@ -280,12 +283,48 @@ class Final_booking_details extends CI_Controller {
         
      }
 
+
+     public function agent_index()
+     {
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $iid = $this->session->userdata('agent_sess_id');
+
+         $record = array();
+         $fields = "final_booking.*,packages.id,packages.tour_title,package_date.id,package_date.journey_date,hotel.id,hotel.hotel_name,
+         booking_payment_details.enquiry_id as enq,booking_payment_details.srs_image_name,all_traveller_info.first_name,all_traveller_info.middle_name,
+         all_traveller_info.last_name,booking_payment_details.run_pending_amt,agent.agent_name";
+         $this->db->where('final_booking.is_deleted','no');
+        //  $this->db->where('final_booking.package_date_id',$id);
+         $this->db->where('all_traveller_info.for_credentials','yes');
+         $this->db->where('final_booking.payment_confirmed_status','Payment Completed');
+         $this->db->join("packages", 'final_booking.package_id=packages.id','left');
+         $this->db->join("package_date", 'final_booking.package_date_id=package_date.id','left');
+         $this->db->join("hotel", 'final_booking.hotel_name_id=hotel.id','left');
+         $this->db->join("booking_payment_details", 'final_booking.enquiry_id=booking_payment_details.enquiry_id','right');
+         $this->db->join("all_traveller_info", 'final_booking.enquiry_id=all_traveller_info.domestic_enquiry_id','right');
+        //  $this->db->group_by('enquiry_id');
+        $this->db->group_by('final_booking.agent_id');
+         $this->db->join("agent", 'final_booking.agent_id=agent.id','right');
+         $arr_data = $this->master_model->getRecords('final_booking',array('final_booking.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
+
+        //  $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['listing_page']    = 'yes';
+         $this->arr_view_data['arr_data']        = $arr_data;
+         $this->arr_view_data['page_title']      = $this->module_title." List";
+         $this->arr_view_data['module_pending_amt'] = $this->module_pending_amt;
+         $this->arr_view_data['module_title']    = $this->module_title;
+         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['middle_content']  = $this->module_view_folder."agent_index";
+         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+     }
+
      
     public function cust_otp()
     { 
         // echo 'hiiiii IN Controller'; die;
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $id=$this->session->userdata('agent_sess_id');
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $id=$this->session->userdata('agent_sess_id');
         // print_r($id); die;
 
             $enquiry_id = $this->input->post('enquiry_id');
@@ -375,8 +414,8 @@ class Final_booking_details extends CI_Controller {
     public function cust_otp_back_btn()
     { 
         // echo 'hiiiii IN Controller'; die;
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $id=$this->session->userdata('agent_sess_id');
+        // $agent_sess_name = $this->session->userdata('agent_name');
+        // $id=$this->session->userdata('agent_sess_id');
 
             $enquiry_id = $this->input->post('enquiry_id');
             $traveller_id = $this->input->post('traveller_id');

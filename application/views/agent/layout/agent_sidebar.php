@@ -251,21 +251,41 @@
           </li>
 
           <li class="nav-item">
-            <a href="<?php echo base_url(); ?>agent/pending_booking_details/index" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
               <p>
-               Pending Payment Bookings
+                Booking Payment Status
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/pending_booking_details/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Pending Payment Bookings
+                  </p>
+                </a>
+              </li>
+               
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/final_booking_details/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    In Process Bookings
+                  </p>
+                </a>
+              </li>
 
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>agent/final_booking_details/index" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-               Final Bookings
-              </p>
-            </a>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/booking_completed_details/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Completed Bookings
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">

@@ -34,13 +34,23 @@ class Pending_amount extends CI_Controller {
         $id=$this->session->userdata('agent_sess_id');
 
         $record = array();
-        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id";
+        $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,
+        packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id,
+        booking_payment_details.package_id,booking_payment_details.package_date_id,
+        booking_payment_details.agent_id";
         $this->db->where('booking_basic_info.is_deleted','no');
-        $this->db->where('domestic_enquiry_id',$iid);
+        $this->db->where('booking_payment_details.enquiry_id',$iid);
         $this->db->join("packages", 'packages.id=booking_basic_info.tour_no','left');
         $this->db->join("package_date", 'package_date.id=booking_basic_info.tour_date','left');
         $this->db->join("package_hotel", 'package_hotel.package_id=packages.id','left');
+        $this->db->join("booking_payment_details", 'booking_basic_info.domestic_enquiry_id=booking_payment_details.enquiry_id','left');
+        $this->db->group_by('booking_payment_details.enquiry_id'); 
         $traveller_booking_info = $this->master_model->getRecords('booking_basic_info',array('booking_basic_info.is_deleted'=>'no'),$fields);
+
+        foreach($traveller_booking_info  as $traveller_booking_pdate){
+            $p_id = $traveller_booking_pdate['package_id'];
+            $p_date_id = $traveller_booking_pdate['package_date_id'];
+        }
 
         $record = array();
         $fields = "all_traveller_info.*,relation.relation";
@@ -173,6 +183,8 @@ class Pending_amount extends CI_Controller {
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
+        $this->arr_view_data['p_id']        = $p_id;
+        $this->arr_view_data['p_date_id']        = $p_date_id;
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['relation_data']        = $relation_data;
@@ -1063,6 +1075,7 @@ class Pending_amount extends CI_Controller {
                     'cash_1'   =>   $cash_1,
                     'total_cash_1'   =>   $total_cash_1,
                     'total_cash_amt'   =>   $total_cash_amt,
+                    'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'Payment Completed'
                 );
                 }else{
@@ -1136,6 +1149,7 @@ class Pending_amount extends CI_Controller {
                     'cash_1'   =>   $cash_1,
                     'total_cash_1'   =>   $total_cash_1,
                     'total_cash_amt'   =>   $total_cash_amt,
+                    'agent_id'   =>   $id,
                     'payment_confirmed_status'   =>  'In Process'
                 );    
                 }
