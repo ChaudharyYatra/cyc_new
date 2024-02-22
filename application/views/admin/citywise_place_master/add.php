@@ -1,3 +1,14 @@
+<style>
+  .select2-selection__rendered{
+    height: 50px;
+    overflow-y: scroll !important;
+  }
+
+  .table .hotel_room_rate{
+    padding: 0.50rem !important;
+  }
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -104,28 +115,28 @@
                     <table class="table table-bordered" id="hotel_room_table">
                         <thead>
                             <tr>
-                                <th>Room Type</th>
-                                <th>Room Rate</th>
-                                <th>Total Person</th>
-                                <th>Action</th>
+                                <th class="hotel_room_rate">Room Type</th>
+                                <th class="hotel_room_rate">Room Rate</th>
+                                <th class="hotel_room_rate">Total Person</th>
+                                <th class="hotel_room_rate">Action</th>
                             </tr>
                         </thead>
                         <tbody id="hotel_room_body">
                             <tr>
-                                <td>
+                                <td class="hotel_room_rate">
                                     <select class="form-control" style="width: 100%;" name="room_select" required="required">
                                         <option value="">Select Room Type</option>
                                         <option value="1">Sunday</option>
                                         <option value="2">Monday</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td class="hotel_room_rate">
                                     <input type="text" class="form-control" name="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                                 </td>
-                                <td>
+                                <td class="hotel_room_rate">
                                     <input type="text" class="form-control" name="room_total_person" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                                 </td>
-                                <td>
+                                <td class="hotel_room_rate">
                                     <button type="button" class="btn btn-danger btn_remove" disabled>X</button>
                                 </td>
                             </tr>

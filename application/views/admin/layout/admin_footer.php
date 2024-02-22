@@ -10970,7 +10970,7 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#travel_add_more").click(function() {
             var expence = $(this).attr('travel_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('travel_attr_add_id',i);
@@ -11007,19 +11007,19 @@ $(document).on("click", ".remove-row", function() {
                                             </td>
                                             <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
                                             <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
-
                                         </tr>
             `;
             $("#table1 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
@@ -11078,7 +11078,7 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#visit_add_more").click(function() {
             var expence = $(this).attr('visit_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('visit_attr_add_id',i);
@@ -11115,19 +11115,19 @@ $(document).on("click", ".remove-row", function() {
                                             </td>
                                             <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
                                             <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
-
                                         </tr>
             `;
             $("#table2 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
@@ -11186,7 +11186,7 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#travel_visit_add_more").click(function() {
             var expence = $(this).attr('travel_visit_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('travel_visit_attr_add_id',i);
@@ -11231,13 +11231,14 @@ $(document).on("click", ".remove-row", function() {
             $("#table3 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked

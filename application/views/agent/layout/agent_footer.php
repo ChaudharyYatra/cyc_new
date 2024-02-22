@@ -5155,6 +5155,25 @@ $(document).ready(function() {
 
         $("#total_cash_amt").val(final_total);
 
+         var booking_amt = $("#booking_amt").val();
+
+         var return_to_cust = $("#return_total_cash_amt").val();
+         
+         var final_amt_differnce = final_total-booking_amt;
+
+         if(booking_amt < final_total && return_to_cust=='')
+         {
+            alert('firsttttt');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < final_total && return_to_cust!=final_amt_differnce)
+         {
+            alert('secoundddd');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < final_total && return_to_cust==final_amt_differnce)
+         {
+            alert('thirddddddd');
+            $("#submit_otp").attr("disabled", false);
+         }
 
     });
 
@@ -5340,6 +5359,34 @@ $(document).ready(function() {
             parseInt(ctotal);
 
         $("#return_total_cash_amt").val(final_total);
+
+         var booking_amt = $("#booking_amt").val();
+         
+         var total_cash_amt = $("#total_cash_amt").val();
+         alert(total_cash_amt);
+
+         var return_to_cust = $("#return_total_cash_amt").val();
+         
+         var final_amt_differnce = total_cash_amt-booking_amt;
+        
+
+         if(booking_amt < total_cash_amt && final_total=='')
+         {
+            alert('1');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && final_total!=final_amt_differnce)
+         {
+            alert('2');
+
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && final_total==final_amt_differnce)
+         {
+            alert('3');
+
+            $("#submit_otp").attr("disabled", false);
+         }
+         alert('4');
+         
 
 
     });
