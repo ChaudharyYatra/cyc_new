@@ -10970,53 +10970,57 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#travel_add_more").click(function() {
             var expence = $(this).attr('travel_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('travel_attr_add_id',i);
             var newRow = `
-            <tr>
-                <td>
-                    <select class="select_css" name="travel_activity_type[]" id="travel_activity_type`+i+`">
-                        <option value="">Select Activity Type</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Visit">Visit</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="travel_start_point[]" id="travel_start_point`+i+`" >
-                        <option value="">Select start point</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td><input type="time" class="form-control quantity" name="travel_start_time[]" id="travel_start_time`+i+`"></td>
-                <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
-                <td>
-                    <select class="select_css" name="travel_to_place[]" id="travel_to_place`+i+`">
-                        <option value="">Select To Place</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td><input type="time" class="form-control quantity" name="travel_end_time[]" id="travel_end_time`+i+`"></td>
-                <td>
-                    <button type="button" class="btn btn-danger remove-row">Remove</button>
-                </td>
-            </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="Travel">Travel</option>
+                                                    <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                    <option value="">Select start point</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
+                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                    <option value="">Select To Place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
+                                            <td>
+                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
+                                            </td>
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
+ 
+                                        </tr>
             `;
             $("#table1 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
@@ -11075,53 +11079,57 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#visit_add_more").click(function() {
             var expence = $(this).attr('visit_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('visit_attr_add_id',i);
             var newRow = `
-            <tr>
-            <td>
-                <select class="select_css" name="visit_activity_type[]" id="visit_activity_type`+i+`">
-                    <option value="">Select Activity Type</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Visit">Visit</option>
-                </select>
-            </td>
-            <td>
-                <select class="select_css" name="visit_start_point[]" id="visit_start_point`+i+`">
-                    <option value="">Select start point</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="visit_start_time[]" id="visit_start_time`+i+`"></td>
-            <td><input type="text" class="form-control quantity" name="visit_distance[]" id="visit_distance`+i+`"></td>
-            <td>
-                <select class="select_css" name="visit_to_place[]" id="visit_to_place`+i+`">
-                    <option value="">Select To Place</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="visit_end_time[]" id="visit_end_time`+i+`"></td>
-            <td>
-                <button type="button" class="btn btn-danger remove-row">Remove</button>
-            </td>
-            </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="Travel">Travel</option>
+                                                    <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                    <option value="">Select start point</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
+                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                    <option value="">Select To Place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
+                                            <td>
+                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
+                                            </td>
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
+ 
+                                        </tr>
             `;
             $("#table2 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
@@ -11180,53 +11188,59 @@ $(document).on("click", ".remove-row", function() {
         // Add more rows when the "Add More" button is clicked
         $("#travel_visit_add_more").click(function() {
             var expence = $(this).attr('travel_visit_attr_add_id');
-            
+           
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
             var expence = $(this).attr('travel_visit_attr_add_id',i);
             var newRow = `
-            <tr>
-            <td>
-                <select class="select_css" name="travel_visit_activity_type[]" id="travel_visit_activity_type`+i+`">
-                    <option value="">Select Activity Type</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Visit">Visit</option>
-                </select>
-            </td>
-            <td>
-                <select class="select_css" name="travel_visit_start_point[]" id="travel_visit_start_point`+i+`">
-                    <option value="">Select start point</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="travel_visit_start_time[]" id="travel_visit_start_time`+i+`"></td>
-            <td><input type="text" class="form-control quantity" name="travel_visit_distance[]" id="travel_visit_distance`+i+`"></td>
-            <td>
-                <select class="select_css" name="travel_visit_to_place[]" id="travel_visit_to_place`+i+`">
-                    <option value="">Select To Place</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="travel_visit_end_time[]" id="travel_visit_end_time`+i+`"></td>
-            <td>
-                <button type="button" class="btn btn-danger remove-row">Remove</button>
-            </td>
-            </tr>
+                                        <tr>
+                                            <td>
+                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="Travel">Travel</option>
+                                                    <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                    <option value="">Select start point</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
+                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                    <option value="">Select To Place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
+                                            <td>
+                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
+                                            </td>
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                                            <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                                            <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+ 
+                                        </tr>
             `;
             $("#table3 tbody").append(newRow);
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
     });
 </script>
+
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked

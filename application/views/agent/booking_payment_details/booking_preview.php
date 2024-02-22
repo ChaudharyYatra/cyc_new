@@ -939,7 +939,7 @@
                                             =
                                         </div>
                                         <div class="col-md-5 mt-2">
-                                            <input readonly type="text" class="form-control" name="total_cash_amt" id="total_cash_amt" placeholder="Total Cash" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['total_cash_amt'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
+                                            <input readonly type="text" value="" class="form-control" name="total_cash_amt" id="total_cash_amt" placeholder="Total Cash" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['total_cash_amt'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
                                         </div>
                                 </div>
                             </div>
@@ -1083,7 +1083,7 @@
                                             =
                                         </div>
                                         <div class="col-md-5 mt-2">
-                                            <input readonly type="text" class="form-control" name="return_total_cash_amt" id="return_total_cash_amt" placeholder="Total Cash" value="<?php if(!empty($return_customer_booking_payment_details)){ echo $return_customer_booking_payment_details['return_total_cash_amt'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
+                                            <input readonly type="text" value="" class="form-control" name="return_total_cash_amt" id="return_total_cash_amt" placeholder="Total Cash" value="<?php if(!empty($return_customer_booking_payment_details)){ echo $return_customer_booking_payment_details['return_total_cash_amt'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
                                         </div>
                                 </div>
                             </div>
@@ -1387,7 +1387,7 @@
                                             =
                                         </div>
                                         <div class="col-md-5 mt-2">
-                                            <input readonly type="text" class="form-control" name="return_total_cash_amt" id="return_total_cash_amt" placeholder="Total Cash" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
+                                            <input readonly type="text" value="" class="form-control" name="return_total_cash_amt" id="return_total_cash_amt" placeholder="Total Cash" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" > 
                                         </div>
                                 </div>
                             </div>
