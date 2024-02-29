@@ -5173,6 +5173,14 @@ $(document).ready(function() {
          {
             alert('thirddddddd');
             $("#submit_otp").attr("disabled", false);
+         }else if(booking_amt == final_total)
+         {
+            alert('fothhhhhhhhhhh');
+            $("#submit_otp").attr("disabled", false);
+         }else if(booking_amt > final_total)
+         {
+            // alert('fothhhhhhhhhhh');
+            $("#submit_otp").attr("disabled", true);
          }
 
     });
@@ -5181,7 +5189,7 @@ $(document).ready(function() {
 </script>
 
 <!-- ================================return to customer  =================================-->
-<script>
+<!-- <script>
     $('.return_data_amt').keyup(function(){
         // alert('hiiii');
         var seat_type_data = $(this).attr('return-attr-amt');
@@ -5392,7 +5400,197 @@ $(document).ready(function() {
     });
 
 });
+</script> -->
+
+<script>
+    $('.return_data_amt').keyup(function(){
+        // alert('hiiii');
+        var seat_type_data = $(this).attr('return-attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt );
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#return_cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_500').val(total_amt );
+            }else{
+                $('#return_total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#return_cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_200').val(total_amt );
+            }else{
+                $('#return_total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#return_cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_100').val(total_amt );
+            }else{
+                $('#return_total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#return_cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_50').val(total_amt );
+            }else{
+                $('#return_total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#return_cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_20').val(total_amt );
+            }else{
+                $('#return_total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#return_cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_10').val(total_amt );
+            }else{
+                $('#return_total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#return_cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_5').val(total_amt );
+            }else{
+                $('#return_total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#return_cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_2').val(total_amt );
+            }else{
+                $('#return_total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#return_cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_1').val(total_amt );
+            }else{
+                $('#return_total_cash_1').val('0');
+            }
+        }
+        
+        
+        var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+        // $(".return_data_amt").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#return_total_cash_500").val();
+        var g_count = $("#return_total_cash_200").val();
+        var m_count = $("#return_total_cash_100").val();
+        var l_count = $("#return_total_cash_50").val();
+        var n_count = $("#return_total_cash_20").val();
+        var o_count = $("#return_total_cash_10").val();
+        var a_count = $("#return_total_cash_5").val();
+        var b_count = $("#return_total_cash_2").val();
+        var c_count = $("#return_total_cash_1").val();
+
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+
+        $("#return_total_cash_amt").val(final_total);
+
+         var booking_amt = $("#booking_amt").val();
+         var total_cash_amt = $("#total_cash_amt").val();
+         var return_to_cust = $("#return_total_cash_amt").val();
+         var final_amt_differnce = total_cash_amt-booking_amt;
+
+         if(booking_amt < total_cash_amt && parseInt(final_total)=='')
+         {
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && parseInt(final_total)!=final_amt_differnce)
+         {
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && parseInt(final_total)==final_amt_differnce)
+         {
+            $("#submit_otp").attr("disabled", false);
+         }
+         
+
+
+    // });
+
+    });
 </script>
+
 <!-- -==============================return to customer -->
 
 

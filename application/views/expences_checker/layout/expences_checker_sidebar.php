@@ -44,6 +44,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>expences_checker/other_tour_expences/tourwise_expences" class="nav-link">
+              <i class="nav-icon fas fa fa-user-secret"></i>
+              <p>
+                Other Expenses
+              </p>
+            </a>
+          </li>
           
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>expences_checker/change_password/change_password" class="nav-link">

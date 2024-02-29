@@ -15,6 +15,8 @@ class Login extends CI_Controller{
         $this->module_url_path_dashboard_kitchen_staff_cook  =  base_url().$this->config->item('kitchen_staff_cook_panel_slug')."kitchen_staff_cook/dashboard";
 
         $this->module_url_path_dashboard_expences_checker  =  base_url().$this->config->item('expences_checker_panel_slug')."expences_checker/dashboard";
+
+        $this->module_url_path_dashboard_expences_add_master  =  base_url().$this->config->item('expences_add_master_panel_slug')."expences_add_master/dashboard";
         $this->module_title       = "Login";
         $this->module_url_slug    = "login";
         $this->module_view_folder = "login/";
@@ -84,6 +86,10 @@ class Login extends CI_Controller{
                     }elseif($this->session->userdata['supervision_role']=='9'){
                         
                         redirect($this->module_url_path_dashboard_expences_checker.'/index');
+                    }
+                    elseif($this->session->userdata['supervision_role']=='10'){
+                        
+                        redirect($this->module_url_path_dashboard_expences_add_master.'/index');
                     }
                     
                 }

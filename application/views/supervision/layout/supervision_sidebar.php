@@ -86,6 +86,49 @@
             </a>
            </li>
         </ul>
+
+        <?php } elseif($this->session->userdata['supervision_role']=='10') {?>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>expences_add_master/dashboard/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>expences_add_master/tour_expenses/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Add expenses
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>expences_add_master/profile/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+               Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>expences_add_master/change_password/change_password" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+              Change password
+              </p>
+            </a>
+          </li>
+               
+           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>supervision/login/logout" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Logout</p>
+            </a>
+           </li>
+        </ul>
         <?php } elseif($this->session->userdata['supervision_role']=='4'){?>
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
