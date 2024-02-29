@@ -649,6 +649,15 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>account/other_tour_expences/tourwise_expences" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Other Tour expences
+              </p>
+            </a>
+          </li>
+
           
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>account/profile/index" class="nav-link">
