@@ -11684,3 +11684,24 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
     });
 </script>
 <!-- sra form in that extra services add more -->
+
+<script>
+    function first_payment_main() {
+        document.getElementById('firstly_submit_form').style.display = 'block';
+        document.getElementById('partially_submit_form').style.display = 'none';
+        document.getElementById('sevices_submit_form').style.display = 'none';
+    }
+
+    function partially_payment_sub() {
+      console.log('partially_payment_sub function called');
+        document.getElementById('partially_submit_form').style.display = 'block';
+        document.getElementById('firstly_submit_form').style.display = 'none';
+        document.getElementById('sevices_submit_form').style.display = 'none';
+    }
+
+    function extra_services() {
+        document.getElementById('sevices_submit_form').style.display = 'block';
+        document.getElementById('firstly_submit_form').style.display = 'none';
+        document.getElementById('partially_submit_form').style.display = 'none';
+    }
+</script>

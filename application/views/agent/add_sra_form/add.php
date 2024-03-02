@@ -46,11 +46,11 @@
                       <div class="form-group">
                           <label>Which is payment type ?</label> <br>
                           <input type="radio" id="first_payment" name="payment_type" value="1" onclick="first_payment_main();" />
-                          <label for="first_payment">First Payment</label> &nbsp;&nbsp;
+                          <label>First Payment</label> &nbsp;&nbsp;
                           <input type="radio" id="partially_payment" name="payment_type" value="0" onclick="partially_payment_sub();" />
-                          <label for="partially_payment">Partial Payment</label> &nbsp;&nbsp;
+                          <label>Partial Payment</label> &nbsp;&nbsp;
                           <input type="radio" id="add_on_services" name="payment_type" value="2" onclick="extra_services();" />
-                          <label for="add_on_services">Add On Services</label> <br>
+                          <label>Add On Services</label> <br>
                       </div>
                   </div>
               </div>
@@ -122,108 +122,110 @@
                         <div class="col-md-6" id="otp">
                         <a href="<?php echo $module_url_path; ?>/add"><button type="submit" class="btn btn-success" name="submit" id="first_submit" value="submit">Submit</button></a>
                         </div>
+                        <br><br>
+                      </div>
                     </form>
                     </div>
                     <!--  firstly payment fields -->
 
                     <!--  Partially payment fields --> 
                     <div id="partially_submit_form" style="display:none;">
-                    <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/add">
-                      <div class="row">
-                      <div class="col-md-6">
-                          <div class="form-group">
-                          <label>SRA No</label>
-                          <input type="text" class="form-control" name="partially_sra_no" id="partially_sra_no" placeholder="Enter SRA No" required="required">
-                          <input type="hidden" class="form-control" name="partially_payment" id="partially_payment" required="required" value="0">
-                          </div>
-                      </div>
-                      <div class="col-md-6" id="mobile_number_div">
-                          <div class="form-group">
-                          <label>Customer Mobile No.</label>
-                          <input type="text" class="form-control" maxlength="10" minlength="10" name="partially_mobile_number" id="partially_mobile_number" placeholder="Enter mobile number" required="required">
-                          </div>
-                      </div>
-                      <div class="col-md-2 mb-3">
-                          <button type="button" class="btn btn-primary search_btn" name="p_submit" value="submit" id="partially_submit">Search</button>
-                      </div>
-                    </div>
-                    </form>
-                    </div>
-                    <!--  Partially payment fields -->
-
-                    <!--  Add On Services fields -->
-                    <div id="sevices_submit_form" style="display:none;">
-                    <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/extra_services_add">
-                      <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <label>SRA No</label>
-                            <input type="text" class="form-control" name="service_sra_no" id="service_sra_no" placeholder="Enter SRA No" required="required">
-                            <input type="hidden" class="form-control" name="add_on_services_payment" id="add_on_services_payment" required="required" value="2">
-                          </div>
-                        </div>
-
-                        <div class="col-md-6" id="sevices_tour_number_div">
-                            <div class="form-group">
-                            <label>Tour Number</label>
-                            <input type="text" class="form-control" name="srrvice_tour_number" id="srrvice_tour_number" placeholder="Enter Tour Number" required="required">
-                            </div>
-                        </div>
-
-                        <div class="col-md-6" id="services_to_date_div">
+                      <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/add">
+                        <div class="row">
+                          <div class="col-md-6">
                               <div class="form-group">
-                                <label>Tour Date</label>
-                                <input type="date" class="form-control" name="service_tour_date" id="service_tour_date" placeholder="Enter Rating" required="required">
+                              <label>SRA No</label>
+                              <input type="text" class="form-control" name="partially_sra_no" id="partially_sra_no" placeholder="Enter SRA No" required="required">
+                              <input type="hidden" class="form-control" name="partially_payment" id="partially_payment" required="required" value="0">
                               </div>
+                          </div>
+                          <div class="col-md-6" id="mobile_number_div">
+                              <div class="form-group">
+                              <label>Customer Mobile No.</label>
+                              <input type="text" class="form-control" maxlength="10" minlength="10" name="partially_mobile_number" id="partially_mobile_number" placeholder="Enter mobile number" required="required">
+                              </div>
+                          </div>
+                          <div class="col-md-2 mb-3">
+                              <button type="button" class="btn btn-primary search_btn" name="p_submit" value="submit" id="partially_submit">Search</button>
+                          </div>
                         </div>
-
-                        <div class="col-md-6" id="services_mobile_number_div">
-                            <div class="form-group">
-                            <label>Customer Mobile No.</label>
-                            <input type="text" class="form-control" maxlength="10" minlength="10" name="service_mobile_number" id="service_mobile_number" placeholder="Enter mobile number" required="required">
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 cash_payment_div" id="services_sub_main_tour_div1" >
-                            <div class="form-group">
-                                <table border="1" class="table table-bordered" id="services_table">
-                                    <thead>
-                                        <tr>
-                                            <th>Extra Services</th>
-                                            <th>Amount</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i=1;?>
-                                        <tr>
-                                            <td>
-                                              <select class="select_css extra_services" name="sra_extra_services[]" id="sra_extra_services<?php echo $i;?>" >
-                                                  <option value="">Select </option>
-                                                  <?php
-                                                      foreach($special_req_master as $special_req_master_data_value) 
-                                                      {
-                                                  ?>
-                                                      <option value="<?php echo $special_req_master_data_value['id'];?>"><?php echo $special_req_master_data_value['service_name'];?></option>
-                                                  <?php } ?>
-                                              </select>
-                                            </td>
-                                            <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity<?php echo $i;?>" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary" attr_add_id="1" name="submit" value="extra_services_add_more" id="extra_services_add_more">Add More</button>
-                                            </td>
-                                        </tr>
-                                        <?php $i++; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-3" id="extra_services_submit_div">
-                          <a href="<?php echo $module_url_path; ?>/extra_services_add"><button type="submit" class="btn btn-primary search_btn" name="extra_services_submit" value="submit" id="services_submit">submit</button></a>
-                        </div>
-                      </div>
-                    </form>
+                      </form>
                     </div>
+                      <!--  Partially payment fields -->
+
+                      <!--  Add On Services fields -->
+                      <div id="sevices_submit_form" style="display:none;">
+                      <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/extra_services_add">
+                        <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                              <label>SRA No</label>
+                              <input type="text" class="form-control" name="service_sra_no" id="service_sra_no" placeholder="Enter SRA No" required="required">
+                              <input type="hidden" class="form-control" name="add_on_services_payment" id="add_on_services_payment" required="required" value="2">
+                            </div>
+                          </div>
+
+                          <div class="col-md-6" id="sevices_tour_number_div">
+                              <div class="form-group">
+                              <label>Tour Number</label>
+                              <input type="text" class="form-control" name="srrvice_tour_number" id="srrvice_tour_number" placeholder="Enter Tour Number" required="required">
+                              </div>
+                          </div>
+
+                          <div class="col-md-6" id="services_to_date_div">
+                                <div class="form-group">
+                                  <label>Tour Date</label>
+                                  <input type="date" class="form-control" name="service_tour_date" id="service_tour_date" placeholder="Enter Rating" required="required">
+                                </div>
+                          </div>
+
+                          <div class="col-md-6" id="services_mobile_number_div">
+                              <div class="form-group">
+                              <label>Customer Mobile No.</label>
+                              <input type="text" class="form-control" maxlength="10" minlength="10" name="service_mobile_number" id="service_mobile_number" placeholder="Enter mobile number" required="required">
+                              </div>
+                          </div>
+
+                          <div class="col-md-12 cash_payment_div" id="services_sub_main_tour_div1" >
+                              <div class="form-group">
+                                  <table border="1" class="table table-bordered" id="services_table">
+                                      <thead>
+                                          <tr>
+                                              <th>Extra Services</th>
+                                              <th>Amount</th>
+                                              <th>Action</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <?php $i=1;?>
+                                          <tr>
+                                              <td>
+                                                <select class="select_css extra_services" name="sra_extra_services[]" id="sra_extra_services<?php echo $i;?>" >
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                        foreach($special_req_master as $special_req_master_data_value) 
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo $special_req_master_data_value['id'];?>"><?php echo $special_req_master_data_value['service_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                              </td>
+                                              <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity<?php echo $i;?>" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                                              <td>
+                                                  <button type="button" class="btn btn-primary" attr_add_id="1" name="submit" value="extra_services_add_more" id="extra_services_add_more">Add More</button>
+                                              </td>
+                                          </tr>
+                                          <?php $i++; ?>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                          <div class="col-md-2 mb-3" id="extra_services_submit_div">
+                            <a href="<?php echo $module_url_path; ?>/extra_services_add"><button type="submit" class="btn btn-primary search_btn" name="extra_services_submit" value="submit" id="services_submit">submit</button></a>
+                          </div>
+                        </div>
+                      </form>
+                    
                     <!--  Add On Services fields -->
 
                       <!-- <div class="col-md-6">
@@ -273,25 +275,6 @@
   
 
 
-<script>
-    function first_payment_main() {
-        document.getElementById('firstly_submit_form').style.display = 'block';
-        document.getElementById('partially_submit_form').style.display = 'none';
-        document.getElementById('sevices_submit_form').style.display = 'none';
-    }
 
-    function partially_payment_sub() {
-      console.log('partially_payment_sub function called');
-        document.getElementById('partially_submit_form').style.display = 'block';
-        document.getElementById('firstly_submit_form').style.display = 'none';
-        document.getElementById('sevices_submit_form').style.display = 'none';
-    }
-
-    function extra_services() {
-        document.getElementById('sevices_submit_form').style.display = 'block';
-        document.getElementById('firstly_submit_form').style.display = 'none';
-        document.getElementById('partially_submit_form').style.display = 'none';
-    }
-</script>
 
 
