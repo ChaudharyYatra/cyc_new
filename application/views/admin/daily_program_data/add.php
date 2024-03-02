@@ -154,6 +154,7 @@
                                 <table border="1" class="table table-bordered" id="table1">
                                     <colgroup>
                                         <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
@@ -164,6 +165,7 @@
                                     <thead>
                                         <tr>
                                             <th>Activity Type</th>
+                                            <th>Select district</th>
                                             <th>Start Place</th>
                                             <th>Start Time</th>
                                             <th>Distance</th>
@@ -180,6 +182,16 @@
                                                     <option value="">Select Activity Type</option>
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td>
@@ -275,6 +287,7 @@
                                 <table border="1" class="table table-bordered" id="table2">
                                     <colgroup>
                                         <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
@@ -285,6 +298,7 @@
                                     <thead>
                                         <tr>
                                             <th>Activity Type</th>
+                                            <th>Select district</th>
                                             <th>Start Place</th>
                                             <th>Start Time</th>
                                             <th>Distance</th>
@@ -301,6 +315,16 @@
                                                     <option value="">Select Activity Type</option>
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td>
@@ -394,6 +418,7 @@
                                 <table border="1" class="table table-bordered" id="table3">
                                     <colgroup>
                                         <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
@@ -404,6 +429,7 @@
                                     <thead>
                                         <tr>
                                             <th>Activity Type</th>
+                                            <th>Select district</th>
                                             <th>Start Place</th>
                                             <th>Start Time</th>
                                             <th>Distance</th>
@@ -420,6 +446,16 @@
                                                     <option value="">Select Activity Type</option>
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td>

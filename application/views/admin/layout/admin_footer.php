@@ -10984,6 +10984,16 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td>
                                                 <select class="select_css" name="start_point[]" id="start_point`+i+`">
                                                     <option value="">Select start point</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
@@ -11092,6 +11102,16 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td>
                                                 <select class="select_css" name="start_point[]" id="start_point`+i+`">
                                                     <option value="">Select start point</option>
                                                     <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
@@ -11197,6 +11217,16 @@ $(document).on("click", ".remove-row", function() {
                                                     <option value="">Select Activity Type</option>
                                                     <option value="Travel">Travel</option>
                                                     <option value="Visit">Visit</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td>

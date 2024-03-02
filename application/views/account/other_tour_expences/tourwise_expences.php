@@ -33,6 +33,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Expenses Adder Name</th>
                     <th>Expenses date</th>
                     <th>Expense Head</th>
                     <th>Sub-Expenses Head</th>
@@ -49,6 +50,7 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?> </td>
+                    <td><?php echo $info['supervision_name']; ?> </td>
 
                     <td><?php echo date("d-m-Y",strtotime($info['expense_date'])) ?></td>
                     

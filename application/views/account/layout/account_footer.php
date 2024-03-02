@@ -1,7 +1,4 @@
 
-
-
-
 </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
@@ -3995,10 +3992,6 @@ $('[name^="particular_expenses"]').each(function() {
 
 </script>
 <!-- expenses edit more for expenses account -->
-
-
-
-
 
 
 

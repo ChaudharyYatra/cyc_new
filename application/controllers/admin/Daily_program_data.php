@@ -175,8 +175,16 @@ class Daily_program_data extends CI_Controller {
         $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
         //  print_r($citywise_place_master); die;
 
+        $record = array();
+        $fields = "district_table.*";
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        // $this->db->group_by('select_district'); 
+        $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
+
         //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
          $this->arr_view_data['action']          = 'add';
+         $this->arr_view_data['district_data']        = $district_data;
          $this->arr_view_data['tour_creation']        = $tour_creation;
          $this->arr_view_data['food_menu_master']        = $food_menu_master;
          $this->arr_view_data['citywise_place_master']        = $citywise_place_master;

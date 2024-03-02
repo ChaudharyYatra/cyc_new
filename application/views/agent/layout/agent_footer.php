@@ -11579,3 +11579,108 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
   });
 </script>
 
+<!-- SRA form partial payment ajax -->
+ 
+<script>  
+ $(document).ready(function(){
+  $("#partially_submit").click(function() {  
+//   alert('hiiiiiiiiiiii');
+    // var agent_id = '1';
+ 
+        //   var attr_cancel_val =$(this).attr('attr_cancle_btn');
+        var sra_no = $('#partially_sra_no').val();
+        var mobile_number = $('#partially_mobile_number').val();
+        var tbody = $('#tid');
+        tbody.empty();
+          //  var for_m_hold = $(this).val();
+        //    alert(super_id);
+        //    alert(date_super_id);
+ 
+           
+           if(sra_no != '' && mobile_number != '')  
+           {  
+            // alert('hiiiiiiiiiiii');
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>agent/add_sra_form/partial_payment_data",      
+                     method:"POST",  
+                     data:{sra_no:sra_no , mobile_number:mobile_number},  
+                     dataType: 'json',
+                     success:function(response){
+                        // alert('hiiiiiiiii');
+                        //   console.log(response);
+                        var i = 0;
+                        //   $('#tour_date').find('option').not(':first').remove();
+                        var sra_id = 0;
+                        var img_count=parseInt(i)+1;
+                        $.each(response,function(index,data){  
+                            sra_id++;
+                            console.log(data);
+                            // $('#tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
+                            $('#tid').append(`<tr><td>`+ sra_id +`</td>
+                            <td>`+ data['tour_number'] +`</td>
+                            <td>`+ data['tour_date'] +`</td>
+                            <td>`+ data['customer_name'] +`</td>
+                            <td>`+ data['total_seat'] +`</td>
+                            <td>`+ data['total_sra_amt'] +`</td>
+                            <td>
+                                <input type="hidden" id="old_img_name`+img_count+`" name="old_img_name[]"
+                                    value="">
+                                    <div id="old_img_name`+img_count+`" class="mt-2 img_size_cast">
+                                        <img class="image_name" src="<?php echo base_url(); ?>uploads/SRA_photo_pdf/`+data['image_name']+`" width="60%" />
+                                        <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php echo base_url(); ?>uploads/SRA_photo_pdf/`+data['image_name']+`">Download</a>
+                                    </div>
+                            </td>
+                            </tr>`);
+                        });
+                       
+                     }
+ 
+                });  
+           }
+          });
+      });  
+ </script>
+ 
+<!-- SRA form partial payment ajax -->
+ 
+<!-- sra form in that extra services add more -->
+<script>
+    $(document).ready(function() {
+        $("#extra_services_add_more").click(function() {
+            var expence = $(this).attr('attr_add_id');
+           
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('attr_add_id',i);
+            var newRow = `
+                <tr>
+                    <td>
+                        <select class="select_css extra_services" name="sra_extra_services[]" id="sra_extra_services`+i+`" >
+                            <option value="">Select </option>
+                            <option value="Other_services">Other</option>
+                            <?php
+                                foreach($special_req_master as $special_req_master_data_value)
+                                {
+                            ?>
+                                <option value="<?php echo $special_req_master_data_value['id'];?>"><?php echo $special_req_master_data_value['service_name'];?></option>
+                            <?php } ?>
+                        </select>
+                        <input style="display: none;margin-top: 8px;" type="text" class="form-control services_other_input" name="services_other_name[]" id="services_other_name`+i+`" placeholder="Enter name" >
+                    </td>
+                    <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity`+i+`" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-row">Remove</button>
+                    </td>
+                </tr>
+            `;
+            $("#services_table tbody").append(newRow);
+            i++;
+        });
+       
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+<!-- sra form in that extra services add more -->

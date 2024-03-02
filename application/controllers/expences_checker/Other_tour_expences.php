@@ -31,10 +31,11 @@ class Other_tour_expences extends CI_Controller{
                 $expences_checker_master_sess_name = $this->session->userdata('expences_checker_name');
                 $iid = $this->session->userdata('expences_checker_sess_id');
 
-                $fields = "tour_other_expenses.*,expense_type.expense_type_name,expense_category.expense_category";
+                $fields = "tour_other_expenses.*,expense_type.expense_type_name,expense_category.expense_category,supervision.role_type,supervision.supervision_name";
                 $this->db->where('tour_other_expenses.is_deleted','no');
                 // $this->db->where('tour_other_expenses.tour_manager_id',$id);
                 // $this->db->where('tour_expenses.package_date_id',$t_did);
+                $this->db->join("supervision", 'tour_other_expenses.tour_manager_id=supervision.role_type','left');
 
                 $this->db->join("expense_type", 'tour_other_expenses.expense_type=expense_type.id','left');
                 $this->db->join("expense_category", 'tour_other_expenses.expense_category_id=expense_category.id','left');
