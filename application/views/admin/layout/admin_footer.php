@@ -10984,7 +10984,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11003,6 +11003,16 @@ $(document).on("click", ".remove-row", function() {
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <select class="select_css" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>
@@ -11102,7 +11112,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11121,6 +11131,16 @@ $(document).on("click", ".remove-row", function() {
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <select class="select_css" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>
@@ -11220,7 +11240,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="district" id="district" attr_district="district" required="required">
+                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11239,6 +11259,16 @@ $(document).on("click", ".remove-row", function() {
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
+                                            <td>
+                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                    <option value="">Select </option>
+                                                    <?php
+                                                    foreach($district_data as $district_info){ 
+                                                    ?>
+                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <select class="select_css" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>

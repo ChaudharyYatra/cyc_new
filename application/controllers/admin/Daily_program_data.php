@@ -109,6 +109,8 @@ class Daily_program_data extends CI_Controller {
                 $current_date  = $this->input->post('current_date');
                 //add more 
                 $activity_type  = $this->input->post('activity_type');
+                $start_district  = $this->input->post('start_district');
+                $end_district  = $this->input->post('end_district');
                 $start_point  = $this->input->post('start_point');
                 $start_time  = $this->input->post('start_time');
                 $travel_distance  = $this->input->post('travel_distance');
@@ -131,6 +133,8 @@ class Daily_program_data extends CI_Controller {
                 $arr_insert = array(
                 'tour_creation_id' => $id,
                 'activity_type'   =>   $_POST["activity_type"][$i],
+                'start_district'   =>   $_POST["start_district"][$i],
+                'end_district'   =>   $_POST["end_district"][$i],
                 'start_place'   =>   $_POST["start_point"][$i],
                 'start_time'   =>   $_POST["start_time"][$i],
                 'distance'   =>   $_POST["travel_distance"][$i],
@@ -236,6 +240,8 @@ class Daily_program_data extends CI_Controller {
                 $addmore_breakfast_id  = $this->input->post('addmore_breakfast_id');
                 $addmore_entry_after_breakfast  = $this->input->post('addmore_entry_after_breakfast');
                 $travel_activity_type  = $this->input->post('travel_activity_type');
+                $start_district  = $this->input->post('start_district');
+                $end_district  = $this->input->post('end_district');
                 $travel_start_point  = $this->input->post('travel_start_point');
                 $travel_start_time  = $this->input->post('travel_start_time');
                 $travel_distance  = $this->input->post('travel_distance');
@@ -331,6 +337,8 @@ class Daily_program_data extends CI_Controller {
                         {
                         $arr_update = array(
                         'activity_type'   =>   $_POST["travel_activity_type"][$i],
+                        'end_district'   =>   $_POST["end_district"][$i],
+                        'start_place'   =>   $_POST["start_point"][$i],
                         'start_place'   =>   $_POST["travel_start_point"][$i],
                         'start_time'   =>   $_POST["travel_start_time"][$i],
                         'distance'   =>   $_POST["travel_distance"][$i],
