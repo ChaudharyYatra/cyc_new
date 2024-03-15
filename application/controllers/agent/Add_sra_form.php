@@ -11,9 +11,11 @@ class Add_sra_form extends CI_Controller{
                 redirect(base_url().'agent/login'); 
         }
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/add_sra_form";
+        $this->module_sra_booking_payment_details    =  base_url().$this->config->item('agent_panel_slug')."/sra_booking_payment_details";
         $this->module_url_path_dates    =  base_url().$this->config->item('agent_panel_slug')."/package_dates";
 		$this->module_url_path_iternary    =  base_url().$this->config->item('agent_panel_slug')."/package_iternary";
 		$this->module_url_path_hotel    =  base_url().$this->config->item('agent_panel_slug')."/package_hotel";
+		$this->sra_partial_payment_details    =  base_url().$this->config->item('agent_panel_slug')."/sra_partial_payment_details";
         $this->module_title       = "SRA Form";
         $this->module_url_slug    = "add_sra_form";
         $this->module_view_folder = "add_sra_form/";    
@@ -178,6 +180,13 @@ class Add_sra_form extends CI_Controller{
             
             if($this->form_validation->run() == TRUE)
             {
+<<<<<<< HEAD
+=======
+                // $this->db->where('is_active','yes');
+                $SRANo_check = $this->master_model->getRecords('sra_booking_payment_details',array('is_deleted'=>'no','sra_no'=>trim($this->input->post('sra_no'))));
+                if(count($SRANo_check)==0){
+
+>>>>>>> rupali_0910
                 $file_name     = $_FILES['image_name']['name'];
                 $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','PDF','pdf');
 
@@ -246,14 +255,28 @@ class Add_sra_form extends CI_Controller{
                 if($inserted_id > 0)
                 {
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+<<<<<<< HEAD
                     redirect($this->module_url_path.'/add');
+=======
+                    redirect($this->module_sra_booking_payment_details.'/index/'.$sra_no);
+>>>>>>> rupali_0910
                 }
                 else
                 {
                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
                 }
                 redirect($this->module_url_path.'/index');
+<<<<<<< HEAD
         }
+=======
+
+            } 
+            else{
+                $this->session->set_flashdata('error_message',"SRA Number already exist. Please goto partial payment.");
+            }  
+        }
+        
+>>>>>>> rupali_0910
         }
         
         $this->db->order_by('id','desc');
@@ -299,6 +322,11 @@ class Add_sra_form extends CI_Controller{
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+<<<<<<< HEAD
+=======
+        $this->arr_view_data['sra_partial_payment_details'] = $this->sra_partial_payment_details;
+        $this->arr_view_data['module_sra_booking_payment_details'] = $this->module_sra_booking_payment_details;
+>>>>>>> rupali_0910
         $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }

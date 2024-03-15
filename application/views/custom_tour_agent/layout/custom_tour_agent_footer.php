@@ -933,7 +933,6 @@ $('#add_internationalenquiry').validate({ // initialize the plugin
 });
 
 });
-
 </script>
 <!-- jquery validation on add international Enquiry -->
 
@@ -4088,3 +4087,168 @@ function calculate() {
   </script>
 
 
+
+  <!--  custom add international enquiry validation -->
+
+  <script>
+$(document).ready(function () {
+
+$('#custom_add_internationalenquiry').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        first_name: {
+            required: true,
+            noSpace: true
+        },
+        last_name: {
+            required: true,
+            noSpace: true
+        },
+        mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+		wp_mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+        email: {
+            required: true,
+            email:true
+        },
+        gender: {
+            required: true,
+        },
+        tour_number: {
+            required: true,
+        },
+        media_source_name: {
+            required: true,
+        }
+        
+    },
+
+    messages :{
+        first_name : {
+            required : "Please enter first name",
+        },
+        last_name : {
+            required : "Please enter last name",
+        },
+        mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+		wp_mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        gender : {
+            required : "Please enter gender",
+        },
+        tour_number : {
+            required : "Please enter tour number",
+        },
+        media_source_name : {
+            required : "Please enter media source name",
+        }
+        
+    
+    }
+});
+
+});
+</script>
+
+
+<script>
+$(document).ready(function () {
+
+$('#custom_edit_internationalenquiry').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        first_name: {
+            required: true,
+            noSpace: true
+        },
+        last_name: {
+            required: true,
+            noSpace: true
+        },
+        mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+		wp_mobile_number: {
+            required: true,
+            maxlength:10,
+            minlength:10
+        },
+        email: {
+            required: true,
+            email:true
+        },
+        gender: {
+            required: true,
+        },
+        tour_number: {
+            required: true,
+        },
+        media_source_name: {
+            required: true,
+        }
+        
+    },
+
+    messages :{
+        first_name : {
+            required : "Please enter first name",
+        },
+        last_name : {
+            required : "Please enter last name",
+        },
+        mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+		wp_mobile_number : {
+            required : "Please enter mobile number",
+            maxlength: "Please enter maximum 10 digit number",
+            minlength: "Please enter minimum 10 digit number"
+        },
+        email : {
+            required : "Please enter email address",
+            email: "Please enter a valid email address"
+        },
+        gender : {
+            required : "Please enter gender",
+        },
+        tour_number : {
+            required : "Please enter tour number",
+        },
+        media_source_name : {
+            required : "Please enter media source name",
+        }
+        
+    
+    }
+});
+
+});
+</script>
+
+  <!--  custom add international enquiry validation -->

@@ -142,11 +142,19 @@
                           <div class="col-md-6" id="mobile_number_div">
                               <div class="form-group">
                               <label>Customer Mobile No.</label>
+                              <input type="hidden" id="sra_no_textbox">
                               <input type="text" class="form-control" maxlength="10" minlength="10" name="partially_mobile_number" id="partially_mobile_number" placeholder="Enter mobile number" required="required">
                               </div>
                           </div>
-                          <div class="col-md-2 mb-3">
+                          <div class="col-md-1 mb-3">
                               <button type="button" class="btn btn-primary search_btn" name="p_submit" value="submit" id="partially_submit">Search</button>
+                          </div>
+
+                          <div class="col-md-2 mb-3" id="div_partial_payment" style="display:none;">
+                            <!-- <a href="<?php //echo $sra_partial_payment_details; ?>/index/"><button type="submit" class="btn btn-success search_btn" name="partial_payment" id="partial_payment" value="submit">Partial payment</button></a> -->
+                            <a id="partial_payment_link">
+                                <button type="button" class="btn btn-success search_btn" name="partial_payment" id="partial_payment" value="submit">Partial payment</button>
+                            </a>
                           </div>
                         </div>
                       </form>
@@ -239,10 +247,17 @@
                       </div> -->
               </div>
                 <!-- /.card-body -->
+<<<<<<< HEAD
               <div id="partial_table">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                       <tr>
+=======
+              <div id="partial_table" style="display:none;">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+>>>>>>> rupali_0910
                     <th>SN</th>
                     <th>Tour No</th>
                     <th>Tour Date</th>
