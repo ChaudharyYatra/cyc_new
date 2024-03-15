@@ -48,13 +48,18 @@
                    $i=1; 
                    foreach($vehicle_owner as $info) 
                    { 
+                    // print_r($info);
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['vehicle_owner_name'] ?></td>
                     <td><?php echo $info['mobile_number1'] ?></td>
                     <td><?php echo $info['email'] ?></td>
+                    <?php if($info['profile_image']!=''){?>
                     <td><img src="<?php echo base_url(); ?>uploads/vehicle_owner_profile/<?php echo $info['profile_image']; ?>" width="70px;" height="30px;" alt="Slider Image"></td>
+                    <?php }else{ ?>
+                      <td><img src="<?php echo base_url(); ?>uploads/vehicle_owner_profile/images.PNG" width="70px;" height="30px;" alt="Slider Image"></td>
+                    <?php } ?>
                     <td>
                         <?php 
                         if($info['is_active']=='yes')

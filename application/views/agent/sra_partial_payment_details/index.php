@@ -72,26 +72,26 @@
 
             <div class="card card-primary">
               <div class="card-header">
-              <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
+              <?php foreach($traveller_booking_info_header as $traveller_booking_info_value) 
                    {  ?>
                     <div class="row">
-                        <div class="col-md-2">
-                            <label>Tour Details -</label>
+                    <div class="col-md-2">
+                            <label>Tour No -</label>
                         </div>  
                         <div class="col-md-5">
-                            <div><?php echo $traveller_booking_info_value['tour_number']; ?> - <?php echo $traveller_booking_info_value['tour_title']; ?></div>
+                            <div><?php echo $traveller_booking_info_value['tour_number']; ?></div>
                         </div>
                         <div class="col-md-2">
                             <label>Customer Name -</label>
                         </div>
                         <div class="col-md-3">
-                            <div><?php echo $traveller_booking_info_value['first_name']; ?> <?php echo $traveller_booking_info_value['middle_name']; ?> <?php echo $traveller_booking_info_value['srname']; ?></div>
+                            <div><?php echo $traveller_booking_info_value['customer_name']; ?></div>
                         </div>
                         <div class="col-md-2">  
                             <label>Tour Date -</label>
                         </div>
                         <div class="col-md-5">  
-                            <div><?php echo date('d-m-Y', strtotime($traveller_booking_info_value['journey_date'])); ?></div>
+                            <div><?php echo date('d-m-Y', strtotime($traveller_booking_info_value['tour_date'])); ?></div>
                         </div>
                         <div class="col-md-2">
                             <label>Mobile No -</label>
@@ -102,16 +102,21 @@
                         <div class="col-md-7">
                         </div>
                         <div class="col-md-3">
-                            <label> Total Travellers Count -</label>
+                            <label> Total Seat -</label>
                         </div>
                         <div class="col-md-1">
-                            <div><?php echo $traveller_booking_info_value['seat_count']; ?></div>
+                            <div><?php echo $traveller_booking_info_value['total_seat']; ?></div>
                         </div>
-                        <input type="hidden" class="form-control" name="hotel_name_id" id="hotel_name_id" value="<?php echo $traveller_booking_info_value['hotel_name_id']; ?>">
+                        <input type="hidden" class="form-control" name="sra_no" id="sra_no" value="<?php echo $traveller_booking_info_value['sra_no']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $traveller_booking_info_value['tour_date']; ?>">
-                        <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']; ?>">
-                        <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['pid']; ?>">
-                        <input type="hidden" class="form-control" name="journey_date" id="journey_date" value="<?php echo $traveller_booking_info_value['journey_date']; ?>">
+                        <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['id']; ?>">
+                        <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['tour_number']; ?>">
+                    
+                        <!-- <input type="hidden" class="form-control" name="hotel_name_id" id="hotel_name_id" value="<?php //echo $traveller_booking_info_value['hotel_name_id']; ?>">
+                        <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php //echo $traveller_booking_info_value['tour_date']; ?>">
+                        <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php //echo $traveller_booking_info_value['domestic_enquiry_id']; ?>">
+                        <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php //echo $traveller_booking_info_value['pid']; ?>">
+                        <input type="hidden" class="form-control" name="journey_date" id="journey_date" value="<?php //echo $traveller_booking_info_value['journey_date']; ?>"> -->
                     
                         <!-- <input type="hidden" class="form-control" name="booking_ref_no" id="booking_ref_no" value=""> -->
                     </div>
@@ -169,7 +174,7 @@
                 <input type="hidden" class="form-control" name="extra_sevices_id" id="extra_sevices_id" value="<?php if(isset($extra_services_details_value)){echo $extra_services_details_value['id'];} ?>">
                 <?php } ?>
 
-                <input type="text" class="form-control" name="booking_payment_details_id" id="booking_payment_details_id" value="<?php if(isset($booking_payment_details)){echo $booking_payment_details['id'];} ?> ">
+                <input type="hidden" class="form-control" name="booking_payment_details_id" id="booking_payment_details_id" value="<?php if(isset($booking_payment_details)){echo $booking_payment_details['id'];} ?> ">
                 <input type="hidden" class="form-control" name="return_customer_booking_payment_id" id="return_customer_booking_payment_id" value="<?php if(isset($return_customer_booking_payment_details)){echo $return_customer_booking_payment_details['id'];} ?>">
                 <div class="card-body">
                     <div class="row">
@@ -208,8 +213,7 @@
                                 
                                 <tr>
                                     <th>Final Total</th>
-                                    <?php $final_total = $total_hotel_amount + $seat_total_cost; ?>
-                                    <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $final_total ?>" required></td>
+                                    <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $traveller_booking_info_amt['final_amt']; ?>" required></td>
                                     
                                 </tr>
                                     
@@ -257,7 +261,7 @@
                                 <tr id="other_payment_mode_tr">
                                     <th>Amount Receiving Mode</th>
                                     <td>
-                                    <select class="select_css" name="select_transaction" id="select_transaction" onchange='account_details_final_payment(this.value); 
+                                    <select class="select_css" name="select_transaction" id="select_transaction" onchange='sra_account_details_partial_payment(this.value); 
                                         this.blur();'required="required">
                                         <option value="">Select Transaction</option>
                                         <option value="CASH">CASH</option>
@@ -293,16 +297,16 @@
                                             <!-- &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male">&nbsp;&nbsp;Male
                                             &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female">&nbsp;&nbsp;Female -->
 
-                                            <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="netpayment_validate_final_payment()" value="NEFT">&nbsp;&nbsp;NEFT
-                                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="netpayment_validate_final_payment()" value="RTGS">&nbsp;&nbsp;RTGS
-                                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="netpayment_validate_final_payment()" value="IMPS">&nbsp;&nbsp;IMPS
+                                            <input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_neft" onchange="sra_partial_netpayment_validate_final_payment()" value="NEFT">&nbsp;&nbsp;NEFT
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_rtgs" onchange="sra_partial_netpayment_validate_final_payment()" value="RTGS">&nbsp;&nbsp;RTGS
+                                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="sra_partial_netpayment_validate_final_payment()" value="IMPS">&nbsp;&nbsp;IMPS
                                             </div>
 
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Account Number</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="netbank_accno_validate_final_payment()">
+                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="sra_partial_netbank_accno_validate_final_payment()">
                                                 <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                     <option value="">Select Account Number</option>
                                                     
@@ -335,7 +339,7 @@
                                                 <h6 class="text-center">Branch Name</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="netbank_branch_nm_validate_final_payment()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="sra_partial_netbank_branch_nm_validate_final_payment()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
 
                                             <div class="col-md-6 mt-2">
@@ -349,21 +353,21 @@
                                                 <h6 class="text-center">UTR / Transaction No.</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="sra_partial_netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
 
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Transaction Date</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="netbank_date_validate_final_payment()" placeholder="">
+                                                <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="sra_partial_netbank_date_validate_final_payment()" placeholder="">
                                             </div>
 
                                             <div class="col-md-6 mt-2" id="net_banking_reason" style='display:none;'>
                                             <h6 class="text-center">reason</h6>
                                             </div>
                                             <div class="col-md-6 mt-2" id="net_banking_input" style='display:none;'>
-                                                <input type="text" class="form-control" name="net_banking_reason_1" id="net_banking_reason_1" onkeyup="booking_net_banking_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" class="form-control" name="net_banking_reason_1" id="net_banking_reason_1" onkeyup="sra_partial_booking_net_banking_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                         <!-- </div> -->
                                     </div>
@@ -377,7 +381,7 @@
                                             <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="transaction_upi_validate_final_payment()">
+                                            <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="sra_partial_transaction_upi_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
                                                 <option class="self_upi" attr_self="self" value="self">Self</option>
@@ -395,7 +399,7 @@
                                             <h6 class="text-center float-right">UPI Code App Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="payment_type_validate_final_payment()">
+                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="sra_partial_payment_type_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
@@ -428,21 +432,21 @@
                                                 <h6 class="text-center float-right">Transaction Date</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="date" class="form-control" onchange="transaction_date_upi_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                                <input type="date" class="form-control" onchange="sra_partial_transaction_date_upi_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                             </div>
 
                                             <div class="col-md-5 mt-2">
                                                 <h6 class="text-center float-right">UTR / Transaction No.</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="sra_partial_utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
 
                                             <div class="col-md-5 mt-2" id="upi_reason" style='display:none;'>
                                                 <h6 class="text-center float-right">reason</h6>
                                             </div>
                                             <div class="col-md-6 mt-2" id="upi_reason_input" style='display:none;'>
-                                                <input type="text" class="form-control" name="reason" id="reason" onkeyup="reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" class="form-control" name="reason" id="reason" onkeyup="sra_partial_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                         <!-- </div> -->
                                     </div>
@@ -455,7 +459,7 @@
                                             <h6 class="text-center">QR Holder Name</h6>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="qr_hoder_name_validate_final_payment()">
+                                            <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="sra_partial_qr_hoder_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
                                                 <option value="Self" attr_self="self">Self</option>
@@ -472,7 +476,7 @@
                                             <h6 class="text-center">QR Code App Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="qr_payment_type_validate()">
+                                            <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="sra_partial_qr_payment_type_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
@@ -490,21 +494,21 @@
                                             <h6 class="text-center">Transaction Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" onchange="qr_transaction_date_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                            <input type="date" class="form-control" onchange="sra_partial_qr_transaction_date_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="qr_transaction_date" id="qr_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="sra_partial_qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2" id="qr_reason" style='display:none;'>
                                             <h6 class="text-center">reason</h6>
                                         </div>
                                         <div class="col-md-6 mt-2" id="qr_reason_input" style='display:none;'>
-                                            <input type="text" class="form-control" name="qr_reason_1" id="qr_reason_1" onkeyup="booking_qr_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="qr_reason_1" id="qr_reason_1" onkeyup="sra_partial_booking_qr_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -524,7 +528,7 @@
                                             <h6 class="text-center">Name On Cheque</h6>
                                         </div>
                                         <div class="col-md-6 mt-1">
-                                            <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="cheque_name_validate_final_payment()">
+                                            <select class="select_css"  name="name_on_cheque" id="name_on_cheque" required="required" onchange="sra_partial_cheque_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select Name On Cheque</option>
                                                 <option value="self" attr_self="self">Self</option>
@@ -541,7 +545,7 @@
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="cheque_bank_name_validate_final_payment()">
+                                            <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="sra_partial_cheque_bank_name_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
@@ -552,28 +556,28 @@
                                             <h6 class="text-center">Cheque Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="cheque_banknm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="sra_partial_cheque_banknm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Cheque Number</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="sra_partial_cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Drawn On Date</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="cheque_date_validate_final_payment()" placeholder="Select Date">
+                                            <input type="date" class="form-control" name="drawn_on_date" id="drawn_on_date" onchange="sra_partial_cheque_date_validate_final_payment()" placeholder="Select Date">
                                         </div>
 
                                         <div class="col-md-6 mt-2" id="cheque_reason" style='display:none;'>
                                             <h6 class="text-center">reason</h6>
                                         </div>
                                         <div class="col-md-6 mt-2" id="cheque_reason_input" style='display:none;'>
-                                            <input type="text" class="form-control" name="cheque_reason_1" id="cheque_reason_1" onkeyup="booking_cheque_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" class="form-control" name="cheque_reason_1" id="cheque_reason_1" onkeyup="sra_partial_booking_cheque_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
                                         </div>
                                 </div>
@@ -905,15 +909,15 @@
                                             <th><input type="text" class="form-control" name="otp" id="otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
                                             <p id="least_count"></p>
                                             </th>
-                                            <th><button type="button" class="btn btn-success" name="pending_amt_payment_final_booking_submit" id="pending_amt_payment_final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
+                                            <th><button type="button" class="btn btn-success" name="sra_partial_pending_amt_payment_final_booking_submit" id="sra_partial_pending_amt_payment_final_booking_submit" value="submit" disabled>Verify OTP</button> </th>
                                         </tr>
                                     </table>
                                     <div class="row justify-content-center">
                                         <div class="col-md-3">
-                                            <center><th><button type="button" class="btn btn-primary mb-3" name="pending_amt_submit_otp" id="pending_amt_submit_otp"  disabled>Send OTP</button></th></center>
+                                            <center><th><button type="button" class="btn btn-primary mb-3" name="sra_partial_pending_amt_submit_otp" id="sra_partial_pending_amt_submit_otp"  disabled>Send OTP</button></th></center>
                                         </div>
                                         <div class="col-md-4">
-                                            <center><th><button type="button" class="btn btn-primary mb-3" name="pending_amt_re_send_otp" id="pending_amt_re_send_otp" disabled>Resend OTP</button></th></center>
+                                            <center><th><button type="button" class="btn btn-primary mb-3" name="sra_partial_pending_amt_re_send_otp" id="sra_partial_pending_amt_re_send_otp" disabled>Resend OTP</button></th></center>
                                         </div>
                                     </div>
                                 </div>
@@ -1065,56 +1069,7 @@
 </div>
   
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal_send" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-  <form method="post" action="<?php echo $module_url_path;?>/edit" enctype="multipart/form-data">
 
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">SRS form</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-12 mb-2">
-                    <div class="form-group">
-                    <label>Upload SRS Image / PDF</label><br>
-                    <?php foreach($traveller_booking_info as $traveller_booking_info_value) 
-                    { ?>
-                    <input type="hidden" class="form-control" name="enquiry_id" id="enquiry_id" value="<?php echo $traveller_booking_info_value['domestic_enquiry_id']?>">
-                    <?php } ?>
-                    <input type="file" name="image_name" id="image_nam">
-                    <br><span class="text-danger">Please select only JPG,PNG,JPEG,PDF format files.</span>
-                    <br>
-                    <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
-                    </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <label class="col-form-label">Comment:</label>
-                  <textarea class="form-control" name="srs_remark" id="srs_remark"></textarea>
-                  
-                </div>
-              </div>
-            </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit" name="submit" value="send">Send</button>
-            </div> -->
-       
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary d-flex justify-content-center" id="submit_doc" name="submit_doc" value="send">Send</button>
-      </div>
-    </div>
-
-    </form>
-  </div>
-</div>
 
 <script>
     function show1(){

@@ -95,6 +95,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>custom_tour_agent/international_enquiry/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>International Booking Enquiry</p>
+            </a>
+          </li>
+
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
