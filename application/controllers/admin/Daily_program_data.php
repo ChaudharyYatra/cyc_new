@@ -148,6 +148,7 @@ class Daily_program_data extends CI_Controller {
                     $dinner_food_menu='';
                 }
 
+                $food_menu = implode(",", $this->input->post('food_menu[]')); 
                
                 if($start_point != ''){
                $count = count($activity_type);

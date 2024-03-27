@@ -36,32 +36,41 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
-                <p>
-                    SRA Details
-                    <i class="right fas fa-angle-left"></i>
-                </p>
+            
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                SRA Details
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/add_sra_form/add" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add SRA Payment</p>
                 </a>
-                <ul class="nav nav-treeview">
-                
-                <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>agent/add_sra_form/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add SRA Payment</p>
-                    </a>
-                </li>
-    
-                <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>agent/add_qr_code/index" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>SRA Record</p>
-                    </a>
-                </li>
-    
-                </ul>
-            </li>
+               </li>
+
+               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/sra_payment_record/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>SRA Record</p>
+                </a>
+               </li>
+
+               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>agent/sra_all_payment_details/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>SRA Particular Customer Record</p>
+                </a>
+               </li>
+
+            </ul>
+          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -177,32 +186,32 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url(); ?>agent/inter_booking_process/index" class="nav-link">
+              <!-- <li class="nav-item">
+                <a href="<?php //echo base_url(); ?>agent/inter_booking_process/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Booking Process</p>
                 </a>
-              </li>
+              </li> -->
                
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>agent/international_booking_enquiry/index" class="nav-link">
+                <a href="<?php echo base_url(); ?>agent/international_enquiry/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>International Booking Enquiry</p>
                 </a>
                </li>
                
-               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>agent/todays_international_followup_list/index" class="nav-link">
+               <!-- <li class="nav-item">
+                <a href="<?php //echo base_url(); ?>agent/todays_international_followup_list/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Todays Followup</p>
                 </a>
-               </li>
-               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>agent/not_interested_international/index" class="nav-link">
+               </li> -->
+               <!-- <li class="nav-item">
+                <a href="<?php //echo base_url(); ?>agent/not_interested_international/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Not Interested Customers</p>
                 </a>
-               </li>
+               </li> -->
             </ul>
           </li>
 

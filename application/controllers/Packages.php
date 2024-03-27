@@ -310,6 +310,8 @@ class Packages extends CI_Controller {
         if(is_numeric($id))
         {
             $this->db->where('id',$id);
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
             $package_details_data = $this->master_model->getRecords('packages');
             // $this->db->where('package_id',$id);
             // $package_date_details_data = $this->master_model->getRecords('package_date');
@@ -321,6 +323,7 @@ class Packages extends CI_Controller {
         
         $this->db->where('package_id',$id);
         $this->db->where('is_active','yes');
+        $this->db->where('is_deleted','no');
         $this->db->where('package_id',$id);
         $package_date_details_data = $this->master_model->getRecords('package_date');
        

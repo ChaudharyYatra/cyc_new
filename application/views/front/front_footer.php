@@ -236,8 +236,8 @@
  
     // City change
     $('#department_id').on('change', function () {
-      var did = $(this).val();
-      // alert('ppppppppppppppppppppppppppp');
+      var did = $("#department_id").val();
+      // alert(did);
      
       // AJAX request
       $.ajax({
@@ -641,8 +641,8 @@ function validateEnquiryForms()
   $("#mobile_number_error").hide();
   $("#gender_error").hide();
   $("#media_source_name_error").hide();
-  $("#department_id_error").hide();
-  $("#agent_id_error").hide();
+  // $("#department_id_error").hide();
+  // $("#agent_id_error").hide();
   $("#wp_mobile_number_error").hide();
   
   var submiform='';
@@ -770,21 +770,21 @@ function validateEnquiryForms()
     submiform=false;
   }
 
-	var department_id = $('#department_id').val();
-  if (department_id == '' || department_id ==null) 
-  {
-    $('#department_id_error').text('Please select department.');
-    $('#department_id_error').show();
-    submiform=false;
-  }
+	// var department_id = $('#department_id').val();
+  // if (department_id == '' || department_id ==null) 
+  // {
+  //   $('#department_id_error').text('Please select department.');
+  //   $('#department_id_error').show();
+  //   submiform=false;
+  // }
 	
-  var agent_id = $('#agent_id').val();
-  if (agent_id == '' || agent_id ==null) 
-  {
-    $('#agent_id_error').text('Please select Booking Centre.');
-    $('#agent_id_error').show();
-    submiform=false;
-  }
+  // var agent_id = $('#agent_id').val();
+  // if (agent_id == '' || agent_id ==null) 
+  // {
+  //   $('#agent_id_error').text('Please select Booking Centre.');
+  //   $('#agent_id_error').show();
+  //   submiform=false;
+  // }
 
   if(submiform==='')
   {

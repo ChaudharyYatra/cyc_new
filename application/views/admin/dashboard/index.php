@@ -767,7 +767,7 @@ function drawChart10() {
           <?php } ?>
 
           <?php 
-            if($arr_data['booking_payment_details_in_process_count'] >0 ){
+            if($arr_data['booking_payment_details_completed_count'] >0 ){
           ?> 
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -778,7 +778,7 @@ function drawChart10() {
                 <div class="css_amt_not_paid">
                   <div class="row">
                     <div class="col-md-3">
-                      <h3 style="color:white;"><?php echo $arr_data['booking_payment_details_in_process_count']; ?></h3>
+                      <h3 style="color:white;"><?php echo $arr_data['booking_payment_details_completed_count']; ?></h3>
                     </div>
                     <div class="col-md-9">
                       <p style="color:white;">Booking Done And Amount Completed</p>
@@ -805,7 +805,6 @@ function drawChart10() {
         <div class="row">
         <?php 
             if($package_type_wise_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -833,7 +832,6 @@ function drawChart10() {
 
           <?php 
             if($agent_wise_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -862,7 +860,6 @@ function drawChart10() {
 
           <?php 
             if($month_wise_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -891,7 +888,6 @@ function drawChart10() {
 
           <?php 
             if($top_agent_wise_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -920,7 +916,6 @@ function drawChart10() {
 
           <?php 
             if($booking_max_package_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -949,7 +944,6 @@ function drawChart10() {
 
           <?php 
             if($vehicle_type_data >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -979,7 +973,6 @@ function drawChart10() {
 
           <?php 
             if($enquiry_status >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -1008,7 +1001,6 @@ function drawChart10() {
 
           <?php 
             if($agent_status >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->
@@ -1037,7 +1029,6 @@ function drawChart10() {
 
           <?php 
             if($top_s_product >0 ){
-
           ?> 
           <div class="col-md-6">
             <!-- PIE CHART -->

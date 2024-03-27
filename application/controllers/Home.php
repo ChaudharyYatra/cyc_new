@@ -90,12 +90,12 @@ class Home extends CI_Controller {
         // print_r($main_packages_all); die;
 
         $fields ="packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-		$this->db->join("package_date", 'packages.id=package_date.package_id','right');
         $this->db->where('packages.is_deleted','no');
         $this->db->where('packages.is_active','yes');
-        $this->db->where('package_type','2');
-        $this->db->group_by('package_id');
+        $this->db->where('packages.package_type','2');
+        $this->db->group_by('package_date.package_id');
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','right');
 		$international_packages_all= $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
         // print_r($international_packages_all); die;
 

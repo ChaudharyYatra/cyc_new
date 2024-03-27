@@ -295,7 +295,7 @@ class International_packages extends CI_Controller {
                 $this->form_validation->set_rules('email', 'Email', 'required');
                 $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required');
                 $this->form_validation->set_rules('gender', 'Gender', 'required');
-                $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
+                // $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
 				$this->form_validation->set_rules('wp_mobile_number', 'Whatsapp Mobile Number', 'required');
     
                 if($this->form_validation->run() == TRUE)
@@ -305,7 +305,7 @@ class International_packages extends CI_Controller {
                     $email             = trim($this->input->post('email'));
                     $mobile_number     = trim($this->input->post('mobile_number'));
                     $gender            = $this->input->post('gender');
-                    $agent_id         = $this->input->post('agent_id');
+                    // $agent_id         = $this->input->post('agent_id');
                     $media_source_name         = $this->input->post('media_source_name');
 					$wp_mobile_number     = trim($this->input->post('wp_mobile_number'));
                     $package_id        = $id;
@@ -316,22 +316,22 @@ class International_packages extends CI_Controller {
                         'email'         => $email,
                         'mobile_number' => $mobile_number,
                         'gender'        => $gender,
-                        'agent_id'     => $agent_id,
+                        // 'agent_id'     => $agent_id,
                         'media_source_name'    =>$media_source_name,
                         'package_id'    =>$id,
 						'wp_mobile_number'=>$wp_mobile_number,
-						'enquiry_from'    =>'front'
+						'enquiry_from'    =>'Front Website'
                     );
                     
                     $inserted_id = $this->master_model->insertRecord('international_booking_enquiry',$arr_insert,true);
                 
                     $this->db->where('is_deleted','no');
                     $this->db->where('is_active','yes');
-                    $this->db->where('id',$agent_id);
-                    $this->db->order_by('id','DESC');
-                    $agent_data_email = $this->master_model->getRecord('agent');
-                    $agent_email=$agent_data_email['email'];
-					$agent_name=$agent_data_email['agent_name'];
+                    // $this->db->where('id',$agent_id);
+                    // $this->db->order_by('id','DESC');
+                    $custom_tour_agent = $this->master_model->getRecord('custom_tour_agent');
+                    $custom_agent_email=$custom_tour_agent['email'];
+					$custom_agent_name=$custom_tour_agent['name'];
 
                     if($inserted_id > 0)
                     {    
@@ -367,7 +367,7 @@ class International_packages extends CI_Controller {
 										</style>
 									</head>
 									<body background=".base_url()."uploads/email/email1.jpg>
-										<h3>Dear&nbsp;".$agent_name."</h3>
+										<h3>Dear&nbsp;".$custom_agent_name."</h3>
 										<p>I hope this message finds you well. I am writing to let you know that a new inquiry has been encountered in your account from a customer. We would 
                                             appreciate it if you could assist them with their travel-related needs.
 										</p>
@@ -610,7 +610,7 @@ class International_packages extends CI_Controller {
             $this->db->where('is_active','yes');
             $this->db->where('department',$department_id);
             $data = $this->master_model->getRecords('agent');
-    
+            // print_r($data); die;
     echo json_encode($data); 
   }
 }
