@@ -10935,7 +10935,9 @@ $(document).on("click", ".remove-row", function() {
                                     </button>
                                     </td>
                                     <td>
-                                        <a href="" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> &nbsp;/&nbsp;
+                                        <a href="<?php echo $module_daily_program_data;?>/details/<?php $aid=base64_encode($info['id']); 
+                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
+                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> &nbsp;/&nbsp;
 
                                         <a href="<?php echo $module_daily_program_data;?>/edit/<?php $aid=base64_encode($info['id']); 
                                                 echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
