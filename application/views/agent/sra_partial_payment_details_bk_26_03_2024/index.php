@@ -91,7 +91,7 @@
                             <label>Tour Date -</label>
                         </div>
                         <div class="col-md-5">  
-                            <div><?php echo date('d-m-Y', strtotime($traveller_booking_info_value['journey_date'])); ?></div>
+                            <div><?php echo date('d-m-Y', strtotime($traveller_booking_info_value['tour_date'])); ?></div>
                         </div>
                         <div class="col-md-2">
                             <label>Mobile No -</label>
@@ -107,12 +107,9 @@
                         <div class="col-md-1">
                             <div><?php echo $traveller_booking_info_value['total_seat']; ?></div>
                         </div>
-
-                        <!-- <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php //echo $traveller_booking_info_value['academic_year']; ?>"> -->
-                        <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php echo $traveller_booking_info_value['academic_year']; ?>">
                         <input type="hidden" class="form-control" name="sra_no" id="sra_no" value="<?php echo $traveller_booking_info_value['sra_no']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $traveller_booking_info_value['tour_date']; ?>">
-                        <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['sra_payment_id']; ?>">
+                        <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['id']; ?>">
                         <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['tour_number']; ?>">
                     
                         <!-- <input type="hidden" class="form-control" name="hotel_name_id" id="hotel_name_id" value="<?php //echo $traveller_booking_info_value['hotel_name_id']; ?>">

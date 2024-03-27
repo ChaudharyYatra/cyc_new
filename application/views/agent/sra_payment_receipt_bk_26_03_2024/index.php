@@ -224,7 +224,7 @@
                         <h6>Tour Date.</h6>  
                     </div>
                     <div class="col-md-2 mt-2 mb-3">
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['journey_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['tour_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
                 </div>
 

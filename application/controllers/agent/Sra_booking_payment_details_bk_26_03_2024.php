@@ -25,23 +25,17 @@ class Sra_booking_payment_details extends CI_Controller {
         $this->arr_view_data = [];
 	 }
 
-    public function index($iid,$academic_year)
+    public function index($iid)
     {
-        // echo $academic_year;
+        // echo $iid;
 
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
-        $record = array();
-        $fields = "sra_payment.*,package_date.journey_date,sra_payment.id as sra_payment_id";
-        $this->db->where('sra_payment.is_deleted','no');
-        $this->db->where('sra_payment.is_active','yes');
-        $this->db->join("package_date", 'package_date.id=sra_payment.tour_date','left');
-        $this->db->group_start();
-        $this->db->where('sra_payment.sra_no', $iid);
-        $this->db->where('sra_payment.academic_year', $academic_year);
-        $this->db->group_end();
-        $traveller_booking_info = $this->master_model->getRecords('sra_payment','',$fields);
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('sra_no',$iid);
+        $traveller_booking_info = $this->master_model->getRecords('sra_payment');
         // print_r($traveller_booking_info); die;
 
         // $record = array();
@@ -149,10 +143,7 @@ class Sra_booking_payment_details extends CI_Controller {
             // print_r($extra);
 
         $this->db->where('is_deleted','no');
-        $this->db->group_start();
         $this->db->where('sra_booking_payment_details.sra_no',$iid);
-        $this->db->where('sra_booking_payment_details.academic_year', $academic_year);
-        $this->db->group_end();
         $booking_payment_details = $this->master_model->getRecord('sra_booking_payment_details');
         // print_r($booking_payment_details); die;
 
@@ -216,7 +207,6 @@ class Sra_booking_payment_details extends CI_Controller {
 
             $mobile_no = $this->input->post('mobile_no');
             $final_amt = $this->input->post('final_amt');
-            $academic_year = $this->input->post('academic_year');
             $sra_no = $this->input->post('sra_no');
             $package_id = $this->input->post('package_id');
             $package_date_id = $this->input->post('package_date_id');
@@ -250,7 +240,6 @@ class Sra_booking_payment_details extends CI_Controller {
                 $arr_insert = array(
                     'booking_tm_mobile_no'  =>  $mobile_no,
                     'sra_payment_id'  =>  $sra_payment_id,
-                    'academic_year'  =>  $academic_year,
                     'sra_no'  =>  $sra_no,
                     'package_id'  =>  $package_id,
                     'package_date_id'  =>  $package_date_id,

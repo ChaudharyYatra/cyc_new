@@ -21,6 +21,8 @@ class Sra_partial_payment_details extends CI_Controller {
         $this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
         $this->module_url_pending_payment   =  base_url().$this->config->item('agent_panel_slug')."/pending_booking_details";
         $this->module_url_final_booking_details   =  base_url().$this->config->item('agent_panel_slug')."/final_booking_details";
+        $this->module_url_path_add_sra    =  base_url().$this->config->item('agent_panel_slug')."/add_sra_form";
+        $this->module_title_extra_services       = "Extra Services ";
         $this->module_title       = "SRA Partial Payment Details";
         $this->module_view_folder = "sra_partial_payment_details/";
         $this->arr_view_data = [];
@@ -33,22 +35,29 @@ class Sra_partial_payment_details extends CI_Controller {
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $this->db->where('sra_no',$iid);
-        $traveller_booking_info_header = $this->master_model->getRecords('sra_payment');
+        $record = array();
+        $fields = "sra_payment.*,package_date.journey_date,sra_payment.id as sra_payment_id";
+        $this->db->where('sra_payment.is_deleted','no');
+        $this->db->where('sra_payment.is_active','yes');
+        $this->db->join("package_date", 'package_date.id=sra_payment.tour_date','left');
+        // $this->db->group_start();
+        $this->db->where('sra_payment.id', $iid);
+        // $this->db->where('sra_payment.academic_year', $academic_year);
+        // $this->db->group_end();
+        // $traveller_booking_info_header = $this->master_model->getRecords('sra_payment','',$fields);
+        $traveller_booking_info_header = $this->master_model->getRecords('sra_payment',array('sra_payment.is_deleted'=>'no'),$fields);
 
         $fields = "sra_payment.*,sra_booking_payment_details.run_pending_amt,sra_booking_payment_details.final_amt";
         $this->db->where('sra_booking_payment_details.is_deleted','no');
         $this->db->where('sra_payment.is_active','yes');
-        $this->db->where('sra_booking_payment_details.sra_no',$iid);
+        $this->db->where('sra_booking_payment_details.sra_payment_id',$iid);
         $this->db->join("sra_payment", 'sra_booking_payment_details.sra_payment_id=sra_payment.id','left');
         $traveller_booking_info_amt = $this->master_model->getRecord('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
 
         $fields = "sra_payment.*,sra_booking_payment_details.run_pending_amt";
         $this->db->where('sra_booking_payment_details.is_deleted','no');
         $this->db->where('sra_payment.is_active','yes');
-        $this->db->where('sra_booking_payment_details.sra_no',$iid);
+        $this->db->where('sra_booking_payment_details.sra_payment_id',$iid);
         $this->db->join("sra_payment", 'sra_booking_payment_details.sra_payment_id=sra_payment.id','left');
         $traveller_booking_info = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
 
@@ -145,7 +154,7 @@ class Sra_partial_payment_details extends CI_Controller {
             // print_r($extra);
 
         $this->db->where('is_deleted','no');
-        $this->db->where('sra_booking_payment_details.sra_no',$iid);
+        $this->db->where('sra_booking_payment_details.sra_payment_id',$iid);
         $booking_payment_details = $this->master_model->getRecord('sra_booking_payment_details');
         // print_r($booking_payment_details); die;
 
@@ -240,6 +249,7 @@ class Sra_partial_payment_details extends CI_Controller {
         $package_id = $this->input->post('package_id');
         $package_date_id = $this->input->post('package_date_id');
         $sra_payment_id = $this->input->post('sra_payment_id');
+        $academic_year = $this->input->post('academic_year');
 
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
@@ -272,6 +282,7 @@ class Sra_partial_payment_details extends CI_Controller {
                 $arr_insert = array(
                     'booking_tm_mobile_no'  =>  $mobile_no,
                     'sra_payment_id'  =>  $sra_payment_id,
+                    'academic_year'  =>  $academic_year,
                     'sra_no'  =>  $sra_no,
                     'package_id'  =>  $package_id,
                     'package_date_id'  =>  $package_date_id,
@@ -414,6 +425,123 @@ class Sra_partial_payment_details extends CI_Controller {
            echo false;
        }
 
+    }
+
+    public function extra_services_add($iid)
+    {  
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        $record = array();
+        $fields = "sra_payment.*,package_date.journey_date,sra_payment.id as sra_payment_id";
+        $this->db->where('sra_payment.is_deleted','no');
+        $this->db->where('sra_payment.is_active','yes');
+        $this->db->join("package_date", 'package_date.id=sra_payment.tour_date','left');
+        // $this->db->group_start();
+        $this->db->where('sra_payment.id', $iid);
+        // $this->db->where('sra_payment.academic_year', $academic_year);
+        // $this->db->group_end();
+        // $traveller_booking_info_header = $this->master_model->getRecords('sra_payment','',$fields);
+        $traveller_booking_info_header = $this->master_model->getRecords('sra_payment',array('sra_payment.is_deleted'=>'no'),$fields);
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $expense_type_data = $this->master_model->getRecords('expense_type');
+        // print_r($expense_type_data); die;  
+
+        if($this->input->post('extra_services_submit'))
+        {
+                $add_on_services_payment  = $this->input->post('add_on_services_payment');
+                $sra_no  = $this->input->post('sra_no');
+                $package_id  = $this->input->post('package_id');
+                $package_date_id  = $this->input->post('package_date_id');
+                $service_mobile_number  = $this->input->post('service_mobile_number');
+
+                $sra_payment_id  = $this->input->post('sra_payment_id');
+                $academic_year  = $this->input->post('academic_year');
+
+                $other_services  = $this->input->post('other_services');
+                $sra_extra_services  = $this->input->post('sra_extra_services');
+                $services_quantity  = $this->input->post('services_quantity');
+            
+                if($add_on_services_payment == '2'){
+                $count = count($sra_extra_services);
+                // print_r($count); die;
+                for($i=0;$i<$count;$i++)
+                {
+                $arr_insert = array(
+                'extra_services'   =>   $_POST["sra_extra_services"][$i],
+                'other_services'   =>   $_POST["other_services"][$i],
+                'services_amt'   =>   $_POST["services_quantity"][$i],
+                'payment_type' => $add_on_services_payment,
+                'sra_no' => $sra_no,
+                'tour_number' => $package_id,
+                'tour_date' => $package_date_id,
+                'mobile_number' => $service_mobile_number,
+                'sra_payment_id' => $sra_payment_id,
+                'academic_year' => $academic_year
+                
+                ); 
+                $inserted_id = $this->master_model->insertRecord('sra_extra_services',$arr_insert,true);
+                }
+                }
+                
+                if($inserted_id > 0)
+                {
+                    $this->session->set_flashdata('success_message',ucfirst($this->module_title_extra_services)." Added Successfully.");
+                    redirect($this->module_url_path_add_sra.'/add');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                }
+                //  redirect($this->module_seat_type_room_type.'/add/'.$iid);
+                redirect($this->module_url_path.'/index');
+                // }   
+        }
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('expense_category','ASC');
+        $expense_category = $this->master_model->getRecords('expense_category');
+        //  print_r($expense_category); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $measuring_unit = $this->master_model->getRecords('measuring_unit');
+        //  print_r($measuring_unit); die;
+
+        $this->db->where('is_deleted','no');
+        // $this->db->where('extra_services_details.enquiry_id',$iid);
+        // $this->db->group_by('extra_services');
+        $special_req_master = $this->master_model->getRecords('special_req_master');
+        // print_r($special_req_master); die;
+
+        // $record = array();
+        // $fields = "packages.*,package_date.journey_date,package_date.id as pd_id";
+        // $this->db->where('packages.is_deleted','no');
+        // // $this->db->order_by('packages.id','desc');
+        // $this->db->where('packages.id',$id);
+        // $this->db->where('package_date.id',$did);
+        // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        // $packages_data = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        // print_r($packages_data); die;
+
+
+        $this->arr_view_data['traveller_booking_info_header']        = $traveller_booking_info_header;
+        $this->arr_view_data['action']          = 'add';
+        $this->arr_view_data['expense_type_data']        = $expense_type_data;
+        $this->arr_view_data['special_req_master'] = $special_req_master;
+        // $this->arr_view_data['packages_data']        = $packages_data;
+        $this->arr_view_data['expense_category']        = $expense_category;
+        $this->arr_view_data['measuring_unit']        = $measuring_unit;
+        $this->arr_view_data['page_title']      = " Add ".$this->module_title;
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_path_add_sra'] = $this->module_url_path_add_sra;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."extra_services";
+        $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }
 
     public function cust_otp_back_btn()

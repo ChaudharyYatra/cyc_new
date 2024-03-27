@@ -107,10 +107,9 @@
                         <div class="col-md-1">
                             <div><?php echo $traveller_booking_info_value['total_seat']; ?></div>
                         </div>
-                        <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php echo $traveller_booking_info_value['academic_year']; ?>">
                         <input type="hidden" class="form-control" name="sra_no" id="sra_no" value="<?php echo $traveller_booking_info_value['sra_no']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $traveller_booking_info_value['tour_date']; ?>">
-                        <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['sra_payment_id']; ?>">
+                        <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['id']; ?>">
                         <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['tour_number']; ?>">
                     
                         <!-- <input type="hidden" class="form-control" name="booking_ref_no" id="booking_ref_no" value=""> -->

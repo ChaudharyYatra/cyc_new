@@ -33,13 +33,12 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Academic Year</th>
                     <th>SRA No</th>
                     <th>Customer Name</th>
                     <th>Tour No</th>
                     <th>Tour Date</th>
                     <th>Mobile Number</th>
-                    <!-- <th>Status</th> -->
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -53,16 +52,15 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['year'] ?></td> 
                     <td><?php echo $info['sra_no'] ?></td>
                     <td style="text-transform: capitalize;"><?php echo $info['customer_name']?></td>
                     <td><?php echo $info['tour_number'] ?></td>
-                    <td><?php echo $info['journey_date'] ?></td>
+                    <td><?php echo $info['tour_date'] ?></td>
                     <td><?php echo $info['mobile_number'] ?></td>
 
-                    <!-- <td><?php //echo $info['payment_confirmed_status'] ?></td> -->
+                    <td><?php echo $info['payment_confirmed_status'] ?></td>
                     <td>
-                      <a href="<?php echo $module_url_path;?>/details/<?php echo $info['sra_no']; ?>/<?php echo $info['id']; ?>/<?php echo $info['academic_year']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment Details</button></a>
+                      <a href="<?php echo $module_url_path;?>/details/<?php echo $info['sra_no']; ?>" ><button type="button" class="btn btn-primary btn_css mt-1">Payment Details</button></a>
                     </td>
                     
                   </tr>

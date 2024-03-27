@@ -4812,6 +4812,33 @@ $(document).ready(function() {
 
         $("#total_cash_amt").val(final_total);
 
+         var booking_amt = $("#booking_amt").val();
+
+         var return_to_cust = $("#return_total_cash_amt").val();
+         
+         var final_amt_differnce = final_total-booking_amt;
+
+         if(booking_amt < final_total && return_to_cust=='')
+         {
+            alert('firsttttt');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < final_total && return_to_cust!=final_amt_differnce)
+         {
+            alert('secoundddd');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < final_total && return_to_cust==final_amt_differnce)
+         {
+            alert('thirddddddd');
+            $("#submit_otp").attr("disabled", false);
+         }else if(booking_amt == final_total)
+         {
+            alert('fothhhhhhhhhhh');
+            $("#submit_otp").attr("disabled", false);
+         }else if(booking_amt > final_total)
+         {
+            // alert('fothhhhhhhhhhh');
+            $("#submit_otp").attr("disabled", true);
+         }
 
     });
 
@@ -4819,7 +4846,7 @@ $(document).ready(function() {
 </script>
 
 <!-- ================================return to customer  =================================-->
-<script>
+<!-- <script>
     $('.return_data_amt').keyup(function(){
         // alert('hiiii');
         var seat_type_data = $(this).attr('return-attr-amt');
@@ -4998,11 +5025,229 @@ $(document).ready(function() {
 
         $("#return_total_cash_amt").val(final_total);
 
+         var booking_amt = $("#booking_amt").val();
+         
+         var total_cash_amt = $("#total_cash_amt").val();
+         alert(total_cash_amt);
+
+         var return_to_cust = $("#return_total_cash_amt").val();
+         
+         var final_amt_differnce = total_cash_amt-booking_amt;
+        
+
+         if(booking_amt < total_cash_amt && final_total=='')
+         {
+            alert('1');
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && final_total!=final_amt_differnce)
+         {
+            alert('2');
+
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && final_total==final_amt_differnce)
+         {
+            alert('3');
+
+            $("#submit_otp").attr("disabled", false);
+         }
+         alert('4');
+         
+
 
     });
 
 });
+</script> -->
+
+<script>
+    $('.return_data_amt').keyup(function(){
+        // alert('hiiii');
+        var seat_type_data = $(this).attr('return-attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt );
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#return_cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_500').val(total_amt );
+            }else{
+                $('#return_total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#return_cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_200').val(total_amt );
+            }else{
+                $('#return_total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#return_cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_100').val(total_amt );
+            }else{
+                $('#return_total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#return_cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_50').val(total_amt );
+            }else{
+                $('#return_total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#return_cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_20').val(total_amt );
+            }else{
+                $('#return_total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#return_cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_10').val(total_amt );
+            }else{
+                $('#return_total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#return_cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_5').val(total_amt );
+            }else{
+                $('#return_total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#return_cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_2').val(total_amt );
+            }else{
+                $('#return_total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#return_cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_1').val(total_amt );
+            }else{
+                $('#return_total_cash_1').val('0');
+            }
+        }
+        
+        
+        var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+        // $(".return_data_amt").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#return_total_cash_500").val();
+        var g_count = $("#return_total_cash_200").val();
+        var m_count = $("#return_total_cash_100").val();
+        var l_count = $("#return_total_cash_50").val();
+        var n_count = $("#return_total_cash_20").val();
+        var o_count = $("#return_total_cash_10").val();
+        var a_count = $("#return_total_cash_5").val();
+        var b_count = $("#return_total_cash_2").val();
+        var c_count = $("#return_total_cash_1").val();
+
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+
+        $("#return_total_cash_amt").val(final_total);
+
+         var booking_amt = $("#booking_amt").val();
+         var total_cash_amt = $("#total_cash_amt").val();
+         var return_to_cust = $("#return_total_cash_amt").val();
+         var final_amt_differnce = total_cash_amt-booking_amt;
+
+         if(booking_amt < total_cash_amt && parseInt(final_total)=='')
+         {
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && parseInt(final_total)!=final_amt_differnce)
+         {
+            $("#submit_otp").attr("disabled", true);
+         }else if(booking_amt < total_cash_amt && parseInt(final_total)==final_amt_differnce)
+         {
+            $("#submit_otp").attr("disabled", false);
+         }
+         
+
+
+    // });
+
+    });
 </script>
+
 <!-- -==============================return to customer -->
 
 
@@ -11205,10 +11450,6 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
     // var agent_id = '1'; 
 
         //   var attr_cancel_val =$(this).attr('attr_cancle_btn');
-        var academic_year = $('#partially_academic_year').val();
-        var tour_number = $('#partially_tour_number').val();
-        var tour_date = $('#partially_tour_date').val();
-
         var sra_no = $('#partially_sra_no').val();
         var mobile_number = $('#partially_mobile_number').val();
         var tbody = $('#tid');
@@ -11219,26 +11460,20 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
         $('#sra_no_textbox').val(sra_no);
 
            
-           if(academic_year !='' || sra_no != '' || mobile_number != '' || tour_date !='' || tour_number !='' || tour_date!='')  
+           if(sra_no != '' && mobile_number != '')  
            {  
             // alert('hiiiiiiiiiiii');
                 $.ajax({  
                      url:"<?php echo base_url(); ?>agent/add_sra_form/partial_payment_data",      
                      method:"POST",  
-                     data:{academic_year:academic_year, tour_number:tour_number, tour_date:tour_date, sra_no:sra_no , mobile_number:mobile_number},  
+                     data:{sra_no:sra_no , mobile_number:mobile_number},  
                      dataType: 'json',
                      success:function(response){ 
-                        // do not earase pl below code
-                        // if (response != '') {
-                        //     $('#div_partial_payment').css('display', 'block');
-                        // }else{
-                        //     $('#div_partial_payment').css('display', 'none');
-                        // }
-                        // do not earase pl above code
-
-                        if (response.length > 0) {
+                        if (response != '') {
                             $('#div_partial_payment').css('display', 'block');
-
+                        }else{
+                            $('#div_partial_payment').css('display', 'none');
+                        }
                         // alert('hiiiiiiiii');
                         //   console.log(response); 
                         var i = 0;
@@ -11247,35 +11482,11 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                         var img_count=parseInt(i)+1;
                         $.each(response,function(index,data){  
                             sra_id++;
-                            console.log(data['abcamt']);
-
-                            if (data['pending_amt'] > 0 && data['abcamt']!=data['total_sra_amt']) {
-                            var button_id = "partial_payment_" + sra_id; // Dynamically create unique button ID
-                            var buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/index/`+  data['sra_pay_id']+`">
-                                                <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Payment</button>
-                                            </a>`;
-                                        } else if (data['pending_amt'] == 0 || data['abcamt']==data['total_sra_amt'])
-                                        {
-                                            buttonHtml = "Payment Completed";
-                                        }
-
-                            if (data['pending_amt'] > 0 && data['abcamt']!=data['total_sra_amt']) {
-                            var extra_services_button_id = "partial_payment_" + sra_id; // Dynamically create unique button ID
-                            var extra_services_buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/extra_services_add/`+  data['sra_pay_id']+`">
-                                                <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Add</button>
-                                            </a>`;
-                                        } else if (data['pending_amt'] == 0 || data['abcamt']==data['total_sra_amt'])
-                                        {
-                                            extra_services_buttonHtml = "Payment Completed";
-                                        }
-
+                            console.log(data);
                             // $('#tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
-                            $('#tid').append(`<tr>
-                            <td>`+ sra_id +`</td>
-                            <td>`+ data['year'] +`</td>
-                            <td>`+ data['sra_no'] +`</td>
+                            $('#tid').append(`<tr><td>`+ sra_id +`</td>
                             <td>`+ data['tour_number'] +`</td>
-                            <td>`+ data['journey_date'] +`</td>
+                            <td>`+ data['tour_date'] +`</td>
                             <td>`+ data['customer_name'] +`</td>
                             <td>`+ data['total_seat'] +`</td>
                             <td>`+ data['total_sra_amt'] +`</td>
@@ -11287,22 +11498,10 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                                         <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php echo base_url(); ?>uploads/SRA_photo_pdf/`+data['image_name']+`">Download</a>
                                     </div>
                             </td>
-                            <td>`+ buttonHtml +`</td>
-                            <td>`+ extra_services_buttonHtml +`</td>
                             </tr>`);
                         });
                         $('#sra_no_textbox').val(sra_no);
                         
-                     } 
-                     else {
-                            // Show SweetAlert message
-                            Swal.fire({
-                                icon: 'info',
-                                title: 'No records available',
-                                text: 'No records found against the provided information',
-                            });
-                            $('#div_partial_payment').css('display', 'none');
-                        }
                      } 
 
                 });  
@@ -11358,25 +11557,12 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
     });
 });
  </script> -->
+
  
 
 <!-- SRA form partial payment ajax -->
 
 <!-- sra form in that extra services add more -->
-
-    <script>
-        $(document).ready(function() {
-            $('.extra_services').change(function() {
-                var selectedOption = $(this).val();
-                if (selectedOption === 'Other_services') {
-                    $('#other_services').show().prop('required', true);
-                } else {
-                    $('#other_services').hide().prop('required', false);
-                }
-            });
-        });
-    </script>
-
 <script>
     $(document).ready(function() {
         $("#extra_services_add_more").click(function() {
@@ -11388,7 +11574,7 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
             var newRow = `
                 <tr>
                     <td>
-                        <select class="select_css extra_services" name="sra_extra_services[]" id="sra_extra_services`+i+`" required>
+                        <select class="select_css extra_services" name="sra_extra_services[]" id="sra_extra_services`+i+`" >
                             <option value="">Select </option>
                             <option value="Other_services">Other</option>
                             <?php
@@ -11398,9 +11584,9 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                                 <option value="<?php echo $special_req_master_data_value['id'];?>"><?php echo $special_req_master_data_value['service_name'];?></option>
                             <?php } ?>
                         </select>
-                        <input type="text" class="form-control mt-4 other_services_input" name="other_services[]" id="other_services${i}" placeholder="Enter extra services name" value="" style="display: none;">
+                        <input style="display: none;margin-top: 8px;" type="text" class="form-control services_other_input" name="services_other_name[]" id="services_other_name`+i+`" placeholder="Enter name" >
                     </td>
-                    <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity`+i+`" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required></td>
+                    <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity`+i+`" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
                     <td>
                         <button type="button" class="btn btn-danger remove-row">Remove</button>
                     </td>
@@ -11414,17 +11600,6 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
-
-        $(document).on("change", ".extra_services", function() {
-        var selectedOption = $(this).val();
-        var otherServicesInput = $(this).closest("tr").find(".other_services_input");
-        if (selectedOption === "Other_services") {
-            otherServicesInput.show().prop("required", true);
-        } else {
-            otherServicesInput.hide().prop("required", false);
-        }
-    });
-        
     });
 </script>
 <!-- sra form in that extra services add more -->
@@ -11523,7 +11698,6 @@ $(document).ready(function() {
     $("#sra_submit_otp").click(function() {
         var mobile_no = $('#sra_booking_tm_mobile_no').val();  
         var final_amt = $('#final_amt').val();
-        var academic_year = $('#academic_year').val();
         var sra_no = $('#sra_no').val();
         var package_id = $('#package_id').val();
         var package_date_id = $('#package_date_id').val();
@@ -11537,7 +11711,6 @@ $(document).ready(function() {
                 data: {
                     mobile_no: mobile_no,
                     final_amt: final_amt,
-                    academic_year: academic_year,
                     sra_no: sra_no,
                     package_id: package_id,
                     package_date_id: package_date_id,
@@ -12646,7 +12819,6 @@ $(document).ready(function() {
         var mobile_no = $('#booking_tm_mobile_no').val();  
         // alert(mobile_no);
         var final_amt = $('#final_amt').val();
-        var academic_year = $('#academic_year').val();
         var sra_no = $('#sra_no').val();
         var package_id = $('#package_id').val();
         var package_date_id = $('#package_date_id').val();
@@ -12661,7 +12833,6 @@ $(document).ready(function() {
                 data: {
                     mobile_no: mobile_no,
                     final_amt: final_amt,
-                    academic_year: academic_year,
                     sra_no: sra_no,
                     package_id: package_id,
                     package_date_id: package_date_id,
@@ -13049,54 +13220,3 @@ $(document).ready(function() {
 </script>
 <!-------------------- partial payment send otp, resend otp, and verify otp ---------------------->
 
-<script>
-
-    $(document).ready(function(){
-
-    $('#sra_tour_number').change(function(){
-
-    var did = $(this).val();
-
-      $.ajax({
-        url:'<?=base_url()?>agent/add_sra_form/get_tourdate',
-        method: 'post',
-        data: {did: did},
-        dataType: 'json',
-        success: function(response){
-        // console.log(response);
-          $('#tour_date').find('option').not(':first').remove();
-          $.each(response,function(index,data){      
-             $('#tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
-          });
-        }
-     });
-   });
-});
-
-</script>
-
-<script>
-
-    $(document).ready(function(){
-
-    $('#partially_tour_number').change(function(){
-
-    var did = $(this).val();
-
-      $.ajax({
-        url:'<?=base_url()?>agent/add_sra_form/get_tourdate',
-        method: 'post',
-        data: {did: did},
-        dataType: 'json',
-        success: function(response){
-        // console.log(response);
-          $('#partially_tour_date').find('option').not(':first').remove();
-          $.each(response,function(index,data){      
-             $('#partially_tour_date').append('<option value="'+data['id']+'">'+data['journey_date']+'</option>');
-          });
-        }
-     });
-   });
-});
-
-</script>

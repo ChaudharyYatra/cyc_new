@@ -33,7 +33,6 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Academic Year</th>
                     <th>SRA No</th>
                     <th>Customer Name</th>
                     <th>Tour No</th>
@@ -51,7 +50,6 @@
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['year'] ?></td> 
                     <td><?php echo $info['sra_no'] ?></td> 
                     <td><?php echo $info['customer_name'] ?></td> 
                     <td><?php echo $info['tour_number'] ?></td>

@@ -36,32 +36,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
-                <p>
-                    SRA Details
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview">
-                
-                <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>agent/add_sra_form/add" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Add SRA Payment</p>
-                    </a>
-                </li>
-    
-                <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>agent/add_qr_code/index" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>SRA Record</p>
-                    </a>
-                </li>
-    
-                </ul>
-            </li>
+            
 
           <li class="nav-item">
             <a href="#" class="nav-link">

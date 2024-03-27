@@ -49,8 +49,8 @@
                           <label>First Payment</label> &nbsp;&nbsp;
                           <input type="radio" id="partially_payment" name="payment_type" value="0" onclick="partially_payment_sub();" />
                           <label>Partial Payment</label> &nbsp;&nbsp;
-                          <!-- <input type="radio" id="add_on_services" name="payment_type" value="2" onclick="extra_services();" />
-                          <label>Add On Services</label> <br> -->
+                          <input type="radio" id="add_on_services" name="payment_type" value="2" onclick="extra_services();" />
+                          <label>Add On Services</label> <br>
                       </div>
                   </div>
               </div>
@@ -61,72 +61,27 @@
                     <div id="firstly_submit_form" style="display:none;">
                     <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/add" enctype="multipart/form-data">
                       <div class="row">
-
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Academic Year</label>
-                            <select class="form-control" style="width: 100%;" name="academic_year" id="academic_year" required="required">
-                                <option value="">Select Year</option>
-                                <?php
-                                  foreach($academic_years_data as $academic_years_info) 
-                                  { 
-                                ?>
-                                  <option value="<?php echo $academic_years_info['id']; ?>"><?php echo $academic_years_info['year']; ?></option>
-                              <?php } ?>
-                              </select>
-                          </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                             <label>SRA No</label>
                             <input type="text" class="form-control" name="sra_no" id="sra_no" placeholder="Enter SRA No" required="required">
-                            <input type="hidden" class="form-control" name="firstly_payment" id="firstly_payment" required="required">
+                            <input type="hidden" class="form-control" name="firstly_payment" id="firstly_payment" required="required" value="1">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                              <div class="form-group">
-                                <label>SRA Date</label>
-                                <input type="date" class="form-control" name="sra_date" id="sra_date" placeholder="Enter SRA Date" required="required">
-                              </div>
-                        </div>
-                        <div class="col-md-6" id="tour_number_div">
-                          <div class="form-group">
-                            <label>Tour Number - Name</label>
-                            <select class="form-control" style="width: 100%;" name="tour_number" id="sra_tour_number" required="required">
-                                <option value="">Select Tour</option>
-                                <?php
-                                  foreach($packages_tour_type as $packages_tour_type_info) 
-                                  { 
-                                ?>
-                                  <option value="<?php echo $packages_tour_type_info['id']; ?>"><?php echo $packages_tour_type_info['tour_number']; ?> - <?php echo $packages_tour_type_info['tour_title']; ?></option>
-                              <?php } ?>
-                              </select>
-                          </div>
-                        </div>
 
-                        <!-- <div class="col-md-6" id="tour_number_div">
+                        <div class="col-md-6" id="tour_number_div">
                             <div class="form-group">
                             <label>Tour Number</label>
                             <input type="text" class="form-control" name="tour_number" id="tour_number" placeholder="Enter Tour Number" required="required">
                             </div>
-                        </div> -->
-
-                        <div class="col-md-6" id="to_date_div">
-                          <div class="form-group">
-                            <label>Tour Date</label>
-                            <select class="form-control" style="width: 100%;" name="tour_date" id="tour_date" required="required">
-                                <option value="">Select Date</option>
-
-                              </select>
-                          </div>
                         </div>
 
-                        <!-- <div class="col-md-6" id="to_date_div">
+                        <div class="col-md-6" id="to_date_div">
                               <div class="form-group">
                                 <label>Tour Date</label>
                                 <input type="date" class="form-control" name="tour_date" id="tour_date" placeholder="Enter Rating" required="required">
                               </div>
-                        </div> -->
+                        </div>
 
                         <div class="col-md-6" id="customer_name_div">
                             <div class="form-group">
@@ -164,7 +119,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12" id="otp">
+                        <div class="col-md-6" id="otp">
                         <a href="<?php echo $module_url_path; ?>/add"><button type="submit" class="btn btn-success" name="submit" id="first_submit" value="submit">Submit</button></a>
                         </div>
                         <br><br>
@@ -177,45 +132,6 @@
                     <div id="partially_submit_form" style="display:none;">
                       <form method="post" action="<?php echo base_url(); ?>agent/add_sra_form/add">
                         <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Academic Year</label>
-                              <select class="form-control" style="width: 100%;" name="partially_academic_year" id="partially_academic_year" required="required">
-                                  <option value="">Select Year</option>
-                                  <?php
-                                    foreach($academic_years_data as $academic_years_info) 
-                                    { 
-                                  ?>
-                                    <option value="<?php echo $academic_years_info['id']; ?>"><?php echo $academic_years_info['year']; ?></option>
-                                <?php } ?>
-                                </select>
-                            </div>
-                          </div>
-                          <div class="col-md-6" id="tour_number_div">
-                            <div class="form-group">
-                              <label>Tour Number - Name</label>
-                              <select class="form-control" style="width: 100%;" name="partially_tour_number" id="partially_tour_number" required="required">
-                                  <option value="">Select Tour</option>
-                                  <?php
-                                    foreach($packages_tour_type as $packages_tour_type_info) 
-                                    { 
-                                  ?>
-                                    <option value="<?php echo $packages_tour_type_info['id']; ?>"><?php echo $packages_tour_type_info['tour_number']; ?> - <?php echo $packages_tour_type_info['tour_title']; ?></option>
-                                <?php } ?>
-                                </select>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" id="to_date_div">
-                            <div class="form-group">
-                              <label>Tour Date</label>
-                              <select class="form-control" style="width: 100%;" name="partially_tour_date" id="partially_tour_date" required="required">
-                                  <option value="">Select Date</option>
-
-                                </select>
-                            </div>
-                          </div>
-
                           <div class="col-md-6">
                               <div class="form-group">
                               <label>SRA No</label>
@@ -230,14 +146,14 @@
                               <input type="text" class="form-control" maxlength="10" minlength="10" name="partially_mobile_number" id="partially_mobile_number" placeholder="Enter mobile number" required="required">
                               </div>
                           </div>
-                          <div class="col-md-7 mb-3">
+                          <div class="col-md-1 mb-3">
                               <button type="button" class="btn btn-primary search_btn" name="p_submit" value="submit" id="partially_submit">Search</button>
                           </div>
 
-                          <div class="col-md-5 mb-3" id="div_partial_payment" style="display:none;">
+                          <div class="col-md-2 mb-3" id="div_partial_payment" style="display:none;">
                             <!-- <a href="<?php //echo $sra_partial_payment_details; ?>/index/"><button type="submit" class="btn btn-success search_btn" name="partial_payment" id="partial_payment" value="submit">Partial payment</button></a> -->
                             <a id="partial_payment_link">
-                                <!-- <button type="button" class="btn btn-success search_btn" name="partial_payment" id="partial_payment" value="submit">Partial payment</button> -->
+                                <button type="button" class="btn btn-success search_btn" name="partial_payment" id="partial_payment" value="submit">Partial payment</button>
                             </a>
                           </div>
                         </div>
@@ -331,21 +247,24 @@
                       </div> -->
               </div>
                 <!-- /.card-body -->
+<<<<<<< HEAD
+              <div id="partial_table">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                      <tr>
+=======
               <div id="partial_table" style="display:none;">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+>>>>>>> rupali_0910
                     <th>SN</th>
-                    <th>Academic Year</th>
-                    <th>SRA No</th>
                     <th>Tour No</th>
                     <th>Tour Date</th>
                     <th>Customer Name</th>
                     <th>Total Seat</th>
                     <th>Total SRA Amount</th>
                     <th>SRA Upload Image / Pdf</th>
-                    <th>Partial Payment</th>
-                    <th>Extra Services</th>
                   </tr>
                   </thead>
                   <tbody id="tid">
