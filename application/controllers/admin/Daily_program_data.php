@@ -103,7 +103,7 @@ class Daily_program_data extends CI_Controller {
 
         if($this->input->post('submit'))
         {
-            print_r($_REQUEST); 
+            // print_r($_REQUEST); 
 
                 $tour_number  = $this->input->post('tour_number');
                 $tour_creation_id  = $this->input->post('tour_creation_id');
@@ -224,7 +224,7 @@ class Daily_program_data extends CI_Controller {
                 ); 
                 $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
                 }
-                die;
+                // die;
                 }
 
                  if($inserted_id > 0)
@@ -264,7 +264,10 @@ class Daily_program_data extends CI_Controller {
         // $this->db->group_by('select_district'); 
         $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
 
-        //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+        //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;no_of_days
+        $this->arr_view_data['no_of_days']        = $no_of_days;
+        $this->arr_view_data['id']        = $id;
+
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['tour_creation']        = $tour_creation;
          $this->arr_view_data['food_menu_master']        = $food_menu_master;
@@ -274,6 +277,7 @@ class Daily_program_data extends CI_Controller {
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
          $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
@@ -386,6 +390,204 @@ class Daily_program_data extends CI_Controller {
     //      $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     // }
 
+    public function editt($pid,$c_no_of_days,$day)
+        {  
+            $id=base64_decode($pid);
+            // print_r($id);
+            $no_of_days=base64_decode($c_no_of_days);
+
+            if($id=='') 
+            {
+                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+                redirect($this->module_url_path.'/index');
+            }   
+            else
+            {   
+                $this->db->where('id',$id);
+                $arr_data = $this->master_model->getRecords('add_more_day_to_day_program');
+            }
+
+        if($this->input->post('submit'))
+        {
+            // print_r($_REQUEST); 
+
+                $tour_number  = $this->input->post('tour_number');
+                $tour_creation_id  = $this->input->post('tour_creation_id');
+                $current_date  = $this->input->post('current_date');
+                // print_r($_REQUEST);
+                
+                $lunch_food_menu='';
+                $dinner_food_menu='';
+                //add more 
+                $activity_type  = $this->input->post('activity_type');
+                $start_district  = $this->input->post('start_district[]');
+                $end_district  = $this->input->post('end_district[]');
+                $start_point  = $this->input->post('start_point');
+                $start_time  = $this->input->post('start_time');
+                $travel_distance  = $this->input->post('travel_distance');
+                $to_place  = $this->input->post('to_place');
+                $end_time  = $this->input->post('end_time');
+                $meals_type  = $this->input->post('meals_type[]');
+                // $breakfast_food_menu_old = implode(",", $this->input->post('breakfast_food_menu[]')); 
+
+                
+                if($this->input->post('breakfast_food_menu[]') !='')
+                {
+                    echo $breakfast_food_menu = implode(",", $this->input->post('breakfast_food_menu[]')); 
+                    
+                }else{
+                    $breakfast_food_menu='';
+                }
+                // echo $breakfast_food_menu;
+                // die;
+                if($this->input->post('lunch_food_menu[]') !='')
+                {
+                    $lunch_food_menu = implode(",", $this->input->post('lunch_food_menu[]')); 
+                }else{
+                    $lunch_food_menu='';
+                }
+
+                if($this->input->post('dinner_food_menu[]') !='')
+                {
+                    $dinner_food_menu = implode(",", $this->input->post('dinner_food_menu[]')); 
+                }else{
+                    $dinner_food_menu='';
+                }
+
+                $food_menu = implode(",", $this->input->post('food_menu[]')); 
+            
+                if($start_point != ''){
+            $count = count($activity_type);
+                for($i=0;$i<$count;$i++)
+                {
+            
+
+            
+
+                    if($activity_type[$i]=='Food' && $meals_type[$i]=='Breakfast')
+                    {
+                        $apj=$this->input->post('breakfast_food_menu[]');
+                        $food_menu_new='';
+                        $food_menu_count = count($this->input->post('breakfast_food_menu[]'));
+                        for($j=0;$j<$food_menu_count;$j++)
+                        {
+                            if($apj[$j]!='')
+                            {
+                                $food_menu_new.= $apj[$j].',';
+                            }
+                        }
+                    }else if($activity_type[$i]=='Food' && $meals_type[$i]=='Lunch')
+                    {
+                        $apj=$this->input->post('lunch_food_menu[]');
+                        $food_menu_new='';
+                        $food_menu_count = count($this->input->post('lunch_food_menu[]'));
+                        for($j=0;$j<$food_menu_count;$j++)
+                        {
+                            if($apj[$j]!='')
+                            {
+                                $food_menu_new.= $apj[$j].',';
+                            }
+                        }
+                    }else if($activity_type[$i]=='Food' && $meals_type[$i]=='Dinner')
+                    {
+                        $apj=$this->input->post('dinner_food_menu[]');
+                        $food_menu_new='';
+                        $food_menu_count = count($this->input->post('dinner_food_menu[]'));
+                        for($j=0;$j<$food_menu_count;$j++)
+                        {
+                            if($apj[$j]!='')
+                            {
+                                $food_menu_new.= $apj[$j].',';
+                            }
+                        }
+                    }else{
+                        $food_menu_new='';
+                    }
+                    
+                    // if($breakfast_food_menu[$i]==',' || $lunch_food_menu[$i]==',' || $dinner_food_menu[$i]==','){
+                    //     $food_menu_new='';
+                    // }else if($breakfast_food_menu[$i]!=',' && $meals_type[$i]=='Breakfast'){
+                    //     $food_menu_new= $breakfast_food_menu;
+                    // }else if($breakfast_food_menu[$i]!=',' && $meals_type[$i]=='Breakfast'){
+                    //     $food_menu_new= $breakfast_food_menu;
+                    // }
+                    
+                $arr_update = array(
+                'tour_creation_id' => $id,
+                'activity_type'   =>   $_POST["activity_type"][$i],
+                'start_district'   =>   $_POST["start_district"][$i],
+                'end_district'   =>   $_POST["end_district"][$i],
+                'start_place'   =>   $_POST["start_point"][$i],
+                'start_time'   =>   $_POST["start_time"][$i],
+                'distance'   =>   $_POST["travel_distance"][$i],
+                'end_place'   =>   $_POST["to_place"][$i],
+                'end_time'   =>   $_POST["end_time"][$i],
+                'entry_after' => 'Breakfast',
+                'day_no'   =>   $day,
+                'meal_type'   =>   $meals_type[$i],
+                'food_menu'   =>   $food_menu_new,
+                ); 
+
+                $arr_where     = array("tour_creation_id" => $tour_creation_id);
+                $inserted_id = $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
+                }
+                // die;
+                }
+
+                if($inserted_id > 0)
+                {
+                    $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                    redirect($this->module_url_path.'/editt/'.$pid.'/'.$c_no_of_days.'/'.$day);
+                }
+                else
+                {
+                    $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                }
+                redirect($this->module_url_path.'/index');
+        }
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('food_menu_name','ASC');
+        $food_menu_master = $this->master_model->getRecords('food_menu_master');
+        //  print_r($food_menu_master); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');    
+        $this->db->where('id',$id);
+        $this->db->where('tour_number_of_days',$no_of_days);
+        $tour_creation = $this->master_model->getRecords('tour_creation');
+        //  print_r($tour_creation); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
+        //  print_r($citywise_place_master); die;
+
+        $record = array();
+        $fields = "district_table.*";
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        // $this->db->group_by('select_district'); 
+        $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
+
+        //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;no_of_days
+        $this->arr_view_data['no_of_days']        = $no_of_days;
+        $this->arr_view_data['id']        = $id;
+
+        $this->arr_view_data['action']          = 'add';
+        $this->arr_view_data['tour_creation']        = $tour_creation;
+        $this->arr_view_data['food_menu_master']        = $food_menu_master;
+        $this->arr_view_data['citywise_place_master']        = $citywise_place_master;
+        $this->arr_view_data['district_data']        = $district_data;
+        //  $this->arr_view_data['expense_type_data']        = $expense_type_data;
+        $this->arr_view_data['page_title']      = " Add ".$this->module_title;
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
+        $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
+    }
 
 
     public function edit($pid,$c_no_of_days,$day)
@@ -922,8 +1124,8 @@ class Daily_program_data extends CI_Controller {
         // $package_id=base64_decode($pid);
         // $package_date_id=base64_decode($pd_id);
 
-        $supervision_sess_name = $this->session->userdata('supervision_name');
-        $iid = $this->session->userdata('supervision_sess_id');
+        // $supervision_sess_name = $this->session->userdata('supervision_name');
+        // $iid = $this->session->userdata('supervision_sess_id');
 
         $record = array();
         $fields = "add_more_day_to_day_program.*";
@@ -965,13 +1167,18 @@ class Daily_program_data extends CI_Controller {
         $this->arr_view_data['food_menu_master']        = $food_menu_master;
         $this->arr_view_data['citywise_place_master']        = $citywise_place_master;
 
-        $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+        // $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+
+        $this->arr_view_data['no_of_days']        = $no_of_days;
+        $this->arr_view_data['id']        = $id;
+
         $this->arr_view_data['add_more_day_to_day_program']        = $add_more_day_to_day_program;
         // $this->arr_view_data['package_id']        = $package_id;
         // $this->arr_view_data['package_date_id']        = $package_date_id;
         $this->arr_view_data['page_title']      = $this->module_title." Details ";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."details";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }

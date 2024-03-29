@@ -6,10 +6,10 @@
     .card-bg{
         background-color: #F6F6F6;
     }
-    img{
+    /* img{
         width:25% !important;
         height:25% !important;
-    }
+    } */
 
     table{
         table-layout: fixed;
@@ -56,7 +56,12 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
+            <?php
+            // Encrypt variables
+            $encrypted_id = rtrim(base64_encode($id), '=');
+            $encrypted_no_of_days = rtrim(base64_encode($no_of_days), '=');
+            ?>
+            <a href="<?php echo $day_to_day_program_module; ?>/take_days/<?php echo $encrypted_id; ?>/<?php echo $encrypted_no_of_days; ?>"><button class="btn btn-primary">Back</button></a>
             </ol>
           </div>
         </div>
