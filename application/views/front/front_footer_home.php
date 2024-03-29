@@ -1286,10 +1286,11 @@ function search_bar()
   var submiform='';
   
   var zone_master = $('#zone_master').val();
+  var month_search = $('#month_search').val();
   var tour_name = $('#tour_name').val();
   var tour_days = $('#tour_days').val();
 
-  if (zone_master == '' && tour_name == '' && tour_days == '') 
+  if (zone_master == '' && tour_name == '' && tour_days == '' && month_search== '') 
   {
     $('#search_bar_error').text('Please Select Or Enter Atleast One Field.');
     $('#search_bar_error').show();

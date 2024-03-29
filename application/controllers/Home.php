@@ -249,10 +249,21 @@ class Home extends CI_Controller {
     public function all_packages_search()
     {
         $zone_master = $this->input->post('zone_master');
+        // print_r($zone_master); die;
+        $month_search = $this->input->post('month_search');
+        // print_r($month_search); die;
         $tour_name = $this->input->post('tour_name');
+        // print_r($tour_name); die;
         $tour_days = $this->input->post('tour_days');
+        // print_r($tour_days); die;
+        
         $duration = $this->input->post('duration');
         $aData['msg'] = '';
+
+        $tour_days_padded = sprintf('%02d', $tour_days);
+        $timestamp = strtotime($month_search);
+        $selectedMonth = date('m', $timestamp); // Month in numeric format (01-12)
+        $selectedYear = date('Y', $timestamp); // Year in numeric format (e.g., 2024)
         
         // $this->db->where('is_deleted','no');
         // $this->db->where('is_active','yes');
@@ -274,27 +285,61 @@ class Home extends CI_Controller {
         $this->db->order_by('id','ASC');
         $social_media_link = $this->master_model->getRecords('social_media_link');
 
-        // $record = array();
-        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,
-        zone_master.zone_name,packages.tour_title,packages.tour_number_of_days";
-        $this->db->where('packages.is_deleted','no');
-        // $this->db->where('zone_master.zone_name',$zone_master);
-        // $this->db->where('packages.tour_title',$tour_name);
-        // $this->db->where('packages.tour_number_of_days',$tour_days);    
-        // $this->db->where('zone_master.id',$zone_master);
-        // $this->db->where('package_type','1');
-        // $this->db->where('MONTH(package_date.journey_date)', date('m'));
-	    // $this->db->where('YEAR(package_date.journey_date)', date('Y'));
-	    // $this->db->order_by('id', 'RANDOM');
-	    // $this->db->limit(7);
-        $this->db->join("package_date", 'packages.id=package_date.package_id','right');
-        $this->db->join("zone_master", 'packages.zone_name=zone_master.id','right');
-        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-        $this->db->group_by('package_date.package_id');
-        $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no','zone_master.zone_name'=>$zone_master),$fields);
-        // $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-        // print_r($main_packages_all); die;
-        
+
+        if($month_search != '' && $zone_master == '' && $tour_name == '' && $tour_days == ''){
+            // print('monthhhhhhhhhhhhhhhhh'); 
+            $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,packages.tour_title,packages.tour_number_of_days";
+            $this->db->where('packages.is_deleted','no');
+            $this->db->where('MONTH(package_date.journey_date)', $selectedMonth);
+            $this->db->where('YEAR(package_date.journey_date)', $selectedYear);
+            $this->db->join("package_date", 'packages.id=package_date.package_id','right');
+            // $this->db->join("zone_master", 'packages.zone_name=zone_master.id','right');
+            $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            $this->db->group_by('package_date.package_id');
+            $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        }else if($zone_master != '' && $month_search == '' && $tour_name == '' && $tour_days == ''){
+            // print('Zoneeeeeeeeeeeeeeeee'); 
+            $fields = "packages.*,zone_master.zone_name,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,packages.tour_title,packages.tour_number_of_days";
+            $this->db->where('packages.is_deleted','no');
+            $this->db->where('zone_master.zone_name',$zone_master);
+            $this->db->join("package_date", 'packages.id=package_date.package_id','right');
+            $this->db->join("zone_master", 'packages.zone_name=zone_master.id','right');
+            $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            $this->db->group_by('package_date.package_id');
+            $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        }else if($tour_name != '' && $zone_master == '' && $month_search == '' && $tour_days == ''){
+            // print('tourrrrrrrrrrrrrrrr'); 
+            $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,packages.tour_title,packages.tour_number_of_days";
+            $this->db->where('packages.is_deleted','no');
+            $this->db->where('packages.tour_title',$tour_name);
+            $this->db->join("package_date", 'packages.id=package_date.package_id','right');
+            $this->db->join("zone_master", 'packages.zone_name=zone_master.id','right');
+            $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            $this->db->group_by('package_date.package_id');
+            $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        }else if($tour_days != '' && $tour_name == '' && $zone_master == '' && $month_search == ''){
+            // print('daysssssssssssssssss'); 
+            $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,packages.tour_title,packages.tour_number_of_days";
+            $this->db->where('packages.is_deleted','no');
+            $this->db->where('packages.tour_number_of_days',$tour_days_padded);
+            $this->db->join("package_date", 'packages.id=package_date.package_id','right');
+            $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            $this->db->group_by('package_date.package_id');
+            $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        }else if($zone_master != '' && $month_search != '' && $tour_days == '' && $tour_name == ''){
+            // print('zone month'); 
+            $fields = "packages.*,zone_master.zone_name,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost,packages.tour_title,packages.tour_number_of_days";
+            $this->db->where('packages.is_deleted','no');
+            $this->db->where('zone_master.zone_name',$zone_master);
+            $this->db->where('MONTH(package_date.journey_date)', $selectedMonth);
+            $this->db->where('YEAR(package_date.journey_date)', $selectedYear);
+            $this->db->join("package_date", 'packages.id=package_date.package_id','right');
+            $this->db->join("zone_master", 'packages.zone_name=zone_master.id','right');
+            $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            $this->db->group_by('package_date.package_id');
+            $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        }
+
          $data = array('middle_content' => 'search_packages',
 						// 'main_packages'       => $main_packages,
 						'main_packages_all' => $main_packages_all,

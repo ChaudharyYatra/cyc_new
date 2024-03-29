@@ -51,6 +51,8 @@ table.scrolldown tbody{
 .card_price2{
     font-size: 80%;
 }
+
+
     </style>
 
     <!-- banner starts -->
@@ -88,9 +90,9 @@ table.scrolldown tbody{
     <div class="form-main">
         <div class="section-shape top-0" style="background-image: url(<?php echo base_url(); ?>assets/front/images/shape-pat.png);"></div>
         <form action="<?php echo base_url();?>home/all_packages_search" method="post" id="search_bar" onsubmit="return search_bar()">
-        <div class="container all_search">
+        <div class="container-fluid all_search">
             <div class="row align-items-center form-content rounded position-relative ms-1 me-1">
-                <div class="col-md-3 symbol_css">
+                <div class="col-md-2 symbol_css">
                 <h4 class="form-title form-title1 text-center white bg-theme mb-0 search-rounded-start d-lg-flex align-items-center"><i class="icon-location-pin fs-1 me-1"></i> Find Your Holidays</h4>
                 </div>
                 <div class="col-md-2">
@@ -106,7 +108,17 @@ table.scrolldown tbody{
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+
+                <div class="col-md-2">
+                    <div class="month-custom-select">
+                        <input type="text" class="month-search-input" name="month_search" id="month_search" placeholder="Select month" autocomplete="off">
+                        <div class="month-options-containers month_scrollbar_search" id="search_style-3" style="display:none;">
+                            <!-- Options will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
                     <div class="search-custom-select">
                         <div class="search-select-box">
                             <input type="text" class="search-search-input" name="tour_name" id="tour_name" placeholder="select Tour Name" autocomplete="off">
@@ -131,10 +143,10 @@ table.scrolldown tbody{
                         <input type="submit" class="nir-btn w-100" id="submit" value="Search Now" name="submit" style="width:20px">
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-md-10">
                 <span class="text-danger float-left" id="search_bar_error" style="display:none"></span>
                 </div>
             </div>
@@ -1928,3 +1940,111 @@ table.scrolldown tbody{
   </div>
 </div>
 <?php } ?>
+
+<!-- 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var monthOptionsContainer = document.getElementById("search_style-3");
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
+        var currentYear = currentDate.getFullYear();
+        
+        // Generate options for the current month and the next 6 months
+        for (var i = 0; i < 6; i++) {
+            var month = currentMonth + i;
+            var year = currentYear;
+            if (month > 12) {
+                month -= 12;
+                year += 1;
+            }
+            var monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", monthName);
+            option.textContent = monthName;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Search functionality
+        var searchInput = document.getElementById("month_search");
+        searchInput.addEventListener("input", function() {
+            var filter = this.value.toUpperCase();
+            var options = monthOptionsContainer.getElementsByClassName("month-option");
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var monthName = option.getAttribute("value").toUpperCase();
+                if (monthName.indexOf(filter) > -1) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        });
+
+        function selectMonth() {
+            var selectedMonth = this.getAttribute("value");
+            document.getElementById("month_search").value = selectedMonth;
+        }
+
+        // Update event listeners for dynamically added options
+        var options = monthOptionsContainer.getElementsByClassName("month-option");
+        for (var i = 0; i < options.length; i++) {
+            options[i].addEventListener("click", selectMonth);
+        }
+    });
+</script> -->
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var monthOptionsContainer = document.getElementById("search_style-3");
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
+        var currentYear = currentDate.getFullYear();
+        
+        // Generate options for the current month and the next 6 months
+        for (var i = 0; i < 6; i++) {
+            var month = currentMonth + i;
+            var year = currentYear;
+            if (month > 12) {
+                month -= 12;
+                year += 1;
+            }
+            var monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var optionText = monthName + " " + year; // Append year to month name
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", optionText);
+            option.textContent = optionText;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Search functionality
+        var searchInput = document.getElementById("month_search");
+        searchInput.addEventListener("input", function() {
+            var filter = this.value.toUpperCase();
+            var options = monthOptionsContainer.getElementsByClassName("month-option");
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var monthText = option.getAttribute("value").toUpperCase();
+                if (monthText.indexOf(filter) > -1) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        });
+
+        function selectMonth() {
+            var selectedMonth = this.getAttribute("value");
+            document.getElementById("month_search").value = selectedMonth;
+        }
+
+        // Update event listeners for dynamically added options
+        var options = monthOptionsContainer.getElementsByClassName("month-option");
+        for (var i = 0; i < options.length; i++) {
+            options[i].addEventListener("click", selectMonth);
+        }
+    });
+</script>
+

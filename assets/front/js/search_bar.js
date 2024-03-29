@@ -108,3 +108,38 @@ dayssearchInput.addEventListener('click', function() {
   daysoptionsContainer.style.display = 'block';
 });
 
+
+// =======================================================================
+const monthsearchInput = document.querySelector('.month-search-input');
+const monthoptionsContainer = document.querySelector('.month-options-containers');
+const monthoptions = document.querySelectorAll('.month-option');
+
+monthsearchInput.addEventListener('input', function() {
+  const searchText = monthsearchInput.value.toLowerCase();
+
+  monthoptions.forEach(option => {
+    const text = option.textContent.toLowerCase();
+    if (text.includes(searchText)) {
+      option.style.display = 'block';
+    } else {
+      option.style.display = 'none';
+    }
+  });
+});
+
+monthoptions.forEach(option => {
+  option.addEventListener('click', function() {
+    monthsearchInput.value = option.textContent;
+    monthoptionsContainer.style.display = 'none';
+  });
+});
+
+document.addEventListener('click', function(e) {
+  if (!monthoptionsContainer.contains(e.target) && e.target !== monthsearchInput) {
+    monthoptionsContainer.style.display = 'none';
+  }
+});
+
+monthsearchInput.addEventListener('click', function() {
+  monthoptionsContainer.style.display = 'block';
+});
