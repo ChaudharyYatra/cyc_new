@@ -250,6 +250,7 @@ class Sra_partial_payment_details extends CI_Controller {
         $package_date_id = $this->input->post('package_date_id');
         $sra_payment_id = $this->input->post('sra_payment_id');
         $academic_year = $this->input->post('academic_year');
+        $today = date('y-m-d');
 
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
@@ -301,6 +302,7 @@ class Sra_partial_payment_details extends CI_Controller {
                     'package_id'  =>  $package_id,
                     'package_date_id'  =>  $package_date_id,
                     'sra_booking_payment_details_id'  =>  $insertid,
+                    'booking_date'   =>   $today,
                     'agent_id'  =>  $id
                 );
                 // print_r($arr_insert); die;
