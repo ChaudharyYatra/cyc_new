@@ -11027,7 +11027,7 @@ $(document).on("click", ".remove-row", function() {
                                             <td>
                                             <button type="button" class="btn btn-danger remove-row">Remove</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_breakfast">  
                                             <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
                                         </tr>
             `;
@@ -11045,12 +11045,12 @@ $(document).on("click", ".remove-row", function() {
 <script>
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
-        $("#edit_travel_add_more").click(function() {
-            var expence = $(this).attr('edit_travel_attr_add_id');
+        $("#breakfast_edit_add_more").click(function() {
+            var expence = $(this).attr('breakfast_edit_attr_add_id');
             
             var i= parseInt(expence)+parseInt(1);
             // alert(i);
-            var expence = $(this).attr('edit_travel_attr_add_id',i);
+            var expence = $(this).attr('breakfast_edit_attr_add_id',i);
             var newRow = `
             <tr>
                 <td>
@@ -11058,6 +11058,16 @@ $(document).on("click", ".remove-row", function() {
                         <option value="">Select Activity Type</option>
                         <option value="Travel">Travel</option>
                         <option value="Visit">Visit</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css district" name="edit_start_district[]" id="edit_start_district`+i+`" attr_district="district" required="required">
+                        <option value="">Select </option>
+                        <?php 
+                            foreach ($district_data as $district_info) { 
+                                ?>
+                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                            <?php } ?>
                     </select>
                 </td>
                 <td>
@@ -11071,6 +11081,16 @@ $(document).on("click", ".remove-row", function() {
                 <td><input type="time" class="form-control quantity" name="edit_travel_start_time[]" id="edit_travel_start_time`+i+`"></td>
                 <td><input type="text" class="form-control quantity" name="edit_travel_distance[]" id="edit_travel_distance`+i+`"></td>
                 <td>
+                    <select class="select_css district" name="edit_end_district[]" id="edit_end_district`+i+`" attr_district="end_district" required="required">
+                        <option value="">Select </option>
+                        <?php
+                        foreach($district_data as $district_info){ 
+                        ?>
+                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td>
                     <select class="select_css" name="edit_travel_to_place[]" id="edit_travel_to_place`+i+`">
                         <option value="">Select To Place</option>
                         <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
@@ -11078,13 +11098,98 @@ $(document).on("click", ".remove-row", function() {
                         <?php } ?>
                     </select>
                 </td>
-                <td><input type="time" class="form-control quantity" name="edit_travel_end_time[]" id="edit_travel_end_time`+i+`"></td>
+                <td>
+                    <input type="time" class="form-control quantity" name="edit_travel_end_time[]" id="edit_travel_end_time`+i+`">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_meals_type[]" id="edit_meals_type" value="after_breakfast">
+                    <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                    <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                    <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+                </td>
                 <td>
                     <button type="button" class="btn btn-danger remove-row">Remove</button>
                 </td>
             </tr>
             `;
             $("#edit_table1 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#lunch_edit_add_more").click(function() {
+            var expence = $(this).attr('lunch_edit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('lunch_edit_attr_add_id',i);
+            var newRow = `
+            <tr>
+                <td>
+                    <select class="select_css" name="edit_lunch_activity_type[]" id="edit_lunch_activity_type`+i+`">
+                        <option value="">Select Activity Type</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Visit">Visit</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css district" name="edit_lunch_start_district[]" id="edit_lunch_start_district`+i+`" attr_district="district" required="required">
+                        <option value="">Select </option>
+                        <?php 
+                            foreach ($district_data as $district_info) { 
+                                ?>
+                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                            <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="edit_lunch_start_point[]" id="edit_lunch_start_point`+i+`" >
+                        <option value="">Select start point</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="edit_lunch_start_time[]" id="edit_lunch_start_time`+i+`"></td>
+                <td><input type="text" class="form-control quantity" name="edit_lunch_distance[]" id="edit_lunch_distance`+i+`"></td>
+                <td>
+                    <select class="select_css district" name="edit_lunch_end_district[]" id="edit_lunch_end_district`+i+`" attr_district="end_district" required="required">
+                        <option value="">Select </option>
+                        <?php
+                        foreach($district_data as $district_info){ 
+                        ?>
+                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="edit_lunch_to_place[]" id="edit_lunch_to_place`+i+`">
+                        <option value="">Select To Place</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <input type="time" class="form-control quantity" name="edit_lunch_end_time[]" id="edit_lunch_end_time`+i+`">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_lunch_meals_type[]" id="edit_lunch_meals_type" value="after_breakfast">
+                    <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                    <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                    <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+            </tr>
+            `;
+            $("#edit_table2 tbody").append(newRow);
             i++;
         });
         
@@ -11155,7 +11260,7 @@ $(document).on("click", ".remove-row", function() {
                                             <td>
                                             <button type="button" class="btn btn-danger remove-row">Remove</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_lunch">  
                                             <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
                                         </tr>
             `;
@@ -11163,59 +11268,6 @@ $(document).on("click", ".remove-row", function() {
             i++;
         });
        
-        // Remove a row when the "Remove" button is clicked
-        $(document).on("click", ".remove-row", function() {
-            $(this).closest("tr").remove();
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        // Add more rows when the "Add More" button is clicked
-        $("#edit_visit_add_more").click(function() {
-            var expence = $(this).attr('edit_visit_attr_add_id');
-            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('edit_visit_attr_add_id',i);
-            var newRow = `
-            <tr>
-            <td>
-                <select class="select_css" name="edit_visit_activity_type[]" id="edit_visit_activity_type`+i+`">
-                    <option value="">Select Activity Type</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Visit">Visit</option>
-                </select>
-            </td>
-            <td>
-                <select class="select_css" name="edit_visit_start_point[]" id="edit_visit_start_point`+i+`">
-                    <option value="">Select start point</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="edit_visit_start_time[]" id="edit_visit_start_time`+i+`"></td>
-            <td><input type="text" class="form-control quantity" name="edit_visit_distance[]" id="edit_visit_distance`+i+`"></td>
-            <td>
-                <select class="select_css" name="edit_visit_to_place[]" id="edit_visit_to_place`+i+`">
-                    <option value="">Select To Place</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="edit_visit_end_time[]" id="edit_visit_end_time`+i+`"></td>
-            <td>
-                <button type="button" class="btn btn-danger remove-row">Remove</button>
-            </td>
-            </tr>
-            `;
-            $("#edit_table2 tbody").append(newRow);
-            i++;
-        });
-        
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
@@ -11283,7 +11335,7 @@ $(document).on("click", ".remove-row", function() {
                                             <td>
                                             <button type="button" class="btn btn-danger remove-row">Remove</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_dinner">  
                                             <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                                             <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
                                             <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value=""> 
@@ -11300,65 +11352,11 @@ $(document).on("click", ".remove-row", function() {
         });
     });
 </script>
-
-<script>
-    $(document).ready(function() {
-        // Add more rows when the "Add More" button is clicked
-        $("#edit_travel_visit_add_more").click(function() {
-            var expence = $(this).attr('edit_travel_visit_attr_add_id');
-            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('edit_travel_visit_attr_add_id',i);
-            var newRow = `
-            <tr>
-            <td>
-                <select class="select_css" name="edit_travel_visit_activity_type[]" id="edit_travel_visit_activity_type`+i+`">
-                    <option value="">Select Activity Type</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Visit">Visit</option>
-                </select>
-            </td>
-            <td>
-                <select class="select_css" name="edit_travel_visit_start_point[]" id="edit_travel_visit_start_point`+i+`">
-                    <option value="">Select start point</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="edit_travel_visit_start_time[]" id="edit_travel_visit_start_time`+i+`"></td>
-            <td><input type="text" class="form-control quantity" name="edit_travel_visit_distance[]" id="edit_travel_visit_distance`+i+`"></td>
-            <td>
-                <select class="select_css" name="edit_travel_visit_to_place[]" id="edit_travel_visit_to_place`+i+`">
-                    <option value="">Select To Place</option>
-                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                    <?php } ?>
-                </select>
-            </td>
-            <td><input type="time" class="form-control quantity" name="edit_travel_visit_end_time[]" id="edit_travel_visit_end_time`+i+`"></td>
-            <td>
-                <button type="button" class="btn btn-danger remove-row">Remove</button>
-            </td>
-            </tr>
-            `;
-            $("#edit_table3 tbody").append(newRow);
-            i++;
-        });
-        
-        // Remove a row when the "Remove" button is clicked
-        $(document).on("click", ".remove-row", function() {
-            $(this).closest("tr").remove();
-        });
-    });
-</script>
-
 <!-- Daily Program Data add more  -->
 
 <!-- day to day program edit delete -->
 <script>
-  $(".breakfast_delete_add_more").click(function() { 
+  $(".day_delete_instruction").click(function() { 
    
      var delete_add_more_tour_expenses_id =  $(this).attr('value');
      
@@ -11371,7 +11369,7 @@ $(document).on("click", ".remove-row", function() {
               // User clicked "OK," send the AJAX request to delete the record
               $.ajax({
                   type: "POST",
-                  url: '<?=base_url()?>admin/daily_program_data/breakfast_add_more_delete',
+                  url: '<?=base_url()?>admin/daily_program_data/add_more_delete',
                   data: {
                       request_id: delete_add_more_tour_expenses_id
                   },
@@ -11382,73 +11380,7 @@ $(document).on("click", ".remove-row", function() {
                           alert("Record deleted successfully.");
                           // You can add further handling here
                       } else {
-                          alert('Record deleted successfully.');
-                      }
-                  },
-              });
-          }
-     }
-});
-</script>
-<script>
-  $(".lunch_delete_add_more").click(function() { 
-   
-     var delete_add_more_tour_expenses_id =  $(this).attr('value');
-     
-     if(delete_add_more_tour_expenses_id !== '')
-     {
-          // Display a confirmation dialog
-          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
-
-          if (confirmDelete) {
-              // User clicked "OK," send the AJAX request to delete the record
-              $.ajax({
-                  type: "POST",
-                  url: '<?=base_url()?>admin/daily_program_data/lunch_add_more_delete',
-                  data: {
-                      request_id: delete_add_more_tour_expenses_id
-                  },
-                  success: function(response) {
-                      console.log(response);
-                      if (response === true) {
-                          // The record was successfully deleted
-                          alert("Record deleted successfully.");
-                          // You can add further handling here
-                      } else {
-                          alert('Record deleted successfully.');
-                      }
-                  },
-              });
-          }
-     }
-});
-</script>
-<script>
-  $(".dinner_delete_add_more").click(function() { 
-   
-     var delete_add_more_tour_expenses_id =  $(this).attr('value');
-     
-     if(delete_add_more_tour_expenses_id !== '')
-     {
-          // Display a confirmation dialog
-          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
-
-          if (confirmDelete) {
-              // User clicked "OK," send the AJAX request to delete the record
-              $.ajax({
-                  type: "POST",
-                  url: '<?=base_url()?>admin/daily_program_data/dinner_add_more_delete',
-                  data: {
-                      request_id: delete_add_more_tour_expenses_id
-                  },
-                  success: function(response) {
-                      console.log(response);
-                      if (response === true) {
-                          // The record was successfully deleted
-                          alert("Record deleted successfully.");
-                          // You can add further handling here
-                      } else {
-                          alert('Record deleted successfully.');
+                          alert('Record Not deleted.');
                       }
                   },
               });

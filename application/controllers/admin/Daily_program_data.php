@@ -148,16 +148,12 @@ class Daily_program_data extends CI_Controller {
                     $dinner_food_menu='';
                 }
 
-                $food_menu = implode(",", $this->input->post('food_menu[]')); 
+                // $food_menu = implode(",", $this->input->post('food_menu[]')); 
                
                 if($start_point != ''){
                $count = count($activity_type);
                 for($i=0;$i<$count;$i++)
                 {
-               
-
-               
-
                     if($activity_type[$i]=='Food' && $meals_type[$i]=='Breakfast')
                     {
                         $apj=$this->input->post('breakfast_food_menu[]');
@@ -422,12 +418,14 @@ class Daily_program_data extends CI_Controller {
                 $activity_type  = $this->input->post('activity_type');
                 $start_district  = $this->input->post('start_district[]');
                 $end_district  = $this->input->post('end_district[]');
+                
                 $start_point  = $this->input->post('start_point');
                 $start_time  = $this->input->post('start_time');
                 $travel_distance  = $this->input->post('travel_distance');
                 $to_place  = $this->input->post('to_place');
                 $end_time  = $this->input->post('end_time');
                 $meals_type  = $this->input->post('meals_type[]');
+                $day_to_day_id  = $this->input->post('day_to_day_id[]');
                 // $breakfast_food_menu_old = implode(",", $this->input->post('breakfast_food_menu[]')); 
 
                 
@@ -454,16 +452,12 @@ class Daily_program_data extends CI_Controller {
                     $dinner_food_menu='';
                 }
 
-                $food_menu = implode(",", $this->input->post('food_menu[]')); 
+                // $food_menu = implode(",", $this->input->post('food_menu[]')); 
             
                 if($start_point != ''){
             $count = count($activity_type);
                 for($i=0;$i<$count;$i++)
                 {
-            
-
-            
-
                     if($activity_type[$i]=='Food' && $meals_type[$i]=='Breakfast')
                     {
                         $apj=$this->input->post('breakfast_food_menu[]');
@@ -528,10 +522,81 @@ class Daily_program_data extends CI_Controller {
                 'food_menu'   =>   $food_menu_new,
                 ); 
 
-                $arr_where     = array("tour_creation_id" => $tour_creation_id);
+                $arr_where     = array("id" => $day_to_day_id[$i]);
                 $inserted_id = $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
                 }
                 // die;
+                }
+
+// -----------------------------------------------------------------------
+                $edit_travel_activity_type  = $this->input->post('edit_travel_activity_type');
+                $edit_start_district  = $this->input->post('edit_start_district');
+                $edit_travel_start_point  = $this->input->post('edit_travel_start_point');
+                $edit_travel_start_time  = $this->input->post('edit_travel_start_time');
+                $edit_travel_distance  = $this->input->post('edit_travel_distance');
+
+                $edit_end_district  = $this->input->post('edit_end_district');
+
+                $edit_travel_to_place  = $this->input->post('edit_travel_to_place');
+                $edit_travel_end_time  = $this->input->post('edit_travel_end_time');
+                $edit_meals_type  = $this->input->post('edit_meals_type');
+
+                if($edit_travel_activity_type != ''){
+                $count = count($edit_travel_activity_type);
+                // print_r($count); die;
+                for($i=0;$i<$count;$i++)
+                {
+                $arr_insert = array(
+                'activity_type'   =>   $_POST["edit_travel_activity_type"][$i],
+                'start_district'   =>   $_POST["edit_start_district"][$i],
+                'start_place'   =>   $_POST["edit_travel_start_point"][$i],
+                'start_time'   =>   $_POST["edit_travel_start_time"][$i],
+                'distance'   =>   $_POST["edit_travel_distance"][$i],
+                'end_district'   =>   $_POST["edit_end_district"][$i],
+                'end_place'   =>   $_POST["edit_travel_to_place"][$i],
+                'end_time'   =>   $_POST["edit_travel_end_time"][$i],
+                'meals_type'   =>   $_POST["edit_meals_type"][$i],
+                'tour_creation_id' => $id,
+                'day_no'   =>   $day
+
+                ); 
+                $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+                }
+                }
+// ---------------------------------------------------------------------------------
+
+                $edit_lunch_activity_type  = $this->input->post('edit_lunch_activity_type');
+                $edit_lunch_start_district  = $this->input->post('edit_lunch_start_district');
+                $edit_lunch_start_point  = $this->input->post('edit_lunch_start_point');
+                $edit_lunch_start_time  = $this->input->post('edit_lunch_start_time');
+                $edit_lunch_distance  = $this->input->post('edit_lunch_distance');
+
+                $edit_lunch_end_district  = $this->input->post('edit_lunch_end_district');
+
+                $edit_lunch_to_place  = $this->input->post('edit_lunch_to_place');
+                $edit_lunch_end_time  = $this->input->post('edit_lunch_end_time');
+                $edit_lunch_meals_type  = $this->input->post('edit_lunch_meals_type');
+
+                if($edit_lunch_activity_type != ''){
+                $count = count($edit_lunch_activity_type);
+                // print_r($count); die;
+                for($i=0;$i<$count;$i++)
+                {
+                $arr_insert = array(
+                'activity_type'   =>   $_POST["edit_travel_activity_type"][$i],
+                'start_district'   =>   $_POST["edit_start_district"][$i],
+                'start_place'   =>   $_POST["edit_travel_start_point"][$i],
+                'start_time'   =>   $_POST["edit_travel_start_time"][$i],
+                'distance'   =>   $_POST["edit_travel_distance"][$i],
+                'end_district'   =>   $_POST["edit_end_district"][$i],
+                'end_place'   =>   $_POST["edit_travel_to_place"][$i],
+                'end_time'   =>   $_POST["edit_travel_end_time"][$i],
+                'meals_type'   =>   $_POST["edit_lunch_meals_type"][$i],
+                'tour_creation_id' => $id,
+                'day_no'   =>   $day
+                ); 
+                $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+                }
                 }
 
                 if($inserted_id > 0)
@@ -571,12 +636,27 @@ class Daily_program_data extends CI_Controller {
         // $this->db->group_by('select_district'); 
         $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
 
+        $record = array();
+        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_place_master_start.place_name AS start_place_name, citywise_place_master_end.place_name AS end_place_name";
+        $this->db->where('add_more_day_to_day_program.is_deleted', 'no');
+        $this->db->where('add_more_day_to_day_program.is_active', 'yes');
+        $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);
+        $this->db->where('add_more_day_to_day_program.day_no', $day);
+        $this->db->join("district_table AS district_table_start", 'add_more_day_to_day_program.start_district = district_table_start.id', 'left');
+        $this->db->join("district_table AS district_table_end", 'add_more_day_to_day_program.end_district = district_table_end.id', 'left');
+        $this->db->join("citywise_place_master AS citywise_place_master_start", 'add_more_day_to_day_program.start_place = citywise_place_master_start.id', 'left');
+        $this->db->join("citywise_place_master AS citywise_place_master_end", 'add_more_day_to_day_program.end_place = citywise_place_master_end.id', 'left');
+        $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program', array('add_more_day_to_day_program.is_deleted' => 'no'), $fields);
+        // print_r($add_more_day_to_day_program);
+        // die;
+
         //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;no_of_days
         $this->arr_view_data['no_of_days']        = $no_of_days;
         $this->arr_view_data['id']        = $id;
 
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['tour_creation']        = $tour_creation;
+        $this->arr_view_data['add_more_day_to_day_program']        = $add_more_day_to_day_program;
         $this->arr_view_data['food_menu_master']        = $food_menu_master;
         $this->arr_view_data['citywise_place_master']        = $citywise_place_master;
         $this->arr_view_data['district_data']        = $district_data;
@@ -585,430 +665,430 @@ class Daily_program_data extends CI_Controller {
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
         $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
-        $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
 
 
-    public function edit($pid,$c_no_of_days,$day)
-        {  
-            // echo $id; die;
-            // $supervision_sess_name = $this->session->userdata('supervision_name');
-            // $iid = $this->session->userdata('supervision_sess_id');
+    // public function edit($pid,$c_no_of_days,$day)
+    //     {  
+    //         // echo $id; die;
+    //         // $supervision_sess_name = $this->session->userdata('supervision_name');
+    //         // $iid = $this->session->userdata('supervision_sess_id');
 
-            // $tid=base64_decode($id);
-            $id=base64_decode($pid);
-            $no_of_days=base64_decode($c_no_of_days);
+    //         // $tid=base64_decode($id);
+    //         $id=base64_decode($pid);
+    //         $no_of_days=base64_decode($c_no_of_days);
 
-            if($id=='') 
-            {
-                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
-                redirect($this->module_url_path.'/index');
-            }   
-            else
-            {   
-                $this->db->where('id',$id);
-                $arr_data = $this->master_model->getRecords('tour_creation');
-            }
-            if($this->input->post('submit'))
-            {
-                $tour_number_1  = $this->input->post('tour_number_1');
-                $current_date  = $this->input->post('current_date');
-                $tour_creation_id  = $this->input->post('tour_creation_id');
+    //         if($id=='') 
+    //         {
+    //             $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+    //             redirect($this->module_url_path.'/index');
+    //         }   
+    //         else
+    //         {   
+    //             $this->db->where('id',$id);
+    //             $arr_data = $this->master_model->getRecords('tour_creation');
+    //         }
+    //         if($this->input->post('submit'))
+    //         {
+    //             $tour_number_1  = $this->input->post('tour_number_1');
+    //             $current_date  = $this->input->post('current_date');
+    //             $tour_creation_id  = $this->input->post('tour_creation_id');
 
-                //breakfast
-                $breakfast_id  = $this->input->post('breakfast_id');
-                $breakfast_activity_type  = $this->input->post('breakfast_activity_type');
-                $breakfast_meals_type  = $this->input->post('breakfast_meals_type');
-                $breakfast_start_time  = $this->input->post('breakfast_start_time');
-                $breakfast_food_menu = implode(",", $this->input->post('breakfast_food_menu')); 
-                $breakfast_end_time  = $this->input->post('breakfast_end_time');
+    //             //breakfast
+    //             $breakfast_id  = $this->input->post('breakfast_id');
+    //             $breakfast_activity_type  = $this->input->post('breakfast_activity_type');
+    //             $breakfast_meals_type  = $this->input->post('breakfast_meals_type');
+    //             $breakfast_start_time  = $this->input->post('breakfast_start_time');
+    //             $breakfast_food_menu = implode(",", $this->input->post('breakfast_food_menu')); 
+    //             $breakfast_end_time  = $this->input->post('breakfast_end_time');
 
-                //add more 
-                $addmore_breakfast_id  = $this->input->post('addmore_breakfast_id');
-                $addmore_entry_after_breakfast  = $this->input->post('addmore_entry_after_breakfast');
-                $travel_activity_type  = $this->input->post('travel_activity_type');
-                $start_district  = $this->input->post('start_district');
-                $end_district  = $this->input->post('end_district');
-                $travel_start_point  = $this->input->post('travel_start_point');
-                $travel_start_time  = $this->input->post('travel_start_time');
-                $travel_distance  = $this->input->post('travel_distance');
-                $travel_to_place  = $this->input->post('travel_to_place');
-                $travel_end_time  = $this->input->post('travel_end_time');
+    //             //add more 
+    //             $addmore_breakfast_id  = $this->input->post('addmore_breakfast_id');
+    //             $addmore_entry_after_breakfast  = $this->input->post('addmore_entry_after_breakfast');
+    //             $travel_activity_type  = $this->input->post('travel_activity_type');
+    //             $start_district  = $this->input->post('start_district');
+    //             $end_district  = $this->input->post('end_district');
+    //             $travel_start_point  = $this->input->post('travel_start_point');
+    //             $travel_start_time  = $this->input->post('travel_start_time');
+    //             $travel_distance  = $this->input->post('travel_distance');
+    //             $travel_to_place  = $this->input->post('travel_to_place');
+    //             $travel_end_time  = $this->input->post('travel_end_time');
 
-                //Lunch
-                $lunch_id  = $this->input->post('lunch_id');
-                $lunch_activity_type  = $this->input->post('lunch_activity_type');
-                $lunch_meals_type  = $this->input->post('lunch_meals_type');
-                $lunch_start_time  = $this->input->post('lunch_start_time');
-                $lunch_food_menu = implode(",", $this->input->post('lunch_food_menu')); 
-                $lunch_end_time  = $this->input->post('lunch_end_time');
+    //             //Lunch
+    //             $lunch_id  = $this->input->post('lunch_id');
+    //             $lunch_activity_type  = $this->input->post('lunch_activity_type');
+    //             $lunch_meals_type  = $this->input->post('lunch_meals_type');
+    //             $lunch_start_time  = $this->input->post('lunch_start_time');
+    //             $lunch_food_menu = implode(",", $this->input->post('lunch_food_menu')); 
+    //             $lunch_end_time  = $this->input->post('lunch_end_time');
 
-                //add_more
-                $addmore_lunch_id  = $this->input->post('addmore_lunch_id');
-                $addmore_entry_after_lunch  = $this->input->post('addmore_entry_after_lunch');
-                $visit_activity_type  = $this->input->post('visit_activity_type');
-                $visit_start_point  = $this->input->post('visit_start_point');
-                $visit_start_time  = $this->input->post('visit_start_time');
-                $visit_distance  = $this->input->post('visit_distance');
-                $visit_to_place  = $this->input->post('visit_to_place');
-                $visit_end_time  = $this->input->post('visit_end_time');
+    //             //add_more
+    //             $addmore_lunch_id  = $this->input->post('addmore_lunch_id');
+    //             $addmore_entry_after_lunch  = $this->input->post('addmore_entry_after_lunch');
+    //             $visit_activity_type  = $this->input->post('visit_activity_type');
+    //             $visit_start_point  = $this->input->post('visit_start_point');
+    //             $visit_start_time  = $this->input->post('visit_start_time');
+    //             $visit_distance  = $this->input->post('visit_distance');
+    //             $visit_to_place  = $this->input->post('visit_to_place');
+    //             $visit_end_time  = $this->input->post('visit_end_time');
 
-                //Dinner
-                $dinner_id  = $this->input->post('dinner_id');
-                $dinner_activity_type  = $this->input->post('dinner_activity_type');
-                $dinner_meals_type  = $this->input->post('dinner_meals_type');
-                $dinner_start_time  = $this->input->post('dinner_start_time');
-                $dinner_food_menu = implode(",", $this->input->post('dinner_food_menu')); 
-                $dinner_end_time  = $this->input->post('dinner_end_time');
+    //             //Dinner
+    //             $dinner_id  = $this->input->post('dinner_id');
+    //             $dinner_activity_type  = $this->input->post('dinner_activity_type');
+    //             $dinner_meals_type  = $this->input->post('dinner_meals_type');
+    //             $dinner_start_time  = $this->input->post('dinner_start_time');
+    //             $dinner_food_menu = implode(",", $this->input->post('dinner_food_menu')); 
+    //             $dinner_end_time  = $this->input->post('dinner_end_time');
 
-                //add_more
-                $addmore_dinner_id  = $this->input->post('addmore_dinner_id');
-                $addmore_entry_after_dinner  = $this->input->post('addmore_entry_after_dinner');
-                $travel_visit_activity_type  = $this->input->post('travel_visit_activity_type');
-                $travel_visit_start_point  = $this->input->post('travel_visit_start_point');
-                $travel_visit_start_time  = $this->input->post('travel_visit_start_time');
-                $travel_visit_distance  = $this->input->post('travel_visit_distance');
-                $travel_visit_to_place  = $this->input->post('travel_visit_to_place');
-                $travel_visit_end_time  = $this->input->post('travel_visit_end_time');
+    //             //add_more
+    //             $addmore_dinner_id  = $this->input->post('addmore_dinner_id');
+    //             $addmore_entry_after_dinner  = $this->input->post('addmore_entry_after_dinner');
+    //             $travel_visit_activity_type  = $this->input->post('travel_visit_activity_type');
+    //             $travel_visit_start_point  = $this->input->post('travel_visit_start_point');
+    //             $travel_visit_start_time  = $this->input->post('travel_visit_start_time');
+    //             $travel_visit_distance  = $this->input->post('travel_visit_distance');
+    //             $travel_visit_to_place  = $this->input->post('travel_visit_to_place');
+    //             $travel_visit_end_time  = $this->input->post('travel_visit_end_time');
 
-                // ======================== breakfast lunch  dinner ====================================
-                $arr_update = array(
-                'current_day_date' =>   $current_date
-                );
-                $arr_where     = array("tour_creation_id" => $tour_creation_id);
-                $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
+    //             // ======================== breakfast lunch  dinner ====================================
+    //             $arr_update = array(
+    //             'current_day_date' =>   $current_date
+    //             );
+    //             $arr_where     = array("tour_creation_id" => $tour_creation_id);
+    //             $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
 
-                if($breakfast_meals_type == 'Breakfast'){
-                $arr_update = array(
-                    'activity_type' =>   $breakfast_activity_type,
-                    'meal_type' =>   $breakfast_meals_type,
-                    'start_time' =>   $breakfast_start_time,
-                    'menu' =>   $breakfast_food_menu,
-                    'end_time' =>   $breakfast_end_time
-                    );
-                    $arr_where     = array("id" => $breakfast_id);
-                $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
-                }
+    //             if($breakfast_meals_type == 'Breakfast'){
+    //             $arr_update = array(
+    //                 'activity_type' =>   $breakfast_activity_type,
+    //                 'meal_type' =>   $breakfast_meals_type,
+    //                 'start_time' =>   $breakfast_start_time,
+    //                 'menu' =>   $breakfast_food_menu,
+    //                 'end_time' =>   $breakfast_end_time
+    //                 );
+    //                 $arr_where     = array("id" => $breakfast_id);
+    //             $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
+    //             }
 
-                if($breakfast_meals_type == 'Lunch'){
-                $arr_update = array(
-                    'activity_type' =>   $lunch_activity_type,
-                    'meal_type' =>   $lunch_meals_type,
-                    'start_time' =>   $lunch_start_time,
-                    'menu' =>   $lunch_food_menu,
-                    'end_time' =>   $lunch_end_time
-                    );
-                    $arr_where     = array("id" => $lunch_id);
-                $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
-                }
+    //             if($breakfast_meals_type == 'Lunch'){
+    //             $arr_update = array(
+    //                 'activity_type' =>   $lunch_activity_type,
+    //                 'meal_type' =>   $lunch_meals_type,
+    //                 'start_time' =>   $lunch_start_time,
+    //                 'menu' =>   $lunch_food_menu,
+    //                 'end_time' =>   $lunch_end_time
+    //                 );
+    //                 $arr_where     = array("id" => $lunch_id);
+    //             $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
+    //             }
 
-                if($breakfast_meals_type == 'Dinner'){
-                $arr_update = array(
-                    'activity_type' =>   $dinner_activity_type,
-                    'meal_type' =>   $dinner_meals_type,
-                    'start_time' =>   $dinner_start_time,
-                    'menu' =>   $dinner_food_menu,
-                    'end_time' =>   $dinner_end_time
-                    );
-                    $arr_where     = array("id" => $dinner_id);
-                $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
-                }
+    //             if($breakfast_meals_type == 'Dinner'){
+    //             $arr_update = array(
+    //                 'activity_type' =>   $dinner_activity_type,
+    //                 'meal_type' =>   $dinner_meals_type,
+    //                 'start_time' =>   $dinner_start_time,
+    //                 'menu' =>   $dinner_food_menu,
+    //                 'end_time' =>   $dinner_end_time
+    //                 );
+    //                 $arr_where     = array("id" => $dinner_id);
+    //             $inserted_id = $this->master_model->updateRecord('day_to_day_program',$arr_update,$arr_where);
+    //             }
 
-                // ======================== breakfast lunch  dinner ====================================
+    //             // ======================== breakfast lunch  dinner ====================================
 
-                // ========================= edit existing add more breakfast lunch  dinner ==============================
-                    if($addmore_entry_after_breakfast == 'Breakfast'){
-                        $count = count($travel_activity_type);
-                        // print_r($count); die;
-                        for($i=0;$i<$count;$i++)
-                        {
-                        $arr_update = array(
-                        'activity_type'   =>   $_POST["travel_activity_type"][$i],
-                        'end_district'   =>   $_POST["end_district"][$i],
-                        'start_place'   =>   $_POST["start_point"][$i],
-                        'start_place'   =>   $_POST["travel_start_point"][$i],
-                        'start_time'   =>   $_POST["travel_start_time"][$i],
-                        'distance'   =>   $_POST["travel_distance"][$i],
-                        'end_place'   =>   $_POST["travel_to_place"][$i],
-                        'end_time'   =>   $_POST["travel_end_time"][$i]
-                        ); 
-                        // print_r($arr_update); die;
-                        $arr_where     = array("id" => $addmore_breakfast_id[$i]);
-                        $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
-                        }
+    //             // ========================= edit existing add more breakfast lunch  dinner ==============================
+    //                 if($addmore_entry_after_breakfast == 'Breakfast'){
+    //                     $count = count($travel_activity_type);
+    //                     // print_r($count); die;
+    //                     for($i=0;$i<$count;$i++)
+    //                     {
+    //                     $arr_update = array(
+    //                     'activity_type'   =>   $_POST["travel_activity_type"][$i],
+    //                     'end_district'   =>   $_POST["end_district"][$i],
+    //                     'start_place'   =>   $_POST["start_point"][$i],
+    //                     'start_place'   =>   $_POST["travel_start_point"][$i],
+    //                     'start_time'   =>   $_POST["travel_start_time"][$i],
+    //                     'distance'   =>   $_POST["travel_distance"][$i],
+    //                     'end_place'   =>   $_POST["travel_to_place"][$i],
+    //                     'end_time'   =>   $_POST["travel_end_time"][$i]
+    //                     ); 
+    //                     // print_r($arr_update); die;
+    //                     $arr_where     = array("id" => $addmore_breakfast_id[$i]);
+    //                     $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
+    //                     }
                         
-                    }
-                    //=====================================================
-                    if($addmore_entry_after_lunch == 'Lunch'){
-                        $count = count($visit_activity_type);
-                        // print_r($count); die;
-                        for($i=0;$i<$count;$i++)
-                        {
-                        $arr_update = array(
-                        'activity_type'   =>   $_POST["visit_activity_type"][$i],
-                        'start_place'   =>   $_POST["visit_start_point"][$i],
-                        'start_time'   =>   $_POST["visit_start_time"][$i],
-                        'distance'   =>   $_POST["visit_distance"][$i],
-                        'end_place'   =>   $_POST["visit_to_place"][$i],
-                        'end_time'   =>   $_POST["visit_end_time"][$i]
-                        ); 
-                        // print_r($arr_update); die;
-                        $arr_where     = array("id" => $addmore_lunch_id[$i]);
-                        $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
-                        }
+    //                 }
+    //                 //=====================================================
+    //                 if($addmore_entry_after_lunch == 'Lunch'){
+    //                     $count = count($visit_activity_type);
+    //                     // print_r($count); die;
+    //                     for($i=0;$i<$count;$i++)
+    //                     {
+    //                     $arr_update = array(
+    //                     'activity_type'   =>   $_POST["visit_activity_type"][$i],
+    //                     'start_place'   =>   $_POST["visit_start_point"][$i],
+    //                     'start_time'   =>   $_POST["visit_start_time"][$i],
+    //                     'distance'   =>   $_POST["visit_distance"][$i],
+    //                     'end_place'   =>   $_POST["visit_to_place"][$i],
+    //                     'end_time'   =>   $_POST["visit_end_time"][$i]
+    //                     ); 
+    //                     // print_r($arr_update); die;
+    //                     $arr_where     = array("id" => $addmore_lunch_id[$i]);
+    //                     $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
+    //                     }
                         
-                    }
-                    //=====================================================
-                    if($addmore_entry_after_dinner == 'Dinner'){
-                        $count = count($travel_visit_activity_type);
-                        // print_r($count); die;
-                        for($i=0;$i<$count;$i++)
-                        {
-                        $arr_update = array(
-                        'activity_type'   =>   $_POST["travel_visit_activity_type"][$i],
-                        'start_place'   =>   $_POST["travel_visit_start_point"][$i],
-                        'start_time'   =>   $_POST["travel_visit_start_time"][$i],
-                        'distance'   =>   $_POST["travel_visit_distance"][$i],
-                        'end_place'   =>   $_POST["travel_visit_to_place"][$i],
-                        'end_time'   =>   $_POST["travel_visit_end_time"][$i]
-                        ); 
-                        // print_r($arr_update); die;
-                        $arr_where     = array("id" => $addmore_dinner_id[$i]);
-                        $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
-                        }
+    //                 }
+    //                 //=====================================================
+    //                 if($addmore_entry_after_dinner == 'Dinner'){
+    //                     $count = count($travel_visit_activity_type);
+    //                     // print_r($count); die;
+    //                     for($i=0;$i<$count;$i++)
+    //                     {
+    //                     $arr_update = array(
+    //                     'activity_type'   =>   $_POST["travel_visit_activity_type"][$i],
+    //                     'start_place'   =>   $_POST["travel_visit_start_point"][$i],
+    //                     'start_time'   =>   $_POST["travel_visit_start_time"][$i],
+    //                     'distance'   =>   $_POST["travel_visit_distance"][$i],
+    //                     'end_place'   =>   $_POST["travel_visit_to_place"][$i],
+    //                     'end_time'   =>   $_POST["travel_visit_end_time"][$i]
+    //                     ); 
+    //                     // print_r($arr_update); die;
+    //                     $arr_where     = array("id" => $addmore_dinner_id[$i]);
+    //                     $this->master_model->updateRecord('add_more_day_to_day_program',$arr_update,$arr_where);
+    //                     }
                         
-                    }
+    //                 }
 
-                    // ========================= edit existing add more  breakfast lunch  dinner ==============================
+    //                 // ========================= edit existing add more  breakfast lunch  dinner ==============================
 
-                    // ========================= insert new record add more  breakfast lunch  dinner ==============================
+    //                 // ========================= insert new record add more  breakfast lunch  dinner ==============================
                     
                     
-                // footer add more
-                $edit_travel_activity_type  = $this->input->post('edit_travel_activity_type');
-                $edit_travel_start_point  = $this->input->post('edit_travel_start_point');
-                $edit_travel_start_time  = $this->input->post('edit_travel_start_time');
-                $edit_travel_distance  = $this->input->post('edit_travel_distance');
-                $edit_travel_to_place  = $this->input->post('edit_travel_to_place');
-                $edit_travel_end_time  = $this->input->post('edit_travel_end_time');
+    //             // footer add more
+    //             $edit_travel_activity_type  = $this->input->post('edit_travel_activity_type');
+    //             $edit_travel_start_point  = $this->input->post('edit_travel_start_point');
+    //             $edit_travel_start_time  = $this->input->post('edit_travel_start_time');
+    //             $edit_travel_distance  = $this->input->post('edit_travel_distance');
+    //             $edit_travel_to_place  = $this->input->post('edit_travel_to_place');
+    //             $edit_travel_end_time  = $this->input->post('edit_travel_end_time');
 
-                // footer add more
-                $edit_visit_activity_type  = $this->input->post('edit_visit_activity_type');
-                $edit_visit_start_point  = $this->input->post('edit_visit_start_point');
-                $edit_visit_start_time  = $this->input->post('edit_visit_start_time');
-                $edit_visit_distance  = $this->input->post('edit_visit_distance');
-                $edit_visit_to_place  = $this->input->post('edit_visit_to_place');
-                $edit_visit_end_time  = $this->input->post('edit_visit_end_time');
+    //             // footer add more
+    //             $edit_visit_activity_type  = $this->input->post('edit_visit_activity_type');
+    //             $edit_visit_start_point  = $this->input->post('edit_visit_start_point');
+    //             $edit_visit_start_time  = $this->input->post('edit_visit_start_time');
+    //             $edit_visit_distance  = $this->input->post('edit_visit_distance');
+    //             $edit_visit_to_place  = $this->input->post('edit_visit_to_place');
+    //             $edit_visit_end_time  = $this->input->post('edit_visit_end_time');
 
-                // footer add_more
-                $edit_travel_visit_activity_type  = $this->input->post('edit_travel_visit_activity_type');
-                $edit_travel_visit_start_point  = $this->input->post('edit_travel_visit_start_point');
-                $edit_travel_visit_start_time  = $this->input->post('edit_travel_visit_start_time');
-                $edit_travel_visit_distance  = $this->input->post('edit_travel_visit_distance');
-                $edit_travel_visit_to_place  = $this->input->post('edit_travel_visit_to_place');
-                $edit_travel_visit_end_time  = $this->input->post('edit_travel_visit_end_time');
+    //             // footer add_more
+    //             $edit_travel_visit_activity_type  = $this->input->post('edit_travel_visit_activity_type');
+    //             $edit_travel_visit_start_point  = $this->input->post('edit_travel_visit_start_point');
+    //             $edit_travel_visit_start_time  = $this->input->post('edit_travel_visit_start_time');
+    //             $edit_travel_visit_distance  = $this->input->post('edit_travel_visit_distance');
+    //             $edit_travel_visit_to_place  = $this->input->post('edit_travel_visit_to_place');
+    //             $edit_travel_visit_end_time  = $this->input->post('edit_travel_visit_end_time');
 
-                    if($edit_travel_activity_type != ''){
-                    $count = count($edit_travel_activity_type);
-                    // print_r($count); die;
-                    for($i=0;$i<$count;$i++)
-                    {
-                    $arr_insert = array(
-                    'activity_type'   =>   $_POST["edit_travel_activity_type"][$i],
-                    'start_place'   =>   $_POST["edit_travel_start_point"][$i],
-                    'start_time'   =>   $_POST["edit_travel_start_time"][$i],
-                    'distance'   =>   $_POST["edit_travel_distance"][$i],
-                    'end_place'   =>   $_POST["edit_travel_to_place"][$i],
-                    'end_time'   =>   $_POST["edit_travel_end_time"][$i]
-                    ); 
-                    $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
-                    }
-                }   
+    //                 if($edit_travel_activity_type != ''){
+    //                 $count = count($edit_travel_activity_type);
+    //                 // print_r($count); die;
+    //                 for($i=0;$i<$count;$i++)
+    //                 {
+    //                 $arr_insert = array(
+    //                 'activity_type'   =>   $_POST["edit_travel_activity_type"][$i],
+    //                 'start_place'   =>   $_POST["edit_travel_start_point"][$i],
+    //                 'start_time'   =>   $_POST["edit_travel_start_time"][$i],
+    //                 'distance'   =>   $_POST["edit_travel_distance"][$i],
+    //                 'end_place'   =>   $_POST["edit_travel_to_place"][$i],
+    //                 'end_time'   =>   $_POST["edit_travel_end_time"][$i]
+    //                 ); 
+    //                 $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+    //                 }
+    //             }   
 
-                if($edit_visit_activity_type != ''){
-                    $count = count($edit_visit_activity_type);
-                    // print_r($count); die;
-                    for($i=0;$i<$count;$i++)
-                    {
-                    $arr_insert = array(
-                    'activity_type'   =>   $_POST["edit_visit_activity_type"][$i],
-                    'start_place'   =>   $_POST["edit_visit_start_point"][$i],
-                    'start_time'   =>   $_POST["edit_visit_start_time"][$i],
-                    'distance'   =>   $_POST["edit_visit_distance"][$i],
-                    'end_place'   =>   $_POST["edit_visit_to_place"][$i],
-                    'end_time'   =>   $_POST["edit_visit_end_time"][$i]
-                    ); 
-                    $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
-                    }
-                }   
+    //             if($edit_visit_activity_type != ''){
+    //                 $count = count($edit_visit_activity_type);
+    //                 // print_r($count); die;
+    //                 for($i=0;$i<$count;$i++)
+    //                 {
+    //                 $arr_insert = array(
+    //                 'activity_type'   =>   $_POST["edit_visit_activity_type"][$i],
+    //                 'start_place'   =>   $_POST["edit_visit_start_point"][$i],
+    //                 'start_time'   =>   $_POST["edit_visit_start_time"][$i],
+    //                 'distance'   =>   $_POST["edit_visit_distance"][$i],
+    //                 'end_place'   =>   $_POST["edit_visit_to_place"][$i],
+    //                 'end_time'   =>   $_POST["edit_visit_end_time"][$i]
+    //                 ); 
+    //                 $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+    //                 }
+    //             }   
 
-                if($edit_travel_visit_activity_type != ''){
-                    $count = count($edit_travel_visit_activity_type);
-                    // print_r($count); die;
-                    for($i=0;$i<$count;$i++)
-                    {
-                    $arr_insert = array(
-                    'activity_type'   =>   $_POST["edit_travel_visit_activity_type"][$i],
-                    'start_place'   =>   $_POST["edit_travel_visit_start_point"][$i],
-                    'start_time'   =>   $_POST["edit_travel_visit_start_time"][$i],
-                    'distance'   =>   $_POST["edit_travel_visit_distance"][$i],
-                    'end_place'   =>   $_POST["edit_travel_visit_to_place"][$i],
-                    'end_time'   =>   $_POST["edit_travel_visit_end_time"][$i]
-                    ); 
-                    $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
-                    }
-                }   
-                // ========================= insert new record add more  breakfast lunch  dinner ==============================
+    //             if($edit_travel_visit_activity_type != ''){
+    //                 $count = count($edit_travel_visit_activity_type);
+    //                 // print_r($count); die;
+    //                 for($i=0;$i<$count;$i++)
+    //                 {
+    //                 $arr_insert = array(
+    //                 'activity_type'   =>   $_POST["edit_travel_visit_activity_type"][$i],
+    //                 'start_place'   =>   $_POST["edit_travel_visit_start_point"][$i],
+    //                 'start_time'   =>   $_POST["edit_travel_visit_start_time"][$i],
+    //                 'distance'   =>   $_POST["edit_travel_visit_distance"][$i],
+    //                 'end_place'   =>   $_POST["edit_travel_visit_to_place"][$i],
+    //                 'end_time'   =>   $_POST["edit_travel_visit_end_time"][$i]
+    //                 ); 
+    //                 $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+    //                 }
+    //             }   
+    //             // ========================= insert new record add more  breakfast lunch  dinner ==============================
 
-                    if($inserted_id > 0)
-                 {
-                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Record Updated Successfully.");
-                     redirect($this->day_to_day_program_module.'/take_days/'.$pid.'/'.$c_no_of_days);
-                 }
-                 else
-                 {
-                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                 }
-                 redirect($this->module_url_path.'/index');
-                }   
+    //                 if($inserted_id > 0)
+    //              {
+    //                  $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Record Updated Successfully.");
+    //                  redirect($this->day_to_day_program_module.'/take_days/'.$pid.'/'.$c_no_of_days);
+    //              }
+    //              else
+    //              {
+    //                  $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+    //              }
+    //              redirect($this->module_url_path.'/index');
+    //             }   
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $this->db->order_by('id','ASC');
-        $expense_type_data = $this->master_model->getRecords('expense_type');
-        // print_r($expense_type_data); die;  
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+    //     $this->db->order_by('id','ASC');
+    //     $expense_type_data = $this->master_model->getRecords('expense_type');
+    //     // print_r($expense_type_data); die;  
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        // $this->db->where('id',$id);
-        $this->db->order_by('id','ASC');
-        $expense_category_data = $this->master_model->getRecords('expense_category');
-        // print_r($expense_category_data); die;  
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+    //     // $this->db->where('id',$id);
+    //     $this->db->order_by('id','ASC');
+    //     $expense_category_data = $this->master_model->getRecords('expense_category');
+    //     // print_r($expense_category_data); die;  
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $measuring_unit = $this->master_model->getRecords('measuring_unit');
-        //  print_r($measuring_unit); die;
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+    //     $measuring_unit = $this->master_model->getRecords('measuring_unit');
+    //     //  print_r($measuring_unit); die;
 
-        $record = array();
-        $fields = "tour_expenses.*,expense_type.expense_type_name,expense_category.expense_category,
-        packages.tour_number,packages.tour_title,package_date.journey_date";
-        $this->db->where('tour_expenses.is_deleted','no');
-        $this->db->order_by('tour_expenses.id','desc');
-        $this->db->where('tour_expenses.id',$id);
-        $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
-        $this->db->join("expense_category", 'tour_expenses.expense_category_id=expense_category.id','left');
-        $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
-        $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
-        $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
-        // print_r($tour_expenses_all); die;
+    //     $record = array();
+    //     $fields = "tour_expenses.*,expense_type.expense_type_name,expense_category.expense_category,
+    //     packages.tour_number,packages.tour_title,package_date.journey_date";
+    //     $this->db->where('tour_expenses.is_deleted','no');
+    //     $this->db->order_by('tour_expenses.id','desc');
+    //     $this->db->where('tour_expenses.id',$id);
+    //     $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
+    //     $this->db->join("expense_category", 'tour_expenses.expense_category_id=expense_category.id','left');
+    //     $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
+    //     $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
+    //     $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
+    //     // print_r($tour_expenses_all); die;
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-		$this->db->order_by('expense_category','ASC');
-        $expense_category = $this->master_model->getRecords('expense_category');
-        //  print_r($expense_category); die;
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+	// 	$this->db->order_by('expense_category','ASC');
+    //     $expense_category = $this->master_model->getRecords('expense_category');
+    //     //  print_r($expense_category); die;
 
-        $this->db->where('is_deleted','no');
-		$this->db->order_by('tour_number','ASC');
-        $packages_data = $this->master_model->getRecords('packages');
+    //     $this->db->where('is_deleted','no');
+	// 	$this->db->order_by('tour_number','ASC');
+    //     $packages_data = $this->master_model->getRecords('packages');
 
-        $this->db->where('is_deleted','no');
-        $package_date = $this->master_model->getRecords('package_date');
+    //     $this->db->where('is_deleted','no');
+    //     $package_date = $this->master_model->getRecords('package_date');
 
-        $record = array();
-        $fields = "add_more_tour_expenses.*,add_more_tour_expenses.*,expense_category.expense_category";
-        $this->db->where('add_more_tour_expenses.is_deleted','no');
-        $this->db->where('add_more_tour_expenses.tour_expenses_id',$id);
-        $this->db->join("expense_category", 'add_more_tour_expenses.product_name=expense_category.id','left');
-        $add_more_tour_expenses_all = $this->master_model->getRecords('add_more_tour_expenses',array('add_more_tour_expenses.is_deleted'=>'no'),$fields);
+    //     $record = array();
+    //     $fields = "add_more_tour_expenses.*,add_more_tour_expenses.*,expense_category.expense_category";
+    //     $this->db->where('add_more_tour_expenses.is_deleted','no');
+    //     $this->db->where('add_more_tour_expenses.tour_expenses_id',$id);
+    //     $this->db->join("expense_category", 'add_more_tour_expenses.product_name=expense_category.id','left');
+    //     $add_more_tour_expenses_all = $this->master_model->getRecords('add_more_tour_expenses',array('add_more_tour_expenses.is_deleted'=>'no'),$fields);
 
-        $edit_data=count($add_more_tour_expenses_all);
-        // print_r($edit_data); die;
-
-
-        // =======================================================================
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');    
-        $this->db->where('id',$id);
-        $this->db->where('tour_number_of_days',$no_of_days);
-        $tour_creation = $this->master_model->getRecords('tour_creation');
-        //  print_r($tour_creation); die;
-
-        $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id,
-        day_to_day_program.activity_type as daytoday_activity";
-        $this->db->where('tour_creation.is_deleted','no');
-        $this->db->where('tour_creation.id',$id);
-        $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
-        $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
-        $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
-        $this->db->group_by('day_to_day_program.meal_type');
-        $day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
-        // print_r($day_to_day_data); die;
-
-        $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id,
-        tour_creation.id as tour_id";
-        $this->db->where('tour_creation.is_deleted','no');
-        $this->db->where('tour_creation.id',$id);
-        $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
-        $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
-        $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
-        $this->db->group_by('tour_creation.id');
-        $add_more_day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
-        // print_r($add_more_day_to_day_data); die;
+    //     $edit_data=count($add_more_tour_expenses_all);
+    //     // print_r($edit_data); die;
 
 
-        $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id";
-        $this->db->where('tour_creation.is_deleted','no');
-        $this->db->where('add_more_day_to_day_program.is_deleted','no');
-        $this->db->where('tour_creation.id',$id);
-        $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
-        $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
-        $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
-        $multiple_day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
-        // print_r($multiple_day_to_day_data);die;
+    //     // =======================================================================
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');    
+    //     $this->db->where('id',$id);
+    //     $this->db->where('tour_number_of_days',$no_of_days);
+    //     $tour_creation = $this->master_model->getRecords('tour_creation');
+    //     //  print_r($tour_creation); die;
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-		$this->db->order_by('food_menu_name','ASC');
-        $food_menu_master = $this->master_model->getRecords('food_menu_master');
-        //  print_r($food_menu_master); die;
+    //     $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id,
+    //     day_to_day_program.activity_type as daytoday_activity";
+    //     $this->db->where('tour_creation.is_deleted','no');
+    //     $this->db->where('tour_creation.id',$id);
+    //     $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
+    //     $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
+    //     $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
+    //     $this->db->group_by('day_to_day_program.meal_type');
+    //     $day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
+    //     // print_r($day_to_day_data); die;
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
-        //  print_r($citywise_place_master); die;
+    //     $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id,
+    //     tour_creation.id as tour_id";
+    //     $this->db->where('tour_creation.is_deleted','no');
+    //     $this->db->where('tour_creation.id',$id);
+    //     $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
+    //     $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
+    //     $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
+    //     $this->db->group_by('tour_creation.id');
+    //     $add_more_day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
+    //     // print_r($add_more_day_to_day_data); die;
 
-        //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
-         $this->arr_view_data['packages_data'] = $packages_data;
-         $this->arr_view_data['add_more_tour_expenses_all'] = $add_more_tour_expenses_all;
-         $this->arr_view_data['edit_data'] = $edit_data;
-        //  $this->arr_view_data['breakfast_day_to_day_data'] = $breakfast_day_to_day_data;
-         $this->arr_view_data['expense_category'] = $expense_category;
-         $this->arr_view_data['package_date'] = $package_date;
-         $this->arr_view_data['tour_creation'] = $tour_creation;
-         $this->arr_view_data['citywise_place_master'] = $citywise_place_master;
-         $this->arr_view_data['day_to_day_data'] = $day_to_day_data;
-         $this->arr_view_data['multiple_day_to_day_data'] = $multiple_day_to_day_data;
-         $this->arr_view_data['add_more_day_to_day_data'] = $add_more_day_to_day_data;
-         $this->arr_view_data['food_menu_master'] = $food_menu_master;
-         $this->arr_view_data['tour_expenses_all'] = $tour_expenses_all;
-         $this->arr_view_data['expense_type_data'] = $expense_type_data;
-         $this->arr_view_data['expense_category_data'] = $expense_category_data;
-         $this->arr_view_data['measuring_unit'] = $measuring_unit;
-        //  $this->arr_view_data['package_id']        = $package_id;
-        //  $this->arr_view_data['package_date_id']        = $package_date_id;
-         $this->arr_view_data['page_title']      = " Edit ".$this->module_title;
-         $this->arr_view_data['module_title']    = $this->module_title;
-         $this->arr_view_data['add_more_module_url_path']    = $this->add_more_module_url_path;
-         $this->arr_view_data['module_url_path'] = $this->module_url_path;
-         $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
-         $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
-         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
-        }
 
-    public function breakfast_add_more_delete()
+    //     $fields = "tour_creation.*,day_to_day_program.*,add_more_day_to_day_program.*,day_to_day_program.id as daytoday_id,add_more_day_to_day_program.id as add_daytoday_id";
+    //     $this->db->where('tour_creation.is_deleted','no');
+    //     $this->db->where('add_more_day_to_day_program.is_deleted','no');
+    //     $this->db->where('tour_creation.id',$id);
+    //     $this->db->where('tour_creation.tour_number_of_days',$no_of_days);
+    //     $this->db->join("day_to_day_program", 'tour_creation.id=day_to_day_program.tour_creation_id','left');
+    //     $this->db->join("add_more_day_to_day_program", 'day_to_day_program.id=add_more_day_to_day_program.day_to_day_program_id','left');
+    //     $multiple_day_to_day_data = $this->master_model->getRecords('tour_creation',array('tour_creation.is_deleted'=>'no'),$fields);
+    //     // print_r($multiple_day_to_day_data);die;
+
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+	// 	$this->db->order_by('food_menu_name','ASC');
+    //     $food_menu_master = $this->master_model->getRecords('food_menu_master');
+    //     //  print_r($food_menu_master); die;
+
+    //     $this->db->where('is_deleted','no');
+    //     $this->db->where('is_active','yes');
+    //     $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
+    //     //  print_r($citywise_place_master); die;
+
+    //     //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+    //      $this->arr_view_data['packages_data'] = $packages_data;
+    //      $this->arr_view_data['add_more_tour_expenses_all'] = $add_more_tour_expenses_all;
+    //      $this->arr_view_data['edit_data'] = $edit_data;
+    //     //  $this->arr_view_data['breakfast_day_to_day_data'] = $breakfast_day_to_day_data;
+    //      $this->arr_view_data['expense_category'] = $expense_category;
+    //      $this->arr_view_data['package_date'] = $package_date;
+    //      $this->arr_view_data['tour_creation'] = $tour_creation;
+    //      $this->arr_view_data['citywise_place_master'] = $citywise_place_master;
+    //      $this->arr_view_data['day_to_day_data'] = $day_to_day_data;
+    //      $this->arr_view_data['multiple_day_to_day_data'] = $multiple_day_to_day_data;
+    //      $this->arr_view_data['add_more_day_to_day_data'] = $add_more_day_to_day_data;
+    //      $this->arr_view_data['food_menu_master'] = $food_menu_master;
+    //      $this->arr_view_data['tour_expenses_all'] = $tour_expenses_all;
+    //      $this->arr_view_data['expense_type_data'] = $expense_type_data;
+    //      $this->arr_view_data['expense_category_data'] = $expense_category_data;
+    //      $this->arr_view_data['measuring_unit'] = $measuring_unit;
+    //     //  $this->arr_view_data['package_id']        = $package_id;
+    //     //  $this->arr_view_data['package_date_id']        = $package_date_id;
+    //      $this->arr_view_data['page_title']      = " Edit ".$this->module_title;
+    //      $this->arr_view_data['module_title']    = $this->module_title;
+    //      $this->arr_view_data['add_more_module_url_path']    = $this->add_more_module_url_path;
+    //      $this->arr_view_data['module_url_path'] = $this->module_url_path;
+    //      $this->arr_view_data['day_to_day_program_module'] = $this->day_to_day_program_module;
+    //      $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+    //      $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
+    //     }
+
+    public function add_more_delete()
     {
         $id  = $this->input->post('request_id');
 
@@ -1036,8 +1116,7 @@ class Daily_program_data extends CI_Controller {
         }
         else
         {
-           
-               $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
         }
         redirect($this->module_url_path.'/index');  
 
@@ -1128,12 +1207,30 @@ class Daily_program_data extends CI_Controller {
         // $iid = $this->session->userdata('supervision_sess_id');
 
         $record = array();
-        $fields = "add_more_day_to_day_program.*";
-        $this->db->where('add_more_day_to_day_program.is_deleted','no');
-        $this->db->where('add_more_day_to_day_program.is_active','yes');
-        $this->db->where('add_more_day_to_day_program.id',$id);
-        
-        $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program',array('add_more_day_to_day_program.is_deleted'=>'no'),$fields);
+        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_place_master_start.place_name AS start_place_name, citywise_place_master_end.place_name AS end_place_name";
+        $this->db->where('add_more_day_to_day_program.is_deleted', 'no');
+        $this->db->where('add_more_day_to_day_program.is_active', 'yes');
+        $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);
+        $this->db->where('add_more_day_to_day_program.day_no', $day);
+        $this->db->join("district_table AS district_table_start", 'add_more_day_to_day_program.start_district = district_table_start.id', 'left');
+        $this->db->join("district_table AS district_table_end", 'add_more_day_to_day_program.end_district = district_table_end.id', 'left');
+        $this->db->join("citywise_place_master AS citywise_place_master_start", 'add_more_day_to_day_program.start_place = citywise_place_master_start.id', 'left');
+        $this->db->join("citywise_place_master AS citywise_place_master_end", 'add_more_day_to_day_program.end_place = citywise_place_master_end.id', 'left');
+        $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program', array('add_more_day_to_day_program.is_deleted' => 'no'), $fields);
+        // print_r($add_more_day_to_day_program);
+        // die;
+
+        // $record = array();
+        // $fields = "add_more_day_to_day_program.*,district_table.district,citywise_place_master_start.place_name AS start_place_name, citywise_place_master_end.place_name AS end_place_name";
+        // $this->db->where('add_more_day_to_day_program.is_deleted','no');
+        // $this->db->where('add_more_day_to_day_program.is_active','yes');
+        // $this->db->where('add_more_day_to_day_program.tour_creation_id',$id);
+        // $this->db->where('add_more_day_to_day_program.day_no',$day);
+        // $this->db->join("district_table", 'add_more_day_to_day_program.start_district=district_table.id','left');
+        // $this->db->join("citywise_place_master AS citywise_place_master_start", 'add_more_day_to_day_program.start_place = citywise_place_master_start.id', 'left');
+        // $this->db->join("citywise_place_master AS citywise_place_master_end", 'add_more_day_to_day_program.end_district = citywise_place_master_end.id', 'left');
+        // $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program',array('add_more_day_to_day_program.is_deleted'=>'no'),$fields);
+        // print_r($add_more_day_to_day_program); die;
         
 
         $this->db->where('is_deleted','no');
@@ -1160,6 +1257,7 @@ class Daily_program_data extends CI_Controller {
         $this->db->where('is_active','yes');
         // $this->db->group_by('select_district'); 
         $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
+        // print_r($district_data);
     
 
         $this->arr_view_data['district_data']        = $district_data;

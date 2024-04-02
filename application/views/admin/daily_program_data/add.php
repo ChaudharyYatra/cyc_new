@@ -237,7 +237,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-primary" travel_attr_add_id="1" name="submit" value="travel_add_more" id="travel_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_breakfast">  
                                             <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">   -->
                                             <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                                             <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
@@ -390,7 +390,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-primary" visit_attr_add_id="1" name="submit" value="visit_add_more" id="visit_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_lunch">  
                                             <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">   -->
                                             <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                                             <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
@@ -541,7 +541,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-primary" travel_visit_attr_add_id="1" name="submit" value="travel_visit_add_more" id="travel_visit_add_more">Add More</button>
                                             </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="">  
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_dinner">  
                                             <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  -->
                                             <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                                             <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
