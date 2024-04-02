@@ -128,8 +128,8 @@ class Sra_payment_receipt extends CI_Controller {
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
             $this->db->join("package_date", 'package_date.id=sra_booking_payment_details.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
-            // print_r($payment_receipt); die;
         }
+        print_r($payment_receipt); die;
 
         $payment_rupee = $payment_receipt['booking_amt'];
         // print_r($payment_rupee); die;
@@ -219,7 +219,7 @@ public function index_pending($iid,$sra_booking_payment_details_id)
 
 
 $record = array();
-        $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
+        $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
         sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt";
         $this->db->where('sra_final_booking.is_deleted','no');
         $this->db->where('sra_payment.sra_no',$iid);
@@ -227,12 +227,13 @@ $record = array();
         $this->db->join("sra_booking_payment_details", 'sra_final_booking.sra_booking_payment_details_id=sra_booking_payment_details.id','left');
         $this->db->join("agent", 'sra_final_booking.agent_id=agent.id','left');
         $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
+        $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
         $details_payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
         // print_r($details_payment_receipt); die;
 
         if($details_payment_receipt['select_transaction'] == 'UPI'){
             $record = array();
-            $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
+            $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
             sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt";
             $this->db->where('sra_final_booking.is_deleted','no');
             $this->db->where('sra_booking_payment_details.sra_no',$iid);
@@ -242,11 +243,12 @@ $record = array();
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
             $this->db->join("qr_code_add_more", 'sra_booking_payment_details.upi_payment_type=qr_code_add_more.id','left');
             $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
             // print_r($payment_receipt); die;
         }else if($details_payment_receipt['select_transaction'] == 'QR Code'){
             $record = array();
-            $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
+            $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
             sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt";
             $this->db->where('sra_final_booking.is_deleted','no');
             $this->db->where('sra_booking_payment_details.sra_no',$iid);
@@ -256,11 +258,12 @@ $record = array();
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
             $this->db->join("qr_code_add_more", 'sra_booking_payment_details.QR_payment_type=qr_code_add_more.id and sra_booking_payment_details.QR_payment_type=qr_code_add_more.id','left');
             $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
             // print_r($payment_receipt); die;
         }else if($details_payment_receipt['select_transaction'] == 'Net Banking'){
             $record = array();
-            $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
+            $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,upi_apps_name.payment_app_name,
             sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt,qr_code_add_more.account_number";
             $this->db->where('sra_final_booking.is_deleted','no');
             $this->db->where('sra_booking_payment_details.sra_no',$iid);
@@ -270,11 +273,12 @@ $record = array();
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
             $this->db->join("qr_code_add_more", 'sra_booking_payment_details.net_banking_acc_no=qr_code_add_more.id');
             $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
             // print_r($payment_receipt); die;
         }else if($details_payment_receipt['select_transaction'] == 'Cheque'){
             $record = array();
-            $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
+            $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
             sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt";
             $this->db->where('sra_final_booking.is_deleted','no');
             $this->db->where('sra_booking_payment_details.sra_no',$iid);
@@ -282,11 +286,12 @@ $record = array();
             $this->db->join("sra_booking_payment_details", 'sra_final_booking.sra_booking_payment_details_id=sra_booking_payment_details.id','left');
             $this->db->join("agent", 'sra_final_booking.agent_id=agent.id','left');
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
+            $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
             // print_r($payment_receipt); die;
         }else{
             $record = array();
-            $fields = "sra_final_booking.*,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
+            $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
             sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt";
             $this->db->where('sra_final_booking.is_deleted','no');
             $this->db->where('sra_payment.sra_no',$iid);
@@ -294,6 +299,7 @@ $record = array();
             $this->db->join("sra_booking_payment_details", 'sra_final_booking.sra_booking_payment_details_id=sra_booking_payment_details.id','left');
             $this->db->join("agent", 'sra_final_booking.agent_id=agent.id','left');
             $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
+            $this->db->join("package_date", 'package_date.id=sra_final_booking.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
             // print_r($payment_receipt); die;
         }
