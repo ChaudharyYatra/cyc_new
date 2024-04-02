@@ -555,7 +555,7 @@ class Daily_program_data extends CI_Controller {
                 'end_district'   =>   $_POST["edit_end_district"][$i],
                 'end_place'   =>   $_POST["edit_travel_to_place"][$i],
                 'end_time'   =>   $_POST["edit_travel_end_time"][$i],
-                'meals_type'   =>   $_POST["edit_meals_type"][$i],
+                'meal_type'   =>   $_POST["edit_meals_type"][$i],
                 'tour_creation_id' => $id,
                 'day_no'   =>   $day
 
@@ -583,15 +583,50 @@ class Daily_program_data extends CI_Controller {
                 for($i=0;$i<$count;$i++)
                 {
                 $arr_insert = array(
-                'activity_type'   =>   $_POST["edit_travel_activity_type"][$i],
-                'start_district'   =>   $_POST["edit_start_district"][$i],
-                'start_place'   =>   $_POST["edit_travel_start_point"][$i],
-                'start_time'   =>   $_POST["edit_travel_start_time"][$i],
-                'distance'   =>   $_POST["edit_travel_distance"][$i],
-                'end_district'   =>   $_POST["edit_end_district"][$i],
-                'end_place'   =>   $_POST["edit_travel_to_place"][$i],
-                'end_time'   =>   $_POST["edit_travel_end_time"][$i],
-                'meals_type'   =>   $_POST["edit_lunch_meals_type"][$i],
+                'activity_type'   =>   $_POST["edit_lunch_activity_type"][$i],
+                'start_district'   =>   $_POST["edit_lunch_start_district"][$i],
+                'start_place'   =>   $_POST["edit_lunch_start_point"][$i],
+                'start_time'   =>   $_POST["edit_lunch_start_time"][$i],
+                'distance'   =>   $_POST["edit_lunch_distance"][$i],
+                'end_district'   =>   $_POST["edit_lunch_end_district"][$i],
+                'end_place'   =>   $_POST["edit_lunch_to_place"][$i],
+                'end_time'   =>   $_POST["edit_lunch_end_time"][$i],
+                'meal_type'   =>   $_POST["edit_lunch_meals_type"][$i],
+                'tour_creation_id' => $id,
+                'day_no'   =>   $day
+                ); 
+                $inserted_id = $this->master_model->insertRecord('add_more_day_to_day_program',$arr_insert,true);
+                }
+                }
+// --------------------------------------------------------------------------------------------------------------------
+
+                $edit_dinner_activity_type  = $this->input->post('edit_dinner_activity_type');
+                $edit_dinner_start_district  = $this->input->post('edit_dinner_start_district');
+                $edit_dinner_start_point  = $this->input->post('edit_dinner_start_point');
+                $edit_dinner_start_time  = $this->input->post('edit_dinner_start_time');
+                $edit_dinner_distance  = $this->input->post('edit_dinner_distance');
+
+                $edit_dinner_end_district  = $this->input->post('edit_dinner_end_district');
+
+                $edit_dinner_to_place  = $this->input->post('edit_dinner_to_place');
+                $edit_dinner_end_time  = $this->input->post('edit_dinner_end_time');
+                $edit_dinner_meals_type  = $this->input->post('edit_dinner_meals_type');
+
+                if($edit_dinner_activity_type != ''){
+                $count = count($edit_dinner_activity_type);
+                // print_r($count); die;
+                for($i=0;$i<$count;$i++)
+                {
+                $arr_insert = array(
+                'activity_type'   =>   $_POST["edit_dinner_activity_type"][$i],
+                'start_district'   =>   $_POST["edit_dinner_start_district"][$i],
+                'start_place'   =>   $_POST["edit_dinner_start_point"][$i],
+                'start_time'   =>   $_POST["edit_dinner_start_time"][$i],
+                'distance'   =>   $_POST["edit_dinner_distance"][$i],
+                'end_district'   =>   $_POST["edit_dinner_end_district"][$i],
+                'end_place'   =>   $_POST["edit_dinner_to_place"][$i],
+                'end_time'   =>   $_POST["edit_dinner_end_time"][$i],
+                'meal_type'   =>   $_POST["edit_dinner_meals_type"][$i],
                 'tour_creation_id' => $id,
                 'day_no'   =>   $day
                 ); 
@@ -599,6 +634,7 @@ class Daily_program_data extends CI_Controller {
                 }
                 }
 
+// -----------------------------------------------------------------------------
                 if($inserted_id > 0)
                 {
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");

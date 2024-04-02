@@ -11179,7 +11179,7 @@ $(document).on("click", ".remove-row", function() {
                 </td>
                 <td>
                     <input type="time" class="form-control quantity" name="edit_lunch_end_time[]" id="edit_lunch_end_time`+i+`">
-                    <input readonly type="hidden" class="form-control quantity" name="edit_lunch_meals_type[]" id="edit_lunch_meals_type" value="after_breakfast">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_lunch_meals_type[]" id="edit_lunch_meals_type" value="after_lunch">
                     <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                     <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
                     <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
@@ -11190,6 +11190,85 @@ $(document).on("click", ".remove-row", function() {
             </tr>
             `;
             $("#edit_table2 tbody").append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Add more rows when the "Add More" button is clicked
+        $("#dinner_edit_add_more").click(function() {
+            var expence = $(this).attr('dinner_edit_attr_add_id');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('dinner_edit_attr_add_id',i);
+            var newRow = `
+            <tr>
+                <td>
+                    <select class="select_css" name="edit_dinner_activity_type[]" id="edit_dinner_activity_type`+i+`">
+                        <option value="">Select Activity Type</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Visit">Visit</option>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css district" name="edit_dinner_start_district[]" id="edit_dinner_start_district`+i+`" attr_district="district" required="required">
+                        <option value="">Select </option>
+                        <?php 
+                            foreach ($district_data as $district_info) { 
+                                ?>
+                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                            <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="edit_dinner_start_point[]" id="edit_dinner_start_point`+i+`" >
+                        <option value="">Select start point</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="edit_dinner_start_time[]" id="edit_dinner_start_time`+i+`"></td>
+                <td><input type="text" class="form-control quantity" name="edit_dinner_distance[]" id="edit_dinner_distance`+i+`"></td>
+                <td>
+                    <select class="select_css district" name="edit_dinner_end_district[]" id="edit_dinner_end_district`+i+`" attr_district="end_district" required="required">
+                        <option value="">Select </option>
+                        <?php
+                        foreach($district_data as $district_info){ 
+                        ?>
+                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <select class="select_css" name="edit_dinner_to_place[]" id="edit_dinner_to_place`+i+`">
+                        <option value="">Select To Place</option>
+                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td>
+                    <input type="time" class="form-control quantity" name="edit_dinner_end_time[]" id="edit_dinner_end_time`+i+`">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_dinner_meals_type[]" id="edit_dinner_meals_type" value="after_dinner">
+                    <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                    <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                    <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+            </tr>
+            `;
+            $("#edit_table3 tbody").append(newRow);
             i++;
         });
         

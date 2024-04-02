@@ -90,13 +90,6 @@
                         </div>
                         <?php } ?>
 
-                        <div class="col-md-6">
-                            <div class="form-group remove_color">
-                                <label>Date</label>
-                                <input type="date" class="form-control" name="current_date" id="current_date" placeholder="Enter Expense Date">
-                            </div>
-                        </div>
-
                         <div class="col-md-6"></div>
                         <div class="col-md-12">
                             <div class="form-group">

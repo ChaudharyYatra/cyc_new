@@ -90,13 +90,6 @@
                         </div>
                         <?php } ?>
 
-                        <div class="col-md-6">
-                            <div class="form-group remove_color">
-                                <label>Date</label>
-                                <input readonly type="date" class="form-control" name="current_date" id="current_date" placeholder="Enter Expense Date" value="<?php echo $tour_creation_info['id'];?>">
-                            </div>
-                        </div>
-
                         <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
                             if($add_more_day_to_day_program_info['meal_type'] == 'Breakfast'){ ?> 
                         <div class="col-md-6"></div>
