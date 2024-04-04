@@ -11467,6 +11467,74 @@ $(document).on("click", ".remove-row", function() {
      }
 });
 </script>
+
+<script>
+  $(".lunch_delete_instruction").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/daily_program_data/add_more_delete_lunch',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record Not deleted.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+
+<script>
+  $(".dinner_delete_instruction").click(function() { 
+   
+     var delete_add_more_tour_expenses_id =  $(this).attr('value');
+     
+     if(delete_add_more_tour_expenses_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/daily_program_data/add_more_delete_dinner',
+                  data: {
+                      request_id: delete_add_more_tour_expenses_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record Not deleted.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
 <!-- day to day program edit delete -->
     
 <script>

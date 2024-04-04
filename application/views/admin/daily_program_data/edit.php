@@ -119,7 +119,7 @@
                                             <!-- Activity type food type -->
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['activity_type'];?>">
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['meal_type'];?>">  
@@ -190,16 +190,16 @@
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
-                                        <tr>
-                                            <th>Activity Type</th>
-                                            <th>Start district</th>
-                                            <th>Start Place</th>
-                                            <th>Start Time</th>
-                                            <th>Distance</th>
-                                            <th>End district</th>
-                                            <th>End Place</th>
-                                            <th>End Time</th>
-                                            <th>Action</th>
+                                        <tr style="background:#a19f9f; color:white;">
+                                            <th style="width:10%;">Activity Type</th>
+                                            <th style="width:10%;">Start district</th>
+                                            <th style="width:10%;">Start Place</th>
+                                            <th style="width:10%;">Start Time</th>
+                                            <th style="width:10%;">Distance</th>
+                                            <th style="width:10%;">End district</th>
+                                            <th style="width:10%;">End Place</th>
+                                            <th style="width:10%;">End Time</th>
+                                            <th style="width:10%;">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -214,7 +214,7 @@
                                                     <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
@@ -300,7 +300,7 @@
                                             <!-- Activity type food type -->
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['activity_type'];?>">
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['meal_type'];?>">  
@@ -366,7 +366,7 @@
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
-                                        <tr>
+                                        <tr style="background:#a19f9f; color:white;">
                                             <th>Activity Type</th>
                                             <th>Start district</th>
                                             <th>Start Place</th>
@@ -390,7 +390,7 @@
                                                     <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
@@ -432,7 +432,7 @@
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['end_time'];?>"></td>
                                             <td>
-                                                <a onclick="return confirm('Are You Sure You Want To Delete This Record? ')" href="<?php echo $module_url_path;?>/add_more_delete/<?php echo $add_more_day_to_day_program_info['id']; ?>" title="delete"><button value="<?php echo $add_more_day_to_day_program_info['id']; ?>" class="btn btn-primary delete_instruction">Delete</button></a>
+                                                <a href="<?php echo $module_url_path;?>/add_more_delete_lunch/<?php echo $add_more_day_to_day_program_info['id']; ?>" title="delete"><button value="<?php echo $add_more_day_to_day_program_info['id']; ?>" class="btn btn-primary lunch_delete_instruction">Delete</button></a>
                                             </td>
                                             <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_lunch">  
                                             <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">   -->
@@ -475,7 +475,7 @@
                                             <!-- Activity type food type -->
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="activity_type[]" id="activity_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['activity_type'];?>">
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <input readonly type="text" class="form-control quantity" name="meals_type[]" id="meals_type<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['meal_type'];?>">  
@@ -528,10 +528,10 @@
                         </div> 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <table border="1" class="table table-bordered" id="edit_table3">
+                                <table border="1" class="table table-bordered" style="width:100%" id="edit_table3">
                                     <colgroup>
-                                        <col span="1" style="width: 15%;">
-                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 50%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
@@ -541,19 +541,19 @@
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
-                                        <tr>
-                                            <th>Activity Type</th>
-                                            <th>Start district</th>
-                                            <th>Start Place</th>
-                                            <th>Start Time</th>
-                                            <th>Distance</th>
-                                            <th>End district</th>
-                                            <th>End Place</th>
-                                            <th>End Time</th>
-                                            <th>Action</th>
+                                        <tr style="background:#a19f9f; color:white;">
+                                            <th style="width:10%;">Activity Type</th>
+                                            <th style="width:10%;">Start district</th>
+                                            <th style="width:10%;">Start Place</th>
+                                            <th style="width:10%;">Start Time</th>
+                                            <th style="width:10%;">Distance</th>
+                                            <th style="width:10%;">End district</th>
+                                            <th style="width:10%;">End Place</th>
+                                            <th style="width:10%;">End Time</th>
+                                            <th style="width:10%;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="for_row_set">
                                         <?php $i=1;?>
                                         <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
                                             if($add_more_day_to_day_program_info['meal_type'] == 'after_dinner'){ ?>
@@ -565,7 +565,7 @@
                                                     <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
-                                                <input type="text" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
                                             <td>
                                                 <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
@@ -607,7 +607,7 @@
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['end_time'];?>"></td>
                                             <td>
-                                                <a onclick="return confirm('Are You Sure You Want To Delete This Record? ')" href="<?php echo $module_url_path;?>/add_more_delete/<?php echo $add_more_day_to_day_program_info['id']; ?>" title="delete"><button value="<?php echo $add_more_day_to_day_program_info['id']; ?>" class="btn btn-primary delete_instruction">Delete</button></a>
+                                                <a href="<?php echo $module_url_path;?>/add_more_delete_dinner/<?php echo $add_more_day_to_day_program_info['id']; ?>" title="delete"><button value="<?php echo $add_more_day_to_day_program_info['id']; ?>" class="btn btn-primary dinner_delete_instruction">Delete</button></a>
                                             </td>
                                             <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_dinner">  
                                             <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  -->

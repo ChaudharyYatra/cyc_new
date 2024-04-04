@@ -1159,7 +1159,7 @@ class Daily_program_data extends CI_Controller {
         return true; 
     }
 
-    public function lunch_add_more_delete()
+    public function add_more_delete_lunch()
     {
         $id  = $this->input->post('request_id');
 
@@ -1187,15 +1187,14 @@ class Daily_program_data extends CI_Controller {
         }
         else
         {
-           
-               $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
         }
         redirect($this->module_url_path.'/index');  
 
         return true; 
     }
 
-    public function dinner_add_more_delete()
+    public function add_more_delete_dinner()
     {
         $id  = $this->input->post('request_id');
 
@@ -1223,8 +1222,7 @@ class Daily_program_data extends CI_Controller {
         }
         else
         {
-           
-               $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
         }
         redirect($this->module_url_path.'/index');  
 
