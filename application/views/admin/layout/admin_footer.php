@@ -4787,7 +4787,31 @@ $('#add_state').validate({ // initialize the plugin
         state_id: {
             required: true,
         },
+        district_id: {
+            required: true,
+        },
         city_name: {
+            required: true,
+        },
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district_id: {
+            required: true,
+        },
+        city_name: {
+            required: true,
+        },
+        country_id: {
+            required: true,
+        },
+        state_id: {
+            required: true,
+        },
+        district_id: {
             required: true,
         }
     },
@@ -4799,8 +4823,32 @@ $('#add_state').validate({ // initialize the plugin
         state_id : {
             required : "Please enter state name",
         },
+        district_id : {
+            required : "Please enter district name",
+        },
         city_name : {
             required : "Please enter city name",
+        },
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please enter state name",
+        },
+        district_id : {
+            required : "Please enter district name",
+        },
+        city_name : {
+            required : "Please enter city name",
+        },
+        country_id : {
+            required : "Please Select country",
+        },
+        state_id : {
+            required : "Please enter state name",
+        },
+        district_id : {
+            required : "Please enter district name",
         }
     }
 });
@@ -4825,6 +4873,9 @@ $('#edit_state').validate({ // initialize the plugin
         state_id: {
             required: true,
         },
+        district_id: {
+            required: true,
+        },
         city_name: {
             required: true,
         }
@@ -4837,6 +4888,9 @@ $('#edit_state').validate({ // initialize the plugin
         },
         state_id : {
             required : "Please enter state name",
+        },
+        district_id : {
+            required : "Please enter district name",
         },
         city_name : {
             required : "Please enter city name",
@@ -6886,6 +6940,37 @@ $('#add_hotel').validate({ // initialize the plugin
  });
 </script>
 
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#state_id').change(function(){
+      var did = $(this).val();
+    //   alert(did); 
+      // AJAX request
+      $.ajax({
+        url:'<?=base_url()?>admin/city_master/get_district',
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#district_id').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){       
+             $('#district_id').append('<option value="'+data['id']+'">'+data['district']+'</option>');
+          });
+         
+        }
+     });
+   });
+ });
+</script>
+
 
 <script type='text/javascript'>
   // baseURL variable
@@ -8522,28 +8607,57 @@ $('#edit_train').validate({ // initialize the plugin
 
 <script>
     $(document).ready(function (){
-        // $(".if_ticket_yes_div").hide();
+        $(document).on("change",".ticket_cls",function(){
+            var currentDiv = $(this).closest(".add_row");
+            var ticket_cost = currentDiv.find(".if_ticket_yes_no");
 
-    $("#Yes").change(function () {
-        var tno = $("#Yes").val();
+        var tno = $(this).val();
         if(tno=='Yes')
         {
-            $(".if_ticket_yes_div").show();
-        }
-        else
-        {
-            $(".if_ticket_yes_div").hide();
-        }
-        });
-        $("#No").change(function () {
-        var tno = $("#No").val();
-        if(tno=='No')
-        {
-            $(".if_ticket_yes_div").hide();
+            currentDiv.find(".if_ticket_yes_div").show();
         }
         else if(tno=='No')
         {
-            $(".if_ticket_yes_div").show();
+            currentDiv.find(".if_ticket_yes_div").hide();
+        }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function (){
+        $(document).on("change",".municipal_cls",function(){
+            var currentDiv = $(this).closest(".add_row");
+            var ticket_cost = currentDiv.find(".if_municipal_yes_no");
+
+        var tno = $(this).val();
+        if(tno=='Yes')
+        {
+            currentDiv.find(".if_municipal_tax_yes_div").show();
+        }
+        else if(tno=='No')
+        {
+            currentDiv.find(".if_municipal_tax_yes_div").hide();
+        }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function (){
+        $(document).on("change",".parking_cls",function(){
+            var currentDiv = $(this).closest(".add_row");
+            var ticket_cost = currentDiv.find(".if_packing_yes_no");
+
+        var tno = $(this).val();
+        if(tno=='Yes')
+        {
+            currentDiv.find(".if_parking_cost_yes_div").show();
+        }
+        else if(tno=='No')
+        {
+            currentDiv.find(".if_parking_cost_yes_div").hide();
         }
         });
     });
@@ -8551,40 +8665,45 @@ $('#edit_train').validate({ // initialize the plugin
 
 <script>
 
-    var i=1;
+    var p=1;
     
     $('#add_more_place').click(function() {
         $('.select2').select2()
        // alert('hhhh');
-            i++;
+            p++;
+        alert(p);
+        // var selectedDays = [];
+        // $('#open_days' + p + ' option:selected').each(function() {
+        //     selectedDays.push($(this).val());
+        // });
             
-        var structure = $(`<div class="row mb-4" id="new_row`+i+`" style="border: 1px solid #959595;padding: 1rem;"> 
+        var structure = $(`<div class="row mb-4 add_row" id="new_row`+p+`" style="border: 1px solid #959595;padding: 1rem;"> 
 
                         <div class="col-md-3">
                         <div class="form-group">
-                            <label>Place Name</label>
-                            <input type="text" class="form-control" name="Place_name[]" id="Place_name`+i+`" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                            <label>Visiting Place Name</label>
+                            <input type="text" class="form-control" name="Place_name[]" id="Place_name`+p+`" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^A-Za-z]/g, '');" required="required">
                         </div>
                         </div>
 
                         <div class="col-md-2">
                         <div class="form-group">
                             <label>Opening Time</label>
-                            <input type="time" class="form-control" name="opening_time[]" id="opening_time`+i+`" placeholder="Enter opening time" required="required">
+                            <input type="time" class="form-control" name="opening_time[]" id="opening_time`+p+`" placeholder="Enter opening time" required="required">
                         </div>
                         </div>
 
                         <div class="col-md-2">
                         <div class="form-group">
                             <label>Closing Time</label>
-                            <input type="time" class="form-control" name="closing_time[]" id="closing_time`+i+`" placeholder="Enter closing time" required="required">
+                            <input type="time" class="form-control" name="closing_time[]" id="closing_time`+p+`" placeholder="Enter closing time" required="required">
                         </div>
                         </div>
                         
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                         <div class="form-group">
                             <label>Open Days</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="open_days[]" id="open_days`+i+`" required="required">
+                            <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="open_days`+p+`[]" id="open_days`+p+`" required="required">
                                 <option value="">Select </option>
                                 <option value="1">Sunday</option>
                                 <option value="2">Monday</option>
@@ -8593,40 +8712,73 @@ $('#edit_train').validate({ // initialize the plugin
                                 <option value="5">Thursday</option>
                                 <option value="6">Friday</option>
                                 <option value="7">Saturday</option>
+                                <option value="8">All</option>
                             </select>
                         </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                         <label>Is It Entry Ticket Cost </span></label>
                         <div class="form-group">
-                            <input type="radio" id="Yes`+i+`" class="ticket_yes_no`+i+`" name="ticket_yes_no[]" value="Yes" > &nbsp;
+                            <input type="radio" id="Yes`+p+`" name="ticket_yes_no`+p+`" value="Yes" class="ticket_cls"> &nbsp;
                             <label>Yes</label>  &nbsp; &nbsp; 
-                            <input type="radio" id="No`+i+`" class="ticket_yes_no`+i+`" name="ticket_yes_no[]" value="No"> &nbsp;
+                            <input type="radio" id="No`+p+`" name="ticket_yes_no`+p+`" value="No" class="ticket_cls"> &nbsp;
                             <label>No</label><br>
                         </div>
                         </div>
 
-                        <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Required Time will it take to see this place</label>
-                            <input type="text" class="form-control" name="req_time[]" id="req_time`+i+`" placeholder="Enter time" required="required">
-                        </div>
-                        </div>
-
-                        
-                        
-                        <div class="col-md-2 if_ticket_yes_div">
+                        <div class="col-md-3 if_ticket_yes_div">
                             <div class="form-group">
                                 <label>Enter Ticket Cost </span></label>
-                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+i+`" placeholder="Enter cost" required="required" />
+                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+p+`" placeholder="Enter cost" required="required" />
                             </div>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
+                      <label>Is It Municipal Tax </span></label>
+                      <div class="form-group">
+                          <input type="radio" id="Manicipal_Yes`+p+`" name="municipal_tax_yes_no`+p+`" value="Yes" class="municipal_cls"> &nbsp;
+                          <label>Yes</label>  &nbsp; &nbsp; 
+                          <input type="radio" id="Manicipal_No`+p+`" name="municipal_tax_yes_no`+p+`" value="No" class="municipal_cls"> &nbsp;
+                          <label>No</label><br>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 if_municipal_tax_yes_div">
+                      <div class="form-group">
+                          <label>Municipal Tax Amount </span></label>
+                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt`+p+`" placeholder="Enter amount" required="required" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label>Is It Parking Cost </span></label>
+                      <div class="form-group">
+                          <input type="radio" id="parking_cost_Yes`+p+`" name="parking_cost_yes_no`+p+`" value="Yes" class="parking_cls"> &nbsp;
+                          <label>Yes</label>  &nbsp; &nbsp; 
+                          <input type="radio" id="parking_cost_No`+p+`" name="parking_cost_yes_no`+p+`" value="No" class="parking_cls"> &nbsp;
+                          <label>No</label><br>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3 if_parking_cost_yes_div">
+                      <div class="form-group">
+                          <label>Parking Cost</span></label>
+                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost`+p+`" placeholder="Enter cost" required="required" />
+                      </div>
+                    </div>
+
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Required Time will it take to see this place</label>
+                            <input type="text" class="form-control" name="req_time[]" id="req_time`+p+`" placeholder="Enter time" required="required">
+                        </div>
+                        </div>
+
+                        <div class="col-md-5">
                         <div class="form-group">
                             <label>Allowed Vehicle Types</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select Vehicle Types" style="width: 100%;" name="allow_vehicle_types[]" id="allow_vehicle_types`+i+`" required="required">
+                            <select class="select2" multiple="multiple" data-placeholder="Select Vehicle Types" style="width: 100%;" name="allow_vehicle_types`+p+`[]" id="allow_vehicle_types`+p+`" required="required">
                                 <option value="">Select types</option>
                                 <?php
                                 foreach($vehicle_type as $vehicle_type_info) 
@@ -8639,42 +8791,55 @@ $('#edit_train').validate({ // initialize the plugin
                         </div>
 
                         <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Nearest Railway Station Name</label>
-                            <input type="text" class="form-control" name="railway_station_name[]" id="railway_station_name`+i+`" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                        </div>
-                        </div>
+                      <div class="form-group">
+                        <label>Nearest Railway Station Name</label>
+                        <select class="select_css" name="railway_station_name[]" id="railway_station_name`+p+`" required="required">
+                        <option value="">Select Railway Station Name</option>
+                              <?php
+                                foreach($city_table as $city_table_info) 
+                                { 
+                              ?>
+                          <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                              <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Nearest Airport Name</label>
+                        <select class="select_css" name="airport_name[]" id="airport_name`+p+`" required="required">
+                        <option value="">Select Airport Name</option>
+                              <?php
+                                foreach($city_table as $city_table_info) 
+                                { 
+                              ?>
+                          <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                              <?php } ?>
+                        </select>
+                      </div>
+                    </div>
 
                         <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
                             <div class="form-group">
                                 <label></label>
-                                <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                                <button type="button" name="remove" id="`+p+`" class="btn btn-danger btn_remove">X</button>
                             </div>
                         </div>
                     </div>`);
     $('#main_row').append(structure); 
-    $('.select2').select2()
+    $('.select2').select2() 
 
-    // $(".if_ticket_yes_div").hide();
-        
-        $('input[name="ticket_yes_no[]"]').change(function() {
-            if ($(this).val() === 'Yes') {
-                element.closest('.if_ticket_yes_div').show(error);
-                $(".if_ticket_yes_div").show();
-                $('#ticket_cost' + i).prop('required', true);
-            } else {
-                $(".if_ticket_yes_div").hide();
-                $('#ticket_cost' + i).prop('required', false);
-            }
-        });
+
+        $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
 
 });
 
 
-$(document).on('click', '.btn_remove', function(){  
-           var button_id = $(this).attr("id");   
-           $('#new_row'+button_id+'').remove();  
-      });
+
 
 </script>
 
@@ -8686,18 +8851,36 @@ $(document).on('click', '.btn_remove', function(){
 
             var structure = $(`
                 <tr id="new_row${i}">
-                    <td>
-                        <select class="form-control" style="width: 100%;" name="room_select" required="required">
+                    <td class="hotel_room_rate">
+                        <select class="form-control" style="width: 100%;" name="select_type[]" id="select_type`+i+`" required="required">
+                        <option value="">Select type</option>
+                                <?php
+                                foreach($hotel_type as $hotel_type_info) 
+                                { 
+                                ?>
+                                <option value="<?php echo $hotel_type_info['id'];?>"><?php echo $hotel_type_info['hotel_type_name'];?></option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td class="hotel_room_rate">
+                        <select class="form-control" style="width: 100%;" name="room_select[]" required="required">
                             <option value="">Select Room Type</option>
-                            <option value="1">Sunday</option>
-                            <option value="2">Monday</option>
+                                <?php
+                                foreach($room_type as $room_type_info) 
+                                { 
+                                ?>
+                                <option value="<?php echo $room_type_info['id'];?>"><?php echo $room_type_info['room_name'];?></option>
+                                <?php } ?>
                         </select>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="room_rate" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        <input type="text" class="form-control" name="room_rate[]" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="room_total_person" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        <input type="text" class="form-control" name="room_total_person[]" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td class="hotel_room_rate">
+                        <input type="text" class="form-control" name="extra_bed_charges[]" placeholder="Enter extra Bed Charges" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
@@ -8718,10 +8901,13 @@ $(document).ready(function () {
 
 $('#add_citywise_place_master').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
+    $error.appendTo($element.closest("div,td"));
   },
     rules: {
         "select_district": {
+            required: true,
+        },
+        "select_city": {
             required: true,
         },
         "approximate_hall_rate": {
@@ -8766,10 +8952,13 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
             required: true,
         }
     },
-
+    
     messages :{
         "select_district": {
             required : "Please select district",
+        },
+        "select_city": {
+            required : "Please select city",
         },
         "approximate_hall_rate": {
             required : "Please enter approximate hall rate",
@@ -8814,6 +9003,80 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         },
     }
 });
+
+
+$('[name^="select_type"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select expense head",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+// $('[name^="select_type"]').each(function() {
+//         // alert("cccccc");
+//         $(this).rules('add', {
+//             required: true,
+//             // minlength: 2,
+//             messages: {
+//                 required: "Select type",
+//                 // minlength: "Enter at least {0} characters",
+//             }
+//         })
+//     });
+
+    $('[name^="room_select"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select room type",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+    
+    $('[name^="room_rate"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter Room rate",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="room_total_person"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter Room total person",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="extra_bed_charges"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter Extra bed charges",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
 
 });
 
@@ -10971,6 +11234,7 @@ $(document).on("click", ".remove-row", function() {
     $(document).ready(function() {
         // Add more rows when the "Add More" button is clicked
         $("#travel_add_more").click(function() {
+            // alert('ggggggggg');
             var expence = $(this).attr('travel_attr_add_id');
            
             var i= parseInt(expence)+parseInt(1);
@@ -10986,7 +11250,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -10996,17 +11260,14 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11016,11 +11277,8 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
@@ -11298,7 +11556,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11308,17 +11566,14 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11328,11 +11583,8 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
@@ -11373,7 +11625,7 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11383,17 +11635,14 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point`+i+`">
+                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -11403,11 +11652,8 @@ $(document).on("click", ".remove-row", function() {
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place`+i+`">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
@@ -11621,3 +11867,310 @@ $(document).on('click', '.btn_remove', function(){
       });
 
 </script>
+
+
+<!-- citywise place master district wise show select -->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    // district change
+    $('#select_district').change(function(){
+      var did = $(this).val();
+    //   alert(did); 
+      // AJAX request
+      $.ajax({
+        url:'<?=base_url()?>admin/citywise_place_master/get_city',
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#select_city').find('option').not(':first').remove();
+       
+          $.each(response,function(index,data){       
+             $('#select_city').append('<option value="'+data['id']+'">'+data['city_name']+'</option>');
+          });
+         
+        }
+     });
+   });
+ });
+</script>
+<!-- citywise place master district wise show select -->
+
+<!-- jquery validation on add Room Type  -->
+<script>
+$(document).ready(function () {
+
+$('#add_room_type').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        room_type: {
+            required: true,
+        }
+    },
+
+    messages :{
+        room_type : {
+            required : "Please enter room type",
+        },
+    }
+});
+
+});
+
+</script>
+<!-- jquery validation on add Room Type -->
+
+<!-- jquery validation on edit Room Type -->
+<script>
+$(document).ready(function () {
+
+$('#edit_room_type').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        room_type: {
+            required: true,
+        }
+    },
+
+    messages :{
+        room_type : {
+            required : "Please enter room type",
+        },
+    }
+});
+
+});
+
+</script>
+<!-- jquery validation on edits Room Type -->
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+
+        // Event listener for dynamically added "Add More" button
+        $('#add_more_place').on('click', function() {
+            var newField = $('#container .col-md-3').first().clone();
+            newField.find('select').val('').select2(); // Reset cloned select field
+            $('#container').append(newField);
+        });
+
+        // Event listener for select box change
+        $(document).on('change', '.select2', function() {
+            if ($(this).val() && $(this).val().indexOf("8") !== -1) {
+                $(this).val(["1", "2", "3", "4", "5", "6", "7"]).trigger('change');
+            }
+        });
+    });
+</script>
+
+
+<!-- -------------------------- -->
+
+
+<!-- state master add more  -->
+<script>
+        var i=1;
+    $('#add_more_state').click(function() {
+       // alert('hhhh');
+            i++;
+    var structure = $(`<div class="row" id="new_row`+i+`">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Vehicle type</label>
+                                    <select class="form-control" name="vehicle_type[]" id="vehicle_type`+i+`">
+                                    <option value="">Select vehicle type</option>
+                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tax Amount</label>
+                                    <input type="text" class="form-control" name="tax_amount[]" id="tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>How Many Days</label>
+                                    <input type="text" class="form-control" name="how_many_days[]" id="how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+        
+                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                                <div class="form-group">
+                                <label></label>
+                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                                </div>
+                            </div>  
+                        </div> `);
+$('#main_row_for_state_master').append(structure); 
+
+});
+
+
+$(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
+
+</script>
+
+<script>
+  $(".state_delete_instruction").click(function() { 
+   
+     var delete_add_more_state_id =  $(this).attr('value');
+    //  alert(delete_add_more_state_id);
+     if(delete_add_more_state_id !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>admin/state/add_more_delete',
+                  data: {
+                      request_id: delete_add_more_state_id
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Record deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Record deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+
+
+<script>
+        var i=1;
+    $('#edit_add_more_state').click(function() {
+       // alert('hhhh');
+            i++;
+    var structure = $(`<div class="row" id="new_row`+i+`">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Vehicle type</label>
+                                    <select class="form-control" name="edit_vehicle_type[]" id="edit_vehicle_type`+i+`">
+                                    <option value="">Select vehicle type</option>
+                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tax Amount</label>
+                                    <input type="text" class="form-control" name="edit_tax_amount[]" id="edit_tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>How Many Days</label>
+                                    <input type="text" class="form-control" name="edit_how_many_days[]" id="edit_how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                </div>
+                            </div>
+        
+                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
+                                <div class="form-group">
+                                <label></label>
+                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                                </div>
+                            </div>  
+                        </div> `);
+$('#edit_main_row_for_state_master').append(structure); 
+
+});
+
+
+$(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
+
+</script>
+<!-- state master add more  -->
+
+
+<!-- district wise citywise place master show select -->
+<script>
+    var baseURL= "<?php echo base_url();?>";
+    
+    $(document).ready(function(){
+    
+        // district change
+        $(document).on("change",".select_district",function(){
+            var district_id = $(this).val();
+            var startPointDropdown = $(this).closest('tr').find('.start_point');
+        $.ajax({
+            url:'<?=base_url()?>admin/daily_program_data/get_district_place',
+            method: 'post',
+            data: {did: district_id},
+            dataType: 'json',
+            success: function(response){
+
+            startPointDropdown.find('option').not(':first').remove();
+            $.each(response,function(index,data){   
+                startPointDropdown.append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
+            });
+            
+            }
+        });
+        });
+    });
+</script>
+
+<script>
+    var baseURL= "<?php echo base_url();?>";
+    
+    $(document).ready(function(){
+    
+        // district change
+        $(document).on("change",".select_end_district",function(){
+            var district_id = $(this).val();
+            var startPointDropdown = $(this).closest('tr').find('.select_to_place');
+        $.ajax({
+            url:'<?=base_url()?>admin/daily_program_data/get_end_district_place',
+            method: 'post',
+            data: {did: district_id},
+            dataType: 'json',
+            success: function(response){
+
+            startPointDropdown.find('option').not(':first').remove();
+            $.each(response,function(index,data){   
+                startPointDropdown.append('<option value="'+data['id']+'">'+data['place_name']+'</option>');
+            });
+            
+            }
+        });
+        });
+    });
+</script>
+<!-- district wise citywise place master show select -->
+

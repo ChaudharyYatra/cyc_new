@@ -23,11 +23,12 @@ class City_master extends CI_Controller{
         // $this->db->where('is_deleted','no');
         // $arr_data = $this->master_model->getRecords('state');
 
-        $fields = "city.*,country.country_name,.state_table.state_name";
+        $fields = "city.*,country.country_name,.state_table.state_name,district_table.district";
         $this->db->order_by('city.id','asc');        
         $this->db->where('city.is_deleted','no');        
         $this->db->join("country", 'city.country_id=country.id','left');
         $this->db->join("state_table", 'city.state_id=state_table.id','left');
+        $this->db->join("district_table", 'city.district_id=district_table.id','left');
         $arr_data = $this->master_model->getRecords('city',array('city.is_deleted'=>'no'),$fields);
 
         $this->arr_view_data['listing_page']    = 'yes';
@@ -52,10 +53,12 @@ class City_master extends CI_Controller{
             {
                 $country_id = $this->input->post('country_id');
                 $state_id = $this->input->post('state_id');
+                $district_id = $this->input->post('district_id');
                 $city_name = $this->input->post('city_name');
                 $arr_insert = array(
                     'country_id'   =>   $country_id,
                     'state_id'   =>   $state_id,
+                    'district_id'   =>   $district_id,
                     'city_name'   =>   $city_name
                     
                 );
@@ -65,6 +68,7 @@ class City_master extends CI_Controller{
                 $this->db->where('is_deleted','no');
                 $this->db->where('is_active','yes');
                 $city_exist_data = $this->master_model->getRecords('city');
+
                 if(count($city_exist_data) > 0)
                 {
                     $this->session->set_flashdata('error_message',"City".$city_name." Already Exist.");
@@ -207,6 +211,7 @@ class City_master extends CI_Controller{
                 {
                     $country_id = $this->input->post('country_id');
                     $state_id = $this->input->post('state_id');
+                    $district_id = $this->input->post('district_id');
                     $city_name = $this->input->post('city_name');
 
                    $this->db->where('city_name',$city_name);
@@ -222,6 +227,7 @@ class City_master extends CI_Controller{
                    $arr_update = array(
                     'country_id'   =>   $country_id,
                     'state_id'   =>   $state_id,
+                    'district_id'   =>   $district_id,
                     'city_name'   =>   $city_name
                     
                     );
@@ -261,9 +267,14 @@ class City_master extends CI_Controller{
         $this->db->where('is_active','yes');
         $state_name_data = $this->master_model->getRecords('state_table');
 
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $district_name_data = $this->master_model->getRecords('district_table');
+
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['city_arr_data']        = $city_arr_data;
         $this->arr_view_data['state_name_data']        = $state_name_data;
+        $this->arr_view_data['district_name_data']        = $district_name_data;
         $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['country_data']    = $country_data;
@@ -281,6 +292,18 @@ class City_master extends CI_Controller{
                         $this->db->where('is_active','yes');
                         $this->db->where('country_id',$state_data);   
                         $data = $this->master_model->getRecords('state_table');
+        echo json_encode($data);
+    }
+
+    public function get_district(){ 
+        // POST data 
+        // $all_b=array();
+       $state_data = $this->input->post('did');
+        // print_r($boarding_office_location); die;
+                        $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        $this->db->where('state_id',$state_data);   
+                        $data = $this->master_model->getRecords('district_table');
         echo json_encode($data);
     }
    

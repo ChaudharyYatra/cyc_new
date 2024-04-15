@@ -189,7 +189,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -199,17 +199,14 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css start_point" name="start_point[]" id="start_point">
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -219,11 +216,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>
@@ -342,7 +336,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -352,17 +346,17 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css start_point" name="start_point[]" id="start_point" >
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
+                                                    <!-- <?php //foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                        <option value="<?php //echo $citywise_place_master_info['id'];?>"><?php //echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php //} ?> -->
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -372,11 +366,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>
@@ -493,7 +484,7 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
+                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -503,17 +494,17 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
+                                                <select class="select_css start_point" name="start_point[]" id="start_point">
                                                     <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
+                                                    <!-- <?php //foreach($citywise_other_add_more as $citywise_other_add_more_info){ ?> 
+                                                        <option value="<?php //echo $citywise_other_add_more_info['id'];?>"><?php //echo $citywise_other_add_more_info['place_name'];?></option>
+                                                    <?php //} ?> -->
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"></td>
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
+                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
                                                     <option value="">Select </option>
                                                     <?php
                                                     foreach($district_data as $district_info){ 
@@ -523,11 +514,8 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
+                                                <select class="select_css select_to_place" name="to_place[]" id="to_place">
                                                     <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>"></td>

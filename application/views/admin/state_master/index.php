@@ -74,9 +74,8 @@
                         <?php } ?>
                     </td>
                     <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];?>/<?php echo $info['state_name'];?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
-                          
                     </td>
                   </tr>
                   <?php $i++; } ?>

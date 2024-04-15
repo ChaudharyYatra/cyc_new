@@ -48,10 +48,23 @@
                                 </select>
                             </div>
                       </div>
+
+                      <!-- <div class="col-md-6">
+                        <div class="form-group">
+                        <label>State</label>
+                            <select class="form-control" name="state_name" id="state_name">
+                            <option value="">Select State</option>
+                            <?php //foreach($state_table as $state_table_value){ ?> 
+                                <option value="<?php //echo $state_table_value['id'];?>"><?php //echo $state_table_value['state_name'];?></option>
+                            <?php //} ?>
+                            </select>
+                        </div>
+                      </div> -->
+
                       <div class="col-md-6">
                         <div class="form-group">
                             <label>State</label>
-                            <input type="text" class="form-control" name="state_name" id="state_name" placeholder="Enter State Name">
+                            <input type="text" class="form-control" name="state_name" id="state_name" placeholder="Enter State Name" required="required">
                         </div>
                       </div>
                     </div>
@@ -60,80 +73,100 @@
                       <div class="col-md-6">
                             <div class="form-group">
                               <label>State Permit Rate</label>
-                              <input type="text" class="form-control" name="state_permit_rate" id="state_permit_rate" placeholder="Enter State Permit rate">
+                              <input type="text" class="form-control" name="state_permit_rate" id="state_permit_rate" placeholder="Enter State Permit rate" required="required">
                             </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                             <label>All India Permit Rate</label>
-                            <input type="text" class="form-control" name="all_india_permit_rate" id="all_india_permit_rate" placeholder="Enter All India Permit Rate">
+                            <input type="text" class="form-control" name="all_india_permit_rate" id="all_india_permit_rate" placeholder="Enter All India Permit Rate" required="required">
                         </div>
                       </div>
                     </div>
 
-                    <div class="row" id="main_row_tax_type">
-                      <!-- <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Select Tax Type</label>
-                          <select class="form-control" style="width: 100%;" name="tax_type[]" id="tax_type" required="required">
-                            <option value="">Select Tax Type</option>
-                            <option value="Daily">Daily</option>
-                            <option value="Weekly">Weekly</option>
-                            <option value="Monthly">Monthly</option>
-                            <option value="Yearly">Yearly</option>
-                          </select>
-                        </div>
-                      </div> -->
+                      <div class="row" id="main_row_tax_type">
 
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Daily Tax Rate</label><br>
-                          <input type="text" class="form-control" name="daily_tax_rate" id="daily_tax_rate" placeholder="Enter Daily Tax Rate">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Weekly Daily Tax Rate</label><br>
-                          <input type="text" class="form-control" name="weekly_tax_rate" id="weekly_tax_rate" placeholder="Enter Weekly Tax Rate">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Monthly Tax Rate</label><br>
-                          <input type="text" class="form-control" name="monthly_tax_rate" id="monthly_tax_rate" placeholder="Enter Monthly Tax Rate">
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label>Yearly Tax Rate</label><br>
-                          <input type="text" class="form-control" name="yearly_tax_rate" id="yearly_tax_rate" placeholder="Enter Yearly Tax Rate">
-                        </div>
-                      </div>
 
-                      <!-- <div class="col-md-4 mt-4">
-                        <div class="form-group">
-                            <label></label>
-                            <button type="button" class="btn btn-primary" name="submit" value="add_more_tax" name="add_more_tax" id="add_more_tax">Add More</button>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Daily Tax Rate</label><br>
+                            <input type="text" class="form-control" name="daily_tax_rate" id="daily_tax_rate" placeholder="Enter Daily Tax Rate" required="required">
+                          </div>
                         </div>
-                      </div> -->
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Weekly Daily Tax Rate</label><br>
+                            <input type="text" class="form-control" name="weekly_tax_rate" id="weekly_tax_rate" placeholder="Enter Weekly Tax Rate" required="required">
+                          </div>
+                        </div>
 
-                    </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Monthly Tax Rate</label><br>
+                            <input type="text" class="form-control" name="monthly_tax_rate" id="monthly_tax_rate" placeholder="Enter Monthly Tax Rate" required="required">
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Yearly Tax Rate</label><br>
+                            <input type="text" class="form-control" name="yearly_tax_rate" id="yearly_tax_rate" placeholder="Enter Yearly Tax Rate" required="required">
+                          </div>
+                        </div>
+                                      
+
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-12" id="main_row_for_state_master">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                    <label>Vehicle type</label>
+                                        <select class="form-control" name="vehicle_type[]" id="vehicle_type" required="required">
+                                        <option value="">Select vehicle type</option>
+                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                        <?php } ?>
+                                        </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label>Tax Amount</label>
+                                          <input type="text" class="form-control" name="tax_amount[]" id="tax_amount" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label>How Many Days</label>
+                                          <input type="text" class="form-control" name="how_many_days[]" id="how_many_days" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> 
+                          </div>
+
+                       
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
+                <button type="button" class="btn btn-success" name="submit" value="add_more_state" id="add_more_state">Add More</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
-				  <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button></a>
+				          <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button></a>
                 </div>
               </form>
             </div>
             <!-- /.card -->
             </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
+              <!--/.col (left) -->
+                <!-- right column -->
+                <div class="col-md-6">
 
-          </div>
-          <!--/.col (right) -->
+                </div>
+                <!--/.col (right) -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->

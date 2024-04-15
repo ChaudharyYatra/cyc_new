@@ -530,7 +530,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>admin/room_type/index" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Room Type</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin/expense_type/index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>

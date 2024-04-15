@@ -250,8 +250,8 @@ class Daily_program_data extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
-        //  print_r($citywise_place_master); die;
+        $citywise_other_add_more = $this->master_model->getRecords('citywise_other_add_more');
+        //  print_r($citywise_other_add_more); die;
 
         $record = array();
         $fields = "district_table.*";
@@ -267,7 +267,7 @@ class Daily_program_data extends CI_Controller {
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['tour_creation']        = $tour_creation;
          $this->arr_view_data['food_menu_master']        = $food_menu_master;
-         $this->arr_view_data['citywise_place_master']        = $citywise_place_master;
+         $this->arr_view_data['citywise_other_add_more']        = $citywise_other_add_more;
          $this->arr_view_data['district_data']        = $district_data;
         //  $this->arr_view_data['expense_type_data']        = $expense_type_data;
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
@@ -1478,6 +1478,33 @@ class Daily_program_data extends CI_Controller {
                         $this->db->where('package_id',$district_data);   
                         $data = $this->master_model->getRecords('package_date');
         echo json_encode($data);
+}
+
+
+public function get_district_place(){ 
+    // POST data 
+    // $all_b=array();
+   $places_data = $this->input->post('did');
+    // print_r($places_data); die;
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('select_district',$places_data);   
+                    $data = $this->master_model->getRecords('citywise_other_add_more');
+                    // print_r($data); die;
+    echo json_encode($data);
+}
+
+public function get_end_district_place(){ 
+    // POST data 
+    // $all_b=array();
+   $places_data = $this->input->post('did');
+    // print_r($places_data); die;
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('select_district',$places_data);   
+                    $data = $this->master_model->getRecords('citywise_other_add_more');
+                    // print_r($data); die;
+    echo json_encode($data);
 }
 
 
