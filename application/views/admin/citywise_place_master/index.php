@@ -34,7 +34,7 @@
                   <tr>
                     <th>SN</th>
                     <th>District</th>
-                    <th>Place Name</th>
+                    <th>City Name</th>
                     <th>Is Active?</th>
                     <th>Action</th>
                   </tr>
@@ -49,7 +49,7 @@
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['district'] ?></td>
-                    <td><?php echo $info['place_name'] ?></td>
+                    <td><?php echo $info['city_name'] ?></td>
                     <td>
                         <?php 
                         if($info['is_active']=='yes')
