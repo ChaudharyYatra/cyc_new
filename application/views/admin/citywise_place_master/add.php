@@ -203,7 +203,7 @@
                     <div class="col-md-3 if_ticket_yes_div">
                       <div class="form-group">
                           <label>Enter Ticket Cost </span></label>
-                          <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost" placeholder="Enter cost" required="required" />
+                          <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost" placeholder="Enter cost" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" />
                       </div>
                     </div>
 
@@ -220,7 +220,7 @@
                     <div class="col-md-3 if_municipal_tax_yes_div">
                       <div class="form-group">
                           <label>Municipal Tax Amount </span></label>
-                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt" placeholder="Enter amount" required="required" />
+                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt" placeholder="Enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" />
                       </div>
                     </div>
 
@@ -237,14 +237,15 @@
                     <div class="col-md-3 if_parking_cost_yes_div">
                       <div class="form-group">
                           <label>Parking Cost</span></label>
-                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost" placeholder="Enter cost" required="required" />
+                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost" placeholder="Enter cost" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" />
                       </div>
                     </div>
 
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Required Time will it take to see this place</label>
-                        <input type="text" class="form-control" name="req_time[]" id="req_time" placeholder="Enter time" required="required">
+                        <input type="text" class="form-control" name="req_time[]" id="req_time" placeholder="Enter time" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        <span class="text-danger">Only Enter in Minutes</span><br>
                       </div>
                     </div>
 

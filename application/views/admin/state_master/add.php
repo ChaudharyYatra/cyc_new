@@ -115,39 +115,43 @@
                         </div>
                                       
 
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-md-12" id="main_row_for_state_master">
-                                <div class="row">
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                    <label>Vehicle type</label>
-                                        <select class="form-control" name="vehicle_type[]" id="vehicle_type" required="required">
-                                        <option value="">Select vehicle type</option>
-                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
-                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
-                                        <?php } ?>
-                                        </select>
-                                    </div>
-                                  </div>
-
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>Tax Amount</label>
-                                          <input type="text" class="form-control" name="tax_amount[]" id="tax_amount" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                                      </div>
-                                  </div>
-
-                                  <div class="col-md-4">
-                                      <div class="form-group">
-                                          <label>How Many Days</label>
-                                          <input type="text" class="form-control" name="how_many_days[]" id="how_many_days" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div> 
-                          </div>
+                        <table class="table table-bordered" id="main_row_for_state_master">
+                        <colgroup>
+                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 25%;">
+                            <col span="1" style="width: 5%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="hotel_room_rate">Vehicle type</th>
+                                <th class="hotel_room_rate">Tax Amount</th>
+                                <th class="hotel_room_rate">How Many Days</th>
+                                <th class="hotel_room_rate">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="hotel_room_body">
+                            <tr>
+                                <td class="hotel_room_rate">
+                                  <select class="form-control" name="vehicle_type[]" id="vehicle_type" required="required">
+                                    <option value="">Select vehicle type</option>
+                                    <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                        <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                    <?php } ?>
+                                  </select>
+                                </td>
+                                <td class="hotel_room_rate">
+                                  <input type="text" class="form-control" name="tax_amount[]" id="tax_amount" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                </td>
+                                <td class="hotel_room_rate">
+                                  <input type="text" class="form-control" name="how_many_days[]" id="how_many_days" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                </td>
+                                <td class="hotel_room_rate">
+                                    <button type="button" class="btn btn-danger btn_remove" disabled>X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
                        
                 </div>

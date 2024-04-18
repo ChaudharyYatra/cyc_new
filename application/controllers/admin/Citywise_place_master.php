@@ -19,10 +19,11 @@ class Citywise_place_master extends CI_Controller{
 
 	public function index()
 	{  
-        $fields = "citywise_place_master.*,district_table.district";
+        $fields = "citywise_place_master.*,district_table.district,city.city_name";
         $this->db->order_by('id','desc');
         $this->db->where('citywise_place_master.is_deleted','no');
         $this->db->join("district_table", 'citywise_place_master.select_district=district_table.id','left');
+        $this->db->join("city", 'citywise_place_master.select_city=city.id','left');
         $arr_data = $this->master_model->getRecords('citywise_place_master',array('citywise_place_master.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
 

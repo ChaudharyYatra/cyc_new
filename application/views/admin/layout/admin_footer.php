@@ -4778,40 +4778,31 @@ $(document).ready(function () {
 
 $('#add_state').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
+    $error.appendTo($element.closest("div,td"));
   },
     rules: {
         country_id: {
             required: true,
         },
-        state_id: {
+        state_name: {
             required: true,
         },
-        district_id: {
+        state_permit_rate: {
             required: true,
         },
-        city_name: {
+        all_india_permit_rate: {
             required: true,
         },
-        country_id: {
+        daily_tax_rate: {
             required: true,
         },
-        state_id: {
+        weekly_tax_rate: {
             required: true,
         },
-        district_id: {
+        monthly_tax_rate: {
             required: true,
         },
-        city_name: {
-            required: true,
-        },
-        country_id: {
-            required: true,
-        },
-        state_id: {
-            required: true,
-        },
-        district_id: {
+        yearly_tax_rate: {
             required: true,
         }
     },
@@ -4820,38 +4811,65 @@ $('#add_state').validate({ // initialize the plugin
         country_id : {
             required : "Please Select country",
         },
-        state_id : {
+        state_name : {
             required : "Please enter state name",
         },
-        district_id : {
-            required : "Please enter district name",
+        state_permit_rate : {
+            required : "Please enter state permit rate",
         },
-        city_name : {
-            required : "Please enter city name",
+        all_india_permit_rate : {
+            required : "Please enter all india permit rate",
         },
-        country_id : {
-            required : "Please Select country",
+        daily_tax_rate : {
+            required : "Please enter daily tax rate",
         },
-        state_id : {
-            required : "Please enter state name",
+        weekly_tax_rate : {
+            required : "Please enter weekly tax rate",
         },
-        district_id : {
-            required : "Please enter district name",
+        monthly_tax_rate : {
+            required : "Please enter monthly tax rate",
         },
-        city_name : {
-            required : "Please enter city name",
-        },
-        country_id : {
-            required : "Please Select country",
-        },
-        state_id : {
-            required : "Please enter state name",
-        },
-        district_id : {
-            required : "Please enter district name",
+        yearly_tax_rate : {
+            required : "Please enter yearly tax rate",
         }
     }
 });
+
+$('[name^="vehicle_type"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select vehicle type",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="tax_amount"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter tax amount",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="how_many_days"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter how many days",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
 
 });
 
@@ -4864,40 +4882,98 @@ $(document).ready(function () {
 
 $('#edit_state').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
-    $error.appendTo($element.closest("div"));
+    $error.appendTo($element.closest("div,td"));
   },
     rules: {
         country_id: {
             required: true,
         },
-        state_id: {
+        state_name: {
             required: true,
         },
-        district_id: {
+        state_permit_rate: {
             required: true,
         },
-        city_name: {
+        all_india_permit_rate: {
+            required: true,
+        },
+        daily_tax_rate: {
+            required: true,
+        },
+        weekly_tax_rate: {
+            required: true,
+        },
+        monthly_tax_rate: {
+            required: true,
+        },
+        yearly_tax_rate: {
             required: true,
         }
-        
     },
 
     messages :{
         country_id : {
             required : "Please Select country",
         },
-        state_id : {
+        state_name : {
             required : "Please enter state name",
         },
-        district_id : {
-            required : "Please enter district name",
+        state_permit_rate : {
+            required : "Please enter state permit rate",
         },
-        city_name : {
-            required : "Please enter city name",
+        all_india_permit_rate : {
+            required : "Please enter all india permit rate",
+        },
+        daily_tax_rate : {
+            required : "Please enter daily tax rate",
+        },
+        weekly_tax_rate : {
+            required : "Please enter weekly tax rate",
+        },
+        monthly_tax_rate : {
+            required : "Please enter monthly tax rate",
+        },
+        yearly_tax_rate : {
+            required : "Please enter yearly tax rate",
         }
-    
     }
 });
+
+$('[name^="vehicle_type"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select vehicle type",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="tax_amount"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter tax amount",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
+
+    $('[name^="how_many_days"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Enter how many days",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
 
 });
 
@@ -8730,7 +8806,7 @@ $('#edit_train').validate({ // initialize the plugin
                         <div class="col-md-3 if_ticket_yes_div">
                             <div class="form-group">
                                 <label>Enter Ticket Cost </span></label>
-                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+p+`" placeholder="Enter cost" required="required" />
+                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+p+`" placeholder="Enter cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
                             </div>
                         </div>
 
@@ -8747,7 +8823,7 @@ $('#edit_train').validate({ // initialize the plugin
                     <div class="col-md-3 if_municipal_tax_yes_div">
                       <div class="form-group">
                           <label>Municipal Tax Amount </span></label>
-                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt`+p+`" placeholder="Enter amount" required="required" />
+                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt`+p+`" placeholder="Enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
                       </div>
                     </div>
 
@@ -8764,15 +8840,16 @@ $('#edit_train').validate({ // initialize the plugin
                     <div class="col-md-3 if_parking_cost_yes_div">
                       <div class="form-group">
                           <label>Parking Cost</span></label>
-                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost`+p+`" placeholder="Enter cost" required="required" />
+                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost`+p+`" placeholder="Enter cost" oninput="this.value = sthis.value.replace(/[^0-9]/g, '');" required="required" />
                       </div>
                     </div>
 
                         <div class="col-md-6">
                         <div class="form-group">
                             <label>Required Time will it take to see this place</label>
-                            <input type="text" class="form-control" name="req_time[]" id="req_time`+p+`" placeholder="Enter time" required="required">
-                        </div>
+                            <input type="text" class="form-control" name="req_time[]" id="req_time`+p+`" placeholder="Enter time" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                            <span class="text-danger">Only Enter in Minutes</span><br>
+                            </div>
                         </div>
 
                         <div class="col-md-5">
@@ -8837,10 +8914,6 @@ $('#edit_train').validate({ // initialize the plugin
       });
 
 });
-
-
-
-
 </script>
 
     <script>
@@ -8863,7 +8936,7 @@ $('#edit_train').validate({ // initialize the plugin
                         </select>
                     </td>
                     <td class="hotel_room_rate">
-                        <select class="form-control" style="width: 100%;" name="room_select[]" required="required">
+                        <select class="form-control" style="width: 100%;" name="room_select[]" id="room_select`+i+`" required="required">
                             <option value="">Select Room Type</option>
                                 <?php
                                 foreach($room_type as $room_type_info) 
@@ -8874,13 +8947,13 @@ $('#edit_train').validate({ // initialize the plugin
                         </select>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="room_rate[]" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                        <input type="text" class="form-control" name="room_rate[]" id="room_rate`+i+`" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="room_total_person[]" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                        <input type="text" class="form-control" name="room_total_person[]" id="room_total_person`+i+`" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
                     </td>
                     <td class="hotel_room_rate">
-                        <input type="text" class="form-control" name="extra_bed_charges[]" placeholder="Enter extra Bed Charges" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                        <input type="text" class="form-control" name="extra_bed_charges[]" id="extra_bed_charges`+i+`" placeholder="Enter extra Bed Charges" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
@@ -8898,7 +8971,6 @@ $('#edit_train').validate({ // initialize the plugin
 
 <script>
 $(document).ready(function () {
-
 $('#add_citywise_place_master').validate({ // initialize the plugin
     errorPlacement: function($error, $element) {
     $error.appendTo($element.closest("div,td"));
@@ -8922,17 +8994,12 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         "state_tax": {
             required: true,
         },
-
         "Place_name[]": {
-            required: true,
-        },
-        "open_days[]": {
             required: true,
         },
         "allow_vehicle_types[]": {
             required: true,
         },
-
         "opening_time[]": {
             required: true,
         },
@@ -8949,6 +9016,15 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
             required: true,
         },
         "railway_station_name[]": {
+            required: true,
+        },
+        "municipal_amt[]": {
+            required: true,
+        },
+        "parking_cost[]": {
+            required: true,
+        },
+        "airport_name[]": {
             required: true,
         }
     },
@@ -8972,17 +9048,12 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         "state_tax": {
             required : "Please enter state tax",
         },
-
         "Place_name[]": {
             required : "Please enter name",
-        },
-        "open_days[]": {
-            required : "Please select days",
         },
         "allow_vehicle_types[]": {
             required : "Please select vehicle types",
         },
-
         "opening_time[]": {
             required : "Please select opening time",
         },
@@ -9001,9 +9072,140 @@ $('#add_citywise_place_master').validate({ // initialize the plugin
         "railway_station_name[]": {
             required : "Please enter nearest railway station name",
         },
+        "municipal_amt[]": {
+            required : "Please enter municipal tax amount",
+        },
+        "parking_cost[]": {
+            required : "Please enter parking cost",
+        },
+        "airport_name[]": {
+            required : "Please enter airport name",
+        }
     }
 });
 
+// days validation code multiple add more
+    function addOpenDaysValidation(element) {
+        $(element).rules('add', {
+            required: true,
+            messages: {
+                required: "Select open days",
+            }
+        });
+    }
+    $('[name^="open_days"]').each(function() {
+        addOpenDaysValidation(this);
+    });
+    $('#add_citywise_place_master').on('click', '#add_more_place', function() {
+        // Your existing code to add new rows...
+
+        // Add validation for open_days in the newly added row
+        $('[name^="open_days"]').each(function() {
+            addOpenDaysValidation(this);
+        });
+    });
+// days validation code multiple add more
+
+// ticket yes no validation code multiple add more
+function addticket_yes_noValidation(element) {
+        $(element).rules('add', {
+            required: true,
+            messages: {
+                required: "Select Ticket Cost",
+            }
+        });
+    }
+    $('[name^="ticket_yes_no"]').each(function() {
+        addticket_yes_noValidation(this);
+    });
+    $('#add_citywise_place_master').on('click', '#add_more_place', function() {
+        // Your existing code to add new rows...
+
+        // Add validation for open_days in the newly added row
+        $('[name^="ticket_yes_no"]').each(function() {
+            addticket_yes_noValidation(this);
+        });
+    });
+// ticket yes no validation code multiple add more
+
+// municipal_tax_yes_no validation code multiple add more
+function addmunicipal_tax_yes_noValidation(element) {
+        $(element).rules('add', {
+            required: true,
+            messages: {
+                required: "Select municipal tax",
+            }
+        });
+    }
+    $('[name^="municipal_tax_yes_no"]').each(function() {
+        addmunicipal_tax_yes_noValidation(this);
+    });
+    $('#add_citywise_place_master').on('click', '#add_more_place', function() {
+        // Your existing code to add new rows...
+
+        // Add validation for open_days in the newly added row
+        $('[name^="municipal_tax_yes_no"]').each(function() {
+            addmunicipal_tax_yes_noValidation(this);
+        });
+    });
+// municipal_tax_yes_no validation code multiple add more
+
+// parking_cost_yes_no validation code multiple add more
+function addparking_cost_yes_no_noValidation(element) {
+        $(element).rules('add', {
+            required: true,
+            messages: {
+                required: "Select parking cost",
+            }
+        });
+    }
+    $('[name^="parking_cost_yes_no"]').each(function() {
+        addparking_cost_yes_no_noValidation(this);
+    });
+    $('#add_citywise_place_master').on('click', '#add_more_place', function() {
+        // Your existing code to add new rows...
+
+        // Add validation for open_days in the newly added row
+        $('[name^="parking_cost_yes_no"]').each(function() {
+            
+            addparking_cost_yes_no_noValidation(this);
+        });
+    });
+// parking_cost_yes_no validation code multiple add more
+
+// allow_vehicle_types validation code multiple add more
+function addallow_vehicle_types_noValidation(element) {
+        $(element).rules('add', {
+            required: true,
+            messages: {
+                required: "Select vehicle types",
+            }
+        });
+    }
+    $('[name^="allow_vehicle_types"]').each(function() {
+        addallow_vehicle_types_noValidation(this);
+    });
+    $('#add_citywise_place_master').on('click', '#add_more_place', function() {
+        // Your existing code to add new rows...
+
+        // Add validation for open_days in the newly added row
+        $('[name^="allow_vehicle_types"]').each(function() {
+            addallow_vehicle_types_noValidation(this);
+        });
+    });
+// allow_vehicle_types validation code multiple add more
+
+$('[name^="open_days"]').each(function() {
+        // alert("cccccc");
+        $(this).rules('add', {
+            required: true,
+            // minlength: 2,
+            messages: {
+                required: "Select select open days",
+                // minlength: "Enter at least {0} characters",
+            }
+        })
+    });
 
 $('[name^="select_type"]').each(function() {
         // alert("cccccc");
@@ -9011,23 +9213,11 @@ $('[name^="select_type"]').each(function() {
             required: true,
             // minlength: 2,
             messages: {
-                required: "Select expense head",
+                required: "Select select type",
                 // minlength: "Enter at least {0} characters",
             }
         })
     });
-
-// $('[name^="select_type"]').each(function() {
-//         // alert("cccccc");
-//         $(this).rules('add', {
-//             required: true,
-//             // minlength: 2,
-//             messages: {
-//                 required: "Select type",
-//                 // minlength: "Enter at least {0} characters",
-//             }
-//         })
-//     });
 
     $('[name^="room_select"]').each(function() {
         // alert("cccccc");
@@ -9076,8 +9266,6 @@ $('[name^="select_type"]').each(function() {
             }
         })
     });
-
-
 });
 
 </script>
@@ -11984,41 +12172,26 @@ $('#edit_room_type').validate({ // initialize the plugin
     $('#add_more_state').click(function() {
        // alert('hhhh');
             i++;
-    var structure = $(`<div class="row" id="new_row`+i+`">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label>Vehicle type</label>
-                                    <select class="form-control" name="vehicle_type[]" id="vehicle_type`+i+`">
-                                    <option value="">Select vehicle type</option>
-                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
-                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Tax Amount</label>
-                                    <input type="text" class="form-control" name="tax_amount[]" id="tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>How Many Days</label>
-                                    <input type="text" class="form-control" name="how_many_days[]" id="how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                                </div>
-                            </div>
-        
-                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
-                                <div class="form-group">
-                                <label></label>
-                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
-                                </div>
-                            </div>  
-                        </div> `);
-$('#main_row_for_state_master').append(structure); 
+    var structure = $(`<tr id="new_row`+i+`">
+                    <td class="hotel_room_rate">
+                        <select class="form-control" name="vehicle_type[]" id="vehicle_type`+i+`">
+                            <option value="">Select vehicle type</option>
+                                <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                    <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td class="hotel_room_rate">
+                        <input type="text" class="form-control" name="tax_amount[]" id="tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="how_many_days[]" id="how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    </td>
+                    <td>
+                        <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                    </td>
+                </tr>`);
+$('#main_row_for_state_master').append(structure);    
 
 });
 
@@ -12069,45 +12242,55 @@ $(document).on('click', '.btn_remove', function(){
         var i=1;
     $('#edit_add_more_state').click(function() {
        // alert('hhhh');
-            i++;
-    var structure = $(`<div class="row" id="new_row`+i+`">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label>Vehicle type</label>
-                                    <select class="form-control" name="edit_vehicle_type[]" id="edit_vehicle_type`+i+`">
-                                    <option value="">Select vehicle type</option>
-                                        <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
-                                            <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tax Amount</label>
-                                    <input type="text" class="form-control" name="edit_tax_amount[]" id="edit_tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>How Many Days</label>
-                                    <input type="text" class="form-control" name="edit_how_many_days[]" id="edit_how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                                </div>
-                            </div>
-        
-                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
-                                <div class="form-group">
-                                <label></label>
-                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
-                                </div>
-                            </div>  
-                        </div> `);
+           
+    var structure = $(`<tr id="new_row`+i+`">
+                    <td class="hotel_room_rate">
+                        <select class="form-control" name="edit_vehicle_type[]" id="edit_vehicle_type`+i+`">
+                            <option value="">Select vehicle type</option>
+                                <?php foreach($vehicle_type as $vehicle_type_value){ ?> 
+                                    <option value="<?php echo $vehicle_type_value['id'];?>"><?php echo $vehicle_type_value['vehicle_type_name'];?></option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td class="hotel_room_rate">
+                        <input type="text" class="form-control" name="edit_tax_amount[]" id="edit_tax_amount`+i+`" placeholder="Enter Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="edit_how_many_days[]" id="edit_how_many_days`+i+`" placeholder="Enter Days" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                    </td>
+                    <td>
+                        <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
+                    </td>
+                </tr> `);
 $('#edit_main_row_for_state_master').append(structure); 
-
+i++;
+initializeValidationForNewRow(i - 1);
 });
 
+
+function initializeValidationForNewRow(rowIndex) {
+    // Define rules and messages for the newly added row
+    $('#edit_vehicle_type' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Select vehicle type"
+        }
+    });
+
+    $('#edit_tax_amount' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Enter tax amount"
+        }
+    });
+
+    $('#edit_how_many_days' + rowIndex).rules('add', {
+        required: true,
+        messages: {
+            required: "Enter how many days"
+        }
+    });
+}
 
 $(document).on('click', '.btn_remove', function(){  
            var button_id = $(this).attr("id");   
