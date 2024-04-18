@@ -297,7 +297,49 @@
                     </div>
                   </div>
                  
-
+                  <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                      <th>Mater's Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>District Master</td>
+                      <td>"District Master: Navigate here to include new districts above the 'Select District' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/district/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>City Master</td>
+                      <td>"City Master: Navigate here to include new citys above the 'Select City' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/city_master/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Hotel Type Master</td>
+                      <td>"Hotel Type Master: Navigate here to include new hotel type master above the 'Select Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/hotel_type/index" ><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Room Master</td>
+                      <td>"Room Master: Navigate here to include room citys above the 'Room Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/room_type/index" ><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Vehicle Types</td>
+                      <td>"Vehicle Types Master: Navigate here to include vehicle types citys above the 'Allowed Vehicle Types' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/vehicle_type/index" ><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                  </table>
+                  
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

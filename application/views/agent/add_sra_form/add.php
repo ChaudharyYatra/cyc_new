@@ -165,6 +165,29 @@
                         </div>
 
                         <div class="col-md-12" id="otp">
+
+                        <table id="example1" class="table table-bordered table-striped">
+                          <tr>
+                            <th>Mater's Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                          </tr>
+                          <tr>
+                            <td>Academic Year</td>
+                            <td>"Academic Year: Navigate here to include new academic above the 'Academic Year' option."</td>
+                            <td>
+                            <a href="<?php echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Packages</td>
+                            <td>"Tour Number - Name: Navigate here to include new tour above the 'Tour Number - Name' option."</td>
+                            <td>
+                            <a href="<?php echo base_url(); ?>admin/packages/index"><button type="button" class="btn btn-success" >Add</button></a>
+                            </td>
+                          </tr>
+                        </table>
+
                         <a href="<?php echo $module_url_path; ?>/add"><button type="submit" class="btn btn-success" name="submit" id="first_submit" value="submit">Submit</button></a>
                         </div>
                         <br><br>

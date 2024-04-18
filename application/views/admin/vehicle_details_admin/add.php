@@ -78,6 +78,29 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="air_conditionar" id="air_conditionar" value="Non-AC">&nbsp;&nbsp;Non-AC <br>
                               </div>
                       </div>
+
+
+                    <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                      <th>Mater's Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>Bus Type</td>
+                      <td>"Bus Type: Navigate here to include new districts above the 'Bus Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/bus_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Vehicle Type</td>
+                      <td>"Vehicle Type: Navigate here to include new citys above the 'Vehicle Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/vehicle_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                  </table>
                        
               </div>
                 <!-- /.card-body -->

@@ -421,7 +421,7 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin/vehicle_type/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Vehicle Type</p>s
+                                    <p>Vehicle Type</p>
                                     </a>
                                 </li>
 
