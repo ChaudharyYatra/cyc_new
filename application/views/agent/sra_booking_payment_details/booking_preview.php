@@ -1443,6 +1443,32 @@
                                         </div>
                                     </div>
                                 </div> -->
+
+
+                                <div class="col-md-12">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <tr>
+                                        <th>Mater's Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Account details Other</td>
+                                        
+                                        <td>"UPI ID Holder Name,QR Holder Name,Name On Cheque,Account Number : Navigate here to include new account details above the 'Account details' option."</td>
+                                        <td>
+                                        <a href="<?php echo base_url(); ?>admin/add_qr_code/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Account details Self</td>
+                                        <td>"UPI ID Holder Name,QR Holder Name,Name On Cheque,Account Number : Navigate here to include new account details above the 'Account details' option."</td>
+                                        <td>
+                                        <a href="<?php echo base_url(); ?>agent/add_qr_code/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
                             </div>
 
                             </div>

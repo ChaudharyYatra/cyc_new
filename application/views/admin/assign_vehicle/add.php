@@ -79,6 +79,36 @@
                             </div>
                         </div>
                         
+
+                    <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                      <th>Mater's Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>Packages</td>
+                      <td>"Tour Details: Navigate here to include new packages above the 'Tour Details' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/packages/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Packages</td>
+                      <td>"Tour Date: Navigate here to include new tour date above the 'Tour Date' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/packages/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Bus Type</td>
+                      <td>"Bus Type: Navigate here to include new bus type above the 'Bus Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/bus_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                  </table>
+                  
                     </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
