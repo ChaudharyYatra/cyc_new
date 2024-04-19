@@ -182,6 +182,28 @@ input:disabled+label {
                         </div>
                         <div class="col-md-4">
                         </div>
+
+                  <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                      <th>Master's Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>Bus Type Master</td>
+                      <td>"Bus Type Master: Navigate here to include new bus type above the 'Bus Type' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/bus_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Package</td>
+                      <td>"Package: Navigate here to include new Package's above the 'Tour Details' & 'Tour Date' option."</td>
+                      <td>
+                      <a href="<?php echo base_url(); ?>admin/bus_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                      </td>
+                    </tr>
+                  </table>
                 <!-- /.card-body -->
                 <div class="col-md-12">
                 <div class="card-footer">
