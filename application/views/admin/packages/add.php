@@ -276,6 +276,44 @@
                       </div> -->
        
               </div>
+
+
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Master's Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>Academic Year</td>
+                                
+                                <td>"academic year : Navigate here to include new year above the 'academic year' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Package Type</td>
+                                <td>"package type : Navigate here to include new package type above the 'package type' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/package_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hotel Type</td>
+                                <td>"hotel type : Navigate here to include new hotel type above the 'hotel type' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/hotel_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Zone Name</td>
+                                <td>"Zone Name : Navigate here to include new hotel type above the 'Zone Name' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/zone_master/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                        </table>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>

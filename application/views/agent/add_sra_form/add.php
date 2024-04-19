@@ -168,7 +168,7 @@
 
                         <table id="example1" class="table table-bordered table-striped">
                           <tr>
-                            <th>Mater's Name</th>
+                            <th>Master's Name</th>
                             <th>Description</th>
                             <th>Action</th>
                           </tr>

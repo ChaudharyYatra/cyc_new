@@ -94,6 +94,24 @@
                     <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span><br>
                   </div>
                 </div>
+
+                <div class="col-md-12">
+                <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                        <th>Master's Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Academic Year</td>
+                        
+                        <td>"academic year : Navigate here to include new year above the 'academic year' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                </table>
+                </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="btn_pack_mapping">Submit</button>

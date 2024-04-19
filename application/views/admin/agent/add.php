@@ -263,6 +263,47 @@
                               </div>
                       </div>
               </div>
+
+                <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                        <th>Master's Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        
+                        <td>"Department : Navigate here to include new department above the 'Department' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/department/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        
+                        <td>"State : Navigate here to include new State above the 'Select State' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/state/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>District</td>
+                        
+                        <td>"District : Navigate here to include new District above the 'Select District' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/district/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Taluka</td>
+                        
+                        <td>"Taluka : Navigate here to include new Taluka above the 'Select Taluka' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/taluka/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+      
+                </table>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="btn_agent">Submit</button>

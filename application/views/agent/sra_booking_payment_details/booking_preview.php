@@ -1430,6 +1430,7 @@
                                             <th><input type="text" class="form-control" name="booking_otp" id="booking_otp" placeholder="Enter OTP" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> 
                                             <p id="booking_least_count"></p>
                                         </th>
+                                        
                                             
                                             <th><button type="button" class="btn btn-success" name="booking_submit" id="booking_confirm_submit" value="booking_submit" disabled>Verify OTP</button></th>
                                         </tr>
@@ -1448,7 +1449,7 @@
                                 <div class="col-md-12">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <tr>
-                                        <th>Mater's Name</th>
+                                        <th>Master's Name</th>
                                         <th>Description</th>
                                         <th>Action</th>
                                     </tr>

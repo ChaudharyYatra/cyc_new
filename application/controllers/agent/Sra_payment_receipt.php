@@ -129,7 +129,7 @@ class Sra_payment_receipt extends CI_Controller {
             $this->db->join("package_date", 'package_date.id=sra_booking_payment_details.package_date_id','left');
             $payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
         }
-        print_r($payment_receipt); die;
+        // print_r($payment_receipt); die;
 
         $payment_rupee = $payment_receipt['booking_amt'];
         // print_r($payment_rupee); die;
