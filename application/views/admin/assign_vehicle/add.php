@@ -80,7 +80,7 @@
                         </div>
                         
 
-                    <table id="example1" class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped">
                     <tr>
                       <th>Master's Name</th>
                       <th>Description</th>
