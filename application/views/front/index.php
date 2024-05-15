@@ -1941,61 +1941,8 @@ table.scrolldown tbody{
 </div>
 <?php } ?>
 
-<!-- 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var monthOptionsContainer = document.getElementById("search_style-3");
-        var currentDate = new Date();
-        var currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
-        var currentYear = currentDate.getFullYear();
-        
-        // Generate options for the current month and the next 6 months
-        for (var i = 0; i < 6; i++) {
-            var month = currentMonth + i;
-            var year = currentYear;
-            if (month > 12) {
-                month -= 12;
-                year += 1;
-            }
-            var monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
-            var option = document.createElement("div");
-            option.className = "month-option";
-            option.setAttribute("value", monthName);
-            option.textContent = monthName;
-            monthOptionsContainer.appendChild(option);
-        }
 
-        // Search functionality
-        var searchInput = document.getElementById("month_search");
-        searchInput.addEventListener("input", function() {
-            var filter = this.value.toUpperCase();
-            var options = monthOptionsContainer.getElementsByClassName("month-option");
-            for (var i = 0; i < options.length; i++) {
-                var option = options[i];
-                var monthName = option.getAttribute("value").toUpperCase();
-                if (monthName.indexOf(filter) > -1) {
-                    option.style.display = "";
-                } else {
-                    option.style.display = "none";
-                }
-            }
-        });
-
-        function selectMonth() {
-            var selectedMonth = this.getAttribute("value");
-            document.getElementById("month_search").value = selectedMonth;
-        }
-
-        // Update event listeners for dynamically added options
-        var options = monthOptionsContainer.getElementsByClassName("month-option");
-        for (var i = 0; i < options.length; i++) {
-            options[i].addEventListener("click", selectMonth);
-        }
-    });
-</script> -->
-
-
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         var monthOptionsContainer = document.getElementById("search_style-3");
         var currentDate = new Date();
@@ -2046,5 +1993,137 @@ table.scrolldown tbody{
             options[i].addEventListener("click", selectMonth);
         }
     });
+</script> -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var monthOptionsContainer = document.getElementById("search_style-3");
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
+        var currentYear = currentDate.getFullYear();
+        var nextYear = currentYear + 1;
+
+        // Generate options from the current month to December of the current year
+        for (var month = currentMonth; month <= 12; month++) {
+            var monthName = new Date(currentYear, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var optionText = monthName + " " + currentYear; // Append year to month name
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", optionText);
+            option.textContent = optionText;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Generate options for all months of the next year
+        for (var month = 1; month <= 12; month++) {
+            var monthName = new Date(nextYear, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var optionText = monthName + " " + nextYear; // Append year to month name
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", optionText);
+            option.textContent = optionText;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Search functionality
+        var searchInput = document.getElementById("month_search");
+        searchInput.addEventListener("input", function() {
+            var filter = this.value.toUpperCase();
+            var options = monthOptionsContainer.getElementsByClassName("month-option");
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var monthText = option.getAttribute("value").toUpperCase();
+                if (monthText.indexOf(filter) > -1) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        });
+
+        function selectMonth() {
+            var selectedMonth = this.getAttribute("value");
+            document.getElementById("month_search").value = selectedMonth;
+        }
+
+        // Update event listeners for dynamically added options
+        var options = monthOptionsContainer.getElementsByClassName("month-option");
+        for (var i = 0; i < options.length; i++) {
+            options[i].addEventListener("click", selectMonth);
+        }
+    });
 </script>
+
+
+
+
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var monthOptionsContainer = document.getElementById("search_style-3");
+        var currentDate = new Date();
+        var currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed
+        var currentYear = currentDate.getFullYear();
+
+        // Generate options for the current month and the next 6 months
+        for (var i = 0; i < 6; i++) {
+            var month = currentMonth + i;
+            var year = currentYear;
+            if (month > 12) {
+                month -= 12;
+                year += 1;
+            }
+            var monthName = new Date(year, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var optionText = monthName + " " + year; // Append year to month name
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", optionText);
+            option.textContent = optionText;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Generate options for the same months in the next year
+        var nextYear = currentYear + 1;
+        for (var i = 0; i < 6; i++) {
+            var month = currentMonth + i;
+            if (month > 12) {
+                month -= 12;
+            }
+            var monthName = new Date(nextYear, month - 1, 1).toLocaleString('default', { month: 'long' });
+            var optionText = monthName + " " + nextYear; // Append year to month name
+            var option = document.createElement("div");
+            option.className = "month-option";
+            option.setAttribute("value", optionText);
+            option.textContent = optionText;
+            monthOptionsContainer.appendChild(option);
+        }
+
+        // Search functionality
+        var searchInput = document.getElementById("month_search");
+        searchInput.addEventListener("input", function() {
+            var filter = this.value.toUpperCase();
+            var options = monthOptionsContainer.getElementsByClassName("month-option");
+            for (var i = 0; i < options.length; i++) {
+                var option = options[i];
+                var monthText = option.getAttribute("value").toUpperCase();
+                if (monthText.indexOf(filter) > -1) {
+                    option.style.display = "";
+                } else {
+                    option.style.display = "none";
+                }
+            }
+        });
+
+        function selectMonth() {
+            var selectedMonth = this.getAttribute("value");
+            document.getElementById("month_search").value = selectedMonth;
+        }
+
+        // Update event listeners for dynamically added options
+        var options = monthOptionsContainer.getElementsByClassName("month-option");
+        for (var i = 0; i < options.length; i++) {
+            options[i].addEventListener("click", selectMonth);
+        }
+    });
+</script> -->
+
 

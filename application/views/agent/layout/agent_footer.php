@@ -11270,7 +11270,7 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                             if (data['pending_amt'] > 0 && data['abcamt']!=data['total_sra_amt']) {
                             var button_id = "partial_payment_" + sra_id; // Dynamically create unique button ID
                             var buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/index/`+  data['sra_pay_id']+`">
-                                                <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Payment</button>
+                                                <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Make Receipt</button>
                                             </a>`;
                                         } else if (data['pending_amt'] == 0 || data['abcamt']==data['total_sra_amt'])
                                         {
