@@ -5199,3 +5199,29 @@ $('#edit_kitchen_staff_cook').validate({ // initialize the plugin
 </script>
 <!-- jquery validation on edit kitchen staff cook -->
 
+<script>
+    function first_payment_main() {
+        document.getElementById('firstly_submit_form').style.display = 'block';
+        document.getElementById('partially_submit_form').style.display = 'none';
+        document.getElementById('sevices_submit_form').style.display = 'none';
+        document.getElementById('partial_table').style.display = 'none';
+    }
+
+    function partially_payment_sub() {
+      console.log('partially_payment_sub function called');
+        document.getElementById('partially_submit_form').style.display = 'block';
+        document.getElementById('firstly_submit_form').style.display = 'none';
+        document.getElementById('sevices_submit_form').style.display = 'none';
+        document.getElementById('partial_table').style.display = 'block';
+
+    }
+
+    function extra_services() {
+        document.getElementById('sevices_submit_form').style.display = 'block';
+        document.getElementById('firstly_submit_form').style.display = 'none';
+        document.getElementById('partially_submit_form').style.display = 'none';
+        document.getElementById('partial_table').style.display = 'none';
+
+    }
+</script>
+
