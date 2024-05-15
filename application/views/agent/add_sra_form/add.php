@@ -176,14 +176,16 @@
                             <td>Academic Year</td>
                             <td>"Academic Year: Navigate here to include new academic above the 'Academic Year' option."</td>
                             <td>
-                            <a href="<?php echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a>
+                            <!-- <a href="<?php //echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a> -->
+                            <p>Contact to Admin</p>
                             </td>
                           </tr>
                           <tr>
                             <td>Packages</td>
                             <td>"Tour Number - Name: Navigate here to include new tour above the 'Tour Number - Name' option."</td>
                             <td>
-                            <a href="<?php echo base_url(); ?>admin/packages/index"><button type="button" class="btn btn-success" >Add</button></a>
+                            <!-- <a href="<?php echo base_url(); ?>admin/packages/index"><button type="button" class="btn btn-success" >Add</button></a> -->
+                            <p>Contact to Admin</p>
                             </td>
                           </tr>
                         </table>
