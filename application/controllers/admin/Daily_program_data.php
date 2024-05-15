@@ -662,7 +662,7 @@ class Daily_program_data extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
+        $citywise_place_master = $this->master_model->getRecords('citywise_other_add_more');
         //  print_r($citywise_place_master); die;
 
         $record = array();
@@ -673,15 +673,15 @@ class Daily_program_data extends CI_Controller {
         $district_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
 
         $record = array();
-        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_place_master_start.place_name AS start_place_name, citywise_place_master_end.place_name AS end_place_name";
+        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_other_add_more_start.place_name AS start_place_name, citywise_other_add_more_end.place_name AS end_place_name";
         $this->db->where('add_more_day_to_day_program.is_deleted', 'no');
         $this->db->where('add_more_day_to_day_program.is_active', 'yes');
         $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);
         $this->db->where('add_more_day_to_day_program.day_no', $day);
         $this->db->join("district_table AS district_table_start", 'add_more_day_to_day_program.start_district = district_table_start.id', 'left');
         $this->db->join("district_table AS district_table_end", 'add_more_day_to_day_program.end_district = district_table_end.id', 'left');
-        $this->db->join("citywise_place_master AS citywise_place_master_start", 'add_more_day_to_day_program.start_place = citywise_place_master_start.id', 'left');
-        $this->db->join("citywise_place_master AS citywise_place_master_end", 'add_more_day_to_day_program.end_place = citywise_place_master_end.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_start", 'add_more_day_to_day_program.start_place = citywise_other_add_more_start.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_end", 'add_more_day_to_day_program.end_place = citywise_other_add_more_end.id', 'left');
         $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program', array('add_more_day_to_day_program.is_deleted' => 'no'), $fields);
         // print_r($add_more_day_to_day_program);
         // die;
@@ -689,7 +689,6 @@ class Daily_program_data extends CI_Controller {
         //  $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;no_of_days
         $this->arr_view_data['no_of_days']        = $no_of_days;
         $this->arr_view_data['id']        = $id;
-
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['tour_creation']        = $tour_creation;
         $this->arr_view_data['add_more_day_to_day_program']        = $add_more_day_to_day_program;
@@ -1240,16 +1239,30 @@ class Daily_program_data extends CI_Controller {
         // $supervision_sess_name = $this->session->userdata('supervision_name');
         // $iid = $this->session->userdata('supervision_sess_id');
 
-        $record = array();
-        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_place_master_start.place_name AS start_place_name, citywise_place_master_end.place_name AS end_place_name";
+        $fields = "SUM(citywise_other_add_more_end.ticket_cost) AS total_ticket_cost, add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_other_add_more_start.place_name AS start_place_name, citywise_other_add_more_end.place_name AS end_place_name";
+        $this->db->select($fields);
         $this->db->where('add_more_day_to_day_program.is_deleted', 'no');
         $this->db->where('add_more_day_to_day_program.is_active', 'yes');
-        $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);
+        $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);  
         $this->db->where('add_more_day_to_day_program.day_no', $day);
         $this->db->join("district_table AS district_table_start", 'add_more_day_to_day_program.start_district = district_table_start.id', 'left');
         $this->db->join("district_table AS district_table_end", 'add_more_day_to_day_program.end_district = district_table_end.id', 'left');
-        $this->db->join("citywise_place_master AS citywise_place_master_start", 'add_more_day_to_day_program.start_place = citywise_place_master_start.id', 'left');
-        $this->db->join("citywise_place_master AS citywise_place_master_end", 'add_more_day_to_day_program.end_place = citywise_place_master_end.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_start", 'add_more_day_to_day_program.start_place = citywise_other_add_more_start.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_end", 'add_more_day_to_day_program.end_place = citywise_other_add_more_end.id', 'left');
+        $this->db->group_by('add_more_day_to_day_program.tour_creation_id'); // Assuming you want to group by tour_creation_id
+        $add_more_ticket_cost = $this->master_model->getRecords('add_more_day_to_day_program', array('add_more_day_to_day_program.is_deleted' => 'no'), $fields);
+        // print_r($add_more_ticket_cost); die;
+
+        $record = array();
+        $fields = "add_more_day_to_day_program.*, district_table_start.district AS start_district_name, district_table_end.district AS end_district_name, citywise_other_add_more_start.place_name AS start_place_name, citywise_other_add_more_end.place_name AS end_place_name,citywise_other_add_more_end.ticket_cost";
+        $this->db->where('add_more_day_to_day_program.is_deleted', 'no');
+        $this->db->where('add_more_day_to_day_program.is_active', 'yes');
+        $this->db->where('add_more_day_to_day_program.tour_creation_id', $id);  
+        $this->db->where('add_more_day_to_day_program.day_no', $day);
+        $this->db->join("district_table AS district_table_start", 'add_more_day_to_day_program.start_district = district_table_start.id', 'left');
+        $this->db->join("district_table AS district_table_end", 'add_more_day_to_day_program.end_district = district_table_end.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_start", 'add_more_day_to_day_program.start_place = citywise_other_add_more_start.id', 'left');
+        $this->db->join("citywise_other_add_more AS citywise_other_add_more_end", 'add_more_day_to_day_program.end_place = citywise_other_add_more_end.id', 'left');
         $add_more_day_to_day_program = $this->master_model->getRecords('add_more_day_to_day_program', array('add_more_day_to_day_program.is_deleted' => 'no'), $fields);
         // print_r($add_more_day_to_day_program);
         // die;
@@ -1282,7 +1295,7 @@ class Daily_program_data extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $citywise_place_master = $this->master_model->getRecords('citywise_place_master');
+        $citywise_place_master = $this->master_model->getRecords('citywise_other_add_more');
         //  print_r($citywise_place_master); die;
 
         $record = array();
@@ -1303,8 +1316,8 @@ class Daily_program_data extends CI_Controller {
 
         $this->arr_view_data['no_of_days']        = $no_of_days;
         $this->arr_view_data['id']        = $id;
-
         $this->arr_view_data['add_more_day_to_day_program']        = $add_more_day_to_day_program;
+        $this->arr_view_data['add_more_ticket_cost']        = $add_more_ticket_cost;
         // $this->arr_view_data['package_id']        = $package_id;
         // $this->arr_view_data['package_date_id']        = $package_date_id;
         $this->arr_view_data['page_title']      = $this->module_title." Details ";
@@ -1484,7 +1497,7 @@ class Daily_program_data extends CI_Controller {
 public function get_district_place(){ 
     // POST data 
     // $all_b=array();
-   $places_data = $this->input->post('did');
+   $places_data = $this->input->post('district_id');
     // print_r($places_data); die;
                     $this->db->where('is_deleted','no');
                     $this->db->where('is_active','yes');

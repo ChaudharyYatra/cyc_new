@@ -12351,11 +12351,12 @@ $(document).on('click', '.btn_remove', function(){
         // district change
         $(document).on("change",".select_district",function(){
             var district_id = $(this).val();
+            // alert(district_id);
             var startPointDropdown = $(this).closest('tr').find('.start_point');
         $.ajax({
             url:'<?=base_url()?>admin/daily_program_data/get_district_place',
             method: 'post',
-            data: {did: district_id},
+            data: {district_id: district_id},
             dataType: 'json',
             success: function(response){
 
