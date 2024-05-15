@@ -90,6 +90,15 @@
                         </div>
                         <?php } ?>
 
+                        <?php foreach($add_more_ticket_cost as $add_more_ticket_cost_info){ ?> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label>Total Ticket Cost</label>
+                                    <input readonly type="text" class="form-control" name="tour_creation_id" id="tour_creation_id" value="<?php echo $add_more_ticket_cost_info['total_ticket_cost'];?>">
+                                </div>
+                            </div>
+                        <?php } ?>
+
                         <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
                             if($add_more_day_to_day_program_info['meal_type'] == 'Breakfast'){ ?> 
                         <div class="col-md-6"></div>

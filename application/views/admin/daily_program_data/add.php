@@ -37,7 +37,6 @@
     .add_more_css{
         margin-top:30px;
     }
-
     .remove_color .form-control{
         color: black !important;
     }
@@ -89,7 +88,7 @@
                             </div>
                         </div>
                         <?php } ?>
-
+                        
                         <div class="col-md-6"></div>
                         <div class="col-md-12">
                             <div class="form-group">
