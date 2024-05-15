@@ -52,6 +52,7 @@ class Add_qr_code extends CI_Controller{
                 $role_name = $this->input->post('role_name');
                 $other_role = $this->input->post('other_role');
 
+                $nick_name = $this->input->post('nick_name');
                 $mobile_number = $this->input->post('mobile_number');
                 // print_r($mobile_number); die;
                 $upi_id = $this->input->post('upi_id');
@@ -97,6 +98,7 @@ class Add_qr_code extends CI_Controller{
                     }
 
                     $arr_insert = array(
+                        'nick_name'   =>   $_POST["nick_name"][$i],
                         'mobile_number'   =>   $_POST["mobile_number"][$i],
                         'upi_id'   =>   $_POST["upi_id"][$i],
                         'account_number'   =>   $_POST["account_number"][$i],
@@ -269,6 +271,7 @@ class Add_qr_code extends CI_Controller{
                 $role_name = $this->input->post('role_name');
                 $other_role = $this->input->post('other_role');
 
+                $nick_name = $this->input->post('nick_name');
                 $mobile_number = $this->input->post('mobile_number');
                 $company_account_yes_no = $this->input->post('company_account_yes_no');
                 $bank_name = $this->input->post('bank_name');
@@ -286,6 +289,7 @@ class Add_qr_code extends CI_Controller{
                     $this->master_model->updateRecord('qr_code_master',$arr_update,$arr_where);
 
                     $arr_update = array(
+                        'nick_name'  => $nick_name,
                         'mobile_number'  => $mobile_number,
                         'company_account_yes_no'  => $company_account_yes_no,
                         'bank_name'  => $bank_name,
@@ -315,7 +319,7 @@ class Add_qr_code extends CI_Controller{
         // $this->db->where('id',$id);
         // $qr_code_master_data = $this->master_model->getRecords('qr_code_master');
 
-        $fields = "qr_code_master.*,role_type.role_name,qr_code_add_more.mobile_number,qr_code_add_more.upi_id,
+        $fields = "qr_code_master.*,role_type.role_name,qr_code_add_more.nick_name,qr_code_add_more.mobile_number,qr_code_add_more.upi_id,
         qr_code_add_more.account_number,qr_code_add_more.bank_name,qr_code_add_more.company_account_yes_no,qr_code_add_more.qr_code_image,qr_code_add_more.upi_app_name,
         upi_apps_name.payment_app_name,qr_code_add_more.id as qr_add_more_id,qr_code_add_more.is_active as qr_code_is_active";
         $this->db->order_by('id','desc');

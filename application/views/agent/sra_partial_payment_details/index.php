@@ -392,7 +392,7 @@
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
                                                 ?>
-                                                    <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                                    <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?>-<?php echo $upi_qr_data_value['nick_name'];?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -470,7 +470,7 @@
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
                                                 ?>
-                                                    <option value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                                    <option value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?>-<?php echo $upi_qr_data_value['nick_name'];?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -539,7 +539,7 @@
                                                     foreach($upi_qr_data as $upi_qr_data_value) 
                                                     { 
                                                 ?>
-                                                    <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                                    <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?>-<?php echo $upi_qr_data_value['nick_name'];?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>

@@ -50,6 +50,13 @@
                             <input readonly type="text" class="form-control" name="full_name" id="full_name" placeholder="Enter Full Name" value="<?php echo $info['full_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
                         </div>
                     </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nick Name</label>
+                            <input type="text" class="form-control" name="nick_name" id="nick_name" placeholder="Enter Nick Name" value="<?php echo $info['nick_name'];?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
+                    </div>
                       
                     <div class="col-md-6">
                         <div class="form-group">
@@ -97,7 +104,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>UPI ID</label>
-                            <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" value="<?php echo $info['upi_id']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" value="<?php echo $info['upi_id']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
                         </div>
                     </div>
 

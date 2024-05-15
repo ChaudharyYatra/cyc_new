@@ -9302,7 +9302,10 @@ $('#add_QR_code').validate({ // initialize the plugin
             maxlength: 10,
             minlength: 10
         },
-        "company_account_yes_no[]": {
+        "company_account_yes_no[$i]": {
+            required: true,
+        },
+        "nick_name[]": {
             required: true,
         },
         "bank_name[]": {
@@ -9330,15 +9333,18 @@ $('#add_QR_code').validate({ // initialize the plugin
             required : "Please Select Role Name",
         },
         other_role : {
-            required : "Please Enter other role Name",
+            required : "Please Enter Other Role Name",
         },
         "mobile_number[]": {
             required: "Please enter mobile number",
             maxlength: "Please enter maximum 10 digit number",
             minlength: "Please enter minimum 10 digit number"
         },
-        "company_account_yes_no[]": {
+        "company_account_yes_no[$i]": {
             required : "Please select is company account",
+        },
+        "nick_name[]": {
+            required : "Please enter nick name",
         },
         "bank_name[]": {
             required : "Please enter bank name",
@@ -9378,6 +9384,21 @@ $('#edit_QR_code').validate({ // initialize the plugin
         role_name: {
             required: true,
         },
+        bank_name: {
+            required : true,
+        },
+        account_number: {
+            required : true,
+        },
+        company_account_yes_no: {
+            required: true,
+        },
+        upi_app_name: {
+            required : true,
+        },
+        nick_name: {
+            required: true,
+        },
         mobile_number: {
             required: true,
             maxlength:10,
@@ -9408,13 +9429,28 @@ $('#edit_QR_code').validate({ // initialize the plugin
         role_name : {
             required : "Please Select Role Name",
         },
+        bank_name: {
+            required : "Please enter bank name",
+        },
+        account_number: {
+            required : "Please enter account number",
+        },
+        upi_app_name: {
+            required : "Please select upi app name",
+        },
+        company_account_yes_no : {
+            required : "Please select is company account",
+        },
+        nick_name : {
+            required : "Please Enter Nick Name",
+        },
         mobile_number : {
             required : "Please Enter Mobile Number",
             maxlength: "Please enter maximum 10 digit number",
             minlength: "Please enter minimum 10 digit number"
         },
         other_role : {
-            required : "Please Enter other role Name",
+            required : "Please Enter other Role Name",
         },
         old_img_name : {
             required : "Please upload QR code image",
@@ -11979,6 +12015,12 @@ $(document).on("click", ".remove-row", function() {
     var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
                             <div class="col-md-6 mt-4">
                                 <div class="form-group">
+                                    <label>Nick Name</label>
+                                    <input type="text" class="form-control" name="nick_name[]" id="nick_name`+i+`" placeholder="Enter Nick Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
                                     <label>Mobile Number</label>
                                     <input type="text" class="form-control" name="mobile_number[]" id="mobile_number`+i+`" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
@@ -12028,15 +12070,14 @@ $(document).on("click", ".remove-row", function() {
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Upload QR Image</label><br>
                                     <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
                                     <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                            </div>          
+                                    
                             <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
                                 <div class="form-group">
                                 <label></label>

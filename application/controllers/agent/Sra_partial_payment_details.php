@@ -184,10 +184,19 @@ class Sra_partial_payment_details extends CI_Controller {
         // print_r($relation_data); die;
 
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
+        // $this->db->where('is_deleted','no');
+        // $this->db->where('is_active','yes');
+        // $this->db->where('qr_code_master.is_agent','No');
+        // $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+        // print_r($upi_qr_data); die;
+
+        $record = array();
+        $fields = "qr_code_master.*,qr_code_add_more.nick_name";
+        $this->db->where('qr_code_master.is_deleted','no');
+        $this->db->where('qr_code_master.is_active','yes');
         $this->db->where('qr_code_master.is_agent','No');
-        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
+        $this->db->join("qr_code_add_more", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+        $upi_qr_data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
         // print_r($upi_qr_data); die;
 
         foreach($upi_qr_data as $upi_qr_data_id) 

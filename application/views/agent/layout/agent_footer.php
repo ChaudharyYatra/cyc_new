@@ -10765,6 +10765,12 @@ $(document).ready(function() {
     var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
                             <div class="col-md-6 mt-4">
                                 <div class="form-group">
+                                    <label>Nick Name</label>
+                                    <input type="text" class="form-control" name="nick_name[]" id="nick_name`+i+`" placeholder="Enter Nick Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-4">
+                                <div class="form-group">
                                     <label>Mobile Number</label>
                                     <input type="text" class="form-control" name="mobile_number[]" id="mobile_number`+i+`" placeholder="Enter Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
@@ -10780,7 +10786,7 @@ $(document).ready(function() {
                                 </div>
                             </div> -->
 
-                            <div class="col-md-6 mt-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Bank Name</label>
                                     <input type="text" class="form-control" name="bank_name[]" id="bank_name`+i+`" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '');" required="required">
@@ -10854,6 +10860,9 @@ $('#add_QR_code_agent').validate({ // initialize the plugin
             maxlength: 10,
             minlength: 10
         },
+        "nick_name[]": {
+            required: true,
+        },
         "bank_name[]": {
             required: true,
         },
@@ -10879,6 +10888,9 @@ $('#add_QR_code_agent').validate({ // initialize the plugin
         },
         "bank_name[]" : {
             required : "Please enter bank name",
+        },
+        "nick_name[]" : {
+            required : "Please enter nick name",
         },
         "account_number[]" : {
             required : "Please enter account number",
@@ -10913,6 +10925,9 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
             maxlength: 10,
             minlength: 10
         },
+        nick_name: {
+            required: true,
+        },
         bank_name: {
             required: true,
         },
@@ -10935,6 +10950,9 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
             required : "Please enter mobile number",
             maxlength: "Please enter maximum 10 digit number",
             minlength: "Please enter minimum 10 digit number"
+        },
+        nick_name: {
+            required : "Please enter nick name",
         },
         bank_name: {
             required : "Please enter bank name",

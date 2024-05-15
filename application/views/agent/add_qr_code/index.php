@@ -41,7 +41,7 @@
                     <th>Account Number</th>
                     <th>UPI App Name</th>
                     <th>UPI Id</th>
-                    <th>Is Active?</th>
+                    <!-- <th>Is Active?</th> -->
                     <th>Status</th>
                     <th>Reject Reason</th>
                     <th>Action</th>
@@ -65,18 +65,19 @@
                       <img src="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>" width="90px;" height="60px;" alt="Image"><br>
                       <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>">Download</a>
                     </td> -->
-                    <td>
+
+                    <!-- <td>
                         <?php 
-                        if($info['qr_code_is_active']=='yes')
-                          {
+                        //if($info['qr_code_is_active']=='yes')
+                          //{
                         ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['qr_add_more_id']); 
-							            echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
-                        <?php } else { ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['qr_add_more_id']); 
-							            echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
-                        <?php } ?>
-                    </td>
+                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //$aid=base64_encode($info['qr_add_more_id']); 
+							            //echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
+                        <?php //} else { ?>
+                        <a href="<?php //echo $module_url_path ?>/active_inactive/<?php //$aid=base64_encode($info['qr_add_more_id']); 
+							            //echo rtrim($aid, '=').'/'.$info['qr_code_is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
+                        <?php //} ?>
+                    </td> -->
 
                     <td><?php if($info['status']=='no' && $info['reject_remark'] != ''){
                         echo 'Disapproved'; ?>

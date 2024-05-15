@@ -48,6 +48,14 @@
                       
                     <div class="card-body">
                       <div class="row" id="edit_main_row_for_add_more_bank">
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Nick Name</label>
+                              <input type="text" class="form-control" name="nick_name[]" id="nick_name" placeholder="Enter Nick Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                          </div>
+                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Mobile Number</label>
@@ -95,7 +103,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>UPI ID</label>
-                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
                             </div>
                         </div>
 
