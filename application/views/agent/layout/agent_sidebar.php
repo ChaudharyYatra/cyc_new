@@ -67,7 +67,7 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>SRA Particular Customer Record</p>
                 </a>
-               </li>
+              </li>
 
             </ul>
           </li>
