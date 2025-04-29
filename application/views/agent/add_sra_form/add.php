@@ -17,7 +17,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
+              <!--<a href="<?php //echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>-->
               
             </ol>
           </div>
@@ -46,9 +46,9 @@
                       <div class="form-group">
                           <label>Which is payment type ?</label> <br>
                           <input type="radio" id="first_payment" name="payment_type" value="1" onclick="first_payment_main();" />
-                          <label>First Payment</label> &nbsp;&nbsp;
+                          <label>SRA Receipt </label> &nbsp;&nbsp;
                           <input type="radio" id="partially_payment" name="payment_type" value="0" onclick="partially_payment_sub();" />
-                          <label>Partial Payment</label> &nbsp;&nbsp;
+                          <label>Partial Receipt</label> &nbsp;&nbsp;
                           <!-- <input type="radio" id="add_on_services" name="payment_type" value="2" onclick="extra_services();" />
                           <label>Add On Services</label> <br> -->
                       </div>
@@ -79,14 +79,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             <label>SRA No</label>
-                            <input type="text" class="form-control" name="sra_no" id="sra_no" placeholder="Enter SRA No" required="required">
+                            <input type="text" class="form-control" name="sra_no" id="sra_no" placeholder="Enter SRA No" required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                            <!-- <select class="form-control" style="width: 100%;" name="sra_no" id="add_sra_sra_no" required="required"></select> -->
+                            <input type="hidden" id="textbox" class="form-control" style="margin-top: 10px;" readonly>
+                            <!-- <input type="text" class="form-control" name="sra_no" id="sra_no" placeholder="Enter SRA No" required="required"> -->
                             <input type="hidden" class="form-control" name="firstly_payment" id="firstly_payment" required="required">
                             </div>
                         </div>
                         <div class="col-md-6">
                               <div class="form-group">
                                 <label>SRA Date</label>
-                                <input type="date" class="form-control" name="sra_date" id="sra_date" placeholder="Enter SRA Date" required="required">
+                                <input type="date" class="form-control" name="sra_date" id="sra_date" placeholder="Enter SRA Date" required="required" max="<?php echo date("Y-m-d");?>">
                               </div>
                         </div>
                         <div class="col-md-6" id="tour_number_div">
@@ -131,7 +134,7 @@
                         <div class="col-md-6" id="customer_name_div">
                             <div class="form-group">
                             <label>Customer Name</label>
-                            <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Enter customer name" required="required">
+                            <input type="text" class="form-control" name="customer_name" id="customer_name" placeholder="Enter customer name" oninput="this.value = this.value.toUpperCase();" required="required">
                             </div>
                         </div>
 

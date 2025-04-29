@@ -22,11 +22,13 @@ class Home extends CI_Controller {
      {
         $aData['msg'] = '';
         $ip = $this->input->ip_address();
+        // print_r($ip); die;
         
         // this code for website visiter count
         $ip = $this->input->ip_address();
         $this->db->where('ip_address',$ip);
         $visiter_data = $this->master_model->getRecord('visiter_data');
+        
         
         $this->db->where('ip_addess',$ip);
         $website_visitor_data = $this->master_model->getRecord('website_visitor_data');

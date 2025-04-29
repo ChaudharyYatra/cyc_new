@@ -28,7 +28,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/plugins/codemirror/mode/xml/xml.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 
-<script src="<?php echo base_url(); ?>assets/admin/plugins/select2/js/select2.full.min.js"></script>
+<!-- <script src="<?php //echo base_url(); ?>assets/admin/plugins/select2/js/select2.full.min.js"></script> -->
 
 <!-- Bootstrap4 Duallistbox -->
 <script src="<?php echo base_url(); ?>assets/admin/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
@@ -3872,7 +3872,9 @@ $('#add_agent').validate({ // initialize the plugin
         },
         registration_date: {
             required: true,
-
+        },
+        "amount_receiving_mode[]": {
+            required: true,
         },
         password: {
             required: true,
@@ -3947,6 +3949,9 @@ $('#add_agent').validate({ // initialize the plugin
         },
         registration_date : {
             required : "Please enter registration date",
+        },
+        "amount_receiving_mode[]" : {
+            required : "Please select amount receiving mode",
         },
         password : {
             required : "Please enter password",
@@ -6697,7 +6702,7 @@ $('#edit_expense_type').validate({ // initialize the plugin
                         <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
                             <div class="form-group">
                             <label></label>
-                                <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button>
+                                <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
                             </div>
                         </div>
                     </div>`);
@@ -7578,7 +7583,6 @@ $(document).ready(function(){
        if (n+1) {
            if (n > newFields.length) {
                addFields(n);
-               
            } else {
                removeFields(n);
            }
@@ -8740,172 +8744,279 @@ $('#edit_train').validate({ // initialize the plugin
 </script>
 
 <script>
-
     var p=1;
-    
     $('#add_more_place').click(function() {
         $('.select2').select2()
+        $('.select3').select2()
        // alert('hhhh');
             p++;
-        alert(p);
+        // alert(p);
         // var selectedDays = [];
         // $('#open_days' + p + ' option:selected').each(function() {
         //     selectedDays.push($(this).val());
         // });
             
         var structure = $(`<div class="row mb-4 add_row" id="new_row`+p+`" style="border: 1px solid #959595;padding: 1rem;"> 
-
                         <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Visiting Place Name</label>
-                            <input type="text" class="form-control" name="Place_name[]" id="Place_name`+p+`" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^A-Za-z]/g, '');" required="required">
-                        </div>
-                        </div>
-
-                        <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Opening Time</label>
-                            <input type="time" class="form-control" name="opening_time[]" id="opening_time`+p+`" placeholder="Enter opening time" required="required">
-                        </div>
-                        </div>
-
-                        <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Closing Time</label>
-                            <input type="time" class="form-control" name="closing_time[]" id="closing_time`+p+`" placeholder="Enter closing time" required="required">
-                        </div>
-                        </div>
-                        
-                        <div class="col-md-5">
-                        <div class="form-group">
-                            <label>Open Days</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="open_days`+p+`[]" id="open_days`+p+`" required="required">
-                                <option value="">Select </option>
-                                <option value="1">Sunday</option>
-                                <option value="2">Monday</option>
-                                <option value="3">Tuesday</option>
-                                <option value="4">Wednesday</option>
-                                <option value="5">Thursday</option>
-                                <option value="6">Friday</option>
-                                <option value="7">Saturday</option>
-                                <option value="8">All</option>
-                            </select>
-                        </div>
-                        </div>
-
-                        <div class="col-md-3">
-                        <label>Is It Entry Ticket Cost </span></label>
-                        <div class="form-group">
-                            <input type="radio" id="Yes`+p+`" name="ticket_yes_no`+p+`" value="Yes" class="ticket_cls"> &nbsp;
-                            <label>Yes</label>  &nbsp; &nbsp; 
-                            <input type="radio" id="No`+p+`" name="ticket_yes_no`+p+`" value="No" class="ticket_cls"> &nbsp;
-                            <label>No</label><br>
-                        </div>
-                        </div>
-
-                        <div class="col-md-3 if_ticket_yes_div">
                             <div class="form-group">
-                                <label>Enter Ticket Cost </span></label>
-                                <input type="text" class="form-control if_ticket_yes_no" name="ticket_cost[]" id="ticket_cost`+p+`" placeholder="Enter cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                <label>Visiting Place Name</label>
+                                <input type="text" class="form-control" name="Place_name[]" id="Place_name`+p+`" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Opening Time</label>
+                                <input type="time" class="form-control" name="opening_time[]" id="opening_time`+p+`" placeholder="Enter opening time" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Closing Time</label>
+                                <input type="time" class="form-control" name="closing_time[]" id="closing_time`+p+`" placeholder="Enter closing time" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Open Days</label>
+                                <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="open_days`+p+`[]" id="open_days`+p+`" required="required">
+                                    <option value="">Select </option>
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    <option value="8">All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Required Time will it take to see this place</label>
+                                <input type="text" class="form-control" name="req_time[]" id="req_time`+p+`" placeholder="Enter time" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                <span class="text-danger">Only Enter in Minutes</span><br>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Open Days</label>
+                                <select class="select3" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="allow_vehicle_types`+p+`[]" id="allow_vehicle_types`+p+`" required="required">
+                                <?php
+                                    foreach($vehicle_type as $vehicle_type_info) 
+                                    { 
+                                    ?>
+                                    <option class="xyz" value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
+                                    <?php } ?>
+                                    <option value="8">All</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                      <label>Is It Municipal Tax </span></label>
-                      <div class="form-group">
-                          <input type="radio" id="Manicipal_Yes`+p+`" name="municipal_tax_yes_no`+p+`" value="Yes" class="municipal_cls"> &nbsp;
-                          <label>Yes</label>  &nbsp; &nbsp; 
-                          <input type="radio" id="Manicipal_No`+p+`" name="municipal_tax_yes_no`+p+`" value="No" class="municipal_cls"> &nbsp;
-                          <label>No</label><br>
-                      </div>
-                    </div>
+                            <div class="form-group">
+                                <label>Nearest Railway Station Name</label>
+                                <select class="select_css" name="railway_station_name[]" id="railway_station_name`+p+`" required="required">
+                                <option value="">Select Railway Station Name</option>
+                                    <?php
+                                        foreach($city_table as $city_table_info) 
+                                        { 
+                                    ?>
+                                <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div class="col-md-3 if_municipal_tax_yes_div">
-                      <div class="form-group">
-                          <label>Municipal Tax Amount </span></label>
-                          <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt`+p+`" placeholder="Enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <label>Is It Parking Cost </span></label>
-                      <div class="form-group">
-                          <input type="radio" id="parking_cost_Yes`+p+`" name="parking_cost_yes_no`+p+`" value="Yes" class="parking_cls"> &nbsp;
-                          <label>Yes</label>  &nbsp; &nbsp; 
-                          <input type="radio" id="parking_cost_No`+p+`" name="parking_cost_yes_no`+p+`" value="No" class="parking_cls"> &nbsp;
-                          <label>No</label><br>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3 if_parking_cost_yes_div">
-                      <div class="form-group">
-                          <label>Parking Cost</span></label>
-                          <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost`+p+`" placeholder="Enter cost" oninput="this.value = sthis.value.replace(/[^0-9]/g, '');" required="required" />
-                      </div>
-                    </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nearest Airport Name</label>
+                                <select class="select_css" name="airport_name[]" id="airport_name`+p+`" required="required">
+                                <option value="">Select Airport Name</option>
+                                    <?php
+                                        foreach($city_table as $city_table_info) 
+                                        { 
+                                    ?>
+                                <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Required Time will it take to see this place</label>
-                            <input type="text" class="form-control" name="req_time[]" id="req_time`+p+`" placeholder="Enter time" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
-                            <span class="text-danger">Only Enter in Minutes</span><br>
+                            <div class="form-group">
+                                <label>Upload Image</label><br>
+                                <input type="file" name="image_name`+p+`" id="image_name`+p+`" required="required" multiple>
+                                <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                             </div>
                         </div>
 
-                        <div class="col-md-5">
-                        <div class="form-group">
-                            <label>Allowed Vehicle Types</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select Vehicle Types" style="width: 100%;" name="allow_vehicle_types`+p+`[]" id="allow_vehicle_types`+p+`" required="required">
-                                <option value="">Select types</option>
-                                <?php
-                                foreach($vehicle_type as $vehicle_type_info) 
-                                { 
-                                ?>
-                                <option value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
-                            <?php } ?>
-                            </select>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Place Description</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                    <textarea class="form-control" name="place_description_english[]" id="place_description_english`+p+`" placeholder="Enter Description in English"></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="place_description_marathi[]" id="place_description_marathi`+p+`" placeholder="Enter Description in Marathi"></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="place_description_hindi[]" id="place_description_hindi`+p+`" placeholder="Enter Description in Hindi"></textarea>
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>YouTube Link</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="youtube_link[]" id="youtube_link`+p+`" placeholder="Enter YouTube Link">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Google Map Link</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="google_map_link[]" id="google_map_link`+p+`" placeholder="Enter Google Map Link">
+                                    </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
                         </div>
-                        </div>
 
-                        <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Nearest Railway Station Name</label>
-                        <select class="select_css" name="railway_station_name[]" id="railway_station_name`+p+`" required="required">
-                        <option value="">Select Railway Station Name</option>
-                              <?php
-                                foreach($city_table as $city_table_info) 
-                                { 
-                              ?>
-                          <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
-                              <?php } ?>
-                        </select>
-                      </div>
-                    </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="in_tour_creation_yes_1`+p+`" name="in_tour_creation_no_one`+p+`" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="in_tour_creation_no_1`+p+`" name="in_tour_creation_no_one`+p+`" value="No" > &nbsp;
+                                    <label>No</label><br>   
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is Entery Ticket</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="Yes`+p+`" name="ticket_yes_no`+p+`" value="Yes" class="ticket_cls" onclick="toggleInput('ticket_yes_no1', 'ticket_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="No`+p+`" name="ticket_yes_no`+p+`" value="No" class="ticket_cls" onclick="toggleInput('ticket_yes_no1', 'ticket_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control" name="ticket_cost[]" id="ticket_cost`+p+`" placeholder="Enter Ticket Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    </div>
 
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label>Nearest Airport Name</label>
-                        <select class="select_css" name="airport_name[]" id="airport_name`+p+`" required="required">
-                        <option value="">Select Airport Name</option>
-                              <?php
-                                foreach($city_table as $city_table_info) 
-                                { 
-                              ?>
-                          <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
-                              <?php } ?>
-                        </select>
-                      </div>
-                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="in_tour_creation_yes_1`+p+`" name="in_tour_creation_no_two`+p+`" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="in_tour_creation_no_1`+p+`" name="in_tour_creation_no_two`+p+`" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Municipal Tax</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="Manicipal_Yes`+p+`" name="municipal_tax_yes_no`+p+`" value="Yes" class="municipal_cls" onclick="toggleInput('municipal_tax_yes_no1', 'municipal_amt')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="Manicipal_No`+p+`" name="municipal_tax_yes_no`+p+`" value="No" class="municipal_cls" onclick="toggleInput('municipal_tax_yes_no1', 'municipal_amt')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_municipal_yes_no" name="municipal_amt[]" id="municipal_amt`+p+`" placeholder="Enter Municipal Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
 
-                        <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
-                            <div class="form-group">
-                                <label></label>
-                                <button type="button" name="remove" id="`+p+`" class="btn btn-danger btn_remove">X</button>
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="in_tour_creation_yes_2`+p+`" name="in_tour_creation_no_three`+p+`" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="in_tour_creation_no_2`+p+`" name="in_tour_creation_no_three`+p+`" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Parking Cost</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="parking_cost_Yes`+p+`" name="parking_cost_yes_no`+p+`" value="Yes" class="parking_cls" onclick="toggleInput('parking_cost_yes_no1', 'parking_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="parking_cost_No`+p+`" name="parking_cost_yes_no`+p+`" value="No" class="parking_cls" onclick="toggleInput('parking_cost_yes_no1', 'parking_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_packing_yes_no" name="parking_cost[]" id="parking_cost`+p+`" placeholder="Enter Parking Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
+
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="in_tour_creation_yes_3`+p+`" name="in_tour_creation_no_four`+p+`" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="in_tour_creation_no_3`+p+`" name="in_tour_creation_no_four`+p+`" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Darshan Pass Cost</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="darshan_pass_cost_Yes`+p+`" name="darshan_pass_cost_yes_no`+p+`" value="Yes" onclick="toggleInput('darshan_pass_cost_yes_no1', 'darshan_pass_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="darshan_pass_cost_No`+p+`" name="darshan_pass_cost_yes_no`+p+`" value="No" onclick="toggleInput('darshan_pass_cost_yes_no1', 'darshan_pass_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_darshan_pass_yes_no" name="darshan_pass_cost[]" id="darshan_pass_cost`+p+`" placeholder="Enter Darshan Pass Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <label>Ticket Booking Link</label>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                    <input type="text" class="form-control" name="ticket_booking_link[]" id="ticket_booking_link`+p+`" placeholder="Enter Ticket Booking Link">
+                                    </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-self-center">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <button type="button" name="remove" id="`+p+`" class="btn btn-danger btn_remove">X</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>`);
     $('#main_row').append(structure); 
     $('.select2').select2() 
+    $('.select3').select2() 
 
 
         $(document).on('click', '.btn_remove', function(){  
@@ -8916,9 +9027,292 @@ $('#edit_train').validate({ // initialize the plugin
 });
 </script>
 
+<script>
+    var p=1;
+    $('#edit_more_place').click(function() {
+        $('.select2').select2()
+        $('.select3').select2()
+            p++;
+        // var selectedDays = [];
+        // $('#open_days' + p + ' option:selected').each(function() {
+        //     selectedDays.push($(this).val());
+        // });
+            
+        var structure = $(`<div class="row mb-4 add_row" id="new_row${p}" style="border: 1px solid #959595;padding: 1rem;"> 
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Visiting Place Name</label>
+                                <input type="text" class="form-control" name="edit_Place_name[]" id="edit_Place_name${p}" placeholder="Enter Name" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Opening Time</label>
+                                <input type="time" class="form-control" name="edit_opening_time[]" id="edit_opening_time${p}" placeholder="Enter opening time" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Closing Time</label>
+                                <input type="time" class="form-control" name="edit_closing_time[]" id="edit_closing_time${p}" placeholder="Enter closing time" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Open Days</label>
+                                <select class="select2" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="edit_open_days${p}[]" id="edit_open_days${p}" required="required">
+                                    <option value="">Select </option>
+                                    <option value="1">Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesday</option>
+                                    <option value="5">Thursday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    <option value="8">All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Required Time will it take to see this place</label>
+                                <input type="text" class="form-control" name="edit_req_time[]" id="edit_req_time${p}" placeholder="Enter time" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                                <span class="text-danger">Only Enter in Minutes</span><br>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Open Days</label>
+                                <select class="select3" multiple="multiple" data-placeholder="Select Days" style="width: 100%;" name="edit_allow_vehicle_types${p}[]" id="edit_allow_vehicle_types${p}" required="required">
+                                <?php
+                                    foreach($vehicle_type as $vehicle_type_info) 
+                                    { 
+                                    ?>
+                                    <option class="xyz" value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
+                                    <?php } ?>
+                                    <option value="8">All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nearest Railway Station Name</label>
+                                <select class="select_css" name="edit_railway_station_name[]" id="edit_railway_station_name${p}" required="required">
+                                <option value="">Select Railway Station Name</option>
+                                    <?php
+                                        foreach($city_table as $city_table_info) 
+                                        { 
+                                    ?>
+                                <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nearest Airport Name</label>
+                                <select class="select_css" name="edit_airport_name[]" id="edit_airport_name${p}" required="required">
+                                <option value="">Select Airport Name</option>
+                                    <?php
+                                        foreach($city_table as $city_table_info) 
+                                        { 
+                                    ?>
+                                <option value="<?php echo $city_table_info['id'];?>"><?php echo $city_table_info['city_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Upload Image</label><br>
+                                <input type="file" name="edit_image_name${p}" id="edit_image_name${p}" required="required" multiple>
+                                <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Place Description</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                    <textarea class="form-control" name="edit_place_description_english[]" id="edit_place_description_english${p}" placeholder="Enter Description in English"></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="edit_place_description_marathi[]" id="edit_place_description_marathi${p}" placeholder="Enter Description in Marathi"></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="edit_place_description_hindi[]" id="edit_place_description_hindi${p}" placeholder="Enter Description in Hindi"></textarea>
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>YouTube Link</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="edit_youtube_link[]" id="edit_youtube_link${p}" placeholder="Enter YouTube Link">
+                                    </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Google Map Link</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="edit_google_map_link[]" id="edit_google_map_link${p}" placeholder="Enter Google Map Link">
+                                    </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_in_tour_creation_yes_1${p}" name="edit_in_tour_creation_no_one${p}" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_in_tour_creation_no_1${p}" name="edit_in_tour_creation_no_one${p}" value="No" > &nbsp;
+                                    <label>No</label><br>   
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is Entery Ticket</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_Yes${p}" name="edit_ticket_yes_no${p}" value="Yes" class="ticket_cls" onclick="toggleInput('ticket_yes_no1', 'ticket_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_No${p}" name="edit_ticket_yes_no${p}" value="No" class="ticket_cls" onclick="toggleInput('ticket_yes_no1', 'ticket_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control" name="edit_ticket_cost[]" id="edit_ticket_cost${p}" placeholder="Enter Ticket Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    </div>
+
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_in_tour_creation_yes_1${p}" name="edit_in_tour_creation_no_two${p}" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_in_tour_creation_no_1${p}" name="edit_in_tour_creation_no_two${p}" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Municipal Tax</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_Manicipal_Yes${p}" name="edit_municipal_tax_yes_no${p}" value="Yes" class="municipal_cls" onclick="toggleInput('municipal_tax_yes_no1', 'municipal_amt')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_Manicipal_No${p}" name="edit_municipal_tax_yes_no${p}" value="No" class="municipal_cls" onclick="toggleInput('municipal_tax_yes_no1', 'municipal_amt')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_municipal_yes_no" name="edit_municipal_amt[]" id="edit_municipal_amt${p}" placeholder="Enter Municipal Tax Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
+
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_in_tour_creation_yes_2${p}" name="edit_in_tour_creation_no_three${p}" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_in_tour_creation_no_2${p}" name="edit_in_tour_creation_no_three${p}" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Parking Cost</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_parking_cost_Yes${p}" name="edit_parking_cost_yes_no${p}" value="Yes" class="parking_cls" onclick="toggleInput('parking_cost_yes_no1', 'parking_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_parking_cost_No${p}" name="edit_parking_cost_yes_no${p}" value="No" class="parking_cls" onclick="toggleInput('parking_cost_yes_no1', 'parking_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_packing_yes_no" name="edit_parking_cost[]" id="edit_parking_cost${p}" placeholder="Enter Parking Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
+
+                                    <div class="col-md-3 mb-4">
+                                    <label>Is Use In Tour Creation</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_in_tour_creation_yes_3${p}" name="edit_in_tour_creation_no_four${p}" value="Yes" > &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_in_tour_creation_no_3${p}" name="edit_in_tour_creation_no_four${p}" value="No" > &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <label>Is It Darshan Pass Cost</label>
+                                    </div>
+                                    <div class="col-md-2 mb-4">
+                                    <input type="radio" id="edit_darshan_pass_cost_Yes${p}" name="edit_darshan_pass_cost_yes_no${p}" value="Yes" onclick="toggleInput('darshan_pass_cost_yes_no1', 'darshan_pass_cost')"> &nbsp;
+                                    <label>Yes</label>  &nbsp; &nbsp; 
+                                    <input type="radio" id="edit_darshan_pass_cost_No${p}" name="edit_darshan_pass_cost_yes_no${p}" value="No" onclick="toggleInput('darshan_pass_cost_yes_no1', 'darshan_pass_cost')"> &nbsp;
+                                    <label>No</label><br>
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <input type="text" class="form-control if_darshan_pass_yes_no" name="edit_darshan_pass_cost[]" id="edit_darshan_pass_cost${p}" placeholder="Enter Darshan Pass Cost" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                                    </div>
+                                    <div class="col-md-3 mb-4">
+                                    <label>Ticket Booking Link</label>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                    <input type="text" class="form-control" name="edit_ticket_booking_link[]" id="edit_ticket_booking_link${p}" placeholder="Enter Ticket Booking Link">
+                                    </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-self-center">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <button type="button" name="remove" id="${p}" class="btn btn-danger btn_remove">X</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
+    $('#edit_main_row').append(structure); 
+    $('.select2').select2()
+    $('.select3').select2()
+
+
+        $(document).on('click', '.btn_remove', function(){  
+           var button_id = $(this).attr("id");   
+           $('#new_row'+button_id+'').remove();  
+      });
+
+});
+</script>
+
+
+
     <script>
         var i = 1;
-
         $('#add_more_room_details').click(function() {
             i++;
 
@@ -8966,6 +9360,58 @@ $('#edit_train').validate({ // initialize the plugin
         $(document).on('click', '.btn_remove', function() {
             var button_id = $(this).attr("id");
             $('#new_row' + button_id).remove();
+        });
+    </script>
+
+<script>
+        var i = 1;
+        $('#edit_more_room_details').click(function() {
+            i++;
+
+            var structure = $(`
+                <tr id="edit_new_row${i}">
+                    <td class="hotel_room_rate">
+                        <select class="form-control" style="width: 100%;" name="edit_select_type[]" id="edit_select_type`+i+`" required="required">
+                        <option value="">Select type</option>
+                                <?php
+                                foreach($hotel_type as $hotel_type_info) 
+                                { 
+                                ?>
+                                <option value="<?php echo $hotel_type_info['id'];?>"><?php echo $hotel_type_info['hotel_type_name'];?></option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td class="hotel_room_rate">
+                        <select class="form-control" style="width: 100%;" name="edit_room_select[]" id="edit_room_select`+i+`" required="required">
+                            <option value="">Select Room Type</option>
+                                <?php
+                                foreach($room_type as $room_type_info) 
+                                { 
+                                ?>
+                                <option value="<?php echo $room_type_info['id'];?>"><?php echo $room_type_info['room_name'];?></option>
+                                <?php } ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="edit_room_rate[]" id="edit_room_rate`+i+`" placeholder="Enter room rate" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="edit_room_total_person[]" id="edit_room_total_person`+i+`" placeholder="Enter total person" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td class="hotel_room_rate">
+                        <input type="text" class="form-control" name="edit_extra_bed_charges[]" id="edit_extra_bed_charges`+i+`" placeholder="Enter extra Bed Charges" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
+                    </td>
+                </tr>
+            `);
+            $('#edit_hotel_room_body').append(structure);
+        });
+
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#edit_new_row' + button_id).remove();
         });
     </script>
 
@@ -11397,123 +11843,391 @@ $(document).on("click", ".remove-row", function() {
  </script>
 
  <!-- Agent wise Payement status report ajax-->
-
- <!-- Admin -> tour creation day to day program-->
- <script>
-    $(document).ready(function(){
-        var count = $('#tour_no_of_days').val();
-        var tbody = $('#daily_attendance_table_add');
-        // Clear any existing content in the tbody
-        tbody.empty();
-        // alert(count);
-            for(var i=1; i<=count; i++){
-                var img_count=parseInt(i)+1;
-            
-                // alert(i);
-        var structure = $(`<?php foreach($arr_data as $info) 
-                    { ?>
-                                <tr>
-                                    <td>`+i+`</td>
-                                    <td>
-                                    <button class="btn btn-primary">
-                                        <a href="<?php echo $module_daily_program_data;?>/add/<?php $aid=base64_encode($info['id']); 
-                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
-                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css">Day `+i+`</button></a>
-                                    </button>
-                                    </td>
-                                    <td>
-                                        <a href="<?php echo $module_daily_program_data;?>/details/<?php $aid=base64_encode($info['id']); 
-                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
-                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> &nbsp;/&nbsp;
-
-                                        <a href="<?php echo $module_daily_program_data;?>/editt/<?php $aid=base64_encode($info['id']); 
-                                                echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']); 
-                                                echo rtrim($did, '='); ?>/`+i+`" class="itinerary_css"><i class="fas fa-edit" aria-hidden="true" style="color:blue" ;="" title="edit"></i></a> &nbsp;/&nbsp;
-                                        
-                                        <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red"; title="delete"></i></a>
-                                        
-                                        <!-- <a href="<?php //echo $module_url_path;?>/delete/<?php //$aid=base64_encode($info['id']); 
-                                                    //echo rtrim($aid, '='); ?> /<?php //$did=base64_encode($info['add_more_id']); 
-                                                    //echo rtrim($did, '='); ?>" class="itinerary_css"><i class="fa fa-trash" aria-hidden="true" style="color:red" ;=""></i></a> -->
-                                        </div>
-                                    </div>
-                                    </td>
-
-
-                                </tr>
-                                <?php  } ?>`);
-                    
-        
-            //alert(i);                       
-            tbody.append(structure); 
-        }
-    });
-
-</script>
-<!-- Admin -> tour creation day to day program-->
-
-<!-- Daily Program Data add more  -->
+<!-- new script adding more add days functinality as per client requirement -->
 
 <script>
     $(document).ready(function() {
+        var count = parseInt($('#tour_no_of_days').val());
+        var tbody = $('#daily_attendance_table_add');
+       
+        // Function to generate the structure for a given day
+        function generateStructure(dayNumber, isNew = false) {
+            var structure = $(`<?php foreach($arr_data as $info)
+                    { ?>
+                        <tr id="day-row-` + dayNumber + `">
+                            <td>` + dayNumber + `</td>
+                            <td>
+                                <button class="btn btn-primary">
+                                    <a href="<?php echo $module_daily_program_data;?>/add/<?php $aid=base64_encode($info['id']);
+                                            echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']);
+                                            echo rtrim($did, '='); ?>/` + dayNumber + `" class="itinerary_css">Day ` + dayNumber + `</button></a>
+                                </button>
+                            </td>
+                            <td>
+                                <a href="<?php echo $module_daily_program_data;?>/details/<?php $aid=base64_encode($info['id']);
+                                        echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']);
+                                        echo rtrim($did, '='); ?>/` + dayNumber + `" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" title="view"></i></a> &nbsp;/&nbsp;
+ 
+                                <a href="<?php echo $module_daily_program_data;?>/editt/<?php $aid=base64_encode($info['id']);
+                                        echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['tour_number_of_days']);
+                                        echo rtrim($did, '='); ?>/` + dayNumber + `" class="itinerary_css"><i class="fas fa-edit" aria-hidden="true" style="color:blue" title="edit"></i></a> &nbsp;/&nbsp;
+                               
+                                <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red" title="delete"></i></a> &nbsp;/&nbsp;
+                                ` + (isNew ? `<a href="#" class="remove-day" data-day="` + dayNumber + `" title="Remove Day"><i class="fa fa-times" aria-hidden="true" style="color:red" title="remove day"></i></a>` : ``) + `
+                            </td>
+                        </tr>
+                        <?php  } ?>`);
+            return structure;
+        }
+ 
+        // Initial population of days
+        tbody.empty();
+        for (var i = 1; i <= count; i++) {
+            tbody.append(generateStructure(i));
+        }
+ 
+        // Function to add a new day
+        $('#addDayBtn').on('click', function() {
+            count++;
+            tbody.append(generateStructure(count, true));
+        });
+ 
+        // Event delegation to handle dynamic remove day button clicks
+        tbody.on('click', '.remove-day', function(e) {
+            e.preventDefault();
+            var dayNumber = $(this).data('day');
+            $('#day-row-' + dayNumber).remove();
+        });
+    });
+</script>
+
+<!-- Daily Program Data add more  -->
+<script>
+    $(document).ready(function() {
+        // Step 1: Store unique options in a JavaScript array
+        const uniqueStartPoints = [
+            <?php 
+            $unique_places = [];
+            foreach ($citywise_other_add_more as $citywise_other_add_more_info): 
+                // Check if the place_name or id is already in the $unique_places array
+                if (!in_array($citywise_other_add_more_info['place_name'], $unique_places)) {
+                    // If not, add the place_name to $unique_places array
+                    $unique_places[] = $citywise_other_add_more_info['place_name'];
+                    echo "{id: '".htmlspecialchars($citywise_other_add_more_info['id'], ENT_QUOTES, 'UTF-8')."', name: '".htmlspecialchars($citywise_other_add_more_info['place_name'], ENT_QUOTES, 'UTF-8')."'},"; 
+                }
+            endforeach; 
+            ?>
+        ];
+
+        function handleActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="travel_distance[]"]');
+                const toPlace = row.find('select[name="to_place[]"]');
+                const select2Container = toPlace.next('.select2-container');
+ 
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    select2Container.addClass('readonly-select2');
+                    toPlace.find('option').not(':first').remove();
+                } else {
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    select2Container.removeClass('readonly-select2');
+                    toPlace.prop('disabled', false);
+                }
+            });
+        }
+
+        // Step 2: Use uniqueStartPoints array to populate dropdown options
+        function populateStartPointsAndToPlace(selectElement) {
+            selectElement.empty();
+            selectElement.append('<option value="">Select place</option>'); // Default option
+            $.each(uniqueStartPoints, function(index, point) {
+                selectElement.append('<option value="'+point.id+'">'+point.name+'</option>');
+            });
+        }
+
         // Add more rows when the "Add More" button is clicked
-        $("#travel_add_more").click(function() {
-            // alert('ggggggggg');
-            var expence = $(this).attr('travel_attr_add_id');
+        $("#fresh_add_more").click(function() {
+            var expence = $(this).attr('fresh_attr_add_id');
+            var i = parseInt(expence) + 1;
            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('travel_attr_add_id',i);
             var newRow = `
-                                        <tr>
-                                            <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
-                                                    <option value="">Select Activity Type</option>
-                                                    <option value="Travel">Travel</option>
-                                                    <option value="Visit">Visit</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
-                                                    <option value="">Select start point</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
-                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
-                                            <td>
-                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
-                                                    <option value="">Select To Place</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
-                                            <td>
-                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
-                                            </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_breakfast">  
-                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
-                                        </tr>
+                <tr>
+                    <td>
+                        <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
+                            <option value="">Select Activity Type</option>
+                            <option value="Starting Journey Point">Starting Journey Point</option>
+                            <option value="travelling">Travelling</option>
+                            <option value="fresh_up">Fresh Up</option>
+                            <option value="visit">Visit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="select2 select_css start_point start_point`+i+`" name="start_point[]" id="start_point`+i+`" data-live-search="true">
+                        </select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
+                    <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`" value="0"></td>
+                    <td>
+                        <select class="select2 select_css select_to_place to_place`+i+`" name="to_place[]" id="to_place`+i+`" data-live-search="true"></select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
+                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
+                    <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="fresh_before_breakfast">  
+                    <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
+                </tr>
             `;
+           
+            $("#fresh_table1 tbody").append(newRow);
+
+            // Step 3: Populate the start_point and to_place dropdowns in the new row
+            populateStartPointsAndToPlace($('#start_point' + i));
+            populateStartPointsAndToPlace($('#to_place' + i));
+
+            handleActivityTypeChange($('#activity_type' + i));
+
+            $(this).attr('fresh_attr_add_id', i);
+            i++;
+        });
+
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+
+        // Initial population for existing rows
+        populateStartPointsAndToPlace($('#start_point'));
+        populateStartPointsAndToPlace($('#to_place'));
+        handleActivityTypeChange($('#activity_type'));
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function() {
+        const uniqueStartPoints = [
+            <?php 
+            $unique_places = [];
+            foreach ($citywise_other_add_more as $citywise_other_add_more_info): 
+                // Check if the place_name or id is already in the $unique_places array
+                if (!in_array($citywise_other_add_more_info['place_name'], $unique_places)) {
+                    // If not, add the place_name to $unique_places array
+                    $unique_places[] = $citywise_other_add_more_info['place_name'];
+                    echo "{id: '".htmlspecialchars($citywise_other_add_more_info['id'], ENT_QUOTES, 'UTF-8')."', name: '".htmlspecialchars($citywise_other_add_more_info['place_name'], ENT_QUOTES, 'UTF-8')."'},"; 
+                }
+            endforeach; 
+            ?>
+        ];
+
+        function handleBreakfastActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="travel_distance[]"]');
+                const toPlaceElement = row.find('.select_to_place');
+                const toPlaceID = toPlaceElement.attr('attr_toplace');
+
+                const toPlaceSelect = row.find('.to_place_0' + toPlaceID);
+
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    toPlaceSelect.find('option').not(':first').remove();
+                } else {
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    toPlaceSelect.prop('disabled', false);
+                }
+            });
+        }
+
+        // Populate dropdown options using unique start points array
+        function populateStartPointsAndToPlace(selectElement) {
+            selectElement.empty();
+            selectElement.append('<option value="">Select place</option>'); // Default option
+            $.each(uniqueStartPoints, function(index, point) {
+                selectElement.append('<option value="'+point.id+'">'+point.name+'</option>');
+            });
+        }
+
+        // Add more rows when "Add More" is clicked
+        $("#travel_add_more").click(function() {
+            var expence = $(this).attr('travel_attr_add_id');
+            var i = parseInt(expence) + 1;
+
+            var newRow = `
+                <tr>
+                    <td>
+                        <select class="select_css" name="activity_type[]" id="activity_type_0`+i+`">
+                            <option value="">Select Activity Type</option>
+                            <option value="start_place">Start Place</option>
+                            <option value="travelling">Travelling</option>
+                            <option value="fresh_up">Fresh Up</option>
+                            <option value="visit">Visit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="select2 select_css start_point start_point_0`+i+`" name="start_point[]" id="start_point_0`+i+`" data-live-search="true">
+                        </select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
+                    <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`" value="0"></td>
+                    <td>
+                        <select class="select2 select_css select_to_place to_place_0`+i+`" name="to_place[]" id="to_place_0`+i+`" attr_toplace="`+i+`" data-live-search="true">
+                        </select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
+                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
+                    <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_breakfast">  
+                    <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">
+                </tr>
+            `;
+
             $("#table1 tbody").append(newRow);
+
+            // Populate new row with unique options
+            populateStartPointsAndToPlace($('#start_point_0' + i));
+            populateStartPointsAndToPlace($('#to_place_0' + i));
+
+            handleBreakfastActivityTypeChange($('#activity_type_0' + i));
+
+            $(this).attr('travel_attr_add_id', i);
+            i++;
+        });
+
+        // Remove a row when "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+
+        // Initial population for existing rows
+        populateStartPointsAndToPlace($('#start_point_0'));
+        populateStartPointsAndToPlace($('#to_place_0'));
+        handleBreakfastActivityTypeChange($('#activity_type_0'));
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+ 
+        function handlebreakfastActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="edit_before_breakfast_distance[]"]');
+                // const toPlacee = row.find('select[name="select_to_place[]"]');
+                // console.log(toPlacee.attr('attr_toplace'));
+                const toPlacee = row.find('.select_to_place');
+                var get_toplaceval = toPlacee.attr('attr_toplace');
+               
+                const toPlace_empty = row.find('.edit_before_breakfast_to_place_0' + get_toplaceval);
+                // console.log(toPlace_empty.find('option').not(':first'));
+               
+               
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                   
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    // Prevent user interaction with Select2 but allow form submission
+                    toPlace_empty.find('option').not(':first').remove();
+                    // toPlace_empty.prop('disabled', true);
+                    // Disable the actual <select> element for form submission
+                } else {
+                   
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    // Enable user interaction with Select2
+                    toPlace_empty.prop('disabled', false); // Enable the actual <select> element for form submission
+                }
+            });
+        }
+ 
+        // Add more rows when the "Add More" button is clicked
+        $("#before_breakfast_edit_add_more").click(function() {
+ 
+            var expence = $(this).attr('before_breakfast_edit_attr_add_id');
+            var i = parseInt(expence) + 1;
+ 
+            var newRow = `
+            <tr>
+                <td>
+                    <select class="select_css" name="edit_before_breakfast_activity_type[]" id="edit_before_breakfast_activity_type`+i+`">
+                        <option value="">Select Activity Type</option>
+                        <option value="start_place">Start Place</option>
+                        <option value="travelling">Travelling</option>
+                        <option value="fresh_up">Fresh Up</option>
+                        <option value="visit">Visit</option>
+                    </select>
+                </td>
+               
+                <td>
+                    <select class="select2 select_css start_point edit_before_breakfast_start_point_0`+i+`" name="edit_before_breakfast_start_point[]" id="edit_before_breakfast_start_point_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
+                    </select>
+                </td>
+                <td><input type="time" class="form-control quantity" name="edit_before_breakfast_start_time[]" id="edit_before_breakfast_start_time`+i+`"></td>
+                <td><input type="text" class="form-control quantity" name="edit_before_breakfast_distance[]" id="edit_before_breakfast_distance`+i+`"></td>
+               
+                <td>
+                    <select class="select2 select_css select_to_place edit_before_breakfast_to_place_0`+i+`" name="edit_before_breakfast_to_place[]" id="edit_before_breakfast_to_place_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="time" class="form-control quantity" name="edit_before_breakfast_end_time[]" id="edit_before_breakfast_end_time`+i+`">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_before_breakfast_meals_type[]" id="edit_before_breakfast_meals_type" value="fresh_before_breakfast">
+                    <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                    <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                    <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Remove</button>
+                </td>
+            </tr>
+            `;
+            $("#fresh_table1 tbody").append(newRow);
+ 
+            // Initialize Select2 for the newly added start_point select box
+            $('.edit_before_breakfast_start_point_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            $('.edit_before_breakfast_to_place_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            handlebreakfastActivityTypeChange($('#edit_before_breakfast_activity_type' + i));
+            // Reset the attribute for the next addition
+            $(this).attr('before_breakfast_edit_attr_add_id', i);
+ 
             i++;
         });
        
@@ -11521,68 +12235,76 @@ $(document).on("click", ".remove-row", function() {
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
-    });
+        handlebreakfastActivityTypeChange($('#edit_before_breakfast_activity_type'));
+    }); $("#fresh_table1 tbody").append(newRow);
 </script>
-
+ 
 <script>
     $(document).ready(function() {
+ 
+        function handlebreakfastActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="edit_travel_distance[]"]');
+                // const toPlacee = row.find('select[name="select_to_place[]"]');
+                // console.log(toPlacee.attr('attr_toplace'));
+                const toPlacee = row.find('.select_to_place');
+                var get_toplaceval = toPlacee.attr('attr_toplace');
+               
+                const toPlace_empty = row.find('.edit_travel_to_place_0_0' + get_toplaceval);
+                // console.log(toPlace_empty.find('option').not(':first'));
+               
+               
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                   
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    // Prevent user interaction with Select2 but allow form submission
+                    toPlace_empty.find('option').not(':first').remove();
+                    // toPlace_empty.prop('disabled', true);
+                    // Disable the actual <select> element for form submission
+                } else {
+                   
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    // Enable user interaction with Select2
+                    toPlace_empty.prop('disabled', false); // Enable the actual <select> element for form submission
+                }
+            });
+        }
+ 
         // Add more rows when the "Add More" button is clicked
         $("#breakfast_edit_add_more").click(function() {
+ 
             var expence = $(this).attr('breakfast_edit_attr_add_id');
-            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('breakfast_edit_attr_add_id',i);
+            var i = parseInt(expence) + 1;
+ 
             var newRow = `
             <tr>
                 <td>
                     <select class="select_css" name="edit_travel_activity_type[]" id="edit_travel_activity_type`+i+`">
                         <option value="">Select Activity Type</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Visit">Visit</option>
+                        <option value="start_place">Start Place</option>
+                        <option value="travelling">Travelling</option>
+                        <option value="fresh_up">Fresh Up</option>
+                        <option value="visit">Visit</option>
                     </select>
                 </td>
+               
                 <td>
-                    <select class="select_css district" name="edit_start_district[]" id="edit_start_district`+i+`" attr_district="district" required="required">
-                        <option value="">Select </option>
-                        <?php 
-                            foreach ($district_data as $district_info) { 
-                                ?>
-                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                            <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_travel_start_point[]" id="edit_travel_start_point`+i+`" >
-                        <option value="">Select start point</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_travel_start_point_0_0`+i+`" name="edit_travel_start_point[]" id="edit_travel_start_point_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td><input type="time" class="form-control quantity" name="edit_travel_start_time[]" id="edit_travel_start_time`+i+`"></td>
                 <td><input type="text" class="form-control quantity" name="edit_travel_distance[]" id="edit_travel_distance`+i+`"></td>
+               
                 <td>
-                    <select class="select_css district" name="edit_end_district[]" id="edit_end_district`+i+`" attr_district="end_district" required="required">
-                        <option value="">Select </option>
-                        <?php
-                        foreach($district_data as $district_info){ 
-                        ?>
-                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_travel_to_place[]" id="edit_travel_to_place`+i+`">
-                        <option value="">Select To Place</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_travel_to_place_0_0`+i+`" name="edit_travel_to_place[]" id="edit_travel_to_place_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td>
                     <input type="time" class="form-control quantity" name="edit_travel_end_time[]" id="edit_travel_end_time`+i+`">
-                    <input readonly type="hidden" class="form-control quantity" name="edit_meals_type[]" id="edit_meals_type" value="after_breakfast">
+                    <input readonly type="hidden" class="form-control quantity" name="edit_travel_meals_type[]" id="edit_travel_meals_type" value="after_breakfast">
                     <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
                     <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
                     <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
@@ -11593,70 +12315,124 @@ $(document).on("click", ".remove-row", function() {
             </tr>
             `;
             $("#edit_table1 tbody").append(newRow);
+ 
+            // Initialize Select2 for the newly added start_point select box
+            $('.edit_travel_start_point_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            $('.edit_travel_to_place_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            handlebreakfastActivityTypeChange($('#edit_travel_activity_type' + i));
+            // Reset the attribute for the next addition
+            $(this).attr('breakfast_edit_attr_add_id', i);
+ 
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
+            handlebreakfastActivityTypeChange($('#edit_travel_activity_type'));
         });
-    });
+    }); $("#edit_table1 tbody").append(newRow);
 </script>
-
+ 
 <script>
     $(document).ready(function() {
+ 
+        function handlebreakfastActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="edit_lunch_distance[]"]');
+                // const toPlacee = row.find('select[name="select_to_place[]"]');
+                // console.log(toPlacee.attr('attr_toplace'));
+                const toPlacee = row.find('.select_to_place');
+                var get_toplaceval = toPlacee.attr('attr_toplace');
+               
+                const toPlace_empty = row.find('.edit_lunch_to_place_0_0_0' + get_toplaceval);
+                // console.log(toPlace_empty.find('option').not(':first'));
+               
+               
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                   
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    // Prevent user interaction with Select2 but allow form submission
+                    toPlace_empty.find('option').not(':first').remove();
+                    // toPlace_empty.prop('disabled', true);
+                    // Disable the actual <select> element for form submission
+                } else {
+                   
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    // Enable user interaction with Select2
+                    toPlace_empty.prop('disabled', false); // Enable the actual <select> element for form submission
+                }
+            });
+        }
+ 
         // Add more rows when the "Add More" button is clicked
         $("#lunch_edit_add_more").click(function() {
+ 
             var expence = $(this).attr('lunch_edit_attr_add_id');
-            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('lunch_edit_attr_add_id',i);
+            var i = parseInt(expence) + 1;
+ 
             var newRow = `
             <tr>
                 <td>
                     <select class="select_css" name="edit_lunch_activity_type[]" id="edit_lunch_activity_type`+i+`">
                         <option value="">Select Activity Type</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Visit">Visit</option>
+                        <option value="start_place">Start Place</option>
+                        <option value="travelling">Travelling</option>
+                        <option value="fresh_up">Fresh Up</option>
+                        <option value="visit">Visit</option>
                     </select>
                 </td>
+               
                 <td>
-                    <select class="select_css district" name="edit_lunch_start_district[]" id="edit_lunch_start_district`+i+`" attr_district="district" required="required">
-                        <option value="">Select </option>
-                        <?php 
-                            foreach ($district_data as $district_info) { 
-                                ?>
-                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                            <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_lunch_start_point[]" id="edit_lunch_start_point`+i+`" >
-                        <option value="">Select start point</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_lunch_start_point_0_0_0`+i+`" name="edit_lunch_start_point[]" id="edit_lunch_start_point_0_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td><input type="time" class="form-control quantity" name="edit_lunch_start_time[]" id="edit_lunch_start_time`+i+`"></td>
                 <td><input type="text" class="form-control quantity" name="edit_lunch_distance[]" id="edit_lunch_distance`+i+`"></td>
+               
                 <td>
-                    <select class="select_css district" name="edit_lunch_end_district[]" id="edit_lunch_end_district`+i+`" attr_district="end_district" required="required">
-                        <option value="">Select </option>
-                        <?php
-                        foreach($district_data as $district_info){ 
-                        ?>
-                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_lunch_to_place[]" id="edit_lunch_to_place`+i+`">
-                        <option value="">Select To Place</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_lunch_to_place_0_0_0`+i+`" name="edit_lunch_to_place[]" id="edit_lunch_to_place_0_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td>
@@ -11672,70 +12448,124 @@ $(document).on("click", ".remove-row", function() {
             </tr>
             `;
             $("#edit_table2 tbody").append(newRow);
+ 
+            // Initialize Select2 for the newly added start_point select box
+            $('.edit_lunch_start_point_0_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            $('.edit_lunch_to_place_0_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            handlebreakfastActivityTypeChange($('#edit_lunch_activity_type' + i));
+            // Reset the attribute for the next addition
+            $(this).attr('lunch_edit_attr_add_id', i);
+ 
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
+            handlebreakfastActivityTypeChange($('#edit_lunch_activity_type'));
         });
     });
 </script>
-
+ 
 <script>
     $(document).ready(function() {
+ 
+        function handlebreakfastActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="edit_dinner_distance[]"]');
+                // const toPlacee = row.find('select[name="select_to_place[]"]');
+                // console.log(toPlacee.attr('attr_toplace'));
+                const toPlacee = row.find('.select_to_place');
+                var get_toplaceval = toPlacee.attr('attr_toplace');
+               
+                const toPlace_empty = row.find('.edit_dinner_to_place_0_0_0_0' + get_toplaceval);
+                // console.log(toPlace_empty.find('option').not(':first'));
+               
+               
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                   
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    // Prevent user interaction with Select2 but allow form submission
+                    toPlace_empty.find('option').not(':first').remove();
+                    // toPlace_empty.prop('disabled', true);
+                    // Disable the actual <select> element for form submission
+                } else {
+                   
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    // Enable user interaction with Select2
+                    toPlace_empty.prop('disabled', false); // Enable the actual <select> element for form submission
+                }
+            });
+        }
+ 
         // Add more rows when the "Add More" button is clicked
         $("#dinner_edit_add_more").click(function() {
+ 
             var expence = $(this).attr('dinner_edit_attr_add_id');
-            
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('dinner_edit_attr_add_id',i);
+            var i = parseInt(expence) + 1;
+ 
             var newRow = `
             <tr>
                 <td>
                     <select class="select_css" name="edit_dinner_activity_type[]" id="edit_dinner_activity_type`+i+`">
                         <option value="">Select Activity Type</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Visit">Visit</option>
+                        <option value="start_place">Start Place</option>
+                        <option value="travelling">Travelling</option>
+                        <option value="fresh_up">Fresh Up</option>
+                        <option value="visit">Visit</option>
                     </select>
                 </td>
+               
                 <td>
-                    <select class="select_css district" name="edit_dinner_start_district[]" id="edit_dinner_start_district`+i+`" attr_district="district" required="required">
-                        <option value="">Select </option>
-                        <?php 
-                            foreach ($district_data as $district_info) { 
-                                ?>
-                                <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                            <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_dinner_start_point[]" id="edit_dinner_start_point`+i+`" >
-                        <option value="">Select start point</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_dinner_start_point_0_0_0_0`+i+`" name="edit_dinner_start_point[]" id="edit_dinner_start_point_0_0_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td><input type="time" class="form-control quantity" name="edit_dinner_start_time[]" id="edit_dinner_start_time`+i+`"></td>
                 <td><input type="text" class="form-control quantity" name="edit_dinner_distance[]" id="edit_dinner_distance`+i+`"></td>
+               
                 <td>
-                    <select class="select_css district" name="edit_dinner_end_district[]" id="edit_dinner_end_district`+i+`" attr_district="end_district" required="required">
-                        <option value="">Select </option>
-                        <?php
-                        foreach($district_data as $district_info){ 
-                        ?>
-                        <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-                <td>
-                    <select class="select_css" name="edit_dinner_to_place[]" id="edit_dinner_to_place`+i+`">
-                        <option value="">Select To Place</option>
-                        <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                            <option value="<?php echo $citywise_place_master_info['id'];?>"><?php echo $citywise_place_master_info['place_name'];?></option>
-                        <?php } ?>
+                    <select class="select2 select_css start_point edit_dinner_to_place_0_0_0_0`+i+`" name="edit_dinner_to_place[]" id="edit_dinner_to_place_0_0_0_0`+i+`" data-live-search="true">
+                        <option value="">Loading...</option>
                     </select>
                 </td>
                 <td>
@@ -11751,162 +12581,264 @@ $(document).on("click", ".remove-row", function() {
             </tr>
             `;
             $("#edit_table3 tbody").append(newRow);
+ 
+            // Initialize Select2 for the newly added start_point select box
+            $('.edit_dinner_start_point_0_0_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            $('.edit_dinner_to_place_0_0_0_0' + i).select2({
+                placeholder: "Select start point",
+                ajax: {
+                    url:'<?=base_url()?>admin/daily_program_data/get_place', // Replace with your server-side script to fetch data
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.place_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+ 
+            handlebreakfastActivityTypeChange($('#edit_dinner_activity_type' + i));
+            // Reset the attribute for the next addition
+            $(this).attr('dinner_edit_attr_add_id', i);
+ 
             i++;
         });
-        
+       
         // Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
+            handlebreakfastActivityTypeChange($('#edit_dinner_activity_type'));
         });
     });
 </script>
 
 <script>
     $(document).ready(function() {
-        // Add more rows when the "Add More" button is clicked
+        // Step 1: Store unique options in a JavaScript array
+        const uniqueStartPoints = [
+            <?php 
+            $unique_places = [];
+            foreach ($citywise_other_add_more as $citywise_other_add_more_info): 
+                if (!in_array($citywise_other_add_more_info['place_name'], $unique_places)) {
+                    $unique_places[] = $citywise_other_add_more_info['place_name'];
+                    echo "{id: '".htmlspecialchars($citywise_other_add_more_info['id'], ENT_QUOTES, 'UTF-8')."', name: '".htmlspecialchars($citywise_other_add_more_info['place_name'], ENT_QUOTES, 'UTF-8')."'},"; 
+                }
+            endforeach; 
+            ?>
+        ];
+
+        // Step 2: Handle activity type change logic
+        function handleLunchActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="travel_distance[]"]');
+                const toPlace = row.find('select[name="to_place[]"]');
+                const select2Container = toPlace.next('.select2-container');
+
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    select2Container.addClass('readonly-select2');
+                    toPlace.find('option').not(':first').remove();
+                } else {
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    select2Container.removeClass('readonly-select2');
+                    toPlace.prop('disabled', false);
+                }
+            });
+        }
+
+        // Step 3: Populate dropdown options using unique start points array
+        function populateStartPointsAndToPlace(selectElement) {
+            selectElement.empty();
+            selectElement.append('<option value="">Select place</option>'); // Default option
+            $.each(uniqueStartPoints, function(index, point) {
+                selectElement.append('<option value="'+point.id+'">'+point.name+'</option>');
+            });
+        }
+
+        // Step 4: Add more rows when the "Add More" button is clicked
         $("#visit_add_more").click(function() {
             var expence = $(this).attr('visit_attr_add_id');
-           
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('visit_attr_add_id',i);
+            var i = parseInt(expence) + 1;
+            $(this).attr('visit_attr_add_id', i); // Update the attribute for next use
+
             var newRow = `
-                                        <tr>
-                                            <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
-                                                    <option value="">Select Activity Type</option>
-                                                    <option value="Travel">Travel</option>
-                                                    <option value="Visit">Visit</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
-                                                    <option value="">Select start point</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
-                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
-                                            <td>
-                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
-                                                    <option value="">Select To Place</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
-                                            <td>
-                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
-                                            </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_lunch">  
-                                            <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">  
-                                        </tr>
+                <tr>
+                    <td>
+                        <select class="select_css" name="activity_type[]" id="activity_type_0_0${i}">
+                            <option value="">Select Activity Type</option>
+                            <option value="start_place">Start Place</option>
+                            <option value="travelling">Travelling</option>
+                            <option value="fresh_up">Fresh Up</option>
+                            <option value="visit">Visit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="select2 select_css start_point start_point_0_0${i}" name="start_point[]" id="start_point_0_0${i}" data-live-search="true">
+                        </select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time${i}"></td>
+                    <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance${i}" value="0"></td>
+                    <td>
+                        <select class="select2 select_css select_to_place to_place_0_0${i}" name="to_place[]" id="to_place_0_0${i}" data-live-search="true">
+                        </select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time${i}"></td>
+                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
+                    <input readonly type="hidden" class="form-control quantity" name="meals_type[]" value="after_lunch">  
+                    <input readonly type="hidden" class="form-control" name="food_menu[]" value="">
+                </tr>
             `;
+
             $("#table2 tbody").append(newRow);
-            i++;
+
+            // Step 5: Populate the newly added select elements with unique start points and to places
+            populateStartPointsAndToPlace($('#start_point_0_0' + i));
+            populateStartPointsAndToPlace($('#to_place_0_0' + i));
+
+            handleLunchActivityTypeChange($('#activity_type_0_0' + i)); // Attach the event handler
         });
-       
-        // Remove a row when the "Remove" button is clicked
+
+        // Step 6: Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
+
+        // Initial population for any existing rows
+        populateStartPointsAndToPlace($('#start_point_0_0'));
+        populateStartPointsAndToPlace($('#to_place_0_0'));
+        handleLunchActivityTypeChange($('#activity_type_0_0'));
     });
 </script>
+
 
 <script>
     $(document).ready(function() {
-        // Add more rows when the "Add More" button is clicked
+        // Step 1: Store unique places in a JavaScript array
+        const uniqueStartPoints = [
+            <?php 
+            $unique_places = [];
+            foreach ($citywise_other_add_more as $citywise_other_add_more_info): 
+                if (!in_array($citywise_other_add_more_info['place_name'], $unique_places)) {
+                    $unique_places[] = $citywise_other_add_more_info['place_name'];
+                    echo "{id: '".htmlspecialchars($citywise_other_add_more_info['id'], ENT_QUOTES, 'UTF-8')."', name: '".htmlspecialchars($citywise_other_add_more_info['place_name'], ENT_QUOTES, 'UTF-8')."'},"; 
+                }
+            endforeach; 
+            ?>
+        ];
+
+        // Step 2: Handle activity type change logic
+        function handleDinnerActivityTypeChange(activityTypeElement) {
+            activityTypeElement.on('change', function() {
+                const row = activityTypeElement.closest('tr');
+                const travelDistance = row.find('input[name="travel_distance[]"]');
+                const toPlace = row.find('select[name="to_place[]"]');
+                
+                if ($(this).val() === 'visit' || $(this).val() === 'fresh_up') {
+                    travelDistance.prop('readonly', true).removeAttr('required').val('0');
+                    toPlace.find('option').not(':first').remove();
+                } else {
+                    travelDistance.prop('readonly', false).attr('required', 'required');
+                    toPlace.prop('disabled', false);
+                }
+            });
+        }
+
+        // Step 3: Populate dropdown options using unique start points array
+        function populateStartPointsAndToPlace(selectElement) {
+            selectElement.empty();
+            selectElement.append('<option value="">Select place</option>'); // Default option
+            $.each(uniqueStartPoints, function(index, point) {
+                selectElement.append('<option value="'+point.id+'">'+point.name+'</option>');
+            });
+        }
+
+        // Step 4: Add more rows when the "Add More" button is clicked
         $("#travel_visit_add_more").click(function() {
             var expence = $(this).attr('travel_visit_attr_add_id');
-           
-            var i= parseInt(expence)+parseInt(1);
-            // alert(i);
-            var expence = $(this).attr('travel_visit_attr_add_id',i);
-            var newRow = `
-                                        <tr>
-                                            <td>
-                                                <select class="select_css" name="activity_type[]" id="activity_type`+i+`">
-                                                    <option value="">Select Activity Type</option>
-                                                    <option value="Travel">Travel</option>
-                                                    <option value="Visit">Visit</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css start_point" name="start_point[]" id="start_point`+i+`">
-                                                    <option value="">Select start point</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time`+i+`"></td>
-                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance`+i+`"></td>
-                                            <td>
-                                                <select class="select_css select_end_district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>"><?php echo $district_info['district']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css select_to_place" name="to_place[]" id="to_place`+i+`">
-                                                    <option value="">Select To Place</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time`+i+`"></td>
-                                            <td>
-                                            <button type="button" class="btn btn-danger remove-row">Remove</button>
-                                            </td>
-                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="after_dinner">  
-                                            <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
-                                            <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
-                                            <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value=""> 
+            var i = parseInt(expence) + 1;
+            $(this).attr('travel_visit_attr_add_id', i); // Update the attribute for next use
 
-                                        </tr>
+            var newRow = `
+                <tr>
+                    <td>
+                        <select class="select_css" name="activity_type[]" id="activity_type_0_0_0${i}">
+                            <option value="">Select Activity Type</option>
+                            <option value="start_place">Start Place</option>
+                            <option value="travelling">Travelling</option>
+                            <option value="fresh_up">Fresh Up</option>
+                            <option value="visit">Visit</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="select2 select_css start_point start_point_0_0_0${i}" name="start_point[]" id="start_point_0_0_0${i}" data-live-search="true"></select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time${i}"></td>
+                    <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance${i}" value="0"></td>
+                    <td>
+                        <select class="select2 select_css select_to_place to_place_0_0_0${i}" name="to_place[]" id="to_place_0_0_0${i}" data-live-search="true"></select>
+                    </td>
+                    <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time${i}"></td>
+                    <td><button type="button" class="btn btn-danger remove-row">Remove</button></td>
+                    <input readonly type="hidden" class="form-control quantity" name="meals_type[]" value="after_dinner">  
+                    <input type="hidden" class="form-control" name="lunch_food_menu[]" value="">
+                    <input type="hidden" class="form-control" name="dinner_food_menu[]" value="">
+                    <input type="hidden" class="form-control" name="breakfast_food_menu[]" value="">
+                </tr>
             `;
+
             $("#table3 tbody").append(newRow);
-            i++;
+
+            // Step 5: Populate the newly added select elements with unique start points and to places
+            populateStartPointsAndToPlace($('#start_point_0_0_0' + i));
+            populateStartPointsAndToPlace($('#to_place_0_0_0' + i));
+
+            handleDinnerActivityTypeChange($('#activity_type_0_0_0' + i)); // Attach the event handler
         });
-       
-        // Remove a row when the "Remove" button is clicked
+
+        // Step 6: Remove a row when the "Remove" button is clicked
         $(document).on("click", ".remove-row", function() {
             $(this).closest("tr").remove();
         });
+
+        // Initial population for existing rows
+        populateStartPointsAndToPlace($('#start_point_0_0_0'));
+        populateStartPointsAndToPlace($('#to_place_0_0_0'));
+        handleDinnerActivityTypeChange($('#activity_type_0_0_0'));
     });
 </script>
+
 <!-- Daily Program Data add more  -->
 
 <!-- day to day program edit delete -->
 <script>
   $(".day_delete_instruction").click(function() { 
-   
      var delete_add_more_tour_expenses_id =  $(this).attr('value');
      
      if(delete_add_more_tour_expenses_id !== '')
@@ -12007,11 +12939,13 @@ $(document).on("click", ".remove-row", function() {
 </script>
 <!-- day to day program edit delete -->
     
+<!-- =============== add more qr code =================== -->
+
 <script>
         var i=1;
     $('#add_more_bank').click(function() {
-       // alert('hhhh');
             i++;
+
     var structure = $(`<div class="row" id="new_row`+i+`" style="margin-left: 0px;border-top: 1px solid #b2a8a8;">
                             <div class="col-md-6 mt-4">
                                 <div class="form-group">
@@ -12049,41 +12983,57 @@ $(document).on("click", ".remove-row", function() {
                                     <label>Account Number</label>
                                     <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
+                            </div>  
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Branch Name</label>
+                                    <input type="text" class="form-control" name="branch_name[]" id="branch_name" placeholder="Enter Branch Name">
+                                </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                <label>UPI App Name</label>
-                                    <select class="form-control" name="upi_app_name[]" id="upi_app_name`+i+`">
+                                    <label>IFSC Code</label>
+                                    <input type="text" class="form-control" name="ifsc_code[]" id="ifsc_code" placeholder="Enter IFSC Code">
+                                </div>
+                            </div>
+
+                            <table border="1" class="table table-bordered" id="table`+i+`">
+                          <thead>
+                              <tr>
+                                  <th>UPI App Name</th>
+                                  <th>UPI ID</th>
+                                  <th>Upload QR Image</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php $i=1;?>
+                              <tr>
+                                  <td>
+                                  <select class="form-control" name="upi_app_name`+i+`[]" id="upi_app_name">
                                     <option value="">Select App Name</option>
                                     <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
                                         <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
                                     <?php } ?>
-                                    </select>
-                                </div>
-                            </div> 
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>UPI ID</label>
-                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label>Upload QR Image</label><br>
-                                    <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
-                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
-                                </div>
-                            </div>
-                                    
-                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
-                                <div class="form-group">
-                                <label></label>
-                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
-                                </div>
-                            </div>  
+                                  </select>
+                                  </td>
+                                  <td>
+                                    <input type="text" class="form-control" name="upi_id`+i+`[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                  </td>
+                                  
+                                  <td>
+                                    <input type="file" name="image_name`+i+`" id="image_nam" required="required">
+                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
+                                  </td>
+                                  <td>
+                                      <button type="button" class="btn btn-primary add_qr_add_more" attr_add_id="1" attr_QR_code="`+i+`" name="submit" id="add_qr_add_more1">Add More</button>
+                                  </td>
+                              </tr>
+                              <?php $i++; ?>
+                          </tbody>
+                      </table> 
                         </div> `);
 $('#main_row_for_add_more_bank').append(structure); 
 
@@ -12200,6 +13150,41 @@ $('#edit_room_type').validate({ // initialize the plugin
                 $(this).val(["1", "2", "3", "4", "5", "6", "7"]).trigger('change');
             }
         });
+    });
+</script>
+
+    <script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select3').select2()
+    })
+    </script>
+
+<script>
+    $(document).ready(function() {
+        $('.select3').select2();
+
+        // Event listener for dynamically added "Add More" button
+        $('#add_more_place').on('click', function() {
+            var vehiclenewField = $('#container .col-md-5').first().clone();
+            vehiclenewField.find('select').val('').select2(); // Reset cloned select field
+            $('#container').append(vehiclenewField);
+        });
+
+        $(document).on('change', '.select3', function() {
+        var $select = $(this);
+        var selectedValues = $select.val();
+
+        // Check if "8" is selected
+        if (selectedValues && selectedValues.indexOf("8") !== -1) {
+            // Get all option values except "8"
+            var allValues = $select.find('.xyz').map(function() {
+                return $(this).val();
+            }).get();
+            // Set all options to be selected
+            $select.val(allValues).trigger('change');
+        }
+    });
     });
 </script>
 
@@ -12398,4 +13383,531 @@ $(document).on('click', '.btn_remove', function(){
     });
 </script>
 <!-- district wise citywise place master show select -->
+
+<!-- =============== add more qr code =================== -->
+
+<script>
+    $(document).ready(function() {
+        // $(".add_qr_add_more").click(function() {
+            $(document).on("click", ".add_qr_add_more", function() {
+            // alert('ffffffffff');
+            var expence = $(this).attr('attr_add_id');
+            var new_attr_number = $(this).attr('attr_QR_code');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('attr_add_id',i);
+            var newRow = `
+                <tr>
+                    <td>
+                        <select class="form-control" name="upi_app_name`+new_attr_number+`[]" id="upi_app_name`+i+`">
+                            <option value="">Select App Name</option>
+                            <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="upi_id`+new_attr_number+`[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                    </td>
+                    <td>
+                        <input type="file" name="image_name`+new_attr_number+`[]" id="image_nam`+i+`" required="required">
+                        <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-row">Remove</button>
+                    </td>
+                </tr>
+            `;
+            var new_table_id='#table'+new_attr_number;
+            // alert(new_table_id);
+            $(new_table_id + ' tbody').append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+
+    });
+</script>
+<!-- =============== add more qr code =================== -->
+
+
+<script>
+        var i = 1;
+        $('#add_more_sector').click(function() {
+            i++;
+            var structure = $(`
+               
+                    <div class="row mt-4 ml-1" id="new_row${i}">
+ 
+                      <div class="col-md-10">
+                        <div class="row" style="border: 1px solid #e7b9b9;padding: 1rem;" id="add_more_internal_sector_rows">
+ 
+                            <div class="col-md-4">
+                                <label>Select Sector</label>
+                                <select class="form-control" style="width: 100%;" name="select_type_sector[]" id="select_type_sector${i}" required="required">
+                                <option value="">Select type</option>
+                                    <?php
+                                    foreach($sector as $sector_info)
+                                    {
+                                    ?>
+                                    <option value="<?php echo $sector_info['id'];?>"><?php echo $sector_info['sector'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Organization Name</label>
+                                <input type="text" class="form-control" name="organization[]" id="organization${i}" placeholder="Organization Name" oninput="this.value = this.value.replace(/[^A-Za-z\\s]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Select Designation</label>
+                                <select class="form-control" style="width: 100%;" name="select_designation[]" id="select_designation${i}" required="required">
+                                    <option value="">Select Designation</option>
+                                    <?php
+                                        foreach($hotel_type as $hotel_type_info)
+                                        {
+                                    ?>
+                                        <option value="<?php echo $hotel_type_info['id'];?>"><?php echo $hotel_type_info['hotel_type_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Person Name</label>
+                                <input type="text" class="form-control" name="person_name[]" id="person_name${i}" placeholder="Person Name" oninput="this.value = this.value.replace(/[^A-Za-z\\s]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Contact Number</label>
+                                <input type="text" class="form-control" name="mobile_number[]" id="mobile_number${i}" placeholder="Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Email</label>
+                                <input type="email" class="form-control" name="email[]" id="email${i}" placeholder="Email-id" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Address</label>
+                                <textarea class="form-control" name="address" id="address${i}" placeholder="Address" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Website URL</label>
+                                <input type="text" class="form-control" name="website_url[]" id="website_url${i}" placeholder="Website URL" required="required">
+                                </div>
+                            </div>
+ 
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn_remove mt-4" id="${i}">X</button>
+                      </div>
+                    </div>
+               
+            `);
+            $('#add_more_sector_row').append(structure);
+        });
+ 
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#new_row' + button_id).remove();
+        });
+    </script>
+
+<script>
+        var i = 1;
+        $('#edit_more_sector').click(function() {
+            i++;
+            var structure = $(`
+               
+                    <div class="row mt-4 ml-1" id="new_row${i}">
+ 
+                      <div class="col-md-10">
+                        <div class="row" style="border: 1px solid #e7b9b9;padding: 1rem;" id="add_more_internal_sector_rows">
+ 
+                            <div class="col-md-4">
+                                <label>Select Sector</label>
+                                <select class="form-control" style="width: 100%;" name="edit_select_type_sector[]" id="edit_select_type_sector${i}" required="required">
+                                <option value="">Select type</option>
+                                    <?php
+                                    foreach($sector as $sector_info)
+                                    {
+                                    ?>
+                                    <option value="<?php echo $sector_info['id'];?>"><?php echo $sector_info['sector'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Organization Name</label>
+                                <input type="text" class="form-control" name="edit_organization[]" id="edit_organization${i}" placeholder="Organization Name" oninput="this.value = this.value.replace(/[^A-Za-z\\s]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Select Designation</label>
+                                <select class="form-control" style="width: 100%;" name="edit_select_designation[]" id="edit_select_designation${i}" required="required">
+                                    <option value="">Select Designation</option>
+                                    <?php
+                                        foreach($hotel_type as $hotel_type_info)
+                                        {
+                                    ?>
+                                        <option value="<?php echo $hotel_type_info['id'];?>"><?php echo $hotel_type_info['hotel_type_name'];?></option>
+                                    <?php } ?>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Person Name</label>
+                                <input type="text" class="form-control" name="edit_person_name[]" id="edit_person_name${i}" placeholder="Person Name" oninput="this.value = this.value.replace(/[^A-Za-z\\s]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Contact Number</label>
+                                <input type="text" class="form-control" name="edit_mobile_number[]" id="edit_mobile_number${i}" placeholder="Mobile Number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Email</label>
+                                <input type="email" class="form-control" name="edit_email[]" id="edit_email${i}" placeholder="Email-id" required="required">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Address</label>
+                                <textarea class="form-control" name="edit_address" id="edit_address${i}" placeholder="Address" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Enter Website URL</label>
+                                <input type="text" class="form-control" name="edit_website_url[]" id="edit_website_url${i}" placeholder="Website URL" required="required">
+                                </div>
+                            </div>
+ 
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn_remove mt-4" id="${i}">X</button>
+                      </div>
+                    </div>
+               
+            `);
+            $('#edit_more_sector_row').append(structure);
+        });
+ 
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#new_row' + button_id).remove();
+        });
+    </script>
+
+<script>
+        var i = 1;
+        $('#add_more_vehicle_details').click(function() {
+            i++;
+            var structure = $(`
+               
+                    <div class="row" id="new_row${i}">
+                        <div class="col-md-5 mb-4">
+                            <select class="select_css" name="other_vehicle[]" id="other_vehicle" required="required">
+                            <option value="">Select Vehicle Types</option>
+                            <?php
+                                foreach($vehicle_type as $vehicle_type_info)
+                                {
+                            ?>
+                                <option value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
+                            <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-md-5 mb-4">
+                            <input type="text" class="form-control" name="max_amt[]" id="max_amt" placeholder="Enter Max Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                        </div>
+                        <div class="col-md-2 mb-4">
+                            <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
+                        </div>
+ 
+                    </div>
+               
+            `);
+            $('#other_vehicle_details').append(structure);
+        });
+ 
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#new_row' + button_id).remove();
+        });
+    </script>
+
+<script>
+        var i = 1;
+        $('#edit_more_vehicle_details').click(function() {
+            i++;
+            var structure = $(`
+               
+                    <div class="row" id="new_row${i}">
+                        <div class="col-md-5 mb-4">
+                            <select class="select_css" name="edit_other_vehicle[]" id="edit_other_vehicle" required="required">
+                            <option value="">Select Vehicle Types</option>
+                            <?php
+                                foreach($vehicle_type as $vehicle_type_info)
+                                {
+                            ?>
+                                <option value="<?php echo $vehicle_type_info['id']; ?>"><?php echo $vehicle_type_info['vehicle_type_name']; ?></option>
+                            <?php } ?>
+                            </select>
+                        </div>
+                        <div class="col-md-5 mb-4">
+                            <input type="text" class="form-control" name="edit_max_amt[]" id="edit_max_amt" placeholder="Enter Max Amount" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required="required" />
+                        </div>
+                        <div class="col-md-2 mb-4">
+                            <button type="button" class="btn btn-danger btn_remove" id="${i}">X</button>
+                        </div>
+ 
+                    </div>
+               
+            `);
+            $('#edit_other_vehicle_details').append(structure);
+        });
+ 
+        $(document).on('click', '.btn_remove', function() {
+            var button_id = $(this).attr("id");
+            $('#new_row' + button_id).remove();
+        });
+    </script>
+
+
+<!-- jquery validation on add expense statement -->
+<script>
+$(document).ready(function () {
+ 
+$('#edit_expense_statement').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        expense_statement_name: {
+            required: true,
+        },
+        ledger_type: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        expense_statement_name : {
+            required : "Please enter expenses statement",
+        },
+        ledger_type : {
+            required : "Please select ledger type",
+        },
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on add expense statement -->
+ 
+<!-- jquery validation on edit expense statement -->
+<script>
+$(document).ready(function () {
+ 
+$('#edit_expense_statement').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        expense_statement_name: {
+            required: true,
+        },
+        ledger_type: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        expense_statement_name : {
+            required : "Please enter expenses statement",
+        },
+        ledger_type : {
+            required : "Please select ledger type",
+        },
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on edits expense statement -->
+ 
+<!-- jquery validation on add ingredients -->
+<script>
+$(document).ready(function () {
+ 
+$('#add_ingredients').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ingredients: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        ingredients : {
+            required : "Please enter ingredients",
+        }
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on add ingredients -->
+ 
+<!-- jquery validation on edit ingredients -->
+<script>
+$(document).ready(function () {
+ 
+$('#edit_expense_statement').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        ingredients: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        ingredients : {
+            required : "Please enter ingredients",
+        }
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on edits ingredients -->
+ 
+<!-- jquery validation on add receipe -->
+<script>
+$(document).ready(function () {
+ 
+$('#add_receipe').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        receipe: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        receipe : {
+            required : "Please enter receipe",
+        }
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on add receipe -->
+ 
+<!-- jquery validation on edit receipe -->
+<script>
+$(document).ready(function () {
+ 
+$('#add_receipe').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        receipe: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        receipe : {
+            required : "Please enter receipe",
+        }
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on edits receipe -->
+ 
+<!-- jquery validation on add kitchen equipment -->
+<script>
+$(document).ready(function () {
+ 
+$('#add_kitchen_equipment').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        kitchen_equipment_name: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        kitchen_equipment_name : {
+            required : "Please enter kitchen equipment",
+        }
+    }
+});
+ 
+});
+ 
+</script>
+<!-- jquery validation on add kitchen equipment -->
+ 
+<!-- jquery validation on edit kitchen equipment -->
+<script>
+$(document).ready(function () {
+ 
+$('#edit_kitchen_equipment').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        kitchen_equipment_name: {
+            required: true,
+        }
+    },
+ 
+    messages :{
+        kitchen_equipment_name : {
+            required : "Please enter kitchen equipment",
+        }
+    }
+});
+});
+</script>
+<!-- jquery validation on edits kitchen_equipment -->
+
 

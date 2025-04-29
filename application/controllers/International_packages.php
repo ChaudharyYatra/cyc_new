@@ -603,14 +603,15 @@ class International_packages extends CI_Controller {
         }
     }
 	public function getAgent(){ 
-    // POST data 
-    $department_id = $this->input->post('did');
-    
-            $this->db->where('is_deleted','no');
-            $this->db->where('is_active','yes');
-            $this->db->where('department',$department_id);
-            $data = $this->master_model->getRecords('agent');
-            // print_r($data); die;
-    echo json_encode($data); 
-  }
+        // POST data 
+        $department_id = $this->input->post('did');
+        
+                $this->db->where('is_deleted','no');
+                $this->db->where('is_active','yes');
+                $this->db->where('department',$department_id);
+                $data = $this->master_model->getRecords('agent');
+                print_r($data); die;
+        
+        echo json_encode($data); 
+      }
 }

@@ -2,6 +2,9 @@
   .img_bot{
     margin-bottom: 1px;
   }
+  .content_css{
+    color:white;
+  }
 </style>
 <!-- footer starts -->
 <img class="img_bot" src="<?php echo base_url(); ?>assets/front/shape8_final.png" alt="image" width="100%"></img>
@@ -51,7 +54,6 @@
                                     </div>
                                     <div class="content-part">
                                       <b><p class="text_justify white"><span><a href="https://goo.gl/maps/mU5YbJmuEXqDoYpr7" target="_blank"><?php echo $website_basic_structure_value['location']; ?></a> </span></p></b>
-                                      
                                     </div>
                                   </li>
 
@@ -74,6 +76,33 @@
                                     <div class="content-part">
                                       <b><p class="text_justify"><span><a href="mailto:<?php echo $website_basic_structure_value['email']; ?>"><?php echo $website_basic_structure_value['email']; ?></a> </span></p></b>
                                       
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">GST No. :  27AAACC7487N1Z0</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration No. :  17-08288 of 1994-95</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
                                     </div>
                                   </li>
 
@@ -188,24 +217,21 @@
                                         
                                         
                                         <form method="post" action="<?php echo base_url(); ?>user_profile/index" onsubmit="return validateloginForms()">
-                                            <div class="form-group mb-2">
-                                                <input type="text" class="form-control" name="mobile" id="mobile_login" placeholder="Mobile Number">
-                                                <span class="text-danger float-left" id="mobilelogin_error" style="display:none"></span>
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                <input type="password" class="form-control" name="password" id="pass_login" placeholder="Password">
-                                                     <i id="toggler"class="far fa-eye" style="position: absolute;right: 50px;top: 48%;transform: translateY(-50%);cursor: pointer;"></i>
-                                                <span class="text-danger float-left" id="passlogin_error" style="display:none"></span>
-                                                  
-                                            </div>
-                                            <div class="form-group mb-2">
-                                                
-                                                <a class="float-end" href="#" style="color:rgb(246, 242, 242);">Lost your password?</a>
-                                            </div>
-                                            <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                              <input type="submit" class="nir-btn w-100" id="submit_l" value="Login" name="submit">
-                                            </div>
-                                            
+                                          <div class="form-group mb-2">
+                                            <input type="text" class="form-control" name="mobile" id="mobile_login" placeholder="Mobile Number">
+                                            <span class="text-danger float-left" id="mobilelogin_error" style="display:none"></span>
+                                          </div>
+                                          <div class="form-group mb-2">
+                                            <input type="password" class="form-control" name="password" id="pass_login" placeholder="Password">
+                                                  <i id="toggler"class="far fa-eye" style="position: absolute;right: 50px;top: 48%;transform: translateY(-50%);cursor: pointer;"></i>
+                                            <span class="text-danger float-left" id="passlogin_error" style="display:none"></span>
+                                          </div>
+                                          <div class="form-group mb-2">
+                                            <a class="float-end" href="#" style="color:rgb(246, 242, 242);">Lost your password?</a>
+                                          </div>
+                                          <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                            <input type="submit" class="nir-btn w-100" id="submit_l" value="Login" name="submit">
+                                          </div>
                                         </form>
                                     </div>
                                 </div>
@@ -228,20 +254,21 @@
     
     
 
-<script type='text/javascript'>
+    <script type='text/javascript'>
   // baseURL variable
   var baseURL= "<?php echo base_url();?>";
  
   $(document).ready(function(){
+    // alert('ddddddddddddddddddddd');
  
     // City change
     $('#department_id').on('change', function () {
-      var did = $("#department_id").val();
-      // alert(did);
+      var did = $(this).val();
+      // alert('ppppppppppppppppppppppppppp');
      
       // AJAX request
       $.ajax({
-        url:'<?=base_url()?>international_packages/getAgent',
+        url:'<?=base_url()?>International_packages/getAgent',
         method: 'post',
         data: {did: did},
         dataType: 'json',
@@ -268,12 +295,12 @@
         if(fil_val=='low_to_high'){
         var url =window.location.origin;
         var final_url = base_url+"packages/all_packages_asc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         }else if(fil_val=='high_to_low')
         {
         var url =window.location.origin;
         var final_url = base_url+"packages/all_packages_desc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         };
      });
     });  
@@ -641,8 +668,8 @@ function validateEnquiryForms()
   $("#mobile_number_error").hide();
   $("#gender_error").hide();
   $("#media_source_name_error").hide();
-  // $("#department_id_error").hide();
-  // $("#agent_id_error").hide();
+  $("#department_id_error").hide();
+  $("#agent_id_error").hide();
   $("#wp_mobile_number_error").hide();
   
   var submiform='';
@@ -770,21 +797,77 @@ function validateEnquiryForms()
     submiform=false;
   }
 
-	// var department_id = $('#department_id').val();
-  // if (department_id == '' || department_id ==null) 
-  // {
-  //   $('#department_id_error').text('Please select department.');
-  //   $('#department_id_error').show();
-  //   submiform=false;
-  // }
+	var department_id = $('#department_id').val();
+  if (department_id == '' || department_id ==null) 
+  {
+    $('#department_id_error').text('Please select department.');
+    $('#department_id_error').show();
+    submiform=false;
+  }
 	
-  // var agent_id = $('#agent_id').val();
-  // if (agent_id == '' || agent_id ==null) 
-  // {
-  //   $('#agent_id_error').text('Please select Booking Centre.');
-  //   $('#agent_id_error').show();
-  //   submiform=false;
-  // }
+  var agent_id = $('#agent_id').val();
+  if (agent_id == '' || agent_id ==null) 
+  {
+    $('#agent_id_error').text('Please select Booking Centre.');
+    $('#agent_id_error').show();
+    submiform=false;
+  }
+
+  var occupation_name = $('#occupation_name').val();
+   if (occupation_name == '' || occupation_name ==null) 
+   {
+     $('#occupation_id_error').text('Please select Occupation Name.');
+     $('#occupation_id_error').show();
+     submiform=false;
+   }
+   
+   var zone_name = $('#zone_name').val();
+   if (zone_name == '' || zone_name ==null) 
+   {
+     $('#zone_id_error').text('Please select Zone Name.');
+     $('#zone_id_error').show();
+     submiform=false;
+   }
+   
+   var flat_no = $('#flat_no').val();
+   if (flat_no == '' || flat_no ==null) 
+   {
+     $('#flatno_id_error').text('Please enter Flat No.');
+     $('#flatno_id_error').show();
+     submiform=false;
+   }
+   
+   var house_name = $('#house_name').val();
+   if (house_name == '' || house_name ==null) 
+   {
+     $('#housename_id_error').text('Please enter House Name .');
+     $('#housename_id_error').show();
+     submiform=false;
+   }
+   
+   var street_name = $('#street_name').val();
+   if (street_name == '' || street_name ==null) 
+   {
+     $('#streetname_id_error').text('Please enter Street Name .');
+     $('#streetname_id_error').show();
+     submiform=false;
+   }
+   
+   var landmark = $('#landmark').val();
+   if (landmark == '' || landmark ==null) 
+   {
+     $('#landmark_id_error').text('Please enter Landmark .');
+     $('#landmark_id_error').show();
+     submiform=false;
+   }
+   
+   var area = $('#area').val();
+   if (area == '' || area ==null) 
+   {
+     $('#area_id_error').text('Please enter Area .');
+     $('#area_id_error').show();
+     submiform=false;
+   }
 
   if(submiform==='')
   {
@@ -966,14 +1049,14 @@ function contactEnquiryForms()
 
   var tour_number_other = $('#tour_number').val();
   if(tour_number_other == 'other'){
-  var other_tour_name = $('#other_tour_name').val();
-  if (other_tour_name == '' || other_tour_name ==null) 
-  {
-    $('#other_tour_name1').text('Please Enter Destination Name.');
-    $('#other_tour_name1').show();
-    submiform=false;
+    var other_tour_name = $('#other_tour_name').val();
+    if (other_tour_name == '' || other_tour_name ==null) 
+    {
+      $('#other_tour_name1').text('Please Enter Destination Name.');
+      $('#other_tour_name1').show();
+      submiform=false;
+    }
   }
-}
 
   if(submiform==='')
   {
@@ -981,16 +1064,14 @@ function contactEnquiryForms()
   }
   else
   {
-     return false; 
+    return false; 
   }
-  
-  
 }
     
 </script>
 
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   $('#dept_id').on('change',function(){
     var site_path = '<?php echo  base_url(); ?>';
     var dept_id = $(this).val();
@@ -1013,26 +1094,26 @@ function contactEnquiryForms()
         })
     }
   });
- });
+});
 </script>
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 document.onkeydown = function(e) {
-        if (e.ctrlKey && 
-            (e.keyCode === 67 || 
-             e.keyCode === 86 || 
-             e.keyCode === 85 || 
-             e.keyCode === 117)) {
-            return false;
-        } else {
-            return true;
-        }
+if (e.ctrlKey && 
+    (e.keyCode === 67 || 
+      e.keyCode === 86 || 
+      e.keyCode === 85 || 
+      e.keyCode === 117)) {
+    return false;
+} else {
+    return true;
+}
 };
 $(document).keypress("u",function(e) {
-  if(e.ctrlKey)
-  {
+if(e.ctrlKey)
+{
 return false;
 }
 else
@@ -1053,13 +1134,13 @@ return true;
         var filt= 'asc';
         var url =window.location.origin;
         var final_url = base_url+"tour_list/all_main_category_list/"+filt;
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         }else if(fil_val=='high_to_low')
         {
-            var filt= 'dsc';
+        var filt= 'dsc';
         var url =window.location.origin;
         var final_url = base_url+"tour_list/all_main_category_list/"+filt;
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         };
      });
     });  
@@ -1095,7 +1176,6 @@ function validateinternationalreviewForms()
   $("#email_error").hide();
   $("#message_error").hide();
   
-  
   var submiform='';
   
   var name = $('#name').val();
@@ -1106,7 +1186,6 @@ function validateinternationalreviewForms()
     submiform=false;
   }
   
-
   var emailid = $('#email').val();
   if (emailid == '' || emailid ==null) 
   {
@@ -1116,24 +1195,24 @@ function validateinternationalreviewForms()
   }
   else
   {
-      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(emailid)) 
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if(!regex.test(emailid)) 
+      {
+          $('#email_error').text('Please enter valid email address.');
+          $('#email_error').show();
+          submiform=false;
+      }
+      else if(emailid)
+      {
+        var email_split = emailid.split('@');
+        var count = (email_split[1].match(/\./g) || []).length;
+        if(count > 2)
         {
-           $('#email_error').text('Please enter valid email address.');
+            $('#email_error').text('Please enter valid email address.');
             $('#email_error').show();
             submiform=false;
         }
-        else if(emailid)
-        {
-          var email_split = emailid.split('@');
-          var count = (email_split[1].match(/\./g) || []).length;
-          if(count > 2)
-          {
-              $('#email_error').text('Please enter valid email address.');
-              $('#email_error').show();
-              submiform=false;
-          }
-        }    
+      }    
   }
   
   
@@ -1192,24 +1271,24 @@ function validatedomesticreviewForms()
   }
   else
   {
-      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(emailid)) 
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if(!regex.test(emailid)) 
+      {
+          $('#email_error').text('Please enter valid email address.');
+          $('#email_error').show();
+          submiform=false;
+      }
+      else if(emailid)
+      {
+        var email_split = emailid.split('@');
+        var count = (email_split[1].match(/\./g) || []).length;
+        if(count > 2)
         {
-           $('#email_error').text('Please enter valid email address.');
-            $('#email_error').show();
-            submiform=false;
+          $('#email_error').text('Please enter valid email address.');
+          $('#email_error').show();
+          submiform=false;
         }
-        else if(emailid)
-        {
-          var email_split = emailid.split('@');
-          var count = (email_split[1].match(/\./g) || []).length;
-          if(count > 2)
-          {
-              $('#email_error').text('Please enter valid email address.');
-              $('#email_error').show();
-              submiform=false;
-          }
-        }    
+      }    
   }
   
   
@@ -1276,7 +1355,6 @@ function custom_enquiry_form()
   $("#drop_time_error").hide();
   // $("#special_note_error").hide();
 
-
   var submiform='';
   
   var full_name_error = $('#full_name').val();
@@ -1314,10 +1392,6 @@ function custom_enquiry_form()
               submiform=false;
           }
         }
-        // else
-        // {
-        //     isEmailExist();
-        // }
   }
   
   
@@ -1413,14 +1487,6 @@ var mobile_number = $('#mobile_number1').val();
     submiform=false;
   }
 
-  // var meal_plan_name_error = $('#meal_plan_name').val();
-  // if (meal_plan_name_error == '' || meal_plan_name_error ==null) 
-  // {
-  //   $('#meal_plan_name_error').text('Please Enter Other meal plan.');
-  //   $('#meal_plan_name_error').show();
-  //   submiform=false;
-  // }
-
   var total_adult_error = $('#total_adult').val();
   if (total_adult_error == '' || total_adult_error ==null) 
   {
@@ -1452,22 +1518,6 @@ var mobile_number = $('#mobile_number1').val();
     $('#vehicle_type_error').show();
     submiform=false;
   }
-
-  // var other_vehicle_name_error = $('#other_vehicle_name').val();
-  // if (other_vehicle_name_error == '' || other_vehicle_name_error ==null) 
-  // {
-  //   $('#other_vehicle_name_error').text('Please Enter Other vehicle type.');
-  //   $('#other_vehicle_name_error').show();
-  //   submiform=false;
-  // }
-
-  // var other_pickup_from_name_error = $('#other_pickup_from_name').val();
-  // if (other_pickup_from_name_error == '' || other_pickup_from_name_error ==null) 
-  // {
-  //   $('#other_pickup_from_name_error').text('Please Enter Other Pickup From.');
-  //   $('#other_pickup_from_name_error').show();
-  //   submiform=false;
-  // }
 
   var pick_up_from_error = $('#pick_up_from').val();
   if (pick_up_from_error == '' || pick_up_from_error ==null) 
@@ -1501,14 +1551,6 @@ var mobile_number = $('#mobile_number1').val();
     submiform=false;
   }
 
-  // var other_drop_to_name_error = $('#other_drop_to_name').val();
-  // if (other_drop_to_name_error == '' || other_drop_to_name_error ==null) 
-  // {
-  //   $('#other_drop_to_name_error').text('Please Enter Other Drop To.');
-  //   $('#other_drop_to_name_error').show();
-  //   submiform=false;
-  // }
-
   var drop_date_error = $('#drop_date').val();
   if (drop_date_error == '' || drop_date_error ==null) 
   {
@@ -1540,7 +1582,6 @@ var mobile_number = $('#mobile_number1').val();
 </script>
 
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $('.checkin_date').datepicker({
@@ -1778,16 +1819,13 @@ function downloadForms() {
           region_office_location:region_office_location
         },
         success: function(response) {
-          // alert(response)
             if (response= true) {
-              // alert(response)
               $("#prospect_btn").get(0).click();
               Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: 'PDF Downloaded successfully!',
                 }).then(function() {
-                    // Optionally, you can refresh the page after the user dismisses the alert
                     location.reload();
                 });
                 
@@ -1796,8 +1834,7 @@ function downloadForms() {
             }
         }
     });
-
-    return false; // Prevent the form from submitting via traditional means
+    return false; 
 }
 </script>
 
@@ -1815,7 +1852,7 @@ function downloadrateForms() {
             title: 'Validation Error',
             text: 'Please Select Region Office Location.',
         });
-        return false; // Prevent the form from submitting
+        return false; // Prevent the form from submitting 
     }
     var mobileRegex = /^[6-9]\d{9}$/;
     if (!mobileRegex.test(mobileNumber)) {
@@ -1826,8 +1863,6 @@ function downloadrateForms() {
         });
         return false; // Prevent the form from submitting
     }
-
-    // var mobileRegex = /^[6-9]\d{9}$/;
     
 
     $.ajax({
@@ -1837,32 +1872,23 @@ function downloadrateForms() {
           region_office_location:region_office_location
         },
         success: function(response) {
-          // alert(response)
             if (response= true) {
-              // alert(response)
               $("#rate_btn").get(0).click();
               Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: 'PDF Downloaded successfully!',
                 }).then(function() {
-                    // Optionally, you can refresh the page after the user dismisses the alert
                     location.reload();
                 });
-                
             } else {
-                // Handle error
             }
         }
     });
 
-    return false; // Prevent the form from submitting via traditional means
+    return false;
 }
 </script>
-
-
 <!-- End Download prospect and rate chart pdf -->
-
-
 </body>
 </html>

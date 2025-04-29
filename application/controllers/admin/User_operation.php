@@ -54,6 +54,7 @@ class User_operation extends CI_Controller{
             
                 $role_type  = $this->input->post('role_type');
                 $supervision_name  = trim($this->input->post('supervision_name'));
+                $supervision_nick_name  = trim($this->input->post('supervision_nick_name'));
                 $email = trim($this->input->post('email'));
                 $mobile_number1 = trim($this->input->post('mobile_number1'));
                 $mobile_number2 = trim($this->input->post('mobile_number2'));
@@ -62,6 +63,7 @@ class User_operation extends CI_Controller{
                 $arr_insert = array(
                     'role_type' => $role_type,
                     'supervision_name' => $supervision_name,
+                    'supervision_nick_name' => $supervision_nick_name,
                     'mobile_number1'   => $mobile_number1,
                     'mobile_number2'   => $mobile_number2,
                     'email'            => $email,
@@ -203,6 +205,7 @@ class User_operation extends CI_Controller{
 
                     $role_type  = $this->input->post('role_type');
                     $supervision_name    = trim($this->input->post('supervision_name'));
+                    $supervision_nick_name  = trim($this->input->post('supervision_nick_name'));
                     $mobile_number1 = trim($this->input->post('mobile_number1'));
                     $mobile_number2 = trim($this->input->post('mobile_number2'));
                     $email = trim($this->input->post('email'));
@@ -211,6 +214,7 @@ class User_operation extends CI_Controller{
                 $arr_update = array(
                     'role_type'          => $role_type,
                     'supervision_name'          => $supervision_name,
+                    'supervision_nick_name' => $supervision_nick_name,
                     'mobile_number1'          =>  $mobile_number1,
                     'mobile_number2'          => $mobile_number2,
                     'email'          => $email,

@@ -75,31 +75,28 @@ class Asign_tour_manager extends CI_Controller{
        
 	}
 
-        public function tourwise_expences($id,$t_did)
+        public function tourwise_expences($p_id,$pd_id)
 	{
-                $id=base64_decode($id);
-                $t_did=base64_decode($t_did);
+                $package_id=base64_decode($p_id);
+                $package_date_id=base64_decode($pd_id);
 
                 $expences_checker_master_sess_name = $this->session->userdata('expences_checker_name');
                 $iid = $this->session->userdata('expences_checker_sess_id');
 
                 $fields = "tour_expenses.*,packages.tour_number,packages.tour_title,packages.package_type,package_date.journey_date,
-                package_date.id as did,expense_type.expense_type_name,expense_category.expense_category";
+                package_date.id as did,expense_type.expense_type_name,expense_category.expense_category,supervision.supervision_name";
                 $this->db->where('tour_expenses.is_deleted','no');
-                $this->db->where('tour_expenses.tour_manager_id',$id);
-                $this->db->where('tour_expenses.package_date_id',$t_did);
-
+                $this->db->where('tour_expenses.package_id',$package_id);
+                $this->db->where('tour_expenses.package_date_id',$package_date_id);
+                // $this->db->where('tour_expenses.approval','yes');
                 $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
                 $this->db->join("expense_category", 'tour_expenses.expense_category_id=expense_category.id','left');
                 $this->db->where('packages.is_deleted','no');
                 $this->db->where('packages.is_active','yes');
                 $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
                 $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
-                $this->db->join("add_more_tour_expenses", 'tour_expenses.id=add_more_tour_expenses.tour_expenses_id','left');
+                $this->db->join("supervision", 'tour_expenses.tour_manager_id=supervision.id OR tour_expenses.sub_tour_manager_id=supervision.id','left');
                 $this->db->join("hotel_advance_payment", 'tour_expenses.package_id=hotel_advance_payment.tour_number','left');
-                $this->db->where('tour_expenses.package_date_id',$t_did);
-
-                $this->db->group_by('add_more_tour_expenses.tour_expenses_id');
                 $arr_data = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
                 // print_r($arr_data); die;
                 
@@ -118,6 +115,7 @@ class Asign_tour_manager extends CI_Controller{
 
         public function tourwise_expences_details($id,$t_did,$pd_id,$tm_id)
 	{
+                // print_r($id); die;
                 $id=base64_decode($id);
                 $t_did=base64_decode($t_did);
                 $pd_id=base64_decode($pd_id);
@@ -155,7 +153,7 @@ class Asign_tour_manager extends CI_Controller{
                 $this->arr_view_data['listing_page']    = 'yes';
                 $this->arr_view_data['tour_expenses_all']  = $tour_expenses_all;
                 $this->arr_view_data['add_more_tour_expenses_all']  = $add_more_tour_expenses_all;
-                $this->arr_view_data['tm_id']  = $tm_id;
+                $this->arr_view_data['id']  = $id;
                 $this->arr_view_data['pd_id']  = $pd_id;
                 $this->arr_view_data['page_title']      = $this->module_title_expences." List";
                 $this->arr_view_data['module_title']    = $this->module_title_expences." List";
@@ -174,9 +172,10 @@ class Asign_tour_manager extends CI_Controller{
                 // $now_time =  date('Y-m-d H:i:s');
                 
                         $arr_update = array(
-                        'approval'  => 'yes',
-                        'hold'  => 'no',
-                        'hold_reason'  => ''
+                        'exp_checker_approval'  => 'yes',
+                        'exp_checker_hold'  => 'no',
+                        'expence_checker_id'  => $iid,
+                        'exp_checker_hold_reason'  => ''
                         );
                         
                         $arr_where     = array("id" => $approve_id);
@@ -195,18 +194,16 @@ class Asign_tour_manager extends CI_Controller{
                 
                         $hold_id = $this->input->post('attr_hold'); 
                         $hold_reason = $this->input->post('hold_reason'); 
-                // $now_time =  date('Y-m-d H:i:s');
                         
                         $arr_update = array(
-                                'approval'  => 'no',
-                                'hold'  => 'yes',
-                                'hold_reason'  => $hold_reason
+                                'exp_checker_approval'  => 'no',
+                                'exp_checker_hold'  => 'yes',
+                                'expence_checker_id'  => $iid,
+                                'exp_checker_hold_reason'  => $hold_reason
                                 );
-                        
                                 $arr_where     = array("id" => $hold_id);
                                 $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
                 
-                                // print_r($data); die;
                         $this->arr_view_data['expences_checker_master_sess_name'] = $expences_checker_master_sess_name;
                 
                         echo 'true';

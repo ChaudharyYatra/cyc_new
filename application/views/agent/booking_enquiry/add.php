@@ -32,10 +32,6 @@
               <!-- /.card-header -->
 
             <?php if(empty($agent_booking_enquiry_data)){ ?>
-
-
-
-
               <!-- form start -->
               <form method="post" enctype="multipart/form-data" id="add_bookingenquiry">
                 <div class="card-body">
@@ -136,9 +132,100 @@
                               <label class="col-form-label">Followup Date:</label> 
                               <input type="date" class="form-control" name="followup_date" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" >
                             </div> -->
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Occupation Name</label>
+                                  <select class="select_css" name="occupation_name" id="occupation_name">
+                                      <option value="">Select occupation name</option>
+                                      <?php
+                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $occupation_master_info['id']; ?>"> <?php echo $occupation_master_info['occupation_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Zone Name</label>
+                                  <select class="select_css" name="zone_name" id="zone_name">
+                                      <option value="">Select zone name</option>
+                                      <?php
+                                        foreach($zone_master_data as $zone_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $zone_master_info['id']; ?>"> <?php echo $zone_master_info['zone_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <label>Customer Address -</label>
+                              <div class="form-group">
+                                <label>Flat No./ Banglow No.</label>
+                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                            <label></label>
+                              <div class="form-group">
+                                <label>Building / House Name</label>
+                                <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Street Name</label>
+                                <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Area</label>
+                                <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name">
+                              </div>
+                            </div>
                       
               </div>
                 <!-- /.card-body -->
+                
+                <div class="col-md-12">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Master's Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>Tour Number-Name</td>
+                                
+                                <td>"Tour Number - Name: Navigate here to include new tour above the 'Tour Number - Name' option."</td>
+                                <td>
+                                Contact to admin
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Media source</td>
+                                
+                                <td>"To add new media sources, navigate to the "Media Source Master" under the "Admin Booking Masters" section."</td>
+                                <td>
+                                Contact to admin
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 <div class="card-footer">
                 <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
@@ -242,24 +329,89 @@
                             </div>
 					 
                             <div class="col-md-6" id="other_tour_name_div" style='display:none;'>
-                                    <div class="form-group">
-                                      <label>Enquiry destination name</label>
-                                      <input type="text" class="form-control" name="other_tour_name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['other_tour_name'];} ?>" id="other_tour_name" placeholder="Enter destination name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                    </div>
+                              <div class="form-group">
+                                <label>Enquiry destination name</label>
+                                <input type="text" class="form-control" name="other_tour_name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['other_tour_name'];} ?>" id="other_tour_name" placeholder="Enter destination name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                              </div>
                             </div>
+                            
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label>Enter Seat Count</label>
                                 <input type="text" class="form-control" name="enq_seat_count" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['seat_count'];} ?>" id="enq_seat_count" placeholder="Enter seat count" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                             </div>
-                            <!-- <div class="col-md-6 mb-2">
-                              <label class="col-form-label">Followup Date:</label> 
-                              <input type="date" class="form-control" name="followup_date" value="<?php //if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['followup_date'];} ?>" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" >
-                            </div> -->
-                      
-              </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Occupation Name</label>
+                                  <select class="select_css" name="occupation_name" id="occupation_name">
+                                      <option value="">Select occupation name</option>
+                                      <?php
+                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $occupation_master_info['id']; ?>" <?php if(!empty($agent_booking_enquiry_data)){  if($agent_booking_enquiry_data['occupation_name']== $occupation_master_info['id']){echo 'selected';}} ?>> <?php echo $occupation_master_info['occupation_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Zone Name</label>
+                                  <select class="select_css" name="zone_name" id="zone_name">
+                                      <option value="">Select zone name</option>
+                                      <?php
+                                        foreach($zone_master_data as $zone_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $zone_master_info['id']; ?>" <?php if(!empty($agent_booking_enquiry_data)){  if($agent_booking_enquiry_data['zone_name']== $zone_master_info['id']){echo 'selected';}} ?>> <?php echo $zone_master_info['zone_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <label>Customer Address -</label>
+                              <div class="form-group">
+                                <label>Flat No./ Banglow No.</label>
+                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['flat_no'];} ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                            <label></label>
+                              <div class="form-group">
+                                <label>Building / House Name</label>
+                                <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['house_name'];} ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Street Name</label>
+                                <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['street_name'];} ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['landmark'];} ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Area</label>
+                                <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['area'];} ?>">
+                              </div>
+                            </div>
+                          </div>
                 <!-- /.card-body -->
+                
+                
+                
+                
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button> 
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
@@ -267,8 +419,6 @@
                   <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
-
-
 
 
                <?php } ?> 

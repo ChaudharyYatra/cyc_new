@@ -40,6 +40,10 @@
     .reason_css{
         background-color:rgba(0,0,0,.05) !important;
     }
+    .red-text {
+    color: red;
+    text-align:center;
+}
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -52,7 +56,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_final_booking_details; ?>/sub_index/<?php echo $p_id;?>/<?php echo $p_date_id;?>"><button class="btn btn-primary">Back</button></a>
+              <a href="<?php echo $module_url_path_add_sra; ?>/add"><button class="btn btn-primary">Back</button></a>
             </ol>
           </div>
         </div>
@@ -72,14 +76,21 @@
 
             <div class="card card-primary">
               <div class="card-header">
+                  <div id="extra_id">
+                      
+                  </div>
+                  <div id="extra_count_id">
+                      
+                  </div>
+                  
               <?php foreach($traveller_booking_info_header as $traveller_booking_info_value) 
                    {  ?>
                     <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                             <label>Tour No -</label>
                         </div>  
-                        <div class="col-md-5">
-                            <div><?php echo $traveller_booking_info_value['tour_number']; ?></div>
+                        <div class="col-md-4">
+                            <div><?php echo $traveller_booking_info_value['package_tour_number']; ?></div>
                         </div>
                         <div class="col-md-2">
                             <label>Customer Name -</label>
@@ -87,10 +98,10 @@
                         <div class="col-md-3">
                             <div><?php echo $traveller_booking_info_value['customer_name']; ?></div>
                         </div>
-                        <div class="col-md-2">  
+                        <div class="col-md-3">  
                             <label>Tour Date -</label>
                         </div>
-                        <div class="col-md-5">  
+                        <div class="col-md-4">  
                             <div><?php echo date('d-m-Y', strtotime($traveller_booking_info_value['journey_date'])); ?></div>
                         </div>
                         <div class="col-md-2">
@@ -99,7 +110,11 @@
                         <div class="col-md-3">
                             <div><?php echo $traveller_booking_info_value['mobile_number']; ?></div>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-3">
+                            <label>Total Final Amount -</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div><?php echo $total_amount; ?></div>
                         </div>
                         <div class="col-md-3">
                             <label> Total Seat -</label>
@@ -108,12 +123,29 @@
                             <div><?php echo $traveller_booking_info_value['total_seat']; ?></div>
                         </div>
 
+                        <div class="col-md-3">
+                            <label>Total Paid Amount -</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div><?php echo $total_paid_amount; ?></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Total Remaining Amount -</label>
+                        </div>
+                        <div class="col-md-1">
+                            <div><?php echo $total_remaining_amount; ?></div>
+                        </div>
+                        
+
                         <!-- <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php //echo $traveller_booking_info_value['academic_year']; ?>"> -->
                         <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php echo $traveller_booking_info_value['academic_year']; ?>">
                         <input type="hidden" class="form-control" name="sra_no" id="sra_no" value="<?php echo $traveller_booking_info_value['sra_no']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php echo $traveller_booking_info_value['tour_date']; ?>">
                         <input type="hidden" class="form-control" name="sra_payment_id" id="sra_payment_id" value="<?php echo $traveller_booking_info_value['sra_payment_id']; ?>">
                         <input type="hidden" class="form-control" name="package_id" id="package_id" value="<?php echo $traveller_booking_info_value['tour_number']; ?>">
+                        <input type="hidden" class="form-control" name="sra_final_remaining_amt" id="sra_final_remaining_amt" value="<?php echo $sra_remaining_amt; ?>">
+                        <input type="hidden" class="form-control" name="sra_final_amt" id="sra_final_amt" value="<?php echo $sra_remaining_amt; ?>">
+                        <input type="hidden" class="form-control" name="sra_paid_amt" id="sra_paid_amt" value="<?php echo $sra_remaining_amt; ?>">
                     
                         <!-- <input type="hidden" class="form-control" name="hotel_name_id" id="hotel_name_id" value="<?php //echo $traveller_booking_info_value['hotel_name_id']; ?>">
                         <input type="hidden" class="form-control" name="package_date_id" id="package_date_id" value="<?php //echo $traveller_booking_info_value['tour_date']; ?>">
@@ -190,10 +222,14 @@
                             <table id="example2" class="table table-bordered table-hover table-striped">
                                 <tr>
                                     <th>Mobile Number For OTP</th>
-                                    <td>
+                                    <td id="test_extra_id">
                                     <input type="text" class="form-control" name="booking_tm_mobile_no" id="booking_tm_mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
                                     <input type="hidden" class="form-control" name="inserted_id" id="inserted_id" value="">
+                                    
+                                    <!-- <input type="text" class="form-control" name="extra_services_count[]" id="extra_services_count" value=""> -->
 
+                                    <input type="hidden" class="form-control" name="academic_year" id="academic_year" value="<?php echo $academic_year; ?>">
+                                    
                                     <input type="hidden" class="form-control" name="mobile_no" id="mobile_no" minlength="10" maxlength="10" placeholder="Enter mobile number" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['booking_tm_mobile_no'];} ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required onkeyup="validate()">
                                     </td>
                                 </tr>
@@ -214,43 +250,124 @@
                                     </td>
                                 </tr>
                                 
-                                <tr>
+                                <tr hidden>
                                     <th>Final Total</th>
-                                    <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $traveller_booking_info_amt['final_amt']; ?>" required></td>
-                                    
+                                    <td><input readonly type="text" class="form-control" name="final_amt" id="final_amt" placeholder="Final amount" value="<?php echo $sra_final_amt_sum; ?>" required></td>
+                                </tr>
+
+                                <tr>
+                                <th>Receipt Type</th>
+                                <td>
+                                &nbsp;&nbsp;&nbsp;<input type="radio" class="extra_services_class" name="receipt_type" id="sra" value="SRA" checked onchange='extra_service_receipt_type(this.value);'>&nbsp;&nbsp;SRA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <?php if($extra_services_data_group_by != ''){?>
+                                        <input type="radio" class="extra_services_class" name="receipt_type" id="extra_services" value="Extra Services" onchange='extra_service_receipt_type(this.value);'>&nbsp;&nbsp;Extra Services
+                                    <?php } else{ ?>
+                                        <input disabled type="radio" class="extra_services_class" name="receipt_type" id="extra_services" value="Extra Services" onchange='extra_service_receipt_type(this.value);'>&nbsp;&nbsp;Extra Services
+                                    <?php } ?>
+                                </td>
                                 </tr>
                                     
-                                <tr id="booking_amount_tr" style='display:table-row;'>
+                                <tr id="booking_amount_tr">
                                     <th>Depositing Amount</th>
                                     <td>
-                                    <input type="text" class="form-control" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required onkeyup="final_amt_not_greater()">
+                                    <input type="text" autocomplete="off" class="form-control next_deposit_amt" name="next_booking_amt" id="next_booking_amt" placeholder="Enter Next booking amount" required onkeyup="final_amt_not_greater()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    <input type="text" autocomplete="off" class="form-control" name="next_extra_services_amt" id="next_extra_services_amt" placeholder="Enter ES booking amount" required onkeyup="extra_service_final_amt_greater()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                                     </td>
                                 </tr>
+                                <!-- <tr id="extra_services_amount_tr" style='display:none;'>
+                                    <th>Depositing Amount</th>
+                                    <td>
+                                    </td>
+                                </tr> -->
                                 <tr id="payment_type_tr" style='display:contents;'>
                                     <th>Payment Type</th>
                                     <td>&nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_advance" value="Advance">&nbsp;&nbsp;Advance
+                                    <?php if($booking_payment_details !=''){?>
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_part" value="Part" checked>&nbsp;&nbsp;Part
+                                    <?php }else{ ?>
                                     &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_part" value="Part">&nbsp;&nbsp;Part
+                                    <?php }?>
                                     &nbsp;&nbsp;&nbsp;<input type="radio" name="payment_type" id="payment_type_full" value="Full">&nbsp;&nbsp;Full</td>
                                     
                                 </tr>
+                                </table>
+
+                                <?php 
+                        if(!empty($extra_services_details_value_new)){?>
+                            <div class="" id="extra_services_div" style='display:none;'>
+                                <div class="row">
+                                    <!-- <div class="col-md-2">
+                                    </div> -->
+                                    <div class="col-md-12 mb-2 cash_payment_div">
+                                    <table id="" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Extra Services Name</th>
+                                            <th>Extra Services Amount</th>
+                                            <th>Extra Pending Amount</th>
+                                            <th>Customer Depositing Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $i=1;?>
+                                        <?php  
+                                        foreach($extra_services_details_value_new as $extra_services_details_value_info) 
+                                        { 
+                                            //print_r($extra_services_details_value_info); die;
+                                            if (!$customer_amt_empty) {
+                                            $total_paid_amt =$extra_services_details_value_info['services_amt'] - $extra_services_details_value_info['extra_paid_total'];
+                                            }else{
+                                            $total_paid_amt =$extra_services_details_value_info['services_amt'];
+                                            }
+                                            ?>
+                                        <tr>
+                                            <td><?php echo $extra_services_details_value_info['service_name'] ?>
+                                            <input type="hidden" class="form-control" name="sra_extra_services_id[]" id="sra_extra_services_id" value="<?php echo $extra_services_details_value_info['id'] ?>"></td>
+                                            <input type="hidden" class="form-control" name="prev_pending_amt[]" id="prev_pending_amt" value="<?php echo $total_paid_amt; ?>"></td>
+                                            
+                                            <td id="service_amt_value<?php echo $i; ?>"><?php echo $extra_services_details_value_info['services_amt'] ?></td>
+                                            <td class="update_service_amt" id="service_pending_value<?php echo $i; ?>"><?php echo $total_paid_amt; ?></td>
+                                            <td><input type="text" autocomplete="off" class="form-control customer_sending_amt_class" name="customer_sending_amt[]" id="customer_sending_amt<?php echo $i;?>" placeholder="Enter sending amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'); updateSubmitButton();"></td>
+                                        </tr>
+                                        <?php } ?>
+                                        
+            
+                                        
+                                        <?php $i++; ?>
+                                        </tbody>
+                                        <h6 id="not_match_show_msg" style="color:red; text-align:center; display:none;">Please check Depositing Amount.</h6>
+                                    </table> 
+                                    </div> 
+                                    <!-- <div class="col-md-2">
+                                    </div> -->
+                                </div>
+                            </div>
+                            <?php  } ?>
 
 
-                                
-
-                                <tr id="pending_amount_tr" style='display:table-row;'>
+                                <table id="example2" class="table table-bordered table-hover table-striped">
+                                <tr id="pending_amount_tr">
                                     <th>Pending Amount</th>
                                     <td>
                                     <input readonly type="text" class="form-control" name="pending_amt" id="result_box" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
                                     <input readonly type="hidden" class="form-control" name="updatepending_amt" id="updatepending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
 
                                     <input readonly type="hidden" class="form-control" name="old_pending_amt" id="old_pending_amt" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
-                                    </td>
+
+                                    <!-- extra services pending amount-->
+                                    <input readonly type="text" class="form-control" name="extra_service_pending_amt" id="extra_service_result_box" placeholder="Enter ES pending amount" value="<?php echo $updating_pending_amount_result; ?>">
+                                    <input readonly type="hidden" class="form-control" name="extra_service_updatepending_amt" id="extra_service_updatepending_amt" placeholder="Enter ES pending amount" value="<?php echo $updating_pending_amount_result; ?>">
+
+                                    <input readonly type="hidden" class="form-control" name="extra_service_old_pending_amt" id="extra_service_old_pending_amt" placeholder="Enter ES pending amount" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['pending_amt'];} ?>">
+                                    <input readonly type="hidden" class="form-control" name="extra_services_final_amt" id="extra_services_final_amt" placeholder="Enter final amount" value="<?php echo $x; ?>">
+                                    <!-- extra services pending amount-->
+                                </td>
                                 </tr>
 
                                 <!-- <tr id="pending_amount_tr" style='display:table-row;'>
                                     <th>Pending Amount</th>
                                     <td>
-                                    <input readonly type="text" class="form-control" name="result_box" id="result_box" placeholder="Enter pending amount" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
+                                    <input readonly type="text" class="form-control" name="result_box" id="result_box" placeholder="Enter pending amount" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['run_pending_amt'];} ?>">
                                     </td>
                                 </tr> -->
 
@@ -264,14 +381,31 @@
                                 <tr id="other_payment_mode_tr">
                                     <th>Amount Receiving Mode</th>
                                     <td>
-                                    <select class="select_css" name="select_transaction" id="select_transaction" onchange='sra_account_details_partial_payment(this.value); 
+                                    <select disabled class="select_css" name="select_transaction" id="select_transaction" onchange='sra_account_details_partial_payment(this.value); 
                                         this.blur();'required="required">
                                         <option value="">Select Transaction</option>
+                                        <?php
+                                        $title = explode(',',$agent_data['amount_receiving_mode']);
+                                        // print_r($title); die;
+                                        ?>
+                                        <?php if(in_array('CASH', $title)){?>
                                         <option value="CASH">CASH</option>
+                                        <?php } 
+                                        if(in_array('UPI', $title)){ ?>
                                         <option value="UPI">UPI</option>
+                                        <?php } 
+                                        if(in_array('QR Code', $title)){?>
                                         <option value="QR Code">QR Code</option>
+                                        <?php }
+                                         if(in_array('Cheque', $title)){?>
                                         <option value="Cheque">Cheque</option>
+                                        <?php } 
+                                        if(in_array('Net Banking', $title)){?>  
                                         <option value="Net Banking">Net Banking</option>
+                                        <?php } 
+                                        if(in_array('Demand Draft', $title)){?>  
+                                        <option value="Demand Draft">Demand Draft</option> 
+                                        <?php } ?>   
                                     </select>
                                     </td>
                                 </tr>
@@ -305,20 +439,39 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="netbanking_payment_type" id="netbanking_payment_type_imps" onchange="sra_partial_netpayment_validate_final_payment()" value="IMPS">&nbsp;&nbsp;IMPS
                                             </div>
 
+
+                                            <div class="col-md-6 mt-1">
+                                            <h6 class="text-center float-right">Net Banking Holder Name</h6>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="select_css"  attr_partial_netholder_type="partial" name="net_acc_holder_nm" id="net_acc_holder_nm" required="required" onchange="sra_partial_netbank_holder_validate_final_validation()">
+                                                <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                                    <option value="">Select Net Banking Holder Name</option>
+                                                    <!-- value="<?php //echo $upi_qr_master_id;?>" -->
+                                                    <option class="self_upi" attr_self="self" value="self">Self</option>
+                                                    <?php
+                                                        foreach($upi_qr_data as $upi_qr_data_value) 
+                                                        { 
+                                                    ?>
+                                                        <option class="self_upi" attr_other="other" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Account Number</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <select class="select_css"  name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="sra_partial_netbank_accno_validate_final_payment()">
+                                                <select class="select_css" attr_partial_bank_acc_no="partial" name="net_banking_acc_no" id="net_banking_acc_no" required="required" onchange="sra_partial_netbank_accno_validate_final_payment()">
                                                 <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                     <option value="">Select Account Number</option>
                                                     
                                                     <?php
-                                                        foreach($upi_qr__add_more_data as $upi_qr__add_more_data_value) 
-                                                        { 
+                                                        //foreach($upi_qr__add_more_data as $upi_qr__add_more_data_value) 
+                                                        //{ 
                                                     ?>
-                                                        <option class="self_upi" attr_other="other" attr_qr_master_id="<?php echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php echo $upi_qr__add_more_data_value['id'];?>"><?php echo $upi_qr__add_more_data_value['account_number'];?></option>
-                                                    <?php } ?>
+                                                        <option class="self_upi" attr_other="other" attr_qr_master_id="<?php //echo $upi_qr__add_more_data_value['qr_code_master_id'];?>" value="<?php //echo $upi_qr__add_more_data_value['id'];?>"><?php //echo $upi_qr__add_more_data_value['account_number'];?></option>
+                                                    <?php //} ?>
                                                 </select>
 
                                                 <input type="hidden" readonly class="form-control" name="net_banking_company_acc_yes_no" id="net_banking_company_acc_yes_no">
@@ -331,19 +484,12 @@
                                                 <input type="text" class="form-control" name="net_banking_acc_no" id="net_banking_acc_no" onkeyup="netbank_accno_validate_final_payment()" placeholder="Enter Account No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div> -->
 
-                                            <div class="col-md-6 mt-2">
+                                            <!-- <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Account Holder Name</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
                                                 <input type="text" readonly class="form-control" name="net_acc_holder_nm" id="net_acc_holder_nm" onkeyup="netbank_accno_holder_nm_validate_final_payment()" placeholder="Enter Account Holder Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                            </div>
-
-                                            <div class="col-md-6 mt-2">
-                                                <h6 class="text-center">Branch Name</h6>
-                                            </div>
-                                            <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="sra_partial_netbank_branch_nm_validate_final_payment()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Bank Name</h6>
@@ -353,24 +499,32 @@
                                             </div>
 
                                             <div class="col-md-6 mt-2">
+                                                <h6 class="text-center">Customer Branch Name</h6>
+                                            </div>
+                                            <div class="col-md-6 mt-2">
+                                                <input type="text" autocomplete="off" class="form-control" name="net_banking_branch_name" id="net_banking_branch_name" onkeyup="sra_partial_netbank_branch_nm_validate_final_payment()" placeholder="Enter Branch Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            </div>
+
+                                            <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">UTR / Transaction No.</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="sra_partial_netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="sra_partial_netbank_utr_no_validate_final_payment()" placeholder="Enter UTR No" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="hidden" class="form-control" name="partial_net_bank_utr_no_status" id="partial_net_bank_utr_no_status" value="No">
                                             </div>
 
                                             <div class="col-md-6 mt-2">
                                                 <h6 class="text-center">Transaction Date</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" onchange="sra_partial_netbank_date_validate_final_payment()" placeholder="">
+                                                <input type="date" class="form-control" name="netbanking_date" id="netbanking_date" max="<?php echo date("Y-m-d");?>" onchange="sra_partial_netbank_date_validate_final_payment()" placeholder="">
                                             </div>
 
                                             <div class="col-md-6 mt-2" id="net_banking_reason" style='display:none;'>
                                             <h6 class="text-center">reason</h6>
                                             </div>
                                             <div class="col-md-6 mt-2" id="net_banking_input" style='display:none;'>
-                                                <input type="text" class="form-control" name="net_banking_reason_1" id="net_banking_reason_1" onkeyup="sra_partial_booking_net_banking_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" autocomplete="off" class="form-control" name="net_banking_reason_1" id="net_banking_reason_1" onkeyup="sra_partial_booking_net_banking_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                         <!-- </div> -->
                                     </div>
@@ -384,7 +538,7 @@
                                             <h6 class="text-center float-right">UPI ID Holder Name</h6>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="select_css"  name="select_upi_no" id="select_upi_no" required="required" onchange="sra_partial_transaction_upi_validate_final_payment()">
+                                            <select class="select_css" attr_partial_holder_type="partial" name="select_upi_no" id="select_upi_no" required="required" onchange="sra_partial_transaction_upi_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
                                                 <option class="self_upi" attr_self="self" value="self">Self</option>
@@ -397,16 +551,30 @@
                                             </select>
                                         </div>
 
-
                                         <div class="col-md-5 mt-2">
                                             <h6 class="text-center float-right">UPI Code App Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="upi_payment_type" id="upi_payment_type" onchange="sra_partial_payment_type_validate_final_payment()">
+                                            <select class="select_css" attr_payment_type="sra_extra_services" attr_partial_payment_type="partial" name="upi_payment_type" id="upi_payment_type" onchange="sra_partial_payment_type_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
                                             <input type="hidden" readonly class="form-control" name="company_acc_yes_no" id="company_acc_yes_no">
+                                        </div>
+
+                                        <div class="col-md-5 mt-2">
+                                        <h6 class="text-center float-right">Customer Payment Type</h6>
+                                        </div>
+                                        <div class="col-md-6 mt-2">
+                                            <select class="select_css"  attr_customer_payment_type="partial" name="upi_customer_payment_type" id="upi_customer_payment_type" required="required" onchange="sra_first_customer_payment_type_upi_validate()">
+                                                <option value="">Select Customer Payment Type</option>
+                                                <?php
+                                                    foreach($upi_apps_name as $upi_apps_name_value) 
+                                                    { 
+                                                ?>
+                                                    <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                                                <?php } ?>
+                                            </select>
                                         </div>
                                         <!-- <div id="upi_no_reason_div" style='display:none;'> -->
                                             <!-- <div class="col-md-5 mt-2">
@@ -435,21 +603,22 @@
                                                 <h6 class="text-center float-right">Transaction Date</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="date" class="form-control" onchange="sra_partial_transaction_date_upi_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
-                                            </div>
+                                                <input type="date" class="form-control" onchange="sra_partial_transaction_date_upi_validate_final_payment()" max="<?php echo date("Y-m-d");?>" name="upi_transaction_date" id="upi_transaction_date" max="<?php echo date("Y-m-d");?>" value="<?php //if(!empty($booking_payment_details)){ echo $booking_payment_details['upi_transaction_date'];}?>" placeholder="Transaction Date"> 
+                                            </div>  
 
                                             <div class="col-md-5 mt-2">
                                                 <h6 class="text-center float-right">UTR / Transaction No.</h6>
                                             </div>
                                             <div class="col-md-6 mt-2">
-                                                <input type="text" class="form-control" name="upi_no" id="upi_no" onkeyup="sra_partial_utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control" name="upi_no" id="upi_no" onkeyup="sra_partial_utr_no_validate_final_payment()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="hidden" class="form-control" name="partial_utr_no_status" id="partial_utr_no_status" value="No">
                                             </div>
 
                                             <div class="col-md-5 mt-2" id="upi_reason" style='display:none;'>
                                                 <h6 class="text-center float-right">reason</h6>
                                             </div>
                                             <div class="col-md-6 mt-2" id="upi_reason_input" style='display:none;'>
-                                                <input type="text" class="form-control" name="reason" id="reason" onkeyup="sra_partial_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                                <input type="text" autocomplete="off" class="form-control" name="reason" id="reason" onkeyup="sra_partial_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                             </div>
                                         <!-- </div> -->
                                     </div>
@@ -462,7 +631,7 @@
                                             <h6 class="text-center">QR Holder Name</h6>
                                         </div>
                                         <div class="col-md-6">
-                                            <select class="select_css" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="sra_partial_qr_hoder_name_validate_final_payment()">
+                                            <select class="select_css" attr_partial_qr_holder_type="partial" name="select_qr_upi_no" id="select_qr_upi_no" required="required" onchange="sra_partial_qr_hoder_name_validate_final_payment()">
                                             <!-- onchange='upi_QR_details(this.value); this.blur();' -->
                                                 <option value="">Select UPI ID Holder Name</option>
                                                 <option value="Self" attr_self="self">Self</option>
@@ -479,7 +648,7 @@
                                             <h6 class="text-center">QR Code App Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <select class="select_css" name="qr_payment_type" id="qr_payment_type" onchange="sra_partial_qr_payment_type_validate_final_payment()">
+                                            <select class="select_css" attr_partial_qr_payment_type="partial" name="qr_payment_type" id="qr_payment_type" onchange="sra_partial_qr_payment_type_validate_final_payment()">
                                                 <option value="">Select Transaction</option>
 
                                             </select>
@@ -504,14 +673,15 @@
                                             <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="sra_partial_qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" autocomplete="off" class="form-control" name="qr_upi_no" id="qr_upi_no" onkeyup="sra_partial_qr_utr_no_validate_final_payment()" placeholder="Enter Transaction Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="hidden" class="form-control" name="partial_QR_utr_no_status" id="partial_QR_utr_no_status" value="No">
                                         </div>
 
                                         <div class="col-md-6 mt-2" id="qr_reason" style='display:none;'>
                                             <h6 class="text-center">reason</h6>
                                         </div>
                                         <div class="col-md-6 mt-2" id="qr_reason_input" style='display:none;'>
-                                            <input type="text" class="form-control" name="qr_reason_1" id="qr_reason_1" onkeyup="sra_partial_booking_qr_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" autocomplete="off" class="form-control" name="qr_reason_1" id="qr_reason_1" onkeyup="sra_partial_booking_qr_reason_validate_final_payment()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -544,7 +714,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="col-md-6 mt-2">
+                                        <!-- <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Bank Name</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
@@ -552,21 +722,22 @@
                                                 <option value="">Select Transaction</option>
 
                                             </select>
+                                        </div> -->
                                         <input type="hidden" readonly class="form-control" name="cheque_company_acc_yes_no" id="cheque_company_acc_yes_no">
-                                        </div>
+
 
                                         <div class="col-md-6 mt-2">
-                                            <h6 class="text-center">Cheque Bank Name</h6>
+                                            <h6 class="text-center">Cheque Of Bank</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="bank_name" id="bank_name" onkeyup="sra_partial_cheque_banknm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                            <input type="text" autocomplete="off" class="form-control" name="bank_name" id="bank_name" onkeyup="sra_partial_cheque_banknm_validate_final_payment()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                         </div>
 
                                         <div class="col-md-6 mt-2">
                                             <h6 class="text-center">Cheque Number</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="cheque" id="cheque" onkeyup="sra_partial_cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" autocomplete="off" class="form-control" name="cheque" id="cheque" onkeyup="sra_partial_cheque_no_validate_final_payment()" placeholder="Enter Cheque Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">
@@ -585,6 +756,64 @@
                                         </div>
                                 </div>
 
+                                <div class="" id="Demand_partial_draft_tr" style='display:none;'>
+                                <div class="row cash_payment_div">
+                                <center><h4 class="mb-4">Demand Draft Details</h4></center>
+                                    <div class="col-md-6 mt-1">
+                                        <h6 class="text-center">Demand Draft Name</h6>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <select class="select_css"  attr_cheque_name="sra" name="demand_draft_name" id="demand_draft_name" required="required" onchange="sra_partial_demand_draft_name_validate()">
+                                        <!-- onchange='upi_QR_details(this.value); this.blur();' -->
+                                            <option value="">Select Demand Draft Name</option>
+                                            <option value="self" attr_self="self">Self</option>
+                                            <?php
+                                                foreach($upi_qr_data as $upi_qr_data_value) 
+                                                { 
+                                            ?>
+                                                <option class="self_upi" value="<?php echo $upi_qr_data_value['id'];?>"><?php echo $upi_qr_data_value['full_name'];?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <!-- <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Bank Name</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <select class="select_css" name="cheque_bank_name" id="cheque_bank_name" onchange="sra_first_cheque_bank_name_validate()">
+                                            <option value="">Select Transaction</option>
+
+                                        </select>
+                                    </div> -->
+                                    <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Demand Draft Bank</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <input type="text" autocomplete="off" class="form-control" name="demand_draft_bank_name" id="demand_draft_bank_name" onkeyup="sra_partial_demand_draft_bank_name_validate()" placeholder="Enter Bank Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Demand Draft Number</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <input type="text" autocomplete="off" class="form-control" name="demand_draft_number" id="demand_draft_number" onkeyup="sra_partial_demand_draft_number_validate()" placeholder="Enter Draft Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                    </div>
+
+                                    <div class="col-md-6 mt-2">
+                                        <h6 class="text-center">Demand Draft Date</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <input type="date" class="form-control" name="demand_draft_date" id="demand_draft_date" onchange="sra_partial_demand_draft_date_validate()" placeholder="Select Date">
+                                    </div>
+
+                                    <div class="col-md-6 mt-2" id="demand_reason" style='display:none;'>
+                                            <h6 class="text-center">Demand Draft reason</h6>
+                                    </div>
+                                    <div class="col-md-6 mt-2" id="demand_reason_input" style='display:none;'>
+                                        <input type="text" class="form-control" name="demand_draft_reason" id="demand_draft_reason" onkeyup="sra_partial_demand_draft_reason_validate()" placeholder="Enter Reason" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-md-3">
 
@@ -623,7 +852,7 @@
                                             <label>500 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="500" name="cash_500" id="cash_500" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="500" name="cash_500" id="cash_500" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -636,7 +865,7 @@
                                             <label>200 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="200" name="cash_200" id="cash_200" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="200" name="cash_200" id="cash_200" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -649,7 +878,7 @@
                                             <label>100 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="100" name="cash_100" id="cash_100" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="100" name="cash_100" id="cash_100" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -662,7 +891,7 @@
                                             <label>50 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="50" name="cash_50" id="cash_50" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="50" name="cash_50" id="cash_50" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -675,7 +904,7 @@
                                             <label>20 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="20" name="cash_20" id="cash_20" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="20" name="cash_20" id="cash_20" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -688,7 +917,7 @@
                                             <label>10 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="10" name="cash_10" id="cash_10" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="10" name="cash_10" id="cash_10" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -701,7 +930,7 @@
                                             <label>5 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="5" name="cash_5" id="cash_5" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="5" name="cash_5" id="cash_5" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -714,7 +943,7 @@
                                             <label>2 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="2" name="cash_2" id="cash_2" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="2" name="cash_2" id="cash_2" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -727,7 +956,7 @@
                                             <label>1 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control data_amt" attr-amt="1" name="cash_1" id="cash_1" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control data_amt_partial" attr-amt="1" name="cash_1" id="cash_1" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -767,7 +996,7 @@
                                             <label>500 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="500" name="return_cash_500" id="return_cash_500" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="500" name="return_cash_500" id="return_cash_500" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -780,7 +1009,7 @@
                                             <label>200 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="200" name="return_cash_200" id="return_cash_200" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="200" name="return_cash_200" id="return_cash_200" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -793,7 +1022,7 @@
                                             <label>100 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="100" name="return_cash_100" id="return_cash_100" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="100" name="return_cash_100" id="return_cash_100" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -806,7 +1035,7 @@
                                             <label>50 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="50" name="return_cash_50" id="return_cash_50" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="50" name="return_cash_50" id="return_cash_50" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -819,7 +1048,7 @@
                                             <label>20 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="20" name="return_cash_20" id="return_cash_20" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="20" name="return_cash_20" id="return_cash_20" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -832,7 +1061,7 @@
                                             <label>10 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="10" name="return_cash_10" id="return_cash_10" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="10" name="return_cash_10" id="return_cash_10" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -845,7 +1074,7 @@
                                             <label>5 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="5" name="return_cash_5" id="return_cash_5" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="5" name="return_cash_5" id="return_cash_5" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -858,7 +1087,7 @@
                                             <label>2 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="2" name="return_cash_2" id="return_cash_2" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="2" name="return_cash_2" id="return_cash_2" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -871,7 +1100,7 @@
                                             <label>1 x </label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input type="text" class="form-control return_data_amt" return-attr-amt="1" name="return_cash_1" id="return_cash_1" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                                <input type="text" autocomplete="off" class="form-control return_data_amt_partial" return-attr-amt="1" name="return_cash_1" id="return_cash_1" placeholder="Enter Particulars" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                             </div>
                                             <div class="col-md-1">
                                                 =
@@ -895,6 +1124,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p id="send_receiver_msg" style="display:none;"></p>
                         </div>
                     </div>
 
@@ -966,7 +1200,7 @@
                                 
                                 <td>"UPI ID Holder Name,QR Holder Name,Name On Cheque,Account Number : Navigate here to include new account details above the 'Account details' option."</td>
                                 <td>
-                                <a href="<?php echo base_url(); ?>admin/add_qr_code/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                Contact to Admin
                                 </td>
                             </tr>
                             <tr>

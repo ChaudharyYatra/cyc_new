@@ -115,7 +115,7 @@ class Tour_expences extends CI_Controller{
 
                 $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
                 $this->arr_view_data['listing_page']    = 'yes';
-                $this->arr_view_data['expences_data']        = $expences_data;
+                // $this->arr_view_data['expences_data']        = $expences_data;
                 $this->arr_view_data['expences_details_data']        = $expences_details_data;
                 $this->arr_view_data['page_title']      = $this->module_title_expences." List";
                 $this->arr_view_data['module_title']    = $this->module_title_expences." List";

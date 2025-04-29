@@ -60,6 +60,12 @@
                               </div>
                       </div>
                       <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Nick Name <span class="req_field">*</span></label>
+                          <input type="text" class="form-control" name="supervision_nick_name" id="supervision_nick_name" placeholder="Enter Supervision Nick Name"  value="<?php echo $info['supervision_nick_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
                               <div class="form-group">
                                 <label>Mobile Number 1 <span class="req_field">*</span></label>
                                 <input type="text" class="form-control" name="mobile_number1" id="mobile_number1" placeholder="Enter 10 Digits Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<?php echo $info['mobile_number1']; ?>">

@@ -33,6 +33,7 @@
               <?php
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
 
               <form method="post" enctype="multipart/form-data" id="edit_assign_staff">
@@ -65,6 +66,14 @@
                           ?>
                               <option value="<?php echo $supervision_info['id']; ?>" <?php if($supervision_info['id']==$info['name']) { echo "selected"; } ?>><?php echo $supervision_info['supervision_name']; ?></option>
                           <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Nick Name </label>
+                        <input type="text" readonly name="staff_nick_name[]" id="staff_nick_name" class="form-control" placeholder="Nick Name" value="<?php echo $info['staff_nick_name']; ?>" required>
                         </select>
                       </div>
                     </div>

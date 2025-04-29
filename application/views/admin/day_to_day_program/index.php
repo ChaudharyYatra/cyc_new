@@ -34,6 +34,7 @@
         <div class="row">
           <div class="col-12">
               <?php $this->load->view('admin/layout/admin_alert'); ?>
+              <button id="addDayBtn" class="btn btn-success">Add Day</button>
             <div class="card card-primary">
             
               <!-- /.card-header -->

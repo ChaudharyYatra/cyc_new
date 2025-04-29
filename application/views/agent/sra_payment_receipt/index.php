@@ -172,6 +172,9 @@
                         
                         <?php } else if($payment_receipt['select_transaction'] == 'CASH'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="-" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        
+                        <?php } else if($payment_receipt['select_transaction'] == 'Demand Draft'){?>
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['demand_draft_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                         <?php } ?>
                     </div>
 
@@ -179,9 +182,12 @@
                         <h6 class="ml-4">Drawn on </h6>  
                     </div>
                     <div class="col-md-3 mt-2">
-                    <?php if($payment_receipt['select_transaction'] == 'Cheque'){?>
+                        <?php if($payment_receipt['select_transaction'] == 'Cheque'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['drawn_on_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     
+                        <?php } else if($payment_receipt['select_transaction'] == 'Demand Draft'){?>
+                            <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['demand_draft_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+
                         <?php } else if($payment_receipt['select_transaction'] == 'Net Banking'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo date("d-m-Y",strtotime($payment_receipt['netbanking_date'])); ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     
@@ -193,7 +199,7 @@
 
                         <?php } else{?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="-" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-                    <?php } ?>
+                        <?php } ?>
                     </div>
                     <div class="col-md-2 mt-2">
                         <h6 class="ml-4">Bank</h6>  
@@ -203,6 +209,8 @@
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['bank_name']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <?php }else if($payment_receipt['select_transaction'] == 'Net Banking'){?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['netbanking_bank_name']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                    <?php }else if($payment_receipt['select_transaction'] == 'Demand Draft'){?>
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['demand_draft_bank_name']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <?php } else{?>
                         <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="-" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     <?php } ?>
@@ -212,13 +220,13 @@
                         <h6 class="">against SBA/BBA No.</h6>  
                     </div>
                     <div class="col-md-3 mt-2">
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['booking_reference_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['sra_no']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
                     <div class="col-md-2 mt-2">
                         <h6 class="ml-4">Tour No.</h6>  
                     </div>
                     <div class="col-md-6 mt-2">
-                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['tour_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                        <input type="text" readonly class="form-control input_css" name="enq_seat_count" id="enq_seat_count" value="<?php echo $payment_receipt['package_tour_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                     </div>
                     <div class="col-md-2 mt-2">
                         <h6>Tour Date.</h6>  

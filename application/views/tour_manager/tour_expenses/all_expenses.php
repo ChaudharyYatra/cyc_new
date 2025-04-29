@@ -39,7 +39,7 @@
                   <tr>
                     <th>SN</th>
                     <th>Expenses Date</th>
-                    <th>Expense Head</th>
+                    <th>Expense Type</th>
                     <th>Sub-Expenses Head</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -51,24 +51,25 @@
                    $i=1; 
                    foreach($tour_expenses_all as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo date("d-m-Y",strtotime($info['expense_date'])) ?></td>
                     <td>
-                      <?php
-                          if($info['expense_type_name']!='')
+                    <?php
+                          if($info['tour_expenses_type']=='1')
                             { 
                         ?>
-                          <?php echo $info['expense_type_name']; ?>
-                      <?php } else{?>
+                          Single Expenses
+                      <?php } else if($info['tour_expenses_type']=='0'){?>
                           Multiple Expences
                       <?php } ?>
                     </td>
                     <td>
                       <?php
                             if($info['expense_category']!='')
-                              { 
+                              {
                           ?>
                             <?php echo $info['expense_category']; ?>
                       <?php } else{?>
@@ -89,20 +90,30 @@
                       <?php } ?>
                     </td>
                     
-                    <td>
+                    <td><?php if(!empty($info['tour_manager_id'])){?>
                           <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['package_date_id']);
 					                  echo rtrim($did, '='); ?>/<?php $aid=base64_encode($info['package_id']);
-					                  echo rtrim($aid, '='); ?>" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> &nbsp;/&nbsp;
-
+					                  echo rtrim($aid, '='); ?>/<?php $tid=base64_encode($info['tour_manager_id']);
+					                  echo rtrim($tid, '='); ?>" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> 
+                        <?php }else if(!empty($info['sub_tour_manager_id'])){?>
+                          <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
+					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['package_date_id']);
+					                  echo rtrim($did, '='); ?>/<?php $aid=base64_encode($info['package_id']);
+					                  echo rtrim($aid, '='); ?>/<?php $tid=base64_encode($info['sub_tour_manager_id']);
+					                  echo rtrim($tid, '='); ?>" class="itinerary_css"><i class="fas fa-eye" aria-hidden="true" style="color:black" ;="" title="view"></i></a> 
+                        <?php } ?>
+                          <?php if(!empty($info['tour_manager_id'])){?>
+                          &nbsp;/&nbsp;
                           <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['package_date_id']); 
 					                  echo rtrim($did, '='); ?>/<?php $aid=base64_encode($info['package_id']); 
-					                  echo rtrim($aid, '='); ?>" class="itinerary_css"><i class="fas fa-edit" aria-hidden="true" style="color:blue" ;="" title="edit"></i></a> &nbsp;/&nbsp;
+					                  echo rtrim($aid, '='); ?>/<?php $tid=base64_encode($info['tour_manager_id']);
+					                  echo rtrim($tid, '='); ?>" class="itinerary_css"><i class="fas fa-edit" aria-hidden="true" style="color:blue" ;="" title="edit"></i></a> &nbsp;/&nbsp;
                           
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; 
 					                  ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red"; title="delete"></i></a>
-                          
+                          <?php } ?>
                           <!-- <a href="<?php //echo $module_url_path;?>/delete/<?php //$aid=base64_encode($info['id']); 
 					                  //echo rtrim($aid, '='); ?> /<?php //$did=base64_encode($info['add_more_id']); 
 					                  //echo rtrim($did, '='); ?>" class="itinerary_css"><i class="fa fa-trash" aria-hidden="true" style="color:red" ;=""></i></a> -->

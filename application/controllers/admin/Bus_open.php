@@ -154,7 +154,7 @@ class Bus_open extends CI_Controller{
 
             if($type == 'yes')
             {
-                $arr_update['is_active'] = "no";
+                $arr_update['is_active'] = "no"; 
             }
             else
             {

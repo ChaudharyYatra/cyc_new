@@ -36,6 +36,7 @@
                     <th>SN</th>
                     <th>Role Type</th>
                     <th>supervision Name</th>
+                    <th>supervision Nick Name</th>
                     <th>Email</th>
                     <th>Mobile Number 1</th>
                     <th>Mobile Number 2</th>
@@ -55,6 +56,7 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['role_name'] ?></td>
                     <td><?php echo $info['supervision_name'] ?></td>
+                    <td><?php echo $info['supervision_nick_name'] ?></td>
                     <td><?php echo $info['email'] ?></td>
                     <td><?php echo $info['mobile_number1'] ?></td>
                     <td><?php echo $info['mobile_number2'] ?></td>

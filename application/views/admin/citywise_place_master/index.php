@@ -10,7 +10,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
-              
             </ol>
           </div>
         </div>
@@ -33,6 +32,7 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <!-- <th>Place Name</th> -->
                     <th>District</th>
                     <th>City Name</th>
                     <th>Is Active?</th>
@@ -45,9 +45,11 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
+                    <!-- <td><?php //echo $info['place_name'] ?></td> -->
                     <td><?php echo $info['district'] ?></td>
                     <td><?php echo $info['city_name'] ?></td>
                     <td>
@@ -55,13 +57,13 @@
                         if($info['is_active']=='yes')
                           {
                         ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
+                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['select_district'].'/'. $info['select_city'].'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
                         <?php } else { ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
+                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['select_district'].'/'. $info['select_city'].'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
                         <?php } ?>
                     </td>
                     <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['select_district'];?>/<?php echo $info['select_city'];?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
                           
                     </td>

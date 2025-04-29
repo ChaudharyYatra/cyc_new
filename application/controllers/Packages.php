@@ -10,9 +10,9 @@ class Packages extends CI_Controller {
 	function __construct() {
 
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
-        $this->load->library("pagination");
-        $this->load->model('pagination_model');
+        // $this->load->helper(array('form', 'url'));
+        // $this->load->library("pagination");
+        // $this->load->model('pagination_model');
 
         $this->arr_view_data = [];
 	 }
@@ -406,6 +406,12 @@ class Packages extends CI_Controller {
             $this->db->order_by('id','ASC');
             $media_source = $this->master_model->getRecords('media_source');
 
+            $this->db->where('is_deleted','no');
+            $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+            $this->db->where('is_deleted','no');
+            $zone_master_data = $this->master_model->getRecords('zone_master');
+
             if(isset($_POST['submit']))
             {
                 $this->form_validation->set_rules('first_name', 'First Name', 'required');
@@ -415,6 +421,7 @@ class Packages extends CI_Controller {
                 $this->form_validation->set_rules('gender', 'Gender', 'required');
                 $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
 				$this->form_validation->set_rules('wp_mobile_number', 'Whatsapp Mobile Number', 'required');
+                
 
     
                 if($this->form_validation->run() == TRUE)
@@ -428,6 +435,13 @@ class Packages extends CI_Controller {
                     $media_source_name = $this->input->post('media_source_name');
 					$wp_mobile_number  = trim($this->input->post('wp_mobile_number'));
                     $package_id        = $id;
+                    $occupation_name  = $this->input->post('occupation_name'); 
+                    $zone_name  = $this->input->post('zone_name'); 
+                    $flat_no  = $this->input->post('flat_no'); 
+                    $house_name  = $this->input->post('house_name'); 
+                    $street_name  = $this->input->post('street_name'); 
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area');
     
                     $arr_insert = array(
                         'first_name'    =>   $first_name,
@@ -439,7 +453,14 @@ class Packages extends CI_Controller {
                         'package_id'    =>$id,
                         'media_source_name'    =>$media_source_name,
 						'wp_mobile_number'=>$wp_mobile_number,
-						'enquiry_from'=> 'front'
+						'enquiry_from'=> 'front',
+                        'occupation_name'    =>$occupation_name,
+                        'zone_name'    =>$zone_name,
+                        'flat_no'    =>$flat_no,
+                        'house_name'    =>$house_name,
+                        'street_name'    =>$street_name,
+                        'landmark'    =>$landmark,
+                        'area'    =>$area
                         
                     );
                     $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
@@ -522,7 +543,7 @@ class Packages extends CI_Controller {
             redirect(base_url().'home');
         }
          
-       
+        
         
         $data = array('middle_content' => 'booking_enquiry',
 						'packages_data'       => $packages_data,
@@ -531,6 +552,8 @@ class Packages extends CI_Controller {
                         'agent_data'    => $Aagent_data,
                         'department_data' => $department_data,
                         'media_source' => $media_source,
+                        'occupation_master_data' => $occupation_master_data,
+                        'zone_master_data' => $zone_master_data,
                         'page_title'    => 'Booking Enquiry',
 						);
 						

@@ -21,8 +21,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <?php $iid = $tm_id; // Replace this with your actual data
-                $aid = base64_encode($tm_id);
+              <?php $iid = $id; // Replace this with your actual data
+                $aid = base64_encode($id);
                 $aid = str_replace('=', '', $aid);
                 $aid; 
 
@@ -226,22 +226,22 @@
                 <div class="text-center mt-4">
 
                   <?php 
-                    if($tour_expenses_all_info['approval']=='no' && $tour_expenses_all_info['hold']=='yes')
+                    if($tour_expenses_all_info['exp_checker_approval']=='no' && $tour_expenses_all_info['exp_checker_hold']=='yes')
                       {
                     ?>
                     <button type="button" attr_approve="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary approve" name="submit" value="submit">Approve</button>
                     
-                    <?php } else if($tour_expenses_all_info['approval']=='yes'  && $tour_expenses_all_info['hold']=='no'){ ?>
+                    <?php } else if($tour_expenses_all_info['exp_checker_approval']=='yes' && $tour_expenses_all_info['exp_checker_hold']=='no'){ ?>
                       <button type="button" disabled class="btn btn-success" name="submit" value="submit">Approved</button>
                     <?php } ?>
 
                     <?php 
-                      if($tour_expenses_all_info['approval']=='yes'  && $tour_expenses_all_info['hold']=='no')
+                      if($tour_expenses_all_info['exp_checker_approval']=='yes' && $tour_expenses_all_info['exp_checker_hold']=='no')
                       { ?>
                       
-                    <?php } else if($tour_expenses_all_info['approval']=='no'  && $tour_expenses_all_info['hold']=='yes'){ ?>
+                    <?php } else if($tour_expenses_all_info['exp_checker_approval']=='no' && $tour_expenses_all_info['exp_checker_hold']=='yes'){ ?>
                       <button class="btn btn-warning" id="holdButton">Hold</button>
-                      <?php } else if($tour_expenses_all_info['approval']=='no' && $tour_expenses_all_info['hold']=='pending'){?>
+                      <?php } else if($tour_expenses_all_info['exp_checker_approval']=='no' && $tour_expenses_all_info['exp_checker_hold']=='pending'){?>
                     
                         <button type="button" attr_approve="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary approve" name="submit" value="submit">Approve</button>
                         <button class="btn btn-warning" id="holdButton">Hold</button>

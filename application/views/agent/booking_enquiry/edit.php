@@ -128,12 +128,78 @@
                                 <input type="text" class="form-control" name="other_tour_name" id="other_tour_name" placeholder="Enter destination name" value="<?php echo $info['other_tour_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                         </div>
-				                <div class="col-md-4">
+				                <div class="col-md-6">
                           <div class="form-group">
                             <label>Enter Seat Count</label>
                             <input type="text" class="form-control" name="enq_seat_count" id="enq_seat_count" placeholder="Enter seat count" value="<?php echo $info['seat_count']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                           </div>
                         </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Occupation Name</label>
+                                  <select class="select_css" name="occupation_name" id="occupation_name">
+                                      <option value="">Select occupation name</option>
+                                      <?php
+                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $occupation_master_info['id']; ?>" <?php if(isset($info['occupation_name'])){if($occupation_master_info['id'] == $info['occupation_name']) {echo 'selected';}}?> ><?php echo $occupation_master_info['occupation_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Zone Name</label>
+                                  <select class="select_css" name="zone_name" id="zone_name">
+                                      <option value="">Select zone name</option>
+                                      <?php
+                                        foreach($zone_master_data as $zone_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $zone_master_info['id']; ?>" <?php if(isset($info['zone_name'])){if($zone_master_info['id'] == $info['zone_name']) {echo 'selected';}}?> ><?php echo $zone_master_info['zone_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <label>Customer Address -</label>
+                              <div class="form-group">
+                                <label>Flat No./ Banglow No.</label>
+                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No" value="<?php echo $info['flat_no']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                            <label></label>
+                              <div class="form-group">
+                                <label>Building / House Name</label>
+                                <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name" value="<?php echo $info['house_name']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Street Name</label>
+                                <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name" value="<?php echo $info['street_name']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name" value="<?php echo $info['landmark']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Area</label>
+                                <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name" value="<?php echo $info['area']; ?>">
+                              </div>
+                            </div>
+
                         <!-- <div class="col-md-6 mb-2">
                           <label class="col-form-label">Followup Date:</label> 
                           <input type="date" class="form-control" name="followup_date" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" value="<?php //if(isset($info['followup_date'])){ echo $info['followup_date'];}?>" >

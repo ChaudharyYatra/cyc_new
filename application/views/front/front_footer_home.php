@@ -3,6 +3,9 @@
   .img_bot{
     margin-bottom: 1px;
   }
+  .content_css{
+    color:white;
+  }
 </style>
 <!-- footer starts -->
 <img class="img_bot" src="<?php echo base_url(); ?>assets/front/shape8_final.png" alt="image" width="100%"></img>
@@ -74,7 +77,33 @@
                                     </div>
                                     <div class="content-part">
                                       <b><p class="text_justify"><span><a href="mailto:<?php echo $website_basic_structure_value['email']; ?>"><?php echo $website_basic_structure_value['email']; ?></a> </span></p></b>
-                                      
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">GST No. :  27AAACC7487N1Z0</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration No. :  17-08288 of 1994-95</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
                                     </div>
                                   </li>
 
@@ -86,27 +115,26 @@
                             </ul> -->
                         </div>
                     </div>
-                   <div class="col-lg-3 col-md-3 col-sm-12 mb-4 pe-4">
-                        
-                        <div class="footer-links">
-                            <h3 class="white">Quick links</h3>
-                            <ul>
-                                <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
-                                <li><a href="<?php echo base_url(); ?>privacy_policy">Privacy Policy</a></li>
-                                <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms &amp; Conditions</a></li>
-                                <li><a href="<?php echo base_url(); ?>tour_cancel_rules">Tour Cancel Rules</a></li>
-                                <li><a href="<?php echo base_url(); ?>seat_reservation_rules">Seat Reservation Rules</a></li>
-                                <li><a href="<?php echo base_url(); ?>contact_us">Contact Us</a></li>
-								<li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 mb-4 pe-4">
+                      <div class="footer-links">
+                        <h3 class="white">Quick links</h3>
+                        <ul>
+                            <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
+                            <li><a href="<?php echo base_url(); ?>privacy_policy">Privacy Policy</a></li>
+                            <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms &amp; Conditions</a></li>
+                            <li><a href="<?php echo base_url(); ?>tour_cancel_rules">Tour Cancel Rules</a></li>
+                            <li><a href="<?php echo base_url(); ?>seat_reservation_rules">Seat Reservation Rules</a></li>
+                            <li><a href="<?php echo base_url(); ?>contact_us">Contact Us</a></li>
+                            <li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
+                        </ul>
+                      </div>
                     </div>
                    
                     <div class="col-lg-5 col-md-5 col-sm-12 mb-4">
-                        <div class="footer-links">
-                            <h3 class="white">Map</h3>
-                            <iframe class="rounded overflow-hidden" height="240" src="<?php echo $website_basic_structure_value['map']; ?>"></iframe>
-                        </div>  
+                      <div class="footer-links">
+                        <h3 class="white">Map</h3>
+                        <iframe class="rounded overflow-hidden" height="240" src="<?php echo $website_basic_structure_value['map']; ?>"></iframe>
+                      </div>  
                     </div>
                 </div>
             </div>
@@ -115,33 +143,32 @@
 
 
         <div class="footer-copyright">
-            <div class="container">
-                <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
-                    <div class="copyright-text">
-                        <p class="m-0 white">Designed & Developed by <img src="<?php echo base_url(); ?>uploads/do_not_delete/sumago.jpg" width="25px" height="25px" style="border-radius:20px;"> <a href="https://www.sumagoinfotech.com/"><span style="color:#ff343b;"><b>Sumago Infotech Pvt. Ltd.</b></span></a> © <?php echo date("Y"); ?> All rights reserved.</p>
-                    </div>
-                    <div class="social-links">
-                        <ul>  
-                        <li><a href="<?php echo $website_basic_structure_value['facebook_link']; ?>" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="<?php echo $website_basic_structure_value['instagram_link']; ?>" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="<?php echo $website_basic_structure_value['twitter_link']; ?>" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
-                            <!-- <li><a href="<?php //echo $website_basic_structure_value['linkedin_link']; ?>" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li> -->
-                        </ul>
-                    </div>
-                </div>    
-            </div>
+          <div class="container">
+            <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
+              <div class="copyright-text">
+                <p class="m-0 white">Designed & Developed by <img src="<?php echo base_url(); ?>uploads/do_not_delete/sumago.jpg" width="25px" height="25px" style="border-radius:20px;"> <a href="https://www.sumagoinfotech.com/"><span style="color:#ff343b;"><b>Sumago Infotech Pvt. Ltd.</b></span></a> © <?php echo date("Y"); ?> All rights reserved.</p>
+              </div>
+              <div class="social-links">
+                <ul>  
+                  <li><a href="<?php echo $website_basic_structure_value['facebook_link']; ?>" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                  <li><a href="<?php echo $website_basic_structure_value['instagram_link']; ?>" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                  <li><a href="<?php echo $website_basic_structure_value['twitter_link']; ?>" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                  <!-- <li><a href="<?php //echo $website_basic_structure_value['linkedin_link']; ?>" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li> -->
+                </ul>
+              </div>
+            </div>    
+          </div>
         </div>
         <?php } } ?>
         <div id="particles-js"></div>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <div class="floating_btn">
-            <a class="wp_target" target="_blank" href="https://api.whatsapp.com/send?phone=+917588484848 &text=Hello">
-                <div class="contact_icon">
-                    <i class="fa fa-whatsapp my-float"></i>
-                </div>
-            </a>
-            
+          <a class="wp_target" target="_blank" href="https://api.whatsapp.com/send?phone=+917588484848 &text=Hello">
+            <div class="contact_icon">
+              <i class="fa fa-whatsapp my-float"></i>
+            </div>
+          </a>
         </div>
 
 
@@ -152,7 +179,7 @@
     </div>
     <!-- Back to top start -->
     <div id="back-to-top">
-        <a href="#"></a>
+      <a href="#"></a>
     </div>
     <!-- Back to top ends -->
 
@@ -178,11 +205,11 @@
                                 role="tabpanel">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="blog-image rounded">
-                                            <a href="#"
-                                                style="background-image: url(<?php echo base_url(); ?>uploads/log.jpg);">
-                                            </a>
-                                        </div>
+                                      <div class="blog-image rounded">
+                                          <a href="#"
+                                              style="background-image: url(<?php echo base_url(); ?>uploads/log.jpg);">
+                                          </a>
+                                      </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <h4 class="text-center border-b pb-2 " style="color:white;">Login</h4>
@@ -197,16 +224,13 @@
                                                 <input type="password" class="form-control" name="password" id="pass_login" placeholder="Password">
                                                      <i id="toggler"class="far fa-eye" style="position: absolute;right: 50px;top: 48%;transform: translateY(-50%);cursor: pointer;"></i>
                                                 <span class="text-danger float-left" id="passlogin_error" style="display:none"></span>
-                                                  
                                             </div>
                                             <div class="form-group mb-2">
-                                                
                                                 <a class="float-end" href="#" style="color:rgb(246, 242, 242);">Lost your password?</a>
                                             </div>
                                             <div class="comment-btn mb-2 pb-2 text-center border-b">
                                               <input type="submit" class="nir-btn w-100" id="submit_l" value="Login" name="submit">
                                             </div>
-                                            
                                         </form>
                                     </div>
                                 </div>
@@ -237,7 +261,7 @@
     // City change
     $('#department_id').on('change', function () {
       var did = $(this).val();
-    //   alert('ppppppppppppppppppppppppppp');
+      // alert('ppppppppppppppppppppppppppp');
      
       // AJAX request
       $.ajax({
@@ -268,12 +292,12 @@
         if(fil_val=='low_to_high'){
         var url =window.location.origin;
         var final_url = base_url+"packages/all_packages_asc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         }else if(fil_val=='high_to_low')
         {
-        var url =window.location.origin;
+        var url = window.location.origin;
         var final_url = base_url+"packages/all_packages_desc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         };
      });
     });  
@@ -342,9 +366,9 @@ function validateregForms()
       var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(!regex.test(emailid)) 
         {
-           $('#emailid_error').text('Please enter valid email address.');
-            $('#emailid_error').show();
-            submiform=false;
+          $('#emailid_error').text('Please enter valid email address.');
+          $('#emailid_error').show();
+          submiform=false;
         }
         else if(emailid)
         {
@@ -352,9 +376,9 @@ function validateregForms()
           var count = (email_split[1].match(/\./g) || []).length;
           if(count > 2)
           {
-              $('#emailid_error').text('Please enter valid email address.');
-              $('#emailid_error').show();
-              submiform=false;
+            $('#emailid_error').text('Please enter valid email address.');
+            $('#emailid_error').show();
+            submiform=false;
           }
         }
         // else

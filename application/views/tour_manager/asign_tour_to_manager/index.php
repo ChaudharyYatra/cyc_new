@@ -111,6 +111,10 @@
                           <a href="<?php echo $module_url_path_tour_expenses;?>/add/<?php $aid=base64_encode($info['package_id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['did']); 
 					                  echo rtrim($did, '='); ?>" class="itinerary_css"><button class="dropdown-item">Daily Tour Expenses</button></a>
+
+                          <a href="<?php echo $module_satff_advance_payment;?>/index/<?php $aid=base64_encode($info['package_id']); 
+					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['did']); 
+					                  echo rtrim($did, '='); ?>" class="itinerary_css"><button class="dropdown-item">Staff Advance Payment</button></a>
                           
                           <a href="<?php echo $module_url_path_request_more_fund;?>/add/<?php $aid=base64_encode($info['package_id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['did']); 

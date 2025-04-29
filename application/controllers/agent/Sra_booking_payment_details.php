@@ -1,3 +1,6 @@
+
+
+
 <?php 
 //   Controller for: home page
 // Author: Rupali / Vivek
@@ -32,17 +35,72 @@ class Sra_booking_payment_details extends CI_Controller {
         $agent_sess_name = $this->session->userdata('agent_name');
         $id=$this->session->userdata('agent_sess_id');
 
-        $record = array();
-        $fields = "sra_payment.*,package_date.journey_date,sra_payment.id as sra_payment_id";
+        $this->db->where('is_deleted','no');
+        $this->db->where('id',$id);
+        $agent_data = $this->master_model->getRecord('agent');
+        // print_r($agent_data); die;
+
+        $total_sra_amt = 0;
+        $services_amt = 0;
+        $total_amount = 0;
+
+        
+        $fields = "sra_payment.*,package_date.journey_date,sra_payment.id as sra_payment_id,packages.tour_number as package_tour_number";
         $this->db->where('sra_payment.is_deleted','no');
         $this->db->where('sra_payment.is_active','yes');
+        $this->db->join("packages", 'packages.id=sra_payment.tour_number','left');
         $this->db->join("package_date", 'package_date.id=sra_payment.tour_date','left');
-        $this->db->group_start();
         $this->db->where('sra_payment.sra_no', $iid);
         $this->db->where('sra_payment.academic_year', $academic_year);
-        $this->db->group_end();
-        $traveller_booking_info = $this->master_model->getRecords('sra_payment','',$fields);
-        // print_r($traveller_booking_info); die;
+        $traveller_booking_info = $this->master_model->getRecords('sra_payment',array('sra_payment.is_deleted'=>'no'),$fields);
+        //print_r($traveller_booking_info); die;
+
+        // ------------------- Total Final Amount -----------------------------------
+        if (!empty($traveller_booking_info)) {
+            foreach ($traveller_booking_info as $booking) {
+                $total_sra_amt += isset($booking['total_sra_amt']) ? $booking['total_sra_amt'] : 0;
+            }
+        }
+        //print_r($total_sra_amt); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('sra_extra_services.sra_no',$iid);
+        $this->db->where('sra_extra_services.academic_year', $academic_year);
+        $total_extra_services_details = $this->master_model->getRecords('sra_extra_services');
+        //print_r($total_extra_services_details); die;
+        if (!empty($total_extra_services_details)) {
+            foreach ($total_extra_services_details as $service) {
+                $services_amt += isset($service['services_amt']) ? $service['services_amt'] : 0;
+            }
+        }
+
+        $total_amount = $total_sra_amt + $services_amt; 
+        // ------------------- Total Final Amount -----------------------------------
+
+        // ------------------- Total Paid Amount -----------------------------------
+        $total_paid_amount = $total_amount - $total_amount;
+        // ------------------- Total Paid Amount -----------------------------------
+
+        // ------------------- Total Remaining Amount -----------------------------------
+        $total_remaining_amount = $total_amount - $total_paid_amount;
+        // ------------------- Total Remaining Amount -----------------------------------
+
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('sra_extra_services.sra_payment_id',$iid);
+        $extra_services_details_value = $this->master_model->getRecords('sra_extra_services');
+        // print_r($extra_services_details_value); die;
+
+
+        
+        // $fields = "sra_payment.*,sra_booking_payment_details.run_pending_amt,sra_booking_payment_details.final_amt,sra_extra_services.services_amt as extra_services_amt";
+        // $this->db->where('sra_booking_payment_details.is_deleted','no');
+        // $this->db->where('sra_payment.is_active','yes');
+        // $this->db->where('sra_extra_services.sra_payment_id',$iid);
+        // $this->db->join("sra_payment", 'package_date.id=sra_payment.tour_date','left');
+        // $final_amt_with_extra_services = $this->master_model->getRecord('sra_extra_services',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
 
         // $record = array();
         // $fields = "booking_basic_info.*,packages.id as pid,packages.tour_title,packages.tour_number,packages.tour_number,package_date.journey_date,package_hotel.package_id,package_hotel.hotel_name_id";
@@ -85,7 +143,6 @@ class Sra_booking_payment_details extends CI_Controller {
 
         $record = array();
         $fields = "all_traveller_info.*, package_date.cost";
-        // $this->db->order_by('id','desc');
         $this->db->where('all_traveller_info.is_deleted','no');
         $this->db->where('all_traveller_info.domestic_enquiry_id',$iid);
         $this->db->join("package_date", 'all_traveller_info.package_id= package_date.package_id','left');
@@ -102,15 +159,23 @@ class Sra_booking_payment_details extends CI_Controller {
         $fields = "qr_code_master.*,qr_code_add_more.*,qr_code_add_more.id as add_more.id,qr_code_add_more.account_number";
         $this->db->where('qr_code_master.is_deleted','no');
         $this->db->where('qr_code_master.is_active','yes');
+        $this->db->where('qr_code_add_more.is_deleted','no');
         $this->db->join("qr_code_add_more", 'qr_code_master.id= qr_code_add_more.qr_code_master_id','left');
+        $this->db->group_by('qr_code_add_more.account_number,qr_code_add_more.bank_name');
         $upi_qr__add_more_data = $this->master_model->getRecords('qr_code_master');
+        // print_r($upi_qr__add_more_data); 
 
 
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
+        $record = array();
+        $fields = "qr_code_master.*,qr_code_add_more.nick_name";
+        $this->db->where('qr_code_master.is_deleted','no');
+        $this->db->where('qr_code_master.is_active','yes');
+        $this->db->where('qr_code_add_more.is_deleted','no');
         $this->db->where('qr_code_master.is_agent','No');
-        $upi_qr_data = $this->master_model->getRecords('qr_code_master');
-        // print_r($upi_qr_data); die;
+        $this->db->join("qr_code_add_more", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+        $this->db->group_by('qr_code_add_more.qr_code_master_id');
+        $upi_qr_data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+        //print_r($upi_qr_data); die;
 
         foreach($upi_qr_data as $upi_qr_data_id) 
         { 
@@ -142,9 +207,8 @@ class Sra_booking_payment_details extends CI_Controller {
 
         $extra=array();
         foreach($extra_services_details as $special_req_master_data_value) 
-        { 
+        {  
             array_push($extra,$special_req_master_data_value);
-            // print_r($extra);
         }
             // print_r($extra);
 
@@ -154,7 +218,7 @@ class Sra_booking_payment_details extends CI_Controller {
         $this->db->where('sra_booking_payment_details.academic_year', $academic_year);
         $this->db->group_end();
         $booking_payment_details = $this->master_model->getRecord('sra_booking_payment_details');
-        // print_r($booking_payment_details); die;
+        //print_r($booking_payment_details); die;
 
         $enquiry = isset($booking_payment_details['enquiry_id']);
         // print_r($enquiry); die;
@@ -175,11 +239,17 @@ class Sra_booking_payment_details extends CI_Controller {
         $relation_data = $this->master_model->getRecords('relation');
         // print_r($relation_data); die;
 
+        $record = array();
+        $fields = "upi_apps_name.*";
+        $this->db->where('upi_apps_name.is_deleted','no');
+        $upi_apps_name = $this->master_model->getRecords('upi_apps_name');
 
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['traveller_booking_info']        = $traveller_booking_info;
+        $this->arr_view_data['upi_apps_name']        = $upi_apps_name;
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['agent_data']        = $agent_data;
         $this->arr_view_data['enquiry']        = $enquiry;
         $this->arr_view_data['upi_qr__add_more_data']        = $upi_qr__add_more_data;
         $this->arr_view_data['qr_image_details']        = $qr_image_details;
@@ -187,10 +257,14 @@ class Sra_booking_payment_details extends CI_Controller {
         $this->arr_view_data['booking_payment_details']        = $booking_payment_details;
         $this->arr_view_data['extra_services_details']        = $extra_services_details;
         $this->arr_view_data['extra']        = $extra;
+        $this->arr_view_data['total_amount']        = $total_amount;
+        $this->arr_view_data['total_remaining_amount']        = $total_remaining_amount;
+        $this->arr_view_data['total_paid_amount']        = $total_paid_amount;
         $this->arr_view_data['relation_data']        = $relation_data;
+        $this->arr_view_data['extra_services_details_value']        = $extra_services_details_value;
         $this->arr_view_data['extra_services']        = $extra_services;
         $this->arr_view_data['upi_qr_data']        = $upi_qr_data;
-        $this->arr_view_data['upi_qr_master_id']        = $upi_qr_master_id; 
+        // $this->arr_view_data['upi_qr_master_id']        = $upi_qr_master_id; 
         $this->arr_view_data['special_req_master_data']        = $special_req_master_data;
         $this->arr_view_data['traveller_id_data']        = $traveller_id_data;
         $this->arr_view_data['seat_type_room_type_data']        = $seat_type_room_type_data;
@@ -221,22 +295,73 @@ class Sra_booking_payment_details extends CI_Controller {
             $package_id = $this->input->post('package_id');
             $package_date_id = $this->input->post('package_date_id');
             $sra_payment_id = $this->input->post('sra_payment_id');
+            $select_transaction = $this->input->post('select_transaction');
+            // print_r($select_transaction); die;
+            $booking_amt = $this->input->post('booking_amt');
+
+            $cheque = $this->input->post('cheque');
+            $net_banking_utr_no = $this->input->post('net_banking_utr_no');
+            $qr_upi_no = $this->input->post('qr_upi_no');
+            // print_r($qr_upi_no); die;
             
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
 
-            $from_email='test@choudharyyatra.co.in';
+            if($select_transaction == 'Net Banking'){
+                echo'hhhhhhhhh';
+                $from_email='test@choudharyyatra.co.in';
+                
+                $authKey = "1207173098272815780";
+                
+                $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off, UTR No.$net_banking_utr_no.Team CYCPL";
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098272815780";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+
+            }else if($select_transaction == 'Cheque'){
+                echo'mmmmmmmmmmmmmm';
+                $from_email='test@choudharyyatra.co.in';
+                
+                $authKey = "1207173098087051916";
+                
+                
+                    $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
+                    // $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
+
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098087051916";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+            }else if($select_transaction == 'QR Code'){
+                echo'QQQQQQQQQQQQQQQ';
+                $from_email='test@choudharyyatra.co.in';
+                
+                $authKey = "1207173098501659857";
+                
+                $message="OTP–$traveler_otp Plz share OTP if given info is True.You paid Rs.$booking_amt/- by “QR” at BBN Off, UTR No.$cheque.Team CYCPL";
+
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098501659857";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+            }else{
+                echo'jjjjjjjjjjjjjjjjjjj';
+                $from_email='test@choudharyyatra.co.in';
             
-            $authKey = "1207168241267288907";
-            
-        $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-        $senderId  = "CYCPLN";
-        
-        $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
-        
-         $apiurl = str_replace(" ", '%20', $apiurl); 
-            
+                $authKey = "1207168241267288907";
+                
+                $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+            }   
             
             $ch = curl_init($apiurl);
                     $get_url = $apiurl;
@@ -253,7 +378,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     'academic_year'  =>  $academic_year,
                     'sra_no'  =>  $sra_no,
                     'package_id'  =>  $package_id,
-                    'package_date_id'  =>  $package_date_id,
+                    'package_date_id'  =>  $package_date_id, 
                     'agent_id'  =>  $id,
                     'traveler_otp'  =>  $traveler_otp
                 );
@@ -275,18 +400,6 @@ class Sra_booking_payment_details extends CI_Controller {
                 // print_r($arr_insert); die;
 
                 $inserted_id = $this->master_model->insertRecord('sra_final_booking',$arr_insert,true);
-                // $this->db->where('is_deleted','no');
-                // $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
-                // $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
-                // // print_r($booking_payment_details); die;
-                
-                // print_r($arr_insert); die;
-                // if(!empty($booking_payment_details)){
-                //     $arr_where     = array("id" => $booking_payment_details_id);
-                //     $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
-                // }else{
-                 
-                // }
                 
         if($inserted_id!=''){
            echo true;
@@ -687,7 +800,6 @@ class Sra_booking_payment_details extends CI_Controller {
         
         //  $apiurl = str_replace(" ", '%20', $apiurl); 
             
-            
         //     $ch = curl_init($apiurl);
         //             $get_url = $apiurl;
         //             curl_setopt($ch, CURLOPT_POST,0);
@@ -929,23 +1041,41 @@ class Sra_booking_payment_details extends CI_Controller {
                 
                 $sra_booking_tm_mobile_no = $this->input->post('sra_booking_tm_mobile_no');
                 $sra_payment_id = $this->input->post('sra_payment_id');
+                $sra_no = $this->input->post('sra_no');
+                // print_r($sra_no); 
+                $select_transaction = $this->input->post('select_transaction');
+                // print_r($select_transaction); 
+                $booking_amt = $this->input->post('booking_amt');
+                // print_r($booking_amt); die; 
 
                 $alphabet = '1234567890';
                 $otp = str_shuffle($alphabet);
                 $traveler_otp = substr($otp, 0, '6'); 
-
-                $from_email='test@choudharyyatra.co.in';
                 
-                $authKey = "1207168241267288907";
+                if($select_transaction == 'Net Banking'){
+                    // echo'hhhhhhhhh'; die;
+                    $from_email='test@choudharyyatra.co.in';
+                    
+                    $authKey = "1207168241267288907";
+                    
+                    $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off,For SRA No.$sra_no,Team CYCPL";
+                    $senderId  = "CYCPLN";
+                    
+                    $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$sra_booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207172424495645660";
+                    
+                    $apiurl = str_replace(" ", '%20', $apiurl); 
+                }else{
+                    $from_email='test@choudharyyatra.co.in';
                 
-            $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
-            $senderId  = "CYCPLN";
-            
-            $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$sra_booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
-            
-            $apiurl = str_replace(" ", '%20', $apiurl); 
-                
-                
+                    $authKey = "1207168241267288907";
+                    
+                    $message="Dear User, Thank you for booking the tour with us, Your OTP is $traveler_otp, Valid for 30 minutes. Please share with only Choudhary Yatra team. Regards,CYCPL Team.";
+                    $senderId  = "CYCPLN";
+                    
+                    $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$sra_booking_tm_mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168251580901563";
+                    
+                    $apiurl = str_replace(" ", '%20', $apiurl); 
+                }   
                 $ch = curl_init($apiurl);
                         $get_url = $apiurl;
                         curl_setopt($ch, CURLOPT_POST,0);
@@ -1011,8 +1141,10 @@ class Sra_booking_payment_details extends CI_Controller {
                 // $booking_reference_no = $enquiry_id.'_'.$package_id.'_'.$journey_date;
 
                 $booking_amt = $this->input->post('booking_amt');
+                // print_r($booking_amt); die;
                 $final_amt = $this->input->post('final_amt');
                 $payment_type = $this->input->post('payment_type');
+                $receipt_type = $this->input->post('receipt_type');
                 $mobile_no = $this->input->post('mobile_no');
                 $relation = $this->input->post('relation');
                 $pending_amt = $this->input->post('pending_amt');
@@ -1022,6 +1154,7 @@ class Sra_booking_payment_details extends CI_Controller {
                 
                 $upi_holder_name = $this->input->post('upi_holder_name');
                 $upi_payment_type = $this->input->post('upi_payment_type');
+                $upi_customer_payment_type = $this->input->post('upi_customer_payment_type');
                 // print_r($upi_holder_name); die;
                 $upi_self_no = $this->input->post('upi_self_no');
                 $upi_transaction_date = $this->input->post('upi_transaction_date');
@@ -1035,9 +1168,17 @@ class Sra_booking_payment_details extends CI_Controller {
 
 
                 $upi_no = $this->input->post('upi_no');
+                $name_on_cheque = $this->input->post('name_on_cheque');
                 $cheque = $this->input->post('cheque');
                 $bank_name = $this->input->post('bank_name');
                 $drawn_on_date = $this->input->post('drawn_on_date');
+                $cheque_reason_1 = $this->input->post('cheque_reason_1');
+
+                $demand_draft_name = $this->input->post('demand_draft_name');
+                $demand_draft_bank_name = $this->input->post('demand_draft_bank_name');
+                $demand_draft_number = $this->input->post('demand_draft_number');
+                $demand_draft_date = $this->input->post('demand_draft_date');
+                $demand_draft_reason = $this->input->post('demand_draft_reason');
 
                 $netbanking_payment_type = $this->input->post('netbanking_payment_type');
                 $net_banking_acc_no = $this->input->post('net_banking_acc_no');
@@ -1139,6 +1280,7 @@ class Sra_booking_payment_details extends CI_Controller {
                 $arr_update = array(
                     'final_amt'   =>   $final_amt,
                     'payment_type'   =>   $payment_type,
+                    'receipt_type'   =>   $receipt_type,
                     'booking_amt'   =>   $booking_amt,
                     'pending_amt'   =>   $pending_amt,
                     'run_pending_amt'   =>   $pending_amt,
@@ -1152,6 +1294,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     'upi_transaction_date'   =>   $upi_transaction_date,
                     'UPI_transaction_no'   =>   $upi_self_no,
                     'UPI_reason'   =>   $upi_reason,
+                    'UPI_customer_payment_type'   =>   $upi_customer_payment_type,
 
                     'QR_holder_name'   =>   $qr_holder_name,
                     'QR_mobile_number'   =>   $qr_mobile_number,
@@ -1160,9 +1303,17 @@ class Sra_booking_payment_details extends CI_Controller {
                     'QR_transaction_no'   =>   $qr_upi_no,
 
                     'upi_no'   =>   $upi_no,
+                    'name_on_cheque'   =>   $name_on_cheque,
                     'cheque'   =>   $cheque,
                     'bank_name'   =>   $bank_name,
                     'drawn_on_date'   =>   $drawn_on_date,
+                    'cheque_reason'   =>   $cheque_reason_1,
+
+                    'demand_draft_name'   =>   $demand_draft_name,
+                    'demand_draft_bank_name'   =>   $demand_draft_bank_name,
+                    'demand_draft_number'   =>   $demand_draft_number,
+                    'demand_draft_date'   =>   $demand_draft_date,
+                    'demand_draft_reason'   =>   $demand_draft_reason,
 
                     'netbanking_payment_type'   =>   $netbanking_payment_type,
                     'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -1172,7 +1323,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
 
-                    'booking_reference_no'  =>  $booking_reference_no,
+                    // 'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,
                     'sra_no' => $sra_no,
                     'package_id' => $package_id,
@@ -1209,6 +1360,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     $arr_update = array(
                         'final_amt'   =>   $final_amt,
                         'payment_type'   =>   $payment_type,
+                        'receipt_type'   =>   $receipt_type,
                         'booking_amt'   =>   $booking_amt,
                         'pending_amt'   =>   $pending_amt,
                         'run_pending_amt'   =>   $pending_amt,
@@ -1221,6 +1373,7 @@ class Sra_booking_payment_details extends CI_Controller {
                         'upi_transaction_date'   =>   $upi_transaction_date,
                         'UPI_transaction_no'   =>   $upi_self_no,
                         'UPI_reason'   =>   $upi_reason,
+                        'UPI_customer_payment_type'   =>   $upi_customer_payment_type,
     
                         'QR_holder_name'   =>   $qr_holder_name,
                         'QR_mobile_number'   =>   $qr_mobile_number,
@@ -1229,9 +1382,17 @@ class Sra_booking_payment_details extends CI_Controller {
                         'QR_transaction_no'   =>   $qr_upi_no,
     
                         'upi_no'   =>   $upi_no,
+                        'name_on_cheque'   =>   $name_on_cheque,
                         'cheque'   =>   $cheque,
                         'bank_name'   =>   $bank_name,
                         'drawn_on_date'   =>   $drawn_on_date,
+                        'cheque_reason'   =>   $cheque_reason_1,
+
+                        'demand_draft_name'   =>   $demand_draft_name,
+                        'demand_draft_bank_name'   =>   $demand_draft_bank_name,
+                        'demand_draft_number'   =>   $demand_draft_number,
+                        'demand_draft_date'   =>   $demand_draft_date,
+                        'demand_draft_reason'   =>   $demand_draft_reason,
     
                         'netbanking_payment_type'   =>   $netbanking_payment_type,
                         'net_banking_acc_no'   =>   $net_banking_acc_no,
@@ -1277,8 +1438,9 @@ class Sra_booking_payment_details extends CI_Controller {
                 }
                 // print_r($arr_update); die;
                 $arr_where     = array("sra_no" => $sra_no);
-                $this->master_model->updateRecord('sra_booking_payment_details',$arr_update,$arr_where);
+                $xyz = $this->master_model->updateRecord('sra_booking_payment_details',$arr_update,$arr_where);
 
+                
                 if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,
@@ -1455,26 +1617,218 @@ class Sra_booking_payment_details extends CI_Controller {
         $did_upi = $this->input->post('did');
         // print_r($did_upi); die;
         $taluka_data = $this->input->post('self_data');
-        // print_r($taluka_data);
-        // $taluka_data_1 = $this->input->post('other_data');
-        // print_r($taluka_data_1); die;
+        // print_r($taluka_data); die;
 
         if($taluka_data == 'self'){
-            $this->db->where('is_deleted','no');
-            $this->db->where('is_active','yes');
-            $this->db->where('id',$id);   
-            $data = $this->master_model->getRecords('agent');
-            // // print_r($data); die;
+            // echo 'yessssssssssssssssss';
+            $fields ="qr_code_add_more.*,upi_apps_name.payment_app_name";
+            $this->db->where('qr_code_add_more.is_deleted','no');
+            $this->db->where('qr_code_add_more.is_active','yes');
+            $this->db->where('qr_code_add_more.agent_id',$id);   
+            $this->db->join("qr_code_master", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $data = $this->master_model->getRecords('qr_code_add_more',array('qr_code_add_more.is_deleted'=>'no'),$fields);
+            //  print_r($data); die;
         }else{
-            $this->db->where('is_deleted','no');
-            $this->db->where('is_active','yes');
-            $this->db->where('id',$did_upi);   
-            $data = $this->master_model->getRecords('qr_code_master');
+            //  echo 'Nooooooooooooooooo';
+            $fields ="qr_code_add_more.*,upi_apps_name.payment_app_name";
+            $this->db->where('qr_code_add_more.is_deleted','no');
+            $this->db->where('qr_code_add_more.is_active','yes');
+            $this->db->where('qr_code_add_more.qr_code_master_id',$did_upi);        
+            $this->db->join("qr_code_master", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+            $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+            $data = $this->master_model->getRecords('qr_code_add_more',array('qr_code_add_more.is_deleted'=>'no'),$fields);
             // print_r($data); die;
         }
             echo json_encode($data); 
 
         }
+
+        public function get_net_banking_holdernm_code(){
+
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+    
+            $did_upi = $this->input->post('did');
+            $taluka_data = $this->input->post('self_data');
+            // print_r($taluka_data); die;
+    
+            if($taluka_data == 'self'){
+                // echo 'yessssssssssssssssss';
+                $fields ="qr_code_add_more.*,upi_apps_name.payment_app_name";
+                $this->db->where('qr_code_add_more.is_deleted','no');
+                $this->db->where('qr_code_add_more.is_active','yes');
+                $this->db->where('qr_code_add_more.agent_id',$id);   
+                $this->db->join("qr_code_master", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+                $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                $this->db->group_by('qr_code_add_more.account_number');
+                $data = $this->master_model->getRecords('qr_code_add_more',array('qr_code_add_more.is_deleted'=>'no'),$fields);
+                //  print_r($data); die;
+            }else{
+                //  echo 'Nooooooooooooooooo';
+                $fields ="qr_code_add_more.*,upi_apps_name.payment_app_name";
+                $this->db->where('qr_code_add_more.is_deleted','no');
+                $this->db->where('qr_code_add_more.is_active','yes');
+                $this->db->where('qr_code_add_more.qr_code_master_id',$did_upi);        
+                $this->db->join("qr_code_master", 'qr_code_add_more.qr_code_master_id=qr_code_master.id','left');
+                $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                $this->db->group_by('qr_code_add_more.account_number');
+                $data = $this->master_model->getRecords('qr_code_add_more',array('qr_code_add_more.is_deleted'=>'no'),$fields);
+                // print_r($data); die;
+            }
+                echo json_encode($data); 
+    
+            }
+
+        public function get_QR_upi_code(){
+
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+    
+            $did_upi = $this->input->post('did');
+            $taluka_data = $this->input->post('self_data');
+    
+            if($taluka_data == 'self'){
+                $fields ="qr_code_master.*,qr_code_add_more.upi_app_name,upi_apps_name.payment_app_name,qr_code_add_more.mobile_number";
+                $this->db->where('qr_code_master.is_deleted','no');
+                $this->db->where('qr_code_master.is_active','yes');
+                $this->db->where('qr_code_add_more.agent_id',$id);   
+                $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+                $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+            }else{
+                $fields ="qr_code_master.*,qr_code_add_more.upi_app_name,upi_apps_name.payment_app_name,qr_code_add_more.mobile_number,
+                qr_code_add_more.id as new_qr_id";
+                $this->db->where('qr_code_master.is_deleted','no');
+                $this->db->where('qr_code_master.is_active','yes');
+                $this->db->where('qr_code_add_more.qr_code_master_id',$did_upi);   
+                $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+                $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+                
+            }
+            //print_r($data); die;
+                echo json_encode($data); 
+            }
+
+            public function get_cheque_upi_code(){
+
+                $agent_sess_name = $this->session->userdata('agent_name');
+                $id=$this->session->userdata('agent_sess_id');
+        
+                $did_upi = $this->input->post('did');
+                $taluka_data = $this->input->post('self_data');
+        
+                if($taluka_data == 'self'){
+                    $fields ="qr_code_master.*,qr_code_add_more.upi_app_name,upi_apps_name.payment_app_name,qr_code_add_more.bank_name,qr_code_master.company_account_yes_no as is_company_ac";
+                    $this->db->where('qr_code_master.is_deleted','no');
+                    $this->db->where('qr_code_master.is_active','yes');
+                    $this->db->where('qr_code_add_more.agent_id',$id);   
+                    $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+                    $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                    $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+                }else{
+                    $fields ="qr_code_master.*,qr_code_add_more.upi_app_name,upi_apps_name.payment_app_name,qr_code_add_more.bank_name";
+                    $this->db->where('qr_code_master.is_deleted','no');
+                    $this->db->where('qr_code_master.is_active','yes');
+                    $this->db->where('qr_code_master.id',$did_upi);   
+                    $this->db->join("qr_code_add_more", 'qr_code_master.id=qr_code_add_more.qr_code_master_id','left');
+                    $this->db->join("upi_apps_name", 'qr_code_add_more.upi_app_name=upi_apps_name.id','left');
+                    $data = $this->master_model->getRecords('qr_code_master',array('qr_code_master.is_deleted'=>'no'),$fields);
+                    
+                }
+                //print_r($data); die;
+                    echo json_encode($data); 
+                }
+
+
+                public function get_net_banking_account_bank_name(){
+
+                    $agent_sess_name = $this->session->userdata('agent_name');
+                    $id=$this->session->userdata('agent_sess_id');
+            
+                    $did_upi = $this->input->post('did');
+                    // print_r($did_upi); die;
+         
+                        $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        $this->db->where('id',$did_upi);   
+                        $data = $this->master_model->getRecords('qr_code_add_more');
+                        // print_r($data); die;
+                   
+                        echo json_encode($data); 
+            
+                }
+
+                public function get_net_banking_account_hold_name(){
+
+                    $agent_sess_name = $this->session->userdata('agent_name');
+                    $id=$this->session->userdata('agent_sess_id');
+            
+                    $did_upi = $this->input->post('net_banking_acc_no');
+                    // print_r($did_upi); die;
+         
+                        $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        $this->db->where('id',$did_upi);   
+                        $data = $this->master_model->getRecords('qr_code_master');
+                        // print_r($data); die;
+                   
+                        echo json_encode($data); 
+            
+                }
+
+        public function get_self_upi_number_no(){
+            $id=$this->session->userdata('agent_sess_id');
+            $selectedPaymentType = $this->input->post('selectedPaymentType');
+            $self_data = $this->input->post('self_data');
+            $upi_holder_name_id = $this->input->post('upi_holder_name');
+                // print_r($taluka_data); die;
+
+                if($self_data == 'self'){
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('upi_app_name',$selectedPaymentType);  
+                    $this->db->where('agent_id',$id);  
+                    $data = $this->master_model->getRecords('qr_code_add_more');
+                    // print_r($data); die;
+                }else{
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('upi_app_name',$selectedPaymentType);  
+                    $this->db->where('qr_code_master_id',$upi_holder_name_id);  
+                    $data = $this->master_model->getRecords('qr_code_add_more');
+                }
+            
+                echo json_encode($data);
+        }
+
+        public function get_QR_mobile_number_no(){
+            $id=$this->session->userdata('agent_sess_id');
+
+            $selectedPaymentType = $this->input->post('selectedPaymentType');
+            $selectedself_data = $this->input->post('self_data');
+            $ac_holder_id = $this->input->post('other_data_val');
+                //   print_r($selectedPaymentType); die;
+    
+                if($selectedself_data == 'self'){
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('upi_app_name',$selectedPaymentType);  
+                    $this->db->where('agent_id',$id);  
+                    $data = $this->master_model->getRecords('qr_code_add_more');
+                }else{
+                    $this->db->where('is_deleted','no');
+                    $this->db->where('is_active','yes');
+                    $this->db->where('upi_app_name',$selectedPaymentType);  
+                    $this->db->where('qr_code_master_id',$ac_holder_id);  
+                    $data = $this->master_model->getRecords('qr_code_add_more');
+                }
+                //print_r($data); die;
+            
+                echo json_encode($data);
+        }
+
 
         public function checkMobileMatch() {
             $mobile_no = $this->input->post('mobile_no');
@@ -1800,4 +2154,151 @@ class Sra_booking_payment_details extends CI_Controller {
 // die;
         
     }
+
+    public function get_payment_type_data(){
+
+        // $mydata=array();
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+            
+            $upi_transaction_no = $this->input->post('upi_transaction_no');
+            // print_r($upi_transaction_no); die;
+            $selectedPaymentType = $this->input->post('selectedPaymentType');
+            // print_r($selectedPaymentType); die;
+    
+            $fields = "sra_booking_payment_details.*";
+            $this->db->where('sra_booking_payment_details.is_deleted','no');
+            $this->db->where('sra_booking_payment_details.upi_no', $upi_transaction_no);
+            $this->db->where('sra_booking_payment_details.upi_payment_type', $selectedPaymentType);
+            $this->db->join("upi_apps_name", 'sra_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+            $sra_data = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
+            // print_r($sra_data); die;
+            // array_push($mydata, $sra_data);
+
+            $fields = "sra_booking_payment_details.*";
+            $this->db->where('sra_booking_payment_details.is_deleted','no');
+            $this->db->where('sra_booking_payment_details.QR_payment_type', $selectedPaymentType);
+            $this->db->where('sra_booking_payment_details.QR_transaction_no', $upi_transaction_no);
+            $this->db->join("upi_apps_name", 'sra_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+            $sra_qr_data = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
+            // array_push($mydata, $sra_data);
+            // print_r($sra_qr_data); die;
+
+
+            $fields = "extra_services_booking_payment_details.*";
+            $this->db->where('extra_services_booking_payment_details.is_deleted','no');
+            $this->db->where('extra_services_booking_payment_details.upi_no', $upi_transaction_no);
+            $this->db->where('extra_services_booking_payment_details.upi_payment_type', $selectedPaymentType);
+            $this->db->join("upi_apps_name", 'extra_services_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+            $extra_data = $this->master_model->getRecords('extra_services_booking_payment_details',array('extra_services_booking_payment_details.is_deleted'=>'no'),$fields);
+            // array_push($mydata, $extra_data);
+            // print_r($extra_data); die;
+
+            $fields = "extra_services_booking_payment_details.*";
+            $this->db->where('extra_services_booking_payment_details.is_deleted','no');
+            $this->db->where('extra_services_booking_payment_details.QR_transaction_no', $upi_transaction_no);
+            $this->db->where('extra_services_booking_payment_details.QR_payment_type', $selectedPaymentType);
+            $this->db->join("upi_apps_name", 'extra_services_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+            $extra_qr_data = $this->master_model->getRecords('extra_services_booking_payment_details',array('extra_services_booking_payment_details.is_deleted'=>'no'),$fields);
+
+            // $this->arr_view_data_new['mydata']=$mydata;
+            if(!empty($sra_data) || !empty($sra_qr_data) || !empty($extra_data) || !empty($extra_qr_data)){
+                echo true;
+            }else{
+                echo false;
+            }
+
+            // $this->arr_view_data_new['mydata']=$mydata;
+
+            // echo json_encode($this->arr_view_data_new);
+
+    }
+
+    public function get_bank_name_data(){
+            $mydata=array();
+            $agent_sess_name = $this->session->userdata('agent_name');
+            $id=$this->session->userdata('agent_sess_id');
+            
+            $net_transaction_no = $this->input->post('net_transaction_no');
+            $netbanking_bank_name = $this->input->post('netbanking_bank_name');
+    
+            $fields = "sra_booking_payment_details.*";
+            $this->db->where('sra_booking_payment_details.is_deleted','no');
+            $this->db->where('sra_booking_payment_details.net_banking', $net_transaction_no);
+            $this->db->where('sra_booking_payment_details.netbanking_bank_name', $netbanking_bank_name);
+            $sra_data = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
+            array_push($mydata, $sra_data);
+
+            $fields = "extra_services_booking_payment_details.*";
+            $this->db->where('extra_services_booking_payment_details.is_deleted','no');
+            $this->db->where('extra_services_booking_payment_details.net_banking', $net_transaction_no);
+            $this->db->where('extra_services_booking_payment_details.netbanking_bank_name', $netbanking_bank_name);
+            $extra_data = $this->master_model->getRecords('extra_services_booking_payment_details',array('extra_services_booking_payment_details.is_deleted'=>'no'),$fields);
+            array_push($mydata, $extra_data);
+
+            $this->arr_view_data_new['mydata']=$mydata;
+
+            echo json_encode($this->arr_view_data_new);
+
+        }
+
+
+
+        public function get_QR_payment_type_data(){
+
+            // $mydata=array();
+                $agent_sess_name = $this->session->userdata('agent_name');
+                $id=$this->session->userdata('agent_sess_id');
+                
+                $qr_upi_transaction_no = $this->input->post('qr_upi_transaction_no');
+                $selectedPaymentType = $this->input->post('selectedPaymentType');
+        
+                $fields = "sra_booking_payment_details.*";
+                $this->db->where('sra_booking_payment_details.is_deleted','no');
+                $this->db->where('sra_booking_payment_details.upi_no', $qr_upi_transaction_no);
+                $this->db->where('sra_booking_payment_details.upi_payment_type', $selectedPaymentType);
+                $this->db->join("upi_apps_name", 'sra_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+                $sra_data = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
+                // array_push($mydata, $sra_data);
+    
+                $fields = "sra_booking_payment_details.*";
+                $this->db->where('sra_booking_payment_details.is_deleted','no');
+                $this->db->where('sra_booking_payment_details.QR_payment_type', $selectedPaymentType);
+                $this->db->where('sra_booking_payment_details.QR_transaction_no', $qr_upi_transaction_no);
+                $this->db->join("upi_apps_name", 'sra_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+                $sra_qr_data = $this->master_model->getRecords('sra_booking_payment_details',array('sra_booking_payment_details.is_deleted'=>'no'),$fields);
+                // array_push($mydata, $sra_data);
+                // print_r($sra_qr_data); die;
+    
+    
+                $fields = "extra_services_booking_payment_details.*";
+                $this->db->where('extra_services_booking_payment_details.is_deleted','no');
+                $this->db->where('extra_services_booking_payment_details.upi_no', $qr_upi_transaction_no);
+                $this->db->where('extra_services_booking_payment_details.upi_payment_type', $selectedPaymentType);
+                $this->db->join("upi_apps_name", 'extra_services_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+                $extra_data = $this->master_model->getRecords('extra_services_booking_payment_details',array('extra_services_booking_payment_details.is_deleted'=>'no'),$fields);
+                // array_push($mydata, $extra_data);
+                // print_r($extra_data); die;
+    
+                $fields = "extra_services_booking_payment_details.*";
+                $this->db->where('extra_services_booking_payment_details.is_deleted','no');
+                $this->db->where('extra_services_booking_payment_details.QR_transaction_no', $qr_upi_transaction_no);
+                $this->db->where('extra_services_booking_payment_details.QR_payment_type', $selectedPaymentType);
+                $this->db->join("upi_apps_name", 'extra_services_booking_payment_details.upi_payment_type=upi_apps_name.id','left');
+                $extra_qr_data = $this->master_model->getRecords('extra_services_booking_payment_details',array('extra_services_booking_payment_details.is_deleted'=>'no'),$fields);
+    
+                // $this->arr_view_data_new['mydata']=$mydata;
+                if(!empty($sra_data) || !empty($sra_qr_data) || !empty($extra_data) || !empty($extra_qr_data)){
+                    echo true;
+                }else{
+                    echo false;
+                }
+    
+                // $this->arr_view_data_new['mydata']=$mydata;
+    
+                // echo json_encode($this->arr_view_data_new);
+    
+        }
+
+
 }

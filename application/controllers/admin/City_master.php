@@ -23,7 +23,7 @@ class City_master extends CI_Controller{
         // $this->db->where('is_deleted','no');
         // $arr_data = $this->master_model->getRecords('state');
 
-        $fields = "city.*,country.country_name,.state_table.state_name,district_table.district";
+        $fields = "city.*,country.country_name,state_table.state_name,district_table.district";
         $this->db->order_by('city.id','asc');        
         $this->db->where('city.is_deleted','no');        
         $this->db->join("country", 'city.country_id=country.id','left');

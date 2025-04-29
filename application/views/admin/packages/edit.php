@@ -279,9 +279,9 @@
                             <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                              <br>
                              
-                    <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
-                    <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
-                    <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                            <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
+                            <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
+                            <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
                           </div>
                       </div>
                       

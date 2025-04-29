@@ -37,7 +37,7 @@
                             <label>Tour No -</label>
                         </div>  
                         <div class="col-md-5">
-                            <div><?php echo $traveller_booking_info_value['tour_number']; ?></div>
+                            <div><?php echo $traveller_booking_info_value['package_tour_number']; ?></div>
                         </div>
                         <div class="col-md-2">
                             <label>Customer Name -</label>
@@ -84,7 +84,6 @@
                 <input type="hidden" class="form-control" name="return_customer_booking_payment_id" id="return_customer_booking_payment_id" value="<?php if(isset($return_customer_booking_payment_details)){echo $return_customer_booking_payment_details['id'];} ?>">
                 <div class="card-body">
                     <div class="row">
-
                         <input type="hidden" class="form-control" name="add_on_services_payment" id="add_on_services_payment" required="required" value="2">
 
                         <div class="col-md-12 cash_payment_div" id="services_sub_main_tour_div1" >
@@ -94,6 +93,7 @@
                                         <tr>
                                             <th>Extra Services</th>
                                             <th>Amount</th>
+                                            <th>Remark</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -113,7 +113,8 @@
                                                 </select>
                                                 <input type="text" class="form-control mt-4" name="other_services[]" id="other_services" placeholder="Enter extra services name" value="" style="display: none;">
                                             </td>
-                                            <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity<?php echo $i;?>" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required></td>
+                                            <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity<?php echo $i;?>" placeholder="Enter amount" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required></td>
+                                            <td><textarea type="text" class="form-control services_remark" name="extra_services_remark[]" id="extra_services_remark<?php echo $i;?>" placeholder="Enter reamrk"></textarea>
                                             <td>
                                                 <button type="button" class="btn btn-primary" attr_add_id="1" name="submit" value="extra_services_add_more" id="extra_services_add_more">Add More</button>
                                             </td>
@@ -131,6 +132,9 @@
                             <a href="<?php echo $module_url_path; ?>/extra_services_add"><button type="submit" class="btn btn-primary search_btn" name="extra_services_submit" value="submit" id="services_submit">submit</button></a>
                         </div>
                     </div>
+                    
+                    
+                    
 
                 
             

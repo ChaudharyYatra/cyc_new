@@ -60,7 +60,9 @@ table.scrolldown tbody{
                     <div class="trend-item rounded box-shadow card_bg" data-aos="fade-up" data-duration="500">
                         <div class="trend-image position-relative">
                             <img src="<?php echo base_url(); ?>uploads/packages/<?php echo $main_packages_all_value['image_name']; ?>" alt="image" height="250px">
-                            <div class="color-overlay"></div>
+                            <div class="color-overl
+                            
+                            ay"></div>
                         </div>
                         <div class="trend-content p-4 pt-4 position-relative w-100">
                             <div class="new-trend2 bg-theme white px-3 py-2 rounded">

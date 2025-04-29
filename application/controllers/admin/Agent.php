@@ -173,6 +173,7 @@ class Agent extends CI_Controller{
                 $agent_taluka  = $this->input->post('agent_taluka');
                 $agent_city  = $this->input->post('agent_city');
                 $upi_id  = $this->input->post('upi_id');
+                $amount_receiving_mode = implode(",", $this->input->post('amount_receiving_mode')); 
 
                 if($upi_id!='' || $qr_img_filename!=''){
                     $upi_id  = $this->input->post('upi_id');
@@ -214,6 +215,7 @@ class Agent extends CI_Controller{
                     'city_name'     =>   $agent_city,
                     'upi_id'     =>   $upi_id,
                     'qr_code_image'     =>   $qr_img_filename,
+                    'amount_receiving_mode'     =>   $amount_receiving_mode,
                     'status_of_QR_UPI'     => $status
                     
                 );
@@ -456,7 +458,7 @@ class Agent extends CI_Controller{
 				$this->form_validation->set_rules('booking_center', 'Booking Center', 'required');
 				$this->form_validation->set_rules('agent_name', 'Agent Name', 'required');
 				$this->form_validation->set_rules('mobile_number1', 'Mobile Number1', 'required');
-				$this->form_validation->set_rules('mobile_number2', 'Mobile Number2', 'required');
+				// $this->form_validation->set_rules('mobile_number2', 'Mobile Number2', 'required');
 				$this->form_validation->set_rules('email', 'Email Address', 'required');
 				$this->form_validation->set_rules('password', 'Password', 'required');
 				
@@ -572,7 +574,7 @@ class Agent extends CI_Controller{
          }
         else
         {
-            $qr_img_filename = $old_qr_code_name;
+            $qr_img_filename = $old_tc_name;
             
         }
 
@@ -660,6 +662,8 @@ class Agent extends CI_Controller{
                 $agent_taluka  = $this->input->post('agent_taluka');
                 $agent_city  = $this->input->post('agent_city');
                 $upi_id  = $this->input->post('upi_id');
+                $amount_receiving_mode = implode(",", $this->input->post('amount_receiving_mode'));
+                // print_r($amount_receiving_mode); die;
                 
                 $arr_update = array(
                     'department'   =>    $department,
@@ -689,9 +693,10 @@ class Agent extends CI_Controller{
                     'city_name'     =>   $agent_city,
                     'image_name'     =>   $filename,
                     'qr_code_image'     =>   $qr_img_filename,
+                    'amount_receiving_mode'     =>   $amount_receiving_mode,
                     'upi_id'     =>   $upi_id
                 );
-                
+                // print_r($arr_update); die;
                     $arr_where     = array("id" => $id);
                     $this->master_model->updateRecord('agent',$arr_update,$arr_where);
                     if($id > 0)
@@ -719,7 +724,7 @@ class Agent extends CI_Controller{
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $this->db->where('id',$state_id);
+        // $this->db->where('id',$state_id);
         $this->db->order_by('id','ASC');
         $district_data = $this->master_model->getRecords('district_table');
         // print_r($district_data); die;

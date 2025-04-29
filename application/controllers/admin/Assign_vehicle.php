@@ -26,7 +26,7 @@ class Assign_vehicle extends CI_Controller{
         $this->db->order_by('bus_open.id','desc');
         $this->db->where('bus_open.is_deleted','no');
         $this->db->where('bus_open.is_active','yes');
-        $this->db->where('bus_open.vehicle_rto_registration !=','');
+        // $this->db->where('bus_open.vehicle_rto_registration !=','');
         $this->db->join("packages", 'bus_open.package_id=packages.id','left');
         $this->db->join("package_date", 'bus_open.package_date_id=package_date.id','left');
         $this->db->join("vehicle_details", 'bus_open.vehicle_rto_registration=vehicle_details.id','left');

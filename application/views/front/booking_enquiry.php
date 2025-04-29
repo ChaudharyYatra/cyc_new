@@ -73,42 +73,36 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="First Name" name="first_name" id="first_name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                                 <span class="text-danger float-left" id="first_name_error" style="display:none"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="Last Name" name="last_name" id="last_name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                                 <span class="text-danger float-left" id="last_name_error" style="display:none"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="Email Address" name="email" id="email">
                                                 <span class="text-danger float-left" id="email_error" style="display:none"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="Mobile Number" name="mobile_number" id="mobile_number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9 ]/g, '').replace(/(\..*)\./g, '$1');">
                                                 <span class="text-danger float-left" id="mobile_number_error" style="display:none"></span>
                                             </div>
                                         </div>
 										<div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="WhatsApp Mobile Number" name="wp_mobile_number" id="wp_mobile_number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9 ]/g, '').replace(/(\..*)\./g, '$1');">
                                                 <span class="text-danger float-left" id="wp_mobile_number_error" style="display:none"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <div class="input-box">
                                                     <select class="niceSelect" name="gender" id="gender">
                                                         <option value="">Select Gender</option>
@@ -135,12 +129,11 @@
                                         </div>
                                       <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
-                                                
                                                 <div class="input-box">
                                                     <select class="niceSelect" name="department_id" id="department_id">
                                                         <option value="">Select Region</option>
                                                         <?php foreach($department_data as $department){ ?> 
-                                           <option value="<?php echo $department['id'];?>"><?php echo $department['department'];?></option>
+                                                            <option value="<?php echo $department['id'];?>"><?php echo $department['department'];?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -151,16 +144,77 @@
                                         
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
-                                                
                                                 <div class="input-box">
-                                                    <select class="" name="agent_id" id="agent_id">
+                                                    <select class="niceSelect" name="agent_id" id="agent_id">
                                                         <option value="">Select Booking Centre</option>
                                                     </select>
                                                 </div>
                                                 <span class="text-danger float-left" id="agent_id_error" style="display:none"></span>
 
                                             </div>
-                                        </div>   
+                                        </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="niceSelect" name="occupation_name" id="occupation_name">
+                                                    <option value="">Select occupation name</option>
+                                                    <?php
+                                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                                    ?>
+                                                        <option value="<?php echo $occupation_master_info['id']; ?>" <?php if(!empty($agent_booking_enquiry_data)){  if($agent_booking_enquiry_data['occupation_name']== $occupation_master_info['id']){echo 'selected';}} ?>> <?php echo $occupation_master_info['occupation_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <span class="text-danger float-left" id="occupation_id_error" style="display:none"></span>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <select class="niceSelect" name="zone_name" id="zone_name">
+                                                    <option value="">Select zone name</option>
+                                                    <?php
+                                                        foreach($zone_master_data as $zone_master_info){ 
+                                                    ?>
+                                                        <option value="<?php echo $zone_master_info['id']; ?>" <?php if(!empty($agent_booking_enquiry_data)){  if($agent_booking_enquiry_data['zone_name']== $zone_master_info['id']){echo 'selected';}} ?>> <?php echo $zone_master_info['zone_name']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                            <span class="text-danger float-left" id="zone_id_error" style="display:none"></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['flat_no'];} ?>">
+                                            </div>
+                                            <span class="text-danger float-left" id="flatno_id_error" style="display:none"></span>
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['house_name'];} ?>">
+                                        </div>
+                                        <span class="text-danger float-left" id="housename_id_error" style="display:none"></span>
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['street_name'];} ?>">
+                                        </div>
+                                        <span class="text-danger float-left" id="streetname_id_error" style="display:none"></span>
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['landmark'];} ?>">
+                                        </div>
+                                        <span class="text-danger float-left" id="landmark_id_error" style="display:none"></span>
+                                        </div>
+
+                                        <div class="col-md-6 mt-2">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name" value="<?php if(!empty($agent_booking_enquiry_data)){ echo $agent_booking_enquiry_data['area'];} ?>">
+                                        </div>
+                                        <span class="text-danger float-left" id="area_id_error" style="display:none"></span>
+                                        </div>
                                     </div>
                                 
                            

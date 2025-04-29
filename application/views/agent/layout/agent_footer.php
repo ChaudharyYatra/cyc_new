@@ -128,8 +128,8 @@ var js_array =<?php echo json_encode($bus_info);?>;
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
 
-<script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/jquery.seat-charts.js"></script>
-<script src="<?php echo base_url();?>assets/admin/bus_seat_design/js/script.js"></script> 
+<!-- <script src="<?php //echo base_url();?>assets/admin/bus_seat_design/js/jquery.seat-charts.js"></script>
+<script src="<?php //echo base_url();?>assets/admin/bus_seat_design/js/script.js"></script>  -->
 
 <!-- Page specific script -->
 <script>
@@ -745,7 +745,7 @@ $(document).ready(function() {
             gender: {
                 required: true,
             },
-            tour_number: {
+            "tour_number[]": {
                 required: true,
             },
             media_source_name: {
@@ -766,8 +766,28 @@ $(document).ready(function() {
                         return false;
                     }
                 }
+            },
+            occupation_name: {
+                required: true,
+            },
+            zone_name: {
+                required: true,
+            },
+            flat_no: {
+                required: true,
+            },
+            house_name: {
+                required: true,
+            },
+            street_name: {
+                required: true,
+            },
+            landmark: {
+                required: true,
+            },
+            area: {
+                required: true,
             }
-
         },
 
         messages: {
@@ -794,7 +814,7 @@ $(document).ready(function() {
             gender: {
                 required: "Please enter gender",
             },
-            tour_number: {
+            "tour_number[]": {
                 required: "Please enter tour number",
             },
             media_source_name: {
@@ -808,9 +828,28 @@ $(document).ready(function() {
             },
             other_tour_name: {
                 required: "Please enter destination name",
+            },
+            occupation_name: {
+                required: "Please select occupation name",
+            },
+            zone_name: {
+                required: "Please select zone name",
+            },
+            flat_no: {
+                required: "Please enter flat no",
+            },
+            house_name: {
+                required: "Please enter house name",
+            },
+            street_name: {
+                required: "Please enter street name",
+            },
+            landmark: {
+                required: "Please enter landmark",
+            },
+            area: {
+                required: "Please enter area",
             }
-
-
         }
     });
 
@@ -852,7 +891,7 @@ $(document).ready(function() {
             gender: {
                 required: true,
             },
-            tour_number: {
+            "tour_number[]": {
                 required: true,
             },
             media_source_name: {
@@ -873,6 +912,27 @@ $(document).ready(function() {
                         return false;
                     }
                 }
+            },
+            occupation_name: {
+                required: true,
+            },
+            zone_name: {
+                required: true,
+            },
+            flat_no: {
+                required: true,
+            },
+            house_name: {
+                required: true,
+            },
+            street_name: {
+                required: true,
+            },
+            landmark: {
+                required: true,
+            },
+            area: {
+                required: true,
             }
 
         },
@@ -901,7 +961,7 @@ $(document).ready(function() {
             gender: {
                 required: "Please enter gender",
             },
-            tour_number: {
+            "tour_number[]": {
                 required: "Please enter tour number",
             },
             media_source_name: {
@@ -915,6 +975,27 @@ $(document).ready(function() {
             },
             other_tour_name: {
                 required: "Please enter destination name",
+            },
+            occupation_name: {
+                required: "Please select occupation name",
+            },
+            zone_name: {
+                required: "Please select zone name",
+            },
+            flat_no: {
+                required: "Please enter flat no",
+            },
+            house_name: {
+                required: "Please enter house name",
+            },
+            street_name: {
+                required: "Please enter street name",
+            },
+            landmark: {
+                required: "Please enter landmark",
+            },
+            area: {
+                required: "Please enter area",
             }
 
 
@@ -4507,7 +4588,7 @@ $(".selectall").click(function() {
 
 <!-- Bank transaction ---------------------------------------- -->
 <script type="text/javascript">
-    function account_details(val){
+    function booking_account_details(val){
 
     var booking_preview = $('#select_transaction').val();
     var booking_preview_mobno = $('#booking_tm_mobile_no').val();
@@ -4515,7 +4596,7 @@ $(".selectall").click(function() {
     // alert(booking_preview);
 
     if(booking_preview == 'CASH' && booking_preview_mobno != '' && booking_preview_amt != ''){
-        $("#submit_otp").attr("disabled", false);
+        $("#submit_otp").attr("disabled", true);
     }else if(booking_preview == 'UPI'){
         $("#submit_otp").attr("disabled", true);
     }else if(booking_preview == 'QR Code'){
@@ -4613,399 +4694,6 @@ $(".selectall").click(function() {
     }
     }
 </script>
-
-<!-- <script type="text/javascript">
-    function QR_details(val){
-        // alert('hiiiiiiiii');
-
-    var upi_no_reason_div=document.getElementById('upi_no_reason_div');
-	var upi_no=document.getElementById('upi_no');
-
-    if(val=='Self') {
-        // alert(val);
-    // element.style.display='none';
-    upi_no_reason_div.style.display='contents';
-    }else{
-    upi_no_reason_div.style.display='none';
-    }
-    }
-</script> -->
-<!-- Bank transaction ---------------------------------------- -->
-
-<script>
-    $('.data_amt').keyup(function(){
-        // alert('hiiii');
-        var seat_type_data = $(this).attr('attr-amt');
-        // alert(seat_type_data);
-        
-        // alert(price);
-        // if(seat_type_data=='2000'){
-        //     var price = parseFloat($('#cash_2000').val());
-        //     var total_amt = price * seat_type_data;
-        //     if(total_amt>0){
-        //         $('#total_cash_2000').val(total_amt );
-        //     }else{
-        //         $('#total_cash_2000').val('0');
-        //     }
-        // }else 
-        if(seat_type_data=='500'){
-            var price = parseFloat($('#cash_500').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_500').val(total_amt );
-            }else{
-                $('#total_cash_500').val('0');
-            }
-        }else if(seat_type_data=='200'){
-            var price = parseFloat($('#cash_200').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_200').val(total_amt );
-            }else{
-                $('#total_cash_200').val('0');
-            }
-        }else if(seat_type_data=='100'){
-            var price = parseFloat($('#cash_100').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_100').val(total_amt );
-            }else{
-                $('#total_cash_100').val('0');
-            }
-        }else if(seat_type_data=='50'){
-            var price = parseFloat($('#cash_50').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_50').val(total_amt );
-            }else{
-                $('#total_cash_50').val('0');
-            }
-        }else if(seat_type_data=='20'){
-            var price = parseFloat($('#cash_20').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_20').val(total_amt );
-            }else{
-                $('#total_cash_20').val('0');
-            }
-        }else if(seat_type_data=='10'){
-            var price = parseFloat($('#cash_10').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_10').val(total_amt );
-            }else{
-                $('#total_cash_10').val('0');
-            }
-        }else if(seat_type_data=='5'){
-            var price = parseFloat($('#cash_5').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_5').val(total_amt );
-            }else{
-                $('#total_cash_5').val('0');
-            }
-        }
-        else if(seat_type_data=='2'){
-            var price = parseFloat($('#cash_2').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_2').val(total_amt );
-            }else{
-                $('#total_cash_2').val('0');
-            }
-        }
-        else if(seat_type_data=='1'){
-            var price = parseFloat($('#cash_1').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#total_cash_1').val(total_amt );
-            }else{
-                $('#total_cash_1').val('0');
-            }
-        }
-        
-
-    });
-</script>
-
-<script>
-$(document).ready(function() {
-
-    var f_count = '';
-    var e_count = '';
-    var g_count = '';
-    var m_count = '';
-    var l_count = '';
-    var n_count = '';
-    var o_count = '';
-    var a_count = '';
-    var b_count = '';
-    var c_count = '';
-
-
-    $(".data_amt").on('keyup', function() {
-        // var f_count = $("#total_cash_2000").val()
-        var e_count = $("#total_cash_500").val();
-        var g_count = $("#total_cash_200").val();
-        var m_count = $("#total_cash_100").val();
-        var l_count = $("#total_cash_50").val();
-        var n_count = $("#total_cash_20").val();
-        var o_count = $("#total_cash_10").val();
-        var a_count = $("#total_cash_5").val();
-        var b_count = $("#total_cash_2").val();
-        var c_count = $("#total_cash_1").val();
-
-        // if (f_count != '') {
-        //     var ftotal = f_count;
-        // } else {
-        //     var ftotal = 0;
-        // }
-        if (e_count != '') {
-            var etotal = e_count;
-        } else {
-            var etotal = 0;
-        }
-        if (g_count != '') {
-            var gtotal = g_count;
-        } else {
-            var gtotal = 0;
-        }
-        if (m_count != '') {
-            var mtotal = m_count;
-        } else {
-            var mtotal = 0;
-        }
-        if (l_count != '') {
-            var ltotal = l_count;
-        } else {
-            var ltotal = 0;
-        }
-        if (n_count != '') {
-            var ntotal = n_count;
-        } else {
-            var ntotal = 0;
-        }
-        if (o_count != '') {
-            var ototal = o_count;
-        } else {
-            var ototal = 0;
-        }
-        if (a_count != '') {
-            var atotal = a_count;
-        } else {
-            var atotal = 0;
-        }
-        if (b_count != '') {
-            var btotal = b_count;
-        } else {
-            var btotal = 0;
-        }
-        if (c_count != '') {
-            var ctotal = c_count;
-        } else {
-            var ctotal = 0;
-        }
-        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
-            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
-            parseInt(ctotal);
-
-
-        $("#total_cash_amt").val(final_total);
-
-
-    });
-
-});
-</script>
-
-<!-- ================================return to customer  =================================-->
-<script>
-    $('.return_data_amt').keyup(function(){
-        // alert('hiiii');
-        var seat_type_data = $(this).attr('return-attr-amt');
-        // alert(seat_type_data);
-        
-        // alert(price);
-        // if(seat_type_data=='2000'){
-        //     var price = parseFloat($('#cash_2000').val());
-        //     var total_amt = price * seat_type_data;
-        //     if(total_amt>0){
-        //         $('#total_cash_2000').val(total_amt );
-        //     }else{
-        //         $('#total_cash_2000').val('0');
-        //     }
-        // }else 
-        if(seat_type_data=='500'){
-            var price = parseFloat($('#return_cash_500').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_500').val(total_amt );
-            }else{
-                $('#return_total_cash_500').val('0');
-            }
-        }else if(seat_type_data=='200'){
-            var price = parseFloat($('#return_cash_200').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_200').val(total_amt );
-            }else{
-                $('#return_total_cash_200').val('0');
-            }
-        }else if(seat_type_data=='100'){
-            var price = parseFloat($('#return_cash_100').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_100').val(total_amt );
-            }else{
-                $('#return_total_cash_100').val('0');
-            }
-        }else if(seat_type_data=='50'){
-            var price = parseFloat($('#return_cash_50').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_50').val(total_amt );
-            }else{
-                $('#return_total_cash_50').val('0');
-            }
-        }else if(seat_type_data=='20'){
-            var price = parseFloat($('#return_cash_20').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_20').val(total_amt );
-            }else{
-                $('#return_total_cash_20').val('0');
-            }
-        }else if(seat_type_data=='10'){
-            var price = parseFloat($('#return_cash_10').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_10').val(total_amt );
-            }else{
-                $('#return_total_cash_10').val('0');
-            }
-        }else if(seat_type_data=='5'){
-            var price = parseFloat($('#return_cash_5').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_5').val(total_amt );
-            }else{
-                $('#return_total_cash_5').val('0');
-            }
-        }
-        else if(seat_type_data=='2'){
-            var price = parseFloat($('#return_cash_2').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_2').val(total_amt );
-            }else{
-                $('#return_total_cash_2').val('0');
-            }
-        }
-        else if(seat_type_data=='1'){
-            var price = parseFloat($('#return_cash_1').val());
-            var total_amt = price * seat_type_data;
-            if(total_amt>0){
-                $('#return_total_cash_1').val(total_amt );
-            }else{
-                $('#return_total_cash_1').val('0');
-            }
-        }
-        
-
-    });
-</script>
-
-<script>
-$(document).ready(function() {
-
-    var f_count = '';
-    var e_count = '';
-    var g_count = '';
-    var m_count = '';
-    var l_count = '';
-    var n_count = '';
-    var o_count = '';
-    var a_count = '';
-    var b_count = '';
-    var c_count = '';
-
-
-    $(".return_data_amt").on('keyup', function() {
-        // var f_count = $("#total_cash_2000").val()
-        var e_count = $("#return_total_cash_500").val();
-        var g_count = $("#return_total_cash_200").val();
-        var m_count = $("#return_total_cash_100").val();
-        var l_count = $("#return_total_cash_50").val();
-        var n_count = $("#return_total_cash_20").val();
-        var o_count = $("#return_total_cash_10").val();
-        var a_count = $("#return_total_cash_5").val();
-        var b_count = $("#return_total_cash_2").val();
-        var c_count = $("#return_total_cash_1").val();
-
-        // if (f_count != '') {
-        //     var ftotal = f_count;
-        // } else {
-        //     var ftotal = 0;
-        // }
-        if (e_count != '') {
-            var etotal = e_count;
-        } else {
-            var etotal = 0;
-        }
-        if (g_count != '') {
-            var gtotal = g_count;
-        } else {
-            var gtotal = 0;
-        }
-        if (m_count != '') {
-            var mtotal = m_count;
-        } else {
-            var mtotal = 0;
-        }
-        if (l_count != '') {
-            var ltotal = l_count;
-        } else {
-            var ltotal = 0;
-        }
-        if (n_count != '') {
-            var ntotal = n_count;
-        } else {
-            var ntotal = 0;
-        }
-        if (o_count != '') {
-            var ototal = o_count;
-        } else {
-            var ototal = 0;
-        }
-        if (a_count != '') {
-            var atotal = a_count;
-        } else {
-            var atotal = 0;
-        }
-        if (b_count != '') {
-            var btotal = b_count;
-        } else {
-            var btotal = 0;
-        }
-        if (c_count != '') {
-            var ctotal = c_count;
-        } else {
-            var ctotal = 0;
-        }
-        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
-            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
-            parseInt(ctotal);
-
-        $("#return_total_cash_amt").val(final_total);
-
-
-    });
-
-});
-</script>
-<!-- -==============================return to customer -->
-
-
 
 <!--  -->
 
@@ -5141,24 +4829,6 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- <script>
-$('.data_amt').keyup(function(){
-
-    var booking_amt = $("#booking_amt").val();
-    var total_cash_amt = $("#total_cash_amt").val();
-    // alert(total_travaller_count);
-
-    if (booking_amt == total_cash_amt) {
-        $("#final_booking_submit").prop('disabled', false)
-        alert('Matching!');
-    } else {
-        $("#final_booking_submit").prop('disabled', true)
-        alert('Not Matching!');
-    }
-
-
-});
-</script> -->
 
 <script>
 
@@ -5502,6 +5172,8 @@ function final_amt_not_greater() {
 
     // Update the pending amount input box
     document.getElementById('result_box').value = remainingAmt;
+
+    
 }
 //============= final booking ======================================== 
 
@@ -6639,7 +6311,13 @@ function empty() {
         selectedOption = $("#select_upi_no option:selected");
         var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
-
+        var attr_holder_type = $(this).attr('attr_holder_type');
+        var attr_partial_holder_type = $(this).attr('attr_partial_holder_type');
+        // alert(attr_holder_type);
+        
+if(attr_holder_type !='sra' && attr_partial_holder_type !='partial')
+{
+    // alert('ggggggggggggg');
         // AJAX request
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
@@ -6662,6 +6340,60 @@ function empty() {
             });
           }
         });
+}
+if(attr_holder_type =='sra')
+{    
+    // alert('nnnnnnnnnnnnn');
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_booking_payment_details/get_upi_code',
+          method: 'post',
+        //   self_data: self_data,
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#upi_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                //alert(data); 
+              $('#upi_payment_type').append('<option value="' + data['upi_app_name'] + '">' + data['payment_app_name'] + '</option>');
+            });
+          }
+        });
+    }
+
+    if(attr_partial_holder_type =='partial')
+{    
+    // alert('nnnnnnnnnnnnn');
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_partial_payment_details/get_upi_code',
+          method: 'post',
+        //   self_data: self_data,
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#upi_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                //alert(data); 
+              $('#upi_payment_type').append('<option value="' + data['upi_app_name'] + '">' + data['payment_app_name'] + '</option>');
+            });
+          }
+        });
+    }
     });
 
         // upi_payment_type change as per payment app
@@ -6670,7 +6402,18 @@ function empty() {
         var selectedPaymentType = $(this).val();
         // alert(selectedPaymentType);
 
+        var attr_payment_type = $(this).attr('attr_payment_type');
+
+        selectedOption = $("#select_upi_no option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        // alert(self_data);
+
+        var attr_partial_payment_type = $(this).attr('attr_partial_payment_type');
+        let upi_holder_name=$('#select_upi_no').val();
+
             // AJAX request for self_upi_no
+            if(attr_payment_type !='sra' && attr_partial_payment_type !='partial')
+            {
             $.ajax({
                 url: '<?=base_url()?>agent/booking_preview/get_self_upi_no',
                 method: 'post',
@@ -6696,8 +6439,64 @@ function empty() {
                     
                 }
             });
-        });
+        }
 
+        if(attr_payment_type =='sra')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_booking_payment_details/get_self_upi_number_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType,self_data: self_data,upi_holder_name: upi_holder_name},
+                dataType: 'json',
+                success: function(response){
+                    $('#self_upi_no').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#self_upi_no').val(data['upi_id']);
+                        $('#company_acc_yes_no').val(data['company_account_yes_no']);
+                        
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#upi_reason').css('display', 'block');
+                            $('#upi_reason_input').css('display', 'block');
+                        } else {
+                            $('#upi_reason').css('display', 'none');
+                            $('#upi_reason_input').css('display', 'none');
+                        }
+                    });
+                }
+            });
+        }
+
+        if(attr_partial_payment_type =='partial')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_partial_payment_details/get_self_upi_number_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType,upi_holder_name:upi_holder_name,self_data:self_data},
+                dataType: 'json',
+                success: function(response){
+                    // console.log(response);
+                    
+                    $('#self_upi_no').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#self_upi_no').val(data['upi_id']);
+                        $('#company_acc_yes_no').val(data['company_account_yes_no']);
+                        
+                        if (data['company_account_yes_no'] == 'No') {
+                            // alert('yesss');
+                            $('#upi_reason').css('display', 'block');
+                            $('#upi_reason_input').css('display', 'block');
+                        } else {
+                            // alert('nooo');
+                            $('#upi_reason').css('display', 'none');
+                            $('#upi_reason_input').css('display', 'none');
+                        }
+                    });
+                }
+            });
+        }
+        });
   });
 </script>
 
@@ -6788,7 +6587,11 @@ function empty() {
         var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
 
+        var attr_qr_holder_type = $(this).attr('attr_qr_holder_type');
+        var attr_partial_qr_holder_type = $(this).attr('attr_partial_qr_holder_type');
         // AJAX request
+        if(attr_qr_holder_type !='sra' && attr_partial_qr_holder_type !='partial')
+        {
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
           method: 'post',
@@ -6809,15 +6612,75 @@ function empty() {
             });
           }
         });
+    }
+
+
+        // AJAX request
+        if(attr_qr_holder_type =='sra')
+        {
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_booking_payment_details/get_QR_upi_code',
+          method: 'post',
+          data: {self_data: self_data,other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            $('#qr_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#qr_payment_type').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#qr_payment_type').append('<option value="' + data['upi_app_name'] + '">' + data['payment_app_name'] + '</option>');
+            
+            });
+          }
+        });
+    }
+
+    if(attr_partial_qr_holder_type =='partial')
+        {
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_partial_payment_details/get_QR_upi_code',
+          method: 'post',
+          data: {self_data: self_data,other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            $('#qr_payment_type').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#qr_payment_type').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+              $('#qr_payment_type').append('<option value="' + data['upi_app_name'] + '">' + data['payment_app_name'] + '</option>');
+            
+            });
+          }
+        });
+    }
     });
 
         // upi_payment_type change as per payment app
         
         $('#qr_payment_type').change(function(){
+
         var selectedPaymentType = $(this).val();
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+        var other_data_val = $('#select_qr_upi_no').val();
+
+        var attr_qr_payment_type = $(this).attr('attr_qr_payment_type');
+        var attr_partial_qr_payment_type = $(this).attr('attr_partial_qr_payment_type');
         // alert(selectedPaymentType);
         var imageUrl = '<?php echo base_url(); ?>uploads/QR_code_image/';
             // AJAX request for self_upi_no
+            if(attr_qr_payment_type !='sra' && attr_partial_qr_payment_type !='partial')
+            {
             $.ajax({
                 url: '<?=base_url()?>agent/booking_preview/get_self_upi_no',
                 method: 'post',
@@ -6836,7 +6699,7 @@ function empty() {
                         if (data['company_account_yes_no'] === 'No') {
                             $('#qr_reason').css('display', 'block');
                             $('#qr_reason_input').css('display', 'block');
-                        } else {
+                        } else {    
                             $('#qr_reason').css('display', 'none');
                             $('#qr_reason_input').css('display', 'none');
                         }
@@ -6844,8 +6707,76 @@ function empty() {
                     
                 }
             });
-        });
+        }
 
+        if(attr_qr_payment_type =='sra')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_booking_payment_details/get_QR_mobile_number_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType,
+                    self_data: self_data,
+                    other_data: other_data,
+                    other_data_val: other_data_val
+                },
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    $('#qr_mode_code_image').empty();
+                    $('#qr_mobile_number').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#qr_mobile_number').val(data['mobile_number']);
+                        $('#qr_company_acc_yes_no').val(data['company_account_yes_no']);
+                        $('#qr_mode_code_image').append('<img src="' + imageUrl + data['qr_code_image'] + '" alt="' + data['qr_code_image'] + '">');
+
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#qr_reason').css('display', 'block');
+                            $('#qr_reason_input').css('display', 'block');
+                        } else {    
+                            $('#qr_reason').css('display', 'none');
+                            $('#qr_reason_input').css('display', 'none');
+                        }
+                    });
+                    
+                }
+            });
+        }
+
+        if(attr_partial_qr_payment_type =='partial')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_partial_payment_details/get_QR_mobile_number_no',
+                method: 'post',
+                data: {selectedPaymentType: selectedPaymentType,
+                    self_data: self_data,
+                    other_data: other_data,
+                    other_data_val: other_data_val
+                },
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    $('#qr_mode_code_image').empty();
+                    $('#qr_mobile_number').find('option').not(':first').remove();
+                
+                    $.each(response,function(index,data){   
+                        $('#qr_mobile_number').val(data['mobile_number']);
+                        $('#qr_company_acc_yes_no').val(data['company_account_yes_no']);
+                        $('#qr_mode_code_image').append('<img src="' + imageUrl + data['qr_code_image'] + '" alt="' + data['qr_code_image'] + '">');
+
+                        if (data['company_account_yes_no'] === 'No') {
+                            $('#qr_reason').css('display', 'block');
+                            $('#qr_reason_input').css('display', 'block');
+                        } else {    
+                            $('#qr_reason').css('display', 'none');
+                            $('#qr_reason_input').css('display', 'none');
+                        }
+                    });
+                    
+                }
+            });
+        }
+        });
   });
 </script>
 
@@ -6857,6 +6788,69 @@ function empty() {
  
   $(document).ready(function(){
  
+    $('#net_acc_holder_nm').change(function(){
+        var did = $('#net_acc_holder_nm').val();
+        // alert(did);
+        selectedOption = $("#net_acc_holder_nm option:selected");
+        var self_data = selectedOption.attr('attr_self');
+        var other_data = selectedOption.attr('attr_other');
+        var attr_netholder_type = $(this).attr('attr_netholder_type');
+        var attr_partial_netholder_type = $(this).attr('attr_partial_netholder_type');
+        // alert(attr_holder_type);
+
+if(attr_netholder_type =='sra')
+{    
+    // alert('nnnnnnnnnnnnn');
+        // AJAX request
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_booking_payment_details/get_net_banking_holdernm_code',
+          method: 'post',
+        //   self_data: self_data,
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#net_banking_acc_no').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                //alert(data); 
+              $('#net_banking_acc_no').append('<option value="' + data['id'] + '">' + data['account_number'] + '</option>');
+            });
+          }
+        });
+    }
+
+    if(attr_partial_netholder_type =='partial')
+{    
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_partial_payment_details/get_partial_net_banking_holdernm_code',
+          method: 'post',
+        //   self_data: self_data,
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            console.log(response);
+
+            // Clear existing options
+            $('#net_banking_acc_no').find('option').not(':first').remove();
+            // for remove upi id also
+            $('#self_upi_no').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                //alert(data); 
+              $('#net_banking_acc_no').append('<option value="' + data['id'] + '">' + data['account_number'] + '</option>');
+            });
+          }
+        });
+    }
+    });
+
     // district change
     $('#net_banking_acc_no').change(function(){
         var did = $('#net_banking_acc_no').val();
@@ -6865,7 +6859,12 @@ function empty() {
         var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
 
+        var attr_bank_acc_no = $(this).attr('attr_bank_acc_no');
+        var attr_partial_bank_acc_no = $(this).attr('attr_partial_bank_acc_no');
+
         // AJAX request
+        if(attr_bank_acc_no !='sra' && attr_partial_bank_acc_no !='partial')
+        {
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_account_bank_name',
           method: 'post',
@@ -6896,6 +6895,76 @@ function empty() {
             });
           }
         });
+    }
+
+        // AJAX request
+        if(attr_bank_acc_no =='sra')
+        {
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_booking_payment_details/get_net_banking_account_bank_name',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            $('#netbanking_bank_name').find('option').not(':first').remove();
+            // for remove upi id also
+            // $('#net_acc_holder_nm').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                
+                $('#netbanking_bank_name').val(data['bank_name']);
+                $('#net_banking_company_acc_yes_no').val(data['company_account_yes_no']);
+
+                if (data['company_account_yes_no'] === 'No') {
+                    $('#net_banking_reason').css('display', 'block');
+                    $('#net_banking_input').css('display', 'block');
+                } else {
+                    $('#net_banking_reason').css('display', 'none');
+                    $('#net_banking_input').css('display', 'none');
+                }
+            
+            });
+          }
+        });
+    }
+
+    if(attr_partial_bank_acc_no =='partial')
+        {
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_partial_payment_details/get_net_banking_account_bank_name',
+          method: 'post',
+          data: {self_data: self_data, other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            $('#netbanking_bank_name').find('option').not(':first').remove();
+            // for remove upi id also
+            // $('#net_acc_holder_nm').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+                
+                $('#netbanking_bank_name').val(data['bank_name']);
+                $('#net_banking_company_acc_yes_no').val(data['company_account_yes_no']);
+
+                if (data['company_account_yes_no'] === 'No') {
+                    $('#net_banking_reason').css('display', 'block');
+                    $('#net_banking_input').css('display', 'block');
+                } else {
+                    $('#net_banking_reason').css('display', 'none');
+                    $('#net_banking_input').css('display', 'none');
+                }
+            
+            });
+          }
+        });
+    }
     });
 
         // upi_payment_type change as per payment app
@@ -6906,7 +6975,12 @@ function empty() {
         var net_banking_acc_no = selectedOption.attr('attr_qr_master_id');
         // alert(net_banking_acc_no);
 
+        var attr_bank_acc_no = $(this).attr('attr_bank_acc_no');
+        var attr_partial_bank_acc_no = $(this).attr('attr_partial_bank_acc_no');
+
             // AJAX request for self_upi_no
+            if(attr_bank_acc_no !='sra' && attr_partial_bank_acc_no !='partial')
+            {
             $.ajax({
                 url: '<?=base_url()?>agent/booking_preview/get_account_hold_name',
                 method: 'post',
@@ -6923,6 +6997,48 @@ function empty() {
                     
                 }
             });
+        }
+
+        //     // AJAX request for self_upi_no
+        //     if(attr_bank_acc_no =='sra')
+        //     {
+        //     $.ajax({
+        //         url: '<?//=base_url()?>agent/sra_booking_payment_details/get_net_banking_account_hold_name',
+        //         method: 'post',
+        //         data: {net_banking_acc_no: net_banking_acc_no},
+        //         dataType: 'json',
+        //         success: function(response){
+        //             // console.log(response);
+                    
+        //             $('#net_acc_holder_nm').find('option').not(':first').remove();
+                
+        //             $.each(response,function(index,data){   
+        //                 $('#net_acc_holder_nm').val(data['full_name']);
+        //             });
+                    
+        //         }
+        //     });
+        // }
+
+        // if(attr_partial_bank_acc_no =='partial')
+        //     {
+        //     $.ajax({
+        //         url: '<?//=base_url()?>agent/sra_partial_payment_details/get_net_banking_account_hold_name',
+        //         method: 'post',
+        //         data: {net_banking_acc_no: net_banking_acc_no},
+        //         dataType: 'json',
+        //         success: function(response){
+        //             // console.log(response);
+                    
+        //             $('#net_acc_holder_nm').find('option').not(':first').remove();
+                
+        //             $.each(response,function(index,data){   
+        //                 $('#net_acc_holder_nm').val(data['full_name']);
+        //             });
+                    
+        //         }
+        //     });
+        // }
         });
 
   });
@@ -6943,7 +7059,9 @@ function empty() {
         var upi_no_id = $('#upi_no_id').val();
         var upi_holder_name_id = $('#upi_holder_name_id').val();
         // alert(did);
-    
+        var attr_partial_payment_type = $(this).attr('attr_partial_payment_type');
+        if(attr_partial_payment_type !='partial')
+        {
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>agent/booking_preview/get_upi_id_no_code',
@@ -6960,6 +7078,7 @@ function empty() {
           });
         }
      });
+    }
    });
  });
 </script>
@@ -6974,8 +7093,12 @@ function empty() {
     // district change
     $('#net_banking_acc_no').change(function(){
         var did = $('#net_banking_acc_no').val();
+
+        var attr_bank_acc_no = $(this).attr('attr_bank_acc_no');
+
         // alert(did);
-    
+        if(attr_partial_bank_acc_no !='sra')
+        {
       // AJAX request
       $.ajax({
         url:'<?=base_url()?>agent/booking_preview/get_account_holder_name',
@@ -6993,6 +7116,7 @@ function empty() {
          
         }
      });
+    }
    });
  });
 </script>
@@ -7966,7 +8090,6 @@ document.getElementById("back-button_booking_preview").addEventListener("click",
                 success: function(response) {
                     if (response !== false && response !== '') {
                         var booking_ref_no = $('#booking_ref_no').val(response);
-
                         Swal.fire({
                         title: 'Check OTP',
                         text: 'Please check OTP on mobile number: ' + crediential_mobile_no,
@@ -8504,6 +8627,7 @@ $(document).ready(function(){
 
         var payment_type_tr=document.getElementById('payment_type_tr');
         var booking_amount_tr=document.getElementById('booking_amount_tr');
+        var extra_services_amount_tr=document.getElementById('extra_services_amount_tr');
         var pending_amount_tr=document.getElementById('pending_amount_tr');
 
         if (val == 'Now') {
@@ -9170,22 +9294,37 @@ $(document).ready(function() {
            
         var val = +this.value || 0;
         $("#pending_amt").val($("#final_amt").val() - val);
+        
+        if(current_val > 0)
+        {
+            $("#select_transaction").attr("disabled", false);
+        }else{
+            $("#select_transaction").attr("disabled", true);
+        }
         });
     });    
  
  
     $("#next_booking_amt").on("keyup", function() {
  
-        var enquiry_id=$("#enquiry_id").val();
+            var enquiry_id=$("#enquiry_id").val();
             var final_amt=$("#final_amt").val();
             var current_val=$(this).val();
+
+            var deposite_amt= $(this).val();
+        var sra_remain_amt=$("#sra_final_remaining_amt").val();
+        var sra_final_amt=$("#sra_final_amt").val();
+        var sra_paid_amt=$("#sra_paid_amt").val();
+        var receipt_type = $("input[name='receipt_type']:checked").val();
+
+            if(receipt_type != 'SRA'){
             $.ajax({
                 url:'<?=base_url()?>agent/pay_pending_amount/get_payment_type',
                 method: 'post',
                 data: {enquiry_id: enquiry_id},
                 dataType: 'json',
                 success: function(response){
-                // console.log(response);
+                console.log(response);
                 if(response.length === 0 && current_val!=final_amt)
                 {
                     $('#payment_type_advance').prop("checked", true);
@@ -9199,14 +9338,56 @@ $(document).ready(function() {
  
                 }
             });
- 
- 
+
+        }else{
+            if(deposite_amt != sra_remain_amt && sra_paid_amt==0)
+                {
+                    $('#payment_type_advance').prop("checked", true);
+                }else if(deposite_amt == sra_remain_amt)
+                {
+                    $('#payment_type_full').prop("checked", true);
+                }else if(deposite_amt != sra_remain_amt && sra_paid_amt >0)
+                {
+                    $('#payment_type_part').prop("checked", true);
+                }
+        }
+          
     var val = +this.value || 0;
     var finalAmt = +$("#old_pending_amt").val() || 0;
     var pendingAmt = finalAmt - val;
     console.log(pendingAmt);
     $("#pending_amt").val(pendingAmt);
+
+    if(current_val > 0)
+    {
+        $("#select_transaction").attr("disabled", false);
+    }else{
+        $("#select_transaction").attr("disabled", true);
+    }
 });
+</script>
+
+<script>
+    $(".next_deposit_amt").on("keyup", function() {
+        var deposite_amt= $(this).val();
+        var sra_remain_amt=$("#sra_final_remaining_amt").val();
+        var sra_final_amt=$("#sra_final_amt").val();
+        var sra_paid_amt=$("#sra_paid_amt").val();
+
+        console.log('deposite_amt',deposite_amt);
+        console.log('sra_remain_amt',sra_remain_amt);
+
+                if(deposite_amt != sra_remain_amt && sra_paid_amt==0)
+                {
+                    $('#payment_type_advance').prop("checked", true);
+                }else if(deposite_amt == sra_remain_amt)
+                {
+                    $('#payment_type_full').prop("checked", true);
+                }else if(deposite_amt != sra_remain_amt && sra_paid_amt >0)
+                {
+                    $('#payment_type_part').prop("checked", true);
+                }
+    });
 </script>
 <!-- pending amount Next Booking Amount calculation -->
 
@@ -10776,15 +10957,6 @@ $(document).ready(function() {
                                 </div>
                             </div>
 
-                            <!-- <div class="col-md-6 mt-2">
-                                <label>Is This A Company Account ?</label>
-                                <div class="form-group">
-                                    <input type="radio" id="Yes`+i+`" name="company_account_yes_no[`+i+`]" value="Yes"> &nbsp;
-                                    <label>Yes</label>  &nbsp; &nbsp; 
-                                    <input type="radio" id="No`+i+`" name="company_account_yes_no[`+i+`]" value="No"> &nbsp;
-                                    <label>No</label><br>
-                                </div>
-                            </div> -->
 
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -10798,41 +10970,57 @@ $(document).ready(function() {
                                     <label>Account Number</label>
                                     <input type="text" class="form-control" name="account_number[]" id="account_number`+i+`" placeholder="Enter Account Number" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                 </div>
+                            </div>  
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Branch Name</label>
+                                    <input type="text" class="form-control" name="branch_name[]" id="branch_name" placeholder="Enter Branch Name">
+                                </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                <label>UPI App Name</label>
-                                    <select class="form-control" name="upi_app_name[]" id="upi_app_name`+i+`">
+                                    <label>IFSC Code</label>
+                                    <input type="text" class="form-control" name="ifsc_code[]" id="ifsc_code" placeholder="Enter IFSC Code">
+                                </div>
+                            </div>
+
+                            <table border="1" class="table table-bordered" id="table`+i+`">
+                          <thead>
+                              <tr>
+                                  <th>UPI App Name</th>
+                                  <th>UPI ID</th>
+                                  <th>Upload QR Image</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php $i=1;?>
+                              <tr>
+                                  <td>
+                                  <select class="form-control" name="upi_app_name`+i+`[]" id="upi_app_name">
                                     <option value="">Select App Name</option>
                                     <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
                                         <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
                                     <?php } ?>
-                                    </select>
-                                </div>
-                            </div> 
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>UPI ID</label>
-                                    <input type="text" class="form-control" name="upi_id[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
-                                </div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    <label>Upload QR Image</label><br>
-                                    <input type="file" name="image_name[]" id="image_nam`+i+`" required="required">
-                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-1 pt-4 d-flex justify-content-center align-self-center">
-                                <div class="form-group">
-                                <label></label>
-                                    <button type="button" name="remove" id="`+i+`" class="btn btn-danger btn_remove">X</button>
-                                </div>
-                            </div>  
+                                  </select>
+                                  </td>
+                                  <td>
+                                    <input type="text" class="form-control" name="upi_id`+i+`[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                  </td>
+                                  
+                                  <td>
+                                    <input type="file" name="image_name`+i+`[]" id="image_nam" required="required">
+                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
+                                  </td>
+                                  <td>
+                                      <button type="button" class="btn btn-primary add_qr_add_more" attr_add_id="1" attr_QR_code="`+i+`" name="submit" id="add_qr_add_more1">Add More</button>
+                                  </td>
+                              </tr>
+                              <?php $i++; ?>
+                          </tbody>
+                      </table> 
                         </div> `);
 $('#edit_main_row_for_add_more_bank').append(structure); 
 
@@ -10845,6 +11033,54 @@ $(document).on('click', '.btn_remove', function(){
       });
 
 </script>
+
+<script>
+    $(document).ready(function() {
+        // $(".add_qr_add_more").click(function() {
+            $(document).on("click", ".add_qr_add_more", function() {
+            // alert('ffffffffff');
+            var expence = $(this).attr('attr_add_id');
+            var new_attr_number = $(this).attr('attr_QR_code');
+            
+            var i= parseInt(expence)+parseInt(1);
+            // alert(i);
+            var expence = $(this).attr('attr_add_id',i);
+            var newRow = `
+                <tr>
+                    <td>
+                        <select class="form-control" name="upi_app_name`+new_attr_number+`[]" id="upi_app_name`+i+`">
+                            <option value="">Select App Name</option>
+                            <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="upi_id`+new_attr_number+`[]" id="upi_id`+i+`" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                    </td>
+                    <td>
+                        <input type="file" name="image_name`+new_attr_number+`[]" id="image_nam`+i+`" required="required">
+                        <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-row">Remove</button>
+                    </td>
+                </tr>
+            `;
+            var new_table_id='#table'+new_attr_number;
+            // alert(new_table_id);
+            $(new_table_id + ' tbody').append(newRow);
+            i++;
+        });
+        
+        // Remove a row when the "Remove" button is clicked
+        $(document).on("click", ".remove-row", function() {
+            $(this).closest("tr").remove();
+        });
+
+    });
+</script>
+<!-- =============== add more qr code =================== -->
 
 <!--  add gent QR code validation ---------->
 <script>
@@ -10993,7 +11229,11 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
         var self_data = selectedOption.attr('attr_self');
         var other_data = selectedOption.attr('attr_other');
 
+        var attr_cheque_name = $(this).attr('attr_cheque_name');
+
         // AJAX request
+        if(attr_cheque_name !='sra')
+        {
         $.ajax({
           url: '<?=base_url()?>agent/booking_preview/get_upi_code',
           method: 'post',
@@ -11003,17 +11243,44 @@ $('#edit_QR_code_agent').validate({ // initialize the plugin
             // console.log(response);
 
             // Clear existing options
-            $('#cheque_bank_name').find('option').not(':first').remove();
+            // $('#cheque_bank_name').find('option').not(':first').remove();
             // for remove upi id also
-            $('#cheque_bank_name').val('');
+            // $('#cheque_bank_name').val('');
 
             // Add new options based on the response
             $.each(response, function(index, data){   
-              $('#cheque_bank_name').append('<option value="' + data['add_more_id'] + '">' + data['bank_name'] + '</option>');
+                $('#cheque_company_acc_yes_no').val(data['is_company_ac']);
             
             });
           }
         });
+    }
+
+        // AJAX request
+        if(attr_cheque_name =='sra')
+        {
+        $.ajax({
+          url: '<?=base_url()?>agent/sra_booking_payment_details/get_cheque_upi_code',
+          method: 'post',
+          data: {self_data: self_data,other_data: other_data, did: did},
+          dataType: 'json',
+          success: function(response){
+            // console.log(response);
+
+            // Clear existing options
+            // $('#cheque_company_acc_yes_no').find('option').not(':first').remove();
+            // for remove upi id also
+            // $('#cheque_bank_name').val('');
+
+            // Add new options based on the response
+            $.each(response, function(index, data){   
+            //   $('#cheque_bank_name').append('<option value="' + data['id'] + '">' + data['bank_name'] + '</option>');
+                $('#cheque_company_acc_yes_no').val(data['is_company_ac']);
+            
+            });
+          }
+        });
+    }
     });
 
         // upi_payment_type change as per payment app
@@ -11224,6 +11491,7 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
 
         //   var attr_cancel_val =$(this).attr('attr_cancle_btn');
         var academic_year = $('#partially_academic_year').val();
+        // print_r(academic_year); die;
         var tour_number = $('#partially_tour_number').val();
         var tour_date = $('#partially_tour_date').val();
 
@@ -11246,6 +11514,8 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                      data:{academic_year:academic_year, tour_number:tour_number, tour_date:tour_date, sra_no:sra_no , mobile_number:mobile_number},  
                      dataType: 'json',
                      success:function(response){ 
+                        // console.log('rtrrrrrrrr',response); 
+
                         // do not earase pl below code
                         // if (response != '') {
                         //     $('#div_partial_payment').css('display', 'block');
@@ -11254,35 +11524,33 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                         // }
                         // do not earase pl above code
 
-                        if (response.length > 0) {
+                        if (response.main_data.length > 0) {
                             $('#div_partial_payment').css('display', 'block');
 
                         // alert('hiiiiiiiii');
-                        //   console.log(response); 
                         var i = 0;
                         //   $('#tour_date').find('option').not(':first').remove();
                         var sra_id = 0;
                         var img_count=parseInt(i)+1;
-                        $.each(response,function(index,data){  
+                        $.each(response.main_data,function(index,data){  
                             sra_id++;
-                            console.log(data['abcamt']);
-
-                            if (data['pending_amt'] > 0 && data['abcamt']!=data['total_sra_amt']) {
+                            
+                                if (response.all_total_paid_amount != response.all_total_amount) {
                             var button_id = "partial_payment_" + sra_id; // Dynamically create unique button ID
-                            var buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/index/`+  data['sra_pay_id']+`">
+                            var buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/index/${data['sra_no']}/${data['academic_year']}">
                                                 <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Make Receipt</button>
                                             </a>`;
-                                        } else if (data['pending_amt'] == 0 || data['abcamt']==data['total_sra_amt'])
+                                        } else if (response.all_total_paid_amount == response.all_total_amount)
                                         {
                                             buttonHtml = "Payment Completed";
                                         }
 
-                            if (data['pending_amt'] > 0 && data['abcamt']!=data['total_sra_amt']) {
+                            if (response.all_total_paid_amount != response.all_total_amount) {
                             var extra_services_button_id = "partial_payment_" + sra_id; // Dynamically create unique button ID
-                            var extra_services_buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/extra_services_add/`+  data['sra_pay_id']+`">
+                            var extra_services_buttonHtml = `<a href="<?php echo $sra_partial_payment_details; ?>/extra_services_add/${data['sra_no']}/${data['academic_year']}">
                                                 <button type="submit" class="btn btn-success search_btn partial_payment" data-sra-id="`+ academic_year + sra_no +`" id="`+ button_id +`" value="submit">Add</button>
                                             </a>`;
-                                        } else if (data['pending_amt'] == 0 || data['abcamt']==data['total_sra_amt'])
+                                        } else if (response.all_total_paid_amount == response.all_total_amount)
                                         {
                                             extra_services_buttonHtml = "Payment Completed";
                                         }
@@ -11292,7 +11560,7 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                             <td>`+ sra_id +`</td>
                             <td>`+ data['year'] +`</td>
                             <td>`+ data['sra_no'] +`</td>
-                            <td>`+ data['tour_number'] +`</td>
+                            <td>`+ data['package_tour_number'] +`</td>
                             <td>`+ data['journey_date'] +`</td>
                             <td>`+ data['customer_name'] +`</td>
                             <td>`+ data['total_seat'] +`</td>
@@ -11419,6 +11687,7 @@ $('#edit_internationalenquiry').validate({ // initialize the plugin
                         <input type="text" class="form-control mt-4 other_services_input" name="other_services[]" id="other_services${i}" placeholder="Enter extra services name" value="" style="display: none;">
                     </td>
                     <td><input type="text" class="form-control services_quantity" name="services_quantity[]" id="services_quantity`+i+`" placeholder="Enter quantity" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required></td>
+                    <td><textarea type="text" class="form-control services_remark" name="extra_services_remark[]" id="extra_services_remark`+i+`" placeholder="Enter reamrk"></textarea>
                     <td>
                         <button type="button" class="btn btn-danger remove-row">Remove</button>
                     </td>
@@ -11546,7 +11815,13 @@ $(document).ready(function() {
         var package_id = $('#package_id').val();
         var package_date_id = $('#package_date_id').val();
         var sra_payment_id = $('#sra_payment_id').val();
-        
+        var select_transaction =($('#select_transaction :selected').val());
+        var booking_amt = $('#booking_amt').val();
+
+        var cheque = $('#cheque').val();
+        var net_banking_utr_no = $('#net_banking_utr_no').val();
+        var qr_upi_no = $('#qr_upi_no').val();
+
         if (mobile_no != '') {
             // alert('IN hiiiii');
             $.ajax({
@@ -11560,6 +11835,11 @@ $(document).ready(function() {
                     package_id: package_id,
                     package_date_id: package_date_id,
                     sra_payment_id: sra_payment_id,
+                    select_transaction: select_transaction,
+                    booking_amt: booking_amt,
+                    cheque: cheque,
+                    net_banking_utr_no: net_banking_utr_no,
+                    qr_upi_no: qr_upi_no,
                 },
                 // dataType: 'json',
                 success: function(responce) {
@@ -11603,7 +11883,16 @@ function sra_first_transaction_upi_validate() {
 
 function sra_first_payment_type_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_first_customer_payment_type_upi_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11612,7 +11901,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) 
 
 function sra_first_transaction_date_upi_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11624,14 +11913,14 @@ function sra_first_utr_no_validate() {
     // alert(company_acc);
     if(company_acc === 'Yes'){
     var valid = true;
-    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
           $("#sra_submit_otp").attr("disabled", true);
           if (valid) {
               $("#sra_submit_otp").attr("disabled", false);
           }
     }else{
         var valid = true;
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
+        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
           $("#sra_submit_otp").attr("disabled", true);
           if (valid) {
               $("#sra_submit_otp").attr("disabled", false);
@@ -11640,10 +11929,17 @@ function sra_first_utr_no_validate() {
   }
 
 function sra_first_booking_upi_reason_validate() {
+var utr_no_status = $('#utr_no_status').val();
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
-        $("#sra_submit_otp").attr("disabled", true);
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+        // $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+
+        if(utr_no_status == 'Yes'){
+            $("#sra_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_submit_otp").attr("disabled", false);
         }
 }
@@ -11687,6 +11983,9 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no"
 
 function sra_first_qr_utr_no_validate() {
     var company_acc = $('#qr_company_acc_yes_no').val();
+    console.log(company_acc);
+    console.log(checkEmpty($("#select_transaction")));
+
         if(company_acc === 'Yes'){
         var valid = true;
         valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
@@ -11704,27 +12003,34 @@ function sra_first_qr_utr_no_validate() {
 }
 
 function sra_first_booking_qr_reason_validate() {
+var QR_utr_no_status = $('#QR_utr_no_status').val();
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no")) && checkEmpty($("#qr_reason_1"));
-        $("#sra_submit_otp").attr("disabled", true);
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_mobile_number")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
+        // $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+
+        if(QR_utr_no_status == 'Yes'){
+            $("#sra_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_submit_otp").attr("disabled", false);
         }
 }
 
 //------------- Cheque valiadtion -------------------------
 function sra_first_cheque_name_validate() {
-var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name"));
-        $("#sra_submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#sra_submit_otp").attr("disabled", false);
-        }
-}
+    var name_on_cheque = $('#name_on_cheque').val();
+    if (name_on_cheque == 'self') {
+        $("#cheque_reason").show();
+        $("#cheque_reason_input").show();
+    } else if (name_on_cheque != 'self') {
+        $("#cheque_reason").hide();
+        $("#cheque_reason_input").hide();
+    }
 
-function sra_first_cheque_bank_name_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11733,7 +12039,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 
 function sra_first_cheque_banknm_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11742,7 +12048,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 
 function sra_first_cheque_no_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11750,36 +12056,101 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 }
 
 function sra_first_cheque_date_validate() {
-    var company_acc = $('#cheque_company_acc_yes_no').val();
-        if(company_acc === 'Yes'){
-        var valid = true;
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
-            $("#sra_submit_otp").attr("disabled", true);
-            if (valid) {
-                $("#sra_submit_otp").attr("disabled", false);
-            }
-    }else{
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
-        $("#sra_submit_otp").attr("disabled", true);
+    var valid = true;
+    var name_on_cheque = $('#name_on_cheque').val();
+    var valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
+    
+    if (name_on_cheque == 'self') {
+        valid = valid && checkEmpty($("#cheque_reason_1"));
+    } 
+    $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
         }
-    }
 }
 
 function sra_first_booking_cheque_reason_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+//------------- Cheque valiadtion -------------------------
+
+//------------- Demand Draft valiadtion -------------------------
+function sra_demand_draft_name_validate() {
+var demand_draft_name = $('#demand_draft_name').val();
+if (demand_draft_name == 'self') {
+        $("#demand_reason").show();
+        $("#demand_reason_input").show();
+    } else if (demand_draft_name != 'self') {
+        $("#demand_reason").hide();
+        $("#demand_reason_input").hide();
+    }
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
         }
 }
 
+function sra_demand_draft_bank_name_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_demand_draft_number_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_demand_draft_date_validate() {
+    var demand_draft_name = $('#demand_draft_name').val();
+    var valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date"));
+    
+    if (demand_draft_name == 'self') {
+        valid = valid && checkEmpty($("#demand_draft_reason"));
+    }
+    
+    if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_demand_draft_reason_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date")) && checkEmpty($("#demand_draft_reason"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+//------------- Demand Draft valiadtion -------------------------
+
 // --------Net banking payament validation -------------------------
 function sra_first_netpayment_validate() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm"));
+        $("#sra_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_first_netbank_holder_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_acc_no"));
         $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_submit_otp").attr("disabled", false);
@@ -11832,15 +12203,21 @@ function sra_first_netbank_date_validate() {
 }
 
 function sra_first_booking_net_banking_reason_validate() {
+var net_bank_utr_no_status = $('#net_bank_utr_no_status').val();
 var valid = true;
 valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date")) && checkEmpty($("#net_banking_reason_1"));
-        $("#sra_submit_otp").attr("disabled", true);
+        // $("#sra_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_submit_otp").attr("disabled", false);
+        }
+
+        if(net_bank_utr_no_status == 'Yes'){
+            $("#sra_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_submit_otp").attr("disabled", false);
         }
 }
 
-  
   function checkEmpty(obj) {
     var name = $(obj).attr("name");
     $("." + name + "-validation").html("");
@@ -11858,14 +12235,13 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 
 <script type="text/javascript">
     function account_details(val){
-
     var booking_preview = $('#select_transaction').val();
     var booking_preview_mobno = $('#sra_booking_tm_mobile_no').val();
     var booking_preview_amt = $('#booking_amt').val();
-    // alert(booking_preview);
+    // alert(booking_preview_amt);
 
     if(booking_preview == 'CASH' && booking_preview_mobno != '' && booking_preview_amt != ''){
-        $("#sra_submit_otp").attr("disabled", false);
+        $("#sra_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'UPI'){
         $("#sra_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'QR Code'){
@@ -11874,15 +12250,12 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
         $("#sra_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'Net Banking'){
         $("#sra_submit_otp").attr("disabled", true);
+    }else if(booking_preview == 'Demand Draft'){
+        $("#sra_submit_otp").attr("disabled", true);
     }
-        
-    // if(checkEmpty($("#select_transaction"))){
-    // $("#submit_otp").attr("disabled", true);
+    // else if(booking_preview == 'Demand Draft'){
+    //     $("#sra_submit_otp").attr("disabled", true);
     // }
-    // else{
-    //     $("#submit_otp").attr("disabled", false);
-    // }
-        // alert('hiiiiiiiii');
     var element=document.getElementById('net_banking_tr');
 	var element2=document.getElementById('net_banking');
 
@@ -11898,12 +12271,16 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
     var cash_no_div=document.getElementById('cash_tr');
 	var cash_no=document.getElementById('cash');
 
+	var Demand_draft_tr_div=document.getElementById('Demand_draft_tr');
+	// var cash_no=document.getElementById('cash');
+
     if(val=='Net Banking'){
     upi_no_div.style.display='none';
     mob_no_div.style.display='none';
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     element.style.display='contents';
+    Demand_draft_tr.style.display='none';
     
     }else if(val=='') {
     element.style.display='none';
@@ -11911,6 +12288,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     upi_no_div.style.display='none';
+    Demand_draft_tr.style.display='none';
 	// element2.value="";
 
     }else if(val=='UPI') {
@@ -11919,6 +12297,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     upi_no_div.style.display='contents';
+    Demand_draft_tr.style.display='none';
 	// element2.value="";
 
     }else if(val=='QR Code') {
@@ -11927,6 +12306,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
     cash_no_div.style.display='none';
     upi_no_div.style.display='none';
     rq_div.style.display='contents';
+    Demand_draft_tr.style.display='none';
 	// element2.value="";
 
     }else if(val=='Cheque'){
@@ -11936,17 +12316,75 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
         rq_div.style.display='none';
         mob_no_div.style.display='contents';
         mob_no_one.style.display='contents';
+        Demand_draft_tr.style.display='none';
     }else if(val=='CASH'){
         element.style.display='none';
         rq_div.style.display='none';
         upi_no_div.style.display='none';
         cash_no_div.style.display='flex';
         mob_no_div.style.display='none';
+        Demand_draft_tr.style.display='none';
     }
-
+    else if(val=='Demand Draft'){
+        element.style.display='none';
+        upi_no_div.style.display='none';
+        cash_no_div.style.display='none';
+        rq_div.style.display='none';
+        mob_no_div.style.display='none';
+        Demand_draft_tr.style.display='contents';
+    }
     }
 </script>
 
+<!-- <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sraRadio = document.getElementById('sra');
+    const extraServicesRadio = document.getElementById('extra_services');
+    const extraServicesDiv = document.getElementById('extra_services_div');
+    const extraServicesMsgDiv = document.getElementById('extra_services_div_msg');
+
+    function toggleExtraServicesDiv() {
+        if (extraServicesRadio.checked) {
+            extraServicesDiv.style.display = 'block';
+            extraServicesMsgDiv.style.display = 'block';
+        } else {
+            extraServicesDiv.style.display = 'none';
+            extraServicesMsgDiv.style.display = 'none';
+        }
+    }
+
+    sraRadio.addEventListener('change', toggleExtraServicesDiv);
+    extraServicesRadio.addEventListener('change', toggleExtraServicesDiv);
+
+    // Initial call to set the correct state on page load
+    toggleExtraServicesDiv();
+});
+</script> -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sraRadio = document.getElementById('sra');
+    const extraServicesRadio = document.getElementById('extra_services');
+    const extraServicesDiv = document.getElementById('extra_services_div');
+    const extraServicesMsgDiv = document.getElementById('extra_services_div_msg');
+
+    function toggleExtraServicesDiv() {
+        if (extraServicesRadio.checked) {
+            extraServicesDiv.style.display = 'block';
+            extraServicesMsgDiv.style.display = 'block';
+        } else {
+            extraServicesDiv.style.display = 'none';
+            extraServicesMsgDiv.style.display = 'none';
+        }
+    }
+
+    sraRadio.addEventListener('change', toggleExtraServicesDiv);
+    extraServicesRadio.addEventListener('change', toggleExtraServicesDiv);
+
+    // Initial call to set the correct state on page load
+    toggleExtraServicesDiv();
+});
+</script>
 
 <script>
 $(document).ready(function() {
@@ -11954,9 +12392,9 @@ $(document).ready(function() {
         // alert('hiiiiiiiiiii');
         var sra_booking_tm_mobile_no = $('#sra_booking_tm_mobile_no').val();  
         var sra_payment_id = $('#sra_payment_id').val();
-        
-        // alert(booking_tm_mobile_no);
-        // alert(enquiry_id);
+        var sra_no = $('#sra_no').val();
+        var select_transaction =($('#select_transaction :selected').val());
+        var booking_amt = $('#booking_amt').val();
 
         if (sra_booking_tm_mobile_no != '') {
             // alert('IN hiiiii');
@@ -11965,14 +12403,14 @@ $(document).ready(function() {
                 type: "post",
                 data: {
                     sra_payment_id: sra_payment_id,
-                    sra_booking_tm_mobile_no: sra_booking_tm_mobile_no
+                    sra_booking_tm_mobile_no: sra_booking_tm_mobile_no,
+                    sra_no: sra_no,
+                    select_transaction: select_transaction,
+                    booking_amt: booking_amt,
                 },
                 dataType: 'json',
                 success: function(responce) {
                     if (responce != false && responce !='') {
-                        // console.log(responce);
-                        // alert(responce);
-                        // var booking_ref_no = $('#booking_ref_no').val(responce);
                         Swal.fire({
                         title: 'Check OTP',
                         text: 'Please check Resend OTP on mobile number: ' + sra_booking_tm_mobile_no,
@@ -11981,7 +12419,6 @@ $(document).ready(function() {
                         confirmButtonText: 'OK',
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Optionally, you can perform additional actions here
                         }
                     });
                         
@@ -12053,6 +12490,24 @@ $("#sra_payment_final_booking_submit").click(function() {
         });
     }
 
+    var receipt_type = $("input[name='receipt_type']:checked").val();
+    var receipt_typeId = "";
+    if (receipt_type === undefined) {
+        // No radio button is checked, insert a default value
+        receipt_type = ""; // You can change this to your desired default value
+    } else {
+        // Loop through radio buttons to find the one with the selected value
+        $("input[name='receipt_type']").each(function() {
+            if ($(this).val() === receipt_type) {
+                receipt_typeId = $(this).attr("id");
+                return false; // Exit the loop once a match is found
+            }
+        });
+    }
+
+    
+    var academic_year = $('#academic_year').val();
+
     var booking_amt = $('#booking_amt').val(); 
     var pending_amt = $('#pending_amt').val();
     // alert(pending_amt);
@@ -12067,6 +12522,12 @@ $("#sra_payment_final_booking_submit").click(function() {
     var name_on_cheque = $('#name_on_cheque').val();
     var cheque_bank_name = $('#cheque_bank_name').val();
     var cheque_reason_1 = $('#cheque_reason_1').val();
+
+    var demand_draft_name = $('#demand_draft_name').val();
+    var demand_draft_bank_name = $('#demand_draft_bank_name').val();
+    var demand_draft_number = $('#demand_draft_number').val();
+    var demand_draft_date = $('#demand_draft_date').val();
+    var demand_draft_reason = $('#demand_draft_reason').val();
 
 
     // var netbanking_payment_type = $('#netbanking_payment_type').val();
@@ -12101,6 +12562,7 @@ $("#sra_payment_final_booking_submit").click(function() {
     var upi_self_no = $('#self_upi_no').val();
     var upi_reason = $('#reason').val();
     var upi_transaction_date = $('#upi_transaction_date').val();
+    var upi_customer_payment_type = $('#upi_customer_payment_type').val();
 
 
     var qr_holder_name = $('#select_qr_upi_no').val();
@@ -12172,6 +12634,11 @@ $("#sra_payment_final_booking_submit").click(function() {
             type: "POST",
             url: '<?= base_url() ?>agent/sra_booking_payment_details/verify_otp',
             data: {
+                demand_draft_name: demand_draft_name,
+                demand_draft_bank_name: demand_draft_bank_name,
+                demand_draft_number: demand_draft_number,
+                demand_draft_date: demand_draft_date,
+                demand_draft_reason: demand_draft_reason,
                 verify_otp: verify_otp,
                 mobile_no: mobile_no,
                 sra_no: sra_no,
@@ -12185,6 +12652,7 @@ $("#sra_payment_final_booking_submit").click(function() {
                 return_customer_booking_payment_id: return_customer_booking_payment_id,
                 booking_amt: booking_amt,
                 final_amt: final_amt,
+                receipt_type: receipt_type,
                 payment_type: payment_type,
                 pending_amt: pending_amt,
                 payment_now_later: payment_now_later,
@@ -12209,6 +12677,7 @@ $("#sra_payment_final_booking_submit").click(function() {
                 upi_self_no: upi_self_no,
                 upi_reason: upi_reason,
                 upi_transaction_date: upi_transaction_date,
+                upi_customer_payment_type: upi_customer_payment_type,
                 
                 qr_holder_name: qr_holder_name,
                 qr_mobile_number: qr_mobile_number,
@@ -12270,7 +12739,7 @@ $("#sra_payment_final_booking_submit").click(function() {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $("#sra_submit_otp").prop('disabled', true);
-                            window.location.href = "<?= base_url() ?>agent/sra_payment_receipt/index/"+sra_no;
+                            window.location.href = "<?= base_url() ?>agent/sra_payment_receipt/index/"+sra_no+ "/" +academic_year;
                         }
                     });
                 } else {
@@ -12297,15 +12766,14 @@ $("#sra_payment_final_booking_submit").click(function() {
     $('#otp').on('keyup', function() {
         
         if($(this).val().length != 6) {
-        target.disabled = true;
-        // alert('Please enter six(6) digit OTP.');
-        $('#least_count').html(" You must enter 6 digit OTP.");
-        }
-        else{
-        target.disabled = false;
+            target.disabled = true;
+            $('#least_count').html("You must enter 6 digit OTP.");
+        } else {
+            target.disabled = false;
+            $('#least_count').html(""); // Clear the message when 6 digits are entered
         }
     });
-    });
+});
 </script>
 
 <!-------------------- partial payment send otp, resend otp, and verify otp ---------------------->
@@ -12318,15 +12786,17 @@ $("#sra_payment_final_booking_submit").click(function() {
     // alert(booking_preview);
 
     if(booking_preview == 'CASH' && booking_preview_mobno != '' && booking_preview_amt != ''){
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'UPI'){
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'QR Code'){
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
     }else if(booking_preview == 'Cheque'){
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
     }else if(booking_preview == 'Net Banking'){
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+    }else if(booking_preview == 'Demand Draft'){
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
     }
         
     // if(checkEmpty($("#select_transaction"))){
@@ -12350,6 +12820,8 @@ $("#sra_payment_final_booking_submit").click(function() {
 
     var cash_no_div=document.getElementById('cash_tr');
 	var cash_no=document.getElementById('cash');
+	
+	var Demand_draft_tr_div=document.getElementById('Demand_partial_draft_tr');
 
     if(val=='Net Banking'){
     upi_no_div.style.display='none';
@@ -12357,6 +12829,7 @@ $("#sra_payment_final_booking_submit").click(function() {
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     element.style.display='contents';
+    Demand_draft_tr_div.style.display='none';
     
     }else if(val=='') {
     element.style.display='none';
@@ -12364,6 +12837,7 @@ $("#sra_payment_final_booking_submit").click(function() {
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     upi_no_div.style.display='none';
+    Demand_draft_tr_div.style.display='none';
 	// element2.value="";
 
     }else if(val=='UPI') {
@@ -12372,6 +12846,7 @@ $("#sra_payment_final_booking_submit").click(function() {
     rq_div.style.display='none';
     cash_no_div.style.display='none';
     upi_no_div.style.display='contents';
+    Demand_draft_tr_div.style.display='none';
 	// element2.value="";
 
     }else if(val=='QR Code') {
@@ -12380,6 +12855,7 @@ $("#sra_payment_final_booking_submit").click(function() {
     cash_no_div.style.display='none';
     upi_no_div.style.display='none';
     rq_div.style.display='contents';
+    Demand_draft_tr_div.style.display='none';
 	// element2.value="";
 
     }else if(val=='Cheque'){
@@ -12388,13 +12864,22 @@ $("#sra_payment_final_booking_submit").click(function() {
         cash_no_div.style.display='none';
         rq_div.style.display='none';
         mob_no_div.style.display='contents';
-        mob_no_one.style.display='contents';
+        // mob_no_one.style.display='contents';
+        Demand_draft_tr_div.style.display='none';
     }else if(val=='CASH'){
         element.style.display='none';
         rq_div.style.display='none';
         upi_no_div.style.display='none';
         cash_no_div.style.display='flex';
         mob_no_div.style.display='none';
+        Demand_draft_tr_div.style.display='none';
+    }else if(val=='Demand Draft'){
+        element.style.display='none';
+        upi_no_div.style.display='none';
+        cash_no_div.style.display='none';
+        rq_div.style.display='none';
+        mob_no_div.style.display='none';
+        Demand_draft_tr_div.style.display='contents';
     }
 
     }
@@ -12412,7 +12897,16 @@ function sra_partial_transaction_upi_validate_final_payment() {
 
 function sra_partial_payment_type_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_first_customer_payment_type_upi_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12421,7 +12915,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) 
 
 function sra_partial_transaction_date_upi_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12433,14 +12927,14 @@ function sra_partial_utr_no_validate_final_payment() {
     // alert(company_acc);
     if(company_acc === 'Yes'){
     var valid = true;
-    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+    valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
           $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
           if (valid) {
               $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
           }
     }else{
         var valid = true;
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
+        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
           $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
           if (valid) {
               $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12449,10 +12943,17 @@ function sra_partial_utr_no_validate_final_payment() {
   }
 
 function sra_partial_reason_validate_final_payment() {
+var partial_utr_no_status = $('#partial_utr_no_status').val();
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no")) && checkEmpty($("#reason"));
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_upi_no")) && checkEmpty($("#upi_payment_type")) && checkEmpty($("#upi_customer_payment_type")) && checkEmpty($("#upi_transaction_date")) && checkEmpty($("#upi_no"));
+        // $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+
+        if(partial_utr_no_status == 'Yes'){
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
         }
 }
@@ -12504,18 +13005,34 @@ function sra_partial_qr_utr_no_validate_final_payment() {
 }
 
 function sra_partial_booking_qr_reason_validate_final_payment() {
+var partial_QR_utr_no_status = $('#partial_QR_utr_no_status').val();
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no")) && checkEmpty($("#qr_reason_1"));
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#select_qr_upi_no")) && checkEmpty($("#qr_payment_type")) && checkEmpty($("#qr_transaction_date")) && checkEmpty($("#qr_upi_no"));
+        // $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+
+        if(partial_QR_utr_no_status == 'Yes'){
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
 // -----------------------------cheque validation --------------------------------------------------
 function sra_partial_cheque_name_validate_final_payment() {
+var name_on_cheque = $('#name_on_cheque').val();
+    if (name_on_cheque == 'self') {
+        $("#cheque_reason").show();
+        $("#cheque_reason_input").show();
+    } else if (name_on_cheque != 'self') {
+        $("#cheque_reason").hide();
+        $("#cheque_reason_input").hide();
+    }
+
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12524,7 +13041,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 
 function sra_partial_cheque_bank_name_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12533,7 +13050,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 
 function sra_partial_cheque_banknm_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12542,7 +13059,7 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 
 function sra_partial_cheque_no_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12550,36 +13067,99 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque"))
 }
 
 function sra_partial_cheque_date_validate_final_payment() {
-    var company_acc = $('#cheque_company_acc_yes_no').val();
-        if(company_acc === 'Yes'){
-        var valid = true;
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
-            $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
-            if (valid) {
-                $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
-            }
-    }else{
-        valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
-        if (valid) {
-            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
-        }
+    var name_on_cheque = $('#name_on_cheque').val();
+    var valid = valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date"));
+    
+    if (name_on_cheque == 'self') {
+        valid = valid && checkEmpty($("#cheque_reason_1"));
+    } 
+    if (valid) {
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
     }
 }
 
 function sra_partial_booking_cheque_reason_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#cheque_bank_name")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#name_on_cheque")) && checkEmpty($("#bank_name")) && checkEmpty($("#cheque")) && checkEmpty($("#drawn_on_date")) && checkEmpty($("#cheque_reason_1"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+// -----------------------------cheque validation --------------------------------------------------
+
+//----------------------------- Demand Draft valiadtion -------------------------
+function sra_partial_demand_draft_name_validate() {
+var demand_draft_name = $('#demand_draft_name').val();
+    if (demand_draft_name == 'self') {
+        $("#demand_reason").show();
+        $("#demand_reason_input").show();
+    } else if (demand_draft_name != 'self') {
+        $("#demand_reason").hide();
+        $("#demand_reason_input").hide();
+    }
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
+function sra_partial_demand_draft_bank_name_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_partial_demand_draft_number_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_partial_demand_draft_date_validate() {
+    var demand_draft_name = $('#demand_draft_name').val();
+    var valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date"));
+    
+    if (demand_draft_name == 'self') {
+        valid = valid && checkEmpty($("#demand_draft_reason"));
+    }
+    
+    if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_partial_demand_draft_reason_validate() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#demand_draft_name")) && checkEmpty($("#demand_draft_bank_name")) && checkEmpty($("#demand_draft_number")) && checkEmpty($("#demand_draft_date")) && checkEmpty($("#demand_draft_reason"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+//------------- Demand Draft valiadtion -------------------------
+
 // ----------------------------- net banking -----------------------------------------
 function sra_partial_netpayment_validate_final_payment() {
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no"));
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm"));
+        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+}
+
+function sra_partial_netbank_holder_validate_final_validation() {
+var valid = true;
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_acc_holder_nm")) && checkEmpty($("#net_banking_acc_no"));
         $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
@@ -12633,16 +13213,21 @@ function sra_partial_netbank_date_validate_final_payment() {
 }
 
 function sra_partial_booking_net_banking_reason_validate_final_payment() {
+var partial_net_bank_utr_no_status = $('#partial_net_bank_utr_no_status').val();
 var valid = true;
-valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date")) && checkEmpty($("#net_banking_reason_1"));
-        $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_payment_type_neft")) && checkEmpty($("#netbanking_payment_type_rtgs")) && checkEmpty($("#netbanking_payment_type_imps")) && checkEmpty($("#net_banking_acc_no")) && checkEmpty($("#net_banking_branch_name")) && checkEmpty($("#net_banking_utr_no")) && checkEmpty($("#netbanking_date"));
+        // $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
         if (valid) {
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+        }
+
+        if(partial_net_bank_utr_no_status == 'Yes'){
+            $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+        }else{
             $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
         }
 }
 
-
-  
   function checkEmpty(obj) {
     var name = $(obj).attr("name");
     $("." + name + "-validation").html("");
@@ -12662,13 +13247,42 @@ valid = checkEmpty($("#select_transaction")) && checkEmpty($("#netbanking_paymen
 $(document).ready(function() {
     $("#sra_partial_pending_amt_submit_otp").click(function() {
         var mobile_no = $('#booking_tm_mobile_no').val();  
-        // alert(mobile_no);
         var final_amt = $('#final_amt').val();
         var academic_year = $('#academic_year').val();
         var sra_no = $('#sra_no').val();
         var package_id = $('#package_id').val();
         var package_date_id = $('#package_date_id').val();
         var sra_payment_id = $('#sra_payment_id').val();
+
+        var receipt_type = $("input[name='receipt_type']:checked").val();
+        var receipt_typeId = "";
+        if (receipt_type === undefined) {
+            // No radio button is checked, insert a default value
+            receipt_type = ""; // You can change this to your desired default value
+        } else {
+            // Loop through radio buttons to find the one with the selected value
+            $("input[name='receipt_type']").each(function() {
+                if ($(this).val() === receipt_type) {
+                    receipt_typeId = $(this).attr("id");
+                    return false; // Exit the loop once a match is found
+                }
+            });
+        }
+
+        var next_extra_services_amt = $('#next_extra_services_amt').val(); 
+        var extra_services_pending_amt = $('#extra_service_result_box').val();
+
+        var customer_sending_amt = $('input[name="customer_sending_amt[]"]').map(function () {
+                return this.value; // $(this).val()
+            }).get();
+            // alert(customer_sending_amt);
+        var prev_pending_amt = $('input[name="prev_pending_amt[]"]').map(function () {
+            return this.value; // $(this).val()
+        }).get();
+
+        var sra_extra_servicesId = $('input[name="sra_extra_services_id[]"]').map(function () {
+                return this.value; // $(this).val()
+            }).get();    
 
         
         if (mobile_no != '') {
@@ -12684,12 +13298,36 @@ $(document).ready(function() {
                     package_id: package_id,
                     package_date_id: package_date_id,
                     sra_payment_id: sra_payment_id,
+                    receipt_type: receipt_type,
+                    next_extra_services_amt: next_extra_services_amt,
+                    extra_services_pending_amt: extra_services_pending_amt,
+                    customer_sending_amt: customer_sending_amt,
+                    SraExtraServicesId: sra_extra_servicesId,
+                    prev_pending_amt: prev_pending_amt,
                 },
-                // dataType: 'json',
+                dataType: 'json',
                 success: function(responce) {
+                    // alert(responce);
+                    // console.log(responce);
                     if (responce != false && responce !='') {
-                        // alert(responce);
-                        $('#inserted_id').val(responce);
+                        if(receipt_type=="SRA")
+                            {
+                                $.each(responce.myArray,function(index,data){
+                            // console.log(responce);
+                                $('#inserted_id').val(responce.myArray);
+                            });
+                                // $('#inserted_id').val(responce);
+                            }else{
+                                // console.log('ddddddddd',responce.myarray);
+                                 $.each(responce.myArray,function(index,data){
+                                    // console.log('ssssssssssssss',data);
+                                 var inputElement = '<input type="hidden" class="form-control" name="extra_services_inserted_id[]" id="extra_services_inserted_id_' + index + '" value="' + data + '">';
+                                            $('#extra_id').append(inputElement);
+                            });
+                            var inputElement_new = '<input type="hidden" class="form-control" name="extra_count" id="extra_count" value="' + responce.extra_count + '">';
+                                            $('#extra_count_id').append(inputElement_new);
+                            }
+                        
                         var booking_ref_no = $('#booking_ref_no').val(responce);
                         Swal.fire({
                         title: 'Check OTP',
@@ -12733,7 +13371,7 @@ $(document).ready(function() {
 </script>
 
 <script>
-    $(document).ready(function(){ 
+    // $(document).ready(function(){ 
     const target = document.getElementById('sra_partial_pending_amt_payment_final_booking_submit');
     target.disabled = true;
     $('#otp').on('keyup', function() {
@@ -12747,7 +13385,7 @@ $(document).ready(function() {
         target.disabled = false;
         }
     });
-    });
+    // });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -12755,11 +13393,10 @@ $(document).ready(function() {
 $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
 
     // alert('hiiiiiiiii'); 
-
     var verify_otp = $('#otp').val(); 
+    var academic_year = $('#academic_year').val(); 
     var mobile_no = $('#booking_tm_mobile_no').val(); 
     var sra_no = $('#sra_no').val();
-    // alert(enquiry_id);
     var journey_date  = $("#journey_date").val();
     var traveller_id  = $("#traveller_id").val();
     var enquiry_id    = $("#enquiry_id").val();
@@ -12784,9 +13421,31 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
             }
         });
     }
+    
+    var receipt_type = $("input[name='receipt_type']:checked").val();
+    // alert(receipt_type);
+     
 
-    var booking_amt = $('#next_booking_amt').val(); 
-    var pending_amt = $('#result_box').val();
+    if (receipt_type == 'SRA') {
+        var booking_amt = $('#next_booking_amt').val();
+    }else if (receipt_type == 'Extra Services') {
+        var booking_amt = $('#next_extra_services_amt').val();
+    }
+    
+    if (receipt_type == 'SRA') {
+        var pending_amt = $('#result_box').val();
+    }else if (receipt_type == 'Extra Services') {
+        var pending_amt = $('#extra_service_result_box').val();
+    }
+    
+    // alert("pending_amt: " + pending_amt);
+    // var pending_amt = $('#result_box').val();
+    
+    // if (pending_amt == 0) {
+    //     var pending_amt = $('#extra_service_result_box').val();
+    // } 
+    
+    
     // var payment_now_later = $('#payment_now_later').val();
     var payment_now_later = $("input[name='payment_now_later']:checked").val();
 
@@ -12799,6 +13458,11 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
     var cheque_bank_name = $('#cheque_bank_name').val();
     var cheque_reason_1 = $('#cheque_reason_1').val();
 
+    var demand_draft_name = $('#demand_draft_name').val();
+    var demand_draft_bank_name = $('#demand_draft_bank_name').val();
+    var demand_draft_number = $('#demand_draft_number').val();
+    var demand_draft_date = $('#demand_draft_date').val();
+    var demand_draft_reason = $('#demand_draft_reason').val();
 
     // var netbanking_payment_type = $('#netbanking_payment_type').val();
     var netbanking_payment_type = $("input[name='netbanking_payment_type']:checked").val();
@@ -12832,6 +13496,7 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
     var upi_self_no = $('#self_upi_no').val();
     var upi_reason = $('#reason').val();
     var upi_transaction_date = $('#upi_transaction_date').val();
+    var upi_customer_payment_type = $('#upi_customer_payment_type').val();
 
 
     var qr_holder_name = $('#select_qr_upi_no').val();
@@ -12895,7 +13560,48 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
     var booking_payment_details_id = $('#booking_payment_details_id').val();
     var return_customer_booking_payment_id = $('#return_customer_booking_payment_id').val();
     var inserted_id = $('#inserted_id').val();
+    var extra_count = $('#extra_count').val();
+    // alert(extra_count);
     
+    // --------------- extra services ---------------------------- 
+    
+    // alert(payment_type);
+    var receipt_typeId = "";
+    if (receipt_type === undefined) {
+        // No radio button is checked, insert a default value
+        receipt_type = ""; // You can change this to your desired default value
+    } else {
+        // Loop through radio buttons to find the one with the selected value
+        $("input[name='receipt_type']").each(function() {
+            if ($(this).val() === receipt_type) {
+                receipt_typeId = $(this).attr("id");
+                return false; // Exit the loop once a match is found
+            }
+        });
+    }
+
+    var next_extra_services_amt = $('#next_extra_services_amt').val(); 
+    var extra_services_pending_amt = $('#extra_service_result_box').val();
+    var extra_services_final_amt = $('#extra_services_final_amt').val();
+    // var customer_sending_amt = $('#customer_sending_amt').val();
+    // alert(customer_sending_amt); 
+    
+        var customer_sending_amt = $('input[name="customer_sending_amt[]"]').map(function () {
+            return this.value; // $(this).val()
+        }).get();
+        // alert(customer_sending_amt); 
+
+    var extra_services_inserted_id = $('input[name="extra_services_inserted_id[]"]').map(function () {
+        return this.value; // $(this).val()
+    }).get();
+
+    var sra_extra_servicesId = $('input[name="sra_extra_services_id[]"]').map(function () {
+        return this.value; // $(this).val()
+    }).get();
+    // alert(extra_services_inserted_id); 
+
+
+    // --------------- extra services ---------------------------- 
     // alert(inserted_id);
 
     if (verify_otp != '') {
@@ -12903,6 +13609,12 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
             type: "POST",
             url: '<?= base_url() ?>agent/sra_partial_payment_details/verify_otp',
             data: {
+                demand_draft_name: demand_draft_name,
+                demand_draft_bank_name: demand_draft_bank_name,
+                demand_draft_number: demand_draft_number,
+                demand_draft_date: demand_draft_date,
+                demand_draft_reason: demand_draft_reason,
+                extra_services_inserted_id: extra_services_inserted_id,
                 verify_otp: verify_otp,
                 mobile_no: mobile_no,
                 sra_no: sra_no,
@@ -12941,6 +13653,7 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
                 upi_self_no: upi_self_no,
                 upi_reason: upi_reason,
                 upi_transaction_date: upi_transaction_date,
+                upi_customer_payment_type: upi_customer_payment_type,
                 
                 qr_holder_name: qr_holder_name,
                 qr_mobile_number: qr_mobile_number,
@@ -12989,11 +13702,20 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
                 return_cash_1: return_cash_1,
                 return_total_cash_1: return_total_cash_1,
                 return_total_cash_amt: return_total_cash_amt,
+
+                receipt_type: receipt_type,
+                next_extra_services_amt: next_extra_services_amt,
+                extra_services_pending_amt: extra_services_pending_amt,
+                customer_sending_amt: customer_sending_amt,
+                SraExtraServicesId: sra_extra_servicesId,
+                academic_year: academic_year,
+                extra_services_final_amt: extra_services_final_amt,
             },
             //  dataType: 'json',
             //  cache: false,
             success: function(response) {
-                    if (response == true) {
+                console.log(response);
+                    if (response == 1) {
                     Swal.fire({
                         title: 'Success',
                         text: 'Verify OTP Successfully',
@@ -13002,7 +13724,19 @@ $("#sra_partial_pending_amt_payment_final_booking_submit").click(function() {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $("#submit_otp").prop('disabled', true);
-                            window.location.href = "<?=base_url() ?>agent/sra_payment_receipt/index_pending/"+sra_no+ "/" +inserted_id;
+                            if(receipt_type == 'SRA'){
+                                // alert('SRA');
+                            window.location.href = "<?=base_url() ?>agent/sra_payment_receipt/index_pending/"+sra_no+ "/" +academic_year+ "/"+inserted_id+ "/"+receipt_type;
+                            }else if(receipt_type == 'Extra Services'){
+                                // alert('Extra Services');
+                                var $extra = receipt_type;
+                                if ($extra === "Extra Services") {
+                                    var changedValue = "Extra_Services"; // Replace "New Value" with whatever you want to change it to
+                                    console.log("Changed value:", changedValue);
+                                    window.location.href = "<?=base_url() ?>agent/sra_payment_receipt/index_extra_services/"+sra_no+ "/" +academic_year+ "/"+extra_count+ "/"+changedValue;
+                                }
+
+                            }
                         }
                     });
                 } else {
@@ -13118,3 +13852,1455 @@ $(document).ready(function() {
 });
 
 </script>
+
+<!--  -->
+
+<!-- <script>
+    $(document).ready(function() {
+        // Initialize Select2 on your select element
+        $('#sra_no').select2({
+            minimumResultsForSearch: Infinity, // Hides the search box if not needed
+            closeOnSelect: true // Automatically close the dropdown on selection
+        });
+
+        // Load initial options
+        loadOptions(1, 100);
+
+        // Event listener for when the select dropdown opens
+        $('#sra_no').on('select2:open', function() {
+            $('.select2-results__options').on('scroll', handleScroll);
+        });
+
+        // Event listener for when an option is selected
+        $('#sra_no').on('select2:select', function(e) {
+            let selectedValue = e.params.data.id;
+            $('#selected_value').val(selectedValue);
+            $('#sra_no').select2('close');
+        });
+    });
+
+    function loadOptions(start, end) {
+        let options = '';
+        for (let i = start; i <= end && i <= 100000; i++) {
+            options += '<option value="' + i + '">' + i + '</option>';
+        }
+        $('#sra_no').append(options).trigger('change');
+    }
+
+    function handleScroll() {
+        let selectBox = $('.select2-results__options');
+        if (selectBox.scrollTop() + selectBox.innerHeight() >= selectBox[0].scrollHeight) {
+            let currentLength = $('#sra_no').find('option').length;
+            if (currentLength < 100000) {
+                loadOptions(currentLength + 1, currentLength + 100);
+            }
+        }
+    }
+</script> -->
+
+<script>
+        $(document).ready(function() {
+            // Initialize Select2 with search functionality
+            $('#add_sra_sra_no').select2({
+                placeholder: "Select SRA No",
+                width: '100%',
+                dropdownAutoWidth: true,
+                minimumResultsForSearch: 1,
+                ajax: {
+                    transport: function (params, success, failure) {
+                        setTimeout(function () {
+                            var results = [];
+                            var term = params.data.q || ''; // Search term
+                            var start = params.data.page ? (params.data.page - 1) * 50 + 1 : 1;
+                            var end = start + 49;
+                            
+                            for (var i = start; i <= end && i <= 100000; i++) {
+                                if (i.toString().includes(term)) {
+                                    results.push({ id: i, text: i });
+                                }
+                            }
+                            
+                            success({
+                                results: results,
+                                pagination: {
+                                    more: end < 100000
+                                }
+                            });
+                        }, 500);
+                    },
+                    processResults: function (data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.results,
+                            pagination: data.pagination
+                        };
+                    },
+                    delay: 250,
+                    cache: true
+                }
+            });
+
+            // Event listener for the select box change
+            $('#add_sra_sra_no').on('select2:select', function(e) {
+                let selectedValue = $(this).val();
+                $('#textbox').val(selectedValue);
+                $('#add_sra_sra_no').select2('close'); // Close the dropdown
+            });
+        });
+    </script>
+
+<script>
+        $('#next_extra_services_amt').keyup(function(){
+            var current_val=$(this).val();
+            var xyz = 0;
+
+            document.querySelectorAll('.customer_sending_amt_class').forEach(function(input) {
+            var value = parseFloat(input.value) || 0;
+            xyz += value;
+
+            // Get the corresponding update_service_amt value
+
+        });
+        
+
+
+        if(current_val > 0 && current_val==xyz)
+        {
+            $("#select_transaction").attr("disabled", false);
+        }else{
+            $("#select_transaction").attr("disabled", true);
+        }
+        });
+    </script>
+
+<script>
+    $(document).on('keyup', '.customer_sending_amt_class', function() {
+        
+    var current_val=$('#next_extra_services_amt').val();
+    
+    var xyz = 0;
+
+    document.querySelectorAll('.customer_sending_amt_class').forEach(function(input) {
+    var value = parseFloat(input.value) || 0;
+    xyz += value;
+
+    // Get the corresponding update_service_amt value
+
+});
+
+
+
+if(current_val > 0 && current_val==xyz)
+{
+    $("#select_transaction").attr("disabled", false);
+}else{
+    $("#select_transaction").attr("disabled", true);
+}
+});
+    </script>
+
+    <script>
+        function extra_service_final_amt_greater() {
+    // Get values from the input boxes
+    var updatepending_amt = parseFloat(document.getElementById('extra_service_updatepending_amt').value);
+    // alert(result_box);
+    var next_booking_amt = parseFloat(document.getElementById('next_extra_services_amt').value);
+    // alert(next_booking_amt);
+    // Calculate remaining amount
+    var remainingAmt = updatepending_amt - next_booking_amt;
+    // alert(remainingAmt);
+
+    // Check if remaining amount is less than zero
+    if (remainingAmt < 0) {
+        alert("You Entered Wrong Amount");
+        // Reset the booking amount to prevent going below 0
+        document.getElementById('next_extra_services_amt').value = updatepending_amt;
+        // Recalculate remaining amount
+        remainingAmt = 0;
+    }
+
+    // Update the pending amount input box
+    document.getElementById('extra_service_result_box').value = remainingAmt;
+}
+    </script>
+
+
+<script>
+function extra_service_receipt_type(value) {
+    const bookingAmountRow = document.getElementById('next_booking_amt');
+    const extraServicesAmountRow = document.getElementById('next_extra_services_amt');
+    const result_boxAmountRow = document.getElementById('result_box');
+    const extra_service_result_boxAmountRow = document.getElementById('extra_service_result_box');
+    const extra_service_payment_type_tr = document.getElementById('payment_type_tr');
+
+    if (value === 'SRA') {
+        bookingAmountRow.style.display = 'table-row';
+        extraServicesAmountRow.style.display = 'none';
+        result_boxAmountRow.style.display = 'table-row';
+        extra_service_result_boxAmountRow.style.display = 'none';
+        extra_service_payment_type_tr.style.display = 'table-row';
+    } else if (value === 'Extra Services') {
+        bookingAmountRow.style.display = 'none';
+        result_boxAmountRow.style.display = 'none';
+        extraServicesAmountRow.style.display = 'table-row';
+        extra_service_result_boxAmountRow.style.display = 'table-row';
+        extra_service_payment_type_tr.style.display = 'none';
+    }
+}
+
+// Initial call to set the correct state on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const selectedValue = document.querySelector('input[name="receipt_type"]:checked').value;
+    extra_service_receipt_type(selectedValue);
+});
+</script>
+<script>
+    $('.data_amt_first').keyup(function(){
+        // alert('hiiii');
+        var seat_type_data = $(this).attr('attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt);
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_500').val(total_amt);
+            }else{
+                $('#total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_200').val(total_amt);
+            }else{
+                $('#total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_100').val(total_amt);
+            }else{
+                $('#total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_50').val(total_amt);
+            }else{
+                $('#total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_20').val(total_amt);
+            }else{
+                $('#total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_10').val(total_amt);
+            }else{
+                $('#total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_5').val(total_amt);
+            }else{
+                $('#total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_2').val(total_amt);
+            }else{
+                $('#total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_1').val(total_amt);
+            }else{
+                $('#total_cash_1').val('0');
+            }
+        }
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+
+    var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+
+
+    $(".data_amt_first").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#total_cash_500").val();
+        var g_count = $("#total_cash_200").val();
+        var m_count = $("#total_cash_100").val();
+        var l_count = $("#total_cash_50").val();
+        var n_count = $("#total_cash_20").val();
+        var o_count = $("#total_cash_10").val();
+        var a_count = $("#total_cash_5").val();
+        var b_count = $("#total_cash_2").val();
+        var c_count = $("#total_cash_1").val();
+
+        // if (f_count != '') {
+        //     var ftotal = f_count;
+        // } else {
+        //     var ftotal = 0;
+        // }
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+        $("#total_cash_amt").val(final_total);
+    });    
+});    
+</script>
+
+<script>
+    $('.return_data_amt_first').keyup(function(){
+        // alert('hiiii');
+        var seat_type_data = $(this).attr('return-attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt);
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#return_cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_500').val(total_amt);
+            }else{
+                $('#return_total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#return_cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_200').val(total_amt);
+            }else{
+                $('#return_total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#return_cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_100').val(total_amt);
+            }else{
+                $('#return_total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#return_cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_50').val(total_amt);
+            }else{
+                $('#return_total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#return_cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_20').val(total_amt);
+            }else{
+                $('#return_total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#return_cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_10').val(total_amt);
+            }else{
+                $('#return_total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#return_cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_5').val(total_amt);
+            }else{
+                $('#return_total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#return_cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_2').val(total_amt);
+            }else{
+                $('#return_total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#return_cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_1').val(total_amt);
+            }else{
+                $('#return_total_cash_1').val('0');
+            }
+        }
+        
+
+    });
+</script>
+
+<script>
+$(document).ready(function() {
+
+    var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+
+
+    $(".return_data_amt_first").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#return_total_cash_500").val();
+        var g_count = $("#return_total_cash_200").val();
+        var m_count = $("#return_total_cash_100").val();
+        var l_count = $("#return_total_cash_50").val();
+        var n_count = $("#return_total_cash_20").val();
+        var o_count = $("#return_total_cash_10").val();
+        var a_count = $("#return_total_cash_5").val();
+        var b_count = $("#return_total_cash_2").val();
+        var c_count = $("#return_total_cash_1").val();
+
+        // if (f_count != '') {
+        //     var ftotal = f_count;
+        // } else {
+        //     var ftotal = 0;
+        // }
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+
+        $("#return_total_cash_amt").val(final_total);
+
+
+    });
+});
+
+
+// =========== Sra Booking ==========================================================
+
+$(document).ready(function() {
+            $(".return_data_amt_first").attr("disabled", true);
+            function checkConditions() {
+                var total_cash_amt = parseFloat($('#total_cash_amt').val());
+                var booking_amt = parseFloat($('#booking_amt').val());
+                var return_total_cash_amt = parseFloat($('#return_total_cash_amt').val());
+
+                if (isNaN(return_total_cash_amt)) {
+                    return_total_cash_amt = 0;
+                }
+
+                var total_cash = booking_amt + return_total_cash_amt;
+                $("#total_of_two").val(total_cash);
+
+                if (total_cash_amt === booking_amt || total_cash_amt === total_cash) {
+                    $("#sra_submit_otp").attr("disabled", false);
+                } else {
+                    $("#sra_submit_otp").attr("disabled", true);
+                }
+
+                if(total_cash_amt === booking_amt  || total_cash_amt==0){
+                    $(".return_data_amt_first").attr("disabled", true);
+                }else if(total_cash_amt > booking_amt){
+                    $(".return_data_amt_first").attr("disabled", false);
+                    $("#send_receiver_msg").text("Please match receive amount and sending to customer amount.").addClass("red-text").css("display", "block");
+                }else{
+                    $(".return_data_amt_first").attr("disabled", false);
+                }
+            }
+
+            $(".data_amt_first, .return_data_amt_first").on('keyup', function() {
+                checkConditions();
+            });
+
+            // checkConditions();
+        });
+</script>
+
+
+<script>
+    $('.data_amt_partial').keyup(function(){
+        
+        var seat_type_data = $(this).attr('attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt);
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_500').val(total_amt);
+            }else{
+                $('#total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_200').val(total_amt);
+            }else{
+                $('#total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_100').val(total_amt);
+            }else{
+                $('#total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_50').val(total_amt);
+            }else{
+                $('#total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_20').val(total_amt);
+            }else{
+                $('#total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_10').val(total_amt);
+            }else{
+                $('#total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_5').val(total_amt);
+            }else{
+                $('#total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_2').val(total_amt);
+            }else{
+                $('#total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#total_cash_1').val(total_amt);
+            }else{
+                $('#total_cash_1').val('0');
+            }
+        }
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+
+    var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+
+
+    $(".data_amt_partial").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#total_cash_500").val();
+        var g_count = $("#total_cash_200").val();
+        var m_count = $("#total_cash_100").val();
+        var l_count = $("#total_cash_50").val();
+        var n_count = $("#total_cash_20").val();
+        var o_count = $("#total_cash_10").val();
+        var a_count = $("#total_cash_5").val();
+        var b_count = $("#total_cash_2").val();
+        var c_count = $("#total_cash_1").val();
+
+        // if (f_count != '') {
+        //     var ftotal = f_count;
+        // } else {
+        //     var ftotal = 0;
+        // }
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+        $("#total_cash_amt").val(final_total);
+    });    
+});    
+</script>
+
+
+<script>
+    $(document).ready(function() {
+    $('.return_data_amt_partial').keyup(function(){
+        
+        var seat_type_data = $(this).attr('return-attr-amt');
+        // alert(seat_type_data);
+        
+        // alert(price);
+        // if(seat_type_data=='2000'){
+        //     var price = parseFloat($('#cash_2000').val());
+        //     var total_amt = price * seat_type_data;
+        //     if(total_amt>0){
+        //         $('#total_cash_2000').val(total_amt);
+        //     }else{
+        //         $('#total_cash_2000').val('0');
+        //     }
+        // }else 
+        if(seat_type_data=='500'){
+            var price = parseFloat($('#return_cash_500').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_500').val(total_amt);
+            }else{
+                $('#return_total_cash_500').val('0');
+            }
+        }else if(seat_type_data=='200'){
+            var price = parseFloat($('#return_cash_200').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_200').val(total_amt);
+            }else{
+                $('#return_total_cash_200').val('0');
+            }
+        }else if(seat_type_data=='100'){
+            var price = parseFloat($('#return_cash_100').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_100').val(total_amt);
+            }else{
+                $('#return_total_cash_100').val('0');
+            }
+        }else if(seat_type_data=='50'){
+            var price = parseFloat($('#return_cash_50').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_50').val(total_amt);
+            }else{
+                $('#return_total_cash_50').val('0');
+            }
+        }else if(seat_type_data=='20'){
+            var price = parseFloat($('#return_cash_20').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_20').val(total_amt);
+            }else{
+                $('#return_total_cash_20').val('0');
+            }
+        }else if(seat_type_data=='10'){
+            var price = parseFloat($('#return_cash_10').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_10').val(total_amt);
+            }else{
+                $('#return_total_cash_10').val('0');
+            }
+        }else if(seat_type_data=='5'){
+            var price = parseFloat($('#return_cash_5').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_5').val(total_amt);
+            }else{
+                $('#return_total_cash_5').val('0');
+            }
+        }
+        else if(seat_type_data=='2'){
+            var price = parseFloat($('#return_cash_2').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_2').val(total_amt);
+            }else{
+                $('#return_total_cash_2').val('0');
+            }
+        }
+        else if(seat_type_data=='1'){
+            var price = parseFloat($('#return_cash_1').val());
+            var total_amt = price * seat_type_data;
+            if(total_amt>0){
+                $('#return_total_cash_1').val(total_amt);
+            }else{
+                $('#return_total_cash_1').val('0');
+            }
+        }
+        
+
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+
+    var f_count = '';
+    var e_count = '';
+    var g_count = '';
+    var m_count = '';
+    var l_count = '';
+    var n_count = '';
+    var o_count = '';
+    var a_count = '';
+    var b_count = '';
+    var c_count = '';
+
+
+    $(".return_data_amt_partial").on('keyup', function() {
+        // var f_count = $("#total_cash_2000").val()
+        var e_count = $("#return_total_cash_500").val();
+        var g_count = $("#return_total_cash_200").val();
+        var m_count = $("#return_total_cash_100").val();
+        var l_count = $("#return_total_cash_50").val();
+        var n_count = $("#return_total_cash_20").val();
+        var o_count = $("#return_total_cash_10").val();
+        var a_count = $("#return_total_cash_5").val();
+        var b_count = $("#return_total_cash_2").val();
+        var c_count = $("#return_total_cash_1").val();
+
+        // if (f_count != '') {
+        //     var ftotal = f_count;
+        // } else {
+        //     var ftotal = 0;
+        // }
+        if (e_count != '') {
+            var etotal = e_count;
+        } else {
+            var etotal = 0;
+        }
+        if (g_count != '') {
+            var gtotal = g_count;
+        } else {
+            var gtotal = 0;
+        }
+        if (m_count != '') {
+            var mtotal = m_count;
+        } else {
+            var mtotal = 0;
+        }
+        if (l_count != '') {
+            var ltotal = l_count;
+        } else {
+            var ltotal = 0;
+        }
+        if (n_count != '') {
+            var ntotal = n_count;
+        } else {
+            var ntotal = 0;
+        }
+        if (o_count != '') {
+            var ototal = o_count;
+        } else {
+            var ototal = 0;
+        }
+        if (a_count != '') {
+            var atotal = a_count;
+        } else {
+            var atotal = 0;
+        }
+        if (b_count != '') {
+            var btotal = b_count;
+        } else {
+            var btotal = 0;
+        }
+        if (c_count != '') {
+            var ctotal = c_count;
+        } else {
+            var ctotal = 0;
+        }
+        var final_total = parseInt(etotal) + parseInt(gtotal) + parseInt(mtotal) +
+            parseInt(ltotal) + parseInt(ntotal) + parseInt(ototal) + parseInt(atotal) + parseInt(btotal) +
+            parseInt(ctotal);
+
+        $("#return_total_cash_amt").val(final_total);
+
+
+    });
+});
+
+
+$(document).ready(function() {
+            
+$(".return_data_amt_partial").attr("disabled", true);
+            function partial_agent_booking_checkConditions() {
+                // alert('lllllllllllllllllllllllll');
+                var total_cash_amt = parseFloat($('#total_cash_amt').val());
+            var parcial_booking_amt = parseFloat($('#next_booking_amt').val());
+            var parcial_extra_services_booking_amt = parseFloat($('#next_extra_services_amt').val());
+                var return_total_cash_amt = parseFloat($('#return_total_cash_amt').val());
+
+                // console.log('booking_amt',booking_amt);
+
+                // if (isNaN(parcial_booking_amt) && !isNaN(parcial_extra_services_booking_amt)) {
+                //     booking_amt = parcial_extra_services_booking_amt;
+                // }else if (isNaN(parcial_booking_amt) && isNaN(parcial_extra_services_booking_amt)) {
+                //     booking_amt = 0;
+                // }
+
+                if(!isNaN(parcial_booking_amt))
+                {
+                    var booking_amt=parcial_booking_amt;
+                }
+                else if(!isNaN(parcial_extra_services_booking_amt))
+                {
+                    var booking_amt=parcial_extra_services_booking_amt;
+                }else{
+                    var booking_amt=0;
+                }
+
+                if (isNaN(return_total_cash_amt)) {
+                    return_total_cash_amt = 0;
+                }
+
+console.log('total_cash_amt',total_cash_amt);
+console.log('booking_amt',booking_amt);
+console.log('total_cash',total_cash);
+// console.log('return_total_cash_amt',return_total_cash_amt);
+
+                var total_cash = booking_amt + return_total_cash_amt;
+                $("#total_of_two").val(total_cash);
+
+                if (total_cash_amt === booking_amt || total_cash_amt === total_cash) {
+                    $("#sra_partial_pending_amt_submit_otp").attr("disabled", false);
+                } else {
+                    $("#sra_partial_pending_amt_submit_otp").attr("disabled", true);
+                }
+
+                if(total_cash_amt === booking_amt){
+                    $(".return_data_amt_partial").attr("disabled", true);
+                }else if(total_cash_amt > booking_amt){
+                    $(".return_data_amt_partial").attr("disabled", false);
+                    $("#send_receiver_msg").show().text("Please match receive amount and sending to customer amount.").addClass("red-text");
+                }else{
+                    $(".return_data_amt_partial").attr("disabled", false);
+                }
+            }
+
+            $(".data_amt_partial, .return_data_amt_partial").on('keyup', function() {
+                partial_agent_booking_checkConditions();
+            });
+
+            // partial_agent_booking_checkConditions();
+        });  
+</script>
+
+
+<script>
+    function updateSubmitButton() {
+        // Calculate the sum of all customer sending amount inputs
+        var xyz = 0;
+        var isValid = true;
+
+        // Remove previous error messages
+        document.querySelectorAll('.error-msg').forEach(function(msg) {
+            msg.remove();
+        });
+
+        document.querySelectorAll('.customer_sending_amt_class').forEach(function(input) {
+            var value = parseFloat(input.value) || 0;
+            xyz += value;
+
+            // Get the corresponding update_service_amt value
+            var updateServiceAmt = parseFloat(input.closest('tr').querySelector('.update_service_amt').innerText) || 0;
+
+            // Check if the input value is greater than the update_service_amt value
+            if (value > updateServiceAmt) {
+                isValid = false;
+                // Create and insert the error message
+                var errorMsg = document.createElement('span');
+                errorMsg.className = 'error-msg';
+                errorMsg.style.color = 'red';
+                errorMsg.textContent = 'Please match the pending amount.';
+                input.parentNode.appendChild(errorMsg);
+            }
+        });
+
+        // Get the value of the next extra services amount
+        var nextExtraServicesAmt = parseFloat(document.getElementById('next_extra_services_amt').value) || 0;
+
+        // Compare the sums and enable/disable the submit button
+        var submitButton = document.getElementById('sra_partial_pending_amt_submit_otp');
+        var notMatchMsg = document.getElementById('not_match_show_msg');
+        if (xyz === nextExtraServicesAmt && isValid) {
+            submitButton.disabled = true;
+            notMatchMsg.style.display = 'none';
+        } else {
+            submitButton.disabled = true;
+            if (isValid) {
+                notMatchMsg.textContent = "Please match customer depositing amount and depositing amount.";
+                notMatchMsg.style.display = 'block';
+            } else {
+                notMatchMsg.style.display = 'none';
+            }
+        }
+    }
+</script>
+
+<script>
+    $('#upi_no').on('keyup', function() {
+        var upi_transaction_no= $(this).val();
+        // alert(upi_transaction_no);
+
+        var attr_payment_type = $(this).attr('attr_payment_type');
+        var selectedPaymentType = $('#upi_payment_type').val();
+
+        selectedOption = $("#upi_payment_type option:selected");
+        var self_data = selectedOption.attr('attr_self');
+
+        // var attr_partial_payment_type = $(this).attr('attr_partial_payment_type');
+        let upi_holder_name=$('#select_upi_no').val();
+        var attr_payment_type = $('#upi_payment_type').attr('attr_payment_type');
+        // alert(attr_payment_type);
+
+        var receipt_type = $("input[name='receipt_type']:checked").val();
+        var attr_partial_payment_type = $('#upi_payment_type').attr('attr_partial_payment_type');
+
+        if(attr_payment_type =='sra') {
+            // alert('dddddddddd');
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_booking_payment_details/get_payment_type_data',
+            method: 'post',
+            data: {upi_transaction_no: upi_transaction_no, selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && upi_transaction_no !== '') {
+                    Swal.fire({ 
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#utr_no_status").val('Yes'); // Change #utr_no_status value to 'Yes'
+                        } else {
+                            $("#utr_no_status").val('No'); // Change #utr_no_status value to 'No' if Cancel or outside click
+                        }
+                        $("#sra_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+    }
+
+
+        if(attr_partial_payment_type =='partial')
+        {
+            if(receipt_type =='SRA'){
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_partial_payment_details/get_SRA_payment_type_data',
+            method: 'post',
+            data: {upi_transaction_no: upi_transaction_no,selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && upi_transaction_no !== '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_utr_no_status").val('Yes'); // Change #utr_no_status value to 'Yes'
+                        } else {
+                            $("#partial_utr_no_status").val('No'); // Change #utr_no_status value to 'No' if Cancel or outside click
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+        }else if(receipt_type =='Extra Services'){
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_partial_payment_details/get_extra_service_payment_type_data',
+            method: 'post',
+            data: {upi_transaction_no: upi_transaction_no,selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && upi_transaction_no !== '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_utr_no_status").val('Yes'); // Change #utr_no_status value to 'Yes'
+                        } else {
+                            $("#partial_utr_no_status").val('No'); // Change #utr_no_status value to 'No' if Cancel or outside click
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+        }
+        }
+    });
+</script>
+
+<script>
+    $('#qr_upi_no').on('keyup', function() {
+        var qr_upi_transaction_no= $(this).val();
+        // alert(selectedPaymentType);
+
+        // var attr_qr_payment_type = $(this).attr('attr_qr_payment_type');
+        var selectedPaymentType = $('#qr_payment_type').val();
+
+        selectedOption = $("#qr_payment_type option:selected");
+        var self_data = selectedOption.attr('attr_self');
+
+        // var attr_partial_payment_type = $(this).attr('attr_partial_payment_type');
+        let QR_upi_holder_name=$('#select_qr_upi_no').val();
+        var attr_qr_payment_type = $('#qr_payment_type').attr('attr_qr_payment_type');
+        // alert(attr_qr_payment_type);
+
+        var receipt_type = $("input[name='receipt_type']:checked").val();
+        var attr_partial_qr_payment_type = $('#qr_payment_type').attr('attr_partial_qr_payment_type');
+        // alert(receipt_type);
+
+        if(attr_qr_payment_type =='sra')
+        {
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_booking_payment_details/get_QR_payment_type_data',
+            method: 'post',
+            data: {qr_upi_transaction_no: qr_upi_transaction_no,selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && qr_upi_transaction_no !== '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#QR_utr_no_status").val('Yes');
+                        } else {
+                            $("#QR_utr_no_status").val('No');
+                        }
+                        $("#sra_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+        }
+
+        if(attr_partial_qr_payment_type =='partial')
+        {
+            if(receipt_type =='SRA'){
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_partial_payment_details/get_SRA_QR_payment_type_data',
+            method: 'post',
+            data: {qr_upi_transaction_no: qr_upi_transaction_no,selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && qr_upi_transaction_no !== '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_QR_utr_no_status").val('Yes');
+                        } else {
+                            $("#partial_QR_utr_no_status").val('No');
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+        }else if(receipt_type =='Extra Services'){
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_partial_payment_details/get_extra_service_payment_type_data',
+            method: 'post',
+            data: {qr_upi_transaction_no: qr_upi_transaction_no,selectedPaymentType: selectedPaymentType},
+            dataType: 'json',
+            success: function(response) {
+                if(response == true && qr_upi_transaction_no !== '') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'UTR No. already exists',
+                        text: 'Please enter a Correct UTR No.',
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_QR_utr_no_status").val('Yes');
+                        } else {
+                            $("#partial_QR_utr_no_status").val('No');
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                } else {
+                    // $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                }
+            }
+        });
+        }
+        }
+    });
+</script>
+
+<script>
+    $('#net_banking_utr_no').on('keyup', function() {
+        var net_transaction_no= $(this).val();
+        // alert(selectedPaymentType);
+        selectedOption = $("#upi_payment_type option:selected");
+        var self_data = selectedOption.attr('attr_self');
+
+        let net_acc_holder_nm=$('#net_acc_holder_nm').val();
+        let netbanking_bank_name=$('#netbanking_bank_name').val();
+        var attr_bank_acc_no = $('#net_banking_acc_no').attr('attr_bank_acc_no');
+        // alert(netbanking_bank_name);
+
+        var receipt_type = $("input[name='receipt_type']:checked").val();
+        var attr_partial_bank_acc_no = $('#net_banking_acc_no').attr('attr_partial_bank_acc_no');
+        if(attr_bank_acc_no =='sra')
+        {
+        $.ajax({
+            url: '<?=base_url()?>agent/sra_booking_payment_details/get_bank_name_data',
+            method: 'post',
+            data: {net_transaction_no: net_transaction_no,netbanking_bank_name: netbanking_bank_name},
+            dataType: 'json',
+            success: function(response){
+                if (response.mydata && response.mydata.length > 0) {
+                // Iterate through mydata array
+                response.mydata.forEach(function(data) {
+                    if (data.length > 0) { // Check if data array has elements
+                        // Here you can perform further checks or actions
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'UTR No. already exists',
+                            text: 'Please enter a Correct UTR No.',
+                        }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#net_bank_utr_no_status").val('Yes');
+                        } else {
+                            $("#net_bank_utr_no_status").val('No');
+                        }
+                        $("#sra_submit_otp").prop('disabled', true);
+                    });
+                    }else{
+                        $("#sra_submit_otp").prop('disabled', false);
+                    }
+                });
+            }
+            }
+        });
+        }
+
+        if(attr_partial_bank_acc_no =='partial')
+        {
+            if(receipt_type =='SRA')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_partial_payment_details/get_SRA_bank_name_data',
+                method: 'post',
+                data: {net_transaction_no: net_transaction_no,netbanking_bank_name: netbanking_bank_name},
+                dataType: 'json',
+                success: function(response){
+                if (response.mydata && response.mydata.length > 0) {
+                // Iterate through mydata array
+                response.mydata.forEach(function(data) {
+                    if (data.length > 0 && net_transaction_no !== '') { // Check if data array has elements
+                        // Here you can perform further checks or actions
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'UTR No. already exists',
+                            text: 'Please enter a Correct UTR No.',
+                        }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_net_bank_utr_no_status").val('Yes');
+                        } else {
+                            $("#partial_net_bank_utr_no_status").val('No');
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                    }else{
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                    }
+                });
+            }
+            }
+            });
+        }else if(receipt_type =='Extra Services')
+            {
+            $.ajax({
+                url: '<?=base_url()?>agent/sra_partial_payment_details/get_extra_service_bank_name_data',
+                method: 'post',
+                data: {net_transaction_no: net_transaction_no,netbanking_bank_name: netbanking_bank_name},
+                dataType: 'json',
+                success: function(response){
+                    console.log(response);
+                    if (response.mydata && response.mydata.length > 0) {
+                        response.mydata.forEach(function(data) {
+                    if (data.length > 0 && net_transaction_no !== '') { // Check if data array has elements
+                        // Here you can perform further checks or actions
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'UTR No. already exists',
+                            text: 'Please enter a Correct UTR No.',
+                        }).then((result) => {
+                        if(result.isConfirmed) {
+                            $("#partial_net_bank_utr_no_status").val('Yes');
+                        } else {
+                            $("#partial_net_bank_utr_no_status").val('No');
+                        }
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', true);
+                    });
+                    }else{
+                        $("#sra_partial_pending_amt_submit_otp").prop('disabled', false);
+                    }
+                });
+            }
+                }
+            });
+        }
+        }
+    });
+</script>
+
+
+<!-- payment Other than SRA Agent wise mobile number show -->
+<script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    $('#staff_name').on('change', function () {
+      var did = $(this).val();
+     
+      // AJAX request
+      $.ajax({
+        url:'<?=base_url()?>agent/payment_other_than_sra/getAgent_mob_no', 
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        
+          $('#agent_mob_no').find('input').not(':first').remove();
+         
+          $.each(response,function(index,data){             
+            $('#agent_mob_no').val(data['mobile_number1']);
+          });
+        }
+     });
+   });
+ });
+ </script>
+<!-- payment Other than SRA Agent wise mobile number show -->
+

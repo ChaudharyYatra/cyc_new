@@ -181,7 +181,7 @@ class Add_sra_form extends CI_Controller{
             if($this->form_validation->run() == TRUE)
             {
                 // $this->db->where('is_active','yes');
-                $SRANo_check = $this->master_model->getRecords('sra_booking_payment_details',array('is_deleted'=>'no','sra_no'=>trim($this->input->post('sra_no')),'academic_year'=>trim($this->input->post('academic_year'))));
+                $SRANo_check = $this->master_model->getRecords('sra_payment',array('is_deleted'=>'no','sra_no'=>trim($this->input->post('sra_no')),'academic_year'=>trim($this->input->post('academic_year'))));
                 if(count($SRANo_check)==0){
 
                 $file_name     = $_FILES['image_name']['name'];
@@ -351,32 +351,84 @@ class Add_sra_form extends CI_Controller{
             $mobile_number=$this->input->post('mobile_number');
 
             $record = array();
-            $fields = "sra_payment.*,package_date.journey_date,academic_years.year,sra_payment.id as sra_pay_id,
-            sra_booking_payment_details.pending_amt,sum(sra_booking_payment_details.booking_amt) as abcamt";
+            $fields = "sra_payment.*,package_date.journey_date,academic_years.year,sra_payment.id as sra_pay_id,packages.tour_number as package_tour_number,
+            sra_booking_payment_details.pending_amt,sum(sra_booking_payment_details.booking_amt) as abcamt,sra_booking_payment_details.final_amt as sra_final";
             $this->db->join("package_date", 'package_date.id=sra_payment.tour_date','left');
+            $this->db->join("packages", 'packages.id=sra_payment.tour_number','left');
             $this->db->join("academic_years", 'academic_years.id=sra_payment.academic_year','left');
             $this->db->join("sra_booking_payment_details", 'sra_booking_payment_details.sra_payment_id=sra_payment.id','left');
-            // $this->db->where('sra_payment.academic_year', $academic_year);
+            // $this->db->join("extra_services_booking_payment_details", 'extra_services_booking_payment_details.sra_payment_id=sra_payment.id','left');
             $this->db->where('sra_payment.agent_id', $id);
-            if ($academic_year) {
-                $this->db->where('sra_payment.academic_year', $academic_year);
-            }
-            
-            $this->db->group_start();
-            $this->db->or_where('sra_payment.academic_year', $academic_year);
-            $this->db->or_where('sra_payment.tour_number', $tour_number);
-            $this->db->or_where('sra_payment.tour_date', $tour_date);
-            $this->db->or_where('sra_payment.sra_no', $sra_no);
-            $this->db->or_where('sra_payment.mobile_number', $mobile_number);
-            $this->db->group_end();
 
-            // $this->db->group_by('sra_payment.id');
+            // Check if both academic year and sra_no are provided
+            if ($academic_year && $sra_no) {
+                $this->db->where('sra_payment.academic_year', $academic_year);
+                $this->db->where('sra_payment.sra_no', $sra_no);
+            }
+            // Check if both academic year and tour_number are provided
+            else if ($academic_year && $tour_number) {
+                $this->db->where('sra_payment.academic_year', $academic_year);
+                $this->db->where('packages.id', $tour_number);
+            }
+            else if ($tour_number) {
+                $this->db->where('packages.id', $tour_number);
+            }
+            else if ($mobile_number) {
+                $this->db->where('sra_payment.mobile_number', $mobile_number);
+            }
+            else {
+                // General filtering logic
+                if ($academic_year) {
+                    $this->db->where('sra_payment.academic_year', $academic_year);
+                }
+                
+                $this->db->group_start();
+                $this->db->or_where('sra_payment.academic_year', $academic_year);
+                $this->db->or_where('sra_payment.tour_number', $tour_number);
+                $this->db->or_where('sra_payment.tour_date', $tour_date);
+                $this->db->or_where('sra_payment.sra_no', $sra_no);
+                $this->db->group_end();
+            }
+
             $this->db->group_by('sra_booking_payment_details.sra_payment_id');
-        
-            $arr_data = $this->master_model->getRecords('sra_payment',array('sra_payment.is_deleted'=>'no'),$fields);
-            // $arr_data = $this->master_model->getRecords('sra_payment','',$fields);
-            // print_r($arr_data);
-            echo json_encode($arr_data);
+            // $this->db->group_by('extra_services_booking_payment_details.sra_payment_id');
+
+            $arr_data = $this->master_model->getRecords('sra_payment', array('sra_payment.is_deleted' => 'no'), $fields);
+            // print_r($arr_data); die;
+            // sum(extra_services_booking_payment_details.customer_sending_amt) as extra_amt,extra_services_booking_payment_details.final_amt as extra_final
+            
+            // $this->db->where('sra_no',$sra_no);
+            $this->db->select('SUM(extra_services_booking_payment_details.customer_sending_amt) as total_amount,extra_services_booking_payment_details.final_amt as extra_final');
+            $this->db->group_by('extra_services_booking_payment_details.sra_no');
+            $extra_arra_data = $this->master_model->getRecords('extra_services_booking_payment_details');
+            // print_r($extra_arra_data); die;
+            $total_sra = 0;
+            $total_paid_sra = 0;
+            $total_extra = 0;
+            $total_paid_extra = 0;
+            foreach($arr_data as $arr_data_info) 
+            {            
+                $total_sra = $arr_data_info['sra_final'];
+                $total_paid_sra = $arr_data_info['abcamt'];
+            }
+
+            foreach($extra_arra_data as $extra_arra_data_info) 
+            {
+            $total_extra = $extra_arra_data_info['extra_final'];
+            $total_paid_extra = $extra_arra_data_info['total_amount'];
+            }
+
+            $all_total_amount = $total_sra + $total_extra;
+            
+            $all_total_paid_amount = $total_paid_sra + $total_paid_extra;
+
+            $response = array(
+                'main_data' => $arr_data,
+                'all_total_amount' => $all_total_amount, // Uncomment if retrieving extra data
+                'all_total_paid_amount' => $all_total_paid_amount, // Uncomment if retrieving extra data
+            );
+
+            echo json_encode($response);
             
             // $record = array();
             // $this->db->where('academic_year',$academic_year);

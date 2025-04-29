@@ -122,7 +122,7 @@ class Assign_staff extends CI_Controller{
 
                 $role_name	  = $this->input->post('role_name'); 
                 $name	  = $this->input->post('name');
-
+                $staff_nick_name	  = $this->input->post('staff_nick_name');
                 $package_id	  = $this->input->post('package_id');
                 $package_date_id   = $this->input->post('package_date_id');
 
@@ -133,6 +133,7 @@ class Assign_staff extends CI_Controller{
                     $arr_insert = array(
                         'role_name'   =>   $role_name[$i],
                         'name'   =>   $name[$i],
+                        'staff_nick_name'   =>   $staff_nick_name[$i],
                         'package_id'   =>   $package_id[$i],
                         'package_date_id'   =>   $package_date_id[$i]
                     );
@@ -276,13 +277,15 @@ class Assign_staff extends CI_Controller{
 
                     $role_name	  = $this->input->post('role_name'); 
                     $name	  = $this->input->post('name');
+                    $staff_nick_name	  = $this->input->post('staff_nick_name');
 
                     $count = count($name);
                     for($i=0;$i<$count;$i++)
                     {
                         $arr_update = array(
                                 'role_name'   =>   $role_name[$i],
-                                'name'   =>   $name[$i]
+                                'name'   =>   $name[$i],
+                                'staff_nick_name'   =>   $staff_nick_name[$i]
                         );
 
                     
@@ -402,6 +405,20 @@ class Assign_staff extends CI_Controller{
         echo json_encode($data);
     }
 
+    
+    public function getnickname(){ 
+        // POST data 
+        // $all_b=array();
+        $nick_name = $this->input->post('did');
+        // print_r($getname); die;
+        
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('id',$nick_name);
+            $data = $this->master_model->getRecords('supervision');
+            // print_r($data); die;
+        echo json_encode($data);
+    }
 
 
 // =======================================================================================================

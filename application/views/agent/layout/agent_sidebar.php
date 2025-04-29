@@ -29,20 +29,36 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
+        <li class="nav-item">
+            <a href="<?php echo base_url(); ?>agent/file_compressed/add" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>File Compressed</p>
+            </a>
+        </li>    
+        <li class="nav-item">
                 <a href="<?php echo base_url(); ?>agent/dashboard/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard</p>
                 </a>
             </li>
-
+          <li class="nav-item">
+              <a href="<?php echo base_url(); ?>agent/requesting_more_fund_for_tm/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Requesting More Fund For TM</p>
+              </a>
+          </li>
             
-
+          <li class="nav-item">
+              <a href="<?php echo base_url(); ?>agent/payment_other_than_sra/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment Other Than SRA</p>
+              </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                SRA Details
+                Account Details
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -51,7 +67,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>agent/add_sra_form/add" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add SRA Payment</p>
+                  <p>Receipt For SRA</p>
                 </a>
                </li>
 
@@ -114,6 +130,12 @@
                Fixed & Customized Enquiries
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+              <a href="<?php echo base_url(); ?>agent/all_other_qr/index" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>All Other QR</p>
+              </a>
           </li>
 
           <li class="nav-item">

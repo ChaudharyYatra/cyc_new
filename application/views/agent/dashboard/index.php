@@ -258,6 +258,32 @@ function drawChart() {
           </div>
           <?php } ?>
 
+          <?php 
+            if($agent_sra_amt >0 ){
+          ?> 
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a class="underline" href="<?php echo base_url(); ?>agent/agent_sra_total_amount/index">
+            
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <div class="css_amt_not_paid">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3 style="color:white;"><?php echo $agent_sra_amt['total_booking_amt']; ?></h3>
+                      <h6 style="color:white;">Agent SRA Total Amount</h6>
+                    </div>
+                    <!-- <div class="col-md-8">
+                      
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            </a>
+          </div>
+          <?php } ?>
+
         </div>
         <!-- /.row -->
     </div>

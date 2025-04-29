@@ -14,6 +14,7 @@ class Asign_tour_to_manager extends CI_Controller{
         $this->module_url_path_instruction    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/instruction_module";
         $this->module_url_tour_photos    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/tour_photos";
 		$this->module_url_path_tour_expenses    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/tour_expenses";
+		$this->module_satff_advance_payment    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/staff_advance_payment";
 		$this->module_url_path_request_more_fund   =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/tm_request_more_fund";
 		$this->module_url_path_customer_feedback   =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/customer_feedback";
         $this->module_back   =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/asign_tour_to_manager";
@@ -41,21 +42,6 @@ class Asign_tour_to_manager extends CI_Controller{
         $this->db->join("supervision", 'assign_staff.role_name=supervision.id','left');
         $arr_data = $this->master_model->getRecords('assign_staff',array('assign_staff.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
-        
-
-        // $fields = "asign_tour_manager.*,packages.tour_number,packages.tour_title,packages.package_type,
-        // package_type.package_type,package_date.journey_date,tour_manager.name,package_date.id as did";
-        // $this->db->where('asign_tour_manager.is_deleted','no');
-        // $this->db->where('asign_tour_manager.tour_manager_id',$id);
-        // $this->db->join("packages", 'asign_tour_manager.package_id=packages.id','left');
-        // $this->db->join("package_type", 'packages.package_type=package_type.id','left');
-        // // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-        // $this->db->join("tour_manager", 'asign_tour_manager.tour_manager_id=tour_manager.id','left');
-        // $arr_data = $this->master_model->getRecords('asign_tour_manager',array('asign_tour_manager.is_deleted'=>'no'),$fields);
-        // print_r($arr_data); die;
-
-        // $this->db->where('packages.is_deleted','no');
-        // $arr_data = $this->master_model->getRecords('packages');
 
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
         $this->arr_view_data['module_url_tour_photos'] = $this->module_url_tour_photos;
@@ -68,6 +54,7 @@ class Asign_tour_to_manager extends CI_Controller{
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_satff_advance_payment'] = $this->module_satff_advance_payment;
         $this->arr_view_data['module_url_path_tour_expenses'] = $this->module_url_path_tour_expenses;
         $this->arr_view_data['module_url_path_request_replace_bus'] = $this->module_url_path_request_replace_bus;
         $this->arr_view_data['module_url_path_request_more_fund'] = $this->module_url_path_request_more_fund;

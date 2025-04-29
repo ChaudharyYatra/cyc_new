@@ -80,7 +80,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label>Nick Name</label>
-                              <input type="text" class="form-control" name="nick_name[]" id="nick_name" placeholder="Enter Nick Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                              <input type="text" class="form-control" name="nick_name[]" id="nick_name" placeholder="Enter Nick Name" required="required">
                           </div>
                         </div>
 
@@ -118,31 +118,52 @@
 
                         <div class="col-md-6">
                           <div class="form-group">
-                          <label>UPI App Name</label>
-                              <select class="form-control" name="upi_app_name[]" id="upi_app_name">
-                              <option value="">Select App Name</option>
-                              <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
-                                  <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
-                              <?php } ?>
-                              </select>
+                            <label>Branch Name</label>
+                            <input type="text" class="form-control" name="branch_name[]" id="branch_name" placeholder="Enter Branch Name">
                           </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>UPI ID</label>
-                                <input type="text" class="form-control" name="upi_id[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
-                            </div>
+                          <div class="form-group">
+                            <label>IFSC Code</label>
+                            <input type="text" class="form-control" name="ifsc_code[]" id="ifsc_code" placeholder="Enter IFSC Code">
+                          </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Upload QR Image</label><br>
-                              <input type="file" name="image_name[]" id="image_nam" required="required">
-                              <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
-                            </div>
-                        </div>
-                        
+                        <table border="1" class="table table-bordered" id="table1">
+                          <thead>
+                              <tr>
+                                  <th>UPI App Name</th>
+                                  <th>UPI ID</th>
+                                  <th>Upload QR Image</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <?php $i=1;?>
+                              <tr>
+                                  <td>
+                                  <select class="form-control" name="upi_app_name1[]" id="upi_app_name">
+                                    <option value="">Select App Name</option>
+                                    <?php foreach($upi_apps_name as $upi_apps_name_value){ ?> 
+                                        <option value="<?php echo $upi_apps_name_value['id'];?>"><?php echo $upi_apps_name_value['payment_app_name'];?></option>
+                                    <?php } ?>
+                                  </select>
+                                  </td>
+                                  <td>
+                                    <input type="text" class="form-control" name="upi_id1[]" id="upi_id" placeholder="Enter UPI ID" oninput="this.value = this.value.replace(/[^a-zA-Z0-9@]/g, '');">
+                                  </td>
+                                  
+                                  <td>
+                                    <input type="file" name="image_name1[]" id="image_nam" required="required">
+                                    <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
+                                  </td>
+                                  <td>
+                                      <button type="button" class="btn btn-primary add_qr_add_more" attr_add_id="1" attr_QR_code="1" name="submit" value="add_qr_add_more" id="add_qr_add_more">Add More</button>
+                                  </td>
+                              </tr>
+                              <?php $i++; ?>
+                          </tbody>
+                      </table>
                       </div> 
                     </div> 
                     

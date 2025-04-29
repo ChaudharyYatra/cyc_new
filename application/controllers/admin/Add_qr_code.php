@@ -48,6 +48,8 @@ class Add_qr_code extends CI_Controller{
     {   
         if($this->input->post('submit'))
         {     
+            // print_r($_REQUEST);
+            // die;
                 $full_name = $this->input->post('full_name');
                 $role_name = $this->input->post('role_name');
                 $other_role = $this->input->post('other_role');
@@ -55,11 +57,13 @@ class Add_qr_code extends CI_Controller{
                 $nick_name = $this->input->post('nick_name');
                 $mobile_number = $this->input->post('mobile_number');
                 // print_r($mobile_number); die;
-                $upi_id = $this->input->post('upi_id');
+                // $upi_id = $this->input->post('upi_id');
                 $account_number = $this->input->post('account_number');
                 $bank_name = $this->input->post('bank_name');
+                $branch_name = $this->input->post('branch_name');
+                $ifsc_code = $this->input->post('ifsc_code');
                 // $company_account_yes_no  = $this->input->post('company_account_yes_no');
-                $upi_app_name = $this->input->post('upi_app_name');
+                // $upi_app_name = $this->input->post('upi_app_name');
                 
                 $arr_insert = array(
                     'full_name'   =>   $_POST["full_name"],
@@ -70,20 +74,43 @@ class Add_qr_code extends CI_Controller{
                 $inserted_id = $this->master_model->insertRecord('qr_code_master',$arr_insert,true);
                 $insertid = $this->db->insert_id();
 
-                $count = count($upi_id);
-                for($i=0;$i<$count;$i++)
+                $main_count = count($nick_name);
+                // $count = count($upi_id);
+                
+                for($i=0;$i<$main_count;$i++)
                 {
+                    $new_i= $i+1;
+                    $upi_new_id='upi_id'.$new_i;
+                    $upi_id = $this->input->post($upi_new_id);
+                    $count = count($upi_id);
+                    $new_upi_app_name='upi_app_name'.$new_i;
+                    $upi_app_name = $this->input->post($new_upi_app_name);
+
+                    $new_image_name='image_name'.$new_i;
+                    
+                    // print_r($upi_id);
+                    // die;
+
+                    $nick_name   =   $_POST["nick_name"][$i];
+                    $mobile_number   =   $_POST["mobile_number"][$i];
+                    $account_number   =   $_POST["account_number"][$i];
+                    $bank_name   =   $_POST["bank_name"][$i];
+                    $branch_name   =   $_POST["branch_name"][$i];
+                    $ifsc_code   =   $_POST["ifsc_code"][$i];
 
                     $company_name = '';
                     if (isset($_POST['company_account_yes_no'][$i])) {
                         $company_name = $_POST['company_account_yes_no'][$i];
                     }
 
-                    $_FILES['file']['name']     = $_FILES['image_name']['name'][$i]; 
-                    $_FILES['file']['type']     = $_FILES['image_name']['type'][$i]; 
-                    $_FILES['file']['tmp_name'] = $_FILES['image_name']['tmp_name'][$i]; 
-                    $_FILES['file']['error']     = $_FILES['image_name']['error'][$i]; 
-                    $_FILES['file']['size']     = $_FILES['image_name']['size'][$i]; 
+                    for($j=0;$j<$count;$j++)
+                {
+
+                    $_FILES['file']['name']     = $_FILES[$new_image_name]['name'][$j]; 
+                    $_FILES['file']['type']     = $_FILES[$new_image_name]['type'][$j]; 
+                    $_FILES['file']['tmp_name'] = $_FILES[$new_image_name]['tmp_name'][$j]; 
+                    $_FILES['file']['error']     = $_FILES[$new_image_name]['error'][$j]; 
+                    $_FILES['file']['size']     = $_FILES[$new_image_name]['size'][$j]; 
                      
                     $uploadPath = './uploads/QR_code_image/'; 
                     $config['upload_path'] = $uploadPath; 
@@ -98,18 +125,22 @@ class Add_qr_code extends CI_Controller{
                     }
 
                     $arr_insert = array(
-                        'nick_name'   =>   $_POST["nick_name"][$i],
-                        'mobile_number'   =>   $_POST["mobile_number"][$i],
-                        'upi_id'   =>   $_POST["upi_id"][$i],
-                        'account_number'   =>   $_POST["account_number"][$i],
-                        'bank_name'   =>   $_POST["bank_name"][$i],
+                        'nick_name'   =>   $nick_name,
+                        'mobile_number'   =>   $mobile_number,
+                        'account_number'   =>   $account_number,
+                        'bank_name'   =>   $bank_name,
+                        'branch_name'   =>   $branch_name,
+                        'ifsc_code'   =>   $ifsc_code,
                         'company_account_yes_no'   =>   $company_name,
-                        'upi_app_name'   =>   $_POST["upi_app_name"][$i],
+
+                        'upi_id'   =>   $upi_id[$j],
+                        'upi_app_name'   =>   $upi_app_name[$j],
                         'qr_code_image'   =>   $fileData['file_name'],
                         'is_agent'   => 'No',
                         'qr_code_master_id'  => $insertid
                     ); 
                     $inserted_id = $this->master_model->insertRecord('qr_code_add_more',$arr_insert,true);
+                }
                 }
                                
                 if($inserted_id > 0)
@@ -137,9 +168,15 @@ class Add_qr_code extends CI_Controller{
         $this->db->where('is_deleted', 'no');
         $upi_apps_name = $this->master_model->getRecords('upi_apps_name');
 
+        $this->db->order_by('bank_name', 'asc');
+        $this->db->where('is_deleted', 'no');
+        $this->db->where('is_active', 'yes');
+        $bank_name_data = $this->master_model->getRecords('bank_name_master');
+
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['upi_apps_name'] = $upi_apps_name;
         $this->arr_view_data['role_type_data'] = $role_type_data;
+        $this->arr_view_data['bank_name_data'] = $bank_name_data;
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;

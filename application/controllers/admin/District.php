@@ -111,7 +111,7 @@ class District extends CI_Controller{
                 $city_exist_data = $this->master_model->getRecords('district_table');
                 if(count($city_exist_data) > 0)
                 {
-                    $this->session->set_flashdata('error_message',"district".$city_name." Already Exist.");
+                    $this->session->set_flashdata('error_message',"district " . $district." Already Exist.");
                     redirect($this->module_url_path.'/add');
                 }
                 

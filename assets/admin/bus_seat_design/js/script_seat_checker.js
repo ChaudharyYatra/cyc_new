@@ -1,9 +1,10 @@
     // var bus_data='<?php'+$bus_info+';?>';
     var did = [];
     var total_final_seat_count = $('#total_seat_count').val();
+console.log(total_final_seat_count);
 
     did = $('#bdata').val();
-    if(js_array.length != 0){
+    if(js_array.length !== 0){
     var array_data = js_array;
    
     if(typeof booked_data != 'undefined'){
