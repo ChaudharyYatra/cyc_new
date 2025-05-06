@@ -306,48 +306,18 @@ class Sra_booking_payment_details extends CI_Controller {
             $traveler_otp = substr($otp, 0, '6'); 
 
             if($select_transaction == 'Net Banking'){
-                echo'hhhhhhhhh';
+                // echo'hhhhhhhhh'; die;
                 $from_email='test@choudharyyatra.co.in';
                 
-                $authKey = "1207173098272815780";
+                $authKey = "1207168241267288907";
                 
-                $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off, UTR No.$net_banking_utr_no.Team CYCPL";
+                $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off,For SRA No.$sra_no,Team CYCPL";
                 $senderId  = "CYCPLN";
                 
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098272815780";
-                
-                $apiurl = str_replace(" ", '%20', $apiurl); 
-
-            }else if($select_transaction == 'Cheque'){
-                echo'mmmmmmmmmmmmmm';
-                $from_email='test@choudharyyatra.co.in';
-                
-                $authKey = "1207173098087051916";
-                
-                
-                    $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
-                    // $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
-
-                $senderId  = "CYCPLN";
-                
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098087051916";
-                
-                $apiurl = str_replace(" ", '%20', $apiurl); 
-            }else if($select_transaction == 'QR Code'){
-                echo'QQQQQQQQQQQQQQQ';
-                $from_email='test@choudharyyatra.co.in';
-                
-                $authKey = "1207173098501659857";
-                
-                $message="OTP–$traveler_otp Plz share OTP if given info is True.You paid Rs.$booking_amt/- by “QR” at BBN Off, UTR No.$cheque.Team CYCPL";
-
-                $senderId  = "CYCPLN";
-                
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098501659857";
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207172424495645660";
                 
                 $apiurl = str_replace(" ", '%20', $apiurl); 
             }else{
-                echo'jjjjjjjjjjjjjjjjjjj';
                 $from_email='test@choudharyyatra.co.in';
             
                 $authKey = "1207168241267288907";

@@ -107,7 +107,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tour Number-Name</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number" required="required">
+                                    <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number">
                                         <option value="">Select Tour</option>
                                         <?php foreach($packages_data as $packages_data_value) { ?>
                                             <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
@@ -132,7 +132,7 @@
                               <label class="col-form-label">Followup Date:</label> 
                               <input type="date" class="form-control" name="followup_date" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" >
                             </div> -->
-
+                            
                             <div class="col-md-6">
                               <div class="form-group">
                                 <label>Occupation Name</label>

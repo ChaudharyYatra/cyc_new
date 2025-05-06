@@ -150,9 +150,8 @@
                                                     </select>
                                                 </div>
                                                 <span class="text-danger float-left" id="agent_id_error" style="display:none"></span>
-
                                             </div>
-                                        </div>
+                                        </div> 
                                         
                                         <div class="col-md-6">
                                             <div class="form-group">

@@ -9,27 +9,6 @@
 <!-- footer starts -->
 <img class="img_bot" src="<?php echo base_url(); ?>assets/front/shape8_final.png" alt="image" width="100%"></img>
 <footer class="pt-4 pb-2">
-  
-        <!-- <div class="section-shape top-0"></div> -->
-        <!-- Instagram starts -->
-        <!-- <div class="insta-main pb-10">
-            <div class="container">
-                <div class="insta-inner"> -->
-                <!--<div class="follow-button">-->
-                <!--    <h5 class="m-0 rounded"><i class="fab fa-instagram"></i> Follow on Instagrams</h5>-->
-                <!--</div>-->
-                <!-- <div class="row attract-slider">
-                    <?php //if(count($social_media_link)>0) { foreach($social_media_link as $key => $social_media_link_value) { ?>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="insta-image rounded">
-                            <a href="<?php //echo $social_media_link_value['social_media_link']; ?>" onclick="window.open(this.href,'_blank');return false;"><img src="<?php //echo base_url(); ?>uploads/social_media_link/<?php// echo $social_media_link_value['image_name']; ?>" alt="<?php //echo $social_media_link_value['social_media_link']; ?>"></a>
-                        </div>
-                    </div>
-                    <?php //} } ?>
-                </div>
-                </div>    
-            </div>
-        </div> -->
         <!-- Instagram ends -->
         <?php if(count($website_basic_structure)>0) { foreach($website_basic_structure as $key => $website_basic_structure_value) { ?>
         <div class="footer-upper">
@@ -78,7 +57,7 @@
                                       <b><p class="text_justify"><span><a href="mailto:<?php echo $website_basic_structure_value['email']; ?>"><?php echo $website_basic_structure_value['email']; ?></a> </span></p></b>
                                     </div>
                                   </li>
-
+                                  
                                   <li class="icon_set">
                                     <!-- <div class="icon-part white icon_size_w">
                                       <i class="fas fa-envelope"></i>

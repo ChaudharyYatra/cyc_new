@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [25-Mar-2025 09:46:45 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 167936 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_result.php on line 215
 [25-Mar-2025 20:29:45 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 167936 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_result.php on line 215
 [26-Mar-2025 12:48:57 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 167936 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_result.php on line 215
@@ -117,3 +118,11 @@
 [19-Apr-2025 17:38:49 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 233472 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 315
 [20-Apr-2025 13:10:13 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 233472 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 315
 [20-Apr-2025 17:57:04 UTC] PHP Fatal error:  Allowed memory size of 1098907648 bytes exhausted (tried to allocate 233472 bytes) in /home3/choudharyshared/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 315
+=======
+[08-Nov-2024 07:12:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+[08-Nov-2024 07:12:10 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+[08-Nov-2024 07:12:13 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+[08-Nov-2024 07:12:25 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+[08-Nov-2024 07:12:31 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+[08-Nov-2024 07:12:43 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 524288 bytes) in /home3/choudharyshared/public_html/cyc_new/system/database/drivers/mysqli/mysqli_driver.php on line 315
+>>>>>>> rupali_0910

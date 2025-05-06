@@ -28,7 +28,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/plugins/codemirror/mode/xml/xml.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/plugins/codemirror/mode/htmlmixed/htmlmixed.js"></script>
 
-<script src="<?php echo base_url(); ?>assets/admin/plugins/select2/js/select2.full.min.js"></script>
+<!-- <script src="<?php //echo base_url(); ?>assets/admin/plugins/select2/js/select2.full.min.js"></script> -->
 
 <!-- Bootstrap4 Duallistbox -->
 <script src="<?php echo base_url(); ?>assets/admin/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
@@ -538,10 +538,6 @@ $(document).on('click', '.btn_remove', function(){
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> rupali_0910
  <script>
  $(document).ready(function(){
      $('#img_width').hide();

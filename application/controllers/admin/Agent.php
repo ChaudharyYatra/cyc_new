@@ -515,7 +515,7 @@ class Agent extends CI_Controller{
 				$this->form_validation->set_rules('booking_center', 'Booking Center', 'required');
 				$this->form_validation->set_rules('agent_name', 'Agent Name', 'required');
 				$this->form_validation->set_rules('mobile_number1', 'Mobile Number1', 'required');
-				$this->form_validation->set_rules('mobile_number2', 'Mobile Number2', 'required');
+				// $this->form_validation->set_rules('mobile_number2', 'Mobile Number2', 'required');
 				$this->form_validation->set_rules('email', 'Email Address', 'required');
 				$this->form_validation->set_rules('password', 'Password', 'required');
 				
@@ -781,13 +781,7 @@ class Agent extends CI_Controller{
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-// ----------- This is Live COde --------------------
-        $this->db->where('state_id',$state_id);
-// ----------- This is Live COde --------------------
-// ----------- This is My Local COde --------------------
         // $this->db->where('id',$state_id);
-// ----------- This is My Local COde --------------------
-
         $this->db->order_by('id','ASC');
         $district_data = $this->master_model->getRecords('district_table');
         // print_r($district_data); die;

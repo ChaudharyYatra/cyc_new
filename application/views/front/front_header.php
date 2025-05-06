@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/fonts/line-icons.css" type="text/css">
 
     <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js"></script>
-  <script src="https://cdn.tutorialjinni.com/pdfobject/2.2.7/pdfobject.js"></script>
-  <script src="https://cdn.tutorialjinni.com/pdfobject/2.2.7/pdfobject.min.js"></script>
+  
+  
 </head>
 <style>
     .header_menu .navbar.navbar-default .nav.navbar-nav li.submenu .dropdown-menu li a:hover {

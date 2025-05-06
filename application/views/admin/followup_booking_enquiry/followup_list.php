@@ -101,16 +101,7 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
-// ----------------- This is Live Code -----------------------------------
-					  //  $enq_id=$info['booking_enquiry_id'];
-						// $query=$this->db->query("select * from domestic_followup where booking_enquiry_id=$enq_id");
-						// $followupdata=$query->result_array();
-						// // print_r($followupdata); die;
-						// $count= count($followupdata);
-// ----------------- This is Live Code -----------------------------------
-// ----------------- This is Live Code -----------------------------------
-                    $enq_id=$info['id'];
-// ----------------- This is Live Code -----------------------------------
+                       $enq_id=$info['id'];
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
@@ -177,7 +168,8 @@
                     </td>
                   </tr>
                   
-                <div class="modal fade" id="exampleModal2_<?php echo $enq_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  
+                  <div class="modal fade" id="exampleModal2_<?php echo $enq_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">

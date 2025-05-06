@@ -89,7 +89,8 @@ class Packages extends CI_Controller {
         $limit = $this->input->post('length');
 
         // Your existing query code
-        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
+        $fields = "packages.id,packages.image_name,packages.tour_number_of_days,packages.tour_number,packages.tour_title,packages.rating,packages.cost,package_date.journey_date,package_date.single_seat_cost,
+        package_date.twin_seat_cost,package_date.three_four_sharing_cost";
         $this->db->where('packages.is_deleted', 'no');
         $this->db->where('packages.is_active', 'yes');
         $this->db->where('package_type', '1');
@@ -146,10 +147,7 @@ class Packages extends CI_Controller {
 
     public function all_exclusive_deal()
     {
-        $aData['msg'] = '';
-        $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
         $main_packages = $this->master_model->getRecords('packages');
 
         $record = array();
@@ -314,6 +312,12 @@ class Packages extends CI_Controller {
             $this->db->where('is_active','yes');
             $this->db->order_by('id','ASC');
             $media_source = $this->master_model->getRecords('media_source');
+            
+            $this->db->where('is_deleted','no');
+            $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+            $this->db->where('is_deleted','no');
+            $zone_master_data = $this->master_model->getRecords('zone_master');
 
             $this->db->where('is_deleted','no');
             $occupation_master_data = $this->master_model->getRecords('occupation_master');
@@ -362,7 +366,7 @@ class Packages extends CI_Controller {
                         'media_source_name'    =>$media_source_name,
 						'wp_mobile_number'=>$wp_mobile_number,
 						'enquiry_from'=> 'front',
-                        'occupation_name'    =>$occupation_name,
+						'occupation_name'    =>$occupation_name,
                         'zone_name'    =>$zone_name,
                         'flat_no'    =>$flat_no,
                         'house_name'    =>$house_name,

@@ -960,7 +960,7 @@ class Booking_basic_info extends CI_Controller {
 // ---------------- This is Local Code -----------------------
 
                         $this->db->where('bus_open_status','yes');
-                        $this->db->where('journey_date >=',$today);
+                        // $this->db->where('journey_date >=',$today);
                         $this->db->where('package_id',$boarding_office_location);
                         $data = $this->master_model->getRecords('package_date');
                         // print_r($data); die;

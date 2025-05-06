@@ -1,5 +1,6 @@
 <?php 
 // Controller for: home page
+// Controller for: home page
 // Author: Nandkishor Wagh
 // Start Date: 01-09-2022
 // last updated: 01-09-2022
@@ -70,8 +71,14 @@ class Agent_list extends CI_Controller {
         $this->db->where('is_deleted', 'no');
         $this->db->where('is_active', 'yes');
         $this->db->order_by('id', 'ASC');
+        $this->db->where('is_deleted', 'no');
+        $this->db->where('is_active', 'yes');
+        $this->db->order_by('id', 'ASC');
         $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
         
+        $this->db->where('is_deleted', 'no');
+        $this->db->where('is_active', 'yes');
+        $this->db->order_by('id', 'ASC');
         $this->db->where('is_deleted', 'no');
         $this->db->where('is_active', 'yes');
         $this->db->order_by('id', 'ASC');
@@ -81,7 +88,27 @@ class Agent_list extends CI_Controller {
         $this->db->where('is_active', 'yes');
         $this->db->order_by('id', 'ASC');
         $this->db->group_by('id', 'ASC');
+        $this->db->where('is_deleted', 'no');
+        $this->db->where('is_active', 'yes');
+        $this->db->order_by('id', 'ASC');
+        $this->db->group_by('id', 'ASC');
         $department_list = $this->master_model->getRecords('department');
+
+        $data = array(
+            'middle_content'         => 'agents_list',
+            'agents_list'            => $agents_list,
+            'website_basic_structure' => $website_basic_structure,
+            'social_media_link'      => $social_media_link,
+            'department_list'        => $department_list,
+            'page_title'             => "Agents List",
+        );
+
+        $this->arr_view_data['page_title']     = "Agents List";
+        $this->arr_view_data['middle_content'] = "agents_list";
+        $this->load->view('front/common_view', $data);
+    }
+}
+
 
         $data = array(
             'middle_content'         => 'agents_list',

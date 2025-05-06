@@ -329,10 +329,12 @@ class Package_hotel extends CI_Controller{
         // POST data 
         // $all_b=array();
        $hotel_data = $this->input->post('did');
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');
-        $this->db->where('city',$hotel_data);   
-        $data = $this->master_model->getRecords('hotel');
+        // print_r($hotel_data);
+                        $this->db->where('is_deleted','no');
+                        $this->db->where('is_active','yes');
+                        $this->db->where('city',$hotel_data);   
+                        $data = $this->master_model->getRecords('hotel');
+                        // print_r($data); die;
         echo json_encode($data);
     }
 

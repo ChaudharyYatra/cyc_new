@@ -10,26 +10,7 @@
 <img class="img_bot" src="<?php echo base_url(); ?>assets/front/shape8_final.png" alt="image" width="100%"></img>
 <footer class="pt-4 pb-2">
   
-        <!-- <div class="section-shape top-0"></div> -->
-        <!-- Instagram starts -->
-        <!-- <div class="insta-main pb-10">
-            <div class="container">
-                <div class="insta-inner"> -->
-                <!--<div class="follow-button">-->
-                <!--    <h5 class="m-0 rounded"><i class="fab fa-instagram"></i> Follow on Instagrams</h5>-->
-                <!--</div>-->
-                <!-- <div class="row attract-slider">
-                    <?php //if(count($social_media_link)>0) { foreach($social_media_link as $key => $social_media_link_value) { ?>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="insta-image rounded">
-                            <a href="<?php //echo $social_media_link_value['social_media_link']; ?>" onclick="window.open(this.href,'_blank');return false;"><img src="<?php //echo base_url(); ?>uploads/social_media_link/<?php// echo $social_media_link_value['image_name']; ?>" alt="<?php //echo $social_media_link_value['social_media_link']; ?>"></a>
-                        </div>
-                    </div>
-                    <?php //} } ?>
-                </div>
-                </div>    
-            </div>
-        </div> -->
+        
         <!-- Instagram ends -->
         <?php if(count($website_basic_structure)>0) { foreach($website_basic_structure as $key => $website_basic_structure_value) { ?>
         <div class="footer-upper">
@@ -76,6 +57,33 @@
                                     <div class="content-part">
                                       <b><p class="text_justify"><span><a href="mailto:<?php echo $website_basic_structure_value['email']; ?>"><?php echo $website_basic_structure_value['email']; ?></a> </span></p></b>
                                       
+                                    </div>
+                                  </li>
+                                  
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">GST No. :  27AAACC7487N1Z0</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration No. :  17-08288 of 1994-95</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
                                     </div>
                                   </li>
 
@@ -263,8 +271,10 @@
  
     // City change
     $('#department_id').on('change', function () {
-      var did = $(this).val();
+      // var did = $(this).val();
       // alert('ppppppppppppppppppppppppppp');
+      var did = $("#department_id").val();
+      //  alert(did);
      
       // AJAX request
       $.ajax({
@@ -672,6 +682,14 @@ function validateEnquiryForms()
   $("#agent_id_error").hide();
   $("#wp_mobile_number_error").hide();
   
+  $("#occupation_id_error").hide();
+  $("#zone_id_error").hide();
+  $("#flatno_id_error").hide();
+  $("#housename_id_error").hide();
+  $("#streetname_id_error").hide();
+  $("#landmark_id_error").hide();
+  $("#area_id_error").hide();
+  
   var submiform='';
   
   var first_name = $('#first_name').val();
@@ -798,6 +816,8 @@ function validateEnquiryForms()
   }
 
 	var department_id = $('#department_id').val();
+
+// --------- This is Live COde --------------------
   if (department_id == '' || department_id ==null) 
   {
     $('#department_id_error').text('Please select department.');
@@ -814,6 +834,25 @@ function validateEnquiryForms()
   }
 
   var occupation_name = $('#occupation_name').val();
+// --------- This is Live COde --------------------
+// --------- This is Local COde --------------------
+  //  if (department_id == '' || department_id ==null) 
+  //  {
+  //    $('#department_id_error').text('Please select department.');
+  //    $('#department_id_error').show();
+  //    submiform=false;
+  //  }
+	
+  //  var agent_id = $('#agent_id').val();
+  //  if (agent_id == '' || agent_id ==null) 
+  //  {
+  //    $('#agent_id_error').text('Please select Booking Centre.');
+  //    $('#agent_id_error').show();
+  //    submiform=false;
+  //  }
+   
+  //  var occupation_name = $('#occupation_name').val();
+// --------- This is Local COde --------------------
    if (occupation_name == '' || occupation_name ==null) 
    {
      $('#occupation_id_error').text('Please select Occupation Name.');

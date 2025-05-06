@@ -35,14 +35,16 @@ class Sra_payment_receipt extends CI_Controller {
         $fields = "sra_final_booking.*,package_date.journey_date,sra_booking_payment_details.*,agent.agent_name,sra_booking_payment_details.id as booking_payement_id,
         sra_payment.sra_no,sra_payment.tour_number,sra_payment.tour_date,sra_payment.customer_name,sra_payment.mobile_number,sra_payment.total_seat,sra_payment.total_sra_amt,packages.tour_number as package_tour_number";
         $this->db->where('sra_final_booking.is_deleted','no');
-        // $this->db->where('sra_payment.sra_no',$iid);
-        // $this->db->where('sra_payment.academic_year',$academic_year);
+        $this->db->where('sra_payment.sra_no',$iid);
+        $this->db->where('sra_payment.academic_year',$academic_year);
         $this->db->join("packages", 'packages.id=sra_final_booking.package_id','left');
         $this->db->join("sra_booking_payment_details", 'sra_final_booking.sra_booking_payment_details_id=sra_booking_payment_details.id','left');
         $this->db->join("agent", 'sra_final_booking.agent_id=agent.id','left');
         $this->db->join("sra_payment", 'sra_final_booking.sra_payment_id=sra_payment.id','left');
         $this->db->join("package_date", 'package_date.id=sra_booking_payment_details.package_date_id','left');
         $details_payment_receipt = $this->master_model->getRecord('sra_final_booking',array('sra_final_booking.is_deleted'=>'no'),$fields);
+        
+
         if($details_payment_receipt['select_transaction'] == 'UPI'){
             // print_r('UPI  Id');
             $record = array();
