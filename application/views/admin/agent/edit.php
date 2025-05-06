@@ -1,3 +1,11 @@
+<style>
+  .color_remove .form-control{
+    color:gray !important;
+  }
+  .color_remove .select_css{
+    color:gray !important;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,6 +42,7 @@
                <?php
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
               <form method="post" enctype="multipart/form-data" id="edit_agent">
                 <div class="card-body">
@@ -51,7 +60,7 @@
                               </div>
                       </div>
                       <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group color_remove">
                             <label>Region Name</label>
                             <select class="form-control" style="width: 100%;" name="department" id="department" required="required">
                                 <option value="">Select Region</option>
@@ -86,7 +95,7 @@
                        <div class="col-md-6">
                               <div class="form-group">
                                 <label>Mobile Number 2</label>
-                                <input type="text" class="form-control" name="mobile_number2" id="mobile_number2" placeholder="Enter 10 Digits Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<?php echo $info['mobile_number2']; ?>">
+                                <input type="text" class="form-control" name="mobile_number2" id="mobile_number2" placeholder="Enter 10 Digits Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $info['mobile_number2']; ?>">
                               </div>
                         </div>
                         <div class="col-md-6">
@@ -112,30 +121,30 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label>Flat No.</label>
-                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No." value="<?php if($info){ echo $info['flat_no'];} ?>" required>
+                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No." value="<?php if($info){ echo $info['flat_no'];} ?>">
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label>Building / House Name</label>
-                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="Enter Building / House Name" value="<?php if($info){echo $info['building_house_nm'];} ?>" required>
+                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="Enter Building / House Name" value="<?php if($info){echo $info['building_house_nm'];} ?>">
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label>Street Name</label>
-                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter Street Name" value="<?php if($info){echo $info['street_name'];} ?>" required>
+                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter Street Name" value="<?php if($info){echo $info['street_name'];} ?>">
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
                             <label>Landmark</label>
-                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter Landmark" value="<?php if($info){echo $info['landmark'];} ?>" required>
+                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter Landmark" value="<?php if($info){echo $info['landmark'];} ?>">
                           </div>
                         </div>
 
                         <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group color_remove">
                                     <label>select State</label>
                                     <select class="select_css" name="agent_state" id="agent_state" required>
                                             <option value="">Select State</option>
@@ -146,20 +155,18 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group color_remove">
                                     <label>Select District</label>
                                     <select class="select_css" name="agent_district" id="agent_district" required>
                                         <option value="">Select District</option>
-                                        <?php foreach($district_data as $district_data_value){ 
-                                        
-                                        ?> 
+                                        <?php foreach($district_data as $district_data_value){ ?> 
                                             <option value="<?php echo $district_data_value['id'];?>" <?php if(isset($info['district_name'])){if($district_data_value['id'] == $info['district_name']) {echo 'selected';}}?>><?php echo $district_data_value['district'];?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group color_remove">
                                     <label>Select Taluka</label>
                                     <select class="select_css" name="agent_taluka" id="agent_taluka" required>
                                         <option value="">Select Taluka</option>
@@ -171,7 +178,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group color_remove">
                                 <label>City/Village Name</label>
                                 <input type="text" class="form-control" name="agent_city" id="agent_city" placeholder="Enter City Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $info['city_name']; ?>" required>
                               </div>
@@ -183,9 +190,87 @@
                                 <input type="file" name="logo_photo" id="logo_photo" placeholder="Logo Photo" >
                               </div>
                         </div> -->
-                        
-                      <div class="col-md-6">
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Logo Photo</label><br>
+                            <input type="file" name="image_name" id="image_name_package">
+                            <br><span class="text-danger">Image height should be 530 & width should be 800.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                             <br>
+                            <span class="text-danger" id="img_width" style="display:none;">Image Width should be Minimum 780 px To Maximum 820 px.</span>
+                            <span class="text-danger" id="img_height" style="display:none;">Image Height should be Minimum 510 px To Maximum 550 px.</span>
+                            <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                        </div>
+                      
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label>Uploaded Image</label><br>
+                          <?php if(!empty($info['image_name'])){ ?>
+                                    <img src="<?php echo base_url(); ?>uploads/agent_photo/<?php echo $info['image_name']; ?>" width="80%">
+                                    <input type="hidden" name="old_img_name" id="old_img_name" value="<?php echo $info['image_name']; ?>">
+                                    <?php } ?>
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Upload QR Image</label><br>
+                            <input type="file" name="qr_code" id="qr_code">
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                             <br>
+                            <span class="text-danger" id="img_width" style="display:none;">Image Width should be Minimum 780 px To Maximum 820 px.</span>
+                            <span class="text-danger" id="img_height" style="display:none;">Image Height should be Minimum 510 px To Maximum 550 px.</span>
+                            <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                        </div>
+                      
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label>Uploaded Image</label><br>
+                          <?php if(!empty($info['qr_code_image'])){ ?>
+                                    <img src="<?php echo base_url(); ?>uploads/QR_code_image/<?php echo $info['qr_code_image']; ?>" width="80%">
+                                    <input type="hidden" name="old_qr_code_name" id="old_qr_code_name" value="<?php echo $info['qr_code_image']; ?>">
+                                    <?php } ?>
+                        </div>
+                      </div>
+
+                        <!-- <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Upload QR Image</label><br>
+                              <input type="file" name="qr_code" id="qr_code">
+                              <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label>Uploaded Image</label><br>
+                            <?php //if(!empty($info['qr_code_image'])){ ?>
+                                      <img src="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>" width="80%">
+                                      <input type="hidden" name="old_qr_code_name" id="old_qr_code_name" value="<?php //echo $info['qr_code_image']; ?>">
+                                      <a class="btn-link pull-right text-center" download="" target="_blank" href="<?php //echo base_url(); ?>uploads/QR_code_image/<?php //echo $info['qr_code_image']; ?>">Download</a>
+                                      <?php //} ?>
+                          </div>
+                        </div> -->
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>UPI ID</label>
+                              <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" value="<?php echo $info['upi_id']; ?>" oninput="validateInput(event)">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
                               <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" name="email" id="email_edit" placeholder="Enter Email Address" value="<?php echo $info['email']; ?>" required>
+                                <span id="email_result"></span>
+                              </div>
+                      </div>
+                      <div class="col-md-6">
+                              <div class="form-group color_remove">
                                 <label>Registration Date</label>
                                 <input type="date" class="form-control" name="registration_date" id="registration_date" placeholder="Select Date" value="<?php echo $info['fld_registration_date']; ?>" >
                               </div>
@@ -202,6 +287,27 @@
                                 <input type="text" class="form-control" name="pan_number" id="pan_number" placeholder="Enter PAN Number" value="<?php echo $info['fld_pan_number']; ?>" >
                               </div>
                       </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Amount Receiving Mode</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select amount receiving mode" style="width: 100%;" name="amount_receiving_mode[]" id="amount_receiving_mode" required="required">
+                              <option value="">Select amount receiving mode</option>
+                              <?php
+                              $title = explode(',',$info['amount_receiving_mode']);
+                              $c=count($title);
+                                    for($i=0; $i<$c; $i++){
+                                        $tid= $title[$i];
+                                    }
+                              ?>
+                              <option value="CASH" <?php if(in_array('CASH', $title)) { echo "selected"; } ?>>CASH</option>
+                              <option value="UPI" <?php if(in_array('UPI', $title)) { echo "selected"; } ?>>UPI</option>
+                              <option value="QR Code" <?php if(in_array('QR Code', $title)) { echo "selected"; } ?>>QR Code</option>
+                              <option value="Cheque" <?php if(in_array('Cheque', $title)) { echo "selected"; } ?>>Cheque</option>
+                              <option value="Net Banking" <?php if(in_array('Net Banking', $title)) { echo "selected"; } ?>>Net Banking</option>
+                              <option value="Demand Draft" <?php if(in_array('Demand Draft', $title)) { echo "selected"; } ?>>Demand Draft</option>
+                            </select>
+                          </div>
+                        </div>
                       <div class="col-md-6">
                             <label>Password</label>
                               <div class="form-group input-group">
@@ -298,5 +404,18 @@ $("body").on('click', '.toggle-password2', function() {
   }
 
 });
+</script>
+
+<script>
+function validateInput(event) {
+    // Get the current input value
+    let inputValue = event.target.value;
+
+    // Replace any characters that are not numbers, alphabets, or @ with an empty string
+    let sanitizedValue = inputValue.replace(/[^a-zA-Z0-9@]/g, '');
+
+    // Update the input field value with the sanitized value
+    event.target.value = sanitizedValue;
+}
 </script>
   

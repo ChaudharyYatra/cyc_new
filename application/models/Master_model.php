@@ -18,6 +18,82 @@ class Master_model extends CI_Model
 		# How to call:
 			$this->master_model->getRecordCount('tbl_name',$condition_array);
 	*/
+
+	function all_enq($limit, $start, $col, $dir, $block = 0) {
+		$this->db->select('a.id, packages.tour_number, packages.tour_title, agent.agent_name, a.first_name, a.last_name, a.email, a.mobile_number');
+		$this->db->from('booking_enquiry a');
+		$this->db->where('a.is_deleted','no');
+		$this->db->where('followup_status','no');
+		$this->db->where('booking_process','no');
+		$this->db->join("packages", 'a.package_id=packages.id','left');
+		$this->db->join("agent", 'a.agent_id=agent.id','left');
+		 
+		 $this->db->limit($limit, $start);
+		 
+		 $this->db->order_by("a." . $col, $dir);
+		 return $this->db->get()->result();
+	 }
+
+	 function all_enq_count($block = 0) {
+		$this->db->select('a.id, packages.tour_number, packages.tour_title, agent.agent_name, a.first_name, a.last_name, a.email, a.mobile_number');
+		$this->db->from('booking_enquiry a');
+		$this->db->where('a.is_deleted','no');
+		$this->db->where('followup_status','no');
+		$this->db->where('booking_process','no');
+		$this->db->join("packages", 'a.package_id=packages.id','left');
+		$this->db->join("agent", 'a.agent_id=agent.id','left');
+       
+        return $this->db->get()->num_rows();
+    }
+
+
+	function enq_search($limit, $start, $search, $col, $dir, $block = 0) {
+        $this->db->select('a.id, packages.tour_number, packages.tour_title, agent.agent_name, a.first_name, a.last_name, a.email, a.mobile_number');
+		$this->db->from('booking_enquiry a');
+		$this->db->where('a.is_deleted','no');
+		$this->db->where('followup_status','no');
+		$this->db->where('booking_process','no');
+		$this->db->join("packages", 'a.package_id=packages.id','left');
+		$this->db->join("agent", 'a.agent_id=agent.id','left');
+        
+       
+        $this->db->group_start();
+        
+        $this->db->or_like('a.first_name', $search);
+        $this->db->or_like('a.last_name', $search);
+        $this->db->or_like('a.email', $search);
+        $this->db->or_like('a.mobile_number', $search);
+        $this->db->or_like('packages.tour_number', $search);
+        $this->db->or_like('packages.tour_title', $search);
+        $this->db->or_like('agent.agent_name', $search);
+        $this->db->group_end();
+        $this->db->limit($limit, $start);
+        $this->db->order_by("a." . $col, $dir);
+        return $this->db->get()->result();
+    }
+
+    function enq_search_count($search, $block = 0) {
+        $this->db->select('a.id, packages.tour_number, packages.tour_title, agent.agent_name, a.first_name, a.last_name, a.email, a.mobile_number');
+		$this->db->from('booking_enquiry a');
+		$this->db->where('a.is_deleted','no');
+		$this->db->where('followup_status','no');
+		$this->db->where('booking_process','no');
+		$this->db->join("packages", 'a.package_id=packages.id','left');
+		$this->db->join("agent", 'a.agent_id=agent.id','left');
+        
+
+        $this->db->group_start();
+        
+        $this->db->or_like('a.first_name', $search);
+        $this->db->or_like('a.last_name', $search);
+        $this->db->or_like('a.email', $search);
+        $this->db->or_like('a.mobile_number', $search);
+        $this->db->or_like('packages.tour_number', $search);
+        $this->db->or_like('packages.tour_title', $search);
+        $this->db->or_like('agent.agent_name', $search);
+        $this->db->group_end();
+        return $this->db->get()->num_rows();
+    }
 	
 	public function getRecordCount($tbl_name,$condition=FALSE)
 	{
@@ -533,6 +609,12 @@ public function deleteRecord($tbl_name,$id)
 		$rst=$this->db->get_where($tbl_name,$condition);
 		return $rst->row_array();
 	}
+
+	public function countFiltered($postData){
+        $this->_get_datatables_query($postData);
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
 	
 }
 ?>

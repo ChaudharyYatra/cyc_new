@@ -14,8 +14,6 @@ class Booking_history extends CI_Controller {
         $this->arr_view_data = [];
 	 }
 
-
-	 
      public function index($id)
      {
         if ($id=='') 
@@ -32,7 +30,6 @@ class Booking_history extends CI_Controller {
         {
             redirect(base_url().'home');
         }
-
 
          $data = array('middle_content' => 'booking_history',
 						'booking_history_details'       => $booking_history_details,);

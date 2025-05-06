@@ -14,7 +14,6 @@ class Dashboard extends CI_Controller{
 		// Check User Permission
 		//hasModuleAccess(6);//set same module id as in module_master table
 
-
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/dashboard";
         $this->module_url_path_followup_list    =  base_url().$this->config->item('agent_panel_slug')."/todays_domestic_followup_list";
         $this->module_url_path_inter_followup_list    =  base_url().$this->config->item('agent_panel_slug')."/todays_international_followup_list";
@@ -25,17 +24,19 @@ class Dashboard extends CI_Controller{
 
 	public function index()
 	{
-
         $today= date('Y-m-d');
 
-	    $agent_sess_name = $this->session->userdata('agent_name');
+	      $agent_sess_name = $this->session->userdata('agent_name');
         $id = $this->session->userdata('agent_sess_id');
-        
+
         date_default_timezone_set('Asia/Kolkata');
-         $twentyFourHoursAgo = date('Y-m-d H:i:s', strtotime('-24 hours'));
+        $twentyFourHoursAgo = date('Y-m-d H:i:s', strtotime('-24 hours'));
 
         $this->db->where('agent_id',$id);  
         $this->db->where('is_deleted','no'); 
+        $this->db->where('followup_status','no');  
+        $this->db->where('booking_process','no');  
+        $this->db->where('enquiry_type','Domestic'); 
         $this->db->where('booking_enquiry.created_at >', $twentyFourHoursAgo);
         $enquiry_data = $this->master_model->getRecords('booking_enquiry');
         $arr_data['enquiry_count_total'] = count($enquiry_data);
@@ -58,6 +59,45 @@ class Dashboard extends CI_Controller{
         $international_enquiry_data_today = $this->master_model->getRecords('international_booking_enquiry');
         $arr_data['internatinal_enquiry_count'] = count($international_enquiry_data_today);
 
+        $this->db->where('agent_id',$id);  
+        $this->db->where('is_deleted','no'); 
+        $custom_domestic_booking_enquiry = $this->master_model->getRecords('custom_domestic_booking_enquiry');
+        $arr_data['custom_domestic_booking_count'] = count($custom_domestic_booking_enquiry);
+
+        $this->db->where('agent_id',$id);  
+        $this->db->where('is_deleted','no'); 
+        $this->db->where('payment_confirmed_status','Payment Not Paid'); 
+        $booking_payment_details_not_paid = $this->master_model->getRecords('booking_payment_details');
+        $arr_data['booking_payment_details_not_paid_count'] = count($booking_payment_details_not_paid);
+        // print_r($arr_data['booking_payment_details_not_paid_count']); die;
+
+        $this->db->where('agent_id',$id);  
+        $this->db->where('is_deleted','no'); 
+        $this->db->where('payment_confirmed_status','In Process'); 
+        $this->db->group_by('booking_payment_details.enquiry_id'); 
+        $booking_payment_details_in_process = $this->master_model->getRecords('booking_payment_details');
+        $arr_data['booking_payment_details_in_process_count'] = count($booking_payment_details_in_process);
+        // print_r($arr_data['booking_payment_details_in_process_count']); die;
+
+        $this->db->where('agent_id',$id);  
+        $this->db->where('is_deleted','no'); 
+        $this->db->where('payment_confirmed_status','Payment Completed'); 
+        $this->db->group_by('booking_payment_details.enquiry_id'); 
+        $booking_payment_details_completed = $this->master_model->getRecords('booking_payment_details');
+        $arr_data['booking_payment_details_completed_count'] = count($booking_payment_details_completed);
+        // print_r($arr_data['booking_payment_details_completed_count']); die;
+        // print_r($booking_payment_details_completed); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->select('SUM(booking_amt) as total_booking_amt');
+        $agent_sra_amt = $this->master_model->getRecord('sra_booking_payment_details');
+
+
+        // print_r($agent_sra_total_amount['booking_amt']); die;
+
+        // print_r($Agent_sum_of_sra_total_amount); die;
+
+        // print_r($arr_data['booking_payment_details_count']); die;
         // $this->db->where('agent_id',$id);  
         // $this->db->where('not_interested','no');  
         // $Domestic_not_interested_cust = $this->master_model->getRecords('booking_enquiry');
@@ -68,12 +108,25 @@ class Dashboard extends CI_Controller{
         // $arr_data['total_enquiry_count'] = $enquiry_count + $internatinal_enquiry_count;
         // print_r($total_enquiry_count); die;
         // $arr_data['enquiry_count'] = count($enquiry_data);
-        
+
+        $record = array();
+        $this->db->select("agent.agent_name, COUNT(booking_enquiry.id) AS enquiry_count");
+        $this->db->from('agent');
+        $this->db->where('agent.is_deleted', 'no');
+        $this->db->where('booking_enquiry.booking_done', 'yes');
+        $this->db->join('booking_enquiry', 'agent.id = booking_enquiry.agent_id', 'left');
+        $this->db->group_by('agent.id'); // Group by agent.id
+        $this->db->order_by('enquiry_count', 'desc'); // Order by enquiry_count in descending order
+        $this->db->limit(5); // Limit the result to the top 5 agents
+
+        $top_agent_wise_data = $this->db->get()->result_array();
+        // print_r($top_agent_wise_data); die;
+
         $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
-      //  $this->arr_view_data['total_enquiry_count']  = $total_enquiry_count;
-        //$this->arr_view_data['enquiry_count']  = $enquiry_count;
+        $this->arr_view_data['top_agent_wise_data']        = $top_agent_wise_data;
+       $this->arr_view_data['agent_sra_amt']  = $agent_sra_amt;
        // $this->arr_view_data['enquiry_count_total']  = $enquiry_count_total;
         //$this->arr_view_data['internatinal_enquiry_count']  = $internatinal_enquiry_count;
         //$this->arr_view_data['international_enquiry_data_total']  = $international_enquiry_data_total;
@@ -88,7 +141,7 @@ class Dashboard extends CI_Controller{
 
     function enquiry_view()  
       {  
-                
+
                 $agent_id=$this->session->userdata('agent_sess_id');
                 $arr_where     = array("agent_id" => $agent_id);
                 $arr_update = array("is_view"=>'yes');
@@ -97,10 +150,8 @@ class Dashboard extends CI_Controller{
             return true;
       }
 
-
       function international_view()  
       {  
-                
                 $agent_id=$this->session->userdata('agent_sess_id');
                 $arr_where     = array("agent_id" => $agent_id);
                 $arr_update = array("is_view"=>'yes');

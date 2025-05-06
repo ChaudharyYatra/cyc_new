@@ -70,7 +70,7 @@ table.scrolldown tbody{
                             </div>
                             <!-- <h5 class="theme mb-1">Tour Number: <?php //echo $international_packages_all_value['tour_number']; ?></h5> -->
                             <!-- <h3 class="mb-1 card_title"><a href="<?php //echo base_url(); ?>international_packages/package_details/<?php //echo $international_packages_all_value['id']; ?>"><?php //echo mb_substr($international_packages_all_value['tour_title'], 0, 18); ?></a></h3> -->
-                            <h3 class="mb-1 card_title" title="<?php echo $international_packages_all_value['tour_title'] ?>"><?php echo mb_substr($international_packages_all_value['tour_title'], 0, 18); ?></h3>
+                            <h3 class="mb-1 card_title"><?php echo mb_substr($international_packages_all_value['tour_title'], 0, 18); ?></h3>
                             <div class="rating-main d-flex align-items-center pb-1">
                             <div class="rating">
                                         <?php if($international_packages_all_value['rating']=='1') { ?>
@@ -141,8 +141,7 @@ table.scrolldown tbody{
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="text-center">
-                                        <!-- <a href="#" class="nir-btn term-btn fw-bold btn-width white" data-bs-toggle="modal" data-bs-target="#itineraryModal_<?php //echo $international_packages_all_value['id'] ?>">Itinerary</a> -->
-                                        <a data-toggle="tab" class="nir-btn term-btn fw-bold btn-width white" href="<?php echo base_url();?>uploads/package_daywise_program/<?php echo $international_packages_all_value['pdf_name']; ?>" class="bordernone">Itinerary</a>
+                                        <a href="#" class="nir-btn term-btn fw-bold btn-width white" data-bs-toggle="modal" data-bs-target="#itineraryModal_<?php echo $international_packages_all_value['id'] ?>">Itinerary</a>
                                     </div>
                                 </div>
                             </div>
@@ -282,8 +281,6 @@ table.scrolldown tbody{
                         $this->db->join("package_date", 'packages.id=package_date.package_id','left');
                         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
                         // $this->db->group_by('package_id');
-                        $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
-                        $this->db->order_by('package_date.journey_date', 'ASC');
                         $international_packages_dates = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
                         
                         foreach($international_packages_dates as $international_packages_all_dates_value){ ?>        

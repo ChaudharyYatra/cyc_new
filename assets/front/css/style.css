@@ -571,7 +571,7 @@ table {
   opacity: 0.5; }
 
 section {
-  /*padding: 4.5rem 0 5rem;*/
+  padding: 4.5rem 0 5rem;
   position: relative; }
 
 /*heading title*/
@@ -2114,7 +2114,7 @@ nav.navbar.navbar-default.navbar-sticky-in .logo-black {
       .modal-open .modal .modal-dialog .modal-content {
         border: none;
         position: relative;
-        border-radius: 5px; }
+        border-radius: 0; }
         .modal-open .modal .modal-dialog .modal-content .modal-body {
           padding: 20px; }
         .modal-open .modal .modal-dialog .modal-content .login-content {
@@ -2528,16 +2528,15 @@ nav.navbar.navbar-default.navbar-sticky-in .logo-black {
   z-index: 2; }
   .form-main .form-content {
     box-shadow: 0px 0px 30px #85858557;
-    margin: -76px auto 0;
+    margin: -50px auto 0;
     background: #fff;
     border-radius: 0px;
-    z-index: 2;
-    /*search bar custom css*/
+    z-index: 2; 
+    /* padding: 25px; */  
     padding-top: 25px;
     padding-bottom: 25px;
     padding-left: 5px;
     padding-right: 5px;
-    /*search bar custom css*/
   }
     .form-main .form-content .input-box {
       position: relative;
@@ -5246,6 +5245,13 @@ section.blog .grid {
     border-bottom: 1px solid #fff;
     display: inline-block; }
 
+.author_bg{
+  background-color: #fff;
+}
+.img_br_no{
+  border-radius: inherit;
+}
+
 .author-news {
   position: relative;
   overflow: hidden;
@@ -6054,7 +6060,95 @@ ul.sidebar-tags li {
   ;
 }
 /* ================About us scroll================== */
+/* ===========search bar1============================== */
+.scrollbar_search{
+  overflow-y: scroll;
+  height: 7vh !important;
+  padding-right: 10px;
 
+}
+
+#search_style-1::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#search_style-1::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#search_style-1::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #d8d8d8
+  ;
+}
+/* ==============search bar1================================== */
+/* ===========search bar2============================== */
+.search_scrollbar_search{
+  overflow-y: scroll;
+  height: 8vh !important;
+  padding-right: 10px;
+
+}
+
+#search_style-2::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#search_style-2::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#search_style-2::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #d8d8d8
+  ;
+}
+/* ==============search bar2================================== */
+
+/* ----search bar3----- */
+
+.month_scrollbar_search{
+  overflow-y: scroll;
+  height: 7vh !important;
+  padding-right: 10px;
+
+}
+
+#search_style-3::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+#search_style-3::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+#search_style-3::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #d8d8d8
+  ;
+}
+/* -----search bar3----- */
 .why-us-item:hover h4 {
   color: #fff !important;
   transition: all ease-in-out 0.5s; }
@@ -6260,7 +6354,7 @@ table.scrolldown tbody td {
   .trending .new-trend2 {
     position: absolute;
     top: -21px;
-    right: 12px; 
+    right: 15px; 
     padding: 8px 15px !important;
   }
 
@@ -6413,11 +6507,65 @@ table.scrolldown tbody td {
   height: 70vh !important;
   overflow-y: scroll;
   /* padding: 10px; */
-  
-  
 }
 
-/*search bar css*/
+/* new date time picker for custom enquiry form */
+.ui-datepicker-month{
+  width: 48% !important;
+  padding: 10px !important;
+  margin-right: 2px !important;
+}
+.ui-datepicker-year{
+  width: 48% !important;
+  padding: 10px !important;
+  margin-right: 2px !important;
+}
+
+/*  */
+@media (min-width: 992px){
+.nav.navbar-nav li.submenu .dropdown-menu.customer_dropdown{
+  min-width: 180px !important;
+  left:-18px !important;
+}
+}
+
+.instruction_bg{
+  background-color: #029E9D;
+  color: #fff;
+}
+.remove_ml{
+  margin-right: -5%;
+}
+.bg_img_customer{
+  background: linear-gradient(0deg, rgb(235 228 232 / 88%), rgb(241 237 239 / 68%)), url(http://localhost/choudhary_yatra_new_git/master/uploads/do_not_delete/origin_main.png);
+  background-size: cover;
+}
+/*  */
+.modal-open .modal .modal-dialog .login_modal_height {
+  border: none;
+  position: relative;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 3px solid rgba(255, 255, 255, 0.3);  
+
+}
+
+@media (max-width: 991px) {
+
+  .modal-content .blog-image{
+    display: none;
+
+  }
+}
+
+.login_modal_height{
+  height:auto !important;
+}
+
+/* ------------------------------------------ */
 .all_search{
     /* box-shadow: 0px 0px 30px #85858557; */
     margin: -76px auto 0;
@@ -6439,105 +6587,4 @@ table.scrolldown tbody td {
   border-top-right-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
   padding: 7px;
-}
-/*search bar css*/
-
-/* ===========search bar1============================== */
-.scrollbar_search{
-  overflow-y: scroll;
-  height: 7vh !important;
-  padding-right: 10px;
-
-}
-
-#search_style-1::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
-
-#search_style-1::-webkit-scrollbar
-{
-  width: 6px;
-  background-color: #F5F5F5;
-}
-
-#search_style-1::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #d8d8d8
-  ;
-}
-/* ==============search bar1================================== */
-/* ===========search bar2============================== */
-.search_scrollbar_search{
-  overflow-y: scroll;
-  height: 8vh !important;
-  padding-right: 10px;
-
-}
-
-#search_style-2::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
-
-#search_style-2::-webkit-scrollbar
-{
-  width: 6px;
-  background-color: #F5F5F5;
-}
-
-#search_style-2::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #d8d8d8
-  ;
-}
-/* ==============search bar2================================== */
-
-/* ----search bar3----- */
-
-.month_scrollbar_search{
-  overflow-y: scroll;
-  height: 7vh !important;
-  padding-right: 10px;
-
-}
-
-#search_style-3::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
-
-#search_style-3::-webkit-scrollbar
-{
-  width: 6px;
-  background-color: #F5F5F5;
-}
-
-#search_style-3::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #d8d8d8
-  ;
-}
-/* -----search bar3----- */
-
-.limited-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Show only 3 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    word-wrap: break-word;
 }

@@ -37,20 +37,20 @@
           <div class="row">
               <div class="col-md-12 pb-3">
                   <div class="input-group">
-          <input type="text" class="form-control" placeholder="Email Address" name="hotel_email_address" id="hotel_email_address">
+          <input type="text" class="form-control" placeholder="Mobile Number" name="mobile_number1" id="mobile_number1">
           <div class="input-group-append">
             
           </div>
            
         </div>
-        <span class="text-danger float-left" id="emaillogin_error" style="display:none;"></span>
+        <span class="text-danger float-left" id="mobile_number1_error" style="display:none;"></span>
               </div>
               
           </div>
           <div class="row">
               <div class="col-md-12 pb-3">
                  <div class="input-group">
-          <input type="password" class="form-control" placeholder="Password" name="hotel_password" id="hotel_password">
+          <input type="password" class="form-control" placeholder="Password" name="password" id="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password"></span>
@@ -107,42 +107,21 @@
   function validateloginForms() 
 {
 
-  $("#emaillogin_error").hide();
+  $("#mobile_number1_error").hide();
   $("#passlogin_error").hide();
   
   var submiform='';
   
- var hotel_email_address = $('#hotel_email_address').val();
-  if (hotel_email_address == '' || hotel_email_address ==null) 
+ var mobile_number1 = $('#mobile_number1').val();
+  if (mobile_number1 == '' || mobile_number1 ==null) 
   {
-    $('#emaillogin_error').text('Please enter email address.');
-    $('#emaillogin_error').show();
+    $('#mobile_number1_error').text('Please enter mobile number.');
+    $('#mobile_number1_error').show();
     submiform=false;
   }
-  else
-  {
-      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(hotel_email_address)) 
-        {
-           $('#emaillogin_error').text('Please enter valid email address.');
-            $('#emaillogin_error').show();
-            submiform=false;
-        }
-        else if(hotel_email_address)
-        {
-          var email_split = hotel_email_address.split('@');
-          var count = (email_split[1].match(/\./g) || []).length;
-          if(count > 2)
-          {
-              $('#emaillogin_error').text('Please enter valid email address.');
-              $('#emaillogin_error').show();
-              submiform=false;
-          }
-        }
-  }
   
-  var hotel_password = $('#hotel_password').val();
-  if(hotel_password == '' || hotel_password ==null) 
+  var password = $('#password').val();
+  if(password == '' || password ==null) 
   {
     $('#passlogin_error').text('Please enter password.');
     $('#passlogin_error').show();

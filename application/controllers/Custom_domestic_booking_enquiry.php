@@ -82,24 +82,54 @@ class Custom_domestic_booking_enquiry extends CI_Controller {
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
         $main_packages = $this->master_model->getRecords('packages');
 
-        $record = array();
-        $fields = "packages.*";
+        // ====================== This is live code ===============================
+        
+            // $record = array();
+            // $fields = "packages.*";
+            // $this->db->where('packages.is_deleted','no');
+            // $this->db->where('packages.is_active','yes');
+            // $this->db->where('package_type','3');
+            // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            // // $this->db->group_by('package_id');
+            // $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+
+            // -------------------- on live this $main_packages_date alredy commented ---------------
+            
+            // $record = array();
+            // $fields = "packages.*,package_date.*";
+            // $this->db->where('packages.is_deleted','no');
+            // $this->db->where('packages.is_active','yes');
+            // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+            // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+            // // $this->db->group_by('package_id');
+            // $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+            
+            // -------------------- on live this $main_packages_date alredy commented ---------------
+
+        // ====================== This is live code ====================================
+
+        // ============= this is Rupali local code ==================
+        
+        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
         $this->db->where('packages.is_deleted','no');
         $this->db->where('packages.is_active','yes');
         $this->db->where('package_type','3');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-        // $this->db->group_by('package_id');
+        $this->db->group_by('package_id');
         $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
 
-        // $record = array();
-        // $fields = "packages.*,package_date.*";
-        // $this->db->where('packages.is_deleted','no');
-        // $this->db->where('packages.is_active','yes');
-        // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-        // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-        // // $this->db->group_by('package_id');
-        // $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-    
+        $record = array();
+        $fields = "packages.*,package_date.*";
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('packages.is_active','yes');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        // $this->db->group_by('package_id');
+        $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        
+        // ============= this is Rupali local code ==================
+
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
         $this->db->order_by('id','ASC');
@@ -119,7 +149,7 @@ class Custom_domestic_booking_enquiry extends CI_Controller {
          $data = array('middle_content' => 'all_custom_domestic_packages',
 						'main_packages'       => $main_packages,
                         'main_packages_all'       => $main_packages_all,
-                        // 'main_packages_date'       => $main_packages_date,
+                        'main_packages_date'       => $main_packages_date,
                         'count'      => $count,
                         'page_title' => 'Packages', 
                         'website_basic_structure' => $website_basic_structure,

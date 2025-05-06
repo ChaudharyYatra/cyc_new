@@ -13,7 +13,7 @@ class Stationary extends CI_Controller{
 	
         $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/stationary";
         $this->module_title       = "Stationary";
-		$this->module_title_stock       = "Stationary Stock";
+        $this->module_title_stock       = "Stationary Stock";
         $this->module_url_slug    = "stationary";
         $this->module_view_folder = "stationary/";    
        
@@ -415,5 +415,31 @@ class Stationary extends CI_Controller{
          $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
 
     }
+
+    public function get_series()
+	{  
+        $from_series_no= $this->input->post('from_series_no');
+        $stationary_id_no      = $this->input->post('stationary_id_no');
+        $this->db->order_by('from_series','asc');
+         $this->db->where('stationary_id',$stationary_id_no);
+         $this->db->limit(1); 
+         $academic_years_data = $this->master_model->getRecord('stationary_details');
+        $from_series=$academic_years_data['from_series'];
+         $this->db->order_by('to_series','desc');
+         $this->db->where('stationary_id',$stationary_id_no);
+         $this->db->limit(1); 
+         $academic_years_data = $this->master_model->getRecord('stationary_details');
+       $to_series=$academic_years_data['to_series'];
+
+        if($from_series<=$from_series_no && $to_series>=$from_series_no)
+        {
+            echo '123';
+        }else{
+            echo '456';
+
+        }
+    // echo "1234";
+        
+	}
    
 }

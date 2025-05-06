@@ -255,7 +255,7 @@ class Hotel extends CI_Controller{
             $this->db->order_by('id','desc');
             $this->db->where('is_deleted','no');
             $this->db->where('is_active','yes');
-            $state_data = $this->master_model->getRecords('state');
+            $state_data = $this->master_model->getRecords('state_table');
 
             $this->arr_view_data['state_data']        = $state_data;
             $this->arr_view_data['action']          = 'add'; 
@@ -600,11 +600,11 @@ class Hotel extends CI_Controller{
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $state_data = $this->master_model->getRecords('state');
+        $state_data = $this->master_model->getRecords('state_table');
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $city_name_data = $this->master_model->getRecords('city');
+        $city_name_data = $this->master_model->getRecords('district_table');
 
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['state_data']        = $state_data;
@@ -650,7 +650,7 @@ class Hotel extends CI_Controller{
                         $this->db->where('is_deleted','no');
                         $this->db->where('is_active','yes');
                         $this->db->where('state_id',$city_data);   
-                        $data = $this->master_model->getRecords('city');
+                        $data = $this->master_model->getRecords('district_table');
         echo json_encode($data);
     }
    

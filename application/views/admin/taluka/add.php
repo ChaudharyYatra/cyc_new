@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" enctype="multipart/form-data" id="add_state">
+              <form method="post" enctype="multipart/form-data" id="add_taluka">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
@@ -69,7 +69,12 @@
                             <label>Select District</label>
                             <select class="form-control" style="width: 100%;" name="district_id" id="district_id" required="required">
                                 <option value="">Select District Name</option>
-                                
+                                <!-- <?php
+                                   //foreach($state_name_data as $state_name_info) 
+                                   //{ 
+                                ?>
+                                   <option value="<?php //echo $state_name_info['id']; ?>"><?php //echo $state_name_info['state_name']; ?></option>
+                               <?php //} ?> -->
                               </select>
                           </div>
                         </div>

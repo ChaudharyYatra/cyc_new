@@ -49,8 +49,8 @@
                             <span class="text-danger">Image height should be 650 & width should be 700.</span>
                             <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span><br>
                             <span class="text-danger" id="img_width" style="display:none;">Image Width should be Minimum 680 px To Maximum 720 px.</span>
-                    <span class="text-danger" id="img_height" style="display:none;">Image Height should be Minimum 630 px To Maximum 670 px.</span>
-                    <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                            <span class="text-danger" id="img_height" style="display:none;">Image Height should be Minimum 630 px To Maximum 670 px.</span>
+                            <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
                           </div>
                       </div>   
               </div>

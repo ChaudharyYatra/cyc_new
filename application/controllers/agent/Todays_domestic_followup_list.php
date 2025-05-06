@@ -29,10 +29,18 @@ class Todays_domestic_followup_list extends CI_Controller {
         $id=$this->session->userdata('agent_sess_id');
         
         $record = array();
+// ----------------- This is Live Code -----------------------------------
         $fields = "domestic_followup.*,booking_enquiry.first_name,booking_enquiry.last_name	,booking_enquiry.created_ats";
         $this->db->where('domestic_followup.is_deleted','no');
         $this->db->where('next_followup_date',$today);
 		 $this->db->where('booking_enquiry.agent_id',$id);
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+        // $fields = "domestic_followup.*,booking_enquiry.first_name,booking_enquiry.last_name,booking_enquiry.created_ats";
+        // $this->db->where('domestic_followup.is_deleted','no');
+        // $this->db->where('next_followup_date',$today);
+	// $this->db->where('booking_enquiry.ftaken_by',$id);
+// ----------------- This is Local Code -----------------------------------
         $this->db->join("booking_enquiry", 'domestic_followup.booking_enquiry_id=booking_enquiry.id','left');
         $arr_data = $this->master_model->getRecords('domestic_followup');
         // print_r($arr_data); die;

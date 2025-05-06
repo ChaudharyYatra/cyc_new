@@ -38,7 +38,6 @@ class Client_reviews extends CI_Controller{
 
     public function add()
     {   
-
         if($this->input->post('submit'))
         {
             $this->form_validation->set_rules('review', 'Review', 'required');

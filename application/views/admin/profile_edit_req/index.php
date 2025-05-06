@@ -76,8 +76,8 @@
                     </td> -->
 
                     <td>
-                          <a href="<?php echo $module_url_path;?>/details/<?php $rid=base64_encode($info['id']); $aid=base64_encode($info['agent_id']); 
-					   echo rtrim($rid, '=').'/'.rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> 
+                          <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
+					   echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> 
                           
                        
                     </td>

@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -8,10 +8,10 @@
             <h1><?php echo $page_title; ?></h1>
           </div>
           <div class="col-sm-6">
-            <!-- <ol class="breadcrumb float-sm-right">
-              <a href="<?php //echo $module_url_path_date; ?>/add"><button class="btn btn-primary">Add</button></a>
+            <ol class="breadcrumb float-sm-right">
+              <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
               
-            </ol> -->
+            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -28,17 +28,22 @@
              
               <!-- /.card-header -->
               <div class="card-body">
-                  <?php  if(count($arr_data) > 0 ) 
-              { ?>
+                <?php  if(count($arr_data) > 0 ) 
+                { ?>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th>SN</th>
-                    <th>Hotel Name</th>
-                    <th>Location</th>
-                    <th>Address</th>
-                    <th>Mobile Number	</th>
-                    <th>Email Address</th>
+                    <th>Room No.</th>
+                    <th>Floor Number</th>
+                    <th>Room Type</th>
+					          <th>Occupancy</th>
+                    <th>Bed Type</th>
+                    <th>Price</th>
+                    <th>Amenities</th>
+                    <th>Description</th>
+                    <th>Is Active?</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -47,14 +52,36 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($info); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $info['hotel_name']; ?></td>
-                    <td><?php echo $info['hotel_location']; ?> </td>
-                    <td><?php echo $info['hotel_address']; ?></td>
-                    <td><?php echo $info['hotel_email_address']; ?></td>
-                    <td><?php echo $info['hotel_mobile_number']; ?></td>
+                    <td><?php echo $info['room_number'] ?></td>
+                    <td><?php echo $info['floor_number'] ?></td>
+					          <td><?php echo $info['room_type'] ?></td>
+                    <td><?php echo $info['occupancy'] ?></td>
+                    <td><?php echo $info['bed_type'] ?></td>
+                    <td><?php echo $info['price'] ?></td>
+                    <td><?php echo $info['amenities'] ?></td>
+                    <td><?php echo $info['description'] ?></td>
+
+                    <td>
+                        <?php 
+                        if($info['is_active']=='yes')
+                          {
+                        ?>
+                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-success btn-sm">YES</button></a>
+                        <?php } else { ?>
+                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php echo $info['id'].'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
+                        <?php } ?>
+                    </td>
+                    <td>
+                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id']; ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" 
+                          title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                          
+                    </td>
+                    
                     
                   </tr>
                   
@@ -68,7 +95,7 @@
                 <i class="fa fa-ban"></i>
                 <b>Alert!</b>
                 Sorry No records available
-              </div>' ; } ?>
+                </div>' ; } ?>
                
               </div>
               <!-- /.card-body -->

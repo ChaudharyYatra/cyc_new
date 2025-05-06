@@ -49,8 +49,8 @@
                     <th>Email</th>
                     <th>Contact Number</th>
                     <th>Enquiry Date</th>
-                    <th>Followup form</th>
-                    <th>Followup List</th>
+                    <!-- <th>Followup form</th>
+                    <th>Followup List</th> -->
                   </tr>
                   </thead>
                   <tbody>
@@ -74,24 +74,23 @@
                     <td><?php echo $info['mobile_number']; ?></td>
                     <td><?php echo date("d-m-Y",strtotime($info['created_at'])); ?></td>
 
-                  <td>
+                  <!-- <td>
                       <?php
-                          if($count > 0)
-                          {
+                          //if($count > 0)
+                          //{
                       ?>
                       <h6>Follow Already Taken</h6>
                       <?php        
-                          }else{
+                          //}else{
                       ?>
-                      <!--<a data-bs-toggle="modal" data-bs-target="#exampleModal" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><img src=<?php //echo base_url(); ?>uploads\do_not_delete\follow.png height="30%" width="30%" alt></img></a>-->
-                      <a data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $i; ?>" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a>
-                      <a href="<?php echo $module_url_path_booking_basic_info;?>/add/<?php echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>                     
+                      <a data-bs-toggle="modal" data-bs-target="#exampleModal<?php //echo $i; ?>" class="enq_id" data-bs-whatever="Form" data-enq-id="<?php //echo $enq_id;?>"><button type="button" class="btn btn-primary btn-sm btn_follow take_followup_btn" class="dropdown-item">Take Followup</button> </a>
+                      <a href="<?php //echo $module_url_path_booking_basic_info;?>/add/<?php //echo $enq_id; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow mt-1" class="dropdown-item">Booking</button></a>                     
                     </td>
-                     <?php } ?>
+                     <?php //} ?>
                      
                     <td>
-                    <a href="<?php echo $module_url_path_domestic_followup;?>/index/<?php echo $info['id']; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow" class="dropdown-item">View</button></a>
-                    </td>
+                    <a href="<?php //echo $module_url_path_domestic_followup;?>/index/<?php //echo $info['id']; ?>"><button type="button" class="btn btn-primary btn-sm btn_follow" class="dropdown-item">View</button></a>
+                    </td> -->
                     
                 
 

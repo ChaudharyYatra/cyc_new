@@ -65,12 +65,48 @@ class Dashboard extends CI_Controller{
         // $arr_data['total_enquiry_count'] = $enquiry_count + $internatinal_enquiry_count;
         // print_r($total_enquiry_count); die;
         // $arr_data['enquiry_count'] = count($enquiry_data);
+
+        $this->db->select("
+        COUNT(custom_domestic_booking_enquiry.id) AS custom_package_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.is_active = 'yes' THEN 1 ELSE 0 END) AS total_isactive_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.is_deleted = 'yes' THEN 1 ELSE 0 END) AS total_isdeleted_count
+        ");
+
+        $this->db->from('custom_domestic_booking_enquiry');
+
+        $custom_enquiry_data = $this->db->get()->row_array();
+        // print_r($custom_enquiry_data); die;
+
+
+        $this->db->select("
+        COUNT(custom_domestic_booking_enquiry.id) AS custom_package_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.is_active = 'yes' THEN 1 ELSE 0 END) AS total_isactive_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.is_deleted = 'yes' THEN 1 ELSE 0 END) AS total_isdeleted_count
+        ");
+
+        $this->db->from('custom_domestic_booking_enquiry');
+
+        $custom_enquiry_data = $this->db->get()->row_array();
+        // print_r($custom_enquiry_data); die;
+
+        $this->db->select("
+        COUNT(custom_domestic_booking_enquiry.id) AS total_enquiry_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.followup_status = 'yes' THEN 1 ELSE 0 END) AS total_followup_count,
+        SUM(CASE WHEN custom_domestic_booking_enquiry.not_interested = 'no' THEN 1 ELSE 0 END) AS total_notintersted_count
+        ");
+
+        $this->db->from('custom_domestic_booking_enquiry');
+        $this->db->where('custom_domestic_booking_enquiry.is_deleted', 'no');
+
+        $enquiry_status = $this->db->get()->row_array();
+
+        // print_r($enquiry_status); die;
         
         $this->arr_view_data['custom_agent_name']        = $custom_agent_name;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
-      //  $this->arr_view_data['total_enquiry_count']  = $total_enquiry_count;
-        //$this->arr_view_data['enquiry_count']  = $enquiry_count;
+        $this->arr_view_data['custom_enquiry_data']  = $custom_enquiry_data;
+        $this->arr_view_data['enquiry_status']  = $enquiry_status;
        // $this->arr_view_data['enquiry_count_total']  = $enquiry_count_total;
         //$this->arr_view_data['internatinal_enquiry_count']  = $internatinal_enquiry_count;
         //$this->arr_view_data['international_enquiry_data_total']  = $international_enquiry_data_total;

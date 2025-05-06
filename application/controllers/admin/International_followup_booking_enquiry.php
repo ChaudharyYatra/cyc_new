@@ -60,7 +60,7 @@ class International_followup_booking_enquiry extends CI_Controller{
                //$this->db->where('international_booking_enquiry_id',$i);
                 //$arr_data = $this->master_model->getRecords('international_followup');
 			
-				$record = array();
+		$record = array();
                 $fields = "international_followup.*,followup_reason.create_followup_reason";
                 $this->db->where('international_followup.is_deleted','no');
                 $this->db->where('international_booking_enquiry_id',$i);

@@ -357,6 +357,7 @@ public function received()
               
                 for($i=0;$i<$count;$i++)
                 {
+// ----------------- This is Live Code -----------------------------------
                     if($received_qty[$i]=='Order Rejected'){
                         $arr_update = array(
                             'received_qty'   =>    $received_qty[$i],
@@ -370,6 +371,14 @@ public function received()
                         'order_status'   =>    'completed' 
                     );
                 }
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                    // $arr_update = array(
+                    //     'received_qty'   =>    $_POST["received_qty"][$i],
+                    //     'received_status'   =>    'yes',    
+                    //     'order_status'   =>    'completed' 
+                    // );
+// ----------------- This is Local Code -----------------------------------
                     $arr_where     = array("id" => $s_id[$i]);
                     $inserted_id = $this->master_model->updateRecord('stationary_order_details',$arr_update,$arr_where);
                 }    

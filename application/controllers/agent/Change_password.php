@@ -89,8 +89,6 @@ public function change_password()
 									</html>";
 						// echo $msg;
 						$subject='Password Change Sucessfully';
-						//$this->send_mail($admin_email,$from_email,$msg,$subject,$cc=null);
-						// die;
 						
 						$msg_email="<html>
 									<head>
@@ -112,7 +110,6 @@ public function change_password()
 									</body>
 									</html>";
 									$subject_email=' Password change by agent';
-						//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 
                              $this->session->set_flashdata('success_message',$this->module_title." Successfully.");
                              redirect(base_url('agent/login/logout'));

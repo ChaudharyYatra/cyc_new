@@ -14,158 +14,197 @@ class Packages extends CI_Controller {
         $this->arr_view_data = [];
 	 }
 
-//     public function all_packages()
-//     {
-//         $aData['msg'] = '';
-//         $this->db->where('is_deleted','no');
-//         $this->db->where('is_active','yes');
-//         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-//         $main_packages = $this->master_model->getRecords('packages');
 
-//         // Get the start and limit parameters from the AJAX request
-//         $start = $this->input->post('start');
-//         $limit = $this->input->post('length');
+// -------------------- This is Live COde ------------------------------------
+// public function all_packages()
+// {
+//     $aData['msg'] = '';
 
-//         // Your existing query code
-//         $record = array();
-//         $fields = "packages.id,packages.image_name,packages.tour_number_of_days,packages.tour_number,packages.tour_title,packages.rating,packages.cost,package_date.journey_date,package_date.single_seat_cost,
-//         package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-//         $this->db->join("package_date", 'packages.id=package_date.package_id','right');
-//  		$this->db->where('packages.is_deleted','no');
-//         $this->db->where('packages.is_active','yes');
-//         // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-//         $this->db->order_by('CAST(tour_number AS UNSIGNED)', 'ASC');
-//         $this->db->order_by('tour_number', 'ASC');
-//         $this->db->group_by('package_id');
-//         $this->db->limit($limit, $start);
-//         $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
-//         $this->db->order_by('package_date.journey_date', 'ASC');
-//         $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+//     // Get start and limit parameters
+//     $start = $this->input->get('start', TRUE) ?? 0; // Default start at 0
+//     $limit = $this->input->get('limit', TRUE) ?? 20; // Default limit to 20
 
-//         // $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-//         // $this->db->where('packages.is_deleted', 'no');
-//         // $this->db->where('packages.is_active', 'yes');
-//         // $this->db->where('package_type', '1');
-//         // $this->db->join("package_date", 'packages.id=package_date.package_id', 'left');
-//         // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-//         // $this->db->group_by('package_id');
-//         // $this->db->limit($limit, $start);
-//         // $main_packages_all = $this->master_model->getRecords('packages', array('packages.is_deleted' => 'no'), $fields);
+//     // Count total records
+//     $total_packages = $this->db->where('is_deleted', 'no')->where('is_active', 'yes')->count_all_results('packages');
 
-//         // Prepare the response data
-//         $response = array(
-//             // "data" => $main_packages_all, // Data for the current page
-//         );
+//     // Fetch paginated results
+//     $fields = "packages.id, packages.image_name, packages.tour_number_of_days, packages.tour_number, packages.tour_title, packages.rating, packages.cost, package_date.journey_date, package_date.single_seat_cost, package_date.twin_seat_cost, package_date.three_four_sharing_cost";
+//     $this->db->join("package_date", 'packages.id=package_date.package_id', 'right');
+//     $this->db->where('packages.is_deleted', 'no');
+//     $this->db->where('packages.is_active', 'yes');
+//     $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
+//     $this->db->where('package_date.is_deleted', 'no');
+//     $this->db->group_by('package_id');
+//     $this->db->order_by('CAST(tour_number AS UNSIGNED)', 'ASC');
+//     $this->db->order_by('package_date.journey_date', 'ASC');
+//     $this->db->limit($limit, $start);
+//     $main_packages_all = $this->master_model->getRecords('packages', array('packages.is_deleted' => 'no'), $fields);
 
-//         // Send the JSON response to the client
-//         // echo json_encode($response);
+//     // Fetch additional data
+//     $this->db->where('is_deleted', 'no');
+//     $this->db->where('is_active', 'yes');
+//     $this->db->order_by('id', 'ASC');
+//     $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
 
+//     $this->db->where('is_deleted', 'no');
+//     $this->db->where('is_active', 'yes');
+//     $this->db->order_by('id', 'ASC');
+//     $social_media_link = $this->master_model->getRecords('social_media_link');
 
-// //         $record = array();
-// //         $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-// //         $this->db->join("package_date", 'packages.id=package_date.package_id','right');
-// // 		 $this->db->where('packages.is_deleted','no');
-// //         $this->db->where('packages.is_active','yes');
-// //         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-// //         $this->db->group_by('package_id');
-// //         $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+//     $this->db->where('is_deleted', 'no');
+//     $this->db->where('is_active', 'yes');
+//     $this->db->order_by('id', 'ASC');
+//     $package_details = $this->master_model->getRecords('packages');
 
-//         $record = array();
-//         $fields = "packages.*,package_date.*";
-//         $this->db->where('packages.is_deleted','no');
-//         $this->db->where('packages.is_active','yes');
-//         $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-//         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-//         // $this->db->group_by('package_id');
-//         $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+//     // Prepare data for the view
+//     $data = array(
+//         'middle_content' => 'all_packages',
+//         'main_packages_all' => $main_packages_all,
+//         'total_packages' => $total_packages,
+//         'limit' => $limit,
+//         'start' => $start,
+//         'page_title' => 'Packages',
+//         'website_basic_structure' => $website_basic_structure,
+//         'social_media_link' => $social_media_link,
+//         'package_details' => $package_details,
+//     );
+
+//     $this->arr_view_data['page_title'] = "All Packages";
+//     $this->load->view('front/common_view', $data);
+// }
+// -------------------- This is Live COde ------------------------------------
+
+// -------------------- This is My Local Code ------------------------------------
+
+    public function all_packages()
+    {
+        $aData['msg'] = '';
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        $main_packages = $this->master_model->getRecords('packages');
+
+        // Get the start and limit parameters from the AJAX request
+        $start = $this->input->post('start');
+        $limit = $this->input->post('length');
+
+        // Your existing query code
+        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
+        $this->db->where('packages.is_deleted', 'no');
+        $this->db->where('packages.is_active', 'yes');
+        $this->db->where('package_type', '1');
+        $this->db->join("package_date", 'packages.id=package_date.package_id', 'left');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        $this->db->group_by('package_id');
+        $this->db->limit($limit, $start);
+        $main_packages_all = $this->master_model->getRecords('packages', array('packages.is_deleted' => 'no'), $fields);
+
+        // Prepare the response data
+        $response = array(
+            "data" => $main_packages_all, // Data for the current page
+        );
+
+        $record = array();
+        $fields = "packages.*,package_date.*";
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('packages.is_active','yes');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        // $this->db->group_by('package_id');
+        $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
     
-//         $this->db->where('is_deleted','no');
-//         $this->db->where('is_active','yes');
-//         $this->db->order_by('id','ASC');
-//         $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
         
-//         $this->db->where('is_deleted','no');
-//         $this->db->where('is_active','yes');
-//         $this->db->order_by('id','ASC');
-//         $social_media_link = $this->master_model->getRecords('social_media_link');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $social_media_link = $this->master_model->getRecords('social_media_link');
 
-//         $this->db->where('is_deleted','no');
-//         $this->db->where('is_active','yes');
-//         $this->db->order_by('id','ASC');
-//         $package_details = $this->master_model->getRecords('packages');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $package_details = $this->master_model->getRecords('packages');
         
-//         $count= sizeof($main_packages);
-//          $data = array('middle_content' => 'all_packages',
-// 						'main_packages'       => $main_packages,
-//                         'main_packages_all'       => $main_packages_all,
-//                         'main_packages_date'       => $main_packages_date,
-//                         'count'      => $count,
-//                         'page_title' => 'Packages', 
-//                         'website_basic_structure' => $website_basic_structure,
-//                         'social_media_link' => $social_media_link,
-//                         'package_details' => $package_details,
-//                         );
+        $count= sizeof($main_packages);
+         $data = array('middle_content' => 'all_packages',
+						'main_packages'       => $main_packages,
+                        'main_packages_all'       => $main_packages_all,
+                        'main_packages_date'       => $main_packages_date,
+                        'count'      => $count,
+                        'page_title' => 'Packages', 
+                        'website_basic_structure' => $website_basic_structure,
+                        'social_media_link' => $social_media_link,
+                        'package_details' => $package_details,
+                        );
 						
-//         $this->arr_view_data['page_title']     =  "All Packages";
-//         $this->load->view('front/common_view',$data);
-//     }
+        $this->arr_view_data['page_title']     =  "All Packages";
+        $this->load->view('front/common_view',$data);
+    }
 
-public function all_packages()
-{
-    $aData['msg'] = '';
+    public function all_exclusive_deal()
+    {
+        $aData['msg'] = '';
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        $main_packages = $this->master_model->getRecords('packages');
 
-    // Get start and limit parameters
-    $start = $this->input->get('start', TRUE) ?? 0; // Default start at 0
-    $limit = $this->input->get('limit', TRUE) ?? 20; // Default limit to 20
+        $record = array();
+        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('packages.is_active','yes');
+        $this->db->where('package_type','Special Limited Offer');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        $this->db->group_by('package_id');
+        $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        // print_r($main_packages_all); die;
 
-    // Count total records
-    $total_packages = $this->db->where('is_deleted', 'no')->where('is_active', 'yes')->count_all_results('packages');
+        $record = array();
+        $fields = "packages.*,package_date.*";
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('packages.is_active','yes');
+        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        // $this->db->group_by('package_id');
+        $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+    
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $social_media_link = $this->master_model->getRecords('social_media_link');
 
-    // Fetch paginated results
-    $fields = "packages.id, packages.image_name, packages.tour_number_of_days, packages.tour_number, packages.tour_title, packages.rating, packages.cost, package_date.journey_date, package_date.single_seat_cost, package_date.twin_seat_cost, package_date.three_four_sharing_cost";
-    $this->db->join("package_date", 'packages.id=package_date.package_id', 'right');
-    $this->db->where('packages.is_deleted', 'no');
-    $this->db->where('packages.is_active', 'yes');
-    $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
-    $this->db->where('package_date.is_deleted', 'no');
-    $this->db->group_by('package_id');
-    $this->db->order_by('CAST(tour_number AS UNSIGNED)', 'ASC');
-    $this->db->order_by('package_date.journey_date', 'ASC');
-    $this->db->limit($limit, $start);
-    $main_packages_all = $this->master_model->getRecords('packages', array('packages.is_deleted' => 'no'), $fields);
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','ASC');
+        $package_details = $this->master_model->getRecords('packages');
+        
+        $count= sizeof($main_packages);
+         $data = array('middle_content' => 'all_exclusive_deal',
+						'main_packages'       => $main_packages,
+                        'main_packages_all'       => $main_packages_all,
+                        'main_packages_date'       => $main_packages_date,
+                        'count'      => $count,
+                        'page_title' => 'Packages', 
+                        'website_basic_structure' => $website_basic_structure,
+                        'social_media_link' => $social_media_link,
+                        'package_details' => $package_details,
+                        );
+						
+        $this->arr_view_data['page_title']     =  "All Packages";
+        $this->load->view('front/common_view',$data);
+    }
+// -------------------- This is My Local Code ------------------------------------
 
-    // Fetch additional data
-    $this->db->where('is_deleted', 'no');
-    $this->db->where('is_active', 'yes');
-    $this->db->order_by('id', 'ASC');
-    $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
 
-    $this->db->where('is_deleted', 'no');
-    $this->db->where('is_active', 'yes');
-    $this->db->order_by('id', 'ASC');
-    $social_media_link = $this->master_model->getRecords('social_media_link');
-
-    $this->db->where('is_deleted', 'no');
-    $this->db->where('is_active', 'yes');
-    $this->db->order_by('id', 'ASC');
-    $package_details = $this->master_model->getRecords('packages');
-
-    // Prepare data for the view
-    $data = array(
-        'middle_content' => 'all_packages',
-        'main_packages_all' => $main_packages_all,
-        'total_packages' => $total_packages,
-        'limit' => $limit,
-        'start' => $start,
-        'page_title' => 'Packages',
-        'website_basic_structure' => $website_basic_structure,
-        'social_media_link' => $social_media_link,
-        'package_details' => $package_details,
-    );
-
-    $this->arr_view_data['page_title'] = "All Packages";
-    $this->load->view('front/common_view', $data);
-}
 
     
     public function package_details($id)
@@ -178,6 +217,8 @@ public function all_packages()
         if(is_numeric($id))
         {
             $this->db->where('id',$id);
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
             $package_details_data = $this->master_model->getRecords('packages');
             // $this->db->where('package_id',$id);
             // $package_date_details_data = $this->master_model->getRecords('package_date');
@@ -274,9 +315,14 @@ public function all_packages()
             $this->db->order_by('id','ASC');
             $media_source = $this->master_model->getRecords('media_source');
 
+            $this->db->where('is_deleted','no');
+            $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+            $this->db->where('is_deleted','no');
+            $zone_master_data = $this->master_model->getRecords('zone_master');
+
             if(isset($_POST['submit']))
             {
-                
                 $this->form_validation->set_rules('first_name', 'First Name', 'required');
                 $this->form_validation->set_rules('last_name', 'Last Name', 'required');
                 $this->form_validation->set_rules('email', 'Email', 'required');
@@ -293,10 +339,17 @@ public function all_packages()
                     $email             = trim($this->input->post('email'));
                     $mobile_number     = trim($this->input->post('mobile_number'));
                     $gender            = $this->input->post('gender');
-                    $agent_id         = $this->input->post('agent_id');
-                    $media_source_name         = $this->input->post('media_source_name');
-					$wp_mobile_number     = trim($this->input->post('wp_mobile_number'));
+                    $agent_id          = $this->input->post('agent_id');
+                    $media_source_name = $this->input->post('media_source_name');
+					$wp_mobile_number  = trim($this->input->post('wp_mobile_number'));
                     $package_id        = $id;
+                    $occupation_name  = $this->input->post('occupation_name'); 
+                    $zone_name  = $this->input->post('zone_name'); 
+                    $flat_no  = $this->input->post('flat_no'); 
+                    $house_name  = $this->input->post('house_name'); 
+                    $street_name  = $this->input->post('street_name'); 
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area');
     
                     $arr_insert = array(
                         'first_name'    =>   $first_name,
@@ -308,9 +361,16 @@ public function all_packages()
                         'package_id'    =>$id,
                         'media_source_name'    =>$media_source_name,
 						'wp_mobile_number'=>$wp_mobile_number,
-						'enquiry_from'    =>'front'
+						'enquiry_from'=> 'front',
+                        'occupation_name'    =>$occupation_name,
+                        'zone_name'    =>$zone_name,
+                        'flat_no'    =>$flat_no,
+                        'house_name'    =>$house_name,
+                        'street_name'    =>$street_name,
+                        'landmark'    =>$landmark,
+                        'area'    =>$area
+                        
                     );
-                    
                     $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
                     
                     $this->db->where('is_deleted','no');
@@ -418,6 +478,8 @@ public function all_packages()
                         'agent_data'    => $Aagent_data,
                         'department_data' => $department_data,
                         'media_source' => $media_source,
+                        'occupation_master_data' => $occupation_master_data,
+                        'zone_master_data' => $zone_master_data,
                         'page_title'    => 'Booking Enquiry',
 						);
 						

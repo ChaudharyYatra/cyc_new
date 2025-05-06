@@ -15,6 +15,7 @@ class International_booking_enquiry_followup extends CI_Controller {
                 redirect(base_url().'agent/login'); 
         }
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/international_booking_enquiry_followup";
+        $this->module_inter_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/Inter_booking_basic_info";
         $this->module_url_path_inter_booking_enq    =  base_url().$this->config->item('agent_panel_slug')."/international_booking_enquiry";
         $this->module_url_path_international_followup    =  base_url().$this->config->item('agent_panel_slug')."/international_booking_enquiry_followup";
         $this->module_title       = "Internatinal Booking Enquiry Followup";
@@ -58,6 +59,7 @@ class International_booking_enquiry_followup extends CI_Controller {
          $this->arr_view_data['page_title']      = $this->module_title." List";
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['module_inter_booking_basic_info'] = $this->module_inter_booking_basic_info;
          $this->arr_view_data['module_url_path_inter_booking_enq'] = $this->module_url_path_inter_booking_enq;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
@@ -319,7 +321,12 @@ public function international_followup()
                                 </html>";
                     // echo $msg;
                     $subject='Thank You For Enquiry';
-                    $this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
+// ----------------- This is Live Code -----------------------------------
+                    // $this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                    // $this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
+// ----------------- This is Local Code -----------------------------------
                     // die;
                     
                     $msg_email="<html>
@@ -343,7 +350,12 @@ public function international_followup()
                                 </body>
                                 </html>";
                                 $subject_email=' New Enquiry from customer';
-                    $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+// ----------------- This is Live Code -----------------------------------
+                    // $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                    // $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+// ----------------- This is Local Code -----------------------------------
                       $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                       redirect($this->module_url_path_international_followup.'/index/'.$international_id);
                   }

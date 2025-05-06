@@ -1,6 +1,6 @@
 <?php 
 //   Controller for: home page
-// Author: Mahesh Mhaske
+// Author: Rupali Patil
 // Start Date: 16-08-2022
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -16,7 +16,9 @@ class Booking_enquiry extends CI_Controller {
         }
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/booking_enquiry";
         $this->module_url_path_domestic_followup    =  base_url().$this->config->item('agent_panel_slug')."/domestic_booking_enquiry_followup";
-		  $this->module_url_path_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/booking_basic_info";
+		$this->module_url_path_booking_basic_info    =  base_url().$this->config->item('agent_panel_slug')."/booking_basic_info";
+		$this->module_url_path_payment_receipt   =  base_url().$this->config->item('agent_panel_slug')."/payment_receipt";
+		$this->module_url_path_seat_checker   =  base_url().$this->config->item('agent_panel_slug')."/seat_checker";
         $this->module_title       = "Booking Enquiry";
         $this->module_title_followup       = "Domestic Booking Enquiry Followup";
         $this->module_url_slug    = "booking_enquiry";
@@ -26,42 +28,6 @@ class Booking_enquiry extends CI_Controller {
          $this->load->library("phpmailer_library");
         $objMail = $this->phpmailer_library->load();
 	 }
-
-    //  public function index()
-    //  {
-    //      $agent_sess_name = $this->session->userdata('agent_name');
-    //      $id=$this->session->userdata('agent_sess_id');
-    //     $record = array();
-    //     $fields = "booking_enquiry.*,packages.tour_title,agent.agent_name,packages.tour_number as tno,booking_enquiry.package_id as pid";
-    //     $this->db->order_by('booking_enquiry.created_at','desc');
-    //     $this->db->where('booking_enquiry.is_deleted','no');
-    //     $this->db->where('booking_enquiry.agent_id',$id);
-    //     $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
-    //     $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
-    //     $this->db->order_by("booking_enquiry.id", "desc");
-    //     // $this->db->join("domestic_followup", 'booking_enquiry.id=domestic_followup.booking_enquiry_id','left');
-    //     $arr_data = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
-        
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('status','approved');
-    //     $followup_reason_data = $this->master_model->getRecords('followup_reason');
-        
-    //     $this->arr_view_data['followup_reason_data'] = $followup_reason_data;
-         
-    //      $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
-    //      $this->arr_view_data['module_url_path_domestic_followup'] = $this->module_url_path_domestic_followup;
-    //      $this->arr_view_data['listing_page']    = 'yes';
-    //      $this->arr_view_data['arr_data']        = $arr_data;
-    //      $this->arr_view_data['page_title']      = $this->module_title." List";
-    //      $this->arr_view_data['module_title']    = $this->module_title;
-    //      $this->arr_view_data['module_title_followup']    = $this->module_title_followup;
-    //      $this->arr_view_data['module_url_path'] = $this->module_url_path;
-    //      $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
-    //      $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
-        
-    //  }
-    
-    
     public function index()
      {
          $agent_sess_name = $this->session->userdata('agent_name');
@@ -76,12 +42,21 @@ class Booking_enquiry extends CI_Controller {
         $this->db->where('booking_enquiry.is_deleted','no');
         $this->db->where('booking_enquiry.booking_process','no');
         $this->db->where('booking_enquiry.followup_status','no');
-        $this->db->where('booking_enquiry.agent_id',$id);
-        $this->db->where('booking_enquiry.booking_status','no');
+// ------------------ This is Live COde -------------------------------
+        // $this->db->where('booking_enquiry.agent_id',$id);
+        // $this->db->where('booking_enquiry.booking_status','no');
         
+        // $this->db->where('booking_enquiry.i_got_it','no');
+        // // $this->db->where('booking_enquiry.not_interested','yes');
+// ------------------ This is Live COde -------------------------------  
+// ------------------ This is Local Code -------------------------------
+        $this->db->where('booking_enquiry.booking_status','no');
+
         $this->db->where('booking_enquiry.i_got_it','no');
         // $this->db->where('booking_enquiry.not_interested','yes');
-        
+
+        $this->db->where('booking_enquiry.agent_id',$id);
+// ------------------ This is Local Code -------------------------------
         $this->db->where('booking_enquiry.created_at >', $twentyFourHoursAgo);
         $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
         $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
@@ -105,6 +80,7 @@ class Booking_enquiry extends CI_Controller {
          $this->arr_view_data['module_title_followup']    = $this->module_title_followup;
          $this->arr_view_data['module_url_path_booking_basic_info'] = $this->module_url_path_booking_basic_info;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['module_url_path_payment_receipt'] = $this->module_url_path_payment_receipt;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
         
@@ -150,20 +126,61 @@ class Booking_enquiry extends CI_Controller {
         redirect($this->module_url_path.'/index');   
     }
 
-   public function add()
+// ---------------- This is Live Code --------------------------
+//    public function add()
+//      {  
+//          $agent_sess_name = $this->session->userdata('agent_name');
+//          $id=$this->session->userdata('agent_sess_id');
+            
+//          if($this->input->post('submit'))
+//          {
+//             // print_r($_REQUEST); die;
+// ---------------- This is Live Code --------------------------
+// ---------------- This is Local Code --------------------------
+    public function add($iid="")
      {  
+        // echo $iid; die;
          $agent_sess_name = $this->session->userdata('agent_name');
          $id=$this->session->userdata('agent_sess_id');
+         
+        $visitor_data=array();
+        $v_booking = $this->uri->segment(4);
+        if($v_booking !=''){
+            $this->db->where('is_deleted','no');
+            $this->db->where('id',$v_booking);
+            $visitor_data = $this->master_model->getRecord('website_visitor_data');
+        }
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('booking_enquiry.id',$iid);
+        $agent_booking_enquiry_data = $this->master_model->getRecord('booking_enquiry');
+        // print_r($agent_booking_enquiry_data); die;
+
+        $record = array();
+        $fields = "booking_enquiry.*,packages.tour_title,agent.agent_name,packages.tour_number as tno,booking_enquiry.package_id as pid";
+        $this->db->order_by('booking_enquiry.created_at','desc');
+        $this->db->where('booking_enquiry.is_deleted','no');
+        $this->db->where('booking_enquiry.booking_process','no');
+        $this->db->where('booking_enquiry.agent_id',$id);
+        $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
+        $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
+        $this->db->order_by("booking_enquiry.id", "desc");
+        $arr_data = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
             
          if($this->input->post('submit'))
          {
-            // print_r($_REQUEST); die;
+// ---------------- This is Local Code --------------------------
              $this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');
              $this->form_validation->set_rules('first_name', 'first_name', 'required');
              $this->form_validation->set_rules('last_name', 'last_name', 'required');
              $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');
              $this->form_validation->set_rules('gender', 'gender', 'required');
-             $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
+// ---------------- This is Live Code --------------------------
+            //  $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
+// ---------------- This is Live Code --------------------------
+// ---------------- This is Local Code --------------------------
+             $this->form_validation->set_rules('wp_mobile_number', 'wp_mobile_number', 'required');
+// ---------------- This is Local Code --------------------------
              
              if($this->form_validation->run() == TRUE)
              { 
@@ -173,12 +190,18 @@ class Booking_enquiry extends CI_Controller {
                  $mobile_number  = $this->input->post('mobile_number'); 
                  $email_address  = $this->input->post('email_address'); 
                  $gender  = $this->input->post('gender'); 
-                 $tour_number  = $this->input->post('tour_number'); 
+                 $tour_number = implode(",", $this->input->post('tour_number')); 
                  $media_source_name         = $this->input->post('media_source_name');
                  $enq_seat_count         = $this->input->post('enq_seat_count');
-				 $wp_mobile_number         = $this->input->post('wp_mobile_number');
                  $today=date("Y-m-d");
-                //  $packages  = $this->input->post('packages'); 
+                 $wp_mobile_number  = $this->input->post('wp_mobile_number');
+                 $occupation_name  = $this->input->post('occupation_name'); 
+                 $zone_name  = $this->input->post('zone_name'); 
+                 $flat_no  = $this->input->post('flat_no'); 
+                 $house_name  = $this->input->post('house_name'); 
+                 $street_name  = $this->input->post('street_name'); 
+                 $landmark  = $this->input->post('landmark'); 
+                 $area  = $this->input->post('area'); 
 
                  $arr_insert = array(
                      'agent_id' =>   $id,
@@ -193,42 +216,63 @@ class Booking_enquiry extends CI_Controller {
                      'package_id'   =>   $tour_number,   
                      'media_source_name'    =>$media_source_name,
                      'seat_count'    =>$enq_seat_count,
-                    //  'created_at'=>$today,
-                     'enquiry_from'    =>'Agent'
+                     'created_at'=>$today,
+                     'wp_mobile_number'    =>$wp_mobile_number,
+                     'enquiry_from'    =>'Agent',
+                    //  'followup_date'    =>$followup_date,
+                     'occupation_name'    =>$occupation_name,
+                     'zone_name'    =>$zone_name,
+                     'flat_no'    =>$flat_no,
+                     'house_name'    =>$house_name,
+                     'street_name'    =>$street_name,
+                     'landmark'    =>$landmark,
+                     'area'    =>$area
                  );
-                 
-                 $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
-                //  $id = $this->db->inserted_id();
+
+                 if($iid!=''){
+                    $arr_where     = array("id" => $iid);
+                    $this->master_model->updateRecord('booking_enquiry',$arr_insert,$arr_where);
+                 }else{
+                    $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
+                 }
+                
                  $this->db->where('is_deleted','no');
                  $this->db->where('is_active','yes');
                  $this->db->where('id',$id);
                  $this->db->order_by('id','DESC');
                  $agent_data_email = $this->master_model->getRecord('agent');
                  $agent_email=$agent_data_email['email'];
-                 $agent_name=$agent_data_email['agent_name'];   
-                 $mobileNumber=$agent_data_email['mobile_number1'];   
-				  $from_email='test@choudharyyatra.co.in';
+// -------------- This is Live cOde ------------------------
+    //              $agent_name=$agent_data_email['agent_name'];   
+    //              $mobileNumber=$agent_data_email['mobile_number1'];   
+	// 			  $from_email='test@choudharyyatra.co.in';
 				  
-				  	$authKey = "1207168241267288907";
+	// 			  	$authKey = "1207168241267288907";
 				  	
-				$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
-                $senderId  = "CYCPLN";
+	// 			$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
+    //             $senderId  = "CYCPLN";
                 
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
+    //             $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
 
-                   $apiurl = str_replace(" ", '%20', $apiurl);
+    //                $apiurl = str_replace(" ", '%20', $apiurl);
                    
-                   $ch = curl_init($apiurl);
-                			$get_url = $apiurl;
-                			curl_setopt($ch, CURLOPT_POST,0);
-                			curl_setopt($ch, CURLOPT_URL, $get_url);
-                			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                			curl_setopt($ch, CURLOPT_HEADER,0);
-                			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-                		$return_val = curl_exec($ch);
+    //                $ch = curl_init($apiurl);
+    //             			$get_url = $apiurl;
+    //             			curl_setopt($ch, CURLOPT_POST,0);
+    //             			curl_setopt($ch, CURLOPT_URL, $get_url);
+    //             			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+    //             			curl_setopt($ch, CURLOPT_HEADER,0);
+    //             			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    //             		$return_val = curl_exec($ch);
     
-    // echo $agent_email; die;
-                 if($agent_email !='')
+    // // echo $agent_email; die;
+    //              if($agent_email !='')
+// -------------- This is Live cOde ------------------------
+// -------------- This is Local code ------------------------
+                 $agent_name=$agent_data_email['agent_name'];     
+				 $from_email='chaudharyyatra8@gmail.com';
+                 if($email_address !='')
+// -------------- This is Local cOde -----------------------
                  {
                     
                    
@@ -251,26 +295,30 @@ class Booking_enquiry extends CI_Controller {
 										<h5>ChoudharyYatra Company</h5>
 									</body>
 									</html>";
-					
+// ------------------ This is Live COde --------------------------
+// 						$subject='Thank You For Enquiry';
+						
+// 						$mail = new PHPMailer(true);
+
+// $auth = true;
+
+// //   $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
+// //         $mail_config['smtp_port'] = '465';
+// //         $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
+// //         $mail_config['_smtp_auth'] = TRUE;
+// //         $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
+// //         $mail_config['smtp_crypto'] = 'ssl';
+						
+						
+						
+						
+						
+// 					//	$this->send_mail($agent_email,$from_email,$msg,$subject,$cc=null);
+// ------------------ This is Live COde --------------------------
+// ------------------ This is Local COde --------------------------
 						$subject='Thank You For Enquiry';
+// ------------------ This is Local COde --------------------------
 						
-						$mail = new PHPMailer(true);
-
-$auth = true;
-
-//   $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
-//         $mail_config['smtp_port'] = '465';
-//         $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
-//         $mail_config['_smtp_auth'] = TRUE;
-//         $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
-//         $mail_config['smtp_crypto'] = 'ssl';
-						
-						
-						
-						
-						
-					//	$this->send_mail($agent_email,$from_email,$msg,$subject,$cc=null);
-				
 				 }
 					if($agent_name !='')
                  {	
@@ -295,8 +343,6 @@ $auth = true;
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-				// 		$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-
 					}
 				 
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
@@ -314,7 +360,12 @@ $auth = true;
 
          //  booking enquiry form fill and click book now btn this functionality execute
 
-        else if($this->input->post('booknow_submit'))
+// ----------- This is Live Code ---------------------
+        // else if($this->input->post('booknow_submit'))
+// ----------- This is Live Code ---------------------
+// ----------- This is Local Code ---------------------
+         if($this->input->post('booknow_submit'))
+// ----------- This is Local Code ---------------------
          {
              $this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');
              $this->form_validation->set_rules('first_name', 'first_name', 'required');
@@ -330,14 +381,19 @@ $auth = true;
                  $first_name  = $this->input->post('first_name'); 
                  $last_name  = $this->input->post('last_name'); 
                  $mobile_number  = $this->input->post('mobile_number'); 
-				 $wp_mobile_number         = $this->input->post('wp_mobile_number');
                  $email_address  = $this->input->post('email_address'); 
                  $gender  = $this->input->post('gender'); 
-                 $tour_number  = $this->input->post('tour_number'); 
+                 $tour_number = implode(",", $this->input->post('tour_number')); 
                  $media_source_name         = $this->input->post('media_source_name');
                  $enq_seat_count         = $this->input->post('enq_seat_count');
                  $today=date("Y-m-d");
-                //  $packages  = $this->input->post('packages'); 
+                 $occupation_name  = $this->input->post('occupation_name'); 
+                 $zone_name  = $this->input->post('zone_name'); 
+                 $flat_no  = $this->input->post('flat_no'); 
+                 $house_name  = $this->input->post('house_name'); 
+                 $street_name  = $this->input->post('street_name'); 
+                 $landmark  = $this->input->post('landmark'); 
+                 $area  = $this->input->post('area');
 
                  $arr_insert = array(
                      'agent_id' =>   $id,
@@ -351,55 +407,103 @@ $auth = true;
                      'package_id'   =>   $tour_number,   
                      'media_source_name'    =>$media_source_name,
                      'seat_count'    =>$enq_seat_count,
-                    //  'created_at'=>$today,
-                     'enquiry_from'    =>'Agent'
+// ------------------- This is Live Code ----------------------------------
+                //     //  'created_at'=>$today,
+                //      'enquiry_from'    =>'Agent'
+                //  );
+                 
+                //  $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
+                //  $iid = $this->db->insert_id(); 
+                //  if($inserted_id > 0)
+                //  {
+                //      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                    
+                //     $this->db->where('is_deleted','no');
+// ------------------- This is Live Code ----------------------------------
+// ------------------- This is Local Code ----------------------------------
+                     'created_at'=>$today,
+                     'enquiry_from'    =>'Agent',
+                     'occupation_name'    =>$occupation_name,
+                     'zone_name'    =>$zone_name,
+                     'flat_no'    =>$flat_no,
+                     'house_name'    =>$house_name,
+                     'street_name'    =>$street_name,
+                     'landmark'    =>$landmark,
+                     'area'    =>$area
                  );
                  
-                 $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
-                 $iid = $this->db->insert_id(); 
+                 
+
+                if($iid!=''){
+                $arr_where     = array("id" => $iid);
+                $inserted_id =$this->master_model->updateRecord('booking_enquiry',$arr_insert,$arr_where);
+                $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                    //  redirect($this->module_url_path_booking_basic_info.'/add/'.$iid);
+                    redirect($this->module_url_path_seat_checker.'/index/'.$iid);
+                }else{
+                $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
+                $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                    //  redirect($this->module_url_path_booking_basic_info.'/add/'.$iid);
+                    redirect($this->module_url_path_seat_checker.'/index/'.$inserted_id);
+                }
+                 
                  if($inserted_id > 0)
                  {
-                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
-                    
-                    $this->db->where('is_deleted','no');
+                     
+                 }
+ 
+                 else
+                 {
+                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                 }
+                 redirect($this->module_url_path.'/index');
+
+                 $this->db->where('is_deleted','no');
+// ------------------- This is Local Code ----------------------------------
                  $this->db->where('is_active','yes');
                  $this->db->where('id',$id);
                  $this->db->order_by('id','DESC');
                  $agent_data_email = $this->master_model->getRecord('agent');
                  $agent_email=$agent_data_email['email'];
                  $agent_name=$agent_data_email['agent_name'];
-                 $mobileNumber=$agent_data_email['mobile_number1'];       
-				 $from_email='chaudharyyatra8@gmail.com';
+// ------------------- This is Live Code -------------------------------
+    //              $mobileNumber=$agent_data_email['mobile_number1'];       
+	// 			 $from_email='chaudharyyatra8@gmail.com';
 				 
-				 	$authKey = "1207168241267288907";
+	// 			 	$authKey = "1207168241267288907";
 				  	
-				$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
-                $senderId  = "CYCPLN";
+	// 			$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
+    //             $senderId  = "CYCPLN";
                 
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
+    //             $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
 
-       $apiurl = str_replace(" ", '%20', $apiurl);
+    //    $apiurl = str_replace(" ", '%20', $apiurl);
        
-       $ch = curl_init($apiurl);
-                			$get_url = $apiurl;
-                			curl_setopt($ch, CURLOPT_POST,0);
-                			curl_setopt($ch, CURLOPT_URL, $get_url);
-                			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-                			curl_setopt($ch, CURLOPT_HEADER,0);
-                			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-                		   $return_val = curl_exec($ch);
+    //    $ch = curl_init($apiurl);
+    //             			$get_url = $apiurl;
+    //             			curl_setopt($ch, CURLOPT_POST,0);
+    //             			curl_setopt($ch, CURLOPT_URL, $get_url);
+    //             			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+    //             			curl_setopt($ch, CURLOPT_HEADER,0);
+    //             			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    //             		   $return_val = curl_exec($ch);
 				  
-				//   if($return_val=="")
-    //         			{
-    //         				echo "Process Failed";
-    //         			}
-    //           		else
-    //         		{
-    // 	          		echo "done";
-    //       		    } 
+	// 			//   if($return_val=="")
+    // //         			{
+    // //         				echo "Process Failed";
+    // //         			}
+    // //           		else
+    // //         		{
+    // // 	          		echo "done";
+    // //       		    } 
           		
-          		echo $agent_email; die;
-                 if($agent_email !='')
+    //       		echo $agent_email; die;
+    //              if($agent_email !='')
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------         
+				 $from_email='chaudharyyatra8@gmail.com';
+                 if($email_address !='')
+// ------------------- This is Local Code -------------------------------
                  {
 						$msg="<html>
 									<head>
@@ -449,22 +553,30 @@ $auth = true;
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-						$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-					} 
+// ------------------- This is Live Code -------------------------------
+
+				// 		$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+				// 	} 
                      
                      
                      
-                     redirect($this->module_url_path_booking_basic_info.'/add/'.$iid);
-                 }
+                //      redirect($this->module_url_path_booking_basic_info.'/add/'.$iid);
+                //  }
  
-                 else
-                 {
-                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                     redirect($this->module_url_path.'/index');
-                 }
+                //  else
+                //  {
+                //      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                //      redirect($this->module_url_path.'/index');
+                //  }
                  
 
-                 
+// ------------------- This is Live Code -------------------------------   
+// ------------------- This is Local Code -------------------------------
+
+						//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+					}
+// ------------------- This is Local Code -------------------------------
+
 					
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_url_path.'/index');
@@ -494,22 +606,34 @@ $auth = true;
          $media_source_data = $this->master_model->getRecords('media_source');
 
          $this->db->where('is_deleted','no');
+         $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+         $this->db->where('is_deleted','no');
+         $zone_master_data = $this->master_model->getRecords('zone_master');
+
+         $this->db->where('is_deleted','no');
          $this->db->where('status','approved');
          $followup_reason_data = $this->master_model->getRecords('followup_reason');
  
          $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['agent_booking_enquiry_data'] = $agent_booking_enquiry_data;
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['booking_enquiry_data'] = $booking_enquiry_data;
          $this->arr_view_data['media_source_data'] = $media_source_data;
+         $this->arr_view_data['occupation_master_data'] = $occupation_master_data;
+         $this->arr_view_data['zone_master_data'] = $zone_master_data;
+         $this->arr_view_data['arr_data'] = $arr_data;
+         $this->arr_view_data['visitor_data'] = $visitor_data;
          $this->arr_view_data['followup_reason_data'] = $followup_reason_data;
          $this->arr_view_data['page_title']      = " Add ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['module_url_path_seat_checker'] = $this->module_url_path_seat_checker;
          $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
      }
   
-     public function domestic_followup()
+    public function domestic_followup()
    {
        $agent_sess_name = $this->session->userdata('agent_name');
        $id=$this->session->userdata('agent_sess_id');
@@ -535,10 +659,31 @@ $auth = true;
                     'follow_up_comment'   =>   $follow_up_comment,
                     'booking_enquiry_id'   =>   $enquiry_id,
                     'follow_up_date' => $current_date,
-                    'followup_reason' => $followup_reason
+                    'followup_reason' => $followup_reason,
+                    'ftaken_by' => $id
+
                 );
                 
                $inserted_id = $this->master_model->insertRecord('domestic_followup',$arr_insert,true);
+
+                $arr_update = array(
+                    'followup_status'   =>   'yes',
+                    'ftaken_by' => $id
+                    );
+                $arr_where     = array("id" => $enquiry_id);
+                $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+
+                if($inserted_id > 0)
+                 {
+                     $this->session->set_flashdata('success_message',"Followup Added Successfully Please Check Followup on Followup List.");
+                     redirect($this->module_url_path.'/index');
+                 }
+ 
+                 else
+                 {
+                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                 }
+                 redirect($this->module_url_path.'/index');
 
                 $this->db->where('is_deleted','no');
                 $this->db->where('is_active','yes');
@@ -590,7 +735,7 @@ $auth = true;
                                </html>";
                    // echo $msg;
                    $subject='Thank You For Enquiry';
-                //   $this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
+<
                    // die;
 				}
 				
@@ -617,7 +762,6 @@ $auth = true;
                                </body>
                                </html>";
                                $subject_email=' New Enquiry from customer';
-                //   $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 				}
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
                     redirect($this->module_url_path_domestic_followup.'/index/'.$enquiry_id);
@@ -633,9 +777,6 @@ $auth = true;
             else{
                redirect($this->module_url_path.'/index');
            } 
-        
-
-
    }
 
 
@@ -717,12 +858,28 @@ $auth = true;
                     $email_address  = $this->input->post('email_address'); 
                     $gender  = $this->input->post('gender'); 
                     // $packages  = $this->input->post('packages'); 
-                    $tour_number  = $this->input->post('tour_number'); 
+// ------------------- This is Live Code -------------------------------
+                    // $tour_number  = $this->input->post('tour_number'); 
+// ------------------- This is Live Code -------------------------------
+
+// ------------------- This is Local Code -------------------------------
+                    // $tour_number  = $this->input->post('tour_number'); 
+                    $tour_number = implode(",", $this->input->post('tour_number'));
+// ------------------- This is Local Code -------------------------------
                     $media_source_name         = $this->input->post('media_source_name');
 				 	$wp_mobile_number         = $this->input->post('wp_mobile_number');
                  	$other_tour_name         = $this->input->post('other_tour_name');
 					$mrandmrs  = $this->input->post('mrandmrs'); 
                     $enq_seat_count         = $this->input->post('enq_seat_count');
+                    $occupation_name  = $this->input->post('occupation_name'); 
+                    $zone_name  = $this->input->post('zone_name'); 
+                    $flat_no  = $this->input->post('flat_no'); 
+                    $house_name  = $this->input->post('house_name'); 
+                    $street_name  = $this->input->post('street_name'); 
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area'); 
+
+                    // $followup_date  = $this->input->post('followup_date'); 
                     
                     $arr_update = array(
                         'first_name'   =>   $first_name,   
@@ -735,10 +892,18 @@ $auth = true;
 						'wp_mobile_number'    =>$wp_mobile_number,
                      	'other_tour_name'    =>$other_tour_name,
 						'MrandMrs'   =>   $mrandmrs,
-                        'seat_count'    =>$enq_seat_count
+                        'seat_count'    =>$enq_seat_count,
+                        'occupation_name'    =>$occupation_name,
+                        'zone_name'    =>$zone_name,
+                        'flat_no'    =>$flat_no,
+                        'house_name'    =>$house_name,
+                        'street_name'    =>$street_name,
+                        'landmark'    =>$landmark,
+                        'area'    =>$area
+                        // 'followup_date'    =>$followup_date,
                     );
                     $arr_where     = array("id" => $id);
-                   $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+                    $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
@@ -769,8 +934,16 @@ $auth = true;
         $this->db->where('is_deleted','no');
         $media_source_data = $this->master_model->getRecords('media_source');
 
+        $this->db->where('is_deleted','no');
+        $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+        $this->db->where('is_deleted','no');
+        $zone_master_data = $this->master_model->getRecords('zone_master');
+
          
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['occupation_master_data']        = $occupation_master_data;
+        $this->arr_view_data['zone_master_data']        = $zone_master_data;
         $this->arr_view_data['packages_data']        = $packages_data;
         $this->arr_view_data['booking_enquiry_data'] = $booking_enquiry_data;
         $this->arr_view_data['media_source_data'] = $media_source_data;
@@ -782,16 +955,31 @@ $auth = true;
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }
 	
-	   public function send_mail($to_email,$from_email,$msg,$subject,$cc=null) {
+// ------------------- This is Live Code -------------------------------
+	//    public function send_mail($to_email,$from_email,$msg,$subject,$cc=null) {
+         
+    //     $this->load->library('email');
+    //     $mail_config = array();
+    //     $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
+    //     $mail_config['smtp_port'] = '465';
+    //     $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
+    //     $mail_config['_smtp_auth'] = TRUE;
+    //     $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
+    //     $mail_config['smtp_crypto'] = 'ssl';
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------
+	public function send_mail($to_email,$from_email,$msg,$subject,$cc=null)
+    {
          
         $this->load->library('email');
         $mail_config = array();
-        $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
-        $mail_config['smtp_port'] = '465';
-        $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
+        $mail_config['smtp_host'] = 'smtp.gmail.com';
+        $mail_config['smtp_port'] = '587';
+        $mail_config['smtp_user'] = 'chaudharyyatra8@gmail.com';
         $mail_config['_smtp_auth'] = TRUE;
-        $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
-        $mail_config['smtp_crypto'] = 'ssl';
+        $mail_config['smtp_pass'] = 'xmjhmjfqzaqyrlht';
+        $mail_config['smtp_crypto'] = 'tls';
+// ------------------- This is Local Code -------------------------------
         $mail_config['protocol'] = 'smtp';
         $mail_config['mailtype'] = 'html';
         $mail_config['send_multipart'] = FALSE;
@@ -817,113 +1005,155 @@ $auth = true;
            echo $this->email->print_debugger(array('headers'));  
           echo "Eroor";
        }
-   }
+// ------------------- This is Live Code -------------------------------
+//    }
    
-   public function sra_booking()
-    {
-        $agent_sess_name = $this->session->userdata('agent_name');
-        $id=$this->session->userdata('agent_sess_id');
+//    public function sra_booking()
+//     {
+//         $agent_sess_name = $this->session->userdata('agent_name');
+//         $id=$this->session->userdata('agent_sess_id');
          
-         if($this->input->post('submit'))
-         {
+//          if($this->input->post('submit'))
+//          {
                 
-             $this->form_validation->set_rules('sra_date', 'SRA date', 'required');
-             $this->form_validation->set_rules('sra_number', 'SRA number', 'required');
+//              $this->form_validation->set_rules('sra_date', 'SRA date', 'required');
+//              $this->form_validation->set_rules('sra_number', 'SRA number', 'required');
              
-             if($this->form_validation->run() == TRUE)
-             { 
-                 $sra_date  = $this->input->post('sra_date');
-                 $sra_number  = $this->input->post('sra_number'); 
-                 $enquiry_id  = $this->input->post('enquiry_id'); 
-                 $current_date= date('Y-m-d');
+//              if($this->form_validation->run() == TRUE)
+//              { 
+//                  $sra_date  = $this->input->post('sra_date');
+//                  $sra_number  = $this->input->post('sra_number'); 
+//                  $enquiry_id  = $this->input->post('enquiry_id'); 
+//                  $current_date= date('Y-m-d');
 
-                 $arr_insert = array(
-                     'sra_date'   =>   $sra_date, 
-                     'sra_number'   =>   $sra_number,
-                     'booking_enquiry_id'   =>   $enquiry_id,
-                     'booking_date' => $current_date,
-                     'booking_taken_by' => $id
+//                  $arr_insert = array(
+//                      'sra_date'   =>   $sra_date, 
+//                      'sra_number'   =>   $sra_number,
+//                      'booking_enquiry_id'   =>   $enquiry_id,
+//                      'booking_date' => $current_date,
+//                      'booking_taken_by' => $id
  
-                 );
+//                  );
                  
-                $inserted_id = $this->master_model->insertRecord('sra_booking',$arr_insert,true);
+//                 $inserted_id = $this->master_model->insertRecord('sra_booking',$arr_insert,true);
  
-                 $arr_update = array(
-                     'booking_status'   =>   'done',
-                     'booking_taken_by' => $id
-                     );
-                 $arr_where     = array("id" => $enquiry_id);
-                 $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+//                  $arr_update = array(
+//                      'booking_status'   =>   'done',
+//                      'booking_taken_by' => $id
+//                      );
+//                  $arr_where     = array("id" => $enquiry_id);
+//                  $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
  
-                 if($inserted_id > 0)
-                  {
-                      $this->session->set_flashdata('success_message',"Booking Done Successfully.");
-                      redirect($this->module_url_path.'/index');
-                  }
+//                  if($inserted_id > 0)
+//                   {
+//                       $this->session->set_flashdata('success_message',"Booking Done Successfully.");
+//                       redirect($this->module_url_path.'/index');
+//                   }
   
-                  else
-                  {
-                      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                  }
-                  redirect($this->module_url_path.'/index');
+//                   else
+//                   {
+//                       $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                   }
+//                   redirect($this->module_url_path.'/index');
  
                 
 
-                    $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
-                    redirect($this->module_url_path.'/index');
+//                     $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
+//                     redirect($this->module_url_path.'/index');
                     
-                 }
+//                  }
  
-                 else
-                 {
-                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                 }
-                 redirect($this->module_url_path.'/index');
-             }  
-             else{
-                redirect($this->module_url_path.'/index');
-            } 
+//                  else
+//                  {
+//                      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                  }
+//                  redirect($this->module_url_path.'/index');
+//              }  
+//              else{
+//                 redirect($this->module_url_path.'/index');
+//             } 
          
  
  
-    }
+//     }
     
-        public function not_intrested($iid)
-        {
-            $agent_sess_name = $this->session->userdata('agent_name');
-            $id=$this->session->userdata('agent_sess_id');
+//         public function not_intrested($iid)
+//         {
+//             $agent_sess_name = $this->session->userdata('agent_name');
+//             $id=$this->session->userdata('agent_sess_id');
     
-            // print_r($iid); die;
+//             // print_r($iid); die;
     
-                $arr_update = array(
-                'not_interested'          => 'no',
-                'followup_status'          => 'yes'
+//                 $arr_update = array(
+//                 'not_interested'          => 'no',
+//                 'followup_status'          => 'yes'
                     
-                );
+//                 );
                 
-                $arr_where     = array("id" => $iid);
-                $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
-                if($id > 0)
-                {
-                    $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
-                }
-                else
-                {
-                    $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
-                }
-                redirect($this->module_url_path.'/index/'.$iid);
+//                 $arr_where     = array("id" => $iid);
+//                 $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+//                 if($id > 0)
+//                 {
+//                     $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
+//                 }
+//                 else
+//                 {
+//                     $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+//                 }
+//                 redirect($this->module_url_path.'/index/'.$iid);
                        
     
                 
-                $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
-                $this->arr_view_data['arr_data']        = $arr_data;
-                $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
-                $this->arr_view_data['module_title']    = $this->module_title;
-                $this->arr_view_data['module_url_path'] = $this->module_url_path;
-                $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
-                $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+//                 $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+//                 $this->arr_view_data['arr_data']        = $arr_data;
+//                 $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+//                 $this->arr_view_data['module_title']    = $this->module_title;
+//                 $this->arr_view_data['module_url_path'] = $this->module_url_path;
+//                 $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+//                 $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
             
-        }
+//         }
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------
+    }
+
+    public function not_intrested($iid)
+    {
+        $agent_sess_name = $this->session->userdata('agent_name');
+        $id=$this->session->userdata('agent_sess_id');
+
+        // print_r($iid); die;
+
+            $arr_update = array(
+            'not_interested'          => 'no',
+            'followup_status'          => 'yes'
+                
+            );
+            
+            $arr_where     = array("id" => $iid);
+            $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+            if($id > 0)
+            {
+                $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
+            }
+            else
+            {
+                $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+            }
+            redirect($this->module_url_path.'/index/'.$iid);
+                   
+
+            
+            $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+            $this->arr_view_data['arr_data']        = $arr_data;
+            $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+            $this->arr_view_data['module_title']    = $this->module_title;
+            $this->arr_view_data['module_url_path'] = $this->module_url_path;
+            $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+            $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+        
+    }
+// ------------------- This is Local Code -------------------------------
 
 
 

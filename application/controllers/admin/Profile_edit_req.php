@@ -43,18 +43,24 @@ class Profile_edit_req extends CI_Controller{
 
         // Get Details of Package
 
-        public function details($id,$aid)
-        {
-            $id=base64_decode($id);
-            $aid=base64_decode($aid); 
-            $fields = "agent.*,department.department";
-            $this->db->where('agent.id',$aid);      
-            $this->db->where('department.is_deleted','no');    
-            $this->db->where('agent.profile_update_request','requested');      
-            $this->db->join("department", 'agent.department=department.id','left');
-            $agent_arr_data = $this->master_model->getRecords('agent',array('agent.is_deleted'=>'no'),$fields);
-             
+// ------------------- This is Live Code -------------------------------
+        // public function details($id,$aid)
+        // {
+        //     $id=base64_decode($id);
+        //     $aid=base64_decode($aid); 
+        //     $fields = "agent.*,department.department";
+        //     $this->db->where('agent.id',$aid);      
+        //     $this->db->where('department.is_deleted','no');    
+        //     $this->db->where('agent.profile_update_request','requested');      
+        //     $this->db->join("department", 'agent.department=department.id','left');
+        //     $agent_arr_data = $this->master_model->getRecords('agent',array('agent.is_deleted'=>'no'),$fields);
+// ------------------- This is Live Code -------------------------------          
 			
+// ------------------- This is Local Code -------------------------------
+        public function details($id)
+        {
+			$id=base64_decode($id);
+// ------------------- This is Local Code -------------------------------
             if ($id=='') 
             {
                 $this->session->set_flashdata('error_message','Invalid Selection Of Record');
@@ -69,7 +75,6 @@ class Profile_edit_req extends CI_Controller{
                 $this->db->where('agent_temp_tbl.profile_update_request','requested');
                 $this->db->join("department", 'agent_temp_tbl.department=department.id','left');
                 $arr_data = $this->master_model->getRecords('agent_temp_tbl',array('agent_temp_tbl.is_deleted'=>'no'),$fields);
-
                 $profile_update_request=$arr_data[0]['profile_update_request'];
                 //     print_r($profile_update_request); die;
 
@@ -81,15 +86,17 @@ class Profile_edit_req extends CI_Controller{
             }
             
             $this->arr_view_data['arr_data']        = $arr_data;
-            $this->arr_view_data['agent_arr_data']        = $agent_arr_data;
+// -------------------- This is Live Code -----------------------------
+        //     $this->arr_view_data['agent_arr_data']        = $agent_arr_data;
+// -------------------- This is Live Code -----------------------------
+// -------------------- This is Local Code -----------------------------
             $this->arr_view_data['page_title']      = "Profile Update Request";
             $this->arr_view_data['module_title']    = $this->module_title;
             $this->arr_view_data['module_url_path'] = $this->module_url_path;
             $this->arr_view_data['middle_content']  = $this->module_view_folder."details";
             $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
         }
-
-
+// -------------------- This is Local Code -----------------------------
         // Approve
 
         public function approve()
@@ -118,6 +125,8 @@ class Profile_edit_req extends CI_Controller{
                 $fld_GST_number = $arr_data['fld_GST_number'];
                 $fld_pan_number = $arr_data['fld_pan_number'];
                 $image_name = $arr_data['image_name'];
+                $filename_qr_code = $arr_data['qr_code_image'];
+                $upi_id = $arr_data['upi_id'];
             
                 $arr_update = array(
                         'city'   =>    $city,
@@ -134,7 +143,11 @@ class Profile_edit_req extends CI_Controller{
                         'fld_GST_number'          => $fld_GST_number,
                         'fld_pan_number'          => $fld_pan_number,
                         'image_name'          => $image_name,
-                        'profile_update_request' => 'accepted'
+                        'profile_update_request' => 'accepted',
+                        'status_of_QR_UPI' => 'Approved',
+                        'qr_code_image'          => $filename_qr_code,
+                        'upi_id'          => $upi_id
+
                     );
                     
                         $arr_where     = array("id" => $agent_id);
@@ -143,7 +156,8 @@ class Profile_edit_req extends CI_Controller{
                         if($inserted_id > 0)
                     {
                         $arr_update2 = array(
-                                'profile_update_request' => 'accepted'
+                                'profile_update_request' => 'accepted',
+                                'status_of_QR_UPI' => 'Approved'
                         );
             
                      $arr_where2     = array("agent_temp_tbl.id" => $request_id);

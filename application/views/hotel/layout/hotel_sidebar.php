@@ -1,3 +1,11 @@
+<style>
+  .desig_css{
+    color:white;
+  }
+  .name_css{
+    text-decoration: none;
+  }
+</style>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -13,7 +21,8 @@
         <div class="image">
         </div>
         <div class="info">
-          <center><a href="#" class="d-block"><?php echo $hotel_sess_name; ?></a></center>
+          <center><a href="#" class="d-block name_css"><?php echo $hotel_sess_name; ?></a></center>
+          <center><h6 class="desig_css">[ Hotel ]</h6></center>
         </div>
       </div>
 
@@ -32,12 +41,35 @@
                   <p>Hotel</p>
                 </a>
           </li>
+
+          <li class="nav-item">
+                <a href="<?php echo base_url(); ?>hotel/allocate_tour/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Allocated Tours</p>
+                </a>
+          </li>
+
+          <li class="nav-item">
+                <a href="<?php echo base_url(); ?>hotel/final_booking_details/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Final Booking</p>
+                </a>
+          </li>
           
           <li class="nav-item">
             <a href="<?php echo base_url(); ?>hotel/profile/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
                Profile
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>hotel/change_password/change_password" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+               Change Password
               </p>
             </a>
           </li>

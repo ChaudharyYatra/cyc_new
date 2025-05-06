@@ -101,15 +101,14 @@
                   </tr>
 
                   <tr>
-
                     <th>Mobile_number 3</th>
                     <td><?php echo $info['fld_mobile_number3']; ?></td>
+
+                    <th>Amount Receiving Mode</th>
+                    <td><?php echo $info['amount_receiving_mode']; ?></td>
 					  
                     <th>Password</th>
                     <td><?php echo $info['password']; ?></td>
-
-                    <th></th>
-                    <td></td>
                   </tr>
 
                   </table>

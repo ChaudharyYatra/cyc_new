@@ -23,12 +23,13 @@ class Supervision extends CI_Controller{
         $fields = "supervision.*";
         // $this->db->order_by('agent.arrange_id','asc');        
         $this->db->where('supervision.is_deleted','no');        
+        $this->db->where('supervision.role_type','3');        
         // $this->db->join("department", 'agent.department=department.id','left');
         $arr_data = $this->master_model->getRecords('supervision',array('supervision.is_deleted'=>'no'),$fields);
 
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
-        $this->arr_view_data['page_title']      = $this->module_title;
+        $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
@@ -42,6 +43,7 @@ class Supervision extends CI_Controller{
     {          
         if(isset($_POST['submit']))
         {
+            $this->form_validation->set_rules('role_type', 'role type', 'required');
             $this->form_validation->set_rules('supervision_name', 'supervision_name', 'required');
             $this->form_validation->set_rules('email', 'Email Address', 'required');
             $this->form_validation->set_rules('mobile_number1', 'Mobile Number1', 'required');
@@ -50,6 +52,7 @@ class Supervision extends CI_Controller{
             if($this->form_validation->run() == TRUE)
             {
             
+                $role_type  = $this->input->post('role_type');
                 $supervision_name  = trim($this->input->post('supervision_name'));
                 $email = trim($this->input->post('email'));
                 $mobile_number1 = trim($this->input->post('mobile_number1'));
@@ -57,6 +60,7 @@ class Supervision extends CI_Controller{
 				$password = trim($this->input->post('password'));
 
                 $arr_insert = array(
+                    'role_type' => $role_type,
                     'supervision_name' => $supervision_name,
                     'mobile_number1'   => $mobile_number1,
                     'mobile_number2'   => $mobile_number2,
@@ -80,8 +84,12 @@ class Supervision extends CI_Controller{
             
         }   
 
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $role_type = $this->master_model->getRecords('role_type');
+
             $this->arr_view_data['action']          = 'add';       
-            // $this->arr_view_data['department_data'] = $department_data;
+            $this->arr_view_data['role_type']        = $role_type;
             $this->arr_view_data['page_title']      = " Add ".$this->module_title;
             $this->arr_view_data['module_title']    = $this->module_title;
             $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -193,13 +201,15 @@ class Supervision extends CI_Controller{
                 if($this->form_validation->run() == TRUE)
                 { 
 
-                 $supervision_name    = trim($this->input->post('supervision_name'));
-                 $mobile_number1 = trim($this->input->post('mobile_number1'));
-                 $mobile_number2 = trim($this->input->post('mobile_number2'));
-                 $email = trim($this->input->post('email'));
-				$password = trim($this->input->post('password'));
+                    $role_type  = $this->input->post('role_type');
+                    $supervision_name    = trim($this->input->post('supervision_name'));
+                    $mobile_number1 = trim($this->input->post('mobile_number1'));
+                    $mobile_number2 = trim($this->input->post('mobile_number2'));
+                    $email = trim($this->input->post('email'));
+                    $password = trim($this->input->post('password'));
                 
                 $arr_update = array(
+                    'role_type'          => $role_type,
                     'supervision_name'          => $supervision_name,
                     'mobile_number1'          =>  $mobile_number1,
                     'mobile_number2'          => $mobile_number2,
@@ -224,9 +234,12 @@ class Supervision extends CI_Controller{
             }
         }
         
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $role_type = $this->master_model->getRecords('role_type');
+
         
-        
-        // $this->arr_view_data['department_data']        = $department_data;
+        $this->arr_view_data['role_type']        = $role_type;
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;

@@ -64,7 +64,7 @@ class Packages extends CI_Controller{
             //$this->form_validation->set_rules('tour_number', 'Tour Number', 'required|is_unique[packages.tour_number]');
             $this->form_validation->set_rules('tour_title', 'Tour Title', 'required');
             $this->form_validation->set_rules('rating', 'Rating', 'required');
-            // $this->form_validation->set_rules('cost', 'Single Per Seat', 'required');
+            $this->form_validation->set_rules('cost', 'Single Per Seat', 'required');
             
             if($this->form_validation->run() == TRUE)
             {
@@ -153,7 +153,7 @@ class Packages extends CI_Controller{
                 {  
                     $data['error'] = $this->upload->display_errors();
                     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    // redirect($this->module_url_path.'/edit/'.$id);
+                    redirect($this->module_url_path.'/edit/'.$id);
                 }
                 if($file_name['name']!="")
                 {   
@@ -219,97 +219,97 @@ class Packages extends CI_Controller{
 
                 // ===============
 
-                // $file_name     = $_FILES['inclusion_img']['name'];
+                $file_name     = $_FILES['inclusion_img']['name'];
 
-                // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-                // $file_name = $_FILES['inclusion_img'];
-                // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+                $file_name = $_FILES['inclusion_img'];
+                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-                // if($file_name['name']!="")
-                // {
-                //     $ext = explode('.',$_FILES['inclusion_img']['name']); 
-                //     $config['file_name'] = rand(1000,90000);
+                if($file_name['name']!="")
+                {
+                    $ext = explode('.',$_FILES['inclusion_img']['name']); 
+                    $config['file_name'] = rand(1000,90000);
 
-                //     if(!in_array($ext[1],$arr_extension))
-                //     {
-                //         $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                //     }
-                // }   
+                    if(!in_array($ext[1],$arr_extension))
+                    {
+                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                    }
+                }   
 
-                // $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+                $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
             
-                // $config['upload_path']   = './uploads/inclusion_img/';
-                // $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
-                // $config['max_size']      = '10000';
-                // $config['file_name']     = $file_name_to_dispaly_pdf;
-                // $config['overwrite']     = TRUE;
-                // $this->load->library('upload',$config);
-                // $this->upload->initialize($config); // Important
+                $config['upload_path']   = './uploads/inclusion_img/';
+                $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
+                $config['max_size']      = '10000';
+                $config['file_name']     = $file_name_to_dispaly_pdf;
+                $config['overwrite']     = TRUE;
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config); // Important
                 
-                // if(!$this->upload->do_upload('inclusion_img'))
-                // {  
-                //     $data['error'] = $this->upload->display_errors();
-                //     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                //     // redirect($this->module_url_path.'/edit/'.$id);
-                // }
-                // if($file_name['name']!="")
-                // {   
-                //     $file_name = $this->upload->data();
-                //     $inclusion_img_filename = $file_name_to_dispaly_pdf;
-                // }
-                // else
-                // {
-                //     $inclusion_img_filename = $this->input->post('inclusion_img',TRUE);
+                if(!$this->upload->do_upload('inclusion_img'))
+                {  
+                    $data['error'] = $this->upload->display_errors();
+                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                    redirect($this->module_url_path.'/edit/'.$id);
+                }
+                if($file_name['name']!="")
+                {   
+                    $file_name = $this->upload->data();
+                    $inclusion_img_filename = $file_name_to_dispaly_pdf;
+                }
+                else
+                {
+                    $inclusion_img_filename = $this->input->post('inclusion_img',TRUE);
                     
-                // }
+                }
 
                  // ===============
 
-                //  $file_name     = $_FILES['tc_img']['name'];
+                 $file_name     = $_FILES['tc_img']['name'];
 
-                //  $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+                 $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
  
-                //  $file_name = $_FILES['tc_img'];
-                //  $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+                 $file_name = $_FILES['tc_img'];
+                 $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
  
-                //  if($file_name['name']!="")
-                //  {
-                //      $ext = explode('.',$_FILES['tc_img']['name']); 
-                //      $config['file_name'] = rand(1000,90000);
+                 if($file_name['name']!="")
+                 {
+                     $ext = explode('.',$_FILES['tc_img']['name']); 
+                     $config['file_name'] = rand(1000,90000);
  
-                //      if(!in_array($ext[1],$arr_extension))
-                //      {
-                //          $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                //      }
-                //  }   
+                     if(!in_array($ext[1],$arr_extension))
+                     {
+                         $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                     }
+                 }   
  
-                //  $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+                 $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
              
-                //  $config['upload_path']   = './uploads/tc_img/';
-                //  $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
-                //  $config['max_size']      = '10000';
-                //  $config['file_name']     = $file_name_to_dispaly_pdf;
-                //  $config['overwrite']     = TRUE;
-                //  $this->load->library('upload',$config);
-                //  $this->upload->initialize($config); // Important
+                 $config['upload_path']   = './uploads/tc_img/';
+                 $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
+                 $config['max_size']      = '10000';
+                 $config['file_name']     = $file_name_to_dispaly_pdf;
+                 $config['overwrite']     = TRUE;
+                 $this->load->library('upload',$config);
+                 $this->upload->initialize($config); // Important
                  
-                //  if(!$this->upload->do_upload('tc_img'))
-                //  {  
-                //      $data['error'] = $this->upload->display_errors();
-                //      $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                //      redirect($this->module_url_path.'/add/');
-                //  }
-                //  if($file_name['name']!="")
-                //  {   
-                //      $file_name = $this->upload->data();
-                //      $tc_img_filename = $file_name_to_dispaly_pdf;
-                //  }
-                //  else
-                //  {
-                //      $tc_img_filename = $this->input->post('tc_img',TRUE);
+                 if(!$this->upload->do_upload('tc_img'))
+                 {  
+                     $data['error'] = $this->upload->display_errors();
+                     $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                     redirect($this->module_url_path.'/edit/'.$id);
+                 }
+                 if($file_name['name']!="")
+                 {   
+                     $file_name = $this->upload->data();
+                     $tc_img_filename = $file_name_to_dispaly_pdf;
+                 }
+                 else
+                 {
+                     $tc_img_filename = $this->input->post('tc_img',TRUE);
                      
-                //  }
+                 }
 
               
                 $academic_year  = $this->input->post('academic_year'); 
@@ -327,8 +327,15 @@ class Packages extends CI_Controller{
                 $zone_name = trim($this->input->post('zone_name'));
                 $from_date = trim($this->input->post('from_date'));
                 $to_date = trim($this->input->post('to_date'));
-                $inclusion  = $this->input->post('inclusion'); 
-                $terms_conditions  = $this->input->post('terms_conditions');
+// ----------------- This is live code -----------------------
+                // $inclusion  = $this->input->post('inclusion'); 
+                // $terms_conditions  = $this->input->post('terms_conditions');
+// ----------------- This is live code -----------------------
+// ----------------- This is local code -----------------------
+                $tour_type = trim($this->input->post('tour_type'));
+                $main_tour_id = trim($this->input->post('main_tour_id'));
+// ----------------- This is local code -----------------------
+
                 
                 $arr_insert = array(
                     'academic_year'   =>   $academic_year,
@@ -343,14 +350,16 @@ class Packages extends CI_Controller{
                     'image_name'    => $filename,
                     'pdf_name'    => $pdf_filename,
                     'package_full_image'    => $new_img_filename,
-                    'inclusion_img'             => $inclusion,
-                    'tc_img'             => $terms_conditions,
+                    'inclusion_img'             => $inclusion_img_filename,
+                    'tc_img'             => $tc_img_filename,
                     'boarding_office'  => $boarding_office,
                     'package_type'             => $package_type,
                     'hotel_type'             => $hotel_type,
                     'zone_name'  => $zone_name,
                     'from_date'             => $from_date,
-                    'to_date'  => $to_date
+                    'to_date'  => $to_date,
+                    'tour_type' => $tour_type,
+                    'main_tour_id' => $main_tour_id
                 );
                 
                 $inserted_id = $this->master_model->insertRecord('packages',$arr_insert,true);
@@ -395,11 +404,19 @@ class Packages extends CI_Controller{
         $this->db->where('is_active','yes');
         $zone_info = $this->master_model->getRecords('zone_master');
 
+         // $this->db->order_by('id','desc');
+         $this->db->where('is_deleted','no');
+         $this->db->where('is_active','yes');
+         $this->db->where('tour_type',1);
+         $packages_tour_type = $this->master_model->getRecords('packages');
+         // print_r($packages_tour_type); die;
+
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['academic_years_data'] = $academic_years_data;
         $this->arr_view_data['package_type'] = $package_type;
         $this->arr_view_data['hotel_type_info'] = $hotel_type_info;
         $this->arr_view_data['zone_info'] = $zone_info;
+        $this->arr_view_data['packages_tour_type'] = $packages_tour_type;
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -751,120 +768,120 @@ class Packages extends CI_Controller{
             }
 			
 			// ===============
-            // $old_inclusion_name = $this->input->post('old_inclusion_name');
+            $old_inclusion_name = $this->input->post('old_inclusion_name');
                 
-            // if(!empty($_FILES['inclusion_img']) && $_FILES['inclusion_img']['name'] !='')
-            // {
+            if(!empty($_FILES['inclusion_img']) && $_FILES['inclusion_img']['name'] !='')
+            {
             
-            // $file_name     = $_FILES['inclusion_img']['name']; 
+            $file_name     = $_FILES['inclusion_img']['name']; 
 
-            // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+            $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-            // $file_name = $_FILES['inclusion_img'];
-            // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+            $file_name = $_FILES['inclusion_img'];
+            $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-            // if($file_name['name']!="")
-            // {
+            if($file_name['name']!="")
+            {
                 
-            //     $ext = explode('.',$_FILES['inclusion_img']['name']); 
-            //     $config['file_name'] = rand(1000,90000);
+                $ext = explode('.',$_FILES['inclusion_img']['name']); 
+                $config['file_name'] = rand(1000,90000);
 
-            //     if(!in_array($ext[1],$arr_extension))
-            //     {
-            //         $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-            //     }
-            // }   
+                if(!in_array($ext[1],$arr_extension))
+                {
+                    $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                }
+            }   
 
-            // $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+            $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
         
-            // $config['upload_path']   = './uploads/inclusion_img/';
-            // $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
-            // $config['max_size']      = '10000';
-            // $config['file_name']     = $file_name_to_dispaly_pdf;
-            // $config['overwrite']     = TRUE;
-            // $this->load->library('upload',$config);
-            // $this->upload->initialize($config); // Important
+            $config['upload_path']   = './uploads/inclusion_img/';
+            $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
+            $config['max_size']      = '10000';
+            $config['file_name']     = $file_name_to_dispaly_pdf;
+            $config['overwrite']     = TRUE;
+            $this->load->library('upload',$config);
+            $this->upload->initialize($config); // Important
             
-            // if(!$this->upload->do_upload('inclusion_img'))
-            // {  
+            if(!$this->upload->do_upload('inclusion_img'))
+            {  
                 
-            //     $data['error'] = $this->upload->display_errors();
-            //     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-            //     redirect($this->module_url_path.'/edit/'.$id);
-            // }
-            // if($file_name['name']!="")
-            // {   
-            //     $file_name = $this->upload->data();
-            //     $inclusion_img_filename = $file_name_to_dispaly_pdf;
-            // }
-            // else
-            // {
-            //     $inclusion_img_filename = $this->input->post('inclusion_img',TRUE);
+                $data['error'] = $this->upload->display_errors();
+                $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                redirect($this->module_url_path.'/edit/'.$id);
+            }
+            if($file_name['name']!="")
+            {   
+                $file_name = $this->upload->data();
+                $inclusion_img_filename = $file_name_to_dispaly_pdf;
+            }
+            else
+            {
+                $inclusion_img_filename = $this->input->post('inclusion_img',TRUE);
                 
-            // }
-            // }
-            // else
-            // {
-            //     $inclusion_img_filename = $old_inclusion_name;
+            }
+            }
+            else
+            {
+                $inclusion_img_filename = $old_inclusion_name;
                 
-            // }
+            }
 
             // ===============
 
-            // $old_tc_name = $this->input->post('old_tc_name');
+            $old_tc_name = $this->input->post('old_tc_name');
                 
-            // if(!empty($_FILES['tc_img']) && $_FILES['tc_img']['name'] !='')
-            // {
-            // $file_name     = $_FILES['tc_img']['name'];
+            if(!empty($_FILES['tc_img']) && $_FILES['tc_img']['name'] !='')
+            {
+            $file_name     = $_FILES['tc_img']['name'];
 
-            // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+            $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-            // $file_name = $_FILES['tc_img'];
-            // $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
+            $file_name = $_FILES['tc_img'];
+            $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG');
 
-            // if($file_name['name']!="")
-            // {
-            //     $ext = explode('.',$_FILES['tc_img']['name']); 
-            //     $config['file_name'] = rand(1000,90000);
+            if($file_name['name']!="")
+            {
+                $ext = explode('.',$_FILES['tc_img']['name']); 
+                $config['file_name'] = rand(1000,90000);
 
-            //     if(!in_array($ext[1],$arr_extension))
-            //     {
-            //         $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-            //     }
-            // }   
+                if(!in_array($ext[1],$arr_extension))
+                {
+                    $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                }
+            }   
 
-            // $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+            $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
         
-            // $config['upload_path']   = './uploads/tc_img/';
-            // $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
-            // $config['max_size']      = '10000';
-            // $config['file_name']     = $file_name_to_dispaly_pdf;
-            // $config['overwrite']     = TRUE;
-            // $this->load->library('upload',$config);
-            // $this->upload->initialize($config); // Important
+            $config['upload_path']   = './uploads/tc_img/';
+            $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg';  
+            $config['max_size']      = '10000';
+            $config['file_name']     = $file_name_to_dispaly_pdf;
+            $config['overwrite']     = TRUE;
+            $this->load->library('upload',$config);
+            $this->upload->initialize($config); // Important
             
-            // if(!$this->upload->do_upload('tc_img'))
-            // {  
-            //     $data['error'] = $this->upload->display_errors();
-            //     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-            //     redirect($this->module_url_path.'/edit/'.$id);
-            // }
-            // if($file_name['name']!="")
-            // {   
-            //     $file_name = $this->upload->data();
-            //     $tc_img_filename = $file_name_to_dispaly_pdf;
-            // }
-            // else
-            // {
-            //     $tc_img_filename = $this->input->post('tc_img',TRUE);
+            if(!$this->upload->do_upload('tc_img'))
+            {  
+                $data['error'] = $this->upload->display_errors();
+                $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                redirect($this->module_url_path.'/edit/'.$id);
+            }
+            if($file_name['name']!="")
+            {   
+                $file_name = $this->upload->data();
+                $tc_img_filename = $file_name_to_dispaly_pdf;
+            }
+            else
+            {
+                $tc_img_filename = $this->input->post('tc_img',TRUE);
                 
-            // }
-            //  }
-            // else
-            // {
-            //     $tc_img_filename = $old_tc_name;
+            }
+             }
+            else
+            {
+                $tc_img_filename = $old_tc_name;
                 
-            // }
+            }
 
                 
                 $academic_year  = $this->input->post('academic_year'); 
@@ -875,19 +892,24 @@ class Packages extends CI_Controller{
                 $cost = trim($this->input->post('cost'));
                 $tour_number_of_days = trim($this->input->post('tour_number_of_days'));
                 $short_description = trim($this->input->post('short_description'));
-                $full_description = trim($this->input->post('full_description'));               
-                //$inclusion = trim($this->input->post('inclusion'));
-                //$terms_conditions = trim($this->input->post('terms_conditions'));
-                //$contact_us = trim($this->input->post('contact_us'));
+                $full_description = trim($this->input->post('full_description'));      
                 $boarding_office = implode(",", $this->input->post('boarding_office'));
                 $package_type = trim($this->input->post('package_type'));
                 $hotel_type = trim($this->input->post('hotel_type'));
                 $zone_name = trim($this->input->post('zone_name'));
-                $from_date = $this->input->post('from_date');
-                $to_date = $this->input->post('to_date');
+// ------------------- This is Live code -------------------------
+                // $from_date = $this->input->post('from_date');
+                // $to_date = $this->input->post('to_date');
                 
-                $inclusion  = $this->input->post('inclusion'); 
-                $terms_conditions  = $this->input->post('terms_conditions');
+                // $inclusion  = $this->input->post('inclusion'); 
+                // $terms_conditions  = $this->input->post('terms_conditions');
+// ------------------- This is Live code -------------------------
+// ------------------- This is Local code -------------------------
+                $from_date = trim($this->input->post('from_date'));
+                $to_date = trim($this->input->post('to_date'));
+                $tour_type = trim($this->input->post('tour_type'));
+                $main_tour_id = trim($this->input->post('main_tour_id'));
+// ------------------- This is Local code -------------------------
 
 
                 $arr_update = array(
@@ -899,11 +921,9 @@ class Packages extends CI_Controller{
                     'cost'          => $cost,
                     'tour_number_of_days'          => $tour_number_of_days,
                     'short_description'        => $short_description,
-                    'full_description'        => $full_description,  
-                    // 'inclusion_img'        => $inclusion_img_filename,
-                    // 'tc_img'        => $tc_img_filename,
-                    //'terms_conditions'        => $terms_conditions,
-                    //'contact_us'        => $contact_us,
+                    'full_description'        => $full_description,                    
+                    'inclusion_img'        => $inclusion_img_filename,
+                    'tc_img'        => $tc_img_filename,
                     'image_name'    => $filename,
                     'pdf_name'    => $pdf_filename,
                     'package_full_image'    => $new_img_filename,
@@ -913,9 +933,14 @@ class Packages extends CI_Controller{
                     'zone_name'  => $zone_name,
                     'from_date'             => $from_date,
                     'to_date'  => $to_date,
-                    'inclusion'             => $inclusion,
-                    'terms_conditions'             => $terms_conditions
-                    
+// ---------------- This is live code ------------------------
+                    // 'inclusion'             => $inclusion,
+                    // 'terms_conditions'             => $terms_conditions
+// ---------------- This is live code ------------------------
+// ---------------- This is local code ------------------------
+                    'tour_type'  => $tour_type,
+                    'main_tour_id'  => $main_tour_id
+// ---------------- This is local code ------------------------
                 );
                 
                     $arr_where     = array("id" => $id);
@@ -949,6 +974,13 @@ class Packages extends CI_Controller{
         $package_type = $this->master_model->getRecords('package_type');
         // print_r($package_type); die;
 
+        // $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('tour_type',1);
+        $packages_tour_type = $this->master_model->getRecords('packages');
+        // print_r($packages_tour_type); die;
+
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -963,6 +995,7 @@ class Packages extends CI_Controller{
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['hotel_type_info']        = $hotel_type_info;
         $this->arr_view_data['zone_info']        = $zone_info;
+        $this->arr_view_data['packages_tour_type'] = $packages_tour_type;
         $this->arr_view_data['package_type']        = $package_type;
         $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;

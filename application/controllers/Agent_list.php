@@ -11,20 +11,16 @@ class Agent_list extends CI_Controller {
         parent::__construct();
         $this->arr_view_data = [];
         $this->traveler_front_id =  $this->session->userdata('traveler_front_id');
-	 }
+	}
 
 	 
     public function index()
     {
         // Initialize visitor count logic
         $ip = $this->input->ip_address();
-        //  print_r($ip); die;
-
         // Check for existing visitor record based on IP
         $this->db->where('ip_address', $ip);
         $visiter_data = $this->master_model->getRecord('agentlist_visiter_data');
-        // print_r($visiter_data); die;
-        
         
         // Check website visitor data
         $this->db->where('ip_address', $ip);
@@ -36,9 +32,8 @@ class Agent_list extends CI_Controller {
 
         if (!empty($visiter_data)) {
             $visiter_data_count = $visiter_data['visiter_count'] + 1;
-            //print_r($visiter_data_count); die;
             $visiter_data_id = $visiter_data['id'];
-            //print_r($visiter_data_id); die;
+
             $visiter_visit_date = $visiter_data['added_date'];
             $added_date = date('Y-m-d');
 

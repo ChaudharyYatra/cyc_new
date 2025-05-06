@@ -1,3 +1,11 @@
+<style>
+  .desig_css{
+    color:white;
+  }
+  .name_css{
+    text-decoration: none;
+  }
+</style>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -13,7 +21,8 @@
         <div class="image">
         </div>
         <div class="info">
-          <center><a href="#" class="d-block"><?php echo $stationary_sess_name; ?></a></center>
+          <center><a href="#" class="d-block name_css"><?php echo $stationary_sess_name; ?></a></center>
+          <center><h6 class="desig_css">[ Stationary ]</h6></center>
         </div>
       </div>
 

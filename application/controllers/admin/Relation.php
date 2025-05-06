@@ -22,7 +22,7 @@ class Relation extends CI_Controller{
 	{  
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
-        $arr_data = $this->master_model->getRecords('Relation');
+        $arr_data = $this->master_model->getRecords('relation');
 
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;

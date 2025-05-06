@@ -31,14 +31,12 @@ class Login extends CI_Controller{
               $arr_data = $this->master_model->getRecords('admin');              
                 if(empty($arr_data))
                 {    
-                    $this->session->set_flashdata('error_message1',"Email Or Password Is Wrong.");
-
+                    $this->session->set_flashdata('error_message1',"Mobile Number Or Password Is Wrong.");
                 }
                 else
                 {
                     foreach($arr_data as $admin_data)
                     {
-                        
                         $email = $admin_data['email'];
                         $id = $admin_data['id'];
                         $name = $admin_data['name'];

@@ -45,6 +45,8 @@ class Places_master extends CI_Controller{
             
             $this->form_validation->set_rules('state_name', 'state_name', 'required');
             $this->form_validation->set_rules('place_name', 'place_name', 'required');
+            // $this->form_validation->set_rules('Select_close_days', 'Select close days', 'required');
+            $this->form_validation->set_rules('place_description', 'place description', 'required');
             
             if($this->form_validation->run() == TRUE)
             {
@@ -53,11 +55,16 @@ class Places_master extends CI_Controller{
                 if(count($places_master_check)==0){
 
                 $state_name = $this->input->post('state_name'); 
-                $place_name = $this->input->post('place_name');  
+                $place_name = $this->input->post('place_name'); 
+                // $Select_close_days = $this->input->post('Select_close_days');
+                $Select_close_days = implode(",", $this->input->post('Select_close_days'));
+                $place_description = $this->input->post('place_description'); 
 
                 $arr_insert = array(
                     'state_name'   =>   $state_name,
-                    'place_name'   =>   $place_name
+                    'place_name'   =>   $place_name,
+                    'Select_close_days'   =>   $Select_close_days,
+                    'place_description'   =>   $place_description
                 );
                 
                 $inserted_id = $this->master_model->insertRecord('places_master',$arr_insert,true);
@@ -83,9 +90,14 @@ class Places_master extends CI_Controller{
         $this->db->where('is_active','yes');
         $state_data = $this->master_model->getRecords('state');
 
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $places_master_data = $this->master_model->getRecords('places_master');
+
 
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['state_data'] = $state_data;
+        $this->arr_view_data['places_master_data'] = $places_master_data;
         //$this->arr_view_data['user_role']       = $user_role; 
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
@@ -193,6 +205,8 @@ class Places_master extends CI_Controller{
             {
                 $this->form_validation->set_rules('state_name', 'state_name', 'required');
                 $this->form_validation->set_rules('place_name', 'place_name', 'required');
+                // $this->form_validation->set_rules('Select_close_days', 'Select close days', 'required');
+                $this->form_validation->set_rules('place_description', 'place description', 'required');
                 
                 if($this->form_validation->run() == TRUE)
                 {
@@ -203,11 +217,15 @@ class Places_master extends CI_Controller{
 
                     $state_name = $this->input->post('state_name'); 
                     $place_name = $this->input->post('place_name'); 
+                    $Select_close_days = implode(",", $this->input->post('Select_close_days'));
+                    $place_description = $this->input->post('place_description');
                     
                     
                     $arr_update = array(
                         'state_name'   =>   $state_name,
-                        'place_name'   =>   $place_name
+                        'place_name'   =>   $place_name,
+                        'Select_close_days'   =>   $Select_close_days,
+                        'place_description'   =>   $place_description
                     );
 
                     $arr_where     = array("id" => $id);

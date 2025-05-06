@@ -21,12 +21,12 @@ class Package_hotel extends CI_Controller{
 	public function index($id)
 	{  
         $record = array();
-        $fields = "package_hotel.*,packages.tour_title,state.state_name,city.city_name,hotel.hotel_name";
+        $fields = "package_hotel.*,packages.tour_title,state_table.state_name,city.city_name,hotel.hotel_name";
         // $this->db->order_by('package_iternary.day_number','asc');
         $this->db->where('package_hotel.is_deleted','no');
         $this->db->where('package_hotel.package_id',$id);
         $this->db->join("packages", 'package_hotel.package_id=packages.id','left');
-        $this->db->join("state", 'package_hotel.state_id=state.id','left');
+        $this->db->join("state_table", 'package_hotel.state_id=state_table.id','left');
         $this->db->join("city", 'package_hotel.city_id=city.id','left');
         $this->db->join("hotel", 'package_hotel.hotel_name_id=hotel.id','left');
         $arr_data = $this->master_model->getRecords('package_hotel',array('package_hotel.is_deleted'=>'no'),$fields);
@@ -107,7 +107,7 @@ class Package_hotel extends CI_Controller{
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $state_name_data = $this->master_model->getRecords('state');
+        $state_name_data = $this->master_model->getRecords('state_table');
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -275,7 +275,7 @@ class Package_hotel extends CI_Controller{
       
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $state_name_data = $this->master_model->getRecords('state');
+        $state_name_data = $this->master_model->getRecords('state_table');
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -293,7 +293,7 @@ class Package_hotel extends CI_Controller{
         $this->db->where('package_hotel.is_deleted','no');
         $this->db->where('package_hotel.id',$id);
         $this->db->join("packages", 'package_hotel.package_id=packages.id','left');
-        $this->db->join("state", 'package_hotel.state_id=state.id','left');
+        $this->db->join("state_table", 'package_hotel.state_id=state_table.id','left');
         $this->db->join("city", 'package_hotel.city_id=city.id','left');
         $this->db->join("hotel", 'package_hotel.hotel_name_id=hotel.id','left');
         $package_hotel_data = $this->master_model->getRecords('package_hotel',array('package_hotel.is_deleted'=>'no'),$fields);
@@ -329,11 +329,10 @@ class Package_hotel extends CI_Controller{
         // POST data 
         // $all_b=array();
        $hotel_data = $this->input->post('did');
-        // print_r($city_data); die;
-                        $this->db->where('is_deleted','no');
-                        $this->db->where('is_active','yes');
-                        $this->db->where('city',$hotel_data);   
-                        $data = $this->master_model->getRecords('hotel');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->where('city',$hotel_data);   
+        $data = $this->master_model->getRecords('hotel');
         echo json_encode($data);
     }
 

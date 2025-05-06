@@ -18,7 +18,6 @@
     <img src="<?php echo base_url(); ?>uploads/do_not_delete/logo.png" alt="Chaudhary Yatra" style="width:40%;"></img>
 <div class="login-box">
   <!-- /.login-logo -->
-    
    <?php  if($this->session->flashdata('error_message1')!=''){ ?>
   <div class="alert alert-danger alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true" id="sess_clo">&times;</button>
@@ -49,7 +48,7 @@
           <input type="password" class="form-control" placeholder="Password" name="pass_login" id="pass_login">
           <div class="input-group-append">
               <div class="input-group-text">
-              <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password"></span>
+              <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Password"></span>
             </div>
           </div>
         </div>

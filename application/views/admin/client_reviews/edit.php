@@ -42,7 +42,8 @@
                           <div class="form-group">
                           <div class="form-group">
                                 <label>Review</label>
-                                <textarea type="text" class="form-control" name="review" id="review" placeholder="Enter Tour Review" required="required" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"><?php echo $info['review']; ?></textarea>
+                                <!-- <textarea type="text" class="form-control" name="review" id="review" placeholder="Enter Tour Review" required="required" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"><?php //echo $info['review']; ?></textarea> -->
+                                <input type="text" class="form-control" name="review" id="review" placeholder="Enter Tour Review" required="required" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $info['review']; ?>">
                               </div>
                           </div>
                       </div>

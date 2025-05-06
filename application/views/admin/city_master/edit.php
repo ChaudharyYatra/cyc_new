@@ -38,7 +38,7 @@
               <form method="post" enctype="multipart/form-data" id="edit_state">
                 <div class="card-body">
                 <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                           <div class="form-group">
                             <label>Select Country</label>
                             <select class="form-control" style="width: 100%;" name="country_id" id="country_id" required="required">
@@ -53,7 +53,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                           <div class="form-group">
                             <label>Select State</label>
                             <select class="form-control" style="width: 100%;" name="state_id" id="state_id" required="required">
@@ -68,7 +68,22 @@
                           </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Select District</label>
+                            <select class="form-control" style="width: 100%;" name="district_id" id="district_id" required="required">
+                                <option value="">Select District Name</option>
+                                <?php
+                                   foreach($district_name_data as $district_name_info) 
+                                   { 
+                                ?>
+                                    <option value="<?php echo $district_name_info['id']; ?>" <?php if($district_name_info['id']==$info['state_id']) { echo "selected"; } ?>><?php echo $district_name_info['district']; ?></option>
+                               <?php } ?>
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
                         <div class="form-group">
                             <label>City Name</label>
                             <input type="text" class="form-control" name="city_name" id="city_name" placeholder="Enter City Name" value="<?php echo $info['city_name']; ?>">

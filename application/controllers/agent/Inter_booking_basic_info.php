@@ -32,7 +32,6 @@ class Inter_booking_basic_info extends CI_Controller {
         //     redirect($this->module_url_path_bus_seat_sel.'/index');
         //  }
         
-        
          $this->arr_view_data['agent_sess_name']        = $agent_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
         //  $this->arr_view_data['arr_data']        = $arr_data;
@@ -140,6 +139,13 @@ class Inter_booking_basic_info extends CI_Controller {
                  );
                 //  print_r($arr_insert); die;
                  $inserted_id = $this->master_model->insertRecord('inter_booking_basic_info',$arr_insert,true);
+
+                 $arr_update = array(
+                    'booking_process'   =>   'yes'
+                 );
+                 $arr_where     = array("id" => $domestic_enquiry_id);
+                 $this->master_model->updateRecord('international_booking_enquiry',$arr_update,$arr_where);
+
                                
                  if($inserted_id > 0)
                  {
@@ -205,7 +211,12 @@ class Inter_booking_basic_info extends CI_Controller {
                  );
                 //  print_r($arr_insert); die;
                  $inserted_id = $this->master_model->insertRecord('inter_booking_basic_info',$arr_insert,true);
-                               
+                 $arr_update = array(
+                    'booking_process'   =>   'yes'
+                 );
+                 $arr_where     = array("id" => $domestic_enquiry_id);
+                 $this->master_model->updateRecord('international_booking_enquiry',$arr_update,$arr_where);
+
                  if($inserted_id > 0)
                  {
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
@@ -235,6 +246,189 @@ class Inter_booking_basic_info extends CI_Controller {
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }
 
+    public function edit($iid="")
+    {  
+         $agent_sess_name = $this->session->userdata('agent_name');
+         $id=$this->session->userdata('agent_sess_id');
+         
+        $this->db->where('is_deleted','no');
+        $this->db->where('id',$id);
+        $agent_data = $this->master_model->getRecords('agent');
+        // print_r($agent_data); die;
+        
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('international_booking_enquiry.id',$iid);
+        $agent_booking_enquiry_data = $this->master_model->getRecords('international_booking_enquiry');
+        // print_r($agent_booking_enquiry_data); die;
+
+        $record = array();
+        $fields = "agent.*,department.department,international_booking_enquiry.seat_count,international_booking_enquiry.id as enq_id,inter_booking_basic_info.middle_name";
+        $this->db->where('agent.is_deleted','no');
+        $this->db->where('agent.id',$id);
+        $this->db->where('international_booking_enquiry.id',$iid);
+        $this->db->where('inter_booking_basic_info.domestic_enquiry_id',$iid);
+        $this->db->join("department", 'agent.department=department.id','left');
+        $this->db->join("international_booking_enquiry", 'agent.id=international_booking_enquiry.agent_id','left');
+        $this->db->join("inter_booking_basic_info", 'international_booking_enquiry.id=inter_booking_basic_info.domestic_enquiry_id','left');
+        $agent_department = $this->master_model->getRecords('agent',array('agent.is_deleted'=>'no'),$fields);
+        // print_r($agent_department); die;
+
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('tour_number','ASC');
+        $packages_data_booking = $this->master_model->getRecords('packages');
+        // print_r($packages_data); die; 
+        
+        $this->db->where('is_deleted','no');
+        $media_source_data = $this->master_model->getRecords('media_source');
+        // print_r($media_source_data);
+
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('domestic_enquiry_id',$iid);
+        $inter_booking_basic_info = $this->master_model->getRecords('inter_booking_basic_info');
+        // print_r($inter_booking_basic_info); die;
+
+
+         if($this->input->post('submit'))
+        {
+             //print_r($_REQUEST);
+            $this->form_validation->set_rules('domestic_enquiry_id', 'domestic_enquiry_id', 'required');
+            $this->form_validation->set_rules('booking_office', 'Booking office', 'required');
+            $this->form_validation->set_rules('regional_office', 'Regional office', 'required');
+            $this->form_validation->set_rules('mrandmrs', 'Mr / Mrs', 'required');
+            $this->form_validation->set_rules('surname', 'Srname', 'required');
+            $this->form_validation->set_rules('first_name', 'First name', 'required');
+            $this->form_validation->set_rules('middle_name', 'Middle name', 'required');
+            $this->form_validation->set_rules('seat_count', 'Enter seat count', 'required');
+            $this->form_validation->set_rules('mobile_number', 'mobile number', 'required');
+            $this->form_validation->set_rules('media_source_name', 'media source name', 'required');
+            $this->form_validation->set_rules('gender', 'gender', 'required');
+             
+             if($this->form_validation->run() == TRUE)
+             { 
+                //echo 'ppppppp';
+                //die;
+                $domestic_enquiry_id  = $this->input->post('domestic_enquiry_id');
+                $booking_office  = $this->input->post('booking_office'); 
+                $regional_office  = $this->input->post('regional_office');
+                $mrandmrs  = $this->input->post('mrandmrs'); 
+                $surname  = $this->input->post('surname'); 
+                $first_name  = $this->input->post('first_name'); 
+                $middle_name  = $this->input->post('middle_name'); 
+                $seat_count  = $this->input->post('seat_count'); 
+                $mobile_number  = $this->input->post('mobile_number'); 
+                $media_source_name  = $this->input->post('media_source_name'); 
+                $gender  = $this->input->post('gender'); 
+
+                $arr_update = array(
+                     'domestic_enquiry_id' =>   $domestic_enquiry_id,
+                     'booking_office' =>   $booking_office,
+                     'regional_office' =>   $regional_office,
+                     'mr/mrs'   =>   $mrandmrs, 
+                     'srname'   =>   $surname, 
+                     'first_name'   =>   $first_name, 
+                     'middle_name'   =>   $middle_name, 
+                     'seat_count'=>$seat_count,
+                     'mobile_number'   =>   $mobile_number, 
+                     'media_source_name'   =>   $media_source_name, 
+                     'gender'=>$gender
+                 );
+                 $arr_where     = array("domestic_enquiry_id" => $iid);
+                 $inserted_id = $this->master_model->updateRecord('inter_booking_basic_info',$arr_update,$arr_where);
+              
+                 if($inserted_id > 0)
+                 {
+                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." update Successfully.");
+                     redirect($this->domestic_booking_process.'/index');
+                 }
+ 
+                 else
+                 {
+                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                 }
+                 redirect($this->module_url_path.'/index');
+             }   
+        }
+
+        if($this->input->post('booknow_submit'))
+        {
+            $this->form_validation->set_rules('domestic_enquiry_id', 'domestic_enquiry_id', 'required');
+            $this->form_validation->set_rules('booking_office', 'Booking office', 'required');
+            $this->form_validation->set_rules('regional_office', 'Regional office', 'required');
+            $this->form_validation->set_rules('mrandmrs', 'Mr / Mrs', 'required');
+            $this->form_validation->set_rules('surname', 'Srname', 'required');
+            $this->form_validation->set_rules('first_name', 'First name', 'required');
+            $this->form_validation->set_rules('middle_name', 'Middle name', 'required');
+            $this->form_validation->set_rules('seat_count', 'Enter seat count', 'required');
+            $this->form_validation->set_rules('mobile_number', 'mobile number', 'required');
+            $this->form_validation->set_rules('media_source_name', 'media source name', 'required');
+            $this->form_validation->set_rules('gender', 'gender', 'required');
+             
+             if($this->form_validation->run() == TRUE)
+             { 
+                $domestic_enquiry_id  = $this->input->post('domestic_enquiry_id');
+                $booking_office  = $this->input->post('booking_office'); 
+                $regional_office  = $this->input->post('regional_office');
+                $mrandmrs  = $this->input->post('mrandmrs'); 
+                $surname  = $this->input->post('surname'); 
+                $first_name  = $this->input->post('first_name'); 
+                $middle_name  = $this->input->post('middle_name'); 
+                $seat_count  = $this->input->post('seat_count'); 
+                $mobile_number  = $this->input->post('mobile_number'); 
+                $media_source_name  = $this->input->post('media_source_name'); 
+                $gender  = $this->input->post('gender'); 
+
+                $arr_update = array(
+                     'domestic_enquiry_id' =>   $domestic_enquiry_id,
+                     'booking_office' =>   $booking_office,
+                     'regional_office' =>   $regional_office,
+                     'mr/mrs'   =>   $mrandmrs, 
+                     'srname'   =>   $surname, 
+                     'first_name'   =>   $first_name, 
+                     'middle_name'   =>   $middle_name, 
+                     'seat_count'=>$seat_count,
+                     'mobile_number'   =>   $mobile_number, 
+                     'media_source_name'   =>   $media_source_name, 
+                     'gender'=>$gender
+                 );
+                $arr_where     = array("domestic_enquiry_id" => $iid);
+                 $inserted_id = $this->master_model->updateRecord('inter_booking_basic_info',$arr_update,$arr_where);
+              
+                 if($inserted_id > 0)
+                 {
+                     $this->session->set_flashdata('success_message',ucfirst($this->module_title)." update Successfully.");
+                     redirect($this->inter_bus_seat_sel.'/edit/'.$iid);
+                 }
+ 
+                 else
+                 {
+                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                 }
+                 redirect($this->module_url_path.'/index');
+             }   
+        }
+ 
+
+        
+         $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['agent_data']        = $agent_data;
+         $this->arr_view_data['agent_booking_enquiry_data']        = $agent_booking_enquiry_data;
+         $this->arr_view_data['agent_department']        = $agent_department;
+         $this->arr_view_data['media_source_data']        = $media_source_data;
+         $this->arr_view_data['inter_booking_basic_info']        = $inter_booking_basic_info;
+         $this->arr_view_data['packages_data_booking']        = $packages_data_booking;
+         $this->arr_view_data['page_title']      = " Edit ".$this->module_title;
+         $this->arr_view_data['module_title']    = $this->module_title;
+         $this->arr_view_data['inter_bus_seat_sel'] = $this->inter_bus_seat_sel;
+         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+         $this->arr_view_data['module_inter_booking_enquiry'] = $this->module_inter_booking_enquiry;
+         $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+
+        
+    }
 
      public function getBlock(){ 
         // POST data 

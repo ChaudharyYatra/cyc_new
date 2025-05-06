@@ -14,7 +14,7 @@ table.scrolldown tbody{
     font-size: 58%;
 }
 .card_price2{
-    font-size: 63%;
+    font-size: 80%;
 }
 
 </style>  

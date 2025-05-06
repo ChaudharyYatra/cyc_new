@@ -56,11 +56,16 @@ error_reporting(E_ALL & ~E_NOTICE);
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
+// ------------------------ Live Code -------------------
 // 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-if (!defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-}
+// if (!defined('ENVIRONMENT')) {
+//     define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+// }
+// ------------------------ Live Code -------------------
 
+// ------------------------ Local Code -------------------
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+// ------------------------ Local Code -------------------
 
 /*
  *---------------------------------------------------------------
@@ -320,7 +325,3 @@ switch (ENVIRONMENT)
  * And away we go...
  */
 require_once BASEPATH.'core/CodeIgniter.php';
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-

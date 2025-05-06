@@ -58,6 +58,30 @@
                           </div>
                       </div>
 
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Select Place Close Days</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select Place Close Days" style="width: 100%;" name="Select_close_days[]" id="Select_close_days" required="required">
+                                <option value="">Select close days</option>
+                                <option value="Sunady">Sunady</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday </option>
+                                <option value="Thursday">Thursday </option>
+                                <option value="Friday">Friday </option>
+                                <option value="Saturday">Saturday</option>
+                                
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Place Description</label>
+                            <textarea class="form-control" name="place_description" id="place_description" placeholder="Enter place description" required="required"></textarea>
+                          </div>
+                      </div>
+
                   </div>
                 </div>
                 <!-- /.card-body -->

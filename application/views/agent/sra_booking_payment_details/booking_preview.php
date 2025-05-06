@@ -372,7 +372,7 @@
                                             <h6 class="text-center">UTR / Transaction No.</h6>
                                         </div>
                                         <div class="col-md-6 mt-2">
-                                            <input type="text" class="form-control" name="net_banking_utr_no" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
+                                            <input type="text" class="form-control" name="D" id="net_banking_utr_no" onkeyup="netbank_utr_no_validate()" placeholder="Enter UTR No" value="<?php if(!empty($booking_payment_details)){ echo $booking_payment_details['net_banking'];}?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" >
                                         </div>
 
                                         <div class="col-md-6 mt-2">

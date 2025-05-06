@@ -36,6 +36,12 @@
                     <th>SN</th>
                     <th>Country Name</th>
                     <th>State Name</th>
+                    <th>State Permit Rate</th>
+                    <th>All India Permit Rate</th>
+                    <th>Daily Tax Rate</th>
+                    <th>Weekly Daily Tax Rate</th>
+                    <th>Monthly Tax Rate</th>
+                    <th>Yearly Tax Rate</th>
                     <th>Is Active?</th>
                     <th>Action</th>
                   </tr>
@@ -51,6 +57,12 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['country_name'] ?></td>
                     <td><?php echo $info['state_name'] ?></td>
+                    <td><?php echo $info['state_permit_rate'] ?></td>
+                    <td><?php echo $info['all_india_permit_rate'] ?></td>
+                    <td><?php echo $info['daily_tax_rate'] ?></td>
+                    <td><?php echo $info['weekly_tax_rate'] ?></td>
+                    <td><?php echo $info['monthly_tax_rate'] ?></td>
+                    <td><?php echo $info['yearly_tax_rate'] ?></td>
                     <td>
                         <?php 
                         if($info['is_active']=='yes')
@@ -62,9 +74,8 @@
                         <?php } ?>
                     </td>
                     <td>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];  ?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                          <a href="<?php echo $module_url_path;?>/edit/<?php echo $info['id'];?>/<?php echo $info['state_name'];?>" title="Edit"><i class="fa fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                           <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php echo $info['id']; ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
-                          
                     </td>
                   </tr>
                   <?php $i++; } ?>

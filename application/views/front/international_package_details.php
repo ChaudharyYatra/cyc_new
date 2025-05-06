@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="description-images mb-4">
-                    <?php if(!empty($package_details_value['international_package_full_image'])) { ?><img src="<?php echo base_url(); ?>uploads/international_package_full_image/<?php echo $package_details_value['international_package_full_image']; ?>" alt="image" class="w-100 rounded package_d_height" >
+                    <?php if(!empty($package_details_value['package_full_image'])) { ?><img src="<?php echo base_url(); ?>uploads/package_full_image/<?php echo $package_details_value['package_full_image']; ?>" alt="image" class="w-100 rounded package_d_height" >
                          <?php }?>
                     </div>
                 
@@ -146,7 +146,7 @@
                     <div class="download-btn">
                         <p class="mb-3 text_justify">
                             <center>
-                                <a href="<?php echo base_url();?>uploads/package_daywise_program/<?php echo $package_details_value['pdf_name']; ?>"><button type="button" class="btn nir-btn mb-2">
+                                <a href="<?php echo base_url();?>international_packages/booking_enquiry/<?php echo $package_details_value['id']; ?>"><button type="button" class="btn nir-btn mb-2">
                                 Click Here
                                 </button></a>
                             </center>
@@ -262,7 +262,7 @@
             <div class="modal-body modal-b">
             <!-- <?php //echo $international_packages_all_value['id'] ?> -->
             <?php if(!empty($international_packages_all_value['pdf_name'])) { ?>
-            <img src="<?php echo base_url(); ?>uploads/international_package_daywise_program/<?php echo $international_packages_all_value['pdf_name']; ?>" width="100%"/> 
+            <img src="<?php echo base_url(); ?>uploads/package_daywise_program/<?php echo $international_packages_all_value['pdf_name']; ?>" width="100%"/> 
             <?php } ?>
             </div>
             <!-- <div class="modal-footer">
@@ -283,7 +283,7 @@
             <div class="modal-body modal-b">
             <!-- <?php //echo $international_packages_all_value['id'] ?> -->
             <?php if(!empty($international_packages_all_value['inclusion_img'])) { ?>
-            <img src="<?php echo base_url(); ?>uploads/international_inclusion_img/<?php echo $international_packages_all_value['inclusion_img']; ?>" width="100%"/> 
+            <img src="<?php echo base_url(); ?>uploads/inclusion_img/<?php echo $international_packages_all_value['inclusion_img']; ?>" width="100%"/> 
             <?php } ?>
             </div>
             <!-- <div class="modal-footer">
@@ -304,7 +304,7 @@
             <div class="modal-body modal-b">
             <!-- <?php //echo $international_packages_all_value['id'] ?> -->
             <?php if(!empty($international_packages_all_value['tc_img'])) { ?>
-            <img src="<?php echo base_url(); ?>uploads/international_tc_img/<?php echo $international_packages_all_value['tc_img']; ?>" width="100%" style=""/> 
+            <img src="<?php echo base_url(); ?>uploads/tc_img/<?php echo $international_packages_all_value['tc_img']; ?>" width="100%" style=""/> 
             <?php } ?>
             </div>
             <!-- <div class="modal-footer">

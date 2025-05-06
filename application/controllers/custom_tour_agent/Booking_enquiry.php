@@ -73,7 +73,12 @@ class Booking_enquiry extends CI_Controller {
    public function add()
      {  
          $custom_agent_name = $this->session->userdata('custom_agent_name');
+// ----------------- This is Live Code -----------------------------------
          $agent_id=$this->session->userdata('custom_agent_sess_id');
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+        //  $id=$this->session->userdata('custom_agent_sess_id');
+// ----------------- This is Local Code -----------------------------------
          
         // $visitor_data=array();
         // $v_booking = $this->uri->segment(4);
@@ -89,10 +94,19 @@ class Booking_enquiry extends CI_Controller {
         $this->db->order_by('booking_enquiry.created_at','desc');
         $this->db->where('booking_enquiry.is_deleted','no');
         $this->db->where('booking_enquiry.booking_process','no');
+// ----------------- This is Live Code -----------------------------------
         $this->db->where('booking_enquiry.agent_id',$agent_id);
         $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
         $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
         $this->db->order_by("booking_enquiry.id", "desc");
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+        // $this->db->where('booking_enquiry.agent_id',$id);
+        // $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
+        // $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
+        // $this->db->order_by("booking_enquiry.id", "desc");
+        // // $this->db->join("domestic_followup", 'booking_enquiry.id=domestic_followup.booking_enquiry_id','left');
+// ----------------- This is Local Code -----------------------------------
         $arr_data = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
             
@@ -167,7 +181,12 @@ class Booking_enquiry extends CI_Controller {
                 $drop_time            = $this->input->post('drop_time');
                 $special_note            = $this->input->post('special_note');
                 $tour_number            = $this->input->post('tour_number');
+// ----------------- This is Live Code -----------------------------------
                 $other_tour_name         = $this->input->post('other_tour_name');
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                // $other_tour_name         = $this->input->post('other_tour');
+// ----------------- This is Local Code -----------------------------------
 
                  $arr_insert = array(
                         'full_name'    =>   $full_name,
@@ -211,24 +230,40 @@ class Booking_enquiry extends CI_Controller {
 
                 $arr_insert = array(
                     'meal_plan_name'    =>$meal_plan_name,
+// ----------------- This is Live Code -----------------------------------
                     'status'            => 'pending'
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                    // 'status'            => 'approved'
+// ----------------- This is Local Code -----------------------------------
                 );
                 $inserted_id = $this->master_model->insertRecord('meal_plan',$arr_insert,true);
 
                 $arr_insert = array(
                     'vehicle_type_name'    =>$other_vehicle_name,
+// ----------------- This is Live Code -----------------------------------
                     'status'            => 'pending'
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                    // 'status'            => 'approved'
+// ----------------- This is Local Code -----------------------------------
                 );
                 $inserted_id = $this->master_model->insertRecord('vehicle_type',$arr_insert,true);
 
                 $arr_insert = array(
                     'pick_up_name'    =>$other_pickup_from_name,
+// ----------------- This is Live Code -----------------------------------
                     'status'            => 'pending'
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Live Code -----------------------------------
+                    // 'status'            => 'approved'
+// ----------------- This is Live Code -----------------------------------
                 );
                 $inserted_id = $this->master_model->insertRecord('pick_up_from',$arr_insert,true);
 
                 $arr_insert = array(
                     'drop_to_name'    =>$other_drop_to_name,
+// ----------------- This is Live Code -----------------------------------
                     'status'            => 'pending'
                 );
                  $inserted_id = $this->master_model->insertRecord('drop_to',$arr_insert,true);
@@ -260,74 +295,14 @@ class Booking_enquiry extends CI_Controller {
                 			curl_setopt($ch, CURLOPT_HEADER,0);
                 			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
                 		$return_val = curl_exec($ch);
-				  
-				//   if($return_val=="")
-    //         			{
-    //         				echo "Process Failed";
-    //         			}
-    //           		else
-    //         		{
-    // 	          		echo "done";
-    //       		    } 
-    
-    // die;
-				//   $from_email='chaudharyyatra8@gmail.com';
-                //  if($email_address !='')
-                //  {
-                    
-                   
-				// 		$msg="<html>
-				// 					<head>
-				// 						<style type='text/css'>
-				// 							body {font-family: Verdana, Geneva, sans-serif}
-				// 						</style>
-				// 					</head>
-				// 					<body background=".base_url()."uploads/email/email1.jpg>
-				// 						<h3>Dear&nbsp;".$first_name."&nbsp;".$last_name."</h3>
-				// 						<p>I hope this message finds you well. I am writing to let you know that a new inquiry has been 											    
-				// 						encountered in your account from a customer. We would appreciate it if you could assist them with their travel-related needs.
-				// 						</p>
-				// 						<p>Please review the inquiry details and take the necessary action to resolve the inquiry. If you have any questions or need any additional information, 
-				// 						please do not hesitate to contact Head Office. 
-				// 						</p>
-				// 						<p>Thank you for your prompt attention to this matter.</p>
-				// 						<p>Sincerely,</p>
-				// 						<h5>ChoudharyYatra Company</h5>
-				// 					</body>
-				// 					</html>";
-				// 		// echo $msg;
-				// 		$subject='Thank You For Enquiry';
-				// 		//$this->send_mail($email_address,$from_email,$msg,$subject,$cc=null);
-				// 		// die;
-				//  }
-				// 	if($agent_name !='')
-                //  {	
-				// 		$msg_email="<html>
-				// 					<head>
-				// 						<style type='text/css'>
-				// 							body {font-family: Verdana, Geneva, sans-serif}
-				// 						</style>
-				// 					</head>
-				// 					<body background=".base_url()."uploads/email/email1.jpg>
-				// 						<h3>Dear&nbsp;".$agent_name."</h3>
-				// 						<p>I hope this message finds you well. I am writing to let you know that a new inquiry has been encountered in your account from a customer. We would 
-                //                             appreciate it if you could assist them with their travel-related needs.
-				// 						</p>
-				// 						<p>Please review the inquiry details and take the necessary action to resolve the inquiry. If you have any questions or need any additional information, please do 
-                //                             not hesitate to contact Head Office. 
-				// 						</p>
-				// 						<p>Thank you for your prompt attention to this matter.</p>
-				// 						<p>Sincerely,</p>
-				// 						<h5>ChoudharyYatra Company</h5>
-				// 						<a href=".base_url()."admin/login>Click Here</a>
-				// 					</body>
-				// 					</html>";
-				// 					$subject_email=' New Enquiry from customer';
-				// 		//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-
-				// 	 	//die;
-				// 	}
 				 
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+                //     'status'            => 'approved'
+                // );
+                // $inserted_id = $this->master_model->insertRecord('drop_to',$arr_insert,true);
+                
+// ----------------- This is Local Code -----------------------------------
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_url_path.'/index');
                  }
@@ -459,6 +434,7 @@ class Booking_enquiry extends CI_Controller {
                 $user_email=$booking_enquiry_data['email'];
                 $first_name=$booking_enquiry_data['first_name'];
                 $last_name=$booking_enquiry_data['last_name'];
+// ----------------- This is Live Code -----------------------------------
                 
                  $mobileNumber=$agent_data_email['mobile_number1'];
                  
@@ -491,6 +467,7 @@ class Booking_enquiry extends CI_Controller {
     
     die;
     
+// ----------------- This is Live Code -----------------------------------
 
                $arr_update = array(
                    'followup_status'   =>   'yes'
@@ -580,7 +557,12 @@ class Booking_enquiry extends CI_Controller {
          if(is_numeric($id))
          {   
              $this->db->where('id',$id);
-             $arr_data = $this->master_model->getRecords('booking_enquiry');
+// ----------------- This is Live Code -----------------------------------
+            //  $arr_data = $this->master_model->getRecords('booking_enquiry');
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+             $arr_data = $this->master_model->getRecords('custom_domestic_booking_enquiry');
+// ----------------- This is Local Code -----------------------------------
  
              if(empty($arr_data))
              {
@@ -590,7 +572,12 @@ class Booking_enquiry extends CI_Controller {
              $arr_update = array('is_deleted' => 'yes');
              $arr_where = array("id" => $id);
                   
-             if($this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where))
+// ----------------- This is Live Code -----------------------------------
+            //  if($this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where))
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+             if($this->master_model->updateRecord('custom_domestic_booking_enquiry',$arr_update,$arr_where))
+// ----------------- This is Local Code -----------------------------------
              {
                  $this->session->set_flashdata('success_message',$this->module_title.' Deleted Successfully.');
              }
@@ -624,14 +611,11 @@ class Booking_enquiry extends CI_Controller {
 
         if(is_numeric($id))
         {   
-            $this->db->where('custom_domestic_booking_enquiry.id',$id);
             $record = array();
             $fields = "custom_domestic_booking_enquiry.*,meal_plan.meal_plan_name";
             $this->db->where('custom_domestic_booking_enquiry.is_deleted','no');
             $this->db->where('custom_domestic_booking_enquiry.id',$id);
             $this->db->join("meal_plan", 'custom_domestic_booking_enquiry.meal_plan=meal_plan.id','left');
-            // $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
-            // $this->db->join("domestic_followup", 'booking_enquiry.id=domestic_followup.booking_enquiry_id','left');
             $arr_data = $this->master_model->getRecords('custom_domestic_booking_enquiry',array('custom_domestic_booking_enquiry.is_deleted'=>'no'),$fields);
             // print_r($arr_data); die;
 
@@ -668,12 +652,17 @@ class Booking_enquiry extends CI_Controller {
             $this->form_validation->set_rules('drop_time', 'drop_time', 'required');
             // $this->form_validation->set_rules('special_note', 'special_note', 'required');
             if($this->input->post('tour_number')=='Other'){
+// ----------------- This is Live Code -----------------------------------
             $this->form_validation->set_rules('other_tour_name', 'enter destination name', 'required');
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+            // $this->form_validation->set_rules('other_tour', 'enter destination name', 'required');
+// ----------------- This is Local Code -----------------------------------
             }
                 
                 if($this->form_validation->run() == TRUE)
                 {
-                    $full_name        = $this->input->post('full_name'); 
+                $full_name        = $this->input->post('full_name'); 
                 $email         = $this->input->post('email'); 
                 $mobile_number1             = trim($this->input->post('mobile_number1'));
 
@@ -708,8 +697,12 @@ class Booking_enquiry extends CI_Controller {
                 $drop_time            = $this->input->post('drop_time');
                 $special_note            = $this->input->post('special_note');
                 $tour_number            = $this->input->post('tour_number');
+// ----------------- This is Live Code -----------------------------------
                 $other_tour_name         = $this->input->post('other_tour_name');
-                    
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Live Code -----------------------------------
+                // $other_tour         = $this->input->post('other_tour');
+// ----------------- This is Live Code -----------------------------------
                     $arr_update = array(
                         'full_name'    =>   $full_name,
                         'email'     => $email,
@@ -743,10 +736,35 @@ class Booking_enquiry extends CI_Controller {
                         'drop_time'    =>$drop_time,
 						'special_note'=>$special_note,
                         'package_id'=>$tour_number,
-                        'other_tour_name'    =>$other_tour_name	
+                        'other_tour_name'    =>$other_tour	
                     );
                     $arr_where     = array("id" => $id);
                     $this->master_model->updateRecord('custom_domestic_booking_enquiry',$arr_update,$arr_where);
+
+                    $arr_insert = array(
+                        'meal_plan_name'    =>$meal_plan_name,
+                        'status'            => 'approved'
+                    );
+                    $inserted_id = $this->master_model->insertRecord('meal_plan',$arr_insert,true);
+    
+                    $arr_insert = array(
+                        'vehicle_type_name'    =>$other_vehicle_name,
+                        'status'            => 'approved'
+                    );
+                    $inserted_id = $this->master_model->insertRecord('vehicle_type',$arr_insert,true);
+    
+                    $arr_insert = array(
+                        'pick_up_name'    =>$other_pickup_from_name,
+                        'status'            => 'approved'
+                    );
+                    $inserted_id = $this->master_model->insertRecord('pick_up_from',$arr_insert,true);
+    
+                    $arr_insert = array(
+                        'drop_to_name'    =>$other_drop_to_name,
+                        'status'            => 'approved'
+                    );
+                    $inserted_id = $this->master_model->insertRecord('drop_to',$arr_insert,true);
+                    
                     if($id > 0)
                     {
                         $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
@@ -772,6 +790,7 @@ class Booking_enquiry extends CI_Controller {
          $this->db->or_where('package_type','4');
          $this->db->or_where('package_type','7');
         $packages_data = $this->master_model->getRecords('packages');
+        // print_r($packages_data); die;
 
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
@@ -781,24 +800,28 @@ class Booking_enquiry extends CI_Controller {
         $media_source_data = $this->master_model->getRecords('media_source');
 
         $this->db->where('is_deleted','no');
+         $this->db->where('status','approved');
          $this->db->where('is_active','yes');
          $this->db->order_by('id','ASC');
          $meal_plan = $this->master_model->getRecords('meal_plan');
          // print_r($meal_plan); die;
 
          $this->db->where('is_deleted','no');
+         $this->db->where('status','approved');
          $this->db->where('is_active','yes');
          $this->db->order_by('id','ASC');
          $vehicle_type = $this->master_model->getRecords('vehicle_type');
          // print_r($vehicle_type); die;
 
          $this->db->where('is_deleted','no');
+         $this->db->where('status','approved');
          $this->db->where('is_active','yes');
          $this->db->order_by('id','ASC');
          $pick_up_from = $this->master_model->getRecords('pick_up_from');
          // print_r($pick_up_from); die;
 
          $this->db->where('is_deleted','no');
+         $this->db->where('status','approved');
          $this->db->where('is_active','yes');
          $this->db->order_by('id','ASC');
          $drop_to = $this->master_model->getRecords('drop_to');

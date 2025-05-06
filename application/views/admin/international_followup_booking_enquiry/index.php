@@ -62,7 +62,7 @@
                     <td><?php echo $info['first_name'];?> <?php echo $info['last_name'];?></td>
                     <td><?php echo $info['email'];?></td>
                     <td><?php echo $info['mobile_number'];?></td>
-                    <td><?php echo date("Y-m-d",strtotime($info['created_at'])); ?></td>
+                    <td><?php echo date("d-m-Y",strtotime($info['created_at'])); ?></td>
 
                     <td>
                       <!-- <a href="<?php //echo $module_url_path; ?>/list/<?php //echo $info['id']; ?>"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Status</button></a> -->

@@ -36,6 +36,7 @@
                     <th>SN</th>
                     <th>Country Name</th>
                     <th>State Name</th>
+                    <th>District Name</th>
                     <th>City Name</th>
                     <th>Is Active?</th>
                     <th>Action</th>
@@ -52,6 +53,7 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['country_name'] ?></td>
                     <td><?php echo $info['state_name'] ?></td>
+                    <td><?php echo $info['district'] ?></td>
                     <td><?php echo $info['city_name'] ?></td>
                     <td>
                         <?php 

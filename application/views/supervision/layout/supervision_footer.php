@@ -308,7 +308,7 @@ function fetch_sess(){
     var btnalt_id = 'btnaltid'+data['id'];
     var btnhold_id = 'btnholdid'+data['id'];
     var btn_id= 'btnid'+data['id'];
-	var text_box_id= 'enter_code'+data['id'];
+	  var text_box_id= 'enter_code'+data['id'];
 	   
     if(data['is_hold']=='yes' && data['superviser_id']!=super_id && data['status']=='no')
     {
@@ -327,7 +327,7 @@ function fetch_sess(){
        $('#'+btnalt_id).css("display", "none");
       $('#'+btnhold_id).css("display", "none");
       $('#'+btn_id).css("display", "block");
-	  $('#'+text_box_id).prop("disabled", true);
+	    $('#'+text_box_id).prop("disabled", true);
 
     }
           });
@@ -429,6 +429,55 @@ $('#enter_code').validate({ // initialize the plugin
             required : "Please enter code",
         },
         
+    
+    }
+});
+
+});
+
+</script>
+
+<script>
+$(document).ready(function() {
+
+$('#supervision_password').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        old_pass: {
+            required: true,
+        },
+        new_password: {
+            required: true,
+            notEqualTo:"#old_pass",
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+        },
+        confirm_pass: {
+            required: true,
+            equalTo: "#new_password", 
+        }
+        
+    },
+
+    messages :{
+        old_pass : {
+            required : "Please enter old password",
+        },
+        new_password : {
+            required : "Please enter new password",
+            notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+        },
+        confirm_pass : {
+            required : "Please enter confirm password",
+            equalTo : "New password and Confirm Password can't match",
+        }
     
     }
 });

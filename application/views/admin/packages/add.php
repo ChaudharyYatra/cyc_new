@@ -1,3 +1,8 @@
+<style>
+  .hide {
+    display: none;
+    }
+</style>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,6 +15,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
+              
             </ol>
           </div>
         </div>
@@ -63,13 +69,39 @@
                           </select>
                         </div>
                       </div>
-                      
-                        <div class="col-md-6 c_from_date">
-                              <div class="form-group">
-                                <label>From Date</label>
-                                <input type="date" class="form-control" name="from_date" placeholder="Enter Destinations" required="required">
-                              </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Tour Type</label> <br>
+                            <input type="radio" id="main_tour" name="tour_type" value="1" onclick="main();"/>
+                                <label for="Yes" id="main_tour">Main Tour</label> &nbsp;&nbsp;
+                            <input type="radio" id="sub_tour" name="tour_type" value="0" onclick="sub();"/>
+                                <label for="No" id="sub_tour">Sub Tour</label> <br>
                         </div>
+                      </div>
+
+                      <div class="col-md-6 hide" id="sub_main_tour_div1">
+                        <div class="form-group">
+                          <label>Select Main Tour</label>
+                          <select class="select_css" name="main_tour_id" id="main_tour_id">
+                          <option value="">Select main tour</option>
+                                <?php
+                                  foreach($packages_tour_type as $packages_tour_type_info) 
+                                  { 
+                                ?>
+                            <option value="<?php echo $packages_tour_type_info['id'];?>"><?php echo $packages_tour_type_info['tour_title'];?></option>
+                                <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6 c_from_date">
+                        <div class="form-group">
+                          <label>From Date</label>
+                          <input type="date" class="form-control" name="from_date" placeholder="Enter Destinations" required="required">
+                        </div>
+                      </div>
+
                        <div class="col-md-6 c_from_date">
                               <div class="form-group">
                                 <label>To Date</label>
@@ -117,8 +149,8 @@
                         
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Boarding  Office/ Location</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select Boarding  Office/ Location" style="width: 100%;" name="boarding_office[]" id="boarding_office" required="required">
+                            <label>Boarding Office/ Location</label>
+                              <select class="select2" multiple="multiple" data-placeholder="Select Boarding  Office/ Location" style="width: 100%;" name="boarding_office[]" id="boarding_office" required="required">
                                 <option value="">Select Bording  Office/ Location</option>
                                 <?php
                                   foreach($agent_data as $agent_info) 
@@ -169,11 +201,10 @@
                       <div class="col-md-6">
                           <div class="form-group">
                             <label>Upload Itinerary PDF</label><br>
-                            <input type="file" name="pdf_name" id="pdf_name_package" accept="application/pdf">
+                            <input type="file" name="pdf_name" id="pdf_name_package" accept="application/pdf" required="required">
                             <br><span class="text-danger">PDF size should be less than 2MB.</span>
                             <br><span class="text-danger">Please upload only PDF files.</span>
                             <br><span class="text-danger" id="pdf_format" style="display:none;">You selected wrong file format.</span>
-                            
                           </div>
                       </div>
                       
@@ -205,45 +236,31 @@
                           </div>
                       </div>
                                            
-                      <!--<div class="col-md-6">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Inclusion Image</label><br>-->
-                      <!--      <input type="file" name="inclusion_img" id="inclusion_img" required="required">-->
-                      <!--      <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>-->
-                      <!--      <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>-->
-                      <!--      <br>-->
-                      <!--<span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922 px.</span>-->
-                      <!--<span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 605 px.</span>-->
-                      <!--<span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>-->
-                      <!--    </div>-->
-                      <!--</div>-->
-                      
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <label>Inclusion</label><br>
-                            <textarea class="form-control" name="inclusion" id="inclusion" placeholder="Enter Inclusion" required="required"></textarea>
-                            </div>
-                        </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Inclusion Image</label><br>
+                            <input type="file" name="inclusion_img" id="inclusion_img" required="required">
+                            <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            <br>
+                            <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922 px.</span>
+                            <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 605 px.</span>
+                            <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                      </div>
 
-                      <!--<div class="col-md-6">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Terms & Conditions Image</label><br>-->
-                      <!--      <input type="file" name="tc_img" id="tc_img" required="required">-->
-                      <!--      <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>-->
-                      <!--      <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>-->
-                      <!--      <br>-->
-                      <!--<span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922 px.</span>-->
-                      <!--<span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 605 px.</span>-->
-                      <!--<span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>-->
-                      <!--    </div>-->
-                      <!--</div>-->
-                      
-                        <div class="col-md-6">
-                            <div class="form-group">
-                            <label>Terms & Conditions</label><br>
-                            <textarea class="form-control" name="terms_conditions" id="terms_conditions" placeholder="Enter Terms & Conditions" required="required"></textarea>
-                            </div>
-                        </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Terms & Conditions Image</label><br>
+                            <input type="file" name="tc_img" id="tc_img" required="required">
+                            <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            <br>
+                      <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922 px.</span>
+                      <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 605 px.</span>
+                      <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                      </div>
 
                       <!-- <div class="col-md-6">
                           <div class="form-group">
@@ -259,6 +276,44 @@
                       </div> -->
        
               </div>
+
+
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Master's Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>Academic Year</td>
+                                
+                                <td>"academic year : Navigate here to include new year above the 'academic year' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/academic_year/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Package Type</td>
+                                <td>"package type : Navigate here to include new package type above the 'package type' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/package_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Hotel Type</td>
+                                <td>"hotel type : Navigate here to include new hotel type above the 'hotel type' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/hotel_type/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Zone Name</td>
+                                <td>"Zone Name : Navigate here to include new hotel type above the 'Zone Name' option."</td>
+                                <td>
+                                <a href="<?php echo base_url(); ?>admin/zone_master/index"><button type="button" class="btn btn-success" >Add</button></a>
+                                </td>
+                            </tr>
+                        </table>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="submit_slider">Submit</button>
@@ -282,5 +337,12 @@
   </div>
   
 
-</body>
-</html>
+  <script>
+    function sub(){
+    document.getElementById('sub_main_tour_div1').style.display = 'block';
+    }
+    function main(){
+    document.getElementById('sub_main_tour_div1').style.display = 'none';
+    document.getElementById('main_tour_id').value = "";
+    }
+</script>

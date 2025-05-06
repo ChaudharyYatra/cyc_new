@@ -66,7 +66,7 @@
                       <div class="col-md-6">
                               <div class="form-group">
                                 <label>Tour number</label>
-                                  <select class="form-control" name="tour_number" id="tour_number" onchange='CheckColors(this.value); 
+                                  <select class="form-control niceSelect" name="tour_number" id="tour_number" onchange='tour_title(this.value); 
                                   this.blur();' onfocus='this.size=6;' onblur='this.size=1;'>
                                     <option value="">Select tour title</option>
                                     <option value="Other">Other</option>
@@ -76,22 +76,22 @@
                                   </select>
                               </div>
                       </div>
-                      <div class="col-md-6" id="other_tour_name_div" style='display:none;'>
+                      <div class="col-md-6" id="other_tour_div" style='display:none;'>
                               <div class="form-group">
                                 <label>Enquiry destination name</label>
-                                <input type="text" class="form-control mealplan_css" name="other_tour_name" id="other_tour_name" placeholder="Enter destination name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control mealplan_css" name="other_tour" id="other_tour" placeholder="Enter destination name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                       </div>
                       <div class="col-md-6">
                               <div class="form-group">
                                 <label>Checkin Date</label>
-                                <input type="text" class="form-control checkin_date" placeholder="" name="checkin_date" id="checkin_date">
+                                <input type="text" class="form-control checkin_date" autocomplete="off" placeholder="" name="checkin_date" id="checkin_date">
                               </div>
                       </div>
                       <div class="col-md-6">
                               <div class="form-group">
                                 <label>Checkout Date</label>
-                                <input type="text" class="form-control checkout_date" placeholder="" name="checkout_date" id="checkout_date">
+                                <input type="text" class="form-control checkout_date" autocomplete="off" placeholder="" name="checkout_date" id="checkout_date">
                               </div>
                       </div>
                       <div class="col-md-6">
@@ -264,7 +264,7 @@
                     </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
                   <!-- <button type="submit" class="btn btn-success" name="booknow_submit" value="Book Now">Submit & Proceed</button>  -->
                   <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>

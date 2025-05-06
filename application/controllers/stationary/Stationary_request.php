@@ -21,9 +21,6 @@ class Stationary_request extends CI_Controller {
         $this->module_url_slug    = "stationary_request";
         $this->module_view_folder = "stationary_request/";
         $this->arr_view_data = [];
-        
-        // $this->load->library("phpmailer_library");
-        // $objMail = $this->phpmailer_library->load();
 	 }
 
      public function index()
@@ -42,7 +39,7 @@ class Stationary_request extends CI_Controller {
          $this->db->join("stationary_order_details", 'stationary_order_details.order_id=stationary_order.id','left');
          $this->db->group_by('stationary_order_details.order_id');
          $arr_data = $this->master_model->getRecords('stationary_order',array('stationary_order.is_deleted'=>'no'),$fields);
-        
+        // print_r($arr_data); die;
 
          $this->arr_view_data['stationary_sess_name'] = $stationary_sess_name;
          $this->arr_view_data['listing_page']    = 'yes';
@@ -98,13 +95,14 @@ class Stationary_request extends CI_Controller {
 
          $record = array();
          $fields = "stationary_order_details.*,stationary_order_details.stationary_name as sta_id,stationary.stationary_name,
-         stationary.series_yes_no,agent.agent_name,agent.booking_center,department.department,stationary.id as stid, ";
+         stationary.series_yes_no,agent.agent_name,agent.booking_center,department.department,stationary.id as stid,stationary_order.reject_status";
          $this->db->order_by('stationary_order_details.created_at','desc');
          $this->db->where('stationary_order_details.is_deleted','no');
         //  $this->db->where('stationary_order_details.reject_status','no');
          $this->db->where('stationary_order_details.order_id',$id);
          $this->db->join("stationary", 'stationary_order_details.stationary_name=stationary.id','left');
          $this->db->join("agent", 'stationary_order_details.agent_id=agent.id','left');
+         $this->db->join("stationary_order", 'agent.id=stationary_order.agent_id','left');
          $this->db->join("department", 'agent.department=department.id','left');
          $arr_data = $this->master_model->getRecords('stationary_order_details',array('stationary_order_details.is_deleted'=>'no'),$fields);
 
@@ -498,11 +496,6 @@ class Stationary_request extends CI_Controller {
                     $arr_where_od     = array("id" => $order_detail_id[$i]);
                     $result = $this->master_model->updateRecord('stationary_order_details',$arr_update,$arr_where_od);
                 }    
-                
-                 
-                 
-                   
-    
 
                     $this->db->where('is_deleted','no');
                     $this->db->where('is_active','yes');

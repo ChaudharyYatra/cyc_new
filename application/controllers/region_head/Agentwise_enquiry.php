@@ -14,8 +14,14 @@ class Agentwise_enquiry extends CI_Controller{
         $this->module_url_path    =  base_url().$this->config->item('region_head_panel_slug')."region_head/agentwise_enquiry";
 		$this->module_url_path_back    =  base_url().$this->config->item('region_head_panel_slug')."region_head/agent";
         $this->module_title       = "Agent Enquiry";
-        $this->module_url_slug    = "Agentwise_enquiry";
-        $this->module_view_folder = "Agentwise_enquiry/";    
+// ----------------- This is Live Code -----------------------------------
+        // $this->module_url_slug    = "Agentwise_enquiry";
+        // $this->module_view_folder = "Agentwise_enquiry/";    
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
+        $this->module_url_slug    = "agentwise_enquiry";
+        $this->module_view_folder = "agentwise_enquiry/";    
+// ----------------- This is Local Code -----------------------------------
         $this->load->library('upload');
 	}
 

@@ -35,7 +35,7 @@
                    foreach($city_arr_data as $info) 
                    { 
                      ?>
-              <form method="post" enctype="multipart/form-data" id="edit_state">
+              <form method="post" enctype="multipart/form-data" id="edit_district">
                 <div class="card-body">
                 <div class="row">
                 <div class="col-md-4">

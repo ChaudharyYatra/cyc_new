@@ -2,12 +2,34 @@
   .img_bot{
     margin-bottom: 1px;
   }
+  .content_css{
+    color:white;
+  }
 </style>
 <!-- footer starts -->
 <img class="img_bot" src="<?php echo base_url(); ?>assets/front/shape8_final.png" alt="image" width="100%"></img>
 <footer class="pt-4 pb-2">
   
-    
+        <!-- <div class="section-shape top-0"></div> -->
+        <!-- Instagram starts -->
+        <!-- <div class="insta-main pb-10">
+            <div class="container">
+                <div class="insta-inner"> -->
+                <!--<div class="follow-button">-->
+                <!--    <h5 class="m-0 rounded"><i class="fab fa-instagram"></i> Follow on Instagrams</h5>-->
+                <!--</div>-->
+                <!-- <div class="row attract-slider">
+                    <?php //if(count($social_media_link)>0) { foreach($social_media_link as $key => $social_media_link_value) { ?>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="insta-image rounded">
+                            <a href="<?php //echo $social_media_link_value['social_media_link']; ?>" onclick="window.open(this.href,'_blank');return false;"><img src="<?php //echo base_url(); ?>uploads/social_media_link/<?php// echo $social_media_link_value['image_name']; ?>" alt="<?php //echo $social_media_link_value['social_media_link']; ?>"></a>
+                        </div>
+                    </div>
+                    <?php //} } ?>
+                </div>
+                </div>    
+            </div>
+        </div> -->
         <!-- Instagram ends -->
         <?php if(count($website_basic_structure)>0) { foreach($website_basic_structure as $key => $website_basic_structure_value) { ?>
         <div class="footer-upper">
@@ -54,34 +76,64 @@
                                     </div>
                                     <div class="content-part">
                                       <b><p class="text_justify"><span><a href="mailto:<?php echo $website_basic_structure_value['email']; ?>"><?php echo $website_basic_structure_value['email']; ?></a> </span></p></b>
-                                      
                                     </div>
                                   </li>
 
-                            
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">GST No. :  27AAACC7487N1Z0</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration No. :  17-08288 of 1994-95</span></p></b>
+                                    </div>
+                                  </li>
+
+                                  <li class="icon_set">
+                                    <!-- <div class="icon-part white icon_size_w">
+                                      <i class="fas fa-envelope"></i>
+                                    </div> -->
+                                    <div class="content-part">
+                                      <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
+                                    </div>
+                                  </li>
+
+                            <!-- <ul>
+                                <li class="white"><strong>Location:</strong> <?php //echo $website_basic_structure_value['location']; ?></li>
+                                <li class="white"><strong>Contact Number:</strong> <?php //echo $website_basic_structure_value['contact_number']; ?></li>
+                                <li class="white"><strong>Email:</strong> <?php //echo $website_basic_structure_value['email']; ?></li>
+                                <li class="white"><strong>Website:</strong> <?php //echo $website_basic_structure_value['website_link']; ?></li>
+                            </ul> -->
                         </div>
                     </div>
-                   <div class="col-lg-3 col-md-3 col-sm-12 mb-4 pe-4">
-                        
-                        <div class="footer-links">
-                            <h3 class="white">Quick links</h3>
-                            <ul>
-                                <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
-                                <li><a href="<?php echo base_url(); ?>privacy_policy">Privacy Policy</a></li>
-                                <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms &amp; Conditions</a></li>
-                                <li><a href="<?php echo base_url(); ?>tour_cancel_rules">Tour Cancel Rules</a></li>
-                                <li><a href="<?php echo base_url(); ?>seat_reservation_rules">Seat Reservation Rules</a></li>
-                                <li><a href="<?php echo base_url(); ?>contact_us">Contact Us</a></li>
-								<li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 mb-4 pe-4">
+                      <div class="footer-links">
+                        <h3 class="white">Quick links</h3>
+                        <ul>
+                            <li><a href="<?php echo base_url(); ?>about_us">About Us</a></li>
+                            <li><a href="<?php echo base_url(); ?>privacy_policy">Privacy Policy</a></li>
+                            <li><a href="<?php echo base_url(); ?>terms_and_conditions">Terms &amp; Conditions</a></li>
+                            <li><a href="<?php echo base_url(); ?>tour_cancel_rules">Tour Cancel Rules</a></li>
+                            <li><a href="<?php echo base_url(); ?>seat_reservation_rules">Seat Reservation Rules</a></li>
+                            <li><a href="<?php echo base_url(); ?>contact_us">Contact Us</a></li>
+                            <li><a href="<?php echo base_url(); ?>faq">FAQ</a></li>
+                        </ul>
+                      </div>
                     </div>
                    
                     <div class="col-lg-5 col-md-5 col-sm-12 mb-4">
-                        <div class="footer-links">
-                            <h3 class="white">Map</h3>
-                            <iframe class="rounded overflow-hidden" height="240" src="<?php echo $website_basic_structure_value['map']; ?>"></iframe>
-                        </div>  
+                      <div class="footer-links">
+                        <h3 class="white">Map</h3>
+                        <iframe class="rounded overflow-hidden" height="240" src="<?php echo $website_basic_structure_value['map']; ?>"></iframe>
+                      </div>  
                     </div>
                 </div>
             </div>
@@ -90,33 +142,32 @@
 
 
         <div class="footer-copyright">
-            <div class="container">
-                <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
-                    <div class="copyright-text">
-                        <p class="m-0 white">Designed & Developed by <img src="<?php echo base_url(); ?>uploads/do_not_delete/sumago.jpg" width="25px" height="25px" style="border-radius:20px;"> <a href="https://www.sumagoinfotech.com/"><span style="color:#ff343b;"><b>Sumago Infotech Pvt. Ltd.</b></span></a> © <?php echo date("Y"); ?> All rights reserved.</p>
-                    </div>
-                    <div class="social-links">
-                        <ul>  
-                        <li><a href="<?php echo $website_basic_structure_value['facebook_link']; ?>" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="<?php echo $website_basic_structure_value['instagram_link']; ?>" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="<?php echo $website_basic_structure_value['twitter_link']; ?>" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
-                            
-                        </ul>
-                    </div>
-                </div>    
-            </div>
+          <div class="container">
+            <div class="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
+              <div class="copyright-text">
+                <p class="m-0 white">Designed & Developed by <img src="<?php echo base_url(); ?>uploads/do_not_delete/sumago.jpg" width="25px" height="25px" style="border-radius:20px;"> <a href="https://www.sumagoinfotech.com/"><span style="color:#ff343b;"><b>Sumago Infotech Pvt. Ltd.</b></span></a> © <?php echo date("Y"); ?> All rights reserved.</p>
+              </div>
+              <div class="social-links">
+                <ul>  
+                  <li><a href="<?php echo $website_basic_structure_value['facebook_link']; ?>" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                  <li><a href="<?php echo $website_basic_structure_value['instagram_link']; ?>" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                  <li><a href="<?php echo $website_basic_structure_value['twitter_link']; ?>" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                  <!-- <li><a href="<?php //echo $website_basic_structure_value['linkedin_link']; ?>" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li> -->
+                </ul>
+              </div>
+            </div>    
+          </div>
         </div>
         <?php } } ?>
         <div id="particles-js"></div>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <div class="floating_btn">
-            <a class="wp_target" target="_blank" href="https://api.whatsapp.com/send?phone=+917588484848 &text=Hello">
-                <div class="contact_icon">
-                    <i class="fa fa-whatsapp my-float"></i>
-                </div>
-            </a>
-            
+          <a class="wp_target" target="_blank" href="https://api.whatsapp.com/send?phone=+917588484848 &text=Hello">
+            <div class="contact_icon">
+              <i class="fa fa-whatsapp my-float"></i>
+            </div>
+          </a>
         </div>
 
 
@@ -127,7 +178,7 @@
     </div>
     <!-- Back to top start -->
     <div id="back-to-top">
-        <a href="#"></a>
+      <a href="#"></a>
     </div>
     <!-- Back to top ends -->
 
@@ -141,57 +192,48 @@
     </div>
 
         <!-- login registration modal -->
-        <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade  log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content login_modal_height">
                 <div class="modal-body">
                     <div class="post-tabs">
-                        <!-- tab navs -->
-                      
-                        <!-- tab contents -->
+                  
                         <div class="tab-content blog-full" id="postsTabContent">
-                            <!-- popular posts -->
+                       
                             <div aria-labelledby="login-tab" class="tab-pane fade active show" id="login"
                                 role="tabpanel">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="blog-image rounded">
-                                            <a href="#"
-                                                style="background-image: url(<?php echo base_url(); ?>uploads/log.jpg);"></a>
-                                        </div>
+                                      <div class="blog-image rounded">
+                                          <a href="#"
+                                              style="background-image: url(<?php echo base_url(); ?>uploads/log.jpg);">
+                                          </a>
+                                      </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <h4 class="text-center border-b pb-2">Login</h4>
+                                        <h4 class="text-center border-b pb-2 " style="color:white;">Login</h4>
                                         
-                                        <form method="post" action="<?php echo base_url(); ?>user_login_reg/index" onsubmit="return validateloginForms()">
+                                        
+                                        <form method="post" action="<?php echo base_url(); ?>user_profile/index" onsubmit="return validateloginForms()">
                                             <div class="form-group mb-2">
-                                                <input type="text" class="form-control" name="email_login" id="email_login" placeholder="Email Address" value="">
-                                                <span class="text-danger float-left" id="emaillogin_error" style="display:none"></span>
+                                                <input type="text" class="form-control" name="mobile" id="mobile_login" placeholder="Mobile Number">
+                                                <span class="text-danger float-left" id="mobilelogin_error" style="display:none"></span>
                                             </div>
                                             <div class="form-group mb-2">
-                                                <input type="password" class="form-control" name="pass_login" id="pass_login" placeholder="Password" value="">
+                                                <input type="password" class="form-control" name="password" id="pass_login" placeholder="Password">
+                                                     <i id="toggler"class="far fa-eye" style="position: absolute;right: 50px;top: 48%;transform: translateY(-50%);cursor: pointer;"></i>
                                                 <span class="text-danger float-left" id="passlogin_error" style="display:none"></span>
                                             </div>
                                             <div class="form-group mb-2">
-                                               
-                                                <a class="float-end" href="#">Lost your password?</a>
+                                                <a class="float-end" href="#" style="color:rgb(246, 242, 242);">Lost your password?</a>
                                             </div>
                                             <div class="comment-btn mb-2 pb-2 text-center border-b">
-                                                <input type="submit" class="nir-btn w-100" id="submit_l" value="Login" name="login">
+                                              <input type="submit" class="nir-btn w-100" id="submit_l" value="Login" name="submit">
                                             </div>
-                                            
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Recent posts -->
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -214,11 +256,11 @@
   var baseURL= "<?php echo base_url();?>";
  
   $(document).ready(function(){
- 
+
     // City change
     $('#department_id').on('change', function () {
       var did = $(this).val();
-      alert('ppppppppppppppppppppppppppp');
+      // alert('ppppppppppppppppppppppppppp');
      
       // AJAX request
       $.ajax({
@@ -249,12 +291,12 @@
         if(fil_val=='low_to_high'){
         var url =window.location.origin;
         var final_url = base_url+"packages/all_packages_asc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         }else if(fil_val=='high_to_low')
         {
-        var url =window.location.origin;
+        var url = window.location.origin;
         var final_url = base_url+"packages/all_packages_desc";
-	    window.location.href = final_url;
+	      window.location.href = final_url;
         };
      });
     });  
@@ -281,7 +323,7 @@
     });  
 </script>
 
-  <script>
+<script>
 function validateregForms() 
 {
   $("#firstname_error").hide();
@@ -323,9 +365,9 @@ function validateregForms()
       var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if(!regex.test(emailid)) 
         {
-           $('#emailid_error').text('Please enter valid email address.');
-            $('#emailid_error').show();
-            submiform=false;
+          $('#emailid_error').text('Please enter valid email address.');
+          $('#emailid_error').show();
+          submiform=false;
         }
         else if(emailid)
         {
@@ -333,9 +375,9 @@ function validateregForms()
           var count = (email_split[1].match(/\./g) || []).length;
           if(count > 2)
           {
-              $('#emailid_error').text('Please enter valid email address.');
-              $('#emailid_error').show();
-              submiform=false;
+            $('#emailid_error').text('Please enter valid email address.');
+            $('#emailid_error').show();
+            submiform=false;
           }
         }
         // else
@@ -421,41 +463,61 @@ function validateregForms()
 <script>
     function validateloginForms() 
 {
-  $("#emaillogin_error").hide();
+  $("#mobilelogin_error").hide();
   $("#passlogin_error").hide();
   
   
   var submiform='';
   
-  var emaillogin = $('#email_login').val();
-  if (emaillogin == '' || emaillogin ==null) 
+  var mobilelogin = $('#mobile_login').val();
+  if (mobilelogin == '' || mobilelogin ==null) 
   {
-    $('#emaillogin_error').text('Please enter email address.');
-    $('#emaillogin_error').show();
+    $('#mobilelogin_error').text('Please enter mobile number.');
+    $('#mobilelogin_error').show();
     submiform=false;
   }
   else
   {
-      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if(!regex.test(emaillogin)) 
-        {
-           $('#emaillogin_error').text('Please enter valid email address.');
-            $('#emaillogin_error').show();
-            submiform=false;
-        }
-        else if(emaillogin)
-        {
-          var email_split = emaillogin.split('@');
-          var count = (email_split[1].match(/\./g) || []).length;
-          if(count > 2)
-          {
-              $('#emailid_error').text('Please enter valid email address.');
-              $('#emailid_error').show();
+      var mobNum = $('#mobile_login').val();
+      var filter = /^\d*(?:\.\d{1,2})?$/;
+        if(filter.test(mobNum)) {
+            if(mobNum.length < 10){
+                  $('#mobilelogin_error').text('Please enter 10 digits mobile number');
+              $('#mobilelogin_error').show();
               submiform=false;
-          }
-        }
-       
+             } 
+            }
+            
+         if(filter.test(mobNum)) {
+            if(mobNum.length > 10){
+                  $('#mobilelogin_error').text('Please enter 10 digits mobile number');
+              $('#mobilelogin_error').show();
+              submiform=false;
+             } 
+            }
   }
+  // else
+  // {
+  //     var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  //       if(!regex.test(emaillogin)) 
+  //       {
+  //          $('#emaillogin_error').text('Please enter valid email address.');
+  //           $('#emaillogin_error').show();
+  //           submiform=false;
+  //       }
+  //       else if(emaillogin)
+  //       {
+  //         var email_split = emaillogin.split('@');
+  //         var count = (email_split[1].match(/\./g) || []).length;
+  //         if(count > 2)
+  //         {
+  //             $('#emailid_error').text('Please enter valid email address.');
+  //             $('#emailid_error').show();
+  //             submiform=false;
+  //         }
+  //       }
+       
+  // }
   
   var password = $('#pass_login').val();
   if (password == '' || password ==null) 
@@ -724,6 +786,10 @@ var mobile_number = $('#mobile_number').val();
 }
     
 </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> rupali_0910
 <script>
   $(document).ready(function(){
   $('#dept_id').on('change',function(){
@@ -752,7 +818,7 @@ var mobile_number = $('#mobile_number').val();
 </script>
 
 
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 document.onkeydown = function(e) {
         if (e.ctrlKey && 
@@ -980,42 +1046,261 @@ function validatedomesticreviewForms()
   AOS.init();
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+    var value = '<?php echo $this->session->userdata("details_given");?>'
+    
+    if(value!='yes'){
+  setTimeout(function(){
+      $('#front_popup').modal('show');
+  }, 10000);
+    }
+});
+</script> 
 
 <script>
-    $('#data-table').ready(function() {
-    var start = 0; // Starting index
-    var limit = 10; // Number of records to load initially
-
-    var dataTable = $('#data-table').DataTable({
-        "paging": false, // Disable DataTables pagination
-        "searching": false, // Disable DataTables search
-        "ordering": false, // Disable DataTables sorting
-        "info": false, // Disable DataTables info
-        "scrollY": "100px", // Set the height of the scrollable area
-        "scrollCollapse": true,
-        "ajax": {
-            "url": "<?php echo base_url('packages/all_packages'); ?>", // Replace with your controller and method
-            "type": "POST",
-            "data": function(d) {
-                d.start = start; // Pass start and limit parameters to the server
-                d.length = limit;
-            },
-            "dataSrc": "data" // The data source property in your JSON response
+function validateCustomisedForms() 
+{
+  $("#first_name_error").hide();
+  $("#last_name_error").hide();
+  $("#email_error").hide();
+  $("#mobile_number_error").hide();
+  $("#department_id_error").hide();
+  $("#agent_id_error").hide();
+  $("#interested_in_error").hide();
+  $("#interested_in_gr_int_error").hide();
+  $("#form_date_error").hide();
+  $("#to_date_error").hide();
+  $("#total_seat_error").hide();
+  
+  var submiform='';
+  
+  var first_name = $('#first_name').val();
+  if (first_name == '' || first_name ==null) 
+  {
+    $('#first_name_error').text('Please enter first name.');
+    $('#first_name_error').show();
+    submiform=false;
+  }
+  
+  var form_date = $('#form_date').val();
+  if (form_date == '' || form_date ==null) 
+  {
+    $('#form_date_error').text('Please select from date.');
+    $('#form_date_error').show();
+    submiform=false;
+  }
+  
+  var to_date = $('#to_date').val();
+  if (to_date == '' || to_date ==null) 
+  {
+    $('#to_date_error').text('Please select to date.');
+    $('#to_date_error').show();
+    submiform=false;
+  }
+  
+  
+  var last_name = $('#last_name').val();
+  if (last_name == '' || last_name ==null) 
+  {
+    $('#last_name_error').text('Please enter last name.');
+    $('#last_name_error').show();
+    submiform=false;
+  }
+  
+  var email = $('#email').val();
+  if (email == '' || email ==null) 
+  {
+    $('#email_error').text('Please enter email address.');
+    $('#email_error').show();
+    submiform=false;
+  }
+  else
+  {
+      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if(!regex.test(email)) 
+        {
+           $('#email_error').text('Please enter valid email address.');
+            $('#email_error').show();
+            submiform=false;
         }
-    });
-
-    // Detect when the user scrolls to the bottom
-    $('#data-table').on('scroll', function() {
-        var container = $(this);
-        if (container.scrollTop() + container.innerHeight() >= container[0].scrollHeight) {
-            // User has scrolled to the bottom, load more data
-            start += limit; // Update the starting index
-            dataTable.ajax.reload(); // This will trigger the server-side request with updated parameters
+        else if(email)
+        {
+          var email_split = email.split('@');
+          var count = (email_split[1].match(/\./g) || []).length;
+          if(count > 2)
+          {
+              $('#email_error').text('Please enter valid email address.');
+              $('#email_error').show();
+              submiform=false;
+          }
         }
-    });
-});
+        // else
+        // {
+        //     isEmailExist();
+        // }
+  }
+  
+  
+var mobile_number = $('#mobile_number').val();
+  if (mobile_number == '' || mobile_number ==null) 
+  {
+    $('#mobile_number_error').text('Please enter mobile number.');
+    $('#mobile_number_error').show();
+    submiform=false;
+  }
+  else
+  {
+      var mobNum = $('#mobile_number').val();
+      var filter = /^\d*(?:\.\d{1,2})?$/;
+        if(filter.test(mobNum)) {
+            if(mobNum.length < 10){
+                  $('#mobile_number_error').text('Please enter 10 digits mobile number');
+              $('#mobile_number_error').show();
+              submiform=false;
+             } 
+            }
+            
+         if(filter.test(mobNum)) {
+            if(mobNum.length > 10){
+                  $('#mobile_number_error').text('Please enter 10 digits mobile number');
+              $('#mobile_number_error').show();
+              submiform=false;
+             } 
+            }
+  }
 
+	var department_id = $('#department_id').val();
+  if (department_id == '' || department_id ==null) 
+  {
+    $('#department_id_error').text('Please select department.');
+    $('#department_id_error').show();
+    submiform=false;
+  }
+	
+  var agent_id = $('#agent_id').val();
+  if (agent_id == '' || agent_id ==null) 
+  {
+    $('#agent_id_error').text('Please select Booking Centre.');
+    $('#agent_id_error').show();
+    submiform=false;
+  }
+
+  var interested_in = $('#interested_in').val();
+  if (interested_in == '' || interested_in ==null) 
+  {
+    $('#interested_in_error').text('Please select interted in.');
+    $('#interested_in_error').show();
+    submiform=false;
+  }
+
+  var interested_in_gr_int = $('#interested_in_gr_int').val();
+  if (interested_in_gr_int == '' || interested_in_gr_int ==null) 
+  {
+    $('#interested_in_gr_int_error').text('Please select type of tour.');
+    $('#interested_in_gr_int_error').show();
+    submiform=false;
+  }
+
+  var total_seat = $('#total_seat').val();
+  if (total_seat == '' || total_seat ==null) 
+  {
+    $('#total_seat_error').text('Please enter total seat count.');
+    $('#total_seat_error').show();
+    submiform=false;
+  }
+
+  
+  
+  if(submiform==='')
+  {
+      return true;
+  }
+  else
+  {
+     return false; 
+  }
+  
+  
+}
+    
 </script>
+
+<script>
+function validateFeedbackForms() 
+{
+  $("#categories_error").hide();
+  $("#rating_error").hide();
+  $("#msg_error").hide();
+  $("#image_name_error").hide();
+  
+  var submiform='';
+
+
+  var gender = $('#categories').val();
+  if (gender == '' || gender ==null) 
+  {
+    $('#categories_error').text('Please select categories.');
+    $('#categories_error').show();
+    submiform=false;
+  }
+
+  var gender = $('#rating').val();
+  if (gender == '' || gender ==null) 
+  {
+    $('#rating_error').text('Please select rating.');
+    $('#rating_error').show();
+    submiform=false;
+  }
+
+  var gender = $('#message').val();
+  if (gender == '' || gender ==null) 
+  {
+    $('#msg_error').text('Please enter feedback.');
+    $('#msg_error').show();
+    submiform=false;
+  }
+
+  var gender = $('#image_name').val();
+  if (gender == '' || gender ==null) 
+  {
+    $('#image_name_error').text('Please select image.');
+    $('#image_name_error').show();
+    submiform=false;
+  }
+
+  
+  
+  if(submiform==='')
+  {
+      return true;
+  }
+  else
+  {
+     return false; 
+  }
+  
+  
+}
+    
+</script>
+
+<script>
+    var password = document.getElementById('pass_login');
+    var toggler = document.getElementById('toggler');
+        showHidePassword = () => {
+        if (password.type == 'password') {
+        password.setAttribute('type', 'text');
+        toggler.classList.add('fa-eye-slash');
+        } 
+        else {
+        toggler.classList.remove('fa-eye-slash');
+        password.setAttribute('type', 'password');
+        }
+    };
+    toggler.addEventListener('click', showHidePassword);
+</script>
+
 
 <script>
 function search_bar() 
@@ -1051,5 +1336,9 @@ function search_bar()
 }
     
 </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> rupali_0910
 </body>
 </html>

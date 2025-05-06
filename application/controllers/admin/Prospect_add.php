@@ -57,7 +57,14 @@ class Prospect_add extends CI_Controller{
 
                 $config['upload_path']   = './uploads/prospect_pdf/';
                 $config['allowed_types'] = 'pdf|PDF'; 
-                $config['max_size']      = '20000';
+
+// ----------- This is Live Code --------------------
+                // $config['max_size']      = '20000';
+// ----------- This is Live Code --------------------
+// ----------- This is Local Code --------------------
+                $config['max_size']      = '10000';
+// ----------- This is Local Code --------------------
+
                 $config['file_name']     =  $file_name_to_dispaly;
                 $config['overwrite']     =  TRUE;
 
@@ -69,8 +76,6 @@ class Prospect_add extends CI_Controller{
                 {  
                     $data['error'] = $this->upload->display_errors();
                     $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    print_r($this->upload->display_errors());
-                    echo 'abcd'; die;
                     redirect($this->module_url_path);  
                 }
 

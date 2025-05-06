@@ -263,7 +263,7 @@ $('.send_qty').on('keyup', function() {
      var currentRow=$(this).closest("tr"); 
      var col3=currentRow.find("td:eq(2)").text(); 
      console.log(parseInt(col3));
-   if(parseInt(p) <= parseInt(col3) || parseInt(p) >= parseInt(col3) && p >0)
+     if(parseInt(p) <= parseInt(col3) || parseInt(p) >= parseInt(col3) && p >0)
      {
 $(".send_qty").each(function () {  
      
@@ -297,7 +297,7 @@ $(".send_qty").each(function () {
      });
 }else{
      $('.sendButton').attr("disabled", true);
-     alert('Please insert quantity more than 0');
+     alert('Please insert less quantity or equal quantity');
 }
 });
 	 });	 
@@ -366,6 +366,8 @@ $(".send_qty").each(function () {
      if(new_array_qty!='')
      {
 
+          // console.log($.isEmptyObject(new_array_qty));
+
           $.ajax({
                           type: "POST",
                           url:'<?=base_url()?>stationary/stationary_request/send',
@@ -423,8 +425,8 @@ $(".send_qty").each(function () {
         
 			var remove_tr_id='detail_tr'+modal_id;
           $('.'+remove_tr_id).remove(); 
-	// var id_for_update_series = '0'+modal_id;
-	var id_for_update_series = modal_id;
+          // var id_for_update_series = '0'+modal_id;
+          var id_for_update_series = modal_id;
             for(var i=0; i<count; i++){
             var add_id=i+modal_id;
              var add_id_name=modal_id;
@@ -481,7 +483,25 @@ $(".send_qty").each(function () {
 
 </script>
 
- 
+<script>
+
+//   $(document).ready(function(){
+//     var col3=0;
+//     $('.send').on('click', function() {
+//       // var currentRow=$(this).closest("tr"); 
+//       var currentRow=$(this).closest("tr"); 
+//       var col3=currentRow.find('input[name="send_qty[]"]').val();
+//     });
+//  for(var i=1; i<=col3;i++)
+//  {
+//   console.log(i);
+//   var abc='series_data'+i;
+//   $('#'+abc).on('change', function () {
+//     var did = $(this).val();
+//   });
+// }
+// });
+ </script>  
 
 
 <script>
@@ -608,3 +628,115 @@ $(".send_qty").each(function () {
           });
 	});
 </script>
+<script>
+  
+  function zoomin(){
+        var myImg = document.getElementById("img");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 2500) return false;
+         else{
+            myImg.style.width = (currWidth + 100) + "px";
+        } 
+    }
+    function zoomout(){
+        var myImg = document.getElementById("img");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 100) return false;
+		 else{
+            myImg.style.width = (currWidth - 100) + "px";
+        }
+    }
+
+    $(function(){
+  var zoomStep = 50;
+  var rotateStep = 90;
+  function zoom(step){
+    var image = $('.img-fluid');
+    image.width(image.width() + step);
+    setImageContainerDimensions();
+  }
+  function rotate(step){
+    var container = $('#imageModalBody');
+    var rotation = parseInt(container.attr('data-rotation'));
+    var newRotation = rotation + step;
+
+    newRotation = newRotation < 0 ? (newRotation + 360) % 360 : newRotation % 360;
+    $('#imageModalBody').removeClass('rotate' + rotation);
+    $('#imageModalBody').addClass('rotate' + newRotation);
+    container.attr('data-rotation', newRotation);
+    setImageContainerDimensions();
+  }
+  function setImageContainerDimensions(){
+    var container = $('#imageModalBody');
+    var image = container.find('.img-fluid');
+    
+    rotation = parseInt(container.attr('data-rotation'));
+    if (rotation % 180 == 90) {
+      container.width(image.height() + 17).height(image.width());
+    }
+    else {
+      container.width(image.width() + 17).height(image.height());
+    }
+  }
+  
+  $('.rotate-left').on('click', function(){
+        rotate(-rotateStep);
+  });
+  $('.rotate-right').on('click', function(){
+        rotate(rotateStep);
+  });
+  
+})
+
+
+</script>
+
+<script>
+$(document).ready(function() {
+
+$('#stationary_password').validate({ // initialize the plugin
+    errorPlacement: function($error, $element) {
+    $error.appendTo($element.closest("div"));
+  },
+    rules: {
+        old_pass: {
+            required: true,
+        },
+        new_password: {
+            required: true,
+            notEqualTo:"#old_pass",
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
+        },
+        confirm_pass: {
+            required: true,
+            equalTo: "#new_password", 
+        }
+        
+    },
+
+    messages :{
+        old_pass : {
+            required : "Please enter old password",
+        },
+        new_password : {
+            required : "Please enter new password",
+            notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
+        },
+        confirm_pass : {
+            required : "Please enter confirm password",
+            equalTo : "New password and Confirm Password can't match",
+        }
+    
+    }
+});
+
+});
+
+</script>
+

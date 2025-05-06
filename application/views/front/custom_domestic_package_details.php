@@ -111,18 +111,49 @@
 
                 </div>
             	
+				<!-- <div id="dates" class="trend-item box-shadow bg-white mb-2 rounded overflow-hidden dates">
+                    <div class="trend-content-main p-4 pb-2">
+                        <div class="trend-content">
+                            <div class="eentry-button d-flex justify-content-center align-items-center mb-2">
+                                    <h4>Tour Dates & Costs</h4>
+                            </div>
+                            <table class="table table-bordered scrolldown">
+                                <thead>
+                                <tr class="table_head">
+                                    <th>Dates</th>
+                                    <th>Single Per Seat</th>
+                                    <th>Twin Sharing Per Seat</th>
+                                    <th>3/4 Sharing Per Seat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            <?php //foreach($package_date_details_data as $date_data){ ?>        
+                                <tr>
+                                    <td><?php //echo date('d-m-Y', strtotime($date_data['journey_date'])); ?></td>
+                                    <td>₹ <?php //echo $date_data['single_seat_cost'];?></td>
+                                    <td>₹ <?php //echo $date_data['twin_seat_cost'];?></td>
+                                    <td>₹ <?php //echo $date_data['three_four_sharing_cost'];?></td>
+                                </tr>
+                            <?php //} ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+            <!-- Button trigger modal -->
 
-
+           
                 <div  id="iternary" class="accrodion-grp faq-accrodion box-shadow bg-white mb-2 rounded  overflow-hidden" data-grp-name="faq-accrodion">
                     <h4 class="text-center mt-2">Itinerary</h4>
                     <h5 class="text-center">Our Brief Daily Program</h5>
 
+                    <!-- <div class="description-images mb-4 img-pack_hight">
+                    <?php //if(!empty($package_details_value['pdf_name'])) { ?><img src="<?php //echo base_url(); ?>uploads/package_daywise_program/<?php //echo $package_details_value['pdf_name']; ?>" alt="image" class="w-100 rounded" >
+                         <?php// }?>
+                    </div> -->
                     
                     <!-- embed responsive iframe --> 
                     <!-- ======================= -->
-                <?php if($package_details_value['pdf_name']!=''){
-               
-                ?>
 
                     <div id="Iframe-Master-CC-and-Rs" class="set-margin set-padding set-border set-box-shadow center-block-horiz pack-details">
                     <div class="responsive-wrapper 
@@ -136,12 +167,8 @@
                         </iframe>
                         
                     </div>
-                <?php } else { ?>
-                <center><p> Itinerary is not uploded</p></center>
-                <?php } ?>
 
                 </div>
-            
 
                 <!-- <?php 
                 //$status ='active';

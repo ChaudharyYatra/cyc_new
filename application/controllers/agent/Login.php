@@ -32,11 +32,12 @@ class Login extends CI_Controller{
               $this->db->where('mobile_number1',$mobile_number1);
               $this->db->where('password',$Pass_login);
               $this->db->where('is_active','yes');
+              $this->db->where('is_deleted','no');
               $arr_data = $this->master_model->getRecords('agent');       
                      
                 if(empty($arr_data))
                 {    
-                    $this->session->set_flashdata('error_message1',"Mobile Number Or Password Is Wrong.");
+                    $this->session->set_flashdata('error_message1',"Email Or Password Is Wrong.");
                 }
                 else
                 {
@@ -46,8 +47,14 @@ class Login extends CI_Controller{
                         $this->session->set_userdata('agent_mobile',$agent_data['mobile_number1']);
                         $this->session->set_userdata('agent_sess_id',$agent_data['id']);
                         $this->session->set_userdata('agent_name',$agent_data['agent_name']);
-                        $this->session->set_userdata('agent_login_count',$agent_data['login_count']);
+// ----------------- This is Live Code -----------------------------------
+                        // $this->session->set_userdata('agent_login_count',$agent_data['login_count']);
+                        // $this->session->set_userdata('region_head',$agent_data['department']);
+// ----------------- This is Live Code -----------------------------------
+// ----------------- This is Local Code -----------------------------------
                         $this->session->set_userdata('region_head',$agent_data['department']);
+                        $this->session->set_userdata('agent_login_count',$agent_data['login_count']);
+// ----------------- This is Local Code -----------------------------------
 
                         $agent = $agent_data['id'];
                         $var = $agent_data['login_count'];

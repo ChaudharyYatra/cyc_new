@@ -37,6 +37,8 @@
                     <th>SN</th>
                     <th>State Name</th>
 					          <th>Place Name</th>
+                    <th>Place Close Days</th>
+                    <th>Place Description</th>
                     <th>Is Active?</th>
                     <th>Action</th>
                   </tr>
@@ -52,6 +54,8 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['state_name'] ?></td>
 					          <td><?php echo $info['place_name'] ?></td>
+                    <td><?php echo $info['Select_close_days'] ?></td>
+                    <td><?php echo $info['place_description'] ?></td>
                     
                     <td>
                         <?php 

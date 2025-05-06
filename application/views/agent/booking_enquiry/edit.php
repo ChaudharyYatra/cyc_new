@@ -34,11 +34,12 @@
               <?php
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($arr_data); die;
                      ?>
               <form method="post" enctype="multipart/form-data" id="edit_bookingenquiry">
                 <div class="card-body">
                 <div class="row">
-					<div class="col-md-6">
+					          <div class="col-md-6">
                           <div class="form-group">
                             <label>Mr / Mrs</label><br>
                             <select class="select_css" name="mrandmrs" id="mrandmrs">
@@ -51,25 +52,25 @@
                         <div class="col-md-6">
                               <div class="form-group">
                                 <label>First name</label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name" value="<?php echo $info['first_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control" style="text-transform: capitalize;" name="first_name" id="first_name" placeholder="Enter First Name" value="<?php echo $info['first_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                         </div>
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Last name</label>
-                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Last Name" value="<?php echo $info['last_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
+                                    <input type="text" class="form-control" style="text-transform: capitalize;" name="last_name" id="last_name" placeholder="Enter Last Name" value="<?php echo $info['last_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                                 </div>
                         </div>
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Mobile number</label>
-                                    <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" value="<?php echo $info['mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                    <input type="text" class="form-control" name="mobile_number" id="mobile_number" placeholder="Enter Mobile Number" value="<?php echo $info['mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
                                 </div>
                         </div>
-					<div class="col-md-6">
+					              <div class="col-md-6">
                               <div class="form-group">
                                 <label>Whatsapp Mobile number</label>
-                                <input type="text" class="form-control" name="wp_mobile_number" id="wp_mobile_number" placeholder="Enter Whatsapp Mobile Number" value="<?php echo $info['wp_mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input type="text" class="form-control" name="wp_mobile_number" id="wp_mobile_number" placeholder="Enter Whatsapp Mobile Number" value="<?php echo $info['wp_mobile_number']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="10" minlength="10">
                               </div>
                         </div>
                         <div class="col-md-6">
@@ -81,15 +82,16 @@
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Gender </label> <br>
-                                    &nbsp;&nbsp;<input type="radio" name="gender" id="gender" value="Male" <?php if(isset($info['gender'])){if($info['gender']=='Male') {echo'checked';}}?>>&nbsp;&nbsp;Male
-                                    &nbsp;&nbsp;<input type="radio" name="gender" id="gender" value="Female" <?php if(isset($info['gender'])){if($info['gender']=='Female') {echo'checked';}}?>>&nbsp;&nbsp;Female <br>
+                                    &nbsp;&nbsp;<input type="radio" name="gender" id="male" value="Male" <?php if(isset($info['gender'])){if($info['gender']=='Male') {echo'checked';}}?>>&nbsp;&nbsp;Male
+                                    &nbsp;&nbsp;<input type="radio" name="gender" id="female" value="Female" <?php if(isset($info['gender'])){if($info['gender']=='Female') {echo'checked';}}?>>&nbsp;&nbsp;Female <br>
                                 </div>
                         </div>
 					
 					           <div class="col-md-6">
                               <div class="form-group">
                                 <label>Media source</label>
-                                  <select class="niceSelect select_css" name="media_source_name" id="media_source_name" >
+                                  <select class="form-control niceSelect" name="media_source_name" id="media_source_name" onfocus='this.size=3;' onblur='this.size=1;' 
+                                        onchange='this.size=1; this.blur();'>
                                       <option value="">Select media source</option>
                                       <?php
                                         foreach($media_source_data as $media_source_info){ 
@@ -100,18 +102,24 @@
                               </div>
                       </div>
 
-                       <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tour number</label>
-                                    <select class="form-control" name="tour_number" id="tour_number" onchange='CheckColors(this.value); 
-                                  this.blur();' onfocus='this.size=6;' onblur='this.size=1;'>
-                                        <option value="">Select tour Number</option>
-                                        <option value="Other" <?php if(isset($info['package_id'])){if("Other" == $info['package_id']) {echo 'selected';}}?>>Other</option>
-                                        <?php foreach($packages_data as $packages_data_value){ ?> 
-                                            <option value="<?php echo $packages_data_value['tour_number'];?>" <?php if(isset($info['package_id'])){if($packages_data_value['tour_number'] == $info['package_id']) {echo 'selected';}}?> ><?php echo $packages_data_value['tour_number'];?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Tour Number-Name</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select Tour" style="width: 100%;" name="tour_number[]" id="tour_number" required="required">
+                              <option value="">Select tour</option>
+                              <?php
+                              $title = $temparray=explode(',',$info['package_id']);
+                              $c=count($title);
+                                foreach($packages_data as $packages_data_value) 
+                                { 
+                                    for($i=0; $i<$c; $i++){
+                                        $tid= $title[$i];
+                                    }
+                              ?>
+                                <option value="<?php echo $packages_data_value['id']; ?>" <?php if(in_array($packages_data_value['id'], $title)) { echo "selected"; } ?>><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
+                            <?php  } ?>
+                            </select>
+                          </div>
                         </div>
 
                         <div class="col-md-6" id="other_tour_name_div" style='display:none;'>
@@ -120,12 +128,82 @@
                                 <input type="text" class="form-control" name="other_tour_name" id="other_tour_name" placeholder="Enter destination name" value="<?php echo $info['other_tour_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');">
                               </div>
                         </div>
-				<div class="col-md-6">
+				                <div class="col-md-6">
                           <div class="form-group">
                             <label>Enter Seat Count</label>
-                            <input type="text" class="form-control" name="enq_seat_count" id="enq_seat_count" placeholder="Enter seat count" value="<?php echo $info['seat_count']; ?>">
+                            <input type="text" class="form-control" name="enq_seat_count" id="enq_seat_count" placeholder="Enter seat count" value="<?php echo $info['seat_count']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                           </div>
                         </div>
+
+                        <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Occupation Name</label>
+                                  <select class="select_css" name="occupation_name" id="occupation_name">
+                                      <option value="">Select occupation name</option>
+                                      <?php
+                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $occupation_master_info['id']; ?>" <?php if(isset($info['occupation_name'])){if($occupation_master_info['id'] == $info['occupation_name']) {echo 'selected';}}?> ><?php echo $occupation_master_info['occupation_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Zone Name</label>
+                                  <select class="select_css" name="zone_name" id="zone_name">
+                                      <option value="">Select zone name</option>
+                                      <?php
+                                        foreach($zone_master_data as $zone_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $zone_master_info['id']; ?>" <?php if(isset($info['zone_name'])){if($zone_master_info['id'] == $info['zone_name']) {echo 'selected';}}?> ><?php echo $zone_master_info['zone_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <label>Customer Address -</label>
+                              <div class="form-group">
+                                <label>Flat No./ Banglow No.</label>
+                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No" value="<?php echo $info['flat_no']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                            <label></label>
+                              <div class="form-group">
+                                <label>Building / House Name</label>
+                                <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name" value="<?php echo $info['house_name']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Street Name</label>
+                                <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name" value="<?php echo $info['street_name']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name" value="<?php echo $info['landmark']; ?>">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Area</label>
+                                <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name" value="<?php echo $info['area']; ?>">
+                              </div>
+                            </div>
+
+                        <!-- <div class="col-md-6 mb-2">
+                          <label class="col-form-label">Followup Date:</label> 
+                          <input type="date" class="form-control" name="followup_date" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" value="<?php //if(isset($info['followup_date'])){ echo $info['followup_date'];}?>" >
+                        </div> -->
 
              
 
@@ -155,5 +233,3 @@
   </div>
   
 
-</body>
-</html>

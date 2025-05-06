@@ -98,7 +98,7 @@
                      ?>
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Requested Profile Details</h3>
+                <h3 class="card-title"><?php echo $page_title; ?></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -148,8 +148,15 @@
                     <td><?php echo $info['fld_registration_date']; ?></td>
 
                     <th>Photo</th>
-                    <td><img src="<?php echo base_url(); ?>uploads/agent_photo/<?php echo $info['image_name']; ?>" width="20%;" height="20%;" alt="Agent Image"></td>
+                    <td><img src="<?php echo base_url(); ?>uploads/agent_photo/<?php echo $info['image_name']; ?>" width="50%;" height="50%;" alt="Agent Image"></td>
 
+                  </tr>
+                  <tr>
+                  <th>QR Code Photo</th>
+                    <td><img src="<?php echo base_url(); ?>uploads/QR_code_image/<?php echo $info['qr_code_image']; ?>" width="50%;" height="50%;" alt="Agent Image"></td>
+                  
+                    <th>UPI ID</th>
+                    <td><?php echo $info['upi_id']; ?></td>
                   </tr>
 
                   </table>
@@ -160,7 +167,9 @@
                 </center>
               </div>
         <br>
+        <div class="row">
 
+            </div>
             <?php } ?>
           <!--/.col (left) -->
           <!-- right column -->

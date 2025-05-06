@@ -14,6 +14,7 @@ class International_packages extends CI_Controller{
         $this->module_url_path    =  base_url().$this->config->item('admin_panel_slug')."/international_packages";
         $this->module_url_path_dates    =  base_url().$this->config->item('admin_panel_slug')."/international_packages_dates";
 		$this->module_url_path_iternary    =  base_url().$this->config->item('admin_panel_slug')."/international_package_iternary";
+        $this->module_packages    =  base_url().$this->config->item('admin_panel_slug')."/packages";
         $this->module_title       = "International Packages";
         $this->module_url_slug    = "international_packages";
         $this->module_view_folder = "international_packages/";    
@@ -23,8 +24,17 @@ class International_packages extends CI_Controller{
 	public function index()
 	{
         $this->db->where('is_deleted','no');
-		$this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-        $arr_data = $this->master_model->getRecords('international_packages');
+
+// ----------- This is Live Code -------------------
+		// $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
+        // $arr_data = $this->master_model->getRecords('international_packages');
+// ----------- This is Live Code -------------------
+
+// ----------- This is Local Code -------------------
+        $this->db->where('package_type','International Packages');
+		$this->db->order_by('tour_number','ASC');
+        $arr_data = $this->master_model->getRecords('packages');
+// ----------- This is Local Code -------------------
         
         $this->arr_view_data['module_url_path_dates'] = $this->module_url_path_dates;
 		$this->arr_view_data['module_url_path_iternary'] = $this->module_url_path_iternary;
@@ -33,6 +43,7 @@ class International_packages extends CI_Controller{
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_packages'] = $this->module_packages;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
        
@@ -298,6 +309,7 @@ class International_packages extends CI_Controller{
 
               
                 $academic_year  = $this->input->post('academic_year'); 
+                $package_type  = $this->input->post('package_type'); 
                 $tour_number        = trim($this->input->post('tour_number'));
                 $tour_title        = trim($this->input->post('tour_title'));
                 $destinations = trim($this->input->post('destinations'));
@@ -307,9 +319,12 @@ class International_packages extends CI_Controller{
                 $short_description = trim($this->input->post('short_description'));
                 $full_description = trim($this->input->post('full_description'));
                 $boarding_office = implode(",", $this->input->post('boarding_office'));
+                $hotel_type = trim($this->input->post('hotel_type'));
+                $zone_name = trim($this->input->post('zone_name'));
                 
                 $arr_insert = array(
                     'academic_year'   =>   $academic_year,
+                    'package_type'   =>   $package_type,
                     'tour_number'          => $tour_number,
                     'tour_title'          => $tour_title,
                     'destinations'          => $destinations,
@@ -323,7 +338,9 @@ class International_packages extends CI_Controller{
                     'international_package_full_image'    => $new_img_filename,
                     'inclusion_img'             => $inclusion_img_filename,
                     'tc_img'             => $tc_img_filename,
-                    'boarding_office'             => $boarding_office
+                    'boarding_office'             => $boarding_office,
+                    'hotel_type'             => $hotel_type,
+                    'zone_name'             => $zone_name
                 );
                 
                 $inserted_id = $this->master_model->insertRecord('international_packages',$arr_insert,true);
@@ -351,12 +368,23 @@ class International_packages extends CI_Controller{
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $academic_years_data = $this->master_model->getRecords('academic_years');
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $hotel_type_info = $this->master_model->getRecords('hotel_type');
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $zone_info = $this->master_model->getRecords('zone_master');
 
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['academic_years_data'] = $academic_years_data;
+        $this->arr_view_data['hotel_type_info'] = $hotel_type_info;
+        $this->arr_view_data['zone_info'] = $zone_info;
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_packages'] = $this->module_packages;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
@@ -776,6 +804,7 @@ class International_packages extends CI_Controller{
                
                 
                 $academic_year  = $this->input->post('academic_year'); 
+                $package_type  = $this->input->post('package_type'); 
                 $tour_number        = trim($this->input->post('tour_number'));
                 $tour_title        = trim($this->input->post('tour_title'));
                 $destinations = trim($this->input->post('destinations'));
@@ -785,9 +814,14 @@ class International_packages extends CI_Controller{
                 $short_description = trim($this->input->post('short_description'));
                 $full_description = trim($this->input->post('full_description'));
                 $boarding_office = implode(",", $this->input->post('boarding_office'));
+                $hotel_type        = trim($this->input->post('hotel_type'));
+                $zone_name        = trim($this->input->post('zone_name'));
+                 
+                
                 
                 $arr_update = array(
                     'academic_year'   =>   $academic_year,
+                    'package_type'   =>   $package_type,
                     'tour_number'          => $tour_number,
                     'tour_title'          => $tour_title,
                     'destinations'          => $destinations,
@@ -801,7 +835,9 @@ class International_packages extends CI_Controller{
                     'international_package_full_image'    => $new_img_filename,
                     'inclusion_img'             => $new_inclusion_img_filename,
                     'tc_img'             => $new_tc_img_filename,
-                    'boarding_office'             => $boarding_office
+                    'boarding_office'             => $boarding_office,
+                    'hotel_type'             => $hotel_type,
+                    'zone_name'             => $zone_name
                 );
                 
                     $arr_where     = array("id" => $id);
@@ -827,8 +863,18 @@ class International_packages extends CI_Controller{
         $this->db->where('is_deleted','no');
         $academic_years_data = $this->master_model->getRecords('academic_years');
         
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $hotel_type_info = $this->master_model->getRecords('hotel_type');
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $zone_info = $this->master_model->getRecords('zone_master');
+        
         $this->arr_view_data['academic_years_data']        = $academic_years_data;
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['hotel_type_info']        = $hotel_type_info;
+        $this->arr_view_data['zone_info']        = $zone_info;
         $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;

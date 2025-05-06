@@ -87,9 +87,8 @@
                     <th>Follow Up Date</th>
                     <th>Follow Up Time</th>
                     <th>Next Follow Up Date</th>
-					<th>Reason</th>
-                    <th>Follow Up Remark</th>
-					<th>Follow Up Status</th>
+                    <th>Reason</th>
+                    <th>Follow Up Comment</th>
                     
                   </tr>
                   </thead>
@@ -99,19 +98,21 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
-					   $enq_id=$info['international_booking_enquiry_id'];
-						// print_r($enq_id); die;
-						$query=$this->db->query("select * from international_followup where international_booking_enquiry_id=$enq_id");
-						$followupdata=$query->result_array();
-						$count= count($followupdata);
-						// print($count); die;
+// <!-- ----------------- This is Live Code ---------------- -->
+					  //  $enq_id=$info['international_booking_enquiry_id'];
+						// // print_r($enq_id); die;
+						// $query=$this->db->query("select * from international_followup where international_booking_enquiry_id=$enq_id");
+						// $followupdata=$query->result_array();
+						// $count= count($followupdata);
+						// // print($count); die;
+// <!-- ----------------- This is Live Code ---------------- -->
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['follow_up_date'] ?></td>
                     <td><?php if($i < 5)
                             {
-                            echo $info['follow_up_time'];
+                            echo date('d-m-Y', strtotime($info['follow_up_time']));
                               }else
                           {
                             echo "No Record";
@@ -125,37 +126,43 @@
                             echo "No Record";
                           }
                     ?></td>
-					 <td><?php echo $info['create_followup_reason'] ?></td>
-                    <td><?php echo $info['follow_up_comment'] ?></td>
+<!-- ----------------- This is Live Code ---------------- -->
+					 <!-- <td><?php //echo $info['create_followup_reason'] ?></td>
+                    <td><?php //echo $info['follow_up_comment'] ?></td>
 					  <td>
                     
                         <?php 
-                        if($info['is_followup_status']=='no')
-                          {
+                        // if($info['is_followup_status']=='no')
+                        //   {
                         ?>
                         <?php
-                            if($count >= 5)
-                            {
+                            // if($count >= 5)
+                            // {
                         ?>
                         <h5 style="color:red;">Not Interested</h5>
-                        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default<?php //echo $i;?>">Status</button> -->
                         <?php        
-                            }else{
+                            //}else{
                         ?>
                         <button class="btn btn-danger btn-sm btn_follow" attr-test="no">Next Followup</button>
-                        <?php } ?>
-                        <?php } else { ?>
+                        <?php //} ?>
+                        <?php //} else { ?>
                         <button class="btn btn-success btn-sm btn_follow" attr-test="no" disabled>Followup Done</button>
-                        <?php } ?>
+                        <?php //} ?>
 
                         <?php 
-                        if($info['is_followup_status']=='no'  && $count <= 4)
-                          {
+                        // if($info['is_followup_status']=='no'  && $count <= 4)
+                        //   {
                         ?>
-                        <!--<button type="button" class="btn btn-primary btn-sm btn_follow" attr-test="no" disabled>Booking</button>-->
                         <button type="button" class="btn btn-primary btn-sm btn_follow" class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#booking">Booking</button>
-                        <?php } ?>
-                    </td>
+                        <?php //} ?>
+                    </td> -->
+<!-- ----------------- This is Live Code ---------------- -->
+<!-- ----------------- This is Local Code ---------------- -->
+                    <!-- <td><?php //echo $info['follow_up_time'] ?></td>
+                    <td><?php //echo $info['next_followup_date'] ?></td> -->
+                    <td><?php echo $info['create_followup_reason'] ?></td>
+                    <td><?php echo $info['follow_up_comment'] ?></td>
+<!-- ----------------- This is Local Code ---------------- -->
                     
                   </tr>
                   

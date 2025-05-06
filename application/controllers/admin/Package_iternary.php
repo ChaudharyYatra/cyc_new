@@ -53,19 +53,58 @@ class Package_iternary extends CI_Controller{
         
             if($this->input->post('submit'))
             {
+// ----------------- this is Live code ---------------------------
+                // $total_days = $this->input->post('total_days');
+                // $day_number = $this->input->post('day_number');
+                // $iternary_desc = $this->input->post('iternary_desc');
+
+                // $count = count($iternary_desc);
+                // for($i=0;$i<$count;$i++)
+                // {
+                //     $arr_insert = array(
+                //         'total_days'   =>   $_POST["total_days"],
+                //          'day_number'   =>   $_POST["day_number"][$i],
+                //         'iternary_desc'   =>   $_POST["iternary_desc"][$i],
+                //         'package_id' => $id,
+// ----------------- this is Live code ---------------------------                       
+// ----------------- this is Local code ---------------------------
+
                 $total_days = $this->input->post('total_days');
                 $day_number = $this->input->post('day_number');
+                $image_name = $this->input->post('image_name');
                 $iternary_desc = $this->input->post('iternary_desc');
 
-                $count = count($iternary_desc);
+                    $count = count($iternary_desc);
+                    
                 for($i=0;$i<$count;$i++)
                 {
+                    $_FILES['file']['name']     = $_FILES['image_name']['name'][$i]; 
+                    $_FILES['file']['type']     = $_FILES['image_name']['type'][$i]; 
+                    $_FILES['file']['tmp_name'] = $_FILES['image_name']['tmp_name'][$i]; 
+                    $_FILES['file']['error']     = $_FILES['image_name']['error'][$i]; 
+                    $_FILES['file']['size']     = $_FILES['image_name']['size'][$i]; 
+                     
+                    $uploadPath = './uploads/package_iternary/'; 
+                    $config['upload_path'] = $uploadPath; 
+                    $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
+
+                    $this->load->library('upload', $config); 
+                    $this->upload->initialize($config); 
+
+                    if($this->upload->do_upload('file')){ 
+                        // Uploaded file data 
+                        $fileData = $this->upload->data(); 
+                    }
+
+                // -------------------upload image 1-------------------------------------------------------
+                
                     $arr_insert = array(
                         'total_days'   =>   $_POST["total_days"],
-                         'day_number'   =>   $_POST["day_number"][$i],
+                        'day_number'   =>   $_POST["day_number"][$i],
+                        'image_name'   =>   $fileData['file_name'],
                         'iternary_desc'   =>   $_POST["iternary_desc"][$i],
                         'package_id' => $id,
-                       
+// ----------------- this is Local code ---------------------------
                     );
                     $inserted_id = $this->master_model->insertRecord('package_iternary',$arr_insert,true);
                 }
@@ -216,15 +255,83 @@ class Package_iternary extends CI_Controller{
             }
             if($this->input->post('submit'))
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> rupali_0910
                 $package_id = $package_id;               
                 $this->form_validation->set_rules('day_number', 'Day Number', 'required');
                 $this->form_validation->set_rules('iternary_desc', 'Itinerary Description', 'required');
               
                 if($this->form_validation->run() == TRUE)
                 {
+<<<<<<< HEAD
                 
                 $arr_update = array(                    
                         'day_number'   =>   $_POST["day_number"],
+=======
+
+                // -----------------------upload image--------------------------------------------------------
+
+                    $old_img_name = $this->input->post('old_img_name');
+                
+                    if(!empty($_FILES['image_name']) && $_FILES['image_name']['name'] !='')
+                    {
+                    $file_name     = $_FILES['image_name']['name'];
+                    $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','PDF','pdf');
+
+                    $file_name = $_FILES['image_name'];
+                    $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
+
+                    if($file_name['name']!="")
+                    {
+                        $ext = explode('.',$_FILES['image_name']['name']); 
+                        $config['file_name'] = rand(1000,90000);
+
+                        if(!in_array($ext[1],$arr_extension))
+                        {
+                            $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+                            redirect($this->module_url_path.'/edit/'.$id);
+                        }
+                    }   
+
+                    $file_name_to_dispaly =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+                    
+                    $config['upload_path']   = './uploads/package_iternary/';
+                    $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|PDF|pdf';  
+                    $config['max_size']      = '10000';
+                    $config['file_name']     = $file_name_to_dispaly;
+                    $config['overwrite']     = TRUE;
+                    $this->load->library('upload',$config);
+                    $this->upload->initialize($config); // Important
+                    
+                    if(!$this->upload->do_upload('image_name'))
+                    {  
+                        $data['error'] = $this->upload->display_errors();
+                        $this->session->set_flashdata('error_message',$this->upload->display_errors());
+                        redirect($this->module_url_path.'/edit/'.$id);
+                    }
+                    if($file_name['name']!="")
+                    {   
+                        $file_name = $this->upload->data();
+                        $filename = $file_name_to_dispaly;
+                        if($old_img_name!='') unlink('./uploads/package_iternary/'.$old_img_name);
+                    }
+                    else
+                    {
+                        $filename = $this->input->post('image_name',TRUE);
+                    }
+                }
+                else
+                {
+                    $filename = $old_img_name;
+                }
+                // -----------------------upload image--------------------------------------------------------
+                
+                $arr_update = array(                    
+                        'day_number'   =>   $_POST["day_number"],
+                        'image_name'   =>   $filename,
+>>>>>>> rupali_0910
                         'iternary_desc'   =>   $_POST["iternary_desc"]
                     );
                     $arr_where     = array("id" => $id);

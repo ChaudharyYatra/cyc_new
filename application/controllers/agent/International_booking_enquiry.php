@@ -1,6 +1,6 @@
 <?php 
 //   Controller for: home page
-// Author: Mahesh Mhaske
+// Author: Rupali Patil
 // Start Date: 16-08-2022
 // last updated: 16-08-2022
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -32,6 +32,7 @@ class International_booking_enquiry extends CI_Controller {
         $fields = "international_booking_enquiry.*,international_packages.tour_title,agent.agent_name,international_packages.tour_number as tno, international_booking_enquiry.package_id as pid";
         $this->db->order_by('international_booking_enquiry.created_at','desc');
         $this->db->where('international_booking_enquiry.is_deleted','no');
+        $this->db->where('international_booking_enquiry.booking_process','no');
         $this->db->where('international_booking_enquiry.agent_id',$id);
         $this->db->join("international_packages", 'international_booking_enquiry.package_id= international_packages.id','left');
         $this->db->join("agent", 'international_booking_enquiry.agent_id=agent.id','left');
@@ -60,6 +61,27 @@ class International_booking_enquiry extends CI_Controller {
      {  
          $agent_sess_name = $this->session->userdata('agent_name');
          $id=$this->session->userdata('agent_sess_id');
+
+         $visitor_data=array();
+         $v_booking = $this->uri->segment(4);
+         if($v_booking !=''){
+             $this->db->where('is_deleted','no');
+             $this->db->where('id',$v_booking);
+             $visitor_data = $this->master_model->getRecord('website_visitor_data');
+         }
+         // print_r($visitor_data); die;
+ 
+        $record = array();
+        $fields = "international_booking_enquiry.*,international_packages.tour_title,agent.agent_name,international_packages.tour_number as tno, international_booking_enquiry.package_id as pid";
+        $this->db->order_by('international_booking_enquiry.created_at','desc');
+        $this->db->where('international_booking_enquiry.is_deleted','no');
+        $this->db->where('international_booking_enquiry.booking_process','no');
+        $this->db->where('international_booking_enquiry.agent_id',$id);
+        $this->db->join("international_packages", 'international_booking_enquiry.package_id= international_packages.id','left');
+        $this->db->join("agent", 'international_booking_enquiry.agent_id=agent.id','left');
+        $this->db->order_by("id", "desc");
+        $arr_data = $this->master_model->getRecords('international_booking_enquiry',array('international_booking_enquiry.is_deleted'=>'no'),$fields);
+         // print_r($arr_data); die;
          
          if($this->input->post('submit'))
          {
@@ -138,7 +160,7 @@ class International_booking_enquiry extends CI_Controller {
 									</html>";
 						// echo $msg;
 						$subject='Thank You For Enquiry';
-						//$this->send_mail($email_address,$from_email,$msg,$subject,$cc=null);
+
 						// die;
 						
 						$msg_email="<html>
@@ -162,7 +184,6 @@ class International_booking_enquiry extends CI_Controller {
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-						//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)."Added Successfully.");
                      redirect($this->module_url_path.'/index');
@@ -264,7 +285,7 @@ class International_booking_enquiry extends CI_Controller {
 									</html>";
 						// echo $msg;
 						$subject='Thank You For Enquiry';
-						//$this->send_mail($email_address,$from_email,$msg,$subject,$cc=null);
+
 						// die;
 						
 						$msg_email="<html>
@@ -288,7 +309,6 @@ class International_booking_enquiry extends CI_Controller {
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-						//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)."Added Successfully.");
                      redirect($this->module_url_path.'/index');
@@ -318,6 +338,7 @@ class International_booking_enquiry extends CI_Controller {
          $international_booking_enquiry_data = $this->master_model->getRecords('international_booking_enquiry');
  
          $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+         $this->arr_view_data['visitor_data'] = $visitor_data;
          $this->arr_view_data['media_source_data'] = $media_source_data;
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['international_booking_enquiry_data'] = $international_booking_enquiry_data;
@@ -593,7 +614,6 @@ class International_booking_enquiry extends CI_Controller {
                                 </html>";
                     // echo $msg;
                     $subject='Thank You For Enquiry';
-                    //$this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
                     // die;
                     
                     $msg_email="<html>
@@ -617,7 +637,6 @@ class International_booking_enquiry extends CI_Controller {
                                 </body>
                                 </html>";
                                 $subject_email=' New Enquiry from customer';
-                    //$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)."Added Successfully.");
                      redirect($this->module_url_path_international_followup.'/index/'.$international_id);

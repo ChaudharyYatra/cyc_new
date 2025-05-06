@@ -36,6 +36,16 @@ class Year_wise_cost_creation extends CI_Controller{
     
     public function add()
     {   
+        
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $this->db->order_by('id','desc');
+        $academic_years_data = $this->master_model->getRecord('year_wise_cost_creation');
+
+        $year_wise_id = $academic_years_data['id'];
+        $year_w_id = $year_wise_id + 1;
+        // print_r($year_w_id); die;
+
        
         if($this->input->post('submit'))
         {
@@ -91,6 +101,7 @@ class Year_wise_cost_creation extends CI_Controller{
 
         $this->arr_view_data['action']          = 'add';
         $this->arr_view_data['academic_years_data'] = $academic_years_data;
+        $this->arr_view_data['year_w_id'] = $year_w_id;
         //$this->arr_view_data['user_role']       = $user_role; 
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
@@ -143,26 +154,46 @@ class Year_wise_cost_creation extends CI_Controller{
                     'rate_5'   =>   $rate_5
                 );
                 
-                $inserted_id = $this->master_model->insertRecord('add_bus_kilometer_rates',$arr_insert,true);
+// --------------------- This is Live Code -----------------------------
+                // $inserted_id = $this->master_model->insertRecord('add_bus_kilometer_rates',$arr_insert,true);
+// --------------------- This is Live Code -----------------------------
+// --------------------- This is local Code -----------------------------
+                $inserted_id = $this->master_model->insertRecord('bus_kilometer_rates',$arr_insert,true);
+// --------------------- This is local Code -----------------------------
                                
                 if($inserted_id > 0)
                 {    
                     $this->session->set_flashdata('success_message'," add bus kilometer rates Added Successfully.");
-                    redirect($this->module_url_path.'/office_maintainance');
+//  ----------------------- This is Live Code -------------------------
+                    // redirect($this->module_url_path.'/office_maintainance');
+//  ----------------------- This is Live Code -------------------------
+//  ----------------------- This is Local Code -------------------------
+                    redirect($this->module_url_path.'/add_office_maintainance');
+//  ----------------------- This is Local Code -------------------------
                 }
                 else
                 {
                     $this->session->set_flashdata('error_message'," Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
                 }
-                redirect($this->module_url_path.'/office_maintainance');
+//  ----------------------- This is Live Code -------------------------
+                // redirect($this->module_url_path.'/office_maintainance');
+//  ----------------------- This is Live Code -------------------------
+//  ----------------------- This is Local Code -------------------------
+                redirect($this->module_url_path.'/add_office_maintainance');
+//  ----------------------- This is Local Code -------------------------
             }   
             
         
         }
 
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $this->db->where('is_active','yes');
+        $bus_type_data = $this->master_model->getRecords('bus_type');
 
 
         $this->arr_view_data['action']          = 'add';
+        $this->arr_view_data['bus_type_data'] = $bus_type_data;
         //$this->arr_view_data['user_role']       = $user_role; 
         $this->arr_view_data['page_title']      = " Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;

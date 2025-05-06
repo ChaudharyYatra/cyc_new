@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
+              <!-- <a href="<?php //echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a> -->
               
             </ol>
           </div>
@@ -40,7 +40,7 @@
                     <th>Mobile Number 2</th>
                     <th>Password</th>
                     <th>Is Active?</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                   </tr>
                   </thead>
                   <tbody>
@@ -69,14 +69,15 @@
                       echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><button class="btn btn-danger btn-sm">NO</button> </a>
                                 <?php } ?>
                     </td>
-                    <td>
-                        
-                                    <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
-                      echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
-                                    <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
-                      echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
+                    <!-- <td>
+                          <a href="<?php //echo $module_url_path;?>/details/<?php //$aid=base64_encode($info['id']); 
+                      //echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp;
+                                    <a href="<?php //echo $module_url_path;?>/edit/<?php //$aid=base64_encode($info['id']); 
+                      //echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
+                                    <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php //echo $module_url_path;?>/delete/<?php //$aid=base64_encode($info['id']); 
+                      //echo rtrim($aid, '='); ?>" title="Delete"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
                        
-                    </td>
+                    </td> -->
 
                   </tr>
                   

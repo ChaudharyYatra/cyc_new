@@ -25,7 +25,11 @@ class Package_dates extends CI_Controller{
         $this->db->order_by('package_date.id','asc');
         $this->db->where('packages.is_deleted','no');
         $this->db->where('package_date.package_id',$id);
-        $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
+
+// ------------- this is Live code -------------------------
+        // $this->db->where('DATE(journey_date) >=', date('Y-m-d'));
+// ------------- this is Live code -------------------------
+
         $this->db->join("packages", 'package_date.package_id=packages.id','left');
         $arr_data = $this->master_model->getRecords('package_date',array('package_date.is_deleted'=>'no'),$fields);
         
@@ -57,8 +61,19 @@ class Package_dates extends CI_Controller{
         
             if($this->input->post('submit'))
             {
+
+// -------------------- this is Live Code ----------------------
+                // $journey_date  = $this->input->post('journey_date'); 
+                // $available_seats = $this->input->post('available_seats');
+// -------------------- this is Live Code ----------------------
+// -------------------- this is Local Code ----------------------
+                $package_title  = $this->input->post('package_title');
+                $package_length = substr($package_title, 0, 3);
                 $journey_date  = $this->input->post('journey_date'); 
-                $available_seats = $this->input->post('available_seats');
+                // print_r($journey_date); die;
+                $year_slot = $this->input->post('year_slot');
+// -------------------- this is Local Code ----------------------
+
                 $package_id = $this->input->post('package_id');
                 $single_seat_cost = $this->input->post('single_seat_cost');
                 $twin_seat_cost = $this->input->post('twin_seat_cost');
@@ -69,6 +84,7 @@ class Package_dates extends CI_Controller{
                 {
                     $arr_insert = array(
                         'journey_date'   =>   $_POST["journey_date"][$i],
+<<<<<<< HEAD
                         'available_seats'   =>   $_POST["available_seats"][$i],
                         'single_seat_cost'   =>   $_POST["single_seat_cost"],
                         'twin_seat_cost'   =>   $_POST["twin_seat_cost"],
@@ -78,6 +94,29 @@ class Package_dates extends CI_Controller{
                     );
                     $inserted_id = $this->master_model->insertRecord('package_date',$arr_insert,true);
                 }
+=======
+                        'year_slot'   =>   $_POST["year_slot"][$i],
+                        'single_seat_cost'   =>   $_POST["single_seat_cost"],
+                        'twin_seat_cost'   =>   $_POST["twin_seat_cost"],
+                        'three_four_sharing_cost'   =>   $_POST["three_four_sharing_cost"],
+                        'package_id' => $package_id
+                       
+                    );
+                    $inserted_id = $this->master_model->insertRecord('package_date',$arr_insert,true);
+                    // ------------------unique id created ---------------------------------------------------------
+                    $insertid = $this->db->insert_id(); 
+
+                    $package_unique_id = $package_id.'_'.$package_length.'_'.$journey_date[$i].'_'.$insertid;
+
+                    $arr_update = array(
+                        'package_unique_id'   =>   $package_unique_id
+                    );
+                    $arr_where = array("id" => $inserted_id);
+                    $package_unique_inserted= $this->master_model->updateRecord('package_date',$arr_update,$arr_where);
+                    // -------------------unique id created ------------------------------------------------------------------
+                }
+                
+>>>>>>> rupali_0910
 
                     if($id > 0)
                     {
@@ -98,8 +137,24 @@ class Package_dates extends CI_Controller{
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $academic_years_data = $this->master_model->getRecords('academic_years');
+<<<<<<< HEAD
         
         $this->arr_view_data['arr_data']        = $arr_data;
+=======
+
+        $record = array();
+        $fields = "package_date.*,packages.tour_title";
+        $this->db->order_by('package_date.id','asc');
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('package_date.package_id',$id);
+        $this->db->join("packages", 'package_date.package_id=packages.id','left');
+        $this->db->group_by('package_date.year_slot');
+        $arr_data_dates = $this->master_model->getRecords('package_date',array('package_date.is_deleted'=>'no'),$fields);
+        // print_r($arr_data_dates); die;
+
+        $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['arr_data_dates']        = $arr_data_dates;
+>>>>>>> rupali_0910
         $this->arr_view_data['id']        = $id;
         $this->arr_view_data['page_title']      = "Add ".$this->module_title;
         $this->arr_view_data['module_title']    = $this->module_title;
@@ -214,7 +269,11 @@ class Package_dates extends CI_Controller{
             {
                 $package_id = $_POST["package_id"];
                 $this->form_validation->set_rules('journey_date', 'Journey Date', 'required');
+<<<<<<< HEAD
                 $this->form_validation->set_rules('available_seats', 'Available Seats', 'required');
+=======
+                // $this->form_validation->set_rules('available_seats', 'Available Seats', 'required');
+>>>>>>> rupali_0910
                 $this->form_validation->set_rules('single_seat_cost', 'Single Seats', 'required');
                 $this->form_validation->set_rules('twin_seat_cost', 'Single Seats', 'required');
                 $this->form_validation->set_rules('three_four_sharing_cost', 'Single Seats', 'required');
@@ -223,7 +282,11 @@ class Package_dates extends CI_Controller{
                 {
                 $arr_update = array(
                         'journey_date'   =>   $_POST["journey_date"],
+<<<<<<< HEAD
                         'available_seats'   =>   $_POST["available_seats"],
+=======
+                        // 'available_seats'   =>   $_POST["available_seats"],
+>>>>>>> rupali_0910
                         'single_seat_cost'   =>   $_POST["single_seat_cost"],
                         'twin_seat_cost'   =>   $_POST["twin_seat_cost"],
                         'three_four_sharing_cost'   =>   $_POST["three_four_sharing_cost"],
@@ -275,7 +338,11 @@ class Package_dates extends CI_Controller{
             {
       
                 $journey_date  = $this->input->post('journey_date'); 
+<<<<<<< HEAD
                 $available_seats = $this->input->post('available_seats');
+=======
+                // $available_seats = $this->input->post('available_seats');
+>>>>>>> rupali_0910
                 $package_id = $this->input->post('package_id');
                
                 $count = count($journey_date);
@@ -284,7 +351,11 @@ class Package_dates extends CI_Controller{
                 {
                     $arr_insert = array(
                         'journey_date'   =>   $_POST["journey_date"][$i],
+<<<<<<< HEAD
                         'available_seats'   =>   $_POST["available_seats"][$i],
+=======
+                        // 'available_seats'   =>   $_POST["available_seats"][$i],
+>>>>>>> rupali_0910
                         'package_id' => $package_id,
                        
                     );
@@ -345,5 +416,27 @@ class Package_dates extends CI_Controller{
         $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
     }
    
+<<<<<<< HEAD
+=======
+
+    public function get_slot(){ 
+        // POST data 
+        // $all_b=array();pid
+       $state_data = $this->input->post('did');
+       $package_id = $this->input->post('pid');
+        // print_r($package_id); die;
+        $record = array();
+        $fields = "package_date.*,packages.tour_title";
+        $this->db->order_by('package_date.id','asc');
+        $this->db->where('packages.is_deleted','no');
+        $this->db->where('package_date.year_slot',$state_data);
+        $this->db->where('package_date.package_id',$package_id);
+        $this->db->join("packages", 'package_date.package_id=packages.id','left');
+        $this->db->group_by('package_date.year_slot');
+        $data = $this->master_model->getRecords('package_date',array('package_date.is_deleted'=>'no'),$fields);
+        // print_r($data); die;
+        echo json_encode($data);
+    }
+>>>>>>> rupali_0910
    
 }

@@ -69,6 +69,7 @@ class Taluka extends CI_Controller{
                 $this->db->where('taluka',$taluka);
                 $this->db->where('is_deleted','no');
                 $this->db->where('is_active','yes');
+                $this->db->where('district_id',$district_id);
                 $city_exist_data = $this->master_model->getRecords('taluka_table');
                 if(count($city_exist_data) > 0)
                 {
@@ -272,7 +273,7 @@ class Taluka extends CI_Controller{
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        // $this->db->where('state_id',$district_id);
+        $this->db->where('state_id',$district_id);
         $district_name_data = $this->master_model->getRecords('district_table');
 
         $this->arr_view_data['arr_data']        = $arr_data;
@@ -287,9 +288,7 @@ class Taluka extends CI_Controller{
     }
 
     public function get_state(){ 
-        // POST data 
-        // $all_b=array();
-       $state_data = $this->input->post('did');
+       echo $state_data = $this->input->post('did');
         // print_r($boarding_office_location); die;
                         $this->db->where('is_deleted','no');
                         $this->db->where('is_active','yes');

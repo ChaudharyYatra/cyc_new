@@ -135,12 +135,11 @@ $('#changepassword').validate({ // initialize the plugin
         new_password: {
             required: true,
             notEqualTo:"#old_pass",
-            minlength: 6
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{6,15}$/
         },
         confirm_pass: {
             required: true,
             equalTo: "#new_password", 
-            minlength: 6
         }
         
     },
@@ -151,13 +150,17 @@ $('#changepassword').validate({ // initialize the plugin
         },
         new_password : {
             required : "Please enter new password",
-            minlength : "Please enter 6 digit or character length",
             notEqualTo : "New password and Old Password Same",
+            pattern: " Password must contain: " +
+                     "At least one upper case letter, " +
+                     "At least one lower case letter, " +
+                     "At least one number, " +
+                     "At least one special character " +
+                     "and be between 6-15 characters."
         },
         confirm_pass : {
             required : "Please enter confirm password",
             equalTo : "New password and Confirm Password can't match",
-            minlength : "Please enter 6 digit or character length"
         }
     
     }

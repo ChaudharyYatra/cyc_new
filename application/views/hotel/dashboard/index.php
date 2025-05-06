@@ -16,19 +16,48 @@
     <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
+        <?php 
+            if($arr_data['hotel_room'] >0 ){
+
+          ?> 
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            <a class="underline" href="<?php echo base_url(); ?>hotel/hotel_details/index">
             <div class="small-box bg-info">
               <div class="inner">
-                <!-- <h3><?php //echo  $arr_data['enquiry_count']; ?></h3> -->
-                0
-                <p>Total Room</p>
+                <h3><?php echo $arr_data['hotel_room']; ?></h3>
+
+                <p>Total Room Count</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
             </div>
+            </a>
           </div>
+          <?php } ?>
+
+
+
+          <?php 
+            if($arr_data['final_booking_count'] >0 ){
+
+          ?> 
+          <div class="col-lg-3 col-6">
+            <a class="underline" href="<?php echo base_url(); ?>hotel/final_booking_details/index">
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?php echo $arr_data['final_booking_count']; ?></h3>
+
+                <p>final booking count</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            </div>
+            </a>
+          </div>
+          <?php } ?>
+
        
           
 

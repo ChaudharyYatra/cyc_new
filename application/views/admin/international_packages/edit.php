@@ -53,6 +53,19 @@
                           </div>
                       </div>
                       <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Package Type</label><br>
+                            <select class="select_css" name="package_type" id="package_type">
+                              <option value="">Select package type</option>
+                              <option value="Domestic Package" <?php if(isset($info['package_type'])){if("Domestic Package" == $info['package_type']) {echo 'selected';}}?>>Domestic Package</option>
+                              <option value="International Package" <?php if(isset($info['package_type'])){if("International Package" == $info['package_type']) {echo 'selected';}}?>>International Package</option>
+                              <option value="Custom Domestic Package" <?php if(isset($info['package_type'])){if("Custom Domestic Package" == $info['package_type']) {echo 'selected';}}?>>Custom Domestic Package</option>
+                              <option value="Custom International Package" <?php if(isset($info['package_type'])){if("Custom International Package" == $info['package_type']) {echo 'selected';}}?>>Custom International Package</option>
+                              <option value="Special Limited Offer" <?php if(isset($info['package_type'])){if("Special Limited Offer" == $info['package_type']) {echo 'selected';}}?>>Special Limited Offer</option>
+                            </select>
+                          </div>
+                        </div>
+                      <div class="col-md-6">
                               <div class="form-group">
                                 <label>Tour Number</label>
                                 <input type="text" class="form-control" name="tour_number" id="tour_number" placeholder="Enter Tour Number" oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<?php echo $info['tour_number']; ?>">
@@ -91,7 +104,7 @@
                         
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Bording  Office/ Location</label>
+                            <label>Boarding  Office/ Location</label>
                             <select class="select2" multiple="multiple" data-placeholder="Select Bording  Office/ Location" style="width: 100%;" name="boarding_office[]" id="boarding_office" required="required">
                               <option value="">Select Boarding  Office/ Location</option>
                               <?php
@@ -108,6 +121,30 @@
                             </select>
                           </div>
                         </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label>hotel Type</label>
+                              <select class="select_css" name="hotel_type" id="hotel_type" required>
+                                <option value="">Select hotel type</option>
+                                <?php foreach($hotel_type_info as $hotel_type_info_value){ ?> 
+                                    <option value="<?php echo $hotel_type_info_value['id'];?>" <?php if(isset($info['hotel_type'])){if($hotel_type_info_value['id'] == $info['hotel_type']) {echo 'selected';}}?>><?php echo $hotel_type_info_value['hotel_type_name'];?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Zone Name</label>
+                              <select class="select_css" name="zone_name" id="zone_name" required>
+                                <option value="">Select zone</option>
+                                <?php foreach($zone_info as $zone_info_value){ ?> 
+                                    <option value="<?php echo $zone_info_value['id'];?>" <?php if(isset($info['zone_name'])){if($zone_info_value['id'] == $info['zone_name']) {echo 'selected';}}?>><?php echo $zone_info_value['zone_name'];?></option>
+                                <?php } ?>
+                              </select>
+                            </div>
+                          </div>
                         
                       <div class="col-md-4">
                           <div class="form-group">

@@ -37,7 +37,7 @@
                       <div class="col-md-6">
                             <label>Old Password</label>
                               <div class="form-group input-group">
-                                <input type="password" name="old_pass" id="old_pass" class="form-control" placeholder="Old Password" required>
+                                <input type="password" name="old_pass" id="old_pass" class="form-control" placeholder="Old Password" required/>
                                 <div class="input-group-append">
                                   <div class="input-group-text">
                                   <span toggle="#password-field" class="fas fa-fw fa-eye field_icon toggle-password1"></span>
@@ -59,7 +59,7 @@
                       </div>
 
                       <div class="col-md-6">
-                            <label>Confirm New Password</label>
+                            <label>Confirm Password</label>
                               <div class="form-group input-group">
                                 <input type="password" name="confirm_pass" id="confirm_pass" class="form-control" placeholder="Confirm Password" onChange="checkPasswordMatch();" required>
                                 <div class="input-group-append">
@@ -75,8 +75,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
-					        <a href="<?php echo base_url(); ?>agent/profile/index"><button type="button" class="btn btn-danger">Cancel</button></a>
-
+					<a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
             </div>
@@ -94,27 +93,6 @@
     </section>
     <!-- /.content -->
   </div>
-  
-  
-<!-- Modal -->
-<div class="modal fade" id="agent_change_password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" class="danger">Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       Do you want to Change Password ?
-      </div>
-      <div class="modal-footer">
-        
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
   
 
 <script>

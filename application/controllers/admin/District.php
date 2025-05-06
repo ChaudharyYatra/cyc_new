@@ -30,6 +30,52 @@ class District extends CI_Controller{
         $this->db->join("state_table", 'district_table.state_id=state_table.id','left');
         $arr_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
 
+        // $fields = "district_table.*,country.country_name,.state_table.state_name";
+        // $this->db->order_by('district_table.id','asc');        
+        // $this->db->where('district_table.is_deleted','no');        
+        // $this->db->join("country", 'district_table.country_id=country.id','left');
+        // $this->db->join("state_table", 'district_table.state_id=state_table.id','left');
+        // $arr_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
+
+    $start = $this->input->post('start'); // Starting index of records
+    $length = $this->input->post('length'); // Number of records per page
+    $draw = $this->input->post('draw'); // DataTables draw counter
+
+    // Fields you want to select 
+    $fields = "district_table.*,country.country_name,state_table.state_name";
+    $this->db->order_by('district_table.id', 'asc');
+    $this->db->where('district_table.is_deleted', 'no');
+    $this->db->join("country", 'district_table.country_id=country.id', 'left');
+    $this->db->join("state_table", 'district_table.state_id=state_table.id', 'left');
+    // Count the total number of records (without filtering)
+    // $arr_data = $this->master_model->getRecords('district_table',array('district_table.is_deleted'=>'no'),$fields);
+//    print_r($arr_data); die;
+    $totalRecords = $this->db->count_all_results('district_table');
+    // print_r($totalRecords); die;
+
+    // Apply limit and offset for paging
+    $this->db->select($fields);
+    $this->db->order_by('district_table.id', 'asc');
+    $this->db->where('district_table.is_deleted', 'no');
+    $this->db->join("country", 'district_table.country_id=country.id', 'left');
+    $this->db->join("state_table", 'district_table.state_id=state_table.id', 'left');
+    $this->db->limit($length, $start);
+    $arr_data = $this->db->get('district_table')->result_array();
+    // print_r($arr_data); die;
+
+    // print_r($arr_data); die;
+
+    // Prepare the response for DataTables
+    $response = array(
+        "draw" => intval($draw),
+        "recordsTotal" => $totalRecords, // Total records (without filtering)
+        "recordsFiltered" => $totalRecords, // Total records (with filtering; same as total in this case)
+        "data" => $arr_data, // Data for the current page
+    );
+
+    // Send the JSON response to DataTables
+    // echo json_encode($response);
+
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['page_title']      = $this->module_title." List";
@@ -67,7 +113,7 @@ class District extends CI_Controller{
                 $city_exist_data = $this->master_model->getRecords('district_table');
                 if(count($city_exist_data) > 0)
                 {
-                    $this->session->set_flashdata('error_message',"district".$city_name." Already Exist.");
+                    $this->session->set_flashdata('error_message',"district " . $district." Already Exist.");
                     redirect($this->module_url_path.'/add');
                 }
                 
@@ -209,7 +255,7 @@ class District extends CI_Controller{
                     $state_id = $this->input->post('state_id');
                     $district = $this->input->post('district');
 
-                   $this->db->where('district',$district);
+                    $this->db->where('district',$district);
                     $this->db->where('id!='.$id);
                     $this->db->where('is_deleted','no');
                     $city_exist_data = $this->master_model->getRecords('district_table');

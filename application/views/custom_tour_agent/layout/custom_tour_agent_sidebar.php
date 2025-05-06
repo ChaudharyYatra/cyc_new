@@ -1,3 +1,11 @@
+<style>
+  .desig_css{
+    color:white;
+  }
+  .name_css{
+    text-decoration: none;
+  }
+</style>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -13,7 +21,8 @@
         <div class="image">
         </div>
         <div class="info">
-          <center><a href="#" class="d-block"><?php echo $custom_agent_name; ?></a></center>
+          <center><a href="#" class="name_css"><?php echo $custom_agent_name; ?></a></center>
+          <center><h6 class="desig_css">[ Custom Tour Agent ]</h6></center>
         </div>
       </div>
 
@@ -80,43 +89,17 @@
           </li> -->
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                 Custom Domestic Enquiry
-                <i class="right fas fa-angle-left"></i>
-              </p>
+            <a href="<?php echo base_url(); ?>custom_tour_agent/booking_enquiry/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Custom Booking Enquiry</p>
             </a>
-            <ul class="nav nav-treeview">
-               
-              <!-- <li class="nav-item">
-                <a href="<?php //echo base_url(); ?>custom_tour_agent/domestic_booking_process/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Booking Process</p>
-                </a>
-               </li> -->
+          </li>
 
-              <li class="nav-item">
-                <a href="<?php echo base_url(); ?>custom_tour_agent/booking_enquiry/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Custom Domestic Booking Enquiry</p>
-                </a>
-               </li>
-               
-               <!-- <li class="nav-item">
-                <a href="<?php //echo base_url(); ?>custom_tour_agent/todays_domestic_followup_list/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Todays Followup</p>
-                </a>
-               </li> -->
-
-               <!-- <li class="nav-item">
-                <a href="<?php //echo base_url(); ?>custom_tour_agent/not_interested/index" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Not Interested Customers</p>
-                </a>
-               </li> -->
-            </ul>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>custom_tour_agent/international_enquiry/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>International Booking Enquiry</p>
+            </a>
           </li>
 
           <!-- <li class="nav-item">
@@ -184,22 +167,15 @@
           </li> -->
 
           
-          <!-- <li class="nav-item">
-            <a href="<?php //echo base_url(); ?>custom_tour_agent/profile/index" class="nav-link">
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>custom_tour_agent/profile/index" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>
                Profile
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?php //echo base_url(); ?>custom_tour_agent/change_password/change_password" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-              Change Password
-              </p>
-            </a>
-          </li> -->
+          
                
            <li class="nav-item">
             <a href="<?php echo base_url(); ?>custom_tour_agent/login/logout" class="nav-link">

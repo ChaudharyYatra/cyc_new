@@ -147,7 +147,7 @@
                             <h3 class="">Price Duration Type</h3>
                             <div class="range-slider mt-0">
                                 <p class="text-start mb-2">Price Range</p>
-                                <div data-min="0" data-max="2000" data-unit="₹" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+                                <div data-min="0" data-max="2000" data-unit="$" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
                                     <span class="min-value"><i class="fa fa-rupee"></i>0</span> 
                                     <span class="max-value"><i class="fa fa-rupee"></i>100000</span>
                                     <div class="ui-slider-range ui-widget-header ui-corner-all full" style="left: 0%; width: 100%;"></div>
@@ -156,7 +156,7 @@
                             </div>
                         </div>
 
-                        <!-- <div class="sidebar-item p_list_related_des">
+                        <div class="sidebar-item p_list_related_des">
                             <h3>Reviews Related Destinations</h3>
                             <div class="sidebar-destination">
                                 <div class="row about-slider">
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,10 +24,23 @@ class Dashboard extends CI_Controller{
 	public function index()
 	{
 	    $hotel_sess_name = $this->session->userdata('hotel_name');
+	    $id = $this->session->userdata('hotel_sess_id');
         $enquiry_data = $this->master_model->getRecords('enquiries');
         $arr_data['enquiry_count'] = count($enquiry_data);
+
+        $this->db->where('hotel_room.hotel_id',$id);
+        $this->db->where('hotel_room.is_deleted','no');
+        $hotel_room = $this->master_model->getRecords('hotel_room');
+        $arr_data['hotel_room'] = count($hotel_room);
+        // print_r($arr_data['hotel_room']); die;
+
+        $this->db->where('is_deleted','no');
+        $final_booking = $this->master_model->getRecords('final_booking');
+        $arr_data['final_booking_count'] = count($final_booking);
+        // print_r($final_booking); die;
         
         $this->arr_view_data['hotel_sess_name']        = $hotel_sess_name;
+        $this->arr_view_data['id']        = $id;
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['page_title']      = $this->module_title." List";

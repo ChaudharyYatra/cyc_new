@@ -1,7 +1,10 @@
 <style>
-  .d-block{
-text-decoration:none;
-}
+  .desig_css{
+    color:white;
+  }
+  .name_css{
+    text-decoration: none;
+  }
 </style>
 
 <!-- Main Sidebar Container -->
@@ -19,7 +22,8 @@ text-decoration:none;
         <div class="image">
         </div>
         <div class="info">
-          <center><a href="" class="d-block"><?php echo $agent_inspector_sess_name; ?></a></center>
+          <center><a href="" class="name_css"><?php echo $agent_inspector_sess_name; ?></a></center>
+          <center><h6 class="desig_css">[ Agent Inspector ]</h6></center>
         </div>
       </div>
 

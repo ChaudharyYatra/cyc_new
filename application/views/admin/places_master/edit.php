@@ -63,6 +63,39 @@
                           </div>
                       </div>
 
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Select Place Close Days</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select Place Close Days" style="width: 100%;" name="Select_close_days[]" id="Select_close_days" required="required">
+                                <option value="">Select close days</option>
+                                <?php
+                              $title = $temparray=explode(',',$info['Select_close_days']);
+                              // print_r($title); die;
+                              $c=count($title);
+                                 
+                                    for($i=0; $i<$c; $i++){
+                                        $tid= $title[$i];
+                                    }
+                              ?>
+                                <option value="Sunday" <?php if(isset($info['Select_close_days'])){if(in_array('Sunday',$title)) {echo 'selected';}}?>>Sunday</option>
+                                <option value="Monday" <?php if(isset($info['Select_close_days'])){if(in_array('Monday',$title)) {echo 'selected';}}?>>Monday</option>
+                                <option value="Tuesday <?php if(isset($info['Select_close_days'])){if(in_array('Tuesday',$title)) {echo 'selected';}}?>">Tuesday</option>
+                                <option value="wednesday <?php if(isset($info['Select_close_days'])){if(in_array('Wednesday',$title)) {echo 'selected';}}?>">Wednesday </option>
+                                <option value="Thursday <?php if(isset($info['Select_close_days'])){if(in_array('Thursday',$title)) {echo 'selected';}}?>">Thursday </option>
+                                <option value="Friday <?php if(isset($info['Select_close_days'])){if(in_array('Friday',$title)) {echo 'selected';}}?>">Friday </option>
+                                <option value="Saturday <?php if(isset($info['Select_close_days'])){if(in_array('Saturday',$title)) {echo 'selected';}}?>">Saturday</option>
+                                
+                              </select>
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Place Description</label>
+                            <textarea class="form-control" name="place_description" id="place_description" placeholder="Enter place description" required="required"><?php echo $info['place_description']; ?></textarea>
+                          </div>
+                      </div>
+
                   </div>
 
                 </div>

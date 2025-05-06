@@ -1,3 +1,5 @@
+
+
 <style>
         table.scrolldown tbody td, thead th {
   width : 260px;
@@ -7,12 +9,14 @@
 table.scrolldown tbody{
     height : auto !important;
 }
-
+.scrolling{
+    overflow-x: hidden;
+    height:95vh;
+}
 </style>  
 
     <!-- BreadCrumb Starts -->  
     <section class="breadcrumb-main pb-20 pt-14" style="background-image: url(<?php echo base_url(); ?>uploads/do_not_delete/domestic_slider.jpg);">
-        
         <div class="breadcrumb-outer">
             <div class="container">
                 <div class="breadcrumb-content text-center">
@@ -51,12 +55,14 @@ table.scrolldown tbody{
             </div>
 
             <div class="row">
-           <?PHP foreach($main_packages_all as $key => $main_packages_all_value) { ?>
+                <?PHP foreach($main_packages_all as $key => $main_packages_all_value) { ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="trend-item rounded box-shadow card_bg" data-aos="fade-up" data-duration="500">
                         <div class="trend-image position-relative">
                             <img src="<?php echo base_url(); ?>uploads/packages/<?php echo $main_packages_all_value['image_name']; ?>" alt="image" height="250px">
-                            <div class="color-overlay"></div>
+                            <div class="color-overl
+                            
+                            ay"></div>
                         </div>
                         <div class="trend-content p-4 pt-4 position-relative w-100">
                             <div class="new-trend2 bg-theme white px-3 py-2 rounded">
@@ -72,7 +78,7 @@ table.scrolldown tbody{
                             </div>
                             <!-- <h5 class="theme mb-1">Tour Number: <?php //echo $main_packages_all_value['tour_number']; ?></h5> -->
                             <!-- <h3 class="mb-1 card_title"><a href="<?php //echo base_url(); ?>packages/package_details/<?php //echo $main_packages_all_value['id']; ?>"><?php //echo mb_substr($main_packages_all_value['tour_title'], 0, 18); ?></a></h3> -->
-                            <h3 class="mb-1 card_title" title="<?php echo $main_packages_all_value['tour_title'] ?>"><?php echo mb_substr($main_packages_all_value['tour_title'], 0, 18); ?></h3>
+                            <h3 class="mb-1 card_title"><?php echo mb_substr($main_packages_all_value['tour_title'], 0, 18); ?></h3>
                             <div class="rating-main d-flex align-items-center pb-1">
                                 <div class="rating">
                                             <?php if($main_packages_all_value['rating']=='1') { ?>
@@ -140,8 +146,7 @@ table.scrolldown tbody{
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="text-center">
-                                        <!-- <a href="#" class="nir-btn term-btn fw-bold btn-width white" data-bs-toggle="modal" data-bs-target="#itineraryModal_<?php //echo $main_packages_all_value['id'] ?>">Itinerary</a> -->
-                                        <a data-toggle="tab" class="nir-btn term-btn fw-bold btn-width white" href="<?php echo base_url();?>packages/booking_enquiry/<?php echo $main_packages_all_value['id']; ?>" class="bordernone">Itinerary</a>
+                                        <a href="#" class="nir-btn term-btn fw-bold btn-width white" data-bs-toggle="modal" data-bs-target="#itineraryModal_<?php echo $main_packages_all_value['id'] ?>">Itinerary</a>
                                     </div>
                                 </div>
                             </div>
@@ -240,75 +245,18 @@ table.scrolldown tbody{
 </div>
 
 <!-- Inclusion modal -->
-<!--<div class="modal fade" id="InclusionModal_<?php //echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-scrollable">-->
-<!--        <div class="modal-content modal-c">-->
-<!--            <div class="modal-header modal-h">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel">Inclusion</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body modal-b">-->
-            <!-- <?php //echo $main_packages_all_value['id'] ?> -->
-<!--            <?php //if(!empty($main_packages_all_value['inclusion'])) { ?>-->
-<!--            <img src="<?php //echo base_url(); ?>uploads/inclusion_img/<?php //echo $main_packages_all_value['inclusion']; ?>" width="100%"/> -->
-<!--            <?php //} ?>-->
-<!--            </div>-->
-            <!-- <div class="modal-footer">
-<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--            </div> -->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <div class="modal fade" id="InclusionModal_<?php echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content modal-c mb-5">
+        <div class="modal-content modal-c">
             <div class="modal-header modal-h">
-            <h5 class="modal-title" id="exampleModalLabel">Inclusion</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body modal-b m-4" style="text-align:justify">
-            <?php echo $main_packages_all_value['inclusion']?>
-            </div>
-             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Terms & Condition modal -->
-<!--<div class="modal fade" id="tcModal_<?php //echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-scrollable">-->
-<!--        <div class="modal-content modal-c">-->
-<!--            <div class="modal-header modal-h">-->
-<!--                <h5 class="modal-title" id="exampleModalLabel">Terms & Condition</h5>-->
-<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body modal-b">-->
-            <!-- <?php //echo $main_packages_all_value['id'] ?> -->
-<!--            <?php //if(!empty($main_packages_all_value['tc_img'])) { ?>-->
-<!--            <img src="<?php //echo base_url(); ?>uploads/tc_img/<?php //echo $main_packages_all_value['tc_img']; ?>" width="100%"/> -->
-<!--            <?php //} ?>-->
-<!--            </div>-->
-            <!-- <div class="modal-footer">
-<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
-<!--            </div> -->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<div class="modal fade" id="tcModal_<?php echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content modal-c mb-5">
-            <div class="modal-header modal-h">
-                <h5 class="modal-title" id="exampleModalLabel">Terms & Condition</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Inclusion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body modal-b m-4" style="text-align:justify">
-                <?php echo $main_packages_all_value['terms_conditions']?>
+            </div>
+            <div class="modal-body modal-b">
+            <!-- <?php //echo $main_packages_all_value['id'] ?> -->
+            <?php if(!empty($main_packages_all_value['inclusion_img'])) { ?>
+            <img src="<?php echo base_url(); ?>uploads/inclusion_img/<?php echo $main_packages_all_value['inclusion_img']; ?>" width="100%"/> 
+            <?php } ?>
             </div>
             <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -317,7 +265,26 @@ table.scrolldown tbody{
     </div>
 </div>
 
-
+<!-- Terms & Condition modal -->
+<div class="modal fade" id="tcModal_<?php echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content modal-c">
+            <div class="modal-header modal-h">
+                <h5 class="modal-title" id="exampleModalLabel">Terms & Condition</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-b">
+            <!-- <?php //echo $main_packages_all_value['id'] ?> -->
+            <?php if(!empty($main_packages_all_value['tc_img'])) { ?>
+            <img src="<?php echo base_url(); ?>uploads/tc_img/<?php echo $main_packages_all_value['tc_img']; ?>" width="100%"/> 
+            <?php } ?>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div> -->
+        </div>
+    </div>
+</div>
 
 <!-- Date modal -->
 <div class="modal fade" id="tour_dates_Modal_<?php echo $main_packages_all_value['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

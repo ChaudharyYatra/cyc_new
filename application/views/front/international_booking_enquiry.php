@@ -46,7 +46,6 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-2">
-                                                
                                                 <input type="text" placeholder="Email Address" name="email" id="email">
                                                 <span class="text-danger float-left" id="email_error" style="display:none"></span>
                                             </div>
@@ -71,8 +70,8 @@
                                                 <div class="input-box">
                                                     <select class="niceSelect" name="gender" id="gender">
                                                         <option value="">Select Gender</option>
-                                                        <option value="male">Male</option>
-                                                        <option value="female">Female</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
                                                     </select>
                                                 </div>
                                                 <span class="text-danger float-left" id="gender_error" style="display:none"></span>
@@ -93,15 +92,15 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 col-sm-12">
+                                        <!-- <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 
                                                 <div class="input-box">
-                                                    <select class="niceSelect" name="department_id" id="department_id">
+                                                    <select class="" name="department_id" id="department_id">
                                                         <option value="">Select Department</option>
-                                                        <?php foreach($department_data as $department){ ?> 
-                                           <option value="<?php echo $department['id'];?>"><?php echo $department['department'];?></option>
-                                                        <?php } ?>
+                                                        <?php //foreach($department_data as $department){ ?> 
+                                                            <option value="<?php //echo $department['id'];?>"><?php //echo $department['department'];?></option>
+                                                        <?php //} ?>
                                                     </select>
                                                 </div>
                                                 <span class="text-danger float-left" id="department_id_error" style="display:none"></span>
@@ -120,7 +119,7 @@
                                                 <span class="text-danger float-left" id="agent_id_error" style="display:none"></span>
 
                                             </div>
-                                        </div>   
+                                        </div>    -->
 
                                     </div>
                                 

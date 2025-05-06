@@ -295,24 +295,59 @@ class Sra_booking_payment_details extends CI_Controller {
             $select_transaction = $this->input->post('select_transaction');
             // print_r($select_transaction); die;
             $booking_amt = $this->input->post('booking_amt');
+
+            $cheque = $this->input->post('cheque');
+            $net_banking_utr_no = $this->input->post('net_banking_utr_no');
+            $qr_upi_no = $this->input->post('qr_upi_no');
+            // print_r($qr_upi_no); die;
             
             $alphabet = '1234567890';
             $otp = str_shuffle($alphabet);
             $traveler_otp = substr($otp, 0, '6'); 
 
             if($select_transaction == 'Net Banking'){
-                // echo'hhhhhhhhh'; die;
+                echo'hhhhhhhhh';
                 $from_email='test@choudharyyatra.co.in';
                 
-                $authKey = "1207168241267288907";
+                $authKey = "1207173098272815780";
                 
-                $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off,For SRA No.$sra_no,Team CYCPL";
+                $message="OTP-$traveler_otp Plz share OTP if True.You paid Rs.$booking_amt/- by NEFT/RTGS at BBN Off, UTR No.$net_banking_utr_no.Team CYCPL";
                 $senderId  = "CYCPLN";
                 
-                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207172424495645660";
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098272815780";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+
+            }else if($select_transaction == 'Cheque'){
+                echo'mmmmmmmmmmmmmm';
+                $from_email='test@choudharyyatra.co.in';
+                
+                $authKey = "1207173098087051916";
+                
+                
+                    $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
+                    // $message="OTP $traveler_otp Plz share this OTP if given is True.You Paid Rs.$booking_amt By Chq at BBN Off Chq No.$cheque.Team CYCPL";
+
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098087051916";
+                
+                $apiurl = str_replace(" ", '%20', $apiurl); 
+            }else if($select_transaction == 'QR Code'){
+                echo'QQQQQQQQQQQQQQQ';
+                $from_email='test@choudharyyatra.co.in';
+                
+                $authKey = "1207173098501659857";
+                
+                $message="OTP–$traveler_otp Plz share OTP if given info is True.You paid Rs.$booking_amt/- by “QR” at BBN Off, UTR No.$cheque.Team CYCPL";
+
+                $senderId  = "CYCPLN";
+                
+                $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobile_no&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207173098501659857";
                 
                 $apiurl = str_replace(" ", '%20', $apiurl); 
             }else{
+                echo'jjjjjjjjjjjjjjjjjjj';
                 $from_email='test@choudharyyatra.co.in';
             
                 $authKey = "1207168241267288907";
@@ -340,7 +375,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     'academic_year'  =>  $academic_year,
                     'sra_no'  =>  $sra_no,
                     'package_id'  =>  $package_id,
-                    'package_date_id'  =>  $package_date_id,
+                    'package_date_id'  =>  $package_date_id, 
                     'agent_id'  =>  $id,
                     'traveler_otp'  =>  $traveler_otp
                 );
@@ -362,18 +397,6 @@ class Sra_booking_payment_details extends CI_Controller {
                 // print_r($arr_insert); die;
 
                 $inserted_id = $this->master_model->insertRecord('sra_final_booking',$arr_insert,true);
-                // $this->db->where('is_deleted','no');
-                // $this->db->where('booking_payment_details.enquiry_id',$enquiry_id);
-                // $booking_payment_details = $this->master_model->getRecord('booking_payment_details');
-                // // print_r($booking_payment_details); die;
-                
-                // print_r($arr_insert); die;
-                // if(!empty($booking_payment_details)){
-                //     $arr_where     = array("id" => $booking_payment_details_id);
-                //     $inserted_id = $this->master_model->updateRecord('booking_payment_details',$arr_insert,$arr_where);
-                // }else{
-                 
-                // }
                 
         if($inserted_id!=''){
            echo true;
@@ -1296,7 +1319,7 @@ class Sra_booking_payment_details extends CI_Controller {
                     'netbanking_bank_name'   =>   $netbanking_bank_name,
                     'netbanking_date'   =>   $netbanking_date,
 
-                    'booking_reference_no'  =>  $booking_reference_no,
+                    // 'booking_reference_no'  =>  $booking_reference_no,
                     'package_date_id' => $package_date_id,
                     'sra_no' => $sra_no,
                     'package_id' => $package_id,
@@ -1411,8 +1434,13 @@ class Sra_booking_payment_details extends CI_Controller {
                 }
                 // print_r($arr_update); die;
                 $arr_where     = array("sra_no" => $sra_no);
-                $this->master_model->updateRecord('sra_booking_payment_details',$arr_update,$arr_where);
+// ----------------- This is Live Code -----------------------------------
+                // $this->master_model->updateRecord('sra_booking_payment_details',$arr_update,$arr_where);
+// ----------------- This is Live Code -----------------------------------
 
+// ----------------- This is Local Code -----------------------------------
+                $xyz = $this->master_model->updateRecord('sra_booking_payment_details',$arr_update,$arr_where);
+// ----------------- This is Local Code -----------------------------------
                 if($select_transaction =='CASH'){
                 $arr_insert = array(
                     'return_cash_500'   =>   $return_cash_500 ,

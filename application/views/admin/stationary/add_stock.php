@@ -41,7 +41,7 @@
                         <input type="hidden" disabled class="form-control" name="stationary_id" id="stationary_id" placeholder="Enter Stationary ID" value="<?php echo $arr_data['id']; ?>" />
 
                           <label>Stationary Name <span class="req_field">*</span></label>
-                          <input type="text" readonly class="form-control" name="stationary_name" id="stationary_name" placeholder="Enter Stationary Name" required="required" value="<?php echo $arr_data['stationary_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"/>
+                          <input type="text" class="form-control" name="stationary_name" id="stationary_name" placeholder="Enter Stationary Name" required="required" value="<?php echo $arr_data['stationary_name']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"/>
                           <input type="hidden" class="form-control" name="stationary_id" id="stationary_id" placeholder="Enter Stationary Name" required="required" value="<?php echo $arr_data['id']; ?>" oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');"/>
                       </div>
                     </div>
@@ -71,32 +71,41 @@
                     <div class="col-md-6">
                       <label>Is It Series Item <span class="req_field">*</span></label>
                       <div class="form-group">
+<!-- // ---------------- This is Live COde --------------------------  -->
 						  
-                        <?php if($arr_data['series_yes_no'] == 'Yes') { ?>
-                          <input type="radio" id="Yes" name="series_yes_no" value="Yes"
+                        <?php //if($arr_data['series_yes_no'] == 'Yes') { ?>
+                          <!-- <input type="radio" id="Yes" name="series_yes_no" value="Yes" -->
+<!-- // ---------------- This is Live COde -------------------------- -->
+                        
+<!-- // ---------------- This is local COde -------------------------- -->
+                          <input type="radio" id="Yes" name="series_yes_no" value="Yes" disabled>
+<!-- // ---------------- This is local COde -------------------------- -->
                           <?php if($arr_data['series_yes_no'] == 'Yes'){echo "checked";} ?>> &nbsp;
                           <label for="html">Yes</label>  &nbsp; &nbsp; 
                           <input type="radio" id="No" name="series_yes_no" value="No" disabled <?php if($arr_data['series_yes_no'] == 'No'){echo "checked";} ?>> &nbsp;
                           <label for="html">No</label><br>
-						  <?php } else{ ?>
+<!-- // ---------------- This is local COde -------------------------- -->
+						  <!-- <?php //} else{ ?>
 						  <input type="radio" id="Yes" name="series_yes_no" value="Yes" disabled
-                          <?php if($arr_data['series_yes_no'] == 'Yes'){echo "checked";} ?>> &nbsp;
+                          <?php //if($arr_data['series_yes_no'] == 'Yes'){echo "checked";} ?>> &nbsp;
                           <label for="html">Yes</label>  &nbsp; &nbsp; 
-                          <input type="radio" id="No" name="series_yes_no" value="No" <?php if($arr_data['series_yes_no'] == 'No'){echo "checked";} ?>> &nbsp;
+                          <input type="radio" id="No" name="series_yes_no" value="No" <?php //if($arr_data['series_yes_no'] == 'No'){echo "checked";} ?>> &nbsp;
                           <label for="html">No</label><br>
-						  <?php } ?>
+						  <?php //} ?>
 						  
                       </div>
-                    </div>
+                    </div> -->
+<!-- // ---------------- This is local COde -------------------------- -->
 					  
+                      </div>
+                    </div>
                     <?php if($arr_data['series_yes_no'] == 'Yes') { ?>
                     <div class="col-md-3 if_series_yes_div">
                       <div class="form-group">
                           <label>From Series <span class="req_field">*</span></label>
-                          <input type="text" class="form-control" name="from_series" id="from_series" placeholder="Enter from series" required="required" value="<?php echo $last_series;?>" readonly/>
+                          <input type="text" class="form-control" name="from_series" id="from_series" placeholder="Enter from series" required="required" />
                       </div>
                     </div>
-					  
                     <div class="col-md-3 if_series_yes_div">
                       <div class="form-group">
                           <label>To Series <span class="req_field">*</span></label>
@@ -144,4 +153,5 @@
   </div>
   
 
-
+</body>
+</html>

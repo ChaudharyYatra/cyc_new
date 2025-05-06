@@ -1,3 +1,9 @@
+<style>
+  .hide {
+    display: none;
+    }
+</style>
+
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -66,6 +72,51 @@
                           </select>
                         </div>
                       </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Tour Type</label> <br>
+                            <input type="radio" id="main_tour" name="tour_type" onclick="main();"
+                            value="1" <?php if(isset($info['tour_type'])){if($info['tour_type']=='1') {echo'checked';}}?>/>
+                                <label for="Yes" id="main_tour">Main Tour</label> &nbsp;&nbsp;
+                            <input type="radio" id="sub_tour" name="tour_type" value="0" onclick="sub();"
+                            value="0" <?php if(isset($info['tour_type'])){if($info['tour_type']=='0') {echo'checked';}}?>/>
+                                <label for="No" id="sub_tour">Sub Tour</label> <br>
+                        </div>
+                      </div>
+
+                      <?php if($info['tour_type']=='1') { ?>
+                      <div class="col-md-6 hide" id="sub_main_tour_div1">
+                        <div class="form-group">
+                          <label>Select Main Tour</label>
+                          <select class="select_css" name="main_tour_id" id="main_tour_id">
+                          <option value="">Select main tour</option>
+                                <?php
+                                  foreach($packages_tour_type as $packages_tour_type_info) 
+                                  { 
+                                ?>
+                            <option value="<?php echo $packages_tour_type_info['id'];?>" <?php if(isset($info['main_tour_id'])){if($packages_tour_type_info['id'] == $info['main_tour_id']) {echo 'selected';}}?>><?php echo $packages_tour_type_info['tour_title'];?></option>
+                                <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <?php } else { ?>
+                      <div class="col-md-6" id="sub_main_tour_div1" >
+                        <div class="form-group">
+                          <label>Select Main Tour</label>
+                          <select class="select_css" name="main_tour_id" id="main_tour_id">
+                          <option value="">Select main tour</option>
+                                <?php
+                                  foreach($packages_tour_type as $packages_tour_type_info) 
+                                  { 
+                                ?>
+                            <option value="<?php echo $packages_tour_type_info['id'];?>" <?php if(isset($info['main_tour_id'])){if($packages_tour_type_info['id'] == $info['main_tour_id']) {echo 'selected';}}?>><?php echo $packages_tour_type_info['tour_title'];?></option>
+                                <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <?php } ?>
+
                       <?php if($info['package_type'] == '7') { ?>
                       <div class="col-md-6 c_from_date">
                               <div class="form-group">
@@ -84,7 +135,7 @@
                               <div class="form-group">
                                 <label>Tour Number</label>
                                 <input type="text" class="form-control" name="tour_number" id="tour_number" placeholder="Enter Tour Number" oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<?php echo $info['tour_number']; ?>">
-                              <input type="hidden" class="form-control" name="original_tour_number" id="original_tour_number" placeholder="Enter Tour Number" value="<?php echo $info['tour_number']; ?>">
+                                <input type="hidden" class="form-control" name="original_tour_number" id="original_tour_number" placeholder="Enter Tour Number" value="<?php echo $info['tour_number']; ?>">
                               </div>
                       </div>
                       <div class="col-md-6">
@@ -124,7 +175,12 @@
                             <select class="select2" multiple="multiple" data-placeholder="Select Bording  Office/ Location" style="width: 100%;" name="boarding_office[]" id="boarding_office" required="required">
                               <option value="">Select Boarding  Office/ Location</option>
                               <?php
-                              $title = $temparray=explode(',',$info['boarding_office']);
+// ---------------- This is Live COde -------------------------- -->
+                              // $title = $temparray=explode(',',$info['boarding_office']);
+// ---------------- This is Live COde -------------------------- -->
+// ---------------- This is Live COde -------------------------- -->
+                              $title = explode(',',$info['boarding_office']);
+// ---------------- This is Live COde -------------------------- -->
                               $c=count($title);
                                 foreach($agent_data as $agent_info) 
                                 { 
@@ -228,9 +284,9 @@
                             <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
                              <br>
                              
-                    <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
-                    <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
-                    <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                            <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
+                            <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
+                            <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
                           </div>
                       </div>
                       
@@ -251,68 +307,53 @@
                           </div>
                       </div>
                       
-                      <!--<div class="col-md-4">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Inclusion Image</label><br>-->
-                      <!--      <input type="file" name="inclusion_img" id="inclusion_img">-->
-                      <!--      <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>-->
-                      <!--      <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>-->
-                      <!--       <br>-->
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Inclusion Image</label><br>
+                            <input type="file" name="inclusion_img" id="inclusion_img">
+                            <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                             <br>
                              
-                      <!--    <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>-->
-                      <!--    <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>-->
-                      <!--    <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>-->
-                      <!--    </div>-->
-                      <!--</div>-->
+                          <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
+                          <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
+                          <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                      </div>
                       
-                      <!--<div class="col-md-2">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Uploaded Image</label><br>-->
-                      <!--      <?php //if(!empty($info['inclusion_img'])){ ?>-->
-                      <!--                <img src="<?php //echo base_url(); ?>uploads/inclusion_img/<?php //echo $info['inclusion_img']; ?>" width="50%">-->
-                      <!--                <input type="hidden" name="old_inclusion_name" id="old_inclusion_name" value="<?php // $info['inclusion_img']; ?>" required="required">-->
-                      <!--                <?php } ?>-->
-                      <!--    </div>-->
-                      <!--</div>-->
-                      
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Inclusion</label>
-                        <textarea class="form-control" name="inclusion" id="inclusion" required="required"><?php echo $info['inclusion']; ?></textarea>
-                        </div>
-                    </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label>Uploaded Image</label><br>
+                            <?php if(!empty($info['inclusion_img'])){ ?>
+                                      <img src="<?php echo base_url(); ?>uploads/inclusion_img/<?php echo $info['inclusion_img']; ?>" width="50%">
+                                      <input type="hidden" name="old_inclusion_name" id="old_inclusion_name" value="<?php echo $info['inclusion_img']; ?>" required="required">
+                                      <?php } ?>
+                          </div>
+                      </div>
 
-                      <!--<div class="col-md-4">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Terms & Conditions Image</label><br>-->
-                      <!--      <input type="file" name="tc_img" id="tc_img">-->
-                      <!--      <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>-->
-                      <!--      <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>-->
-                      <!--       <br>-->
+                      <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Terms & Conditions Image</label><br>
+                            <input type="file" name="tc_img" id="tc_img">
+                            <br><span class="text-danger">Image height should be 605 & width should be 1920.</span>
+                            <br><span class="text-danger">Please select only JPG,PNG,JPEG format files.</span>
+                             <br>
                              
-                      <!--    <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>-->
-                      <!--    <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>-->
-                      <!--    <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>-->
-                      <!--    </div>-->
-                      <!--</div>-->
+                          <span class="text-danger" id="full_img_width" style="display:none;">Image Width should be Minimum 1919 px To Maximum 1922px.</span>
+                          <span class="text-danger" id="full_img_height" style="display:none;">Image Height should be Minimum 600 px To Maximum 406 px.</span>
+                          <span class="text-danger" id="full_img_size" style="display:none;">Image Size Should Be Less Than 2 MB.</span>
+                          </div>
+                      </div>
                       
-                      <!--<div class="col-md-2">-->
-                      <!--    <div class="form-group">-->
-                      <!--      <label>Uploaded Image</label><br>-->
-                      <!--      <?php //if(!empty($info['tc_img'])){ ?>-->
-                      <!--                <img src="<?php echo base_url(); ?>uploads/tc_img/<?php //echo $info['tc_img']; ?>" width="50%">-->
-                      <!--                <input type="hidden" name="old_tc_name" id="old_tc_name" value="<?php //echo $info['tc_img']; ?>" required="required">-->
-                      <!--                <?php //} ?>-->
-                      <!--    </div>-->
-                      <!--</div>-->
-                      
-                      
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label>Terms & Conditions</label>
-                        <textarea class="form-control" name="terms_conditions" id="terms_conditions" required="required"><?php echo $info['terms_conditions']; ?></textarea>
-                        </div>
-                    </div>
+                      <div class="col-md-2">
+                          <div class="form-group">
+                            <label>Uploaded Image</label><br>
+                            <?php if(!empty($info['tc_img'])){ ?>
+                                      <img src="<?php echo base_url(); ?>uploads/tc_img/<?php echo $info['tc_img']; ?>" width="50%">
+                                      <input type="hidden" name="old_tc_name" id="old_tc_name" value="<?php echo $info['tc_img']; ?>" required="required">
+                                      <?php } ?>
+                          </div>
+                      </div>
 
                       <!-- <div class="col-md-4">
                           <div class="form-group">
@@ -346,7 +387,7 @@
                 </div>
                 </div>
               </form>
-              <?php //} ?>
+              <?php } ?>
             </div>
             <!-- /.card -->
             </div>
@@ -363,3 +404,12 @@
     <!-- /.content -->
   </div>
   
+  <script>
+    function sub(){
+    document.getElementById('sub_main_tour_div1').style.display = 'block';
+    }
+    function main(){
+    document.getElementById('sub_main_tour_div1').style.display = 'none';
+    document.getElementById('main_tour_id').value = "";
+    }
+</script>

@@ -54,7 +54,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="office_submit" value="submit">Submit</button>
-					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+					        <a href="<?php echo $module_url_path; ?>/add_office_maintainance"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
             </div>

@@ -1,4 +1,5 @@
-<style>
+    
+    <style>
         .label_color{
             color: black;
         }
@@ -86,7 +87,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group mb-2">
                                                 <input type="text" name="mobile_number2" id="mobile_number2" placeholder="Enter mobile number" oninput="this.value = this.value.replace(/[^0-9 ]/g, '').replace(/(\..*)\./g, '$1');">
-                                                <!-- <span class="text-danger float-left" id="last_name_error" style="display:none"></span> -->
+                                                <span class="text-danger float-left" id="mobile_number2_error" style="display:none"></span>
                                             </div>
                                         </div>
 

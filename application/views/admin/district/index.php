@@ -1,3 +1,23 @@
+<script>
+    $(document).ready(function() {
+        $('#example1').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "<?php echo base_url('district/index'); ?>",
+                "type": "POST"
+            }
+            // Add other DataTables options here
+        });
+    });
+
+    // Event handler for DataTables pagination click
+    $('#example1').on('page.dt', function () {
+        // Reload DataTables data when pagination is clicked
+        $('#example1').DataTable().ajax.reload();
+    });
+
+</script>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,7 +30,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <a href="<?php echo $module_url_path; ?>/add"><button class="btn btn-primary">Add</button></a>
-              
             </ol>
           </div>
         </div>
@@ -25,11 +44,10 @@
           <div class="col-12">
               <?php $this->load->view('admin/layout/admin_alert'); ?>
             <div class="card">
-             
               <!-- /.card-header -->
               <div class="card-body">
-                  <?php  if(count($arr_data) > 0 ) 
-              { ?>
+                  <?php  if(count($arr_data) > 0 ) {
+                   ?>
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -47,6 +65,7 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                    // print_r($arr_data); die;
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>

@@ -37,7 +37,8 @@
                       <div class="col-md-6">
                           <div class="form-group">
                             <label>Review</label>
-                            <textarea type="text" class="form-control" name="review" id="review" placeholder="Enter Review" required="required"></textarea>
+                            <!-- <textarea type="text" class="form-control" name="review" id="review" placeholder="Enter Review" required="required"></textarea> -->
+                            <input type="text" class="form-control" name="review" id="review" placeholder="Enter Review" required="required">
                           </div>
                       </div>
                       <div class="col-md-6">

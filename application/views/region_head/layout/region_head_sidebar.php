@@ -1,3 +1,11 @@
+<style>
+  .desig_css{
+    color:white;
+  }
+  .name_css{
+    text-decoration: none;
+  }
+</style>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -13,7 +21,8 @@
         <div class="image">
         </div>
         <div class="info">
-          <center><a href="#" class="d-block"><?php echo $region_head_sess_name; ?></a></center>
+          <center><a href="#" class="d-block name_css"><?php echo $region_head_sess_name; ?></a></center>
+          <center><h6 class="desig_css">[ Region Head ]</h6></center>
         </div>
       </div>
 
@@ -35,8 +44,7 @@
               </p>
             </a>
           </li>
-
-           <li class="nav-item">
+          <li class="nav-item">
             <a href="<?php echo base_url(); ?>region_head/prospect_rate_download_mob/index" class="nav-link">
               <i class="nav-icon fa fa-download" aria-hidden="true"></i>
               <p>
@@ -44,7 +52,6 @@
               </p>
             </a>
           </li>
-          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
@@ -73,6 +80,13 @@
                 <a href="<?php echo base_url(); ?>region_head/not_interested/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Not Interested Customers</p>
+                </a>
+               </li>
+
+               <li class="nav-item">
+                <a href="<?php echo base_url(); ?>region_head/booking_enquiry/general_enquiry" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>General Enquiry</p>
                 </a>
                </li>
                
@@ -145,15 +159,6 @@
                </li>
                
             </ul>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>region_head/prospect_rate_download_mob/index" class="nav-link">
-              <i class="nav-icon fa fa-download" aria-hidden="true"></i>
-              <p>
-                Document Download List
-              </p>
-            </a>
           </li>
           
           <li class="nav-item">

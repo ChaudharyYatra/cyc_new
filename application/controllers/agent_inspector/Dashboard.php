@@ -20,82 +20,6 @@ class Dashboard extends CI_Controller{
 
 	public function index()
 	{
-	    
-	           //    $info_arr = array('from'=>'test@choudharyyatra.co.in',
-	          	// 			'to'=>'mhaskem01@gmail.com',
-	          	// 			'subject'=> 'Testing mail',
-	          	// 			'message'=>'testing'); 
-	          	// 		$this->emailsending->sendmail($info_arr);
-	          
-	          			
-	   // require_once APPPATH . "/third_party/phpmail/PHPMailerAutoload.php";
-
-// 		$mail = new PHPMailer();
-
-// 		$mail->SMTPDebug = 0;
-	
-		//Ask for HTML-friendly debug output
-// 		$mail->Debugoutput = 'html';
-// 		$mail->SMTPSecure  = 'ssl';
-// 	//	$mail->SMTPSecure = 'tls'; //tls
-// 		//Set the hostname of the mail server
-// 		$mail->Host = "smtp.gmail.com";
-// 		//Set the SMTP port number - likely to be 25, 465 or 587
-// 		$mail->Port = 465;
-// 		$mail->SMTPOptions = [
-// 			'ssl'=> [
-// 			'verify_peer' => false,
-// 			'verify_peer_name' => false,
-// 			'allow_self_signed' => true
-// 			]
-// 		];
-	
-		//Whether to use SMTP authentication
-// 		$mail->SMTPAuth = true;
-// 		// secure transfer enabled REQUIRED for Gmail
-// 		//$mail->SMTPSecure = 'ssl'; //tls
-// 		//Username to use for SMTP authentication
-// 		//$mail->Username = "info@nathetyres.in";
-// 		$mail->Username = "info.cycplteam@gmail.com";
-// 		//Password to use for SMTP authentication 
-// 		 $mail->Password = 'glxvtzjwiqngpwuq';
-// 		//Set who the message is to be sent from		
-// 		$mail->SetFrom('info.cycplteam@gmail.com', 'CHAUDHARY');
-// 		//Set an alternative reply-to address
-// 		$mail->addReplyTo('info.cycplteam@gmail.com', 'CHAUDHARY');
-// 		//Set who the message is to be sent to
-// 		$mail->addAddress('mhaskem01@gmail.com', ''); 
-// 		//$mail->addCC('bhagwan.sahane@esds.co.in', 'Bhagwan Sahane');
-// 		//Set the subject line
-// 		$mail->Subject = 'test';
-// 		//Read an HTML message body from an external file, convert referenced images to embedded,
-// 		//convert HTML into a basic plain-text alternative body
-// 		$mail->Body = 'hi';
-// 		$mail->IsHTML(true);
-// 		// $mail->msgHTML(file_get_contents('contents.html'), dirname(_FILE_));
-// 		// Replace the plain text body with one created manually
-// 		//    $mail->AltBody = 'This is a plain-text message body';
-// 		//Attach an image file
-// 		if ($attachment != '') {
-// 			$mail->addAttachment($attachment);
-// 		}
-		//send the message, check for errors
-// 	$mahesh = $mail->send();
-// 	echo $this->email->print_debugger();
-		
-// 		if (!$mail->send()) {
-// 			echo "Mailer Error: " . $mail->ErrorInfo;
-// 			return false;
-// 		} else {
-// 		    	echo 'test1';
-// 			return true;
-// 		}
-	          			
-// 	     die;
-	    
-	    
-	    
-	    
                 $agent_inspector_sess_name = $this->session->userdata('agent_inspector_name');
                 $id = $this->session->userdata('agent_inspector_sess_id');
                 $region_id = $this->session->userdata('agent_inspector_region');
@@ -218,9 +142,86 @@ class Dashboard extends CI_Controller{
                 $stationary_details = $this->master_model->getRecords('stationary_order',array('stationary_order.is_deleted'=>'no'),$fields);
                 $arr_data['stationary_details'] = count($stationary_details);
 
+                $record = array();
+                $this->db->select("agent.agent_name, COUNT(booking_enquiry.id) AS enquiry_count");
+                $this->db->from('agent');
+                $this->db->where('agent.is_deleted', 'no');
+                $this->db->where('booking_enquiry.booking_done', 'yes');
+                $this->db->join('booking_enquiry', 'agent.id = booking_enquiry.agent_id', 'left');
+                $this->db->group_by('agent.id'); // Group by agent.id
+                $top_agent_wise_data = $this->db->get()->result_array();
+                // print_r($agent_wise_data); die; 
+
+                $record = array();
+                $this->db->select("DATE_FORMAT(package_date.journey_date, '%Y-%m') AS month, packages.tour_title, COUNT(packages.id) AS package_count");
+                $this->db->from('packages');
+                $this->db->where('packages.is_deleted', 'no');
+                $this->db->join('package_date', 'packages.id = package_date.package_id', 'left');
+                $this->db->group_by('month'); // Group by month and package type
+                $month_wise_data = $this->db->get()->result_array();
+                // print_r($month_wise_data); die;
+
+                $record = array();
+                $this->db->select("packages.tour_title, COUNT(packages.id) AS package_count");
+                $this->db->from('packages');
+                $this->db->where('packages.is_deleted', 'no');
+                $this->db->where('booking_basic_info.booking_done', 'yes');
+                $this->db->join('booking_basic_info', 'packages.id = booking_basic_info.tour_no', 'left');
+                $this->db->group_by('packages.tour_title'); // Group by package name
+                $this->db->order_by('package_count', 'desc'); // Order by package_count in descending order
+                $this->db->limit(1); // Limit the result to the top rows
+
+                $booking_max_package_data = $this->db->get()->row_array();
+                // print_r($booking_max_package_data); die;
+
+
+                $this->db->select("
+                COUNT(booking_enquiry.id) AS total_enquiey_count,
+                SUM(CASE WHEN booking_enquiry.followup_status = 'yes' THEN 1 ELSE 0 END) AS total_followup_count,
+                SUM(CASE WHEN booking_enquiry.booking_done = 'yes' THEN 1 ELSE 0 END) AS total_booked_count,
+                SUM(CASE WHEN booking_enquiry.not_interested = 'no' THEN 1 ELSE 0 END) AS total_notintersted_count
+                ");
+
+                $this->db->from('booking_enquiry');
+                $this->db->where('booking_enquiry.is_deleted', 'no');
+
+                $enquiry_status = $this->db->get()->row_array();
+
+                // print_r($enquiry_status); die;
+
+
+                $this->db->select("
+                COUNT(agent.id) AS total_agent_count,
+                SUM(CASE WHEN agent.is_active = 'yes' THEN 1 ELSE 0 END) AS total_isactive_count,
+                SUM(CASE WHEN agent.is_deleted = 'yes' THEN 1 ELSE 0 END) AS total_isdeleted_count
+                ");
+
+                $this->db->from('agent');
+
+                $agent_status = $this->db->get()->row_array();
+
+                // print_r($agent_status); die;
+
+                $this->db->select("stationary.stationary_name, COUNT(stationary_order_details.id) AS request_count");
+                $this->db->from('stationary_order_details');
+                $this->db->where('stationary_order_details.is_deleted', 'no');
+                $this->db->where('stationary_order_details.order_status', 'completed');
+                $this->db->join("stationary", 'stationary_order_details.stationary_name = stationary.id', 'left');
+                $this->db->group_by('stationary.stationary_name');
+                $this->db->order_by('request_count', 'desc'); // Order by request_count in descending order
+                $this->db->limit(5); // Limit the result to the top 5 stationary names
+
+                $top_s_product = $this->db->get()->result_array();
+
                 $this->arr_view_data['agent_inspector_sess_name']        = $agent_inspector_sess_name;
                 $this->arr_view_data['listing_page']    = 'yes';
                 $this->arr_view_data['arr_data']        = $arr_data;
+                $this->arr_view_data['top_s_product']        = $top_s_product;
+                $this->arr_view_data['enquiry_status']        = $enquiry_status;
+                $this->arr_view_data['agent_status']        = $agent_status;
+                $this->arr_view_data['top_agent_wise_data']        = $top_agent_wise_data;
+                $this->arr_view_data['month_wise_data']        = $month_wise_data;
+                $this->arr_view_data['booking_max_package_data']        = $booking_max_package_data;
                 $this->arr_view_data['page_title']      = $this->module_title." List";
                 $this->arr_view_data['module_title']    = $this->module_title;
                 $this->arr_view_data['module_url_path'] = $this->module_url_path;

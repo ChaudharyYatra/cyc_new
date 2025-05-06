@@ -1,3 +1,80 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Create a data table
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Status');
+            data.addColumn('number', 'Count');
+
+            // PHP variables containing the data
+            var totalEnquiry = <?php echo $custom_enquiry_data['custom_package_count']; ?>;
+            var totalActive = <?php echo $custom_enquiry_data['total_isactive_count']; ?>;
+            var totalDeleted = <?php echo $custom_enquiry_data['total_isdeleted_count']; ?>;
+
+            // Add data to the data table
+            data.addRow(['Enquiry', totalEnquiry]);
+            data.addRow(['Active', totalActive]);
+            data.addRow(['Deleted', totalDeleted]);
+
+            // Set chart options
+            var options = {
+                title: 'Enquiry, Active, and Deleted Counts',
+                titleTextStyle: {
+                    color: '#FF0000', // Set the title text color to red
+                    fontSize: 18,     // Set the title font size to 18px
+                    bold: true        // Make the title text bold
+                }
+            };
+
+            // Create a new pie chart and attach it to the 'piechart' div
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            // Draw the chart
+            chart.draw(data, options);
+        }
+ 
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+google.charts.setOnLoadCallback(drawChart8);
+
+function drawChart8() {
+    // Create a data table
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Status');
+    data.addColumn('number', 'Count');
+
+    // PHP variable containing the data
+    var chartData = <?php echo json_encode($enquiry_status); ?>;
+
+    // Add the data from PHP to the data table
+    data.addRow(['Total Enquiry', parseInt(chartData.total_enquiry_count)]);
+    data.addRow(['Total Follow-up', parseInt(chartData.total_followup_count)]);
+    data.addRow(['Booked', parseInt(chartData.total_booked_count)]);
+    data.addRow(['Not Interested', parseInt(chartData.total_notintersted_count)]);
+
+    // Set chart options
+    var options = {
+        title: 'Enquiry Status',
+        titleTextStyle: {
+            color: '#FF0000', // Set the title text color to red
+            fontSize: 18,     // Set the title font size to 18px
+            bold: true        // Make the title text bold
+        }
+    };
+
+    // Create a new pie chart and attach it to the 'piechart' div
+    var chart = new google.visualization.PieChart(document.getElementById('piechart6'));
+
+    // Draw the chart
+    chart.draw(data, options);
+}
+
+
+</script>
 <style>
   .underline{
     text-decoration: none !important;
@@ -117,3 +194,72 @@
    
 
 </section>
+
+
+
+<!-- Main content -->
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+        <?php 
+            if($custom_enquiry_data >0 ){
+
+          ?> 
+          <div class="col-md-6">
+            <!-- PIE CHART -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Custom Enquiry Counts</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button> -->
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="piechart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <?php } ?>
+          <!-- /.col (LEFT) -->
+
+          <?php 
+            if($enquiry_status >0 ){
+
+          ?> 
+          <div class="col-md-6">
+            <!-- PIE CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Enquiry Status</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button> -->
+                </div>
+              </div>
+              <div class="card-body">
+                <div id="piechart6" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 500px;"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <?php } ?>
+          <!-- /.col (LEFT) -->
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+</section>
+    <!-- /.content -->

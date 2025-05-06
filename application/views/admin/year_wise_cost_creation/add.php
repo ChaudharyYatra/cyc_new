@@ -38,7 +38,7 @@
                   <div class="col-md-6">
                       <div class="form-group">
                         <label>Slab Serial Number</label>
-                        <input type="text" class="form-control" name="slab_serial_number" id="slab_serial_number" placeholder="Enter Slab Serial Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"  required="required">
+                        <input type="text" readonly class="form-control" name="slab_serial_number" id="slab_serial_number" placeholder="Enter Slab Serial Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $year_w_id; ?>"  required="required">
                       </div>
                   </div>
 
@@ -91,7 +91,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
-					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
+					        <a href="<?php echo $module_url_path; ?>/add"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
             </div>

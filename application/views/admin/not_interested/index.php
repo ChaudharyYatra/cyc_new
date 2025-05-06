@@ -68,7 +68,7 @@
                     <td><?php echo $info['tour_title']; ?></td>
                     <td><?php echo $info['email']; ?></td>
                     <td><?php echo $info['mobile_number']; ?></td>
-                    <td><?php echo date("Y-m-d",strtotime($info['created_at'])); ?></td>
+                    <td><?php echo date("d-m-Y",strtotime($info['created_at'])); ?></td>
                     <td>
                       <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>
 " ><button type="button" class="btn btn-primary">View</button></a>

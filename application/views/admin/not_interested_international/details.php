@@ -80,10 +80,10 @@
                   <thead>
                   <tr>
                     <th>SN</th>
-					<th>Follow Up Date</th>
+					          <th>Follow Up Date</th>
                     <th>Next Follow Up Date</th>
                     <th>Next Follow Up Time</th>
-					<th>Reason</th>
+                    <th>Reason</th>
                     <th>Follow Up Comment</th>
                     <th>Followup status?</th>
                   </tr>
@@ -104,8 +104,8 @@
                   <tr>
                     <td><?php echo $i; ?></td>
                     <!-- <td><?php //echo $info['created_at'] ?></td> -->
-					<td><?php echo $info['follow_up_date'] ?></td>
-                   <td><?php if($i < 5)
+					          <td><?php echo date('d-m-Y', strtotime($info['follow_up_date'])); ?></td>
+                    <td><?php if($i < 5)
                             {
                             echo date('d-m-Y', strtotime($info['next_followup_date']));
                               }else
@@ -121,7 +121,7 @@
                             echo "No Record";
                           }
                     ?></td>
-					  <td><?php echo $info['create_followup_reason'] ?></td>
+                    <td><?php echo $info['create_followup_reason'] ?></td>
                     <td><?php echo $info['follow_up_comment'] ?></td>
                     
                     <!-- <td>

@@ -40,7 +40,7 @@ class Login extends CI_Controller{
                      
                 if(empty($arr_data))
                 {    
-                    $this->session->set_flashdata('error_message1',"Mobile Number Or Password Is Wrong.");
+                    $this->session->set_flashdata('error_message1',"Email Or Password Is Wrong.");
                 }
                 else
                 {
