@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'sumagotest_chaudhary_yatra',
+ 	'hostname' => 'localhost',
+ 	'username' => 'choudharyshared_testuser',
+ 	'password' => 'N$e{R_UP$J4m',
+ 	'database' => 'choudharyshared_testdb',
 	// 'hostname' => 'localhost',
 	// 'username' => 'sumagotest_chaudhary_yatra',
 	// 'password' => 'sumagotest_chaudhary_yatra',

@@ -95,7 +95,7 @@
                        <div class="col-md-6">
                               <div class="form-group">
                                 <label>Mobile Number 2</label>
-                                <input type="text" class="form-control" name="mobile_number2" id="mobile_number2" placeholder="Enter 10 Digits Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" required="required" value="<?php echo $info['mobile_number2']; ?>">
+                                <input type="text" class="form-control" name="mobile_number2" id="mobile_number2" placeholder="Enter 10 Digits Mobile Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="<?php echo $info['mobile_number2']; ?>">
                               </div>
                         </div>
                         <div class="col-md-6">
@@ -287,6 +287,27 @@
                                 <input type="text" class="form-control" name="pan_number" id="pan_number" placeholder="Enter PAN Number" value="<?php echo $info['fld_pan_number']; ?>" >
                               </div>
                       </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Amount Receiving Mode</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select amount receiving mode" style="width: 100%;" name="amount_receiving_mode[]" id="amount_receiving_mode" required="required">
+                              <option value="">Select amount receiving mode</option>
+                              <?php
+                              $title = explode(',',$info['amount_receiving_mode']);
+                              $c=count($title);
+                                    for($i=0; $i<$c; $i++){
+                                        $tid= $title[$i];
+                                    }
+                              ?>
+                              <option value="CASH" <?php if(in_array('CASH', $title)) { echo "selected"; } ?>>CASH</option>
+                              <option value="UPI" <?php if(in_array('UPI', $title)) { echo "selected"; } ?>>UPI</option>
+                              <option value="QR Code" <?php if(in_array('QR Code', $title)) { echo "selected"; } ?>>QR Code</option>
+                              <option value="Cheque" <?php if(in_array('Cheque', $title)) { echo "selected"; } ?>>Cheque</option>
+                              <option value="Net Banking" <?php if(in_array('Net Banking', $title)) { echo "selected"; } ?>>Net Banking</option>
+                              <option value="Demand Draft" <?php if(in_array('Demand Draft', $title)) { echo "selected"; } ?>>Demand Draft</option>
+                            </select>
+                          </div>
+                        </div>
                       <div class="col-md-6">
                             <label>Password</label>
                               <div class="form-group input-group">

@@ -279,7 +279,7 @@ class Booking_payment_details extends CI_Controller {
 
             $booking_amt = $this->input->post('booking_amt');
             $final_amt = $this->input->post('final_amt');
-            $later_payment_reason = $this->input->post('later_payment_reason');
+            $later_payment_reason = $this->input->post('later_payment_reason'); 
             $payment_type = $this->input->post('payment_type');
             $mobile_no = $this->input->post('mobile_no');
             $pending_amt = $this->input->post('pending_amt');

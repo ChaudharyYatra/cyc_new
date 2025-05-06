@@ -45,32 +45,33 @@ class More_fund_request extends CI_Controller{
 	}
 	
 	
-    public function add()
+    public function add_give_money_approval($id)
     {   
         $supervision_sess_name = $this->session->userdata('supervision_name');
         $iid = $this->session->userdata('supervision_sess_id');   
 
         if($this->input->post('submit'))
         {
-            $this->form_validation->set_rules('approval_amt', 'approval_amt', 'required');
+            $this->form_validation->set_rules('sanction_paid_amt', 'sanction_paid_amt', 'required');
 
             if($this->form_validation->run() == TRUE)
             {
-                $approval_amt	  = $this->input->post('approval_amt');
-                $tm_request_fund_id	  = $this->input->post('tm_request_fund_id');
+                $sanction_paid_amt	  = $this->input->post('sanction_paid_amt');
                
                 $today= date('Y-m-d');
                     $arr_update = array(
-                        'tom_approval_amt'   =>   $approval_amt,
-                        'tom_approval_date'   =>   $today
-
+                        'tom_approval_amt'   =>   $sanction_paid_amt,
+                        'tom_approval_date'   =>   $today,
+                        'Tom_id'   =>   $iid,
+                        'request_status'   =>   'Tom Approved',
+                        'TOM_send'            => 'yes'
                     );
-                    $arr_where     = array("id" => $tm_request_fund_id);
+                    $arr_where     = array("id" => $id);
                     $inserted_id = $this->master_model->updateRecord('tm_request_more_fund',$arr_update,$arr_where);
                    
                 if($inserted_id > 0)
                 {
-                    $this->session->set_flashdata('success_message'," Approval Amount Added Successfully.");
+                    $this->session->set_flashdata('success_message',"Approval Amount Added Successfully.");
                     redirect($this->module_url_path.'/index');
                 }
 
@@ -84,18 +85,44 @@ class More_fund_request extends CI_Controller{
        
         }
 
-
-        $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');  
-        $package_type = $this->master_model->getRecords('package_type');
+        $record = array();
+        $fields = "tm_request_more_fund.*,supervision.supervision_name";
+        $this->db->where('tm_request_more_fund.is_deleted','no');
+        $this->db->where('tm_request_more_fund.id',$id);
+        $this->db->join("supervision", 'tm_request_more_fund.tour_manager_id=supervision.id','left');
+        $arr_data = $this->master_model->getRecords('tm_request_more_fund',array('tm_request_more_fund.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
 
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
-        $this->arr_view_data['package_type']        = $package_type;
-        $this->arr_view_data['action']          = 'add';
-        $this->arr_view_data['page_title']      = " Assign Staff";
+        $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['action']          = 'add_give_money_approval';
+        $this->arr_view_data['page_title']      = " Give Money Approval";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
-        $this->arr_view_data['middle_content']  = $this->module_view_folder."add";
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."add_give_money_approval";
+        $this->load->view('tour_operation_manager/layout/tour_operation_manager_combo',$this->arr_view_data);
+    }
+
+    public function view_give_money_approval($id)
+    {   
+        $supervision_sess_name = $this->session->userdata('supervision_name');
+        $iid = $this->session->userdata('supervision_sess_id');   
+
+        $record = array();
+        $fields = "tm_request_more_fund.*,supervision.supervision_name";
+        $this->db->where('tm_request_more_fund.is_deleted','no');
+        $this->db->where('tm_request_more_fund.id',$id);
+        $this->db->join("supervision", 'tm_request_more_fund.tour_manager_id=supervision.id','left');
+        $arr_data = $this->master_model->getRecords('tm_request_more_fund',array('tm_request_more_fund.is_deleted'=>'no'),$fields);
+        // print_r($arr_data); die;
+
+        $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+        $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['action']          = 'view_give_money_approval';
+        $this->arr_view_data['page_title']      = "View Give Money Approval";
+        $this->arr_view_data['module_title']    = $this->module_title;
+        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['middle_content']  = $this->module_view_folder."view_give_money_approval";
         $this->load->view('tour_operation_manager/layout/tour_operation_manager_combo',$this->arr_view_data);
     }
 

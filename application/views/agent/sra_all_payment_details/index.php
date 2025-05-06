@@ -56,7 +56,7 @@
                     <td><?php echo $info['year'] ?></td> 
                     <td><?php echo $info['sra_no'] ?></td>
                     <td style="text-transform: capitalize;"><?php echo $info['customer_name']?></td>
-                    <td><?php echo $info['tour_number'] ?></td>
+                    <td><?php echo $info['package_tour_number'] ?></td>
                     <td><?php echo $info['journey_date'] ?></td>
                     <td><?php echo $info['mobile_number'] ?></td>
 

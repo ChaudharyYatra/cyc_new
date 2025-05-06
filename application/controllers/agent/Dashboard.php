@@ -14,7 +14,6 @@ class Dashboard extends CI_Controller{
 		// Check User Permission
 		//hasModuleAccess(6);//set same module id as in module_master table
 
-
         $this->module_url_path    =  base_url().$this->config->item('agent_panel_slug')."/dashboard";
         $this->module_url_path_followup_list    =  base_url().$this->config->item('agent_panel_slug')."/todays_domestic_followup_list";
         $this->module_url_path_inter_followup_list    =  base_url().$this->config->item('agent_panel_slug')."/todays_international_followup_list";
@@ -89,6 +88,15 @@ class Dashboard extends CI_Controller{
         // print_r($arr_data['booking_payment_details_completed_count']); die;
         // print_r($booking_payment_details_completed); die;
 
+        $this->db->where('is_deleted','no');
+        $this->db->select('SUM(booking_amt) as total_booking_amt');
+        $agent_sra_amt = $this->master_model->getRecord('sra_booking_payment_details');
+
+
+        // print_r($agent_sra_total_amount['booking_amt']); die;
+
+        // print_r($Agent_sum_of_sra_total_amount); die;
+
         // print_r($arr_data['booking_payment_details_count']); die;
         // $this->db->where('agent_id',$id);  
         // $this->db->where('not_interested','no');  
@@ -118,8 +126,7 @@ class Dashboard extends CI_Controller{
         $this->arr_view_data['listing_page']    = 'yes';
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['top_agent_wise_data']        = $top_agent_wise_data;
-      //  $this->arr_view_data['total_enquiry_count']  = $total_enquiry_count;
-        //$this->arr_view_data['enquiry_count']  = $enquiry_count;
+       $this->arr_view_data['agent_sra_amt']  = $agent_sra_amt;
        // $this->arr_view_data['enquiry_count_total']  = $enquiry_count_total;
         //$this->arr_view_data['internatinal_enquiry_count']  = $internatinal_enquiry_count;
         //$this->arr_view_data['international_enquiry_data_total']  = $international_enquiry_data_total;

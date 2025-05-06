@@ -222,7 +222,7 @@
                       <button class="btn btn-warning" id="holdButton">Hold</button>
                       <?php } else if($tour_expenses_all_info['approval']=='no' && $tour_expenses_all_info['hold']=='pending'){?>
                     
-                        <button type="button" attr_approve="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary approve" name="submit" value="submit">Approve</button>
+                        <button type="button" attr_approve="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary approve" id="approve" name="submit" value="submit">Approve</button>
                         <button class="btn btn-warning" id="holdButton">Hold</button>
                     <?php } ?>
 
@@ -265,7 +265,7 @@
                             </div>
                             <!-- <button type="submit" class="btn btn-primary hold" name="submit">Submit Hold</button> -->
 
-                            <button type="button" attr_hold="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary hold" name="submit" value="submit">Submit Hold</button>
+                            <button type="button" attr_hold="<?php echo $tour_expenses_all_info['t_expences_id'] ?>" class="btn btn-primary hold" id="hold" name="submit" value="submit">Submit Hold</button>
                         </form>
                         
                       </div>

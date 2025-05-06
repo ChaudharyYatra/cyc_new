@@ -111,7 +111,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tour Number-Name</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number" required="required">
+                                    <select class="select2" multiple="multiple" data-placeholder="Select tour" style="width: 100%;" name="tour_number[]" id="tour_number">
                                         <option value="">Select Tour</option>
                                         <?php foreach($packages_data as $packages_data_value) { ?>
                                             <option value="<?php echo $packages_data_value['id'];?>"><?php echo $packages_data_value['tour_number'];?> -  <?php echo $packages_data_value['tour_title'];?></option>
@@ -136,9 +136,100 @@
                               <label class="col-form-label">Followup Date:</label> 
                               <input type="date" class="form-control" name="followup_date" id="followup_date" min="<?php //echo date("Y-m-d"); ?>" >
                             </div> -->
+                            
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Occupation Name</label>
+                                  <select class="select_css" name="occupation_name" id="occupation_name">
+                                      <option value="">Select occupation name</option>
+                                      <?php
+                                        foreach($occupation_master_data as $occupation_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $occupation_master_info['id']; ?>"> <?php echo $occupation_master_info['occupation_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Zone Name</label>
+                                  <select class="select_css" name="zone_name" id="zone_name">
+                                      <option value="">Select zone name</option>
+                                      <?php
+                                        foreach($zone_master_data as $zone_master_info){ 
+                                      ?>
+                                        <option value="<?php echo $zone_master_info['id']; ?>"> <?php echo $zone_master_info['zone_name']; ?></option>
+                                      <?php } ?>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <label>Customer Address -</label>
+                              <div class="form-group">
+                                <label>Flat No./ Banglow No.</label>
+                                <input type="text" class="form-control" name="flat_no" id="flat_no" placeholder="Enter Flat No">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 mt-2">
+                            <label></label>
+                              <div class="form-group">
+                                <label>Building / House Name</label>
+                                <input type="text" class="form-control" name="house_name" id="house_name" placeholder="Enter house name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Street Name</label>
+                                <input type="text" class="form-control" name="street_name" id="street_name" placeholder="Enter street name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Landmark</label>
+                                <input type="text" class="form-control" name="landmark" id="landmark" placeholder="Enter landmark name">
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label>Area</label>
+                                <input type="text" class="form-control" name="area" id="area" placeholder="Enter area name">
+                              </div>
+                            </div>
                       
               </div>
                 <!-- /.card-body -->
+                
+                <div class="col-md-12">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr>
+                                <th>Master's Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <td>Tour Number-Name</td>
+                                
+                                <td>"Tour Number - Name: Navigate here to include new tour above the 'Tour Number - Name' option."</td>
+                                <td>
+                                Contact to admin
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Media source</td>
+                                
+                                <td>"To add new media sources, navigate to the "Media Source Master" under the "Admin Booking Masters" section."</td>
+                                <td>
+                                Contact to admin
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 <div class="card-footer">
                 <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button>
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
@@ -260,6 +351,10 @@
                       
               </div>
                 <!-- /.card-body -->
+                
+                
+                
+                
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success" name="booknow_submit" value="Submit & Seat Checker">Submit & Seat Checker</button> 
                   <button type="submit" class="btn btn-primary" name="submit" value="submit">Save & Close</button>
@@ -267,8 +362,6 @@
                   <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
-
-
 
 
                <?php } ?> 

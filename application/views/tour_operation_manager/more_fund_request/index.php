@@ -49,9 +49,10 @@
                     <th>SN</th>
                     <th>Package Type</th>
                     <th>Tour No / Name</th>
-                    <th>Request Amount For More Fund</th>
-                    <th>Approval Amt</th>
-                    <th>Approved / Disapproved</th>
+                    <th>Request Amount For More Fund From TM</th>
+                    <th>Request Amount Status From TOM</th>
+                    <!-- <th>Priority Status</th>
+                    <th>Reason</th> -->
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -67,46 +68,28 @@
                     <td><?php echo $info['package_type'] ?></td>
                     <td><?php echo $info['tour_number'] ?> - <?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['more_fund_amt'] ?></td>
-                    <td><a data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $i; ?>" data-bs-whatever="Form"><button type="button" class="btn btn-primary btn-sm" class="dropdown-item">Approval Amt</button> </a></td>
-                    <td><?php echo $info['status'] ?></td>
-
-
+                    <td><?php echo $info['request_status'] ?></td>
+                    <!-- <td><a data-bs-toggle="modal" data-bs-target="#exampleModal<?php //echo $i; ?>" data-bs-whatever="Form"><button type="button" class="btn btn-primary btn-sm" class="dropdown-item">Approval Amt</button> </a></td> -->
+                    <!-- <td><?php //echo $info['priority_status'] ?></td>
+                    <td><?php //echo $info['reason'] ?></td> -->
                     <td>
-                        <?php 
-                        if($info['status']=='approved' || $info['status']=='rejected')
-                        {
-                        	// echo("A Or D");
-                        if($info['is_active']=='no' && $info['is_active']!='')
-                          {
-                            // echo("A");
-                        ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-up"></i></a>
-                        <?php } 
-                        else if($info['is_active']=='yes' && $info['is_active']!=''){
-                        //   echo("B");
-                          ?> 
-                        <a readonly href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-down"></i> </a>
-                        <?php } 
-                        else if($info['is_active']=''){
-                        //   echo("C");
-                          ?>
-                          <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-                            echo rtrim($aid, '=') ?>"><i class="fa fa-thumbs-up"></i> </a>
-                          <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-                            echo rtrim($aid, '=') ?>"><i class="fa fa-thumbs-down"></i> </a>
-                          <?php } 
-                        }else if($info['status']=='pending'){
-                          // echo("D");
-                        ?>
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-down"></i></a> / 
-                        <a href="<?php echo $module_url_path ?>/active_inactive/<?php $aid=base64_encode($info['id']); 
-							echo rtrim($aid, '=').'/'.$info['is_active']; ?>"><i class="fa fa-thumbs-up"></i> </a>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default">Action</button>
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <?php if($info['TOM_send']=='yes'){ ?>
+                        <div class="dropdown-menu" role="menu">
+                          <a href="<?php echo $module_url_path;?>/view_give_money_approval/<?php echo $info['id'];?>" class=""><button class="dropdown-item" >View</button></a>
+                        </div>
+                        <?php }else{ ?> 
+                        <div class="dropdown-menu" role="menu">
+                          <a href="<?php echo $module_url_path;?>/add_give_money_approval/<?php echo $info['id'];?>" class=""><button class="dropdown-item" >Give Money Approval</button></a>
+                        </div>
                         <?php } ?>
+                      </div>
                     </td>
-                    
+
                   </tr>
 
                   <div class="modal fade" id="exampleModal<?php echo $i; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

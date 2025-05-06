@@ -149,7 +149,7 @@
                         
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Boarding  Office/ Location</label>
+                            <label>Boarding Office/ Location</label>
                               <select class="select2" multiple="multiple" data-placeholder="Select Boarding  Office/ Location" style="width: 100%;" name="boarding_office[]" id="boarding_office" required="required">
                                 <option value="">Select Bording  Office/ Location</option>
                                 <?php

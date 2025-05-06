@@ -33,8 +33,9 @@
                   <thead>
                   <tr>
                     <th>SN</th>
+                    <th>Add By</th>
                     <th>Expenses date</th>
-                    <th>Expense Head</th>
+                    <th>Expenses Type</th>
                     <th>Sub-Expenses Head</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -51,15 +52,17 @@
                     <td><?php echo $i; ?> </td>
 
                     <td><?php echo date("d-m-Y",strtotime($info['expense_date'])) ?></td>
+
+                    <td><?php echo $info['supervision_name']; ?></td>
                     
                     <td>
-                      <?php
-                        if($info['expense_type_name']!='')
-                          { 
-                      ?>
-                        <?php echo $info['expense_type_name']; ?>
-                      <?php } else{?>
-                        Multiple Expences
+                    <?php
+                          if($info['tour_expenses_type']=='1')
+                            { 
+                        ?>
+                          Single Expenses
+                      <?php } else if($info['tour_expenses_type']=='0'){?>
+                          Multiple Expences
                       <?php } ?>
                     </td>
                     
@@ -69,32 +72,36 @@
                             { 
                         ?>
                           <?php echo $info['expense_category']; ?>
-                      <?php } else{?>
-                          Multiple Expences
-                      <?php } ?>
+                        <?php } ?>
                     </td>
 
                     <td>
                     <?php 
-                      if($info['approval']=='no' && $info['hold']=='yes')
+                      if($info['exp_checker_approval']=='no' && $info['exp_checker_hold']=='yes')
                         {
                       ?>
                       Hold
                       
-                      <?php } else if($info['approval']=='yes'  && $info['hold']=='no'){ ?>
+                      <?php } else if($info['exp_checker_approval']=='yes'  && $info['exp_checker_hold']=='no'){ ?>
                         Approved
-                      <?php } else if($info['approval']=='no'  && $info['hold']=='pending'){ ?>
+                      <?php } else if($info['exp_checker_approval']=='no'  && $info['exp_checker_hold']=='pending'){ ?>
                         Pending
                       <?php } ?>
 
                     </td>
 
                     <td>
+                    <?php if(!empty($info['tour_manager_id'])){?>
                     <a href="<?php echo $module_url_path;?>/tourwise_expences_details/<?php $aid=base64_encode($info['package_id']); 
 					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['package_date_id']); 
 					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['tour_manager_id']); 
 					            echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black"; title="View"></i></a>
-                    
+                    <?php } else if(!empty($info['sub_tour_manager_id'])){ ?>
+                      <a href="<?php echo $module_url_path;?>/tourwise_expences_details/<?php $aid=base64_encode($info['package_id']); 
+					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['id']); echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['package_date_id']); 
+					            echo rtrim($aid, '='); ?>/<?php $aid=base64_encode($info['sub_tour_manager_id']); 
+					            echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black"; title="View"></i></a>
+                    <?php } ?>
                     </td>
 
                   </tr>

@@ -247,7 +247,10 @@ $('#changepassword').validate({ // initialize the plugin
 $(document).ready(function(){
     $(".hold").click(function() {   
         var did = $('#expense_id').val();
+        // alert(did); 
+
         var attr_hold = $(this).attr('attr_hold');
+        // alert(attr_hold);
         // var hold_reason = $(this).attr('hold_reason');
         var hold_reason = $('#hold_reason').val();
         // alert(hold_reason);
@@ -295,7 +298,7 @@ $(document).ready(function(){
 
 <script>  
  $(document).ready(function(){
-  $(".approve").click(function() {   
+  $("#approve").click(function() {   
     // alert('hii');
     var did = $('#expense_id').val();
     // alert(did);
@@ -338,7 +341,7 @@ $(document).ready(function(){
 
 <script>  
 $(document).ready(function(){
-    $(".hold").click(function() {   
+    $("#hold").click(function() {   
         var did = $('#expense_id').val();
         var attr_hold = $(this).attr('attr_hold');
         // var hold_reason = $(this).attr('hold_reason');

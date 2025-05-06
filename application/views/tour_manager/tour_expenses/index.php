@@ -72,9 +72,9 @@
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                          <a href="<?php echo $module_url_path;?>/all_expenses/<?php $aid=base64_encode($info['package_id']); 
+                          <a href="<?php echo $module_url_path_assign_tm_subtm_to_tour;?>/index/<?php $aid=base64_encode($info['package_id']); 
 					                  echo rtrim($aid, '='); ?>/<?php $did=base64_encode($info['package_date_id']); 
-					                  echo rtrim($did, '='); ?>" class="itinerary_css"><button class="dropdown-item">View All Expenses</button></a>
+					                  echo rtrim($did, '='); ?>" class="itinerary_css"><button class="dropdown-item">View Assign Staff</button></a>
                           
                           <!-- <a href="<?php //echo $module_url_path;?>/edit/<?php //$aid=base64_encode($info['package_id']); 
 					                  //echo rtrim($aid, '='); ?> /<?php //$did=base64_encode($info['package_date_id']); 

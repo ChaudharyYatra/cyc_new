@@ -10,9 +10,9 @@ class Packages extends CI_Controller {
 	function __construct() {
 
         parent::__construct();
-        $this->load->helper(array('form', 'url'));
-        $this->load->library("pagination");
-        $this->load->model('pagination_model');
+        // $this->load->helper(array('form', 'url'));
+        // $this->load->library("pagination");
+        // $this->load->model('pagination_model');
 
         $this->arr_view_data = [];
 	 }
@@ -30,7 +30,8 @@ class Packages extends CI_Controller {
         $limit = $this->input->post('length');
 
         // Your existing query code
-        $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
+        $fields = "packages.id,packages.image_name,packages.tour_number_of_days,packages.tour_number,packages.tour_title,packages.rating,packages.cost,package_date.journey_date,package_date.single_seat_cost,
+        package_date.twin_seat_cost,package_date.three_four_sharing_cost";
         $this->db->where('packages.is_deleted', 'no');
         $this->db->where('packages.is_active', 'yes');
         $this->db->where('package_type', '1');
@@ -99,146 +100,6 @@ class Packages extends CI_Controller {
         $this->load->view('front/common_view',$data);
     }
 
-
-    // public function all_packages()
-    // {
-    //     $aData['msg'] = '';
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     $main_packages = $this->master_model->getRecords('packages');
-
-    //     // Get the start and limit parameters from the AJAX request
-    //     $start = $this->input->post('start');
-    //     $limit = $this->input->post('length');
-
-    //     // Your existing query code
-    //     $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-    //     $this->db->where('packages.is_deleted', 'no');
-    //     $this->db->where('packages.is_active', 'yes');
-    //     $this->db->where('package_type', '1');
-    //     $this->db->join("package_date", 'packages.id=package_date.package_id', 'left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     $this->db->group_by('package_id');
-    //     $this->db->limit($limit, $start);
-    //     $main_packages_all = $this->master_model->getRecords('packages', array('packages.is_deleted' => 'no'), $fields);
-
-    //     // Prepare the response data
-    //     $response = array(
-    //         "data" => $main_packages_all, // Data for the current page
-    //     );
-
-    //     // Send the JSON response to the client
-    //     // echo json_encode($response);
-
-    //     // $record = array();
-    //     // $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-    //     // $this->db->where('packages.is_deleted','no');
-    //     // $this->db->where('packages.is_active','yes');
-    //     // $this->db->where('package_type','1');
-    //     // $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-    //     // $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     // $this->db->group_by('package_id');
-    //     // $this->db->limit($limit, $start);
-    //     // $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-
-    //     $record = array();
-    //     $fields = "packages.*,package_date.*";
-    //     $this->db->where('packages.is_deleted','no');
-    //     $this->db->where('packages.is_active','yes');
-    //     $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     // $this->db->group_by('package_id');
-    //     $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-    
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
-        
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $social_media_link = $this->master_model->getRecords('social_media_link');
-
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $package_details = $this->master_model->getRecords('packages');
-        
-    //     $count= sizeof($main_packages);
-    //      $data = array('middle_content' => 'all_packages',
-	// 					'main_packages'       => $main_packages,
-    //                     'main_packages_all'       => $main_packages_all,
-    //                     'main_packages_date'       => $main_packages_date,
-    //                     'count'      => $count,
-    //                     'page_title' => 'Packages', 
-    //                     'website_basic_structure' => $website_basic_structure,
-    //                     'social_media_link' => $social_media_link,
-    //                     'package_details' => $package_details,
-    //                     );
-						
-    //     $this->arr_view_data['page_title']     =  "All Packages";
-    //     $this->load->view('front/common_view',$data);
-    // }
-
-    // public function all_custom_domestic_packages()
-    // {
-    //     $aData['msg'] = '';
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     $main_packages = $this->master_model->getRecords('packages');
-
-    //     $record = array();
-    //     $fields = "packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-    //     $this->db->where('packages.is_deleted','no');
-    //     $this->db->where('packages.is_active','yes');
-    //     $this->db->where('package_type','Custom Domestic Package');
-    //     $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     $this->db->group_by('package_id');
-    //     $main_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-
-    //     $record = array();
-    //     $fields = "packages.*,package_date.*";
-    //     $this->db->where('packages.is_deleted','no');
-    //     $this->db->where('packages.is_active','yes');
-    //     $this->db->join("package_date", 'packages.id=package_date.package_id','left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     // $this->db->group_by('package_id');
-    //     $main_packages_date = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-    
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
-        
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $social_media_link = $this->master_model->getRecords('social_media_link');
-
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $package_details = $this->master_model->getRecords('packages');
-        
-    //     $count= sizeof($main_packages);
-    //      $data = array('middle_content' => 'all_custom_domestic_packages',
-	// 					'main_packages'       => $main_packages,
-    //                     'main_packages_all'       => $main_packages_all,
-    //                     'main_packages_date'       => $main_packages_date,
-    //                     'count'      => $count,
-    //                     'page_title' => 'Packages', 
-    //                     'website_basic_structure' => $website_basic_structure,
-    //                     'social_media_link' => $social_media_link,
-    //                     'package_details' => $package_details,
-    //                     );
-						
-    //     $this->arr_view_data['page_title']     =  "All Packages";
-    //     $this->load->view('front/common_view',$data);
-    // }
 
     public function all_exclusive_deal()
     {
@@ -405,6 +266,12 @@ class Packages extends CI_Controller {
             $this->db->where('is_active','yes');
             $this->db->order_by('id','ASC');
             $media_source = $this->master_model->getRecords('media_source');
+            
+            $this->db->where('is_deleted','no');
+            $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+            $this->db->where('is_deleted','no');
+            $zone_master_data = $this->master_model->getRecords('zone_master');
 
             if(isset($_POST['submit']))
             {
@@ -428,6 +295,13 @@ class Packages extends CI_Controller {
                     $media_source_name = $this->input->post('media_source_name');
 					$wp_mobile_number  = trim($this->input->post('wp_mobile_number'));
                     $package_id        = $id;
+                    $occupation_name  = $this->input->post('occupation_name'); 
+                    $zone_name  = $this->input->post('zone_name'); 
+                    $flat_no  = $this->input->post('flat_no'); 
+                    $house_name  = $this->input->post('house_name'); 
+                    $street_name  = $this->input->post('street_name'); 
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area');
     
                     $arr_insert = array(
                         'first_name'    =>   $first_name,
@@ -439,7 +313,14 @@ class Packages extends CI_Controller {
                         'package_id'    =>$id,
                         'media_source_name'    =>$media_source_name,
 						'wp_mobile_number'=>$wp_mobile_number,
-						'enquiry_from'=> 'front'
+						'enquiry_from'=> 'front',
+						'occupation_name'    =>$occupation_name,
+                        'zone_name'    =>$zone_name,
+                        'flat_no'    =>$flat_no,
+                        'house_name'    =>$house_name,
+                        'street_name'    =>$street_name,
+                        'landmark'    =>$landmark,
+                        'area'    =>$area
                         
                     );
                     $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
@@ -531,247 +412,14 @@ class Packages extends CI_Controller {
                         'agent_data'    => $Aagent_data,
                         'department_data' => $department_data,
                         'media_source' => $media_source,
+                        'occupation_master_data' => $occupation_master_data,
+                        'zone_master_data' => $zone_master_data,
                         'page_title'    => 'Booking Enquiry',
 						);
 						
         $this->arr_view_data['page_title']     =  "Packages List";
         $this->load->view('front/common_view',$data);
     }
-
-
-    // public function custom_domestic_booking_enquiry($id)
-    // {
-        
-    //     if ($id=='') 
-    //     {
-    //         redirect(base_url.'/packages/all_packages');
-    //     }   
-
-    //     if(is_numeric($id))
-    //     {     	
-    //         $this->db->order_by('packages.id','desc');
-    //      	$where['packages.is_deleted'] = 'no';
-    //      	$where['packages.is_active'] = 'yes';
-	// 		$packages_data = $this->master_model->getRecords('packages');
-            
-    //         $fields = "agent.*,department.department";
-    //         $this->db->where('department.is_deleted','no');
-    //         $this->db->where('department.is_active','yes');
-    //         $this->db->order_by('agent.id','ASC');
-    //         $this->db->join("department", 'agent.department=department.id','left');
-    //         $Aagent_data = $this->master_model->getRecords('agent',array('agent.is_deleted'=>'no','agent.is_active'=>'yes'),$fields);
-            
-    //         $this->db->where('is_deleted','no');
-    //         $this->db->where('is_active','yes');
-    //         $this->db->order_by('id','ASC');
-    //         $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
-            
-    //         $this->db->where('is_deleted','no');
-    //         $this->db->where('is_active','yes');
-    //         $this->db->order_by('id','ASC');
-    //         $department_data = $this->master_model->getRecords('department');
-            
-    //         $this->db->where('is_deleted','no');
-    //         $this->db->where('is_active','yes');
-    //         $this->db->order_by('id','DESC');
-    //         $agent_data = $this->master_model->getRecords('agent');
-            
-    //         $this->db->where('is_deleted','no');
-    //         $this->db->where('is_active','yes');
-    //         $this->db->order_by('id','ASC');
-    //         $social_media_link = $this->master_model->getRecords('social_media_link');
-            
-    //         $this->db->where('is_deleted','no');
-    //         $this->db->where('is_active','yes');
-    //         $this->db->order_by('id','ASC');
-    //         $media_source = $this->master_model->getRecords('media_source');
-
-    //         if(isset($_POST['submit']))
-    //         {
-    //             $this->form_validation->set_rules('first_name', 'First Name', 'required');
-    //             $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-    //             $this->form_validation->set_rules('email', 'Email', 'required');
-    //             $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required');
-    //             $this->form_validation->set_rules('gender', 'Gender', 'required');
-    //             $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
-	// 			$this->form_validation->set_rules('wp_mobile_number', 'Whatsapp Mobile Number', 'required');
-
-    
-    //             if($this->form_validation->run() == TRUE)
-    //             {
-    //                 $first_name        = $this->input->post('first_name'); 
-    //                 $last_name         = $this->input->post('last_name'); 
-    //                 $email             = trim($this->input->post('email'));
-    //                 $mobile_number     = trim($this->input->post('mobile_number'));
-    //                 $gender            = $this->input->post('gender');
-    //                 $agent_id         = $this->input->post('agent_id');
-    //                 $media_source_name         = $this->input->post('media_source_name');
-	// 				$wp_mobile_number     = trim($this->input->post('wp_mobile_number'));
-    //                 $package_id        = $id;
-    
-    //                 $arr_insert = array(
-    //                     'first_name'    =>   $first_name,
-    //                     'last_name'     => $last_name,
-    //                     'email'         => $email,
-    //                     'mobile_number' => $mobile_number,
-    //                     'gender'        => $gender,
-    //                     'agent_id'     => $agent_id,
-    //                     'package_id'    =>$id,
-    //                     'media_source_name'    =>$media_source_name,
-	// 					'wp_mobile_number'=>$wp_mobile_number,
-    //                 );
-                    
-    //                 $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
-                    
-    //                 $this->db->where('is_deleted','no');
-    //                 $this->db->where('is_active','yes');
-    //                 $this->db->where('id',$agent_id);
-    //                 $this->db->order_by('id','DESC');
-    //                 $agent_data_email = $this->master_model->getRecord('agent');
-    //                 $agent_email=$agent_data_email['email'];
-	// 				$agent_name=$agent_data_email['agent_name'];
-                    
-                
-    //                 if($inserted_id > 0)
-    //                 {    
-	// 					$from_email='chaudharyyatra8@gmail.com';
-	// 					$msg="<html>
-	// 								<head>
-	// 									<style type='text/css'>
-	// 										body {font-family: Verdana, Geneva, sans-serif}
-	// 									</style>
-	// 								</head>
-	// 								<body background=".base_url()."uploads/email/email1.jpg>
-	// 									<h3>Dear&nbsp;".$first_name."&nbsp;".$last_name."</h3>
-	// 									<p>We are so glad to welcome you as a customer of <b>Choudhary Yatra Company Pvt. 
-	// 										Ltd.</b> We hope that you will have an unforgettable and amazing journey with us.
-	// 									</p>
-	// 									<p>Our team of experienced professionals is ready to provide you with the best 
-	// 										possible service. We are committed to making your travel experience enjoyable 
-	// 										and hassle-free. Our staff is available to answer any questions you have 
-	// 										and to provide assistance.</p>
-	// 									<p>We look forward to being your travel partner with you for many years to come.</p>
-	// 									<p>Sincerely,</p>
-	// 									<h5>ChoudharyYatra Company</h5>
-	// 								</body>
-	// 								</html>";
-	// 					//echo $msg;
-	// 					$subject='Thank You For Enquiry';
-	// 					$this->send_mail($email,$from_email,$msg,$subject,$cc=null);
-	// 					//die;
-						
-	// 					$msg_email="<html>
-	// 								<head>
-	// 									<style type='text/css'>
-	// 										body {font-family: Verdana, Geneva, sans-serif}
-	// 									</style>
-	// 								</head>
-	// 								<body background=".base_url()."uploads/email/email1.jpg>
-	// 									<h3>Dear&nbsp;".$agent_name."</h3>
-	// 									<p>I hope this message finds you well. I am writing to let you know that a new inquiry has been encountered in your account from a customer. We would 
-    //                                         appreciate it if you could assist them with their travel-related needs.
-	// 									</p>
-	// 									<p>Please review the inquiry details and take the necessary action to resolve the inquiry. If you have any questions or need any additional information, please do 
-    //                                         not hesitate to contact Head Office. 
-	// 									</p>
-	// 									<p>Thank you for your prompt attention to this matter.</p>
-	// 									<p>Sincerely,</p>
-	// 									<h5>ChoudharyYatra Company</h5>
-	// 									<a href=".base_url()."admin/login>Click Here</a>
-	// 								</body>
-	// 								</html>";
-	// 								$subject_email=' New Enquiry from customer';
-	// 					$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-						
-    //                     $this->session->set_flashdata('success_message',"Enquiry Added Successfully.");
-    //                     redirect(base_url().'packages/confirm_enquiry');
-                        
-    //                 }
-    //                 else
-    //                 {
-    //                     $this->session->set_flashdata('error_message'," Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-    //                 }
-    //                     redirect(base_url().'packages/booking_enquiry/'.$id);
-    //             }   
-    //         }
-
-    //     }
-    //     else
-    //     {
-    //         redirect(base_url().'home');
-    //     }
-         
-       
-        
-    //     $data = array('middle_content' => 'custom_domestic_booking_enquiry',
-	// 					'packages_data'       => $packages_data,
-	// 					'website_basic_structure'       => $website_basic_structure,
-	// 					'social_media_link'       => $social_media_link,
-    //                     'agent_data'    => $Aagent_data,
-    //                     'department_data' => $department_data,
-    //                     'media_source' => $media_source,
-    //                     'page_title'    => 'Custom Domestic Booking Enquiry',
-	// 					);
-						
-    //     $this->arr_view_data['page_title']     =  "Packages List";
-    //     $this->load->view('front/common_view',$data);
-    // }
-
-    // public function custom_domestic_package_details($id)
-    // {
-    //     if($id=='') 
-    //     {
-    //         redirect(base_url().'/home');
-    //     }   
-
-    //     if(is_numeric($id))
-    //     {
-    //         $this->db->where('id',$id);
-    //         $package_details_data = $this->master_model->getRecords('packages');
-    //         // $this->db->where('package_id',$id);
-    //         // $package_date_details_data = $this->master_model->getRecords('package_date');
-    //     }
-    //     else
-    //     {
-    //         redirect(base_url().'home');
-    //     }
-        
-    //     $this->db->where('package_id',$id);
-    //     $this->db->where('is_active','yes');
-    //     $this->db->where('package_id',$id);
-    //     $package_date_details_data = $this->master_model->getRecords('package_date');
-       
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $website_basic_structure = $this->master_model->getRecords('website_basic_structure');
-        
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');
-    //     $this->db->order_by('id','ASC');
-    //     $social_media_link = $this->master_model->getRecords('social_media_link');
-        
-		
-	// 	$fields = "package_iternary.*,packages.tour_title";
-    //     $this->db->order_by('package_iternary.day_number','asc');
-    //     $this->db->where('package_iternary.is_deleted','no');
-    //     $this->db->where('package_iternary.package_id',$id);
-    //     $this->db->join("packages", 'package_iternary.package_id=packages.id','left');
-    //     $package_iternary_data = $this->master_model->getRecords('package_iternary',array('package_iternary.is_deleted'=>'no'),$fields);
-		
-    //     $data = array('middle_content' => 'custom_domestic_package_details',
-	// 					'package_details'       => $package_details_data,
-	// 					'package_date_details_data'       => $package_date_details_data,
-	// 					'website_basic_structure'       => $website_basic_structure,
-	// 					'social_media_link'       => $social_media_link,
-	// 				    'package_iternary_data'       => $package_iternary_data,
-	// 					'page_title'       => 'Package Details',
-	// 					);
-						
-    //     $this->arr_view_data['page_title']     =  "Custom Domestic Package Details";
-    //     $this->load->view('front/common_view',$data);
-    // }
-
 
 	
 	 public function send_mail($to_email,$from_email,$msg,$subject,$cc=null) {

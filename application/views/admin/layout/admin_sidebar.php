@@ -23,6 +23,18 @@
                 <h6 class="desig_css">[ Admin ]</h6>
             </div>
         </div>
+        <!-- Search Box -->
+        <div class="search-box">
+                <input type="text" id="searchInput" onkeyup="searchSidebar()" placeholder="Search...">
+                <div>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="searchResults" style="display: none;">
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Original Sidebar Content -->
+            <div id="originalSidebarContent">
 
 
         <!-- Sidebar Menu -->
@@ -41,6 +53,20 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/assign_agent_money_transfer/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Assign agent to agent Money trasfer</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/money_received_against_ctv/add" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Money Received From Another Branch</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="<?php echo base_url(); ?>admin/vehicle_details_admin/index" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Dummy Vehicle Details</p>
@@ -51,7 +77,19 @@
                         <i class="far fa-circle nav-icon"></i>
                         <p>Assign Tour Vehicle</p>
                     </a>
-                </li>  
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/tour_expenses_pending_payment/index" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Tour Expenses Pending Payment</p>
+                    </a>
+                </li>   
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>admin/ingredients_compare_module/index" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>Ingredients Compare Module</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -440,13 +478,6 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>admin/bus_type/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Bus Type</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin/special_req_master/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Special Request Master</p>
@@ -457,6 +488,13 @@
                                     <a href="<?php echo base_url(); ?>admin/add_qr_code/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>QR Code Master</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>admin/all_other_qr/index" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>All Other QR</p>
                                     </a>
                                 </li>
 
@@ -490,7 +528,6 @@
                                     <p>Food Menu Master</p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -636,7 +673,7 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin/vehicle_type/index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Vehicle Type</p>s
+                                        <p>Vehicle Type</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -654,7 +691,7 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin/bus_type/index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Bus Type</p>
+                                        <p>Bus Seat Type</p>
                                     </a>
                                 </li>
 
@@ -665,6 +702,36 @@
                                     </a>
                                 </li>
 
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                Maharaj Masters
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>admin/recipe/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Recipe Name</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>admin/ingredients/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Ingredients Name</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo base_url(); ?>admin/kitchen_equipment/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Kitchen Equipment Name</p>
+                                </a>
+                            </li>
                             </ul>
                         </li>
 
@@ -1026,4 +1093,50 @@
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
+    </div>
+
+
+    <!-- JavaScript for Search Functionality -->
+    <script>
+        function searchSidebar() {
+            // Retrieve input value and convert to lowercase for case-insensitive search
+            var input = document.getElementById("searchInput").value.toLowerCase();
+            var navItems = document.querySelectorAll('.nav-item'); // Select all sidebar items
+
+            // Filter through sidebar items
+            var found = false;
+            var results = '';
+            var existingResults = [];
+
+            navItems.forEach(function(item) {
+                var text = item.textContent.toLowerCase(); // Get text content of the sidebar item
+                if (text.includes(input)) { // If the input text is found in the sidebar item
+                    // Check if the item is not already in the results
+                    if (!existingResults.includes(text)) {
+                        found = true;
+                        results += item.outerHTML; // Add the item's HTML to the results
+                        existingResults.push(text);
+                    }
+                }
+            });
+
+            // Display search results or clear results if search input is empty
+            var searchResults = document.getElementById('searchResults');
+            if (input.trim() === '') {
+                searchResults.style.display = 'none'; // Hide search results if input is empty
+                searchResults.innerHTML = ''; // Clear search results
+            } else if (found) {
+                searchResults.style.display = 'block';
+                searchResults.innerHTML = results;
+            } else {
+                searchResults.style.display = 'block';
+                searchResults.innerHTML = "No results found";
+            }
+
+            // Toggle visibility of original sidebar content based on search input
+            var originalSidebarContent = document.getElementById('originalSidebarContent');
+            originalSidebarContent.style.display = (input.trim() === '') ? 'block' : 'none';
+        }
+    </script>
+
 </aside>

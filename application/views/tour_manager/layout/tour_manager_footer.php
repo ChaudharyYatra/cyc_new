@@ -4581,7 +4581,7 @@ $('#add_tour_expenses').validate({ // initialize the plugin
         expense_date: {
             required: true,
         },
-        image_name: {
+        "image_name[]": {
             required: true,
         },
         pax_type: {
@@ -4596,6 +4596,24 @@ $('#add_tour_expenses').validate({ // initialize the plugin
                     return false;
                 }
             }    
+        },
+        tour_expenses_bill: {
+            required: true,
+        },
+        single_measuring_unit: {
+            required: true,
+        },
+        single_quantity: {
+            required: true,
+        },
+        reason: {
+            required: true,
+        },
+        vendor_name: {
+            required: true,
+        },
+        contact_no: {
+            required: true,
         }
     },
 
@@ -4633,7 +4651,7 @@ $('#add_tour_expenses').validate({ // initialize the plugin
         expense_date : {
             required : "Please Enter Expense Date",
         },
-        image_name : {
+        "image_name[]" : {
             required : "Please Select Image Name",
         },
         pax_type : {
@@ -4641,6 +4659,24 @@ $('#add_tour_expenses').validate({ // initialize the plugin
         },
         other_expense_category : {
             required : "Please Enter Other Sub-Expenses Head",
+        },
+        tour_expenses_bill : {
+            required : "Please select bill paid or not.",
+        },
+        single_measuring_unit : {
+            required : "Please select unit",
+        },
+        single_quantity : {
+            required : "Please enter quantity",
+        },
+        reason : {
+            required : "Please enter reason",
+        },
+        vendor_name : {
+            required : "Please enter vendor name",
+        },
+        contact_no : {
+            required : "Please enter contact no",
         }
     }
 });
@@ -4755,6 +4791,24 @@ $('#edit_tour_expenses').validate({ // initialize the plugin
         },
         pax_type: {
             required: true,
+        },
+        tour_expenses_bill: {
+            required: true,
+        },
+        single_measuring_unit: {
+            required: true,
+        },
+        single_quantity: {
+            required: true,
+        },
+        reason: {
+            required: true,
+        },
+        vendor_name: {
+            required: true,
+        },
+        contact_no: {
+            required: true,
         }
     },
 
@@ -4788,6 +4842,24 @@ $('#edit_tour_expenses').validate({ // initialize the plugin
         },
         pax_type : {
             required : "Select Enter Pax Type",
+        },
+        tour_expenses_bill : {
+            required : "Please select bill paid or not.",
+        },
+        single_measuring_unit : {
+            required : "Please select unit",
+        },
+        single_quantity : {
+            required : "Please enter quantity",
+        },
+        reason : {
+            required : "Please enter reason",
+        },
+        vendor_name : {
+            required : "Please enter vendor name",
+        },
+        contact_no : {
+            required : "Please enter contact no",
         }
     }
 });
@@ -5213,6 +5285,24 @@ $('#edit_tour_photo').validate({ // initialize the plugin
     }
 
 </script>
+<!-- <script>
+    $(document).ready(function() {
+        $("#table").on("change", ".sub_expenses_head", function() {
+            var selectedOption = $(this).val();
+            var otherInput = $(this).closest("td").find(".other-input");
+            // alert('otherInput');
+            if (selectedOption == "Other") {
+                alert('tttttttttttttt');
+                otherInput.css('display', 'block');
+                otherInput.prop("required", true);
+            } else {
+                alert('uuuuuuuuuuuuuu');
+                otherInput.css('display', 'none');
+                otherInput.prop("required", false);
+            }
+        });
+    });
+</script> -->
 
 <script>
     $(document).ready(function () {
@@ -5229,6 +5319,7 @@ $('#edit_tour_photo').validate({ // initialize the plugin
         }
         });
 </script>
+
 <!-- expenses category  -->
 
 <!-- Bank transaction ---------------------------------------- -->
@@ -5358,17 +5449,12 @@ $('#edit_tour_photo').validate({ // initialize the plugin
             var newRow = `
                 <tr>
                     <td>
-                        <select class="select_css expense_type" name="expense_type_row[]" id="expense_type_row`+i+`">
-                            <option value="">Select </option>
-                            <?php foreach($expense_type_data as $expense_type_info){ ?> 
-                                <option value="<?php echo $expense_type_info['id'];?>"><?php echo $expense_type_info['expense_type_name'];?></option>
-                            <?php } ?>
-                        </select>
-                    </td>
-                    <td>
                         <select class="select_css sub_expenses_head" name="expense_category_row[]" id="expense_category_row`+i+`">
-                                <option value="">Select </option>
-                                
+                            <option value="">Select </option>
+                            <option value="Other_row">Other</option>
+                            <?php foreach($expense_category as $expense_category_info){ ?> 
+                                <option value="<?php echo $expense_category_info['id'];?>"><?php echo $expense_category_info['expense_category'];?></option>
+                            <?php } ?>
                         </select>
                         <br>
                         <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="other_name[]" id="other_name`+i+`" placeholder="Enter name" >
@@ -5435,45 +5521,45 @@ $('#edit_tour_photo').validate({ // initialize the plugin
 <script>
     $(document).ready(function() {
 
-        $("#table").on("change", ".expense_type", function() {
-        var did = $(this).val();
-        var $currentRow = $(this).closest("tr");
+    //     $("#table").on("change", ".expense_type", function() {
+    //     var did = $(this).val();
+    //     var $currentRow = $(this).closest("tr");
 
-        // Make an Ajax request to fetch sub-expense categories
-        $.ajax({
-            url: '<?= base_url() ?>tour_manager/tour_expenses/get_category',
-            method: 'POST',
-            data: { did: did },
-            dataType: 'json',
-            success: function(response) {
-                // Find the "Sub-Expenses Head" dropdown in the current row
-                var $expenseCategoryDropdown = $currentRow.find('.sub_expenses_head');
+    //     // Make an Ajax request to fetch sub-expense categories
+    //     $.ajax({
+    //         url: '<?//= base_url() ?>tour_manager/tour_expenses/get_category',
+    //         method: 'POST',
+    //         data: { did: did },
+    //         dataType: 'json',
+    //         success: function(response) {
+    //             // Find the "Sub-Expenses Head" dropdown in the current row
+    //             var $expenseCategoryDropdown = $currentRow.find('.sub_expenses_head');
 
-                // Clear the existing options
-                $expenseCategoryDropdown.empty();
+    //             // Clear the existing options
+    //             $expenseCategoryDropdown.empty();
 
-                // Add the new options
-                $expenseCategoryDropdown.append('<option value="">Select </option>');
-                $.each(response, function(index, data) {
-                    $expenseCategoryDropdown.append('<option value="' + data['id'] + '">' + data['expense_category'] + '</option>');
-                });
-                $expenseCategoryDropdown.append('<option value="Other_row">Other</option>');
-            }
-        });
-    });
+    //             // Add the new options
+    //             $expenseCategoryDropdown.append('<option value="">Select </option>');
+    //             $.each(response, function(index, data) {
+    //                 $expenseCategoryDropdown.append('<option value="' + data['id'] + '">' + data['expense_category'] + '</option>');
+    //             });
+    //             $expenseCategoryDropdown.append('<option value="Other_row">Other</option>');
+    //         }
+    //     });
+    // });
 
-    $("#table").on("change", ".sub_expenses_head", function() {
-        var selectedOption = $(this).val();
-        var $otherInput = $(this).closest("tr").find(".other-input");
+    // $("#table").on("change", ".sub_expenses_head", function() {
+    //     var selectedOption = $(this).val();
+    //     var $otherInput = $(this).closest("tr").find(".other-input");
 
-        if (selectedOption === "Other_row") {
-            $otherInput.show();
-            $otherInput.find("input").prop("required", true);
-        } else {
-            $otherInput.hide();
-            $otherInput.find("input").prop("required", false);
-        }
-    });
+    //     if (selectedOption === "Other_row") {
+    //         $otherInput.show();
+    //         $otherInput.find("input").prop("required", true);
+    //     } else {
+    //         $otherInput.hide();
+    //         $otherInput.find("input").prop("required", false);
+    //     }
+    // });
 
         // Function to update per_unit_rate field for a specific row
         function updatePerUnitRate(row) {
@@ -5516,17 +5602,11 @@ $('#edit_tour_photo').validate({ // initialize the plugin
             var newRow = `
                 <tr>
                     <td>
-                        <select class="select_css expense_type" name="add_expense_type_row[]" id="add_expense_type_row`+i+`">
-                            <option value="">Select </option>
-                            <?php foreach($expense_type_data as $expense_type_info){ ?> 
-                                <option value="<?php echo $expense_type_info['id'];?>"><?php echo $expense_type_info['expense_type_name'];?></option>
-                            <?php } ?>
-                        </select>
-                    </td>
-                    <td>
                         <select class="select_css sub_expenses_head" name="add_expense_category_row[]" id="add_expense_category_row`+i+`">
                                 <option value="">Select </option>
-                                
+                                <?php foreach($expense_category as $expense_category_info){ ?> 
+                                    <option value="<?php echo $expense_category_info['id'];?>"><?php echo $expense_category_info['expense_category'];?></option>
+                                <?php } ?>
                         </select>
                         <br>
                         <input style="display: none;margin-top: 8px;" type="text" class="form-control other-input" name="add_other_name[]" id="other_name`+i+`" placeholder="Enter name" >
@@ -5855,6 +5935,22 @@ $(document).ready(function() {
         });
     </script>
 
+<script>
+    // When the Quantity or Rate fields change
+    $(".single_quantity, .expense_amt").on("input", function () {
+        var container = $(this).closest('div');
+        // Get the values of Quantity and Rate
+        var quantityValue = parseInt($(".single_quantity").val()) || 0;
+        var rateValue = parseInt($(".expense_amt").val()) || 0;
+
+        // Calculate Per Unit Rate
+        var perUnitRate = rateValue === 0 ? 0 : (rateValue / quantityValue);
+
+        // Update the Per Unit Rate input field
+        $(".single_per_unit_rate").val(perUnitRate.toFixed(2));
+    });
+</script>
+
     <!-- <script>
     $('.quantity').on('keyup', function() {
 
@@ -5958,6 +6054,164 @@ $(document).ready(function() {
      }
 });
 </script>
+
+<script>
+  $(".delete_image").click(function() { 
+   
+     var delete_image =  $(this).attr('value');
+     
+     if(delete_image !== '')
+     {
+          // Display a confirmation dialog
+          var confirmDelete = confirm('Are You Sure You Want To Delete This Record?');
+
+          if (confirmDelete) {
+              // User clicked "OK," send the AJAX request to delete the record
+              $.ajax({
+                  type: "POST",
+                  url: '<?=base_url()?>tour_manager/tour_expenses/image_delete',
+                  data: {
+                      request_id: delete_image
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      if (response === true) {
+                          // The record was successfully deleted
+                          alert("Image deleted successfully.");
+                          // You can add further handling here
+                      } else {
+                          alert('Image deleted successfully.');
+                      }
+                  },
+              });
+          }
+     }
+});
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Handle Approve button click
+        $('#approveButton').click(function() {
+            // Perform actions when the Approve button is clicked
+        });
+
+        // Handle Hold button click to toggle the Hold section
+        $('#holdButton').click(function() {
+            $('#holdSection').toggle(); // Toggle the visibility of the Hold section
+        });
+
+        // Handle form submission when the Hold button is clicked
+        $('#holdForm').submit(function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            const holdReason = $('#holdReason').val();
+            
+            // Here, you can send the hold reason to your server for processing
+            
+            // Optionally, hide the Hold section again after submission
+            $('#holdSection').hide();
+        });
+    });
+</script>
+<!-- this link for sweet alert -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<!-- anove link for sweet alert -->
+
+<script>  
+ $(document).ready(function(){
+  $(".approve").click(function() {   
+    // alert('hii');
+    var did = $('#expense_id').val();
+    // alert(did);
+          var attr_approve =$(this).attr('attr_approve');
+          //  alert(attr_approve);
+          var p_id = $('#package_id').val();
+          var pd_id = $('#package_date_id').val();
+          var tm_id = $('#tour_manager_id').val();
+          
+
+           
+           if(attr_approve != '' && did != '')  
+           {  
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>tour_manager/tour_expenses/get_approve",  
+                     method:"post",  
+                     data:{attr_approve:attr_approve , did:did},  
+                     dataType: 'json',
+                     success:function(responce){ 
+                      // alert('alert done');
+                         if(responce = 'true')
+                         {
+                          console.log('now done'); 
+                          swal({
+                              title: "success!",
+                              text: "This Expense is Approved Now!",
+                              type: "success"}).then(function() {
+                                window.location.href = "<?=base_url()?>tour_manager/tour_expenses/all_expenses/"+p_id+'/'+pd_id+'/'+tm_id;
+                          });
+                              
+                          // alert('This Expence is Approve Now');
+                        
+                              // alert(responce);
+                          
+                         }
+                     }  
+                });  
+           } 
+          }); 
+      });  
+ </script>
+
+<script>  
+$(document).ready(function(){
+    $(".hold").click(function() {   
+        var did = $('#expense_id').val();
+        var attr_hold = $(this).attr('attr_hold');
+        // var hold_reason = $(this).attr('hold_reason');
+        var hold_reason = $('#hold_reason').val();
+        // alert(hold_reason);
+
+        var p_id = $('#package_id').val();
+        var pd_id = $('#package_date_id').val();
+        var tm_id = $('#tour_manager_id').val();
+        
+        // Check if hold_reason is empty
+        if (hold_reason.trim() === '') {
+            alert('Please enter a reason in the textbox.');
+            return; // Don't proceed with the AJAX request
+        }
+
+        if (attr_hold != '' && did != '' && hold_reason != '') {
+            $.ajax({  
+                url: "<?php echo base_url(); ?>tour_manager/tour_expenses/get_hold",  
+                method: "post",  
+                data: {attr_hold: attr_hold, did: did, hold_reason: hold_reason},  
+                dataType: 'json',
+                success: function(response) { 
+                  // swal("Hold", "This Expense is Hold Now", "success");
+                  swal({
+                        title: "success!",
+                        text: "This Expense is Hold Now!",
+                        type: "success"}).then(function() {
+                          window.location.href = "<?=base_url()?>tour_manager/tour_expenses/all_expenses/"+p_id+'/'+pd_id+'/'+tm_id;
+                    });
+                  // setTimeout(function(){
+                  //           location.reload();
+                  //       }, 4000); 
+                  // alert('yess');
+                    if (response === 'true') {
+                        console.log('now done'); 
+                        // alert('doneeeeeeeeeeeee');
+                        // Redirect or perform other actions as needed
+                    }
+                }  
+            });  
+        }
+    }); 
+});  
+</script>
+
 
 
 

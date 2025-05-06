@@ -6,6 +6,14 @@
     overflow: hidden !important;
     text-overflow: ellipsis;
 }
+.view_btn{
+  color:white;
+  text-decoration:none;
+}
+.view_btn:hover{
+  color:white;
+  text-decoration:none;
+}
   </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -50,7 +58,10 @@
                     <th>Package Type</th>
                     <th>Tour No / Name</th>
                     <th>Request Amount For More Fund</th>
-                    <th>Action</th>
+                    <th>Priority Status</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Receiving Money Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -66,19 +77,30 @@
                     <td><?php echo $info['package_type'] ?></td>
                     <td><?php echo $info['tour_number'] ?> - <?php echo $info['tour_title'] ?></td>
                     <td><?php echo $info['more_fund_amt'] ?></td>
-                    <td><?php echo $info['status'] ?></td>
+                    <td><?php echo $info['priority_status'] ?></td>
+                    <td><?php echo $info['reason'] ?></td>
+                    <td><?php echo $info['request_status'] ?></td>
+
+                    <td>
+                    <?php if($info['Agent_send'] =='yes' && $info['request_status'] !='Received'){?>
+                    <button type="button" class="btn btn-primary btn-sm" class="dropdown-item"><a href="<?php echo $module_url_path;?>/Received_money_approval/<?php $aid=base64_encode($info['id']); 
+					          echo rtrim($aid, '='); ?>" class="view_btn">View</a></button> 
+                    <?php } else if($info['request_status'] =='Received'){ ?>
+                    <button type="button" class="btn btn-primary btn-sm" class="dropdown-item"><a href="<?php echo $module_url_path;?>/view/<?php $aid=base64_encode($info['id']); 
+					          echo rtrim($aid, '='); ?>" class="view_btn">View</a></button> 
+                    <?php } else{ ?>
+                    <button disabled type="button" class="btn btn-primary btn-sm" class="dropdown-item"><a href="<?php echo $module_url_path;?>/Received_money_approval/<?php $aid=base64_encode($info['id']); 
+					          echo rtrim($aid, '='); ?>" class="view_btn">View</a></button> 
+                    <?php } ?>
+                    </td>
 
                     <td>
                     <!-- <a href="<?php //echo $module_url_path;?>/details/<?php //$aid=base64_encode($info['id']); 
 					            //echo rtrim($aid, '='); ?>" title="View"><i class="fas fa-eye" aria-hidden="true" style="color:black";></i></a> &nbsp;/&nbsp; -->
-                    <?php if($info['status']== 'approved'){?>
-                      Inprocess
-                      <?php } else { ?>
                     <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
 					            echo rtrim($aid, '='); ?>" title="Update"><i class="fas fa-edit" aria-hidden="true" style="color:blue";></i></a> &nbsp;/&nbsp;
                     <a href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
 					            echo rtrim($aid, '='); ?>" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="fa fa-trash" aria-hidden="true" style="color:red";></i></a>
-                      <?php } ?>
                   </td>
                   </tr>
                   <?php $i++; } ?>

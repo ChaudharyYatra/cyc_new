@@ -16,6 +16,7 @@ class Tour_expenses extends CI_Controller {
         }
         $this->module_url_path    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/tour_expenses";
         $this->add_more_module_url_path    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/add_more_tour_expenses";
+        $this->module_url_path_assign_tm_subtm_to_tour    =  base_url().$this->config->item('tour_manager_panel_slug')."tour_manager/assign_tm_subtm_to_tour";
         $this->module_title       = "Daily Tour Expenses";
         $this->module_url_slug    = "tour_expenses";
         $this->module_view_folder = "tour_expenses/";
@@ -51,16 +52,17 @@ class Tour_expenses extends CI_Controller {
         $this->arr_view_data['arr_data_assign_staff']        = $arr_data_assign_staff;
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
-        $this->arr_view_data['module_url_path'] = $this->module_url_path;
+        $this->arr_view_data['module_url_path_assign_tm_subtm_to_tour'] = $this->module_url_path_assign_tm_subtm_to_tour;
         $this->arr_view_data['middle_content']  = $this->module_view_folder."index";
         $this->load->view('tour_manager/layout/agent_combo',$this->arr_view_data);
         
         }
 
-        public function all_expenses($pid,$pd_id)
+        public function all_expenses($pid,$pd_id,$tm_id)
         {
         $package_id=base64_decode($pid);
         $package_date_id=base64_decode($pd_id);
+        $tm_or_subtm_id=base64_decode($tm_id);
 
         $supervision_sess_name = $this->session->userdata('supervision_name');
         $id = $this->session->userdata('supervision_sess_id');
@@ -72,13 +74,15 @@ class Tour_expenses extends CI_Controller {
         $this->db->where('tour_expenses.is_deleted','no');
         $this->db->where('tour_expenses.package_id',$package_id);
         $this->db->where('tour_expenses.package_date_id',$package_date_id);
+        $this->db->where('tour_expenses.tour_manager_id',$tm_or_subtm_id);
+        $this->db->Or_where('tour_expenses.sub_tour_manager_id',$tm_or_subtm_id);
         $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
         $this->db->join("expense_category", 'tour_expenses.expense_category_id=expense_category.id','left');
         $this->db->join("packages", 'tour_expenses.package_id=packages.id','left');
         $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
         $this->db->join("add_more_tour_expenses", 'tour_expenses.id=add_more_tour_expenses.tour_expenses_id','left');
         $this->db->join("hotel_advance_payment", 'tour_expenses.package_id=hotel_advance_payment.tour_number','left');
-        $this->db->group_by('tour_expenses.id');
+        $this->db->group_by('tour_expenses.package_id,tour_expenses.package_date_id,tour_expenses.tour_expenses_type');
         $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
         // print_r($tour_expenses_all); die;
 
@@ -111,111 +115,100 @@ class Tour_expenses extends CI_Controller {
         if($this->input->post('submit'))
         {
             // ============================upload image 1====================
-            if($_FILES['image_name']['name']!=''){
-                $file_name     = $_FILES['image_name']['name'];
-                $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','PDF','pdf');
-
-                if($file_name!="")
-                {               
-                    $ext = explode('.',$_FILES['image_name']['name']); 
-                    $config['file_name']   = $this->input->post('txtEmp_id').'.'.$ext[1];
-
-                    if(!in_array($ext[1],$arr_extension))
-                    {
-                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                        redirect($this->module_url_path.'/add');  
+            $uploaded_files = $_FILES['image_name'];
+            $allowed_extensions = array('png', 'jpg', 'jpeg', 'pdf', 'PNG', 'JPG', 'JPEG', 'PDF');
+            $uploaded_file_names = array();
+            
+            foreach ($uploaded_files['name'] as $key => $file_name) {
+                if ($file_name != "") {
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                    if (!in_array($ext, $allowed_extensions)) {
+                        $this->session->set_flashdata('error_message', 'Please upload only png/jpg/jpeg/pdf files.');
+                        redirect($this->module_url_path . '/add');
+                    }
+            
+                    $file_name_to_display = $this->config->item('project_name') . '_' . round(microtime(true)) . str_replace(' ', '_', $file_name);
+            
+                    $config['upload_path'] = './uploads/tour_expenses/';
+                    $config['allowed_types'] = 'png|jpg|JPG|PNG|JPEG|jpeg|PDF|pdf';
+                    $config['max_size'] = '10000';
+                    $config['file_name'] = $file_name_to_display;
+                    $config['overwrite'] = TRUE;
+            
+                    $this->load->library('upload', $config);
+                    $this->upload->initialize($config);
+            
+                    $_FILES['file']['name'] = $uploaded_files['name'][$key];
+                    $_FILES['file']['type'] = $uploaded_files['type'][$key];
+                    $_FILES['file']['tmp_name'] = $uploaded_files['tmp_name'][$key];
+                    $_FILES['file']['error'] = $uploaded_files['error'][$key];
+                    $_FILES['file']['size'] = $uploaded_files['size'][$key];
+            
+                    if (!$this->upload->do_upload('file')) {
+                        $data['error'] = $this->upload->display_errors();
+                        $this->session->set_flashdata('error_message', $this->upload->display_errors());
+                        redirect($this->module_url_path);
+                    } else {
+                        $file_data = $this->upload->data();
+                        $uploaded_file_names[] = $file_data['file_name'];
                     }
                 }
-                $file_name_to_dispaly =  $this->config->item('project_name').''.round(microtime(true)).str_replace(' ','_',$file_name);
-
-                $config['upload_path']   = './uploads/tour_expenses/';
-                $config['allowed_types'] = 'png|jpg|JPG|PNG|JPEG|jpeg|PDF|pdf'; 
-                $config['max_size']      = '10000';
-                $config['file_name']     =  $file_name_to_dispaly;
-                $config['overwrite']     =  TRUE;
-
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config); // Important
-
-                if(!$this->upload->do_upload('image_name'))
-                {  
-                    $data['error'] = $this->upload->display_errors();
-                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    redirect($this->module_url_path);  
-                }
-
-                if($file_name!="")
-                {
-                    $file_name = $this->upload->data();
-                    $filename = $file_name_to_dispaly;
-                }
-                else
-                {
-                    $filename = $this->input->post('image_name',TRUE);
-                }
-              
-            } 
-            else{
-               $filename  = '';
             }
+        
             // ============================upload image 1====================
              // ============================upload image 2====================
 
-             if($_FILES['image_name_2']['name']!=''){
-                $file_name     = $_FILES['image_name_2']['name'];
-                
-                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
-
-                $file_name = $_FILES['image_name_2'];
-                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','PDF','pdf');
-
-                if($file_name['name']!="")
-                {
-                    $ext = explode('.',$_FILES['image_name_2']['name']); 
-                    $config['file_name'] = rand(1000,90000);
-
-                    if(!in_array($ext[1],$arr_extension))
-                    {
-                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                    }
-                }   
-
-               $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
-            
-                $config['upload_path']   = './uploads/tour_expenses/';
-                $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|pdf|PDF';  
-                $config['max_size']      = '10000';
-                $config['file_name']     = $file_name_to_dispaly_pdf;
-                $config['overwrite']     = TRUE;
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config); // Important
-                
-                if(!$this->upload->do_upload('image_name_2'))
-                {  
-                    $data['error'] = $this->upload->display_errors();
-                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    redirect($this->module_url_path.'/edit/'.$id);
-                }
-                if($file_name['name']!="")
-                {   
-                    $file_name = $this->upload->data();
-                    $new_img_filename = $file_name_to_dispaly_pdf;
-                }
-                else
-                {
-                    $new_img_filename = $this->input->post('image_name_2',TRUE);
-                    
-                }
-
-            } 
-            else{
-               $new_img_filename  = '';
-            }
+            //  $uploaded_files = $_FILES['image_name_2'];
+            //  $allowed_extensions = array('png', 'jpg', 'jpeg', 'pdf', 'PNG', 'JPG', 'JPEG', 'PDF');
+            //  $uploaded_file_names1 = array();
+             
+            //  if ($uploaded_files['name'] != '') {
+            //      foreach ($uploaded_files['name'] as $key => $file_name) {
+            //          if ($file_name != "") {
+            //              $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+            //              if (!in_array($ext, $allowed_extensions)) {
+            //                  $this->session->set_flashdata('error_message', 'Please upload only png/jpg/jpeg/pdf files.');
+            //                  redirect($this->module_url_path . '/add');
+            //              }
+             
+            //              $file_name_to_display = $this->config->item('project_name') . '_' . round(microtime(true)) . str_replace(' ', '_', $file_name);
+             
+            //              $config['upload_path'] = './uploads/tour_expenses/';
+            //              $config['allowed_types'] = 'png|jpg|JPG|PNG|JPEG|jpeg|PDF|pdf';
+            //              $config['max_size'] = '10000';
+            //              $config['file_name'] = $file_name_to_display;
+            //              $config['overwrite'] = TRUE;
+             
+            //              $this->load->library('upload', $config);
+            //              $this->upload->initialize($config);
+             
+            //              $_FILES['file']['name'] = $uploaded_files['name'][$key];
+            //              $_FILES['file']['type'] = $uploaded_files['type'][$key];
+            //              $_FILES['file']['tmp_name'] = $uploaded_files['tmp_name'][$key];
+            //              $_FILES['file']['error'] = $uploaded_files['error'][$key];
+            //              $_FILES['file']['size'] = $uploaded_files['size'][$key];
+             
+            //              if (!$this->upload->do_upload('file')) {
+            //                  $data['error'] = $this->upload->display_errors();
+            //                  $this->session->set_flashdata('error_message', $this->upload->display_errors());
+            //                  redirect($this->module_url_path);
+            //              } else {
+            //                  $file_data = $this->upload->data();
+            //                  $uploaded_file_names1[] = $file_data['file_name'];
+            //              }
+            //          }
+            //      }
+            //     } else {
+            //         $new_img_filename = '';
+            //     }
             // ==============================upload image 2===============================================================//
 
-                $expense_type  = $this->input->post('expense_type');
+                // $expense_type  = $this->input->post('expense_type');
                 // print_r($expense_type); die;
                 $expense_category  = $this->input->post('expense_category');
+                $single_measuring_unit  = $this->input->post('single_measuring_unit');
+                $single_quantity  = $this->input->post('single_quantity');
+                $single_per_unit_rate  = $this->input->post('single_per_unit_rate');
                 $other_expense_category  = $this->input->post('other_expense_category');
                 $expense_place  = $this->input->post('expense_place');
                 $expense_date  = $this->input->post('expense_date');
@@ -223,9 +216,13 @@ class Tour_expenses extends CI_Controller {
                 $total_pax  = $this->input->post('total_pax');
                 $expense_amt  = $this->input->post('expense_amt');
                 // $expense_date  = $this->input->post('expense_date');
+                $tour_expenses_bill  = $this->input->post('tour_expenses_bill');
+                $reason  = $this->input->post('reason');
+                $vendor_name  = $this->input->post('vendor_name');
+                $contact_no  = $this->input->post('contact_no');
                 $tour_expenses_remark  = $this->input->post('tour_expenses_remark');
-                $tour_number  = $this->input->post('tour_number');
                 $pax_type  = $this->input->post('pax_type');
+                $tour_number  = $this->input->post('tour_number');
                 $tour_date  = $this->input->post('tour_date');
 
                 $tour_expenses_type  = $this->input->post('tour_expenses_type');
@@ -238,8 +235,9 @@ class Tour_expenses extends CI_Controller {
                 // print_r($rate);
                 $per_unit_rate  = $this->input->post('per_unit_rate');
 
-                $expense_type_row  = $this->input->post('expense_type_row');
+                // $expense_type_row  = $this->input->post('expense_type_row');
                 $expense_category_row  = $this->input->post('expense_category_row');
+                // print_r($expense_category_row); die;
                 $other_name  = $this->input->post('other_name');
                 $bill_date  = $this->input->post('bill_date');
 
@@ -249,9 +247,12 @@ class Tour_expenses extends CI_Controller {
                     // 'quantity'   =>   $_POST["quantity"][$i],
                     // 'rate'   =>   $_POST["rate"][$i],
                     // 'per_unit_rate'   =>   $_POST["per_unit_rate"][$i],
-                    'expense_type'   =>   $_POST["expense_type"],
+                    // 'expense_type'   =>   $_POST["expense_type"],
                     'expense_category_id'   =>   $_POST["expense_category"],
                     'other_expense_category'   =>   $_POST["other_expense_category"],
+                    'measuring_unit'   =>   $_POST["single_measuring_unit"],
+                    'quantity'   =>   $_POST["single_quantity"],
+                    'per_unit_rate'   =>   $_POST["single_per_unit_rate"],
                     'expense_place'   =>   $_POST["expense_place"],
                     'expense_date'   =>   $_POST["expense_date"],
                     'bill_number'   =>   $_POST["bill_number"],
@@ -260,28 +261,43 @@ class Tour_expenses extends CI_Controller {
                     'expense_amt'   =>   $_POST["expense_amt"],
                     // 'expense_date'   =>   $_POST["expense_date"],
                     'tour_expenses_remark'   =>   $_POST["tour_expenses_remark"],
+                    'tour_expenses_bill'   =>   $_POST["tour_expenses_bill"],
+                    'reason'   =>   $_POST["reason"],
+                    'vendor_name'   =>   $_POST["vendor_name"],
+                    'contact_no'   =>   $_POST["contact_no"],
                     'package_id'   =>   $_POST["tour_number"],
                     'pax_type'   =>   $_POST["pax_type"],
                     'package_date_id'   =>   $_POST["tour_date"],
                     'tour_expenses_type'   =>   $_POST["tour_expenses_type"],
-                    
-                    'image_name' => $filename,
-                    'image_name_2' => $new_img_filename,
                     'tour_manager_id' => $iid
-                    
                     ); 
-                $inserted_id = $this->master_model->insertRecord('tour_expenses',$arr_insert,true);
+                    $inserted_id = $this->master_model->insertRecord('tour_expenses',$arr_insert,true);
                 // $insert_id();
+                
                 $current_tour_expenses_id = $this->db->insert_id(); 
                 // print_r($current_tour_expenses_id); die;
-               
+
+                foreach ($uploaded_file_names as $index => $file_name) {
+                $arr_insert = array(
+                    'package_id'   =>   $_POST["tour_number"],
+                    'package_date_id'   =>   $_POST["tour_date"],
+                    'tour_expenses_type'   =>   $_POST["tour_expenses_type"],
+                    'image_name' => $file_name,
+                    // 'image_name_2' => $file_name_2,
+                    'tour_manager_id' => $iid,
+                    'tour_expenses_id' => $current_tour_expenses_id
+                    ); 
+                    $inserted_id = $this->master_model->insertRecord('tour_expenses_image',$arr_insert,true);
+                }
+
+
                 if($tour_expenses_type == '0'){
                 $count = count($product_name);
                 // print_r($count); die;
                 for($i=0;$i<$count;$i++)
                 {
                 $arr_insert = array(
-                'expense_type'   =>   $_POST["expense_type_row"][$i],
+                // 'expense_type'   =>   $_POST["expense_type_row"][$i],
                 'expense_category_id'   =>   $_POST["expense_category_row"][$i],
                 'other_name'   =>   $_POST["other_name"][$i],
                 'product_name'   =>   $_POST["product_name"][$i],
@@ -309,6 +325,7 @@ class Tour_expenses extends CI_Controller {
                 'tour_expenses_id' => $current_tour_expenses_id
                 
                 ); 
+                // print_r($arr_insert); die;
                 $inserted_id = $this->master_model->insertRecord('add_more_tour_expenses',$arr_insert,true);
                 }
                 }
@@ -371,9 +388,8 @@ class Tour_expenses extends CI_Controller {
 
 
 
-    public function edit($id,$pd_id,$pid)
+    public function edit($id,$pd_id,$pid,$tm_id)
         {  
-            // echo $id; die;s
             $supervision_sess_name = $this->session->userdata('supervision_name');
             $iid = $this->session->userdata('supervision_sess_id');
 
@@ -381,6 +397,7 @@ class Tour_expenses extends CI_Controller {
             $tour_expenses_id=base64_decode($id);
             $package_id=base64_decode($pid);
             $package_date_id=base64_decode($pd_id);
+            $tm_or_subtm_id=base64_decode($tm_id);
 
             if ($tour_expenses_id=='') 
             {
@@ -394,135 +411,128 @@ class Tour_expenses extends CI_Controller {
             }
             if($this->input->post('submit'))
             {
-                // print_r($_REQUEST); die;
-                $old_img_name = $this->input->post('old_img_name');
+                $uploaded_files = $_FILES['image_name'];
+                $allowed_extensions = array('png', 'jpg', 'jpeg', 'pdf', 'PNG', 'JPG', 'JPEG', 'PDF');
+                $uploaded_file_names = array();
                 
-                    if(!empty($_FILES['image_name']) && $_FILES['image_name']['name'] !='')
-                    {
-                    $file_name     = $_FILES['image_name']['name'];
-                    $arr_extension = array('png','jpg','JPEG','PNG','JPG','jpeg','PDF','pdf');
-
-                    $file_name = $_FILES['image_name'];
-                    $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
-
-                    if($file_name['name']!="")
-                    {
-                        $ext = explode('.',$_FILES['image_name']['name']); 
-                        $config['file_name'] = rand(1000,90000);
-
-                        if(!in_array($ext[1],$arr_extension))
-                        {
-                            $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                            redirect($this->module_url_path.'/edit/'.$id);
+                foreach ($uploaded_files['name'] as $key => $file_name) {
+                    if ($file_name != "") {
+                        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                        if (!in_array($ext, $allowed_extensions)) {
+                            $this->session->set_flashdata('error_message', 'Please upload only png/jpg/jpeg/pdf files.');
+                            redirect($this->module_url_path . '/add');
                         }
-                    }   
-
-                    $file_name_to_dispaly =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
-                    
-                    $config['upload_path']   = './uploads/tour_expenses/';
-                    $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|PDF|pdf';  
-                    $config['max_size']      = '10000';
-                    $config['file_name']     = $file_name_to_dispaly;
-                    $config['overwrite']     = TRUE;
-                    $this->load->library('upload',$config);
-                    $this->upload->initialize($config); // Important
-                    
-                    if(!$this->upload->do_upload('image_name'))
-                    {  
-                        $data['error'] = $this->upload->display_errors();
-                        $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                        redirect($this->module_url_path.'/edit/'.$id);
-                    }
-                    if($file_name['name']!="")
-                    {   
-                        $file_name = $this->upload->data();
-                        $filename = $file_name_to_dispaly;
-                        if($old_img_name!='') unlink('./uploads/suggestion_image/'.$old_img_name);
-                    }
-                    else
-                    {
-                        $filename = $this->input->post('image_name',TRUE);
+                
+                        $file_name_to_display = $this->config->item('project_name') . '_' . round(microtime(true)) . str_replace(' ', '_', $file_name);
+                
+                        $config['upload_path'] = './uploads/tour_expenses/';
+                        $config['allowed_types'] = 'png|jpg|JPG|PNG|JPEG|jpeg|PDF|pdf';
+                        $config['max_size'] = '10000';
+                        $config['file_name'] = $file_name_to_display;
+                        $config['overwrite'] = TRUE;
+                
+                        $this->load->library('upload', $config);
+                        $this->upload->initialize($config);
+                
+                        $_FILES['file']['name'] = $uploaded_files['name'][$key];
+                        $_FILES['file']['type'] = $uploaded_files['type'][$key];
+                        $_FILES['file']['tmp_name'] = $uploaded_files['tmp_name'][$key];
+                        $_FILES['file']['error'] = $uploaded_files['error'][$key];
+                        $_FILES['file']['size'] = $uploaded_files['size'][$key];
+                
+                        if (!$this->upload->do_upload('file')) {
+                            $data['error'] = $this->upload->display_errors();
+                            $this->session->set_flashdata('error_message', $this->upload->display_errors());
+                            redirect($this->module_url_path);
+                        } else {
+                            $file_data = $this->upload->data();
+                            $uploaded_file_names[] = $file_data['file_name'];
+                        }
                     }
                 }
-                else
-                {
-                    $filename = $old_img_name;
-                }
-
                 // =============================upload 1=============================================
 
                 // =============================upload 2=============================================
-                $old_new_name = $this->input->post('old_new_name');
+            //     $old_new_name = $this->input->post('old_new_name');
                 
-                if(!empty($_FILES['image_name_2']) && $_FILES['image_name_2']['name'] !='')
-                {
-               $file_name     = $_FILES['image_name_2']['name'];
+            //     if(!empty($_FILES['image_name_2']) && $_FILES['image_name_2']['name'] !='')
+            //     {
+            //    $file_name     = $_FILES['image_name_2']['name'];
                 
-                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
+            //     $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
 
-                $file_name = $_FILES['image_name_2'];
-                $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
+            //     $file_name = $_FILES['image_name_2'];
+            //     $arr_extension = array('png','jpg','jpeg','PNG','JPG','JPEG','PDF','pdf');
 
-                if($file_name['name']!="")
-                {
-                    $ext = explode('.',$_FILES['image_name_2']['name']); 
-                    $config['file_name'] = rand(1000,90000);
+            //     if($file_name['name']!="")
+            //     {
+            //         $ext = explode('.',$_FILES['image_name_2']['name']); 
+            //         $config['file_name'] = rand(1000,90000);
 
-                    if(!in_array($ext[1],$arr_extension))
-                    {
-                        $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
-                        redirect($this->module_url_path.'/edit/'.$id);
-                    }
-                }   
+            //         if(!in_array($ext[1],$arr_extension))
+            //         {
+            //             $this->session->set_flashdata('error_message','Please Upload png/jpg Files.');
+            //             redirect($this->module_url_path.'/edit/'.$id);
+            //         }
+            //     }   
 
-               $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
+            //    $file_name_to_dispaly_pdf =  $this->config->item('project_name').round(microtime(true)).str_replace(' ','_',$file_name['name']);
             
-                $config['upload_path']   = './uploads/tour_expenses/';
-                $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|PDF|pdf';  
-                $config['max_size']      = '10000';
-                $config['file_name']     = $file_name_to_dispaly_pdf;
-                $config['overwrite']     = TRUE;
-                $this->load->library('upload',$config);
-                $this->upload->initialize($config); // Important
+            //     $config['upload_path']   = './uploads/tour_expenses/';
+            //     $config['allowed_types'] = 'JPEG|PNG|png|jpg|JPG|jpeg|PDF|pdf';  
+            //     $config['max_size']      = '10000';
+            //     $config['file_name']     = $file_name_to_dispaly_pdf;
+            //     $config['overwrite']     = TRUE;
+            //     $this->load->library('upload',$config);
+            //     $this->upload->initialize($config); // Important
                 
-                if(!$this->upload->do_upload('image_name_2'))
-                {  
-                    $data['error'] = $this->upload->display_errors();
-                    $this->session->set_flashdata('error_message',$this->upload->display_errors());
-                    redirect($this->module_url_path.'/edit/'.$id);
-                }
-                if($file_name['name']!="")
-                {   
-                    $file_name = $this->upload->data();
-                    $new_img_filename = $file_name_to_dispaly_pdf;
-                    if($old_new_name!='') unlink('./uploads/tour_expenses/'.$old_new_name);
-                }
-                else
-                {
-                    $new_img_filename = $this->input->post('image_name_2',TRUE);
+            //     if(!$this->upload->do_upload('image_name_2'))
+            //     {  
+            //         $data['error'] = $this->upload->display_errors();
+            //         $this->session->set_flashdata('error_message',$this->upload->display_errors());
+            //         redirect($this->module_url_path.'/edit/'.$id);
+            //     }
+            //     if($file_name['name']!="")
+            //     {   
+            //         $file_name = $this->upload->data();
+            //         $new_img_filename = $file_name_to_dispaly_pdf;
+            //         if($old_new_name!='') unlink('./uploads/tour_expenses/'.$old_new_name);
+            //     }
+            //     else
+            //     {
+            //         $new_img_filename = $this->input->post('image_name_2',TRUE);
                     
-                }
-            }
-            else
-            {
-                $new_img_filename = $old_new_name;
+            //     }
+            // }
+            // else
+            // {
+            //     $new_img_filename = $old_new_name;
                 
-            }
+            // }
 			
                 // =============================upload 2=============================================
 
-                $expense_type  = $this->input->post('expense_type');
+                // $expense_type  = $this->input->post('expense_type');
                 $expense_category  = $this->input->post('expense_category'); 
                 $other_expense_category  = $this->input->post('other_expense_category');
+                $single_measuring_unit  = $this->input->post('single_measuring_unit');
+                $single_quantity  = $this->input->post('single_quantity');
+                $single_per_unit_rate  = $this->input->post('single_per_unit_rate');
                 $expense_place  = $this->input->post('expense_place');
                 $expense_date  = $this->input->post('expense_date');
                 $bill_number  = $this->input->post('bill_number');
                 $total_pax  = $this->input->post('total_pax');
                 $expense_amt  = $this->input->post('expense_amt');
                 // $expense_date  = $this->input->post('expense_date');
+                $tour_expenses_bill  = $this->input->post('tour_expenses_bill');
+                $reason  = $this->input->post('reason');
+                $vendor_name  = $this->input->post('vendor_name');
+                $contact_no  = $this->input->post('contact_no');
                 $tour_expenses_remark  = $this->input->post('tour_expenses_remark');
                 $pax_type  = $this->input->post('pax_type');
-                // $tour_number  = $this->input->post('tour_number');
+                $tour_number  = $this->input->post('tour_number_id');
+                // print_r($tour_number); die;
+                $tour_date  = $this->input->post('tour_date_id');
 
                 $tour_expenses_type  = $this->input->post('tour_expenses_type');
                 // print_r($tour_expenses_type); die;
@@ -537,7 +547,7 @@ class Tour_expenses extends CI_Controller {
                 $add_more_tour_expenses_id  = $this->input->post('add_more_tour_expenses_id');
                 // print_r($add_more_tour_expenses_id); die;
 
-                $expense_type_row  = $this->input->post('expense_type_row');
+                // $expense_type_row  = $this->input->post('expense_type_row');
                 // print_r($expense_type_row); die;
                 $expense_category_row  = $this->input->post('expense_category_row');
                 $other_name  = $this->input->post('other_name');
@@ -546,34 +556,55 @@ class Tour_expenses extends CI_Controller {
                 // print_r($add_more_expenses_id); die;
                 
                 $arr_update = array(
-                'expense_type' =>   $expense_type,
+                // 'expense_type' =>   $expense_type,
                 'expense_category_id' =>   $expense_category,
                 'other_expense_category' =>   $other_expense_category,
+                'measuring_unit'   =>   $single_measuring_unit,
+                'quantity'   =>   $single_quantity,
+                'per_unit_rate'   =>   $single_per_unit_rate,
                 'expense_place' =>   $expense_place,
                 'expense_date' =>   $expense_date,
                 'bill_number' =>   $bill_number,
                 'total_pax' =>   $total_pax,
                 'expense_amt' =>   $expense_amt,
                 'bill_date' =>   $bill_date,
+                'tour_expenses_bill'   =>   $tour_expenses_bill,
+                'reason'   =>   $reason,
+                'vendor_name'   =>   $vendor_name,
+                'contact_no'   =>   $contact_no,
                 'tour_expenses_remark' =>   $tour_expenses_remark,
                 'update_remark' =>   $update_remark,
-                'image_name' =>   $filename,
-                'image_name_2' =>   $new_img_filename,
+                // 'image_name' =>   $filename,
+                // 'image_name_2' =>   $new_img_filename,
                 'pax_type' =>   $pax_type
                 // 'package_date_id' =>   $tour_number
-
                  );
                  
                     $arr_where     = array("id" => $tour_expenses_id);
                     $inserted_id = $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
+                    // print_r($inserted_id); die;
+
+                foreach ($uploaded_file_names as $index => $file_name) {
+                $arr_insert = array(
+                    'package_id'   =>   $_POST["tour_number"],
+                    'package_date_id'   =>   $_POST["tour_date"],
+                    'tour_expenses_type'   =>   $_POST["tour_expenses_type"],
+                    'image_name' => $file_name,
+                    // 'image_name_2' => $file_name_2,
+                    'tour_manager_id' => $iid,
+                    'tour_expenses_id' => $tour_expenses_id
+                    ); 
+                    $inserted_id = $this->master_model->insertRecord('tour_expenses_image',$arr_insert,true);
+                }
+                // print_r($inserted_id); die;
 
                     if($tour_expenses_type == '0'){
-                        $count = count($expense_type_row);
+                        $count = count($expense_category_row);
                         // print_r($count); die;
                         for($i=0;$i<$count;$i++)
                         {
                         $arr_update = array(
-                        'expense_type'   =>   $_POST["expense_type_row"][$i],
+                        // 'expense_type'   =>   $_POST["expense_type_row"][$i],
                         'expense_category_id'   =>   $_POST["expense_category_row"][$i],
                         'other_name'   =>   $_POST["other_name"][$i],
                         'product_name'   =>   $_POST["product_name"][$i],
@@ -597,7 +628,7 @@ class Tour_expenses extends CI_Controller {
 
                     $current_tour_expenses_id  = $this->input->post('add_more_tour_exp_id');
 
-                    $add_expense_type_row  = $this->input->post('add_expense_type_row');
+                    // $add_expense_type_row  = $this->input->post('add_expense_type_row');
                     $add_expense_category_row  = $this->input->post('add_expense_category_row');
                     $add_other_name  = $this->input->post('add_other_name');
                     $add_bill_date  = $this->input->post('add_bill_date');
@@ -609,7 +640,7 @@ class Tour_expenses extends CI_Controller {
                     for($i=0;$i<$count;$i++)
                     {
                     $arr_insert = array(
-                    'expense_type'   =>   $_POST["add_expense_type_row"][$i],
+                    // 'expense_type'   =>   $_POST["add_expense_type_row"][$i],
                     'expense_category_id'   =>   $_POST["add_expense_category_row"][$i],
                     'other_name'   =>   $_POST["add_other_name"][$i],
                     'product_name'   =>   $_POST["add_product_name"][$i],
@@ -667,6 +698,14 @@ class Tour_expenses extends CI_Controller {
         $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
         // print_r($tour_expenses_all); die;
 
+        $record = array();
+        $fields = "tour_expenses_image.*";
+        $this->db->where('tour_expenses_image.is_deleted','no');
+        $this->db->where('tour_expenses_image.tour_expenses_id',$tour_expenses_id);
+        $this->db->join("tour_expenses", 'tour_expenses_image.tour_expenses_id=tour_expenses.id','left');
+        $tour_expenses_image_all = $this->master_model->getRecords('tour_expenses_image',array('tour_expenses_image.is_deleted'=>'no'),$fields);
+        // print_r($tour_expenses_image_all); die;
+
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
 		$this->db->order_by('expense_category','ASC');
@@ -694,6 +733,7 @@ class Tour_expenses extends CI_Controller {
          $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
          $this->arr_view_data['packages_data'] = $packages_data;
          $this->arr_view_data['add_more_tour_expenses_all'] = $add_more_tour_expenses_all;
+         $this->arr_view_data['tour_expenses_image_all'] = $tour_expenses_image_all;
          $this->arr_view_data['edit_data'] = $edit_data;
          $this->arr_view_data['expense_category'] = $expense_category;
          $this->arr_view_data['package_date'] = $package_date;
@@ -703,6 +743,7 @@ class Tour_expenses extends CI_Controller {
          $this->arr_view_data['measuring_unit'] = $measuring_unit;
          $this->arr_view_data['package_id']        = $package_id;
          $this->arr_view_data['package_date_id']        = $package_date_id;
+         $this->arr_view_data['tm_or_subtm_id']        = $tm_or_subtm_id;
          $this->arr_view_data['page_title']      = " Edit ".$this->module_title;
          $this->arr_view_data['module_title']    = $this->module_title;
          $this->arr_view_data['add_more_module_url_path']    = $this->add_more_module_url_path;
@@ -711,6 +752,41 @@ class Tour_expenses extends CI_Controller {
          $this->load->view('tour_manager/layout/agent_combo',$this->arr_view_data);
         }
 
+    public function image_delete()
+    {
+        $id  = $this->input->post('request_id');
+
+        if(is_numeric($id))
+        {   
+            $this->db->where('id',$id);
+            $arr_data = $this->master_model->getRecords('tour_expenses_image');
+
+            if(empty($arr_data))
+            {
+                $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+                redirect($this->module_url_path);
+            }
+            $arr_update = array('is_deleted' => 'yes');
+            $arr_where = array("id" => $id);
+                    
+            if($this->master_model->updateRecord('tour_expenses_image',$arr_update,$arr_where))
+            {
+                $this->session->set_flashdata('success_message',$this->module_title.' Deleted Successfully.');
+            }
+            else
+            {
+                $this->session->set_flashdata('error_message','Oops,Something Went Wrong While Deleting Record.');
+            }
+        }
+        else
+        {
+            $this->session->set_flashdata('error_message','Invalid Selection Of Record');
+        }
+        redirect($this->module_url_path.'/index');  
+
+        return true; 
+    }
+    
     public function add_more_delete()
     {
         $id  = $this->input->post('request_id');
@@ -746,18 +822,20 @@ class Tour_expenses extends CI_Controller {
         return true; 
     }
 
-    public function details($id,$pd_id,$pid)
+    public function details($id,$pd_id,$pid,$tid)
     {
         $tour_expenses_id=base64_decode($id);
+        // print_r($id); die;
         $package_id=base64_decode($pid);
         $package_date_id=base64_decode($pd_id);
+        $tm_or_subtm_id=base64_decode($tid);
 
         $supervision_sess_name = $this->session->userdata('supervision_name');
         $iid = $this->session->userdata('supervision_sess_id');
 
         $record = array();
         $fields = "tour_expenses.*,expense_type.expense_type_name,expense_category.expense_category,
-        packages.tour_number,packages.tour_title,package_date.journey_date,hotel_advance_payment.advance_amt,expense_category.expense_category as exp_cat";
+        packages.tour_number,packages.tour_title,package_date.journey_date,tour_expenses.id as t_expences_id,hotel_advance_payment.advance_amt,expense_category.expense_category as exp_cat";
         $this->db->where('tour_expenses.is_deleted','no');
         $this->db->where('tour_expenses.id',$tour_expenses_id);
         $this->db->join("expense_type", 'tour_expenses.expense_type=expense_type.id','left');
@@ -766,7 +844,6 @@ class Tour_expenses extends CI_Controller {
         $this->db->join("package_date", 'tour_expenses.package_date_id=package_date.id','left');
         $this->db->join("hotel_advance_payment", 'tour_expenses.package_id=hotel_advance_payment.tour_number','left');
         $tour_expenses_all = $this->master_model->getRecords('tour_expenses',array('tour_expenses.is_deleted'=>'no'),$fields);
-        
 
         $record = array();
         $fields = "add_more_tour_expenses.*,expense_category.expense_category,expense_type.expense_type_name";
@@ -777,12 +854,21 @@ class Tour_expenses extends CI_Controller {
         $add_more_tour_expenses_all = $this->master_model->getRecords('add_more_tour_expenses',array('add_more_tour_expenses.is_deleted'=>'no'),$fields);
         // print_r($add_more_tour_expenses_all); die;
     
+        $record = array();
+        $fields = "tour_expenses_image.*";
+        $this->db->where('tour_expenses_image.is_deleted','no');
+        $this->db->where('tour_expenses_image.tour_expenses_id',$tour_expenses_id);
+        $this->db->join("tour_expenses", 'tour_expenses_image.tour_expenses_id=tour_expenses.id','left');
+        $tour_expenses_image_all = $this->master_model->getRecords('tour_expenses_image',array('tour_expenses_image.is_deleted'=>'no'),$fields);
+        // print_r($tour_expenses_image_all); die;
 
         $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
         $this->arr_view_data['tour_expenses_all']        = $tour_expenses_all;
+        $this->arr_view_data['tour_expenses_image_all']        = $tour_expenses_image_all;
         $this->arr_view_data['add_more_tour_expenses_all']        = $add_more_tour_expenses_all;
         $this->arr_view_data['package_id']        = $package_id;
         $this->arr_view_data['package_date_id']        = $package_date_id;
+        $this->arr_view_data['tm_or_subtm_id']        = $tm_or_subtm_id;
         $this->arr_view_data['page_title']      = $this->module_title." Details ";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -955,5 +1041,53 @@ class Tour_expenses extends CI_Controller {
         echo json_encode($data);
 }
 
+public function get_approve(){ 
+
+    $supervision_sess_name = $this->session->userdata('supervision_name');
+        $iid = $this->session->userdata('supervision_sess_id');
+
+
+    $approve_id = $this->input->post('attr_approve'); 
+    // $now_time =  date('Y-m-d H:i:s');
+    
+            $arr_update = array(
+            'approval'  => 'yes',
+            'hold'  => 'no',
+            'hold_reason'  => ''
+            );
+            
+            $arr_where     = array("id" => $approve_id);
+            $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
+
+                    // print_r($data); die;
+                    $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+
+    echo 'true';
+}
+
+public function get_hold(){ 
+
+    $supervision_sess_name = $this->session->userdata('supervision_name');
+        $iid = $this->session->userdata('supervision_sess_id');
+
+    
+            $hold_id = $this->input->post('attr_hold'); 
+            $hold_reason = $this->input->post('hold_reason'); 
+    // $now_time =  date('Y-m-d H:i:s');
+            
+            $arr_update = array(
+                    'approval'  => 'no',
+                    'hold'  => 'yes',
+                    'hold_reason'  => $hold_reason
+                    );
+            
+                    $arr_where     = array("id" => $hold_id);
+                    $this->master_model->updateRecord('tour_expenses',$arr_update,$arr_where);
+    
+                    // print_r($data); die;
+                    $this->arr_view_data['supervision_sess_name'] = $supervision_sess_name;
+    
+            echo 'true';
+}
 
 }

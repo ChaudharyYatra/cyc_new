@@ -255,7 +255,7 @@ class Hotel extends CI_Controller{
             $this->db->order_by('id','desc');
             $this->db->where('is_deleted','no');
             $this->db->where('is_active','yes');
-            $state_data = $this->master_model->getRecords('state');
+            $state_data = $this->master_model->getRecords('state_table');
 
             $this->arr_view_data['state_data']        = $state_data;
             $this->arr_view_data['action']          = 'add'; 
@@ -600,7 +600,7 @@ class Hotel extends CI_Controller{
         $this->db->order_by('id','desc');
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
-        $state_data = $this->master_model->getRecords('state');
+        $state_data = $this->master_model->getRecords('state_table');
 
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');

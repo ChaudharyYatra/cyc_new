@@ -62,10 +62,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <?php  
-                  
+                  <?php
                    $i=1; 
-                   foreach($tour_creation_iternary  as $info) 
+                   foreach($tour_creation_iternary  as $info)
                    { 
                      ?>
                     <tr>

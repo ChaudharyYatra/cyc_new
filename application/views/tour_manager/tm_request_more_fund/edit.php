@@ -83,6 +83,25 @@
                               </div>
                             </div>
 
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label>Priority Status</label>
+                                  <select class="select_css" name="priority_status" id="priority_status">
+                                      <option value="">Select Priority</option>
+                                      <option value="High" <?php if(isset($packages_data_info['priority_status'])){if("High" == $packages_data_info['priority_status']) {echo 'selected';}}?>>High</option>
+                                      <option value="Medium" <?php if(isset($packages_data_info['priority_status'])){if("Medium" == $packages_data_info['priority_status']) {echo 'selected';}}?>>Medium</option>
+                                      <option value="Low" <?php if(isset($packages_data_info['priority_status'])){if("Low" == $packages_data_info['priority_status']) {echo 'selected';}}?>>Low</option>
+                                  </select>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Reason</label>
+                                    <textarea type="text" class="form-control" name="reason" id="reason" placeholder="Enter reason"><?php echo $packages_data_info['reason'];?></textarea>
+                                </div>
+                            </div>
+
                           <?php if($packages_data_info['select_transaction']=='UPI'){?>
                           <div class="col-md-6" id="upi_no_div" style='display:block;'>
                               <div class="form-group">

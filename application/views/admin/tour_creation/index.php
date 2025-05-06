@@ -87,27 +87,46 @@
                           <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                          <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']); 
-					                  echo rtrim($aid, '='); ?>" ><button class="dropdown-item">View</button></a>
-                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']); 
-					                  echo rtrim($aid, '='); ?>" ><button class="dropdown-item">Edit</button></a>
-
+                          <a href="<?php echo $module_url_path;?>/details/<?php $aid=base64_encode($info['id']);
+                            echo rtrim($aid, '='); ?>" ><button class="dropdown-item">View</button></a>
+                          <a href="<?php echo $module_url_path;?>/edit/<?php $aid=base64_encode($info['id']);
+                            echo rtrim($aid, '='); ?>" ><button class="dropdown-item">Edit</button></a>
+ 
                             <?php if($info['pid']!='3' && $info['pid']!='4' && $info['pid']!='7'){
                               ?>
-                              <a href="<?php echo $module_url_path_dates;?>/add/<?php $aid=base64_encode($info['id']); 
+                              <a href="<?php echo $module_url_path_dates;?>/add/<?php $aid=base64_encode($info['id']);
                                 echo rtrim($aid, '='); ?>" ><button class="dropdown-item">Add Dates</button></a>
                             <?php } ?>
-                            
+                           
                             <a href="<?php echo $module_url_path_iternary; ?>/add/<?php echo $info['id']; ?>/<?php echo $info['tour_number_of_days']; ?>" >
-                            <button class="dropdown-item">Add Itinerary</button></a>		
-                            <a href="<?php echo $module_day_to_day_program; ?>/take_days/<?php $tour_creation_id=base64_encode($info['id']); 
-					                  echo rtrim($tour_creation_id, '='); ?>/<?php $tour_days_id=base64_encode($info['tour_number_of_days']); echo rtrim($tour_days_id, '=');?>" >
-                            <button class="dropdown-item">Day to Day Program</button></a>			
-							            <a href="<?php echo $module_url_path_hotel;?>/add/<?php echo $info['id'];  ?>" ><button class="dropdown-item">Add Hotel</button></a>
-                          <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']); 
-					                  echo rtrim($aid, '='); ?>" title="Delete"><button class="dropdown-item">Delete</button></a>
+                            <button class="dropdown-item">Add Itinerary</button></a>    
+                            <a href="<?php echo $module_day_to_day_program; ?>/take_days/<?php $tour_creation_id=base64_encode($info['id']);
+                            echo rtrim($tour_creation_id, '='); ?>/<?php $tour_days_id=base64_encode($info['tour_number_of_days']); echo rtrim($tour_days_id, '=');?>" >
+                            <button class="dropdown-item">Day to Day Program</button></a>    
+                            <a href="<?php echo $module_url_path_hotel;?>/add/<?php echo $info['id'];  ?>" ><button class="dropdown-item">Add Hotel</button></a>
+                            <a onclick="return confirm('Are You Sure You Want To Delete This Record?')" href="<?php echo $module_url_path;?>/delete/<?php $aid=base64_encode($info['id']);
+                            echo rtrim($aid, '='); ?>" title="Delete"><button class="dropdown-item">Delete</button></a>
+                             <!-- <a href="<?php //echo $module_url_path_iternary; ?>/tour_coast_details/<?php //echo $info['id']; ?>/<?php //echo $info['tour_number_of_days']; ?>" >
+                             <button class="dropdown-item">Coasting</button></a> -->
+ 
+                            <a href="<?php echo $module_url_vehicle_costing_details;?>/index/<?php echo $info['id'];?>">
+                            <button class="dropdown-item">Vehicle Costing Details</button></a>
                              <a href="<?php echo $module_url_path_iternary; ?>/tour_coast_details/<?php echo $info['id']; ?>/<?php echo $info['tour_number_of_days']; ?>" >
                              <button class="dropdown-item">Coasting</button></a>
+   
+                          <a href="<?php echo $module_add_staff; ?>/index/<?php $tour_creation_id=base64_encode($info['id']);
+                            echo rtrim($tour_creation_id, '='); ?>/<?php $tour_days_id=base64_encode($info['tour_number_of_days']); echo rtrim($tour_days_id, '=');?>" >
+                            <button class="dropdown-item">Add Staff</button>
+                          </a>      
+                          <a href="<?php echo $module_vehicle_cost_adding; ?>/index/<?php $tour_creation_id=base64_encode($info['id']);
+                            echo rtrim($tour_creation_id, '='); ?>/<?php $tour_days_id=base64_encode($info['tour_number_of_days']); echo rtrim($tour_days_id, '=');?>" >
+                            <button class="dropdown-item">Add vehicle cost</button>
+                          </a>
+                          <a href="<?php echo $module_slipper_train_ticket_cost; ?>/index/<?php $tour_creation_id=base64_encode($info['id']);
+                            echo rtrim($tour_creation_id, '='); ?>/<?php $tour_days_id=base64_encode($info['tour_number_of_days']); echo rtrim($tour_days_id, '=');?>" >
+                            <button class="dropdown-item">Slipper Train Ticket Cost</button>
+                          </a>  
+                             
                         </div>
                       </div>
                     </td>

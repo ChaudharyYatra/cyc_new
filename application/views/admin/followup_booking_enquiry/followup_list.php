@@ -91,6 +91,8 @@
                     <th>Next Follow Up Date</th>
                     <th>Reason</th>
                     <th>Follow Up Comment</th>
+                    <th>Action</th>
+
                     
                   </tr>
                   </thead>
@@ -100,17 +102,73 @@
                    $i=1; 
                    foreach($arr_data as $info) 
                    { 
+                       $enq_id=$info['id'];
                      ?>
                   <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $info['follow_up_date'] ?></td>
                     <td><?php echo $info['follow_up_time'] ?></td>
-                     <td><?php echo $info['next_followup_date'] ?></td>
-                     <td><?php echo $info['create_followup_reason'] ?></td>
+                    <td><?php echo $info['next_followup_date'] ?></td>
+                    <td><?php echo $info['create_followup_reason'] ?></td>
                     <td><?php echo $info['follow_up_comment'] ?></td>
+                    <td>
+                      <button type="button" class="btn btn-primary" name="remark" id="remark" data-toggle="modal" data-target="#exampleModal2_<?php echo $enq_id; ?>">
+                          Edit
+                      </button>
+                    </td>
                    
                   </tr>
                   
+                  
+                  <div class="modal fade" id="exampleModal2_<?php echo $enq_id; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Next followup form</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    <form method="post" action="<?php echo $module_url_path;?>/domestic_followup">
+                    <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6 mb-2">
+                                <label class="col-form-label">Next followup Date:</label> 
+                                <input type="date" class="form-control" name="next_followup_date" id="next_followup_date" min="<?php echo date("Y-m-d"); ?>" value="<?php if(isset($info['next_followup_date'])){ echo $info['next_followup_date'];}?>" required>
+                                <input type="hidden" name="enquiry_id" id="enquiry_id" value="<?php if(isset($info['id'])){ echo $info['id'];}?>">
+                              </div>
+                              <div class="col-md-6 mb-2">
+                                <label class="col-form-label">Next Follow Up Time:</label>
+                                <input type="time" class="form-control" name="follow_up_time" id="follow_up_time" value="<?php if(isset($info['follow_up_time'])){ echo $info['follow_up_time'];}?>" required>
+                              </div>
+                              <div class="col-md-12 mb-2">
+                                <label>Select Reason</label>
+                                  <div class="input-group">
+                                      <select class="form-control niceSelect" name="followup_reason" id="followup_reason" onfocus='this.size=4;' onblur='this.size=1;' 
+                                          onchange='this.size=1; this.blur();' required="required">
+                                          <option value="">Select reason</option>
+
+                                          <?php foreach($followup_reason_data as $followup_reason){ ?> 
+                                            <option value="<?php echo $followup_reason['id']; ?>" <?php if(isset($info['followup_reason'])){if($followup_reason['id'] == $info['followup_reason']) {echo 'selected';}}?> ><?php echo $followup_reason['create_followup_reason']; ?></option>
+                                          <?php } ?>
+                                      </select>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <label class="col-form-label">Follow Remark:</label>
+                                <textarea class="form-control" name="follow_up_comment" id="follow_up_comment" required><?php echo $info['follow_up_comment']; ?></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <a onclick="return confirm('Are You Sure You Want To submit This Follow Up Record?')" href="<?php echo $module_url_path;?>/booking_enquiry/<?php echo $info['id']; ?>"><button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button></a>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
                   <?php $i++; } ?>
                   
                   </tbody>

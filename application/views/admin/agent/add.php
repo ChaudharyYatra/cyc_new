@@ -238,6 +238,22 @@
                                 <input type="text" class="form-control" name="pan_number" id="pan_number" placeholder="Enter PAN Number" >
                               </div>
                       </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Amount Receiving Mode</label>
+                              <select class="select2" multiple="multiple" data-placeholder="Select Amount Receiving Mode" style="width: 100%;" name="amount_receiving_mode[]" id="amount_receiving_mode" required="required">
+                                <option value="">Select Amount Receiving Mode</option>
+                                  <option value="CASH">CASH</option>
+                                  <option value="UPI">UPI</option>
+                                  <option value="QR Code">QR Code</option>
+                                  <option value="Cheque">Cheque</option>
+                                  <option value="Net Banking">Net Banking</option>
+                                  <option value="Demand Draft">Demand Draft</option>
+                              </select>
+                          </div>
+                        </div>
+
                       <div class="col-md-6">
                             <label>Password</label>
                               <div class="form-group input-group">

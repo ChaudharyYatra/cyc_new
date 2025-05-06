@@ -90,6 +90,90 @@
                         </div>
                         <?php } ?>
 
+                        <div class="col-md-12">
+                            <div class="form-group float-right">
+                                <button type="button" class="btn btn-primary" before_breakfast_edit_attr_add_id="0" name="submit" value="before_breakfast_edit_add_more" id="before_breakfast_edit_add_more">Add More</button>
+                            </div>
+                        </div> 
+
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <table border="1" class="table table-bordered" id="fresh_table1">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 15%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Activity Type</th>
+                                            <th>Start Place</th>
+                                            <th>Start Time</th>
+                                            <th>Distance</th>
+                                            <th>End Place</th>
+                                            <th>End Time</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i=1;?>
+                                        <?php foreach($add_more_day_to_day_program as $index => $add_more_day_to_day_program_info){
+                                            if($add_more_day_to_day_program_info['meal_type'] == 'fresh_before_breakfast'){ 
+                                                $toplace_dynamicId = 'to_place' . $index; $startplace_dynamicId = 'start_point' . $index;?> 
+                                        <tr>
+                                            <td>
+                                                <select class="select_css" name="activity_type[]" id="activity_type">
+                                                    <option value="">Select Activity Type</option>
+                                                    <option value="start_place" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("start_place" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Start Place</option>
+                                                    <option value="fresh_up" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("fresh_up" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Fresh Up</option>
+                                                    <option value="travelling" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("travelling" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travelling</option>
+                                                    <option value="visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
+                                                </select>
+                                                <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
+                                            </td>
+                                            <td>
+                                            <select class="select2 select_css start_point start_point" name="start_point[]" id="<?php echo $startplace_dynamicId ?>" data-live-search="true">
+                                                <option value="">Select place</option>
+                                                <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
+                                                    <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['start_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                <?php } ?>
+                                            </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['start_time'];?>"></td>
+                                            <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['distance'];?>"></td>
+                                           
+                                            <td>
+                                                <select class="select2 select_css select_to_place to_place" name="to_place[]" id="<?php echo $toplace_dynamicId ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
+                                                        <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['start_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </td>
+                                            <td><input type="time" class="form-control quantity" name="end_time[]" id="end_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['end_time'];?>"></td>
+                                            <td>
+                                                <a href="<?php echo $module_url_path;?>/add_more_delete_before_breakfast/<?php echo $add_more_day_to_day_program_info['id']; ?>" title="delete"><button value="<?php echo $add_more_day_to_day_program_info['id']; ?>" class="btn btn-primary day_delete_instruction">Delete</button></a>
+                                            </td>
+                                            <input readonly type="hidden" class="form-control quantity" name="meals_type[]" id="meals_type" value="fresh_before_breakfast">  
+                                            <!-- <input readonly type="hidden" class="form-control" name="food_menu[]" id="food_menu" value="">   -->
+                                            <input type="hidden" class="form-control" name="lunch_food_menu[]" id="lunch_food_menu" value="">
+                                            <input type="hidden" class="form-control" name="dinner_food_menu[]" id="dinner_food_menu" value="">
+                                            <input type="hidden" class="form-control" name="breakfast_food_menu[]" id="breakfast_food_menu" value="">
+
+                                        </tr>
+                                        <?php } } ?>
+                                        <?php $i++; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+
                         <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
                             if($add_more_day_to_day_program_info['meal_type'] == 'Breakfast'){ ?> 
                         <div class="col-md-6"></div>
@@ -179,24 +263,20 @@
                             <div class="form-group">
                                 <table border="1" class="table table-bordered" id="edit_table1">
                                     <colgroup>
-                                        <col span="1" style="width: 15%;">
-                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
-                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
                                         <tr style="background:#a19f9f; color:white;">
                                             <th style="width:10%;">Activity Type</th>
-                                            <th style="width:10%;">Start district</th>
                                             <th style="width:10%;">Start Place</th>
                                             <th style="width:10%;">Start Time</th>
                                             <th style="width:10%;">Distance</th>
-                                            <th style="width:10%;">End district</th>
                                             <th style="width:10%;">End Place</th>
                                             <th style="width:10%;">End Time</th>
                                             <th style="width:10%;">Action</th>
@@ -204,53 +284,38 @@
                                     </thead>
                                     <tbody>
                                         <?php $i=1;?>
-                                        <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
-                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_breakfast'){ ?>
+                                        <?php foreach($add_more_day_to_day_program as $index => $add_more_day_to_day_program_info){
+                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_breakfast'){ 
+                                                $toplace_dynamicId = 'to_place_0' . $index; $startplace_dynamicId = 'start_point_0' . $index;?>
+                                                
                                         <tr>
                                             <td>
                                                 <select class="select_css" name="activity_type[]" id="activity_type">
                                                     <option value="">Select Activity Type</option>
-                                                    <option value="Travel" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Travel" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travel</option>
-                                                    <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
+                                                    <option value="start_place" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("start_place" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Start Place</option>
+                                                    <option value="fresh_up" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("fresh_up" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Fresh Up</option>
+                                                    <option value="travelling" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("travelling" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travelling</option>
+                                                    <option value="visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
                                                 <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php 
-                                                        foreach ($district_data as $district_info) { 
-                                                            ?>
-                                                            <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['start_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                        <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="start_point[]" id="start_point">
-                                                    <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
-                                                        <!-- <option value="<?php //echo $citywise_place_master_info['id'];?>"><?php //echo $citywise_place_master_info['place_name'];?></option> -->
+                                                <select class="select2 select_css start_point start_point_0" name="start_point[]" id="<?php echo $startplace_dynamicId; ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['start_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
-                                                        <?php } ?>
+                                                    <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['start_time'];?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>"  value="<?php echo $add_more_day_to_day_program_info['distance'];?>"></td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['end_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
-                                                    <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                <select class="select2 select_css select_to_place to_place_0" name="to_place[]" id="<?php echo $toplace_dynamicId; ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['end_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
@@ -355,24 +420,20 @@
                             <div class="form-group">
                                 <table border="1" class="table table-bordered" id="edit_table2">
                                     <colgroup>
-                                        <col span="1" style="width: 15%;">
-                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
-                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
                                         <tr style="background:#a19f9f; color:white;">
                                             <th>Activity Type</th>
-                                            <th>Start district</th>
                                             <th>Start Place</th>
                                             <th>Start Time</th>
                                             <th>Distance</th>
-                                            <th>End district</th>
                                             <th>End Place</th>
                                             <th>End Time</th>
                                             <th>Action</th>
@@ -380,52 +441,37 @@
                                     </thead>
                                     <tbody>
                                         <?php $i=1;?>
-                                        <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
-                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_lunch'){ ?>
+                                        <?php foreach($add_more_day_to_day_program as $index => $add_more_day_to_day_program_info){
+                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_lunch'){ 
+                                                $toplace_dynamicId = 'to_place_0_0' . $index; $startplace_dynamicId = 'start_point_0_0' . $index;?>
                                         <tr>
                                             <td>
                                                 <select class="select_css" name="activity_type[]" id="activity_type">
                                                     <option value="">Select Activity Type</option>
-                                                    <option value="Travel" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Travel" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travel</option>
-                                                    <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
+                                                    <option value="start_place" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("start_place" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Start Place</option>
+                                                    <option value="fresh_up" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("fresh_up" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Fresh Up</option>
+                                                    <option value="travelling" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("travelling" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travelling</option>
+                                                    <option value="visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
                                                 <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['start_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
-                                                    <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                <select class="select2 select_css start_point start_point_0_0" name="start_point[]" id="<?php echo $startplace_dynamicId ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['start_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['start_time'];?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['distance'];?>"></td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['end_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
-                                                    <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                <select class="select2 select_css select_to_place to_place_0_0" name="to_place[]" id="<?php echo $toplace_dynamicId ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['end_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
@@ -531,23 +577,19 @@
                                 <table border="1" class="table table-bordered" style="width:100%" id="edit_table3">
                                     <colgroup>
                                         <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 50%;">
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 10%;">
+                                        <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 15%;">
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 10%;">
                                         <col span="1" style="width: 15%;">
                                     </colgroup>
                                     <thead>
                                         <tr style="background:#a19f9f; color:white;">
                                             <th style="width:10%;">Activity Type</th>
-                                            <th style="width:10%;">Start district</th>
                                             <th style="width:10%;">Start Place</th>
                                             <th style="width:10%;">Start Time</th>
                                             <th style="width:10%;">Distance</th>
-                                            <th style="width:10%;">End district</th>
                                             <th style="width:10%;">End Place</th>
                                             <th style="width:10%;">End Time</th>
                                             <th style="width:10%;">Action</th>
@@ -555,52 +597,37 @@
                                     </thead>
                                     <tbody class="for_row_set">
                                         <?php $i=1;?>
-                                        <?php foreach($add_more_day_to_day_program as $add_more_day_to_day_program_info){
-                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_dinner'){ ?>
+                                        <?php foreach($add_more_day_to_day_program as $index => $add_more_day_to_day_program_info){
+                                            if($add_more_day_to_day_program_info['meal_type'] == 'after_dinner'){ 
+                                                $toplace_dynamicId = 'to_place_0_0_0' . $index; $startplace_dynamicId = 'start_point_0_0_0' . $index;?>
                                         <tr>
                                             <td>
                                                 <select class="select_css" name="activity_type[]" id="activity_type">
                                                     <option value="">Select Activity Type</option>
-                                                    <option value="Travel" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Travel" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travel</option>
-                                                    <option value="Visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("Visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
+                                                    <option value="start_place" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("start_place" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Start Place</option>
+                                                    <option value="fresh_up" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("fresh_up" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Fresh Up</option>
+                                                    <option value="travelling" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("travelling" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Travelling</option>
+                                                    <option value="visit" <?php if(isset($add_more_day_to_day_program_info['activity_type'])){if("visit" == $add_more_day_to_day_program_info['activity_type']) {echo 'selected';}}?>>Visit</option>
                                                 </select>
 
                                                 <input type="hidden" name="day_to_day_id[]" value="<?php echo $add_more_day_to_day_program_info['id'];?>">
                                             </td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="start_district[]" id="start_district" attr_district="district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['start_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="start_point[]" id="start_point" >
-                                                    <option value="">Select start point</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                <select class="select2 select_css start_point start_point_0_0_0" name="start_point[]" id="<?php echo $startplace_dynamicId ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['start_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['start_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>
                                             </td>
                                             <td><input type="time" class="form-control quantity" name="start_time[]" id="start_time<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['start_time'];?>"></td>
                                             <td><input type="text" class="form-control quantity" name="travel_distance[]" id="travel_distance<?php echo $i;?>" value="<?php echo $add_more_day_to_day_program_info['distance'];?>"></td>
+                                            
                                             <td>
-                                                <select class="select_css district" name="end_district[]" id="end_district" attr_district="end_district" required="required">
-                                                    <option value="">Select </option>
-                                                    <?php
-                                                    foreach($district_data as $district_info){ 
-                                                    ?>
-                                                    <option value="<?php echo $district_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_district'])){if($district_info['id'] == $add_more_day_to_day_program_info['end_district']) {echo 'selected';}}?>><?php echo $district_info['district'];?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <select class="select_css" name="to_place[]" id="to_place">
-                                                    <option value="">Select To Place</option>
-                                                    <?php foreach($citywise_place_master as $citywise_place_master_info){ ?> 
+                                                <select class="select2 select_css select_to_place to_place_0_0_0" name="to_place[]" id="<?php echo $toplace_dynamicId ?>" data-live-search="true">
+                                                    <option value="">Select place</option>
+                                                    <?php foreach($citywise_place_master as $citywise_place_master_info) { ?>
                                                         <option value="<?php echo $citywise_place_master_info['id'];?>" <?php if(isset($add_more_day_to_day_program_info['end_place'])){if($citywise_place_master_info['id'] == $add_more_day_to_day_program_info['end_place']) {echo 'selected';}}?>><?php echo $citywise_place_master_info['place_name'];?></option>
                                                     <?php } ?>
                                                 </select>

@@ -43,24 +43,24 @@
                     <th>supervision Name</th>
                     <td><?php echo $info['supervision_name']; ?></td>
 
+                    <th>supervision Nick Name</th>
+                    <td><?php echo $info['supervision_nick_name']; ?></td>
+
                     <th>Mobile Number 1</th>
                     <td><?php echo $info['mobile_number1']; ?></td>
-					  
-                    <th>Mobile_number 2</th>
-                    <td><?php echo $info['mobile_number2']; ?></td>
 
                   </tr>
 
                   <tr>
+                    <th>Mobile_number 2</th>
+                    <td><?php echo $info['mobile_number2']; ?></td>
+
                     <th>Email Address</th>
                     <td><?php echo $info['email']; ?></td>
 
                     <th>Password</th>
                     <td><?php echo $info['password']; ?></td>
 
-                    <th></th>
-                    <td> </td>
-					  
                   </tr>
 
                   </table>

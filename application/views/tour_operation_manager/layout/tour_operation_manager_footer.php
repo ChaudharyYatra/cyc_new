@@ -372,13 +372,21 @@ var structure = $(` <div class="row" id="new_row`+i+`">
                         </div>
 
                         <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Name </label>
-                            <select class="select_css row_set1 name" attr_name="staff_name" name="name[]" id="name`+i+`" required="required">
-                            <option value="">select name</option>
-                            
-                            </select>
+                          <div class="form-group">
+                              <label>Name </label>
+                              <select class="select_css row_set1 name" attr_name="staff_name" name="name[]" id="name`+i+`" required="required">
+                              <option value="">select name</option>
+                              
+                              </select>
+                          </div>
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Nick Name </label>
+                            <input type="text" readonly name="staff_nick_name" id="staff_nick_name`+i+`" class="form-control" placeholder="Nick Name" required>
+                            </select>
+                          </div>
                         </div>
 
                         <div class="col-md-1 mt-4 d-flex justify-content-center align-self-center">
@@ -402,10 +410,64 @@ $(document).on('click', '.btn_remove', function(){
        var button_id = $(this).attr("id");   
        $('#new_row'+button_id+'').remove();  
   });
+  
 
 </script>
 
+<script type='text/javascript'>
+  var baseURL= "<?php echo base_url();?>";
 
+  $(document).ready(function() {
+    // Use event delegation to handle dynamically added elements
+    $(document).on('change', '.name', function() {
+      var did = $(this).val();
+      var index = $(this).attr('id').replace('name', '');
+      var nickNameField = '#staff_nick_name' + index;
+
+      // AJAX request
+      $.ajax({
+        url: '<?=base_url()?>tour_operation_manager/Assign_staff/getnickname',
+        method: 'post',
+        data: { did: did },
+        dataType: 'json',
+        success: function(response) {
+          console.log(response);
+          $(nickNameField).val('');
+          $.each(response, function(index, data) {
+            $(nickNameField).val(data['supervision_nick_name']);
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<!-- <script type='text/javascript'>
+  // baseURL variable
+  var baseURL= "<?php //echo base_url();?>";
+ 
+  $(document).ready(function(){
+ 
+    $('#name').on('change', function () {
+      var did = $(this).val();
+    //  alert(did); 
+      // AJAX request
+      $.ajax({
+        url:'<?//=base_url()?>tour_operation_manager/Assign_staff/getnickname', 
+        method: 'post',
+        data: {did: did},
+        dataType: 'json',
+        success: function(response){
+        console.log(response);
+        $('#staff_nick_name').find('input').not(':first').remove();
+        $.each(response,function(index,data){       
+            $('#staff_nick_name').val(data['supervision_nick_name']);
+          });
+        }
+     });
+   });
+ });
+ </script> -->
 <!-- approve expenses -->
 
 <script>  

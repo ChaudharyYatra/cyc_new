@@ -858,6 +858,70 @@
             </a>
            </li>
         </ul>
+        <?php } elseif($this->session->userdata['supervision_role']=='8'){?>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item">
+              <a href="<?php echo base_url(); ?>maharaj/dashboard/index" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard</p>
+              </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Masters
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>maharaj/recipe/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Recipe Name</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>maharaj/ingredients/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ingredients Name</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url(); ?>maharaj/kitchen_equipment/index" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kitchen Equipment Name</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>maharaj/profile/index" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+               Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?php echo base_url(); ?>maharaj/change_password/change_password" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+              Change password
+              </p>
+            </a>
+          </li>
+               
+           <li class="nav-item">
+            <a href="<?php echo base_url(); ?>supervision/login/logout" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Logout</p>
+            </a>
+           </li>
+        </ul>
         <?php } elseif($this->session->userdata['supervision_role']=='9'){?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">

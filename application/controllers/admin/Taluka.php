@@ -23,7 +23,7 @@ class Taluka extends CI_Controller{
         // $this->db->where('is_deleted','no');
         // $arr_data = $this->master_model->getRecords('state');
 
-        $fields = "taluka_table.*,country.country_name,.state_table.state_name,district_table.district";
+        $fields = "taluka_table.*,country.country_name,state_table.state_name,district_table.district";
         $this->db->order_by('taluka_table.id','asc');        
         $this->db->where('taluka_table.is_deleted','no');        
         $this->db->join("country", 'taluka_table.country_id=country.id','left');

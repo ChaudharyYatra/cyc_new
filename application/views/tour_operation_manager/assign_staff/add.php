@@ -70,8 +70,16 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Name </label>
-                        <select class="select_css row_set1 name" name="name[]" id="name" required="required">
+                        <select class="select_css row_set1 name" name="name[]" id="name0" required="required">
                           <option value="">select name</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Nick Name </label>
+                        <input type="text" readonly name="staff_nick_name[]" id="staff_nick_name0" class="form-control" placeholder="Nick Name" required>
                         </select>
                       </div>
                     </div>

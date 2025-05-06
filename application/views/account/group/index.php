@@ -57,11 +57,10 @@
                       $parentGroupId = $info['parent_group'];
                       $parentGroupInfo = $this->master_model->getRecords('group', array('id' => $parentGroupId), 'group_name');
        
-                    echo $parentGroupInfo[0]['group_name'];
-                    ?>
-                    <?php} else{ 
-                    echo $info['parent_group']; ?>
-                    <?php } ?>
+                      $parentGroupInfo[0]['group_name'];
+                    }else{ 
+                      $info['parent_group']; 
+                     } ?>
                     </td>
                     <td><?php echo $info['group_code'] ?></td>
                     

@@ -171,6 +171,13 @@ class Booking_enquiry extends CI_Controller {
                  $enq_seat_count         = $this->input->post('enq_seat_count');
                  $today=date("Y-m-d");
                  $wp_mobile_number  = $this->input->post('wp_mobile_number');
+                 $occupation_name  = $this->input->post('occupation_name'); 
+                 $zone_name  = $this->input->post('zone_name'); 
+                 $flat_no  = $this->input->post('flat_no'); 
+                 $house_name  = $this->input->post('house_name'); 
+                 $street_name  = $this->input->post('street_name'); 
+                 $landmark  = $this->input->post('landmark'); 
+                 $area  = $this->input->post('area'); 
                 //  $followup_date  = $this->input->post('followup_date'); 
 
                  $arr_insert = array(
@@ -186,8 +193,14 @@ class Booking_enquiry extends CI_Controller {
                      'seat_count'    =>$enq_seat_count,
                      'created_at'=>$today,
                      'wp_mobile_number'    =>$wp_mobile_number,
-                     'enquiry_from'    =>'Agent'
-                    //  'followup_date'    =>$followup_date
+                     'enquiry_from'    =>'Agent',
+                     'occupation_name'    =>$occupation_name,
+                     'zone_name'    =>$zone_name,
+                     'flat_no'    =>$flat_no,
+                     'house_name'    =>$house_name,
+                     'street_name'    =>$street_name,
+                     'landmark'    =>$landmark,
+                     'area'    =>$area
                  );
 
                  if($iid!=''){
@@ -293,6 +306,13 @@ class Booking_enquiry extends CI_Controller {
                  $media_source_name         = $this->input->post('media_source_name');
                  $enq_seat_count         = $this->input->post('enq_seat_count');
                  $today=date("Y-m-d");
+                 $occupation_name  = $this->input->post('occupation_name'); 
+                 $zone_name  = $this->input->post('zone_name'); 
+                 $flat_no  = $this->input->post('flat_no'); 
+                 $house_name  = $this->input->post('house_name'); 
+                 $street_name  = $this->input->post('street_name'); 
+                 $landmark  = $this->input->post('landmark'); 
+                 $area  = $this->input->post('area');
                 //  $followup_date  = $this->input->post('followup_date'); 
 
                  $arr_insert = array(
@@ -307,8 +327,14 @@ class Booking_enquiry extends CI_Controller {
                      'media_source_name'    =>$media_source_name,
                      'seat_count'    =>$enq_seat_count,
                      'created_at'=>$today,
-                     'enquiry_from'    =>'Agent'
-                    //  'followup_date'    =>$followup_date
+                     'enquiry_from'    =>'Agent',
+                     'occupation_name'    =>$occupation_name,
+                     'zone_name'    =>$zone_name,
+                     'flat_no'    =>$flat_no,
+                     'house_name'    =>$house_name,
+                     'street_name'    =>$street_name,
+                     'landmark'    =>$landmark,
+                     'area'    =>$area
                  );
                  
                  
@@ -426,6 +452,12 @@ class Booking_enquiry extends CI_Controller {
 
          $this->db->where('is_deleted','no');
          $media_source_data = $this->master_model->getRecords('media_source');
+         
+         $this->db->where('is_deleted','no');
+         $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+         $this->db->where('is_deleted','no');
+         $zone_master_data = $this->master_model->getRecords('zone_master');
 
          $this->db->where('is_deleted','no');
          $this->db->where('status','approved');
@@ -436,6 +468,8 @@ class Booking_enquiry extends CI_Controller {
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['booking_enquiry_data'] = $booking_enquiry_data;
          $this->arr_view_data['media_source_data'] = $media_source_data;
+          $this->arr_view_data['occupation_master_data'] = $occupation_master_data;
+         $this->arr_view_data['zone_master_data'] = $zone_master_data;
          $this->arr_view_data['arr_data'] = $arr_data;
          $this->arr_view_data['visitor_data'] = $visitor_data;
          $this->arr_view_data['followup_reason_data'] = $followup_reason_data;
@@ -677,6 +711,13 @@ class Booking_enquiry extends CI_Controller {
                  	$other_tour_name         = $this->input->post('other_tour_name');
 					$mrandmrs  = $this->input->post('mrandmrs'); 
                     $enq_seat_count         = $this->input->post('enq_seat_count');
+                    $occupation_name  = $this->input->post('occupation_name'); 
+                    $zone_name  = $this->input->post('zone_name'); 
+                    $flat_no  = $this->input->post('flat_no'); 
+                    $house_name  = $this->input->post('house_name'); 
+                    $street_name  = $this->input->post('street_name'); 
+                    $landmark  = $this->input->post('landmark'); 
+                    $area  = $this->input->post('area'); 
 
                     // $followup_date  = $this->input->post('followup_date'); 
                     
@@ -691,8 +732,14 @@ class Booking_enquiry extends CI_Controller {
 						'wp_mobile_number'    =>$wp_mobile_number,
                      	'other_tour_name'    =>$other_tour_name,
 						'MrandMrs'   =>   $mrandmrs,
-                        'seat_count'    =>$enq_seat_count
-                        // 'followup_date'    =>$followup_date,
+                        'seat_count'    =>$enq_seat_count,
+                        'occupation_name'    =>$occupation_name,
+                        'zone_name'    =>$zone_name,
+                        'flat_no'    =>$flat_no,
+                        'house_name'    =>$house_name,
+                        'street_name'    =>$street_name,
+                        'landmark'    =>$landmark,
+                        'area'    =>$area
                     );
                     $arr_where     = array("id" => $id);
                     $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
@@ -725,9 +772,17 @@ class Booking_enquiry extends CI_Controller {
 
         $this->db->where('is_deleted','no');
         $media_source_data = $this->master_model->getRecords('media_source');
+        
+        $this->db->where('is_deleted','no');
+        $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+        $this->db->where('is_deleted','no');
+        $zone_master_data = $this->master_model->getRecords('zone_master');
 
          
         $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['occupation_master_data']        = $occupation_master_data;
+        $this->arr_view_data['zone_master_data']        = $zone_master_data;
         $this->arr_view_data['packages_data']        = $packages_data;
         $this->arr_view_data['booking_enquiry_data'] = $booking_enquiry_data;
         $this->arr_view_data['media_source_data'] = $media_source_data;

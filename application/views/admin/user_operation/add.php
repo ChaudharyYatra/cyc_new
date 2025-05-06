@@ -49,10 +49,17 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                              <div class="form-group">
-                                <label>Name <span class="req_field">*</span></label>
-                                <input type="text" class="form-control" name="supervision_name" id="supervision_name" placeholder="Enter Supervision Name"  oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
-                              </div>
+                        <div class="form-group">
+                          <label>Name <span class="req_field">*</span></label>
+                          <input type="text" class="form-control" name="supervision_name" id="supervision_name" placeholder="Enter Supervision Name"  oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Nick Name <span class="req_field">*</span></label>
+                          <input type="text" class="form-control" name="supervision_nick_name" id="supervision_nick_name" placeholder="Enter Supervision Nick Name"  oninput="this.value = this.value.replace(/[^a-zA-Z ]/g, '').replace(/(\..*)\./g, '$1');" required="required">
+                        </div>
                       </div>
                       <div class="col-md-6">
                               <div class="form-group">
