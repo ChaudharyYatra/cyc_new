@@ -63,64 +63,31 @@ class International_packages extends CI_Controller {
     
     
     
-
-// ----------------- This is Live code ---------------------------
-    // public function all_packages()
-    // {
-    //     $this->db->where('is_deleted','no');
-    //     $this->db->where('is_active','yes');       
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC'); 
-    //     $international_packages = $this->master_model->getRecords('international_packages');
-	// 	//print_r($international_packages); die;
-
-    //     $record = array();
-    //     $fields = 	"international_packages.*,international_packages_dates.journey_date,international_packages_dates.single_seat_cost,international_packages_dates.twin_seat_cost,international_packages_dates.three_four_sharing_cost";
-    //     $this->db->where('international_packages.is_deleted','no');
-    //     $this->db->where('international_packages.is_active','yes');
-    //     $this->db->join("international_packages_dates", 'international_packages.id=international_packages_dates.package_id','left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     $this->db->group_by('package_id');
-    //     $international_packages_all = $this->master_model->getRecords('international_packages',array('international_packages.is_deleted'=>'no'),$fields);
-
-    //     $record = array();
-    //     $fields = "international_packages.*,international_packages_dates.*";
-    //     $this->db->where('international_packages.is_deleted','no');
-    //     $this->db->where('international_packages.is_active','yes');
-    //     $this->db->join("international_packages_dates", 'international_packages.id=international_packages_dates.package_id','left');
-    //     $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
-    //     // $this->db->group_by('package_id');
-    //     $international_packages_dates = $this->master_model->getRecords('international_packages',array('international_packages.is_deleted'=>'no'),$fields);
-// ----------------------- this is Live Code ----------------------
-// ------------------------This is My Local Code ---------------------------------
-
-    public function all_custom_international_packages()
+    public function all_packages()
     {
         $this->db->where('is_deleted','no');
-        $this->db->where('is_active','yes');    
-        $this->db->where('package_type','Custom International Package');   
+        $this->db->where('is_active','yes');       
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC'); 
-        $international_packages = $this->master_model->getRecords('packages');
+        $international_packages = $this->master_model->getRecords('international_packages');
 		//print_r($international_packages); die;
 
         $record = array();
-        $fields = 	"packages.*,package_date.journey_date,package_date.single_seat_cost,package_date.twin_seat_cost,package_date.three_four_sharing_cost";
-        $this->db->where('packages.is_deleted','no');
-        $this->db->where('packages.is_active','yes');
-        $this->db->where('package_type','Custom International Package');
-        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $fields = 	"international_packages.*,international_packages_dates.journey_date,international_packages_dates.single_seat_cost,international_packages_dates.twin_seat_cost,international_packages_dates.three_four_sharing_cost";
+        $this->db->where('international_packages.is_deleted','no');
+        $this->db->where('international_packages.is_active','yes');
+        $this->db->join("international_packages_dates", 'international_packages.id=international_packages_dates.package_id','left');
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
         $this->db->group_by('package_id');
-        $international_packages_all = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
+        $international_packages_all = $this->master_model->getRecords('international_packages',array('international_packages.is_deleted'=>'no'),$fields);
 
         $record = array();
-        $fields = "packages.*,package_date.*";
-        $this->db->where('packages.is_deleted','no');
-        $this->db->where('packages.is_active','yes');
-        $this->db->join("package_date", 'packages.id=package_date.package_id','left');
+        $fields = "international_packages.*,international_packages_dates.*";
+        $this->db->where('international_packages.is_deleted','no');
+        $this->db->where('international_packages.is_active','yes');
+        $this->db->join("international_packages_dates", 'international_packages.id=international_packages_dates.package_id','left');
         $this->db->order_by('CAST(tour_number AS DECIMAL(10,6)) ASC');
         // $this->db->group_by('package_id');
-        $international_packages_dates = $this->master_model->getRecords('packages',array('packages.is_deleted'=>'no'),$fields);
-// ------------------------This is My Local Code ---------------------------------
+        $international_packages_dates = $this->master_model->getRecords('international_packages',array('international_packages.is_deleted'=>'no'),$fields);
 		
         // $this->db->order_by('tour_number','ASC');
         // $international_packages = $this->master_model->getRecords('international_packages');
@@ -141,16 +108,7 @@ class International_packages extends CI_Controller {
         $social_media_link = $this->master_model->getRecords('social_media_link');
         
         $count= sizeof($international_packages);
-
-
-// --------------- This is Live Code --------------------------
-        // $data = array('middle_content' => 'all_international_packages',
-// --------------- This is Live Code --------------------------
-
-// --------------- This is my local Code --------------------------
-         $data = array('middle_content' => 'all_custom_international_packages',
-// --------------- This is my local Code --------------------------
-
+         $data = array('middle_content' => 'all_international_packages',
 						'international_packages'       => $international_packages,
                         'international_packages_all'       => $international_packages_all,
                         'international_packages_dates'       => $international_packages_dates,
@@ -174,14 +132,7 @@ class International_packages extends CI_Controller {
         if(is_numeric($id))
         {
             $this->db->where('id',$id);
-
-// --------------- This is Live Code ----------------------
-            // $package_details_data = $this->master_model->getRecords('international_packages');
-// --------------- This is Live Code ----------------------
-// --------------- This is my local Code ----------------------
-            $package_details_data = $this->master_model->getRecords('packages');
-// --------------- This is my local Code ----------------------
-
+            $package_details_data = $this->master_model->getRecords('international_packages');
 			//print_r($package_details_data); die;
             // $this->db->where('package_id',$id);
             // $package_date_details_data = $this->master_model->getRecords('international_packages_dates');
@@ -194,13 +145,7 @@ class International_packages extends CI_Controller {
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
         $this->db->where('package_id',$id);
-
-// --------------- This is Live Code -----------------------------
-        // $package_date_details_data = $this->master_model->getRecords('international_packages_dates');
-// --------------- This is Live Code -----------------------------
-// ----------- This is My Local code ----------------
-        $package_date_details_data = $this->master_model->getRecords('package_date');
-// ----------- This is My Local code ----------------
+        $package_date_details_data = $this->master_model->getRecords('international_packages_dates');
        
         $this->db->where('is_deleted','no');
         $this->db->where('is_active','yes');
@@ -212,23 +157,12 @@ class International_packages extends CI_Controller {
         $this->db->order_by('id','ASC');
         $social_media_link = $this->master_model->getRecords('social_media_link');
         
-// --------------------- This is Live code -------------------
-		// $fields = "international_package_iternary.*,packages.tour_title";
-        // $this->db->order_by('international_package_iternary.day_number','asc');
-        // $this->db->where('international_package_iternary.is_deleted','no');
-        // $this->db->where('international_package_iternary.package_id',$id);
-        // $this->db->join("packages", 'international_package_iternary.package_id=packages.id','left');
-        // $package_iternary_data = $this->master_model->getRecords('international_package_iternary',array('international_package_iternary.is_deleted'=>'no'),$fields);
-// --------------------- This is Live code -------------------
-
-// ------------------ This is My Local Code ------------------------
-		$fields = "package_iternary.*,packages.tour_title";
-        $this->db->order_by('package_iternary.day_number','asc');
-        $this->db->where('package_iternary.is_deleted','no');
-        $this->db->where('package_iternary.package_id',$id);
-        $this->db->join("packages", 'package_iternary.package_id=packages.id','left');
-        $package_iternary_data = $this->master_model->getRecords('package_iternary',array('package_iternary.is_deleted'=>'no'),$fields);
-// ------------------ This is My Local Code ------------------------
+		$fields = "international_package_iternary.*,packages.tour_title";
+        $this->db->order_by('international_package_iternary.day_number','asc');
+        $this->db->where('international_package_iternary.is_deleted','no');
+        $this->db->where('international_package_iternary.package_id',$id);
+        $this->db->join("packages", 'international_package_iternary.package_id=packages.id','left');
+        $package_iternary_data = $this->master_model->getRecords('international_package_iternary',array('international_package_iternary.is_deleted'=>'no'),$fields);
 		
         $data = array('middle_content' => 'international_package_details',
 						'package_details'       => $package_details_data,
@@ -299,7 +233,7 @@ class International_packages extends CI_Controller {
                 $this->form_validation->set_rules('email', 'Email', 'required');
                 $this->form_validation->set_rules('mobile_number', 'Mobile Number', 'required');
                 $this->form_validation->set_rules('gender', 'Gender', 'required');
-                // $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
+                $this->form_validation->set_rules('agent_id', 'Agent ID', 'required');
 				$this->form_validation->set_rules('wp_mobile_number', 'Whatsapp Mobile Number', 'required');
     
                 if($this->form_validation->run() == TRUE)
@@ -309,7 +243,7 @@ class International_packages extends CI_Controller {
                     $email             = trim($this->input->post('email'));
                     $mobile_number     = trim($this->input->post('mobile_number'));
                     $gender            = $this->input->post('gender');
-                    // $agent_id         = $this->input->post('agent_id');
+                    $agent_id         = $this->input->post('agent_id');
                     $media_source_name         = $this->input->post('media_source_name');
 					$wp_mobile_number     = trim($this->input->post('wp_mobile_number'));
                     $package_id        = $id;
@@ -320,34 +254,22 @@ class International_packages extends CI_Controller {
                         'email'         => $email,
                         'mobile_number' => $mobile_number,
                         'gender'        => $gender,
-                        // 'agent_id'     => $agent_id,
+                        'agent_id'     => $agent_id,
                         'media_source_name'    =>$media_source_name,
                         'package_id'    =>$id,
 						'wp_mobile_number'=>$wp_mobile_number,
-						'enquiry_from'    =>'Front Website'
+						'enquiry_from'    =>'front'
                     );
                     
                     $inserted_id = $this->master_model->insertRecord('international_booking_enquiry',$arr_insert,true);
                 
                     $this->db->where('is_deleted','no');
                     $this->db->where('is_active','yes');
-
-// ---------------- This is Live Code -----------------------
-                    // $this->db->where('id',$agent_id);
-                    // $this->db->order_by('id','DESC');
-                    // $agent_data_email = $this->master_model->getRecord('agent');
-                    // $agent_email=$agent_data_email['email'];
-					// $agent_name=$agent_data_email['agent_name'];
-// ---------------- This is Live Code -----------------------
-
-// ---------------- This is My Local Code -----------------------
-                    // $this->db->where('id',$agent_id);
-                    // $this->db->order_by('id','DESC');
-                    $custom_tour_agent = $this->master_model->getRecord('custom_tour_agent');
-                    $custom_agent_email=$custom_tour_agent['email'];
-					$custom_agent_name=$custom_tour_agent['name'];
-// ---------------- This is My Local Code -----------------------
-
+                    $this->db->where('id',$agent_id);
+                    $this->db->order_by('id','DESC');
+                    $agent_data_email = $this->master_model->getRecord('agent');
+                    $agent_email=$agent_data_email['email'];
+					$agent_name=$agent_data_email['agent_name'];
 
                     if($inserted_id > 0)
                     {    
@@ -373,12 +295,7 @@ class International_packages extends CI_Controller {
 									</html>";
 						//echo $msg;
 						$subject='Thank You For Enquiry';
-// -------------- This is Live Code ------------------------ 
-						// $this->send_mail($email,$from_email,$msg,$subject,$cc=null);
-// -------------- This is Live Code ------------------------ 
-// -------------- This is My Local Code ------------------------ 
-						// $this->send_mail($email,$from_email,$msg,$subject,$cc=null);
-// -------------- This is My Live Code ------------------------ 
+						$this->send_mail($email,$from_email,$msg,$subject,$cc=null);
 						//die;
 						
 						$msg_email="<html>
@@ -388,14 +305,7 @@ class International_packages extends CI_Controller {
 										</style>
 									</head>
 									<body background=".base_url()."uploads/email/email1.jpg>
-
-// ----------------- This is Live Code ----------------
 										<h3>Dear&nbsp;".$agent_name."</h3>
-// ----------------- This is Live Code ----------------
-// ----------------- This is my local Code ----------------
-										<h3>Dear&nbsp;".$custom_agent_name."</h3>
-// ----------------- This is Live Code ----------------
-
 										<p>I hope this message finds you well. I am writing to let you know that a new inquiry has been encountered in your account from a customer. We would 
                                             appreciate it if you could assist them with their travel-related needs.
 										</p>
@@ -409,13 +319,7 @@ class International_packages extends CI_Controller {
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-
-// ------------------------------ This is Live Code ----------------------------
 						$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-// ------------------------------ This is Live Code ----------------------------
-// ------------------------------ This is My Local Code ----------------------------
-						// $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
-// ------------------------------ This is Live Code ----------------------------
 
                         $this->session->set_flashdata('success_message',"Enquiry Added Successfully.");
                         redirect(base_url().'international_packages/confirm_enquiry');
@@ -450,10 +354,6 @@ class International_packages extends CI_Controller {
         $this->load->view('front/common_view',$data);
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> rupali_0910
     public function send_mail($to_email,$from_email,$msg,$subject,$cc=null) {
          
         $this->load->library('email');
@@ -599,10 +499,8 @@ class International_packages extends CI_Controller {
                 return json_encode($arr_agent);
             }
     }
-
-
-// ---------------------- This is Live Code and in My Local Code this code is delete ---------------------------
-
+    
+    
     public function all_custom_international_packages()
     {
         $this->db->where('is_deleted','no');
@@ -663,8 +561,7 @@ class International_packages extends CI_Controller {
         $this->arr_view_data['page_title']     =  "International Packages";
         $this->load->view('front/common_view',$data);
     }
-
-// ---------------------- This is Live Code and in My Local Code this code is delete ---------------------------
+    
 	
 	public function international_package_review()
      {    
@@ -706,15 +603,15 @@ class International_packages extends CI_Controller {
         }
     }
 	public function getAgent(){ 
-        // POST data 
-        $department_id = $this->input->post('did');
-        
-                $this->db->where('is_deleted','no');
-                $this->db->where('is_active','yes');
-                $this->db->where('department',$department_id);
-                $data = $this->master_model->getRecords('agent');
-                // print_r($data); die;
-        
-        echo json_encode($data); 
-      }
+    // POST data 
+    $department_id = $this->input->post('did');
+    
+            $this->db->where('is_deleted','no');
+            $this->db->where('is_active','yes');
+            $this->db->where('department',$department_id);
+            $data = $this->master_model->getRecords('agent');
+            // print_r($data); die;
+    
+    echo json_encode($data); 
+  }
 }

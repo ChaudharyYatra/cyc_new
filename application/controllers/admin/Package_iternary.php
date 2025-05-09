@@ -255,21 +255,12 @@ class Package_iternary extends CI_Controller{
             }
             if($this->input->post('submit'))
             {
-<<<<<<< HEAD
-=======
-
->>>>>>> rupali_0910
                 $package_id = $package_id;               
                 $this->form_validation->set_rules('day_number', 'Day Number', 'required');
                 $this->form_validation->set_rules('iternary_desc', 'Itinerary Description', 'required');
               
                 if($this->form_validation->run() == TRUE)
                 {
-<<<<<<< HEAD
-                
-                $arr_update = array(                    
-                        'day_number'   =>   $_POST["day_number"],
-=======
 
                 // -----------------------upload image--------------------------------------------------------
 
@@ -331,7 +322,6 @@ class Package_iternary extends CI_Controller{
                 $arr_update = array(                    
                         'day_number'   =>   $_POST["day_number"],
                         'image_name'   =>   $filename,
->>>>>>> rupali_0910
                         'iternary_desc'   =>   $_POST["iternary_desc"]
                     );
                     $arr_where     = array("id" => $id);

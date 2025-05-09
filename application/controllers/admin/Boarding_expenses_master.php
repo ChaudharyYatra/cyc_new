@@ -27,18 +27,17 @@ class Boarding_expenses_master extends CI_Controller{
 
 	public function index()
 	{  
-       
         //$user_role = $this->session->userdata('nabcons_user_role');
         //$front_id = $this->session->userdata('nabcons_emp_id');
 
-        // $this->db->order_by('id','desc');
-        // $this->db->where('is_deleted','no');
-        // $arr_data = $this->master_model->getRecords('hotel_master');
+        $this->db->order_by('id','desc');
+        $this->db->where('is_deleted','no');
+        $arr_data = $this->master_model->getRecords('hotel_master');
 
         // $this->arr_view_data['user_role']       = $user_role;
         // $this->arr_view_data['front_id']        = $front_id;
         $this->arr_view_data['listing_page']    = 'yes';
-        // $this->arr_view_data['arr_data']        = $arr_data;
+        $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['page_title']      = $this->module_title." List";
         $this->arr_view_data['module_title']    = $this->module_title;
         $this->arr_view_data['module_url_path'] = $this->module_url_path;
@@ -54,7 +53,6 @@ class Boarding_expenses_master extends CI_Controller{
        
         if($this->input->post('submit'))
         {
-            
             $this->form_validation->set_rules('from_seat_1', 'from_seat_1', 'required');
             $this->form_validation->set_rules('to_seat1', 'to_seat1', 'required');
             $this->form_validation->set_rules('rates1', 'rates1', 'required');

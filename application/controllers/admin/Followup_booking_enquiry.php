@@ -84,90 +84,90 @@ class Followup_booking_enquiry extends CI_Controller{
                 $this->load->view('admin/layout/admin_combo',$this->arr_view_data);
 	}
 	
-	        public function domestic_followup()
-   {
-       $agent_sess_name = $this->session->userdata('agent_name');
-       $id=$this->session->userdata('agent_sess_id');
+// 	        public function domestic_followup()
+//    {
+//        $agent_sess_name = $this->session->userdata('agent_name');
+//        $id=$this->session->userdata('agent_sess_id');
         
-        if($this->input->post('submit'))
-        {
-            $this->form_validation->set_rules('follow_up_time', 'follow up time', 'required');
-            $this->form_validation->set_rules('next_followup_date', 'next follow up time', 'required');
-            $this->form_validation->set_rules('follow_up_comment', 'follow up comment', 'required');
+//         if($this->input->post('submit'))
+//         {
+//             $this->form_validation->set_rules('follow_up_time', 'follow up time', 'required');
+//             $this->form_validation->set_rules('next_followup_date', 'next follow up time', 'required');
+//             $this->form_validation->set_rules('follow_up_comment', 'follow up comment', 'required');
             
-            if($this->form_validation->run() == TRUE)
-            { 
-                $follow_up_time  = $this->input->post('follow_up_time'); 
-                $next_followup_date  = $this->input->post('next_followup_date');
-                $followup_reason  = $this->input->post('followup_reason');
-                $follow_up_comment  = $this->input->post('follow_up_comment'); 
-                $enquiry_id  = $this->input->post('enquiry_id'); 
-                $current_date= date('Y-m-d');
-                $arr_insert = array(
-                    'follow_up_time'   =>   $follow_up_time, 
-                    'next_followup_date'   =>   $next_followup_date, 
-                    'follow_up_comment'   =>   $follow_up_comment,
-                    'followup_reason' => $followup_reason
+//             if($this->form_validation->run() == TRUE)
+//             { 
+//                 $follow_up_time  = $this->input->post('follow_up_time'); 
+//                 $next_followup_date  = $this->input->post('next_followup_date');
+//                 $followup_reason  = $this->input->post('followup_reason');
+//                 $follow_up_comment  = $this->input->post('follow_up_comment'); 
+//                 $enquiry_id  = $this->input->post('enquiry_id'); 
+//                 $current_date= date('Y-m-d');
+//                 $arr_insert = array(
+//                     'follow_up_time'   =>   $follow_up_time, 
+//                     'next_followup_date'   =>   $next_followup_date, 
+//                     'follow_up_comment'   =>   $follow_up_comment,
+//                     'followup_reason' => $followup_reason
 
-                );
-                $arr_where     = array("id" => $enquiry_id);
-                $inserted_id = $this->master_model->updateRecord('domestic_followup',$arr_insert,$arr_where);
+//                 );
+//                 $arr_where     = array("id" => $enquiry_id);
+//                 $inserted_id = $this->master_model->updateRecord('domestic_followup',$arr_insert,$arr_where);
 
-                // $arr_update = array(
-                //     'followup_status'   =>   'yes',
-                //     'ftaken_by' => $id
-                //     );
-                // $arr_where     = array("id" => $enquiry_id);
-                // $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+//                 // $arr_update = array(
+//                 //     'followup_status'   =>   'yes',
+//                 //     'ftaken_by' => $id
+//                 //     );
+//                 // $arr_where     = array("id" => $enquiry_id);
+//                 // $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
 
-                if($inserted_id > 0)
-                 {
-                     $this->session->set_flashdata('success_message',"Followup Added Successfully Please Check Followup on Followup List.");
-                     redirect($this->module_url_path.'/index');
-                 }
+//                 if($inserted_id > 0)
+//                  {
+//                      $this->session->set_flashdata('success_message',"Followup Added Successfully Please Check Followup on Followup List.");
+//                      redirect($this->module_url_path.'/index');
+//                  }
  
-                 else
-                 {
-                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                 }
-                 redirect($this->module_url_path.'/index');
+//                  else
+//                  {
+//                      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                  }
+//                  redirect($this->module_url_path.'/index');
 
-                $this->db->where('is_deleted','no');
-                $this->db->where('is_active','yes');
-                $this->db->where('id',$id);
-                $this->db->order_by('id','DESC');
-                $agent_data_email = $this->master_model->getRecord('agent');
+//                 $this->db->where('is_deleted','no');
+//                 $this->db->where('is_active','yes');
+//                 $this->db->where('id',$id);
+//                 $this->db->order_by('id','DESC');
+//                 $agent_data_email = $this->master_model->getRecord('agent');
 
-                $this->db->where('is_deleted','no');
-               //  $this->db->where('is_active','yes');
-                $this->db->where('id',$enquiry_id);
-                $booking_enquiry_data = $this->master_model->getRecord('booking_enquiry');
+//                 $this->db->where('is_deleted','no');
+//                //  $this->db->where('is_active','yes');
+//                 $this->db->where('id',$enquiry_id);
+//                 $booking_enquiry_data = $this->master_model->getRecord('booking_enquiry');
 
-                $agent_email=$agent_data_email['email'];
-                $agent_name=$agent_data_email['agent_name'];
+//                 $agent_email=$agent_data_email['email'];
+//                 $agent_name=$agent_data_email['agent_name'];
 
-                $user_email=$booking_enquiry_data['email'];
-                $first_name=$booking_enquiry_data['first_name'];
-                $last_name=$booking_enquiry_data['last_name'];
+//                 $user_email=$booking_enquiry_data['email'];
+//                 $first_name=$booking_enquiry_data['first_name'];
+//                 $last_name=$booking_enquiry_data['last_name'];
 
                
-	        $from_email='chaudharyyatra8@gmail.com';
+// 	        $from_email='chaudharyyatra8@gmail.com';
 
-                    $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
-                    redirect($this->module_url_path_domestic_followup.'/index/'.$enquiry_id);
+//                     $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
+//                     redirect($this->module_url_path_domestic_followup.'/index/'.$enquiry_id);
                    
-                }
+//                 }
 
-                else
-                {
-                    $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
-                }
-                redirect($this->module_url_path.'/index');
-            }  
-            else{
-               redirect($this->module_url_path.'/index');
-           } 
-   }
+//                 else
+//                 {
+//                     $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                 }
+//                 redirect($this->module_url_path.'/index');
+//             }  
+//             else{
+//                redirect($this->module_url_path.'/index');
+//            } 
+//    }
 
 
 

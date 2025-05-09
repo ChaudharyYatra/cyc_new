@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-// ----------------- This is Live Code -----------------------------------
+<!-- // ----------------- This is Live Code ----------------------------------- -->
               <form method="post" enctype="multipart/form-data" id="add_agentpercentage">
                 <div class="card-body">
                   <div class="row">
@@ -76,8 +76,8 @@
 					        <a href="<?php echo $module_url_path; ?>/index"><button type="button" class="btn btn-danger" >Cancel</button></a>
                 </div>
               </form>
-// ----------------- This is Live Code -----------------------------------
-// ----------------- This is Local Code -----------------------------------
+<!-- // ----------------- This is Live Code ----------------------------------- -->
+<!-- // ----------------- This is Local Code ----------------------------------- -->
 <!-- Enter Address<input type="any" name="add" id="address" >
                <button onclick="getAddress()" value="" name="button">Get Map</button>
               
@@ -90,7 +90,7 @@ Your Lat Lon  <br>
 
 <div id="map"> </div> -->
 				
-// ----------------- This is Local Code -----------------------------------
+<!-- // ----------------- This is Local Code ----------------------------------- -->
             </div>
             <!-- /.card -->
             </div>

@@ -86,34 +86,6 @@
                                       <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
                                     </div>
                                   </li>
-
-                                  <li class="icon_set">
-                                    <!-- <div class="icon-part white icon_size_w">
-                                      <i class="fas fa-envelope"></i>
-                                    </div> -->
-                                    <div class="content-part">
-                                      <b><p class="text_justify"><span class="content_css">GST No. :  27AAACC7487N1Z0</span></p></b>
-                                    </div>
-                                  </li>
-
-                                  <li class="icon_set">
-                                    <!-- <div class="icon-part white icon_size_w">
-                                      <i class="fas fa-envelope"></i>
-                                    </div> -->
-                                    <div class="content-part">
-                                      <b><p class="text_justify"><span class="content_css">Registration No. :  17-08288 of 1994-95</span></p></b>
-                                    </div>
-                                  </li>
-
-                                  <li class="icon_set">
-                                    <!-- <div class="icon-part white icon_size_w">
-                                      <i class="fas fa-envelope"></i>
-                                    </div> -->
-                                    <div class="content-part">
-                                      <b><p class="text_justify"><span class="content_css">Registration Address :  Jaypur</span></p></b>
-                                    </div>
-                                  </li>
-
                             <!-- <ul>
                                 <li class="white"><strong>Location:</strong> <?php //echo $website_basic_structure_value['location']; ?></li>
                                 <li class="white"><strong>Contact Number:</strong> <?php //echo $website_basic_structure_value['contact_number']; ?></li>

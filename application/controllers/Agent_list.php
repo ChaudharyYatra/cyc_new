@@ -108,19 +108,3 @@ class Agent_list extends CI_Controller {
         $this->load->view('front/common_view', $data);
     }
 }
-
-
-        $data = array(
-            'middle_content'         => 'agents_list',
-            'agents_list'            => $agents_list,
-            'website_basic_structure' => $website_basic_structure,
-            'social_media_link'      => $social_media_link,
-            'department_list'        => $department_list,
-            'page_title'             => "Agents List",
-        );
-
-        $this->arr_view_data['page_title']     = "Agents List";
-        $this->arr_view_data['middle_content'] = "agents_list";
-        $this->load->view('front/common_view', $data);
-    }
-}

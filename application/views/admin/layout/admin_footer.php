@@ -5532,7 +5532,7 @@ $('#add_tour_details_data').validate({ // initialize the plugin
                     </tr> `;
         
          
-        //     //alert(i);                       
+         //alert(i);                       
 
     }
 
@@ -7946,7 +7946,7 @@ $(document).ready(function(){
 });
 </script>
 
-// <!-- admin-> package_hotel-> add -> check box select ->then input box fetch value -->
+<!-- admin-> package_hotel-> add -> check box select ->then input box fetch value -->
 <script language=javascript>
 $(document).on("click",'.in_travel',function(){
     var currentRow=$(this).closest("tr"); 
@@ -7960,7 +7960,7 @@ $(document).on("click",'.in_travel',function(){
     }
 });
 </script>
-// <!-- admin-> package_hotel-> add -> check box select ->then input box fetch value -->
+<!-- admin-> package_hotel-> add -> check box select ->then input box fetch value -->
 
 <!-- dependency code for package_hotel for edit -->
 
@@ -8538,15 +8538,14 @@ $('#edit_zone_master').validate({ // initialize the plugin
 //    });
 // });
 
-// </script>
 
 // <script type='text/javascript'>
-//   // baseURL variable
+ // baseURL variable
 //   var baseURL= "https://sumagotest.in/choudhary/";
 
 //   $(document).ready(function(){
 
-//     // district change
+//     district change
 //     $('#agent_district').change(function(){
 //       var did = $(this).val();
 // ---------------- This is Live COde --------------------------
@@ -8595,7 +8594,6 @@ $('#edit_zone_master').validate({ // initialize the plugin
 //      });
 //    });
 // });
-// </script>
 
 //  <!-- jquery validation on add prospect and rate chart for fornt website -->
 
@@ -12101,7 +12099,7 @@ $("#edit_tr").click(function() {
     var i = $('.edit_place_name').length + 1; // Get the total number of existing rows
     // var expence = $(this).attr('attr_add_id');
     // var i= parseInt(expence)+parseInt(1);
-    // // alert(i);
+    // alert(i);
     // var expence = $(this).attr('attr_add_id',i);
     // alert(i);
     var newRow = `

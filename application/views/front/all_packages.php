@@ -55,7 +55,8 @@ table.scrolldown tbody{
             </div>
 
             <div class="row">
-                <?PHP foreach($main_packages_all as $key => $main_packages_all_value) { ?>
+                <?PHP foreach($main_packages_all as $key => $main_packages_all_value) {
+                    ?>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="trend-item rounded box-shadow card_bg" data-aos="fade-up" data-duration="500">
                         <div class="trend-image position-relative">

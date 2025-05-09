@@ -29,12 +29,13 @@
               <div class="card-body">
                   <?php  if(count($arr_data) > 0 ) 
               { ?>
-//----------------- This is Live Code -----------------------------------
+<!-- //----------------- This is Live Code ----------------------------------- -->
                 <!-- <table id="example1" class="table table-bordered table-striped"> -->
-// ----------------- This is Live Code -----------------------------------
-// ----------------- This is Local Code -----------------------------------
-                <table id="memListTable" class="table table-bordered table-striped">
-// ----------------- This is Local Code -----------------------------------
+<!-- // ----------------- This is Live Code ----------------------------------- -->
+<!-- // ----------------- This is Local Code ----------------------------------- -->
+<!-- memListTable -->
+                <table id="example1" class="table table-bordered table-striped">
+<!-- // ----------------- This is Local Code ----------------------------------- -->
                   <thead>
                   <tr>
                     <th>SN</th>
@@ -44,7 +45,7 @@
                     <th>Customer Name</th>
                     <th>Email</th>
                     <th>Mobile Number</th>
-// ----------------- This is Live Code -----------------------------------
+<!-- // ----------------- This is Live Code ----------------------------------- -->
 <th>Enquiry Date</th>
                     <th>Follow up Status</th>
                   </tr>
@@ -131,13 +132,13 @@
                   <?php $i++; } ?>
                   
                   </tbody>
-// ----------------- This is Live Code -----------------------------------
-// ----------------- This is Local Code -----------------------------------
+<!-- // ----------------- This is Live Code ----------------------------------- -->
+<!-- // ----------------- This is Local Code ----------------------------------- -->
 <!-- <th>Status</th>
                   </tr>
                   </thead> -->
                   
-// ----------------- This is Local Code -----------------------------------
+<!-- // ----------------- This is Local Code ----------------------------------- -->
                   
                 </table>
                 <?php } else
