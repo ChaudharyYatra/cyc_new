@@ -23,10 +23,12 @@ class Booking_enquiry extends CI_Controller {
         $this->module_title_followup       = "Domestic Booking Enquiry Followup";
         $this->module_url_slug    = "booking_enquiry";
         $this->module_view_folder = "booking_enquiry/";
-        $this->arr_view_data = []; 
+        $this->arr_view_data = [];
+        
+         $this->load->library("phpmailer_library");
+        $objMail = $this->phpmailer_library->load();
 	 }
-
-     public function index()
+    public function index()
      {
          $agent_sess_name = $this->session->userdata('agent_name');
          $id=$this->session->userdata('agent_sess_id');
@@ -40,12 +42,21 @@ class Booking_enquiry extends CI_Controller {
         $this->db->where('booking_enquiry.is_deleted','no');
         $this->db->where('booking_enquiry.booking_process','no');
         $this->db->where('booking_enquiry.followup_status','no');
+// ------------------ This is Live COde -------------------------------
+        // $this->db->where('booking_enquiry.agent_id',$id);
+        // $this->db->where('booking_enquiry.booking_status','no');
+        
+        // $this->db->where('booking_enquiry.i_got_it','no');
+        // // $this->db->where('booking_enquiry.not_interested','yes');
+// ------------------ This is Live COde -------------------------------  
+// ------------------ This is Local Code -------------------------------
         $this->db->where('booking_enquiry.booking_status','no');
 
         $this->db->where('booking_enquiry.i_got_it','no');
         // $this->db->where('booking_enquiry.not_interested','yes');
 
         $this->db->where('booking_enquiry.agent_id',$id);
+// ------------------ This is Local Code -------------------------------
         $this->db->where('booking_enquiry.created_at >', $twentyFourHoursAgo);
         $this->db->join("packages", 'booking_enquiry.package_id=packages.id','left');
         $this->db->join("agent", 'booking_enquiry.agent_id=agent.id','left');
@@ -53,7 +64,6 @@ class Booking_enquiry extends CI_Controller {
         // $this->db->join("domestic_followup", 'booking_enquiry.id=domestic_followup.booking_enquiry_id','left');
         $arr_data = $this->master_model->getRecords('booking_enquiry',array('booking_enquiry.is_deleted'=>'no'),$fields);
         // print_r($arr_data); die;
-
 
 
         $this->db->where('is_deleted','no');
@@ -75,10 +85,8 @@ class Booking_enquiry extends CI_Controller {
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
         
      }
-
-       // Active/Inactive
-  
-    public function active_inactive($id,$type)
+     
+     public function active_inactive($id,$type)
     {
         $id=base64_decode($id);
         if($id!='' && ($type == "yes" || $type == "no") )
@@ -118,6 +126,17 @@ class Booking_enquiry extends CI_Controller {
         redirect($this->module_url_path.'/index');   
     }
 
+// ---------------- This is Live Code --------------------------
+//    public function add()
+//      {  
+//          $agent_sess_name = $this->session->userdata('agent_name');
+//          $id=$this->session->userdata('agent_sess_id');
+            
+//          if($this->input->post('submit'))
+//          {
+//             // print_r($_REQUEST); die;
+// ---------------- This is Live Code --------------------------
+// ---------------- This is Local Code --------------------------
     public function add($iid="")
      {  
         // echo $iid; die;
@@ -150,13 +169,18 @@ class Booking_enquiry extends CI_Controller {
             
          if($this->input->post('submit'))
          {
+// ---------------- This is Local Code --------------------------
              $this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');
              $this->form_validation->set_rules('first_name', 'first_name', 'required');
              $this->form_validation->set_rules('last_name', 'last_name', 'required');
              $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');
              $this->form_validation->set_rules('gender', 'gender', 'required');
-             $this->form_validation->set_rules('wp_mobile_number', 'wp_mobile_number', 'required');
-             
+// ---------------- This is Live Code --------------------------
+            //  $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
+// ---------------- This is Live Code --------------------------
+// ---------------- This is Local Code --------------------------
+            //  $this->form_validation->set_rules('wp_mobile_number', 'wp_mobile_number', 'required');
+// ---------------- This is Local Code --------------------------
              
              if($this->form_validation->run() == TRUE)
              { 
@@ -166,7 +190,7 @@ class Booking_enquiry extends CI_Controller {
                  $mobile_number  = $this->input->post('mobile_number'); 
                  $email_address  = $this->input->post('email_address'); 
                  $gender  = $this->input->post('gender'); 
-                $tour_number = implode(",", $this->input->post('tour_number')); 
+                 $tour_number = implode(",", $this->input->post('tour_number')); 
                  $media_source_name         = $this->input->post('media_source_name');
                  $enq_seat_count         = $this->input->post('enq_seat_count');
                  $today=date("Y-m-d");
@@ -178,7 +202,6 @@ class Booking_enquiry extends CI_Controller {
                  $street_name  = $this->input->post('street_name'); 
                  $landmark  = $this->input->post('landmark'); 
                  $area  = $this->input->post('area'); 
-                //  $followup_date  = $this->input->post('followup_date'); 
 
                  $arr_insert = array(
                      'agent_id' =>   $id,
@@ -186,6 +209,8 @@ class Booking_enquiry extends CI_Controller {
                      'first_name'   =>   $first_name,   
                      'last_name'   =>   $last_name, 
                      'mobile_number'   =>   $mobile_number, 
+					 'wp_mobile_number'=>$wp_mobile_number,
+					 'enquiry_from'    =>'agent',
                      'email'   =>   $email_address, 
                      'gender'   =>   $gender, 
                      'package_id'   =>   $tour_number,   
@@ -207,7 +232,7 @@ class Booking_enquiry extends CI_Controller {
                     $arr_where     = array("id" => $iid);
                     $this->master_model->updateRecord('booking_enquiry',$arr_insert,$arr_where);
                  }else{
-                $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
+                    $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
                  }
                 
                  $this->db->where('is_deleted','no');
@@ -216,9 +241,37 @@ class Booking_enquiry extends CI_Controller {
                  $this->db->order_by('id','DESC');
                  $agent_data_email = $this->master_model->getRecord('agent');
                  $agent_email=$agent_data_email['email'];
+// -------------- This is Live cOde ------------------------
+    //              $agent_name=$agent_data_email['agent_name'];   
+    //              $mobileNumber=$agent_data_email['mobile_number1'];   
+	// 			  $from_email='test@choudharyyatra.co.in';
+				  
+	// 			  	$authKey = "1207168241267288907";
+				  	
+	// 			$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
+    //             $senderId  = "CYCPLN";
+                
+    //             $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
+
+    //                $apiurl = str_replace(" ", '%20', $apiurl);
+                   
+    //                $ch = curl_init($apiurl);
+    //             			$get_url = $apiurl;
+    //             			curl_setopt($ch, CURLOPT_POST,0);
+    //             			curl_setopt($ch, CURLOPT_URL, $get_url);
+    //             			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+    //             			curl_setopt($ch, CURLOPT_HEADER,0);
+    //             			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    //             		$return_val = curl_exec($ch);
+    
+    // // echo $agent_email; die;
+    //              if($agent_email !='')
+// -------------- This is Live cOde ------------------------
+// -------------- This is Local code ------------------------
                  $agent_name=$agent_data_email['agent_name'];     
 				 $from_email='chaudharyyatra8@gmail.com';
                  if($email_address !='')
+// -------------- This is Local cOde -----------------------
                  {
                     
                    
@@ -241,7 +294,29 @@ class Booking_enquiry extends CI_Controller {
 										<h5>ChoudharyYatra Company</h5>
 									</body>
 									</html>";
+// ------------------ This is Live COde --------------------------
+// 						$subject='Thank You For Enquiry';
+						
+// 						$mail = new PHPMailer(true);
+
+// $auth = true;
+
+// //   $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
+// //         $mail_config['smtp_port'] = '465';
+// //         $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
+// //         $mail_config['_smtp_auth'] = TRUE;
+// //         $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
+// //         $mail_config['smtp_crypto'] = 'ssl';
+						
+						
+						
+						
+						
+// 					//	$this->send_mail($agent_email,$from_email,$msg,$subject,$cc=null);
+// ------------------ This is Live COde --------------------------
+// ------------------ This is Local COde --------------------------
 						$subject='Thank You For Enquiry';
+// ------------------ This is Local COde --------------------------
 						
 				 }
 					if($agent_name !='')
@@ -267,7 +342,6 @@ class Booking_enquiry extends CI_Controller {
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
-						
 					}
 				 
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
@@ -285,7 +359,12 @@ class Booking_enquiry extends CI_Controller {
 
          //  booking enquiry form fill and click book now btn this functionality execute
 
+// ----------- This is Live Code ---------------------
+        // else if($this->input->post('booknow_submit'))
+// ----------- This is Live Code ---------------------
+// ----------- This is Local Code ---------------------
          if($this->input->post('booknow_submit'))
+// ----------- This is Local Code ---------------------
          {
              $this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');
              $this->form_validation->set_rules('first_name', 'first_name', 'required');
@@ -293,6 +372,7 @@ class Booking_enquiry extends CI_Controller {
              $this->form_validation->set_rules('mobile_number', 'mobile_number', 'required');
              $this->form_validation->set_rules('email_address', 'email_address', 'required');
              $this->form_validation->set_rules('gender', 'gender', 'required');
+             $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
              
              if($this->form_validation->run() == TRUE)
              { 
@@ -313,7 +393,6 @@ class Booking_enquiry extends CI_Controller {
                  $street_name  = $this->input->post('street_name'); 
                  $landmark  = $this->input->post('landmark'); 
                  $area  = $this->input->post('area');
-                //  $followup_date  = $this->input->post('followup_date'); 
 
                  $arr_insert = array(
                      'agent_id' =>   $id,
@@ -321,11 +400,26 @@ class Booking_enquiry extends CI_Controller {
                      'first_name'   =>   $first_name,   
                      'last_name'   =>   $last_name, 
                      'mobile_number'   =>   $mobile_number, 
+					 'wp_mobile_number'=>$wp_mobile_number,
                      'email'   =>   $email_address, 
                      'gender'   =>   $gender, 
                      'package_id'   =>   $tour_number,   
                      'media_source_name'    =>$media_source_name,
                      'seat_count'    =>$enq_seat_count,
+// ------------------- This is Live Code ----------------------------------
+                //     //  'created_at'=>$today,
+                //      'enquiry_from'    =>'Agent'
+                //  );
+                 
+                //  $inserted_id = $this->master_model->insertRecord('booking_enquiry',$arr_insert,true);
+                //  $iid = $this->db->insert_id(); 
+                //  if($inserted_id > 0)
+                //  {
+                //      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
+                    
+                //     $this->db->where('is_deleted','no');
+// ------------------- This is Live Code ----------------------------------
+// ------------------- This is Local Code ----------------------------------
                      'created_at'=>$today,
                      'enquiry_from'    =>'Agent',
                      'occupation_name'    =>$occupation_name,
@@ -364,15 +458,51 @@ class Booking_enquiry extends CI_Controller {
                  redirect($this->module_url_path.'/index');
 
                  $this->db->where('is_deleted','no');
+// ------------------- This is Local Code ----------------------------------
                  $this->db->where('is_active','yes');
                  $this->db->where('id',$id);
                  $this->db->order_by('id','DESC');
                  $agent_data_email = $this->master_model->getRecord('agent');
                  $agent_email=$agent_data_email['email'];
                  $agent_name=$agent_data_email['agent_name'];
-                       
+// ------------------- This is Live Code -------------------------------
+    //              $mobileNumber=$agent_data_email['mobile_number1'];       
+	// 			 $from_email='chaudharyyatra8@gmail.com';
+				 
+	// 			 	$authKey = "1207168241267288907";
+				  	
+	// 			$message="Dear User, Please login to your account, new inquiry has been sent to you for followup. Regards, CYCPL Team.";
+    //             $senderId  = "CYCPLN";
+                
+    //             $apiurl = "http://sms.sumagoinfotech.com/api/sendhttp.php?authkey=394685AG84OZGHLV0z6438e5e3P1&mobiles=$mobileNumber&message=$message&sender=CYCPLN&route=4&country=91&DLT_TE_ID=1207168112571548753";
+
+    //    $apiurl = str_replace(" ", '%20', $apiurl);
+       
+    //    $ch = curl_init($apiurl);
+    //             			$get_url = $apiurl;
+    //             			curl_setopt($ch, CURLOPT_POST,0);
+    //             			curl_setopt($ch, CURLOPT_URL, $get_url);
+    //             			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+    //             			curl_setopt($ch, CURLOPT_HEADER,0);
+    //             			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    //             		   $return_val = curl_exec($ch);
+				  
+	// 			//   if($return_val=="")
+    // //         			{
+    // //         				echo "Process Failed";
+    // //         			}
+    // //           		else
+    // //         		{
+    // // 	          		echo "done";
+    // //       		    } 
+          		
+    //       		echo $agent_email; die;
+    //              if($agent_email !='')
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------         
 				 $from_email='chaudharyyatra8@gmail.com';
                  if($email_address !='')
+// ------------------- This is Local Code -------------------------------
                  {
 						$msg="<html>
 									<head>
@@ -395,7 +525,7 @@ class Booking_enquiry extends CI_Controller {
 									</html>";
 						// echo $msg;
 						$subject='Thank You For Enquiry';
-					//	$this->send_mail($email_address,$from_email,$msg,$subject,$cc=null);
+						$this->send_mail($agent_email,$from_email,$msg,$subject,$cc=null);
 						
 				 }
 				 //die;
@@ -422,8 +552,30 @@ class Booking_enquiry extends CI_Controller {
 									</body>
 									</html>";
 									$subject_email=' New Enquiry from customer';
+// ------------------- This is Live Code -------------------------------
+
+				// 		$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
+				// 	} 
+                     
+                     
+                     
+                //      redirect($this->module_url_path_booking_basic_info.'/add/'.$iid);
+                //  }
+ 
+                //  else
+                //  {
+                //      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+                //      redirect($this->module_url_path.'/index');
+                //  }
+                 
+
+// ------------------- This is Live Code -------------------------------   
+// ------------------- This is Local Code -------------------------------
+
 						//$this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 					}
+// ------------------- This is Local Code -------------------------------
+
 					
                      $this->session->set_flashdata('success_message',ucfirst($this->module_title)." Added Successfully.");
                      redirect($this->module_url_path.'/index');
@@ -441,7 +593,6 @@ class Booking_enquiry extends CI_Controller {
          $this->db->where('is_deleted','no');
 		 $this->db->order_by('tour_number','ASC');
          $packages_data = $this->master_model->getRecords('packages');
-        //  print_r($packages_data); die;
          
          $this->arr_view_data['action']          = 'add';
          $this->arr_view_data['packages_data'] = $packages_data;
@@ -453,6 +604,12 @@ class Booking_enquiry extends CI_Controller {
          $this->db->where('is_deleted','no');
          $media_source_data = $this->master_model->getRecords('media_source');
          
+         $this->db->where('is_deleted','no');
+         $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+         $this->db->where('is_deleted','no');
+         $zone_master_data = $this->master_model->getRecords('zone_master');
+
          $this->db->where('is_deleted','no');
          $occupation_master_data = $this->master_model->getRecords('occupation_master');
 
@@ -481,7 +638,7 @@ class Booking_enquiry extends CI_Controller {
          $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
      }
   
-     public function domestic_followup()
+    public function domestic_followup()
    {
        $agent_sess_name = $this->session->userdata('agent_name');
        $id=$this->session->userdata('agent_sess_id');
@@ -551,7 +708,12 @@ class Booking_enquiry extends CI_Controller {
                 $first_name=$booking_enquiry_data['first_name'];
                 $last_name=$booking_enquiry_data['last_name'];
 
-               
+               $arr_update = array(
+                   'followup_status'   =>   'yes'
+               );
+               $arr_where     = array("id" => $enquiry_id);
+              $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+                          
 				$from_email='chaudharyyatra8@gmail.com';
                 if($user_email !='')
                 {
@@ -578,7 +740,7 @@ class Booking_enquiry extends CI_Controller {
                                </html>";
                    // echo $msg;
                    $subject='Thank You For Enquiry';
-                   //$this->send_mail($user_email,$from_email,$msg,$subject,$cc=null);
+
                    // die;
 				}
 				
@@ -605,7 +767,6 @@ class Booking_enquiry extends CI_Controller {
                                </body>
                                </html>";
                                $subject_email=' New Enquiry from customer';
-                  // $this->send_mail($agent_email,$from_email,$msg_email,$subject_email,$cc=null);
 				}
                     $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
                     redirect($this->module_url_path_domestic_followup.'/index/'.$enquiry_id);
@@ -621,9 +782,6 @@ class Booking_enquiry extends CI_Controller {
             else{
                redirect($this->module_url_path.'/index');
            } 
-        
-
-
    }
 
 
@@ -688,13 +846,14 @@ class Booking_enquiry extends CI_Controller {
                 $this->form_validation->set_rules('email_address', 'email_address', 'required');
                 $this->form_validation->set_rules('gender', 'gender', 'required');
                 // $this->form_validation->set_rules('packages', 'packages', 'required');
-                // $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
-				// $this->form_validation->set_rules('wp_mobile_number', 'whatsapp mobile number', 'required');
-                if($this->input->post('tour_number')=='Other'){
-                $this->form_validation->set_rules('other_tour_name', 'enter destination name', 'required');
+                $this->form_validation->set_rules('tour_number', 'tour_number', 'required');
+				$this->form_validation->set_rules('wp_mobile_number', 'whatsapp mobile number', 'required');
+            if($this->input->post('tour_number')=='Other'){
+             $this->form_validation->set_rules('other_tour_name', 'enter destination name', 'required');
 				$this->form_validation->set_rules('mrandmrs', 'Mr and Mrs', 'required');
                 $this->form_validation->set_rules('enq_seat_count', 'enq_seat_count', 'required');
-                }
+
+            }
                 
                 if($this->form_validation->run() == TRUE)
                 {
@@ -704,8 +863,14 @@ class Booking_enquiry extends CI_Controller {
                     $email_address  = $this->input->post('email_address'); 
                     $gender  = $this->input->post('gender'); 
                     // $packages  = $this->input->post('packages'); 
+// ------------------- This is Live Code -------------------------------
+                    // $tour_number  = $this->input->post('tour_number'); 
+// ------------------- This is Live Code -------------------------------
+
+// ------------------- This is Local Code -------------------------------
                     // $tour_number  = $this->input->post('tour_number'); 
                     $tour_number = implode(",", $this->input->post('tour_number'));
+// ------------------- This is Local Code -------------------------------
                     $media_source_name         = $this->input->post('media_source_name');
 				 	$wp_mobile_number         = $this->input->post('wp_mobile_number');
                  	$other_tour_name         = $this->input->post('other_tour_name');
@@ -779,6 +944,12 @@ class Booking_enquiry extends CI_Controller {
         $this->db->where('is_deleted','no');
         $zone_master_data = $this->master_model->getRecords('zone_master');
 
+        $this->db->where('is_deleted','no');
+        $occupation_master_data = $this->master_model->getRecords('occupation_master');
+
+        $this->db->where('is_deleted','no');
+        $zone_master_data = $this->master_model->getRecords('zone_master');
+
          
         $this->arr_view_data['arr_data']        = $arr_data;
         $this->arr_view_data['occupation_master_data']        = $occupation_master_data;
@@ -794,6 +965,19 @@ class Booking_enquiry extends CI_Controller {
         $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
     }
 	
+// ------------------- This is Live Code -------------------------------
+	//    public function send_mail($to_email,$from_email,$msg,$subject,$cc=null) {
+         
+    //     $this->load->library('email');
+    //     $mail_config = array();
+    //     $mail_config['smtp_host'] = 'smtp.choudharyyatra.co.in';
+    //     $mail_config['smtp_port'] = '465';
+    //     $mail_config['smtp_user'] = 'test@choudharyyatra.co.in';
+    //     $mail_config['_smtp_auth'] = TRUE;
+    //     $mail_config['smtp_pass'] = 'XfpVexP$s6?r';
+    //     $mail_config['smtp_crypto'] = 'ssl';
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------
 	public function send_mail($to_email,$from_email,$msg,$subject,$cc=null)
     {
          
@@ -805,6 +989,7 @@ class Booking_enquiry extends CI_Controller {
         $mail_config['_smtp_auth'] = TRUE;
         $mail_config['smtp_pass'] = 'xmjhmjfqzaqyrlht';
         $mail_config['smtp_crypto'] = 'tls';
+// ------------------- This is Local Code -------------------------------
         $mail_config['protocol'] = 'smtp';
         $mail_config['mailtype'] = 'html';
         $mail_config['send_multipart'] = FALSE;
@@ -830,6 +1015,116 @@ class Booking_enquiry extends CI_Controller {
            echo $this->email->print_debugger(array('headers'));  
           echo "Eroor";
        }
+// ------------------- This is Live Code -------------------------------
+//    }
+   
+//    public function sra_booking()
+//     {
+//         $agent_sess_name = $this->session->userdata('agent_name');
+//         $id=$this->session->userdata('agent_sess_id');
+         
+//          if($this->input->post('submit'))
+//          {
+                
+//              $this->form_validation->set_rules('sra_date', 'SRA date', 'required');
+//              $this->form_validation->set_rules('sra_number', 'SRA number', 'required');
+             
+//              if($this->form_validation->run() == TRUE)
+//              { 
+//                  $sra_date  = $this->input->post('sra_date');
+//                  $sra_number  = $this->input->post('sra_number'); 
+//                  $enquiry_id  = $this->input->post('enquiry_id'); 
+//                  $current_date= date('Y-m-d');
+
+//                  $arr_insert = array(
+//                      'sra_date'   =>   $sra_date, 
+//                      'sra_number'   =>   $sra_number,
+//                      'booking_enquiry_id'   =>   $enquiry_id,
+//                      'booking_date' => $current_date,
+//                      'booking_taken_by' => $id
+ 
+//                  );
+                 
+//                 $inserted_id = $this->master_model->insertRecord('sra_booking',$arr_insert,true);
+ 
+//                  $arr_update = array(
+//                      'booking_status'   =>   'done',
+//                      'booking_taken_by' => $id
+//                      );
+//                  $arr_where     = array("id" => $enquiry_id);
+//                  $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+ 
+//                  if($inserted_id > 0)
+//                   {
+//                       $this->session->set_flashdata('success_message',"Booking Done Successfully.");
+//                       redirect($this->module_url_path.'/index');
+//                   }
+  
+//                   else
+//                   {
+//                       $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                   }
+//                   redirect($this->module_url_path.'/index');
+ 
+                
+
+//                     $this->session->set_flashdata('success_message',ucfirst($this->module_title_followup). " Added Successfully.");
+//                     redirect($this->module_url_path.'/index');
+                    
+//                  }
+ 
+//                  else
+//                  {
+//                      $this->session->set_flashdata('error_message',"Something Went Wrong While Adding The ".ucfirst($this->module_title).".");
+//                  }
+//                  redirect($this->module_url_path.'/index');
+//              }  
+//              else{
+//                 redirect($this->module_url_path.'/index');
+//             } 
+         
+ 
+ 
+//     }
+    
+//         public function not_intrested($iid)
+//         {
+//             $agent_sess_name = $this->session->userdata('agent_name');
+//             $id=$this->session->userdata('agent_sess_id');
+    
+//             // print_r($iid); die;
+    
+//                 $arr_update = array(
+//                 'not_interested'          => 'no',
+//                 'followup_status'          => 'yes'
+                    
+//                 );
+                
+//                 $arr_where     = array("id" => $iid);
+//                 $this->master_model->updateRecord('booking_enquiry',$arr_update,$arr_where);
+//                 if($id > 0)
+//                 {
+//                     $this->session->set_flashdata('success_message',$this->module_title." Information Updated Successfully.");
+//                 }
+//                 else
+//                 {
+//                     $this->session->set_flashdata('error_message'," Something Went Wrong While Updating The ".ucfirst($this->module_title).".");
+//                 }
+//                 redirect($this->module_url_path.'/index/'.$iid);
+                       
+    
+                
+//                 $this->arr_view_data['agent_sess_name'] = $agent_sess_name;
+//                 $this->arr_view_data['arr_data']        = $arr_data;
+//                 $this->arr_view_data['page_title']      = "Edit ".$this->module_title;
+//                 $this->arr_view_data['module_title']    = $this->module_title;
+//                 $this->arr_view_data['module_url_path'] = $this->module_url_path;
+//                 $this->arr_view_data['middle_content']  = $this->module_view_folder."edit";
+//                 $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
+            
+//         }
+// ------------------- This is Live Code -------------------------------
+// ------------------- This is Local Code -------------------------------
     }
 
     public function not_intrested($iid)
@@ -868,6 +1163,7 @@ class Booking_enquiry extends CI_Controller {
             $this->load->view('agent/layout/agent_combo',$this->arr_view_data);
         
     }
+// ------------------- This is Local Code -------------------------------
 
 
 
